@@ -1,0 +1,18 @@
+{
+  "name": "jadetest2",
+  "version": "0.0.1",
+  "dependencies": {},
+  "devDependencies": {
+    "grunt": "~0.4.5",
+    "grunt-contrib-less": "~0.9.0",
+    "grunt-contrib-uglify": "~0.4.0",
+    "grunt-contrib-watch": "~0.6.1",
+    "grunt-contrib-coffee": "~0.12.0",
+    "grunt-contrib-jade": "~0.15.0",
+    "grunt-jade-php":"~0.1.0",
+    "grunt-jade4php":"~1.0.0",
+    "load-grunt-tasks": "~0.4.0",
+    "grunt-autoprefixer": "~0.4.0",
+    "grunt-contrib-cssmin": "~0.11.0"
+  }
+}

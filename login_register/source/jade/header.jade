@@ -1,0 +1,56 @@
+doctype html
+html
+    head(lang='en')
+        //META
+        meta(charset='UTF-8')
+        meta(name='viewport', content='width=device-width, initial-scale=1 maximum-scale=1, user-scalable=no')
+        meta(name='apple-mobile-web-app-status-bar-style', content='black')
+        meta(name='apple-mobile-web-app-capable', content='yes')
+        meta(name='description')
+        - title = "{$_FANWE['title']}"
+        title= title
+
+        :php
+            $current_css[] = './tpl/hi1626/css/login/vendor/normalize.css';
+            $current_css[] = './tpl/hi1626/css/login/dist/login-register.min.css';
+            $current_js[] = './public/js/jquery-1.11.3.min.js';
+            if (ACTION_NAME == 'forgetpassword') {
+                $current_js[] = './public/js/regions.js';
+                $current_js[] = './tpl/hi1626/js/login/forget-password.js';
+            } elseif (ACTION_NAME == 'bind') {
+            $current_js[] = './tpl/hi1626/js/login/social-bind.js';
+            } else {
+            $current_js[] = './tpl/hi1626/js/login/login-register.js';
+            }
+
+        link(rel="stylesheet", type="text/css", href="{css $current_css}", media="all")
+        link(rel="icon", href="{$_FANWE['site_root']}favicon.ico", type="image/x-icon")
+        script(type='text/javascript').
+            var SITE_PATH = '$_FANWE[site_root]';
+            var SITE_URL = '$_FANWE[site_url]';
+            var TPL_PATH = '{TPL_PATH}';
+            var PUBLIC_PATH	 = '{PUBLIC_PATH}';
+            var MODULE_NAME	 = '{MODULE_NAME}';
+            var ACTION_NAME	 = '{ACTION_NAME}';
+            var COOKIE_PRE = "$_FANWE['config']['cookie']['cookie_pre']";
+            var TPL_NAME = '$_FANWE["setting"]["site_tmpl"]';
+            var IS_POSTING = false;
+        script(type='text/javascript',src="{script $current_js}")
+
+
+        <!--[if lt IE 10]>
+        :php
+            $current_js2[] = './public/js/html5shiv.min.js';
+            $current_js2[] = './tpl/hi1626/js/login/login-register-ie.js';
+            $current_js2[] = './public/js/placeholders.jquery.min.js';
+        script(type='text/javascript',src="{script $current_js2}")
+        <![endif]-->
+
+    body
+        header.form-page-header
+            a.above-tablet(href='http://www.1626.com')
+                img.logo(src='/tpl/hi1626/images/login/logo-1626-black.svg')
+                article
+                    p.dotcom .com
+            a.below-tablet(href='http://www.1626.com').
+                回#[img.logo(src='/tpl/hi1626/images/login/logo-1626-black.svg')]首页
