@@ -1,0 +1,284 @@
+button {
+  &:focus {
+    outline: none !important;
+  }
+}
+input {
+  &:focus {
+    outline: none !important;
+  }
+}
+.button {
+  border: 2px solid @gray;
+  transition: background-color 0.1s cubic-bezier(.22, .24, .21, 1);
+  vertical-align: middle;
+  font-size: @font-size-m;
+  &:hover {
+  }
+
+  &.large {
+    height: 40px;
+    border-radius: 20px;
+    padding: 0 16px;
+  }
+  &.hover-blue {
+    background: #fff;
+    &:hover {
+      background: @blue;
+      border: @border-width solid @blue;
+      color: #fff;
+      span {
+        color: #fff;
+      }
+      i {
+        color: white;
+        &.icon-heart {
+          color: @red;
+        }
+      }
+    }
+  }
+  &.always-blue {
+    background: @blue;
+    color: #fff;
+    border: @border-width solid @blue;
+    i {
+      color: white;
+    }
+    span {
+      color: #fff;
+    }
+    &:hover {
+      background: @blue-hover;
+    }
+  }
+  i {
+  }
+  span {
+    font-size: @font-size-m;
+    color: #000;
+    &.bold {
+      font-weight: bold;
+    }
+  }
+}
+
+a.text {
+  border-bottom: 2px solid @gray;
+  &:hover {
+    cursor: pointer;
+    border-bottom: 2px solid @blue;
+  }
+  &:visited {
+
+  }
+}
+
+.icon {
+  ._useIconFont;
+  vertical-align: middle;
+}
+.icon-sml {
+  //margin-right: 3px;
+  &:before {
+    font-size: 20px;
+  }
+}
+.icon-heart {
+  color: @red;
+  &:before {
+    content: "\e800";
+  }
+}
+.icon-mail {
+  &:before {
+    content: "\e804";
+  }
+}
+.icon-phone {
+  &:before {
+    content: "\e805";
+  }
+}
+.icon-lock {
+  &:before {
+    content: "\e803";
+  }
+}
+.icon-captcha {
+  &:before {
+    content: "\e801";
+  }
+}
+.icon-unseen {
+  &:before {
+    content: "\e808";
+  }
+}
+.icon-seen {
+  &:before {
+    content: "\e807";
+  }
+}
+.icon-wechat {
+  &:before {
+    content: "\e810";
+  }
+}
+.icon-weibo {
+  &:before {
+    content: "\e80f";
+  }
+}
+.icon-qq {
+  &:before {
+    content: "\e80e";
+  }
+}
+.icon-hand {
+  &:before {
+    content: "\e811";
+  }
+}
+.icon-goto-page {
+  &:before {
+    content: "\e812";
+  }
+}
+.icon-bad {
+  &:before {
+    content: "\e814";
+  }
+}
+.icon-close-popup {
+  &:before {
+    content: "\e813";
+  }
+}
+.icon-switch {
+  &:before {
+    content: "\e815";
+  }
+}
+.icon-error {
+  &:before {
+    content: "\e80d";
+  }
+}
+.icon-dropdown {
+  &:before {
+    content: "\e90a";
+  }
+}
+.icon-location {
+  &:before {
+    content: "\e900";
+  }
+}
+.icon-tick {
+  &:before {
+    content: "\e80c";
+  }
+}
+.full-width {
+  width: 100%;
+}
+
+/* Base for label styling */
+[type="checkbox"]:not(:checked),
+[type="checkbox"]:checked {
+  position: absolute;
+  left: -9999px;
+}
+[type="checkbox"]:not(:checked) + label,
+[type="checkbox"]:checked + label {
+  position: relative;
+  padding-left: 25px;
+  cursor: pointer;
+}
+
+/* checkbox aspect */
+[type="checkbox"]:not(:checked) + label:before,
+[type="checkbox"]:checked + label:before {
+  content: '';
+  position: absolute;
+  left:0; top: 2px;
+  width: 15px; height: 15px;
+  border: 1px solid #aaa;
+  background: #f8f8f8;
+  border-radius: 3px;
+  //box-shadow: inset 0 1px 3px rgba(0,0,0,.3)
+}
+/* checked mark aspect */
+[type="checkbox"]:not(:checked) + label:after,
+[type="checkbox"]:checked + label:after {
+  ._useIconFont;
+  content: '\e80c';
+  position: absolute;
+  top: 3px; left: 0px;
+  font-size: 18px;
+  line-height: 0.8;
+  color: #000;
+  transition: all .2s;
+}
+/* checked mark aspect changes */
+[type="checkbox"]:not(:checked) + label:after {
+  opacity: 0;
+  transform: scale(0);
+}
+[type="checkbox"]:checked + label:after {
+  opacity: 1;
+  transform: scale(1);
+}
+/* disabled checkbox */
+[type="checkbox"]:disabled:not(:checked) + label:before,
+[type="checkbox"]:disabled:checked + label:before {
+  box-shadow: none;
+  border-color: #bbb;
+  background-color: #ddd;
+}
+[type="checkbox"]:disabled:checked + label:after {
+  color: #999;
+}
+[type="checkbox"]:disabled + label {
+  color: #aaa;
+}
+/* accessibility */
+[type="checkbox"]:checked:focus + label:before,
+[type="checkbox"]:not(:checked):focus + label:before {
+  border: 1px solid @blue;
+}
+
+/* hover style just for information */
+label:hover:before {
+  border: 1px solid @blue !important;
+}
+
+.hand-loading {
+  ._square(100%);
+  position: fixed;
+  top: 0;
+  background: url("@{img-location}/transparent-bg-white.png");
+  background: rgba(255,255,255,0.85);
+  .loading-content {
+    width: 46px;
+    height: 110px;
+    ._absolute-center;
+  }
+  .hand {
+    ._block(35px,54px);
+    margin: auto;
+    img {
+      width: 100%;
+      height: auto;
+    }
+  }
+  p {
+    text-align: center;
+    font-size: @font-size-s;
+  }
+}
+
+.dropdown {
+
+}

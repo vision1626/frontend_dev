@@ -1,0 +1,131 @@
+// {template page/user/header}
+section.login-panel
+    article.form-sidebar.above-tablet
+        .hand-logo
+            i.icon.icon-hand
+        img.logo(src='/tpl/hi1626/images/login/logo-1626-black.svg', alt='')
+        p 全球潮品优选
+        h5 关注我们
+        .social-media
+            a.weibo(href='http://weibo.com/city1626', target='_blank')
+                i.icon.icon-weibo
+            a.wechat
+                i.icon.icon-wechat
+                .wechat-qr
+                    img(src='/tpl/hi1626/images/login/wechat-qr.png')
+    article.form-container
+        .hand-logo.below-tablet
+            i.icon.icon-hand
+        .switch-header
+            .switch-container
+                .form-header.login
+                    label.form-title
+                        span 邮箱找回密码
+                        // <img class="logo" src="assets/img/logo-1626-black.svg" alt=""/>
+                    a.switch.goto-phone(href='#phone')
+                        | 手机找回密码
+                        i.icon.icon-sml.icon-switch
+                .form-header.register
+                    label.form-title
+                        span 手机找回密码
+                    a.switch.goto-mail(href='#mail')
+                        | 邮箱找回密码
+                        i.icon.icon-sml.icon-switch
+        .form-wrap(style='height: 500px;')
+            form#form-mail-reclaim
+                .before-submit
+                    ul
+                        li.input-row
+                            i.icon.icon-sml.icon-mail
+                            input.input-mail(type='text', value='', placeholder='请输入登录邮箱')
+                        li.input-row.captcha
+                            i.icon.icon-sml.icon-captcha
+                            input#captchaInput1(type='text', value='', placeholder='验证码', autocomplete='off', maxlength='5')
+                            a.captcha(style='')
+                    .form-actions
+                        .form-options
+                            a.forget.text(href='{u user/login}', title='返回登录', rel='nofollow') 返回登录
+                        button#submitMailReclaim.button.large.always-blue.full-width(type='button') 发送修改邮件
+                .after-submit(style='display: none;')
+                    p 我们已向您的注册邮箱中发送了重置密码的邮件，请按邮件中的步骤进行密码重置。
+                    p 如收不到邮件，可于60秒后重试。
+            form#form-phone-reclaim(autocomplete='off', style='display: none')
+                ul
+                    li.input-row
+                        i.icon.icon-sml.icon-phone
+                        input.input-phone(type='text', value='', placeholder='请输入登录手机号', autocomplete='off', maxlength='11')
+                    li.input-row
+                        i.icon.icon-sml.icon-lock
+                        input.input-password(type='password', value='', placeholder='请输入新密码', maxlength='20', autocomplete='off')
+                        a.icon.icon-sml.icon-unseen(data-id='pass-ind', title='显示/隐藏密码')
+                    li.input-row
+                        i.icon.icon-sml.icon-lock
+                        input.input-password-again(type='password', value='', placeholder='请确认新密码', maxlength='20', autocomplete='off')
+                        a.icon.icon-sml.icon-unseen(data-id='pass-ind', title='显示/隐藏密码')
+                .form-actions(style='top: 150px')
+                    .form-options
+                        a.forget.text(href='{u user/login}', title='返回登录', rel='nofollow') 返回登录
+                    button#popMobileCaptcha.button.large.always-blue.full-width(type='button') 确认提交
+                h5
+                    | 手机号已更换？
+                    a.text.goto-phone-changed 点此
+                    | 找回密码
+            form#form-phone-changed(autocomplete='off', style='display: none')
+                ul
+                    li.input-row
+                        i.icon.icon-sml.icon-phone
+                        input.input-phone(type='text', value='', placeholder='请输入旧手机号', autocomplete='off', maxlength='11')
+                    li.input-row
+                        i.icon.icon-sml.icon-phone
+                        input.input-new-phone(type='text', value='', placeholder='请输入新手机号', autocomplete='off', maxlength='11')
+                    li.input-row.dropdown-trigger
+                        i.icon.icon-sml.icon-location
+                        input.choose-region(type='text', placeholder='请选择上次登录地点', readonly='readonly', autocomplete='off', data-province='0', data-city='0')
+                        a.icon.icon-sml.icon-dropdown
+                    li.form-dropdown
+                        .dd-wrap
+                            .dd-result
+                                span 请选择上次登录地点
+                                i.icon.icon-sml.icon-dropdown
+                            .dd-container
+                                dl.provinces(style='width: 50%; height: 220px')
+                                dl.cities(style='width: 50%; height: 220px')
+                    li.input-row
+                        i.icon.icon-sml.icon-lock
+                        input.input-password(type='password', value='', placeholder='请输入新密码', maxlength='20', autocomplete='off')
+                        a.icon.icon-sml.icon-unseen(title='显示/隐藏密码')
+                    li.input-row
+                        i.icon.icon-sml.icon-lock
+                        input.input-password-again(type='password', value='', placeholder='请确认新密码', maxlength='20', autocomplete='off')
+                        a.icon.icon-sml.icon-unseen(title='显示/隐藏密码')
+                .form-actions(style='top: 250px')
+                    .form-options
+                        a.forget.text(href='{u user/login}', title='返回登录', rel='nofollow') 返回登录
+                    button#popPhoneChangedCaptcha.button.large.always-blue.full-width(type='button') 确认提交
+        .form-error
+            i.icon.icon-sml.icon-error
+            label
+        input(name='rhash', value='{FORM_HASH}', type='hidden')
+#phoneReclaimPopup.popup-wrap.full-screen(style='display: none')
+    .popup-content(style='width: 240px;')
+        p.title 请先输入验证码
+        .input-row.captcha
+            i.icon.icon-sml.icon-captcha
+            input.captcha-input(type='text', value='', placeholder='验证码', autocomplete='off', maxlength='5')
+            a.captcha(style='')
+        .input-row.phone-code-input-row(style='display: none')
+            i.icon.icon-sml.icon-phone
+            input.phone-code-input(type='text', value='', placeholder='短信中的验证码', autocomplete='off', maxlength='5')
+        p.desc
+            | 我们将在1-2个工作日内审核完毕
+            br
+            | 结果将发送至手机
+        h5.resend-code(style='display: none')
+            span 55秒后
+            a.text 重新发送
+            | 验证码
+        button.button.large.always-blue.full-width.send-code 发送验证码到手机
+        button.button.large.always-blue.full-width.submit-reclaim(style='display: none') 提交
+        button.close-popup
+            i.icon.icon-sml.icon-close-popup
+// {template page/user/footer}
