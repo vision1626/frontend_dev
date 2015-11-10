@@ -27,11 +27,17 @@ init = ->
   #  Switch login and register 註冊登錄切換
   btn_goto_login = $('.goto-login')
   btn_goto_register = $('.goto-register')
+  $('#form-login').show()
+  $('#form-register').hide()
   btn_goto_login.click ->
     $('.form-container').removeClass 'at-register'
+    $('#form-login').show()
+    $('#form-register').hide()
     $('.switch-container').css 'left', 0
   btn_goto_register.click ->
     $('.form-container').addClass 'at-register'
+    $('#form-register').show()
+    $('#form-login').hide()
     form_w = $('.form-container').width()
     $('.switch-container').css 'left', -(form_w + 30)
 
@@ -72,54 +78,20 @@ init = ->
   $('input[type=text],input[type=password]').on 'propertychange input', ->
     $('.form-error').fadeOut(300)
 
-  #  Login submit 提交登錄
-  form_login = $('#form-login')
-  form_login.submit ->
-    user_phone = $.trim($('#form-login input.input-phone').val())
-    user_pass = $.trim($('#form-login input.input-password').val())
-    if user_phone is ''
-      showFormError('请输入邮箱/手机号', 310, 45)
-    else if !validateEmail(user_phone) && !validateMobile(user_phone)
-      showFormError('邮箱/手机号有误', 310, 45)
-    else if user_pass is ''
-      showFormError('请输入密码', 310, 100)
-    else
-      query = new Object()
-      query.account = user_phone
-      query.password = user_pass
-      query.remember = $('#remember').is(':checked') ? 1: 0
-      query.rhash = $.trim($("input[name=rhash]").val());
-
-      $('.hand-loading').show()
-
-      $.ajax {
-        url: $(this).attr('data-action'),
-        type: "POST",
-        data: query,
-        cache: false,
-        dataType: "json",
-        success: (result)->
-          if result.status is 1
-            window.location.href = result.success_url
-            false
-          else if result.status is 2
-            $('.hand-loading').fadeOut(200)
-            showSmallErrorTip("账户已被冻结<br/>如有疑问请发邮件至1626@1626.com")
-          else
-            $('.hand-loading').fadeOut(200)
-            showSmallErrorTip('账户或密码错误')
-        error: ->
-          showSmallErrorTip('操作失败，请稍后重新尝试')
-          $('.hand-loading').fadeOut(200)
-      }
-    false
-
   # 更新電腦驗證碼
   renew_captcha = ->
     $('.input-row.captcha .captcha').css("background-image",
       'url(' + SITE_URL + "services/service.php?m=index&a=verify&rand=" + Math.random() + ')');
     $('.input-row.captcha input').val('');
+  renew_captcha()
 
+  # 關閉彈窗
+  $('.close-popup').click ->
+    popup.fadeOut(200)
+
+  # Click and change captcha image 點擊驗證碼刷新
+  $("a.captcha").click ->
+    renew_captcha()
 
   # 驗證碼彈出框
   popup = $('.popup-wrap')
@@ -127,12 +99,119 @@ init = ->
 
   changePopupPosForIE = ->
     popup_content_w = popup_content.width() + 96
-    #    popup_content_h = popup_content.height() + 96
     popup_content.css 'left': ($(window).width() - popup_content_w) / 2, 'top': 200
 
+
+
+
+  # -------------------------- 登錄 - START -------------------------
+
+  log_input_phone = $('#form-login input.input-phone')
+  log_input_pass = $('#form-login input.input-password')
+  form_login = $('#form-login')
+  btn_login_submit = form_login.find 'button#submitLogin'
+
+  # 函數：激活/禁止提交按鈕
+  disableBtnLogSubmit = ->
+    btn_login_submit.addClass('disabled').removeClass('always-blue')
+  enableBtnLogSubmit = ->
+    btn_login_submit.removeClass('disabled').addClass('always-blue')
+
+  # 函數：提交登錄
+  submitLogin = (phone,pass)->
+    $('.hand-loading').show()
+    query = new Object()
+    query.account = phone
+    query.password = pass
+    query.remember = $('#remember').is(':checked') ? 1: 0
+    query.rhash = $.trim($("input[name=rhash]").val());
+    $.ajax {
+      url: form_login.attr('data-action'),
+      type: "POST",
+      data: query,
+      cache: false,
+      dataType: "json",
+      success: (result)->
+        if result.status is 1
+          window.location.href = result.success_url
+          false
+        else if result.status is 2
+          $('.hand-loading').fadeOut(200)
+          showSmallErrorTip("账户已被冻结<br/>如有疑问请发邮件至1626@1626.com")
+        else
+          $('.hand-loading').fadeOut(200)
+          showSmallErrorTip('账户或密码错误')
+      error: ->
+        showSmallErrorTip('操作失败，请稍后重新尝试')
+        $('.hand-loading').fadeOut(200)
+    }
+
+  # 函數：檢查錄入
+  validateLoginForm = (submit_pressed)->
+    user_phone = $.trim(log_input_phone.val())
+    user_pass = $.trim(log_input_pass.val())
+    if user_phone is ''
+      if submit_pressed then showFormError('请输入邮箱/手机号', 310, 45) else disableBtnLogSubmit()
+    else if !validateEmail(user_phone) && !validateMobile(user_phone)
+      showFormError('邮箱/手机号有误', 310, 45)
+      if !submit_pressed then disableBtnLogSubmit()
+    else if user_pass is ''
+      if submit_pressed then showFormError('请输入密码', 310, 100) else disableBtnLogSubmit()
+    else
+      if !submit_pressed then enableBtnLogSubmit() else submitLogin(user_phone,user_pass)
+
+  # 動態檢查錄入
+  log_input_phone.blur ->
+    validateLoginForm(false)
+  log_input_pass.blur ->
+    validateLoginForm(false)
+  log_input_pass.on 'propertychange input', ->
+    validateLoginForm(false)
+
+  # 點擊提交登錄按鈕
+  btn_login_submit.click ->
+    validateLoginForm(true)
+
+  # -------------------------- 登錄 - END -------------------------
+
+
+  # -------------------------- 註冊 - START -------------------------
+
+  form_register = $('#form-register')
+  reg_input_phone = form_register.find('input.input-phone')
+  reg_input_pass = form_register.find('input.input-password')
+  btn_reg_submit_info = form_register.find('button#submitInfo')
+
+  reg_input_phone.blur ->
+    user_phone = $.trim(reg_input_phone.val())
+    if validateMobile(user_phone)
+      $('#submitInfo').html('发送验证码到 ' + user_phone)
+    else
+      $('#submitInfo').html('发送验证码到 ' + user_phone)
+
+  # 函數：激活/禁止提交按鈕
+  disableBtnLogSubmit = ->
+    btn_reg_submit_info.addClass('disabled').removeClass('always-blue')
+  enableBtnLogSubmit = ->
+    btn_reg_submit_info.removeClass('disabled').addClass('always-blue')
+
+  # 函數：檢查錄入
+  validateRegisterForm = (submit_pressed)->
+    user_phone = $.trim(log_input_phone.val())
+    user_pass = $.trim(log_input_pass.val())
+    if user_phone is ''
+      if submit_pressed then showFormError('请输入邮箱/手机号', 310, 45) else disableBtnLogSubmit()
+    else if !validateEmail(user_phone) && !validateMobile(user_phone)
+      showFormError('邮箱/手机号有误', 310, 45)
+      if !submit_pressed then disableBtnLogSubmit()
+    else if user_pass is ''
+      if submit_pressed then showFormError('请输入密码', 310, 100) else disableBtnLogSubmit()
+    else
+      if !submit_pressed then enableBtnLogSubmit()
+
   # 檢查輸入是否有效，彈出驗證碼
-  $('#pop-captcha').click ->
-    user_phone = $.trim($('#form-register input.input-phone').val())
+  $('#submitInfo').click ->
+    user_phone = $.trim(reg_input_phone.val())
     user_pass = $.trim($('#form-register input.input-password').val())
 
     if $('.input-row.captcha .captcha').css('background-image') is 'none'
@@ -259,10 +338,4 @@ init = ->
       else
         submitRegister(user_phone, user_pass, v_code, m_code)
 
-  # 關閉彈窗
-  $('.close-popup').click ->
-    popup.fadeOut(200)
-
-  # Click and change captcha image 點擊驗證碼刷新
-  $("a.captcha").click ->
-    renew_captcha()
+  # -------------------------- 註冊 - END -------------------------
