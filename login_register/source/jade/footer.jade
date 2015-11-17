@@ -1,0 +1,18 @@
+.form-error-mob(style='display: none')
+   .error-mob-content
+      i.icon.icon-sml.icon-bad
+      label 请先输入验证码
+.hand-loading(style='display: none')
+   .loading-content
+      .hand
+         img(src='/tpl/hi1626/images/login/hand-loading@2x.gif')
+      // <p>请稍候</p>
+script(type='text/javascript').
+   $(document).ready(function () {
+      init();
+      if (checkIE())
+         initForIE();
+   });
+</body>
+<!--{template inc/count}-->
+</html>

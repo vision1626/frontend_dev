@@ -22,35 +22,20 @@ section.login-panel
             .switch-container
                 .form-header.login
                     label.form-title
-                        span 登录
-                        img.logo(src="/tpl/hi1626/images/login/logo-1626-black.svg")
-                    a.switch.goto-register(href="#register") 新用户注册
+                        span 欢迎入驻
+                        img.logo(src='assets/img/logo-1626-black.svg', alt='')
+                    a.switch.goto-login(href='#login')
+                        | 已有账号登录
                         i.icon.icon-sml.icon-switch
                 .form-header.register
                     label.form-title
-                        span 注册
-                        img.logo(src="/tpl/hi1626/images/login/logo-1626-black.svg")
-                    a.switch.goto-login(href="#login") 登录
+                        span 登录
+                        img.logo(src='assets/img/logo-1626-black.svg', alt='')
+                    a.switch.goto-register(href='#register')
+                        | 注册
                         i.icon.icon-sml.icon-switch
-
-        .form-wrap
-            form#form-login(data-action='{u user/ajax_login}')
-                ul
-                    li.input-row
-                        i.icon.icon-sml.icon-phone
-                        input.input-phone(type='text', value='', placeholder='请输入登录邮箱 / 手机号')
-                    li.input-row
-                        i.icon.icon-sml.icon-lock
-                        input.inpset.input-password(type='password', value='', placeholder='请输入密码')
-                        a.icon.icon-sml.icon-unseen(data-id='pass-ind', title='显示/隐藏密码')
-                .form-actions
-                    .form-options
-                        input#remember.checkbox(type='checkbox', value='1', checked='checked', autocomplete='off')
-                        label(for='remember') 10天內免登录
-                        a.forget.text(href='{u user/forgetpassword}', title='忘记密码?', rel='nofollow') 忘记密码?
-                    button#submitLogin.button.large.disabled.full-width(type="button") 登    录
-
-            form#form-register(data-action='{u user/ajax_register}', autocomplete='off')
+        .form-wrap(style='height: 210px;')
+            form#form-bind-register(data-action='{u user/ajax_register}', autocomplete='off')
                 ul
                     li.input-row
                         i.icon.icon-sml.icon-phone
@@ -59,10 +44,6 @@ section.login-panel
                         i.icon.icon-sml.icon-lock
                         input.input-password(type='password', value='', placeholder='请输入密码', maxlength='20', autocomplete='off')
                         a.icon.icon-sml.icon-unseen(title='显示/隐藏密码')
-                    li.input-row.captcha
-                        i.icon.icon-sml.icon-captcha
-                        input#captchaInput(type='text', value='', placeholder='请输入验证码', autocomplete='off', maxlength='5')
-                        a.captcha(style='')
                     li#code_input.input-row(style='display:none')
                         i.icon.icon-sml.icon-captcha
                         input#mobCodeInput(type='text', value='', placeholder='短信中的验证码', autocomplete='off', maxlength='5')
@@ -73,25 +54,33 @@ section.login-panel
                         label(for='agreed') 我已阅读并同意遵守
                         a.text(href='http://www.1626.com/about/privacy.html', target='_blank', style='float:none') 1626服务条款
                     button#submitInfo.button.large.disabled.full-width(type="button") 立即注册
-                    
+            form#form-bind-login(data-action='{u user/ajax_login}')
+                ul
+                    li.input-row
+                        i.icon.icon-sml.icon-phone
+                        input.input-phone(type='text', value='', placeholder='请输入登录邮箱 / 手机号')
+                    li.input-row
+                        i.icon.icon-sml.icon-lock
+                        input.inpset(type='password', value='', placeholder='请输入密码')
+                        a.icon.icon-sml.icon-unseen(data-id='pass-ind', title='显示/隐藏密码')
+                .form-actions
+                    .form-options
+                        input#remember.checkbox(type='checkbox', value='1', checked='checked', autocomplete='off')
+                        label(for='remember') 10天內免登录
+                        a.forget.text(href='{u user/forgetpassword}', title='忘记密码?', rel='nofollow') 忘记密码?
+                    button#submitLogin.button.large.disabled.full-width(type="button") 登    录
         .form-error
             i.icon.icon-sml.icon-error
             label
-        .social-login
-            h5 社交账号登录
-            .social-links
-                a.wechat(href='{u login/weixin}', target='_blank', title='微信')
-                    i.icon.icon-wechat
-                a.weibo(href='{u login/sina}', target='_blank', title='新浪微博')
-                    i.icon.icon-weibo
-                a.qq(href='{u login/qq}', target='_blank', title='QQ')
-                    i.icon.icon-qq
         input(name='rhash', value='{FORM_HASH}', type='hidden')
 
 //.popup-wrap.full-screen(style='display: none')
 //    .popup-content(style='width: 240px;')
 //        p.title 请先输入验证码
-//
+//        .input-row.captcha
+//            i.icon.icon-sml.icon-captcha
+//            input#captchaInput(type='text', value='', placeholder='验证码', autocomplete='off', maxlength='5')
+//            a.captcha(style='')
 //        #code_input.input-row(style='display: none')
 //            i.icon.icon-sml.icon-phone
 //            input#mobCodeInput(type='text', value='', placeholder='短信中的验证码', autocomplete='off', maxlength='5')
