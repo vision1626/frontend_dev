@@ -157,6 +157,7 @@ init = ->
         else if result.msg isnt ''
           showSmallErrorTip(result.msg)
         $('.hand-loading').hide()
+        $('#form-mail-reclaim').find('a.captcha').refresh_captcha()
       error: ->
         showSmallErrorTip('操作失败，请稍后重新尝试')
         $('.hand-loading').hide()
