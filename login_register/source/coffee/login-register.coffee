@@ -195,6 +195,9 @@ init = ->
   reg_input_code = form_register.find('#mobCodeInput')
   reg_resend_code = form_register.find('#resend_code')
   btn_reg_info_submit = form_register.find('button#submitInfo')
+  configMap = {
+    numReg: /\d/
+  }
 
   reg_input_phone.blur ->
     user_phone = $.trim(reg_input_phone.val())
@@ -204,6 +207,14 @@ init = ->
       reg_input_code_row.hide()
       reg_resend_code.hide()
       btn_reg_info_submit.html('立即注册').removeClass('send-code')
+
+  # DOM METHOD
+  checkCaptcha = (event)-> 
+    if (!configMap.numReg.test(String.fromCharCode(event.which)) && event.which != 8)
+      $(this).val($(this).val().slice(0, -1))
+  
+  # EventListener
+  reg_input_captcha.on('keyup', checkCaptcha)
 
   # 函數：激活/禁止提交按鈕
   disableBtnInfoSubmit = ->
