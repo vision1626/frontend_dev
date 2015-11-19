@@ -80,15 +80,15 @@ module.exports = function (grunt) {
             compile: {
                 files: {
                     '<%= globalConfig.jsDebugPath %>/login-register.js':[
-                        '<%= globalConfig.jsSrcPath %>/share-function.coffee',
+                        '<%= globalConfig.jsSrcPath %>/util.coffee',
                         '<%= globalConfig.jsSrcPath %>/login-register.coffee'
                     ],
                     '<%= globalConfig.jsDebugPath %>/forget-password.js':[
-                        '<%= globalConfig.jsSrcPath %>/share-function.coffee',
+                        '<%= globalConfig.jsSrcPath %>/util.coffee',
                         '<%= globalConfig.jsSrcPath %>/forget-password.coffee'
                     ],
                     '<%= globalConfig.jsDebugPath %>/social-bind.js':[
-                        '<%= globalConfig.jsSrcPath %>/share-function.coffee',
+                        '<%= globalConfig.jsSrcPath %>/util.coffee',
                         '<%= globalConfig.jsSrcPath %>/social-bind.coffee'
                     ],
                     '<%= globalConfig.jsDebugPath %>/login-register-ie.js':[

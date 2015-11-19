@@ -18,14 +18,25 @@ $.fn.windowCenter = ->
   $(this).verticalCenter()
   $(this).horizontalCenter()
 
+# --------------- Handlers -----------------
+checkCaptcha = (event)-> 
+    if (!validateCaptcha(String.fromCharCode(event.which)) && event.which != 8)
+      $(this).val($(this).val().slice(0, -1))
+# --------------- End of Handlers -----------------
+
+# Captcha validation
+validateCaptcha = (inputvalue)->
+  pattern = /\d/
+  pattern.test(inputvalue)
+
 # Mobile validation
 validateMobile = (inputvalue)->
-  pattern=/^1[35874][0-9][0-9]{8}$/;
+  pattern = /^1[35874][0-9][0-9]{8}$/;
   pattern.test(inputvalue)
 
 # Email validation
 validateEmail = (inputvalue)->
-  pattern=/^([a-zA-Z0-9_.-])+@([a-zA-Z0-9_.-])+\.([a-zA-Z])+([a-zA-Z])+/;
+  pattern = /^([a-zA-Z0-9_.-])+@([a-zA-Z0-9_.-])+\.([a-zA-Z])+([a-zA-Z])+/;
   pattern.test(inputvalue)
 
 #  Check if IE

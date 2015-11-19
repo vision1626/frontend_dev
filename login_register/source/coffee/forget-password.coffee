@@ -129,6 +129,9 @@ init = ->
       count_down_text.html("如收不到邮件，可<a class='text refresh-mail-reclaim' id=''>点击这里</a>重试。")
       $('#pop-applycode .icon-set-b').show()
 
+  # Event Listener
+  mail_rec_input_captcha.on('keyup', checkCaptcha);
+
   # 函數：激活/禁止提交按鈕
   disableBtnMailRecSubmit = ->
     btn_mail_rec_submit.addClass('disabled').removeClass('always-blue')
@@ -273,6 +276,9 @@ init = ->
         link_resend_code.html("<a class='text click-to-resend'>重新发送</a>验证码")
       else
         link_resend_code_p_c.html("<a class='text click-to-resend'>重新发送</a>验证码")
+
+  # Evnet Listener
+  input_phone_rec_phone.on('keyup', checkCaptcha);
 
   # 函數：發送手機驗證碼請求
   sendPhoneCode = (rec_or_chg, phone,captcha,type)->
