@@ -20,6 +20,8 @@ init = ->
     $(this).css("background-image",
       'url(' + SITE_URL + "services/service.php?m=index&a=verify&rand=" + Math.random() + ')')
 
+  at_page = 0
+
   #  Switch forms 三个表格切换
   $('.goto-phone').click ->
     $('.form-container').addClass 'at-register'
@@ -28,6 +30,7 @@ init = ->
     $('#form-phone-reclaim').show()
     $('#form-mail-reclaim').hide()
     $('#form-phone-reclaim').find('a.captcha').refresh_captcha()
+    at_page = 0 #手機修改密碼
   $('.goto-mail').click ->
     $('.form-container').removeClass 'at-register'
     $('.switch-container').css 'left', 0
@@ -35,9 +38,11 @@ init = ->
     $('#form-phone-changed').hide()
     $('#form-mail-reclaim').show()
     $('#form-mail-reclaim').find('a.captcha').refresh_captcha()
+    at_page = 1 #郵箱修改密碼
   $('.goto-phone-changed').click ->
     $('#form-phone-reclaim').hide()
     $('#form-phone-changed').show()
+    at_page = 2 #手機號碼更改
 
   btn_reveal_pw = $('.icon-unseen')
   btn_reveal_pw.click ->
@@ -147,6 +152,7 @@ init = ->
         if result.status is 1
           form_mail_reclaim.find('.before-submit').hide()
           form_mail_reclaim.find('.after-submit').show()
+          $('.goto-phone').hide()
           resend_mail_countdown()
         else if result.msg isnt ''
           showSmallErrorTip(result.msg)
@@ -157,14 +163,17 @@ init = ->
     }
 
   # 函數：檢查錄入
-  validateMailRecForm = (submit_pressed)->
+  validateMailRecForm = (submit_pressed,typing)->
     user_mail = mail_rec_input_mail.val()
     captcha = mail_rec_input_captcha.val()
     if !submit_pressed
       disableBtnMailRecSubmit()
       if !validateEmail(user_mail)
         showFormError('邮箱输入有误', 310, 45)
-      else if user_mail isnt '' and captcha isnt '' and captcha.length is 5
+      else if captcha.length isnt 5
+        if typing is 0
+          showFormError('验证码输入有误', 310, 100)
+      else if captcha.length is 5
         enableBtnMailRecSubmit()
     else
       if user_mail is ''
@@ -186,12 +195,17 @@ init = ->
     link_mail_captcha.refresh_captcha()
     form_mail_reclaim.find('.before-submit').show()
     form_mail_reclaim.find('.after-submit').hide()
+    $('.goto-phone').show()
 
   # 動態檢查錄入
   mail_rec_input_mail.blur ->
     validateMailRecForm(false)
   mail_rec_input_captcha.on 'propertychange input', ->
-    validateMailRecForm(false)
+    mail = mail_rec_input_mail.val()
+    if validateEmail(mail)
+      validateMailRecForm(false)
+  mail_rec_input_captcha.blur ->
+    validateMailRecForm(false,0)
 
   # -------------------------- 郵件修改密碼 - END -------------------------
 
@@ -640,3 +654,15 @@ init = ->
     validatePhoneChgForm(false)
 
   # -------------------------- 換了手機號碼 - END -------------------------
+
+
+  # 偵測回車鍵
+  $(document).keypress (e)->
+    if(e.which == 13)
+      switch at_page
+        when 0
+          validatePhoneRecForm(true)
+        when 1
+          validateMailRecForm(true)
+        when 2
+          validatePhoneChgForm(true)

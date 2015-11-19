@@ -24,6 +24,8 @@ init = ->
     else
       ipt_pass.attr('type', 'password')
 
+  at_page = 0
+
   #  Switch login and register 註冊登錄切換
   btn_goto_login = $('.goto-login')
   btn_goto_register = $('.goto-register')
@@ -31,11 +33,13 @@ init = ->
     $('.form-container').removeClass 'at-register'
     $('.switch-container').css 'left', 0
     $('.form-error').fadeOut(100)
+    at_page = 1 # register
   btn_goto_login.click ->
     $('.form-container').addClass 'at-register'
     form_w = $('.form-container').width()
     $('.switch-container').css 'left', -(form_w + 30)
     $('.form-error').fadeOut(100)
+    at_page = 0 # login
 
   #  Form input error tip 彈出錯誤提示
   showFormError = (text, x, y)->
@@ -159,129 +163,9 @@ init = ->
   btn_login_submit.click ->
     validateLoginForm(true)
 
-#  #  Login submit 提交登錄
-#  form_login.submit ->
-#    user_phone = $.trim($('#form-login input.input-phone').val())
-#    user_pass = $.trim($('#form-login input.input-password').val())
-#    if user_phone is ''
-#      showFormError('请输入邮箱/手机号', 310, 45)
-#    else if !validateEmail(user_phone) && !validateMobile(user_phone)
-#      showFormError('邮箱/手机号有误', 310, 45)
-#    else if user_pass is ''
-#      showFormError('请输入密码', 310, 100)
-#    else
-#      query = new Object()
-#      query.account = user_phone
-#      query.password = user_pass
-#      query.remember = $('#remember').is(':checked') ? 1: 0
-#      query.rhash = $.trim($("input[name=rhash]").val());
-#
-#      $('.hand-loading').show()
-#
-#      $.ajax {
-#        url: $(this).attr('data-action'),
-#        type: "POST",
-#        data: query,
-#        cache: false,
-#        dataType: "json",
-#        success: (result)->
-#          if result.status is 1
-#            window.location.href = result.success_url
-#            false
-#          else if result.status is 2
-#            $('.hand-loading').fadeOut(200)
-#            showSmallErrorTip("账户已被冻结<br/>如有疑问请发邮件至1626@1626.com")
-#          else
-#            $('.hand-loading').fadeOut(200)
-#            showSmallErrorTip('账户或密码错误')
-#        error: ->
-#          showSmallErrorTip('操作失败，请稍后重新尝试')
-#          $('.hand-loading').fadeOut(200)
-#      }
-#    false
-#
-#  # 檢查輸入是否有效，彈出驗證碼
-#  $('#pop-captcha').click ->
-#    user_phone = $.trim($('#form-register input.input-phone').val())
-#    user_pass = $.trim($('#form-register input.input-password').val())
-#
-#    if $('.input-row.captcha .captcha').css('background-image') is 'none'
-#      renew_captcha()
-#
-#    $('#resend_code, #code_input, #send_code').hide()
-#
-#    if user_phone is ''
-#      showFormError('请输入邮箱/手机号', 310, 45)
-#    else if !validateEmail(user_phone) && !validateMobile(user_phone)
-#      showFormError('邮箱/手机号有误', 310, 45)
-#    else if user_pass is ''
-#      showFormError('请输入密码', 310, 100)
-#    else if user_pass.length > 0 && (user_pass.length < 6 || user_pass.length > 20)
-#      showFormError('请输入6-12位密码', 310, 100)
-#    else if !$('#agreed').is(':checked')
-#      showFormError('请同意条款', 310, 145)
-#    else if validateEmail(user_phone)
-#      $('#submit_register').show()
-#      $('#send_code').hide()
-#      if checkIE()
-#        changePopupPosForIE()
-#      popup.fadeIn(200)
-#    else if validateMobile(user_phone)
-#      $('#submit_register').hide()
-#      $('#send_code').html('发送验证码到 ' + user_phone).show()
-#      if checkIE()
-#        changePopupPosForIE()
-#      popup.fadeIn(200)
-#    false
-#
-#  # 发送手机验证码60秒倒计时
-#  send_code_count_down = (sec)->
-#    sec = sec || 60
-#    sec--
-#    if sec > 0
-#      $('#resend_code').html(sec + '秒后重新发送验证码')
-#      setTimeout(->
-#        send_code_count_down(sec)
-#      , 1000)
-#    else
-#      $('#resend_code').html("<a class='text click-to-resend'>重新发送</a>验证码")
-#
-#  # 發送手機驗證碼
-#  $(document).on 'click', '#send_code, a.click-to-resend', ->
-#    v_code = $.trim($('#captchaInput').val())
-#    if v_code is ''
-#      showSmallErrorTip('请输入验证码')
-#    else if v_code.length > 0 && v_code.length isnt 5
-#      showSmallErrorTip('验证码错误')
-#    else
-#      $('.hand-loading').show()
-#      $('#code_input, #resend_code, #submit_register').show()
-#      $('#send_code').hide()
-#      user_phone = $.trim($('#form-register input.input-phone').val())
-#      v_code = $.trim($('#captchaInput').val())
-#      $.ajax {
-#        url: SITE_URL + 'services/service.php',
-#        type: "GET",
-#        data: {m: 'user', a: 'get_mobile_verify', ajax: 1, mobile: user_phone, code: v_code, type: 'reg'},
-#        cache: false,
-#        dataType: "json",
-#        success: (result)->
-#          $('.hand-loading').hide()
-#          switch result.stauts
-#            when -10 # 短信验证码已经发送
-#              showSmallErrorTip '已发送验证码到你的手机'
-#              send_code_count_down()
-#            when -11 # 短信验证码发送失败
-#              showSmallErrorTip '短信验证码发送失败'
-#            else
-#              if result.msg != ''
-#                showSmallErrorTip result.msg
-#        error: ->
-#          $('.hand-loading').hide()
-#          showSmallErrorTip '系统异常，请稍后重试'
-#      }
 
   # -------------------------- 登錄 - END -------------------------
+
 
   # -------------------------- 註冊 - START -----------------------
 
@@ -370,10 +254,10 @@ init = ->
       dataType: "json"
       success: (result)->
         $('.hand-loading').fadeOut(200)
-        if result.status is 0
+        if result.status > 0
           showSmallErrorTip('注册成功！<br/>即将跳转到首页',1)
           setTimeout(->
-            window.location.href = result.refresh
+            window.location.href = SITE_URL
           , 2000)
         else
           if result.msg is ''
@@ -403,9 +287,13 @@ init = ->
       else if user_pass.length > 0 && (user_pass.length < 6 || user_pass.length > 20)
         showFormError('请输入6-12位密码', 310, 100)
       else if user_phone isnt '' and user_pass isnt '' and captcha isnt '' and captcha.length is 5 and reg_input_agree.is(':checked')
-        enableBtnInfoSubmit()
-        if btn_reg_info_submit.hasClass('code-sent') and user_code isnt '' and user_code.length is 5
-          btn_reg_info_submit.html('立即注册')
+        if btn_reg_info_submit.hasClass('send-code')
+          enableBtnInfoSubmit()
+        else if btn_reg_info_submit.hasClass('code-sent') and user_code isnt '' and user_code.length is 5
+          enableBtnInfoSubmit()
+          btn_reg_info_submit.html('提交注册')
+        else
+          enableBtnInfoSubmit()
 
     else
       if user_phone is ''
@@ -454,3 +342,8 @@ init = ->
     validateRegisterForm(false)
 
 # -------------------------- 註冊 - END -------------------------
+
+  # 偵測回車鍵
+  $(document).keypress (e)->
+    if(e.which == 13)
+      if at_page is 0 then validateLoginForm(true) else validateRegisterForm(true)
