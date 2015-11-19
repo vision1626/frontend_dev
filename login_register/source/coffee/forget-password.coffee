@@ -55,6 +55,7 @@ init = ->
 
   $('a.captcha').click ->
     $(this).refresh_captcha()
+    $(this).parent('.captcha').find('input').val('')
 
   #  Form input error tip 彈出錯誤提示
   showFormError = (text, x, y)->
