@@ -15,6 +15,8 @@ init = ->
   $(window).resize ->
     resizeEle()
 
+  at_page = 0
+
   btn_reveal_pw = $('.icon-unseen')
   btn_reveal_pw.click ->
     $(this).toggleClass 'icon-seen'
@@ -34,12 +36,14 @@ init = ->
     $('#form-login').show()
     $('#form-register').hide()
     $('.switch-container').css 'left', 0
+    at_page = 0 # login
   btn_goto_register.click ->
     $('.form-container').addClass 'at-register'
     $('#form-register').show()
     $('#form-login').hide()
     form_w = $('.form-container').width()
     $('.switch-container').css 'left', -(form_w + 30)
+    at_page = 1 # register
 
   #  Form input error tip 彈出錯誤提示
   showFormError = (text, x, y)->
@@ -355,3 +359,8 @@ init = ->
     validateRegisterForm(false)
 
   # -------------------------- 註冊 - END -------------------------
+
+  # 偵測回車鍵
+  $(document).keypress (e)->
+    if(e.which == 13)
+      if at_page is 0 then validateLoginForm(true) else validateRegisterForm(true)

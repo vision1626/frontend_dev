@@ -23,7 +23,7 @@ section.login-panel
                         span 邮箱找回密码
                         // <img class="logo" src="assets/img/logo-1626-black.svg" alt=""/>
                     a.switch.goto-phone(href='#phone')
-                        | 手机找回密码
+                        | 手机更改密码
                         i.icon.icon-sml.icon-switch
                 .form-header.register
                     label.form-title
@@ -45,7 +45,7 @@ section.login-panel
                     .form-actions
                         .form-options
                             a.forget.text(href='{u user/login}', title='返回登录', rel='nofollow') 返回登录
-                        button#submitMailReclaim.button.large.disabled.full-width(type='button') 发送修改邮件
+                        button#submitMailReclaim.button.large.disabled.full-width(type='button') 发送验证邮件
                 .after-submit(style='display: none;')
                     p 我们已向您的注册邮箱中发送了重置密码的邮件，请按邮件中的步骤进行密码重置。
                     p 如收不到邮件，可于60秒后重试。
