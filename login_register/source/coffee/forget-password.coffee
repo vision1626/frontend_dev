@@ -279,7 +279,7 @@ init = ->
         link_resend_code_p_c.html("<a class='text click-to-resend'>重新发送</a>验证码")
 
   # Evnet Listener
-  input_phone_rec_phone.on('keyup', checkCaptcha);
+  input_phone_rec_captcha.on('keyup', checkCaptcha);
 
   # 函數：發送手機驗證碼請求
   sendPhoneCode = (rec_or_chg, phone,captcha,type)->
@@ -593,6 +593,8 @@ init = ->
     user_code       = $.trim(input_phone_chg_code.val())
     user_province   = selected_region_input.attr 'data-province'
     user_city       = selected_region_input.attr 'data-city'
+
+    input_phone_chg_captcha.on('keyup', checkCaptcha)
 
     if !submit_pressed
       disableBtnPhoneChgSubmit()

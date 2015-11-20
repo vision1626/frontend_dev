@@ -204,7 +204,7 @@ init = ->
       reg_input_code_row.hide()
       reg_resend_code.hide()
       btn_reg_info_submit.html('立即注册').removeClass('send-code')  
-        
+
   # EventListener
   reg_input_captcha.on('keyup', checkCaptcha)
 

@@ -20,7 +20,8 @@ $.fn.windowCenter = ->
 
 # --------------- Handlers -----------------
 checkCaptcha = (event)-> 
-    if (!validateCaptcha(String.fromCharCode(event.which)) && event.which != 8)
+    if (!validateCaptcha(String.fromCharCode(event.which)) &&
+        (event.which < 96 || event.which > 105) && (event.which < 8 || event.which >64))
       $(this).val($(this).val().slice(0, -1))
 # --------------- End of Handlers -----------------
 
