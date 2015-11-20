@@ -29,6 +29,7 @@ init = ->
     $('.switch-container').css 'left', -(form_w + 30)
     $('#form-phone-reclaim').show()
     $('#form-mail-reclaim').hide()
+    $('.form-error').hide()
     $('#form-phone-reclaim').find('a.captcha').refresh_captcha()
     at_page = 0 #手機修改密碼
   $('.goto-mail').click ->
@@ -37,11 +38,13 @@ init = ->
     $('#form-phone-reclaim').hide()
     $('#form-phone-changed').hide()
     $('#form-mail-reclaim').show()
+    $('.form-error').hide()
     $('#form-mail-reclaim').find('a.captcha').refresh_captcha()
     at_page = 1 #郵箱修改密碼
   $('.goto-phone-changed').click ->
     $('#form-phone-reclaim').hide()
     $('#form-phone-changed').show()
+    $('.form-error').hide()
     at_page = 2 #手機號碼更改
 
   btn_reveal_pw = $('.icon-unseen')
