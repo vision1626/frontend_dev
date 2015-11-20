@@ -49,7 +49,7 @@ checkIE = ->
 # 函数: 验证电话号码或邮箱是否合法(已注册否)
 # 参数: user: 手机或email 类型:string
 # 返回: 状态枚举 类型:int
-checkAccount = (userInfo) ->
+checkAccount = (userInfo,callBack) ->
   if userInfo.indexOf('@')>0
     email = userInfo
     mobile = ''
@@ -62,6 +62,7 @@ checkAccount = (userInfo) ->
     type: "GET"
     data: {m: 'user', a: 'check_account_exist', ajax: 1, mobile: mobile, email: email,  type: 'reg'}
     cache: false
+    async: false
     dataType: "json"
     success: (result)->
       # 状态如下:
@@ -72,10 +73,11 @@ checkAccount = (userInfo) ->
       # -4:无此注册用户,
       # 1:账号已存在
       # 返回1则为true,即为已注册
-      result.status is 1
+      callBack(result.status is 1)
     error: ->
-      false
+      callBack(false)
   }
+
 
 
 imagePath = '/tpl/hi1626/images/login'
