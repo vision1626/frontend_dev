@@ -182,6 +182,7 @@ init = ->
         if typing is 0
           showFormError('验证码输入有误', 310, 100)
       else if captcha.length is 5
+
         enableBtnMailRecSubmit()
     else
       if user_mail is ''
@@ -389,6 +390,8 @@ init = ->
       if !validateMobile(user_phone)
         showFormError('手机输入有误', 310, 45)
         btn_phone_rec_submit.html('获取手机验证码').addClass('send-code')
+      else if !checkUserIsRegistered(user_phone)
+        showFormError('该手机未注册', 310, 45)
       else if user_pass.length > 0 && (user_pass.length < 6 || user_pass.length > 20)
         showFormError('请输入6-12位密码', 310, 100)
       else if user_pass_again isnt '' and user_pass_again isnt user_pass
@@ -403,6 +406,8 @@ init = ->
         showFormError('请输入手机', 310, 45)
       else if !validateMobile(user_phone)
         showFormError('手机输入有误', 310, 45)
+      else if !checkUserIsRegistered(user_phone)
+        showFormError('该手机未注册', 310, 45)
       else if user_pass is ''
         showFormError('请输入密码', 310, 100)
       else if user_pass.length > 0 && (user_pass.length < 6 || user_pass.length > 20)
@@ -679,3 +684,5 @@ init = ->
           validateMailRecForm(true)
         when 2
           validatePhoneChgForm(true)
+
+

@@ -46,4 +46,36 @@ checkIE = ->
   msie = ua.indexOf("MSIE ");
   msie > 0
 
+# 函数: 验证电话号码或邮箱是否合法(已注册否)
+# 参数: user: 手机或email 类型:string
+# 返回: 状态枚举 类型:int
+checkAccount = (userInfo) ->
+  if userInfo.indexOf('@')>0
+    email = userInfo
+    mobile = ''
+  else
+    email = ''
+    mobile =  userInfo
+
+  $.ajax {
+    url: SITE_URL + "services/service.php"
+    type: "GET"
+    data: {m: 'user', a: 'check_account_exist', ajax: 1, mobile: mobile, email: email,  type: 'reg'}
+    cache: false
+    dataType: "json"
+    success: (result)->
+      # 状态如下:
+      # 0:无效参数(手机、邮箱都不填),
+      # -1:非法操作(手机、邮箱都填了),
+      # -2:无效的手机号码,
+      # -3:无效的电子邮箱,
+      # -4:无此注册用户,
+      # 1:账号已存在
+      # 返回1则为true,即为已注册
+      result.status is 1
+    error: ->
+      false
+  }
+
+
 imagePath = '/tpl/hi1626/images/login'
