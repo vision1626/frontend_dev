@@ -46,7 +46,7 @@ init = ->
     at_page = 1 # register
 
   #  Form input error tip 彈出錯誤提示
-  showFormError = (text, x, y)->
+  showFormError = (text, x, y, pass)->
     if $(window).width() > 950
       $('.form-error').find('label').text(text)
       $('.form-error').css {'left': x + 'px', 'top': y + 'px'}
@@ -57,6 +57,9 @@ init = ->
       setTimeout(->
         $(".form-error-mob").fadeOut(100)
       , 1000)
+    if pass
+      alert 'Hey!'
+      $('.form-error').css {'color': '#4cff56 !important'}
 
   #  Form input error tip 彈出錯誤提示
   showSmallErrorTip = (text,mood)->
@@ -204,9 +207,11 @@ init = ->
       reg_input_code_row.hide()
       reg_resend_code.hide()
       btn_reg_info_submit.html('立即注册').removeClass('send-code')  
-
+      
   # EventListener
   reg_input_captcha.on('keyup', checkCaptcha)
+  reg_input_phone.on('blur', isAccountExists)
+
 
   # 函數：激活/禁止提交按鈕
   disableBtnInfoSubmit = ->
