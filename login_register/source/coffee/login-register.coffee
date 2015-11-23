@@ -201,18 +201,26 @@ init = ->
   reg_resend_code = form_register.find('#resend_code')
   btn_reg_info_submit = form_register.find('button#submitInfo')
 
+  # DOM method
+  isPhoneExist = (exisied)->
+    if exisied
+      showFormError('手机号已被注册', 310, 45)
+  isEmailExist = (exisied)->
+    if exisied
+      showFormError('邮箱已被注册', 310, 45)
+      
+  # EventListener
+  reg_input_captcha.on('keyup', checkCaptcha)
   reg_input_phone.blur ->
     user_phone = $.trim(reg_input_phone.val())
     if validateMobile(user_phone)
+      checkAccount(user_phone, isPhoneExist)
       btn_reg_info_submit.html('发送验证码到 ' + user_phone).addClass('send-code')
     else
       reg_input_code_row.hide()
       reg_resend_code.hide()
-      btn_reg_info_submit.html('立即注册').removeClass('send-code')  
-      
-  # EventListener
-  reg_input_captcha.on('keyup', checkCaptcha)
-  reg_input_phone.on('blur', isAccountExists)
+      checkAccount(user_phone, isEmailExist)
+      btn_reg_info_submit.html('立即注册').removeClass('send-code')
 
 
   # 函數：激活/禁止提交按鈕
