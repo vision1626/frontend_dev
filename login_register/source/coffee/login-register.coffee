@@ -99,24 +99,37 @@ init = ->
     $('.input-row.captcha input').val('');
   renew_captcha()
 
-  # 關閉彈窗
-#  $('.close-popup').click ->
-#    popup.fadeOut(200)
+
 
   # Click and change captcha image 點擊驗證碼刷新
   $("a.captcha").click ->
     renew_captcha()
 
-  # 驗證碼彈出框
-#  popup = $('.popup-wrap')
-#  popup_content = popup.find '.popup-content'
-#
-#  changePopupPosForIE = ->
-#    popup_content_w = popup_content.width() + 96
-#    popup_content.css 'left': ($(window).width() - popup_content_w) / 2, 'top': 200
+  # -------------------------- 用户条款弹窗 - START -------------------------
 
+  popup = $('.popup-wrap')
+  popup_content = popup.find '.popup-content'
 
+  changePopupPosForIE = ->
+    popup_content_w = popup_content.width() + 96
+    popup_content.css 'left': ($(window).width() - popup_content_w) / 2, 'top': 200
 
+  # 触发弹窗
+  $('a.show-terms').click ->
+    if $(window).width() > 950
+      url = $(this).attr 'data-href'
+      window.open(url, '_blank')
+    else
+      popup_content.find('article').html(USERTERMS) #Separate JS @ /www.hi1626.com/public/js/user-terms.js
+      popup.fadeIn(100)
+      if checkIE()
+        changePopupPosForIE()
+
+  # 關閉彈窗
+  $('.close-popup').click ->
+    popup.fadeOut(100)
+
+  # -------------------------- 用户条款弹窗 - END -------------------------
 
   # -------------------------- 登錄 - START -------------------------
 
