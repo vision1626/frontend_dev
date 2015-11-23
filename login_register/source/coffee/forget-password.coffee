@@ -403,11 +403,6 @@ init = ->
       if !validateMobile(user_phone)
         showFormError('手机输入有误', 310, 45)
         btn_phone_rec_submit.html('获取手机验证码').addClass('send-code')
-#      else if validateMobile(user_phone)
-#        checkAccount(user_phone, (result) ->
-#          if !result
-#            showFormError('该手机未注册', 310, 45)
-#        )
       else if user_pass.length > 0 && (user_pass.length < 6 || user_pass.length > 20)
         showFormError('请输入6-12位密码', 310, 100)
       else if user_pass_again isnt '' and user_pass_again isnt user_pass
@@ -417,16 +412,17 @@ init = ->
           enableBtnPhoneRecSubmit()
         else if btn_phone_rec_submit.hasClass('code-sent') and user_code isnt '' and user_code.length is 5
           enableBtnPhoneRecSubmit()
+#      if validateMobile(user_phone)
+#        if checkAccount(user_phone, (result) -> result)
+#          btn_phone_rec_submit.html('发送验证码到 ' + user_phone)
+#        else
+#          showFormError('该手机未注册', 310, 45)
+#          disableBtnPhoneRecSubmit()
     else
       if user_phone is ''
         showFormError('请输入手机', 310, 45)
       else if !validateMobile(user_phone)
         showFormError('手机输入有误', 310, 45)
-#      else if validateMobile(user_phone)
-#        checkAccount(user_phone, (result) ->
-#          if !result
-#            showFormError('该手机未注册', 310, 45)
-#        )
       else if user_pass is ''
         showFormError('请输入密码', 310, 100)
       else if user_pass.length > 0 && (user_pass.length < 6 || user_pass.length > 20)
@@ -439,7 +435,6 @@ init = ->
         sendPhoneCode('rec',user_phone,captcha,'')
       else if btn_phone_rec_submit.hasClass('code-sent')
         submitPhoneReclaim(user_phone,user_pass,user_pass_again,user_code)
-
 
   # 重新发送验证码
   $(document).on 'click','#form-phone-reclaim h5.resend-code a', ->
@@ -454,9 +449,9 @@ init = ->
   # 動態檢查錄入
   input_phone_rec_phone.blur ->
     validatePhoneRecForm(false)
-    user_phone      = $.trim(input_phone_rec_phone.val())
-    if validateMobile(user_phone)
-      btn_phone_rec_submit.html('发送验证码到 ' + user_phone)
+#    user_phone      = $.trim(input_phone_rec_phone.val())
+#    if validateMobile(user_phone)
+#      btn_phone_rec_submit.html('发送验证码到 ' + user_phone)
   input_phone_rec_pass.blur ->
     validatePhoneRecForm(false)
   input_phone_rec_pass_again.blur ->
