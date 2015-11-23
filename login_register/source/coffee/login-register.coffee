@@ -19,12 +19,15 @@ init = ->
 
   btn_reveal_pw = $('.icon-unseen')
   btn_reveal_pw.click ->
-    $(this).toggleClass 'icon-seen'
     ipt_pass = $(this).prev();
     if ipt_pass.attr('type') is 'password'
       ipt_pass.attr('type', 'text')
+      $(this).addClass 'icon-seen'
+      $(this).removeClass 'icon-unseen'
     else
       ipt_pass.attr('type', 'password')
+      $(this).removeClass 'icon-seen'
+      $(this).addClass 'icon-unseen'
 
   #  Switch login and register 註冊登錄切換
   btn_goto_login = $('.goto-login')

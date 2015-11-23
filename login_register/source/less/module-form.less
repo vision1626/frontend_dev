@@ -179,15 +179,32 @@
     &:hover {
       &:before {
         content: '\e807';
-        color: @blue;
+        color: black;
+      }
+      @media @mobile {
+        &:before {
+          content: '\e808';
+          color: black;
+        }
       }
     }
   }
   .icon-seen {
+    position: absolute;
+    top: 10px;
+    right: 0px;
+    cursor: pointer;
     color: @blue;
     &:hover {
       &:before {
         content: '\e808';
+        color: @blue;
+      }
+      @media @mobile {
+        &:before {
+          content: '\e807';
+          color: @blue;
+        }
       }
     }
   }
