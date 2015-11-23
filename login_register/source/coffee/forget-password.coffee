@@ -119,6 +119,7 @@ init = ->
   mail_rec_input_captcha = form_mail_reclaim.find('#captchaInput1')
   btn_mail_rec_submit = form_mail_reclaim.find('#submitMailReclaim')
   link_mail_captcha = form_mail_reclaim.find('a.captcha')
+  $reg_mail_link = form_mail_reclaim.find('a.user-email')
 
   link_mail_captcha.refresh_captcha()
 
@@ -162,6 +163,7 @@ init = ->
         if result.status is 1
           form_mail_reclaim.find('.before-submit').hide()
           form_mail_reclaim.find('.after-submit').show()
+          $reg_mail_link.attr('href', result.email)
           $('.goto-phone').hide()
           resend_mail_countdown()
         else if result.msg isnt ''

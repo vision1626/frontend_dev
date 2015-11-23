@@ -24,8 +24,9 @@
   background: white;
   position: relative;
   p {
-    text-align: center;
+    text-align: justify;
     margin-top: 0;
+    font-size: @font-size-s;
     &.desc {
       font-size: @font-size-s;
       display: none;
@@ -34,6 +35,10 @@
         color: @blue;
       }
     }
+  }
+  article {
+    overflow: scroll;
+    height: 80%;
   }
 }
 .close-popup {

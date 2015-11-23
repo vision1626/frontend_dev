@@ -71,7 +71,7 @@ section.login-panel
                     .form-options
                         input#agreed.checkbox(type='checkbox', value='1', checked='checked', autocomplete='off')
                         label(for='agreed') 我已阅读并同意遵守
-                        a.text(href='http://www.1626.com/about/privacy.html', target='_blank', style='float:none') 1626服务条款
+                        a.text.show-terms(data-href='http://www.1626.com/about/privacy.html', style='float:none') 1626服务条款
                     button#submitInfo.button.large.disabled.full-width(type="button") 立即注册
                     
         .form-error
@@ -88,20 +88,11 @@ section.login-panel
                     i.icon.icon-qq
         input(name='rhash', value='{FORM_HASH}', type='hidden')
 
-//.popup-wrap.full-screen(style='display: none')
-//    .popup-content(style='width: 240px;')
-//        p.title 请先输入验证码
-//
-//        #code_input.input-row(style='display: none')
-//            i.icon.icon-sml.icon-phone
-//            input#mobCodeInput(type='text', value='', placeholder='短信中的验证码', autocomplete='off', maxlength='5')
-//        h5#resend_code(style='display: none')
-//            span 55秒后
-//            a.text 重新发送
-//            | 验证码
-//        button#send_code.button.large.always-blue.full-width(style='display: none') 发送验证码到手机
-//        button#submit_register.button.large.always-blue.full-width(style='display: none') 立即注册
-//        button.close-popup
-//            i.icon.icon-sml.icon-close-popup
+.popup-wrap.full-screen(style='display: none')
+    .popup-content(style='width: 70%;height:70%;')
+        h3 服务条款
+        article
+        button.close-popup
+            i.icon.icon-sml.icon-close-popup
 
 <!--{template page/user/footer}-->

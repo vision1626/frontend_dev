@@ -19,12 +19,15 @@ init = ->
 
   btn_reveal_pw = $('.icon-unseen')
   btn_reveal_pw.click ->
-    $(this).toggleClass 'icon-seen'
     ipt_pass = $(this).prev();
     if ipt_pass.attr('type') is 'password'
       ipt_pass.attr('type', 'text')
+      $(this).addClass 'icon-seen'
+      $(this).removeClass 'icon-unseen'
     else
       ipt_pass.attr('type', 'password')
+      $(this).removeClass 'icon-seen'
+      $(this).addClass 'icon-unseen'
 
   #  Switch login and register 註冊登錄切換
   btn_goto_login = $('.goto-login')
@@ -99,24 +102,37 @@ init = ->
     $('.input-row.captcha input').val('');
   renew_captcha()
 
-  # 關閉彈窗
-#  $('.close-popup').click ->
-#    popup.fadeOut(200)
+
 
   # Click and change captcha image 點擊驗證碼刷新
   $("a.captcha").click ->
     renew_captcha()
 
-  # 驗證碼彈出框
-#  popup = $('.popup-wrap')
-#  popup_content = popup.find '.popup-content'
-#
-#  changePopupPosForIE = ->
-#    popup_content_w = popup_content.width() + 96
-#    popup_content.css 'left': ($(window).width() - popup_content_w) / 2, 'top': 200
+  # -------------------------- 用户条款弹窗 - START -------------------------
 
+  popup = $('.popup-wrap')
+  popup_content = popup.find '.popup-content'
 
+  changePopupPosForIE = ->
+    popup_content_w = popup_content.width() + 96
+    popup_content.css 'left': ($(window).width() - popup_content_w) / 2, 'top': 200
 
+  # 触发弹窗
+  $('a.show-terms').click ->
+    if $(window).width() > 950
+      url = $(this).attr 'data-href'
+      window.open(url, '_blank')
+    else
+      popup_content.find('article').html(USERTERMS) #Separate JS @ /www.hi1626.com/public/js/user-terms.js
+      popup.fadeIn(100)
+      if checkIE()
+        changePopupPosForIE()
+
+  # 關閉彈窗
+  $('.close-popup').click ->
+    popup.fadeOut(100)
+
+  # -------------------------- 用户条款弹窗 - END -------------------------
 
   # -------------------------- 登錄 - START -------------------------
 
@@ -176,6 +192,8 @@ init = ->
 
   # 動態檢查錄入
   log_input_phone.blur ->
+    validateLoginForm(false)
+  log_input_phone.on 'propertychange input', ->
     validateLoginForm(false)
   log_input_pass.blur ->
     validateLoginForm(false)
