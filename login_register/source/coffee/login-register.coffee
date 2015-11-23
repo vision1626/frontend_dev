@@ -203,6 +203,9 @@ init = ->
   isPhoneExist = (exisied)->
     if exisied
       showFormError('手机号已被注册', 310, 45)
+  isEmailExist = (exisied)->
+    if exisied
+      showFormError('邮箱已被注册', 310, 45)
       
   # EventListener
   reg_input_captcha.on('keyup', checkCaptcha)
@@ -214,6 +217,7 @@ init = ->
     else
       reg_input_code_row.hide()
       reg_resend_code.hide()
+      checkAccount(user_phone, isEmailExist)
       btn_reg_info_submit.html('立即注册').removeClass('send-code')
 
 
