@@ -47,7 +47,9 @@ section.login-panel
                             a.forget.text(href='{u user/login}', title='返回登录', rel='nofollow') 返回登录
                         button#submitMailReclaim.button.large.disabled.full-width(type='button') 发送验证邮件
                 .after-submit(style='display: none;')
-                    p 我们已向您的注册邮箱中发送了重置密码的邮件，请按邮件中的步骤进行密码重置。
+                    p 我们已向您的
+                        a.user-email 注册邮箱
+                        | 中发送了重置密码的邮件，请按邮件中的步骤进行密码重置。
                     p 如收不到邮件，可于60秒后重试。
             form#form-phone-reclaim(autocomplete='off', style='display: none', data-action='services/service.php?m=user&a=resetpwd')
                 ul
