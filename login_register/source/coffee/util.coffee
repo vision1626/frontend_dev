@@ -47,8 +47,8 @@ checkIE = ->
   msie > 0
 
 # 函数: 验证电话号码或邮箱是否合法(已注册否)
-# 参数: user: 手机或email 类型:string
-# 返回: 状态枚举 类型:int
+# 参数: userInfo: 手机或email 类型:string
+#      callBack: 回调函数 阐述: ajax返回值 类型:boolean
 checkAccount = (userInfo,callBack) ->
   if userInfo.indexOf('@')>0
     email = userInfo
@@ -62,7 +62,6 @@ checkAccount = (userInfo,callBack) ->
     type: "GET"
     data: {m: 'user', a: 'check_account_exist', ajax: 1, mobile: mobile, email: email,  type: 'reg'}
     cache: false
-    async: false
     dataType: "json"
     success: (result)->
       # 状态如下:
