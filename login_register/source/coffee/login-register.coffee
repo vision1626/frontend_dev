@@ -177,6 +177,8 @@ init = ->
   # 動態檢查錄入
   log_input_phone.blur ->
     validateLoginForm(false)
+  log_input_phone.on 'propertychange input', ->
+    validateLoginForm(false)
   log_input_pass.blur ->
     validateLoginForm(false)
   log_input_pass.on 'propertychange input', ->
