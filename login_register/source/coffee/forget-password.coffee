@@ -414,12 +414,12 @@ init = ->
           enableBtnPhoneRecSubmit()
         else if btn_phone_rec_submit.hasClass('code-sent') and user_code isnt '' and user_code.length is 5
           enableBtnPhoneRecSubmit()
-#      if validateMobile(user_phone)
-#        if checkAccount(user_phone, (result) -> result)
-#          btn_phone_rec_submit.html('发送验证码到 ' + user_phone)
-#        else
-#          showFormError('该手机未注册', 310, 45)
-#          disableBtnPhoneRecSubmit()
+      if validateMobile(user_phone)
+        if checkAccount(user_phone, (result) -> result)
+          btn_phone_rec_submit.html('发送验证码到 ' + user_phone)
+        else
+          showFormError('该手机未注册', 310, 45)
+          disableBtnPhoneRecSubmit()
     else
       if user_phone is ''
         showFormError('请输入手机', 310, 45)
