@@ -40,6 +40,8 @@ init = ->
   btn_goto_register.click ->
     $('.form-container').addClass 'at-register'
     $('#form-register').show()
+    $('#form-register').find('input#captchaInput').val('')
+#    $('#form-register').find('a.captcha').refresh_captcha()
     $('#form-login').hide()
     form_w = $('.form-container').width()
     $('.switch-container').css 'left', -(form_w + 30)
@@ -163,9 +165,9 @@ init = ->
     user_phone = $.trim(log_input_phone.val())
     user_pass = $.trim(log_input_pass.val())
     if user_phone is ''
-      if submit_pressed then showFormError('请输入邮箱/手机号', 310, 45) else disableBtnLogSubmit()
-    else if !validateEmail(user_phone) && !validateMobile(user_phone)
-      showFormError('邮箱/手机号有误', 310, 45)
+      if submit_pressed then showFormError('请输入用户名/邮箱/手机号', 310, 45) else disableBtnLogSubmit()
+    else if !validateCharacter(user_phone)
+      showFormError('用户名/邮箱/手机号有误', 310, 45)
       if !submit_pressed then disableBtnLogSubmit()
     else if user_pass is ''
       if submit_pressed then showFormError('请输入密码', 310, 100) else disableBtnLogSubmit()
@@ -322,7 +324,7 @@ init = ->
 
     else
       if user_phone is ''
-        showFormError('请输入邮箱/手机号', 310, 45)
+        showFormError('请输入用户名/邮箱/手机号', 310, 45)
       else if !validateEmail(user_phone) && !validateMobile(user_phone)
         showFormError('邮箱/手机号有误', 310, 45)
       else if user_pass is ''

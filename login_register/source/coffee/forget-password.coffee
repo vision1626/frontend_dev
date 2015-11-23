@@ -30,6 +30,7 @@ init = ->
     $('#form-phone-reclaim').show()
     $('#form-mail-reclaim').hide()
     $('.form-error').hide()
+    $('#form-phone-reclaim').find('input.captcha-input').val('')
     $('#form-phone-reclaim').find('a.captcha').refresh_captcha()
     at_page = 0 #手機修改密碼
   $('.goto-mail').click ->
@@ -39,11 +40,13 @@ init = ->
     $('#form-phone-changed').hide()
     $('#form-mail-reclaim').show()
     $('.form-error').hide()
+    $('#form-mail-reclaim').find('input.captcha-input').val('')
     $('#form-mail-reclaim').find('a.captcha').refresh_captcha()
     at_page = 1 #郵箱修改密碼
   $('.goto-phone-changed').click ->
     $('#form-phone-reclaim').hide()
     $('#form-phone-changed').show()
+    $('#form-phone-changed').find('input.captcha-input').val('')
     $('.form-error').hide()
     at_page = 2 #手機號碼更改
 
@@ -178,6 +181,11 @@ init = ->
       disableBtnMailRecSubmit()
       if !validateEmail(user_mail)
         showFormError('邮箱输入有误', 310, 45)
+#      else if validateEmail(user_mail)
+#        checkAccount(user_mail, (result) ->
+#          if !result
+#            showFormError('该邮箱未注册', 310, 45)
+#        )
       else if captcha.length isnt 5
         if typing is 0
           showFormError('验证码输入有误', 310, 100)
@@ -189,6 +197,11 @@ init = ->
         showFormError('请输入邮箱', 310, 45)
       else if !validateEmail(user_mail)
         showFormError('邮箱输入有误', 310, 45)
+#      else if validateEmail(user_mail)
+#        checkAccount(user_mail, (result) ->
+#          if !result
+#            showFormError('该邮箱未注册', 310, 45)
+#        )
       else if captcha is '' or captcha.length isnt 5
         showFormError('验证码输入有误', 310, 100)
       else
@@ -390,11 +403,11 @@ init = ->
       if !validateMobile(user_phone)
         showFormError('手机输入有误', 310, 45)
         btn_phone_rec_submit.html('获取手机验证码').addClass('send-code')
-      else if validateMobile(user_phone)
-        checkAccount(user_phone, (result) ->
-          if !result
-            showFormError('该手机未注册', 310, 45)
-        )
+#      else if validateMobile(user_phone)
+#        checkAccount(user_phone, (result) ->
+#          if !result
+#            showFormError('该手机未注册', 310, 45)
+#        )
       else if user_pass.length > 0 && (user_pass.length < 6 || user_pass.length > 20)
         showFormError('请输入6-12位密码', 310, 100)
       else if user_pass_again isnt '' and user_pass_again isnt user_pass
@@ -409,11 +422,11 @@ init = ->
         showFormError('请输入手机', 310, 45)
       else if !validateMobile(user_phone)
         showFormError('手机输入有误', 310, 45)
-      else if validateMobile(user_phone)
-        checkAccount(user_phone, (result) ->
-          if !result
-            showFormError('该手机未注册', 310, 45)
-        )
+#      else if validateMobile(user_phone)
+#        checkAccount(user_phone, (result) ->
+#          if !result
+#            showFormError('该手机未注册', 310, 45)
+#        )
       else if user_pass is ''
         showFormError('请输入密码', 310, 100)
       else if user_pass.length > 0 && (user_pass.length < 6 || user_pass.length > 20)

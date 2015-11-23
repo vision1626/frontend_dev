@@ -40,6 +40,11 @@ validateEmail = (inputvalue)->
   pattern = /^([a-zA-Z0-9_.-])+@([a-zA-Z0-9_.-])+\.([a-zA-Z])+([a-zA-Z])+/;
   pattern.test(inputvalue)
 
+# Character validation for Login
+validateCharacter = (inputvalue)->
+  pattern =  /^1[35874][0-9][0-9]{8}$|^[A-Za-z0-9]+$|^([a-zA-Z0-9_.-])+@([a-zA-Z0-9_.-])+\.([a-zA-Z])+([a-zA-Z])+/;
+  pattern.test(inputvalue)
+
 #  Check if IE
 checkIE = ->
   ua = window.navigator.userAgent;
@@ -62,6 +67,7 @@ checkAccount = (userInfo,callBack) ->
     type: "GET"
     data: {m: 'user', a: 'check_account_exist', ajax: 1, mobile: mobile, email: email,  type: 'reg'}
     cache: false
+    async: false
     dataType: "json"
     success: (result)->
       # 状态如下:
