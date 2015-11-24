@@ -20,7 +20,7 @@ init = ->
     $(this).css("background-image",
       'url(' + SITE_URL + "services/service.php?m=index&a=verify&rand=" + Math.random() + ')')
 
-  at_page = 0
+  at_page = 1
 
   #  Switch forms 三个表格切换
   $('.goto-phone').click ->
