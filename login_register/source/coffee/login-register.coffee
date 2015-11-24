@@ -39,6 +39,8 @@ init = ->
     $('#form-login').show()
     $('#form-register').hide()
     $('.switch-container').css 'left', 0
+    $('.form-error').hide()
+    $('.input-password').val('')
     at_page = 0 # login
   btn_goto_register.click ->
     $('.form-container').addClass 'at-register'
@@ -49,6 +51,8 @@ init = ->
     $('#form-login').hide()
     form_w = $('.form-container').width()
     $('.switch-container').css 'left', -(form_w + 30)
+    $('.form-error').hide()
+    $('.input-password').val('')
     at_page = 1 # register
 
   #  Form input error tip 彈出錯誤提示
