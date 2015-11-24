@@ -57,13 +57,12 @@ init = ->
       $('.form-error').css {'left': x + 'px', 'top': y + 'px'}
       $('.form-error').show()
     else
-      # $('.form-error-mob').find('label').text(text)
-      # $('.form-error-mob').fadeIn(200)
-      # setTimeout(->
-      #   $(".form-error-mob").fadeOut(100)
-      # , 1000)
-      return 
-
+      $('.form-error-mob').find('label').text(text)
+      $('.form-error-mob').fadeIn(200)
+      setTimeout(->
+        $(".form-error-mob").fadeOut(100)
+      , 1000)
+      
   #  Form input error tip 彈出錯誤提示
   showSmallErrorTip = (text,mood)->
     mood = mood or 0 # 1是成功的笑臉，0是失敗的哭臉
@@ -192,7 +191,9 @@ init = ->
   log_input_phone.blur ->
     validateLoginForm(false)
   log_input_phone.on 'propertychange input', ->
-    validateLoginForm(false)
+    acc = $(this).val()
+    if validateMobile(acc) || validateEmail(acc)
+      validateLoginForm(false)
   log_input_pass.blur ->
     validateLoginForm(false)
   log_input_pass.on 'propertychange input', ->
@@ -226,7 +227,7 @@ init = ->
       showFormError('邮箱已被注册', 310, 45)
       
   # EventListener
-  reg_input_captcha.on('keyup', checkCaptcha)
+  reg_input_captcha.on('input keyup', checkCaptcha)
   reg_input_phone.blur ->
     user_phone = $.trim(reg_input_phone.val())
     if validateMobile(user_phone)
@@ -381,6 +382,10 @@ init = ->
   # 動態檢查錄入
   reg_input_phone.blur ->
     validateRegisterForm(false)
+  reg_input_phone.on 'propertychange input', ->
+    acc = $(this).val()
+    if validateMobile(acc) || validateEmail(acc)
+      validateRegisterForm(false)
 #  reg_input_pass.on 'propertychange input', ->
 #    validateRegisterForm(false)
   reg_input_pass.blur ->

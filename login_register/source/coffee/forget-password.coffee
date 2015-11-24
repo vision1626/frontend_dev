@@ -70,12 +70,11 @@ init = ->
       $('.form-error').css {'left': x + 'px', 'top': y + 'px'}
       $('.form-error').show()
     else
-      # $('.form-error-mob').find('label').text(text)
-      # $('.form-error-mob').fadeIn(200)
-      # setTimeout(->
-      #   $(".form-error-mob").fadeOut(100)
-      # , 1000)
-      return
+      $('.form-error-mob').find('label').text(text)
+      $('.form-error-mob').fadeIn(200)
+      setTimeout(->
+        $(".form-error-mob").fadeOut(100)
+      , 1000)
 
   #  Form input error tip 彈出錯誤提示
   showSmallErrorTip = (text,mood)->
@@ -139,7 +138,7 @@ init = ->
       $('#pop-applycode .icon-set-b').show()
 
   # Event Listener
-  mail_rec_input_captcha.on('keyup', checkCaptcha);
+  mail_rec_input_captcha.on('input keyup', checkCaptcha);
 
   # 函數：激活/禁止提交按鈕
   disableBtnMailRecSubmit = ->
@@ -299,7 +298,7 @@ init = ->
         link_resend_code_p_c.html("<a class='text click-to-resend'>重新发送</a>验证码")
 
   # Evnet Listener
-  input_phone_rec_captcha.on('keyup', checkCaptcha);
+  input_phone_rec_captcha.on('input keyup', checkCaptcha);
 
   # 函數：發送手機驗證碼請求
   sendPhoneCode = (rec_or_chg, phone,captcha,type)->
@@ -633,7 +632,7 @@ init = ->
       )
 
 
-    input_phone_chg_captcha.on('keyup', checkCaptcha)
+    input_phone_chg_captcha.on('input keyup', checkCaptcha)
 
     if !submit_pressed
       disableBtnPhoneChgSubmit()
