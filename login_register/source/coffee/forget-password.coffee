@@ -70,12 +70,11 @@ init = ->
       $('.form-error').css {'left': x + 'px', 'top': y + 'px'}
       $('.form-error').show()
     else
-      # $('.form-error-mob').find('label').text(text)
-      # $('.form-error-mob').fadeIn(200)
-      # setTimeout(->
-      #   $(".form-error-mob").fadeOut(100)
-      # , 1000)
-      return
+      $('.form-error-mob').find('label').text(text)
+      $('.form-error-mob').fadeIn(200)
+      setTimeout(->
+        $(".form-error-mob").fadeOut(100)
+      , 1000)
 
   #  Form input error tip 彈出錯誤提示
   showSmallErrorTip = (text,mood)->
