@@ -77,14 +77,20 @@ init = ->
     , 1500)
 
   # 適應返回鍵
-  locationHashChanged = ->
-    if location.hash is "#register"
-      btn_goto_register.click()
-    else if location.hash is "#login"
-      btn_goto_login.click()
+#  locationHashChanged = ->
+#    if location.hash is "#register"
+#      btn_goto_register.click()
+#    else if location.hash is "#login"
+#      btn_goto_login.click()
+#
+#  $(window).bind 'hashchange', ->
+#    locationHashChanged()
 
-  $(window).bind 'hashchange', ->
-    locationHashChanged()
+  $(window).bind 'load', ->
+    if location.href.indexOf('register.html')>0
+      btn_goto_register.click()
+    else
+      btn_goto_login.click()
 
   locationHashChanged()
 
