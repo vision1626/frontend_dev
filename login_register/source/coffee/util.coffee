@@ -20,6 +20,8 @@ $.fn.windowCenter = ->
 
 # --------------- Handlers -----------------
 checkCaptcha = (event)-> 
+    if isAndroid(navigator.userAgent) and isQQBrowser(navigator.userAgent) 
+      return
     if (!validateCaptcha(String.fromCharCode(event.which)) &&
         (event.which < 96 || event.which > 105) && (event.which < 8 || event.which >64))
       $(this).val($(this).val().slice(0, -1))
@@ -86,3 +88,11 @@ checkAccount = (userInfo,callBack) ->
 
 
 imagePath = '/tpl/hi1626/images/login'
+
+
+#     浏览器/操作系统嗅探
+isAndroid = (ua) ->
+  /android/i.test(ua)
+
+isQQBrowser = (ua) ->
+  /mqq/i.test(ua)
