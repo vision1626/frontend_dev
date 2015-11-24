@@ -226,7 +226,7 @@ init = ->
       showFormError('邮箱已被注册', 310, 45)
       
   # EventListener
-  reg_input_captcha.on('keyup', checkCaptcha)
+  reg_input_captcha.on('input keyup', checkCaptcha)
   reg_input_phone.blur ->
     user_phone = $.trim(reg_input_phone.val())
     if validateMobile(user_phone)
@@ -381,6 +381,10 @@ init = ->
   # 動態檢查錄入
   reg_input_phone.blur ->
     validateRegisterForm(false)
+  reg_input_phone.on 'propertychange input', ->
+    acc = $(this).val()
+    if validateMobile(acc) || validateEmail(acc)
+      validateRegisterForm(false)
 #  reg_input_pass.on 'propertychange input', ->
 #    validateRegisterForm(false)
   reg_input_pass.blur ->
