@@ -47,6 +47,7 @@ init = ->
     $('#form-phone-reclaim').hide()
     $('#form-phone-changed').show()
     $('#form-phone-changed').find('input.captcha-input').val('')
+    $('#form-phone-changed').find('a.captcha').refresh_captcha()
     $('.form-error').hide()
     at_page = 2 #手機號碼更改
 
@@ -95,6 +96,8 @@ init = ->
       $('.goto-phone').click()
     else if location.hash is "#mail"
       $('.goto-mail').click()
+#      $('.captcha-input').val('')
+#      $('.captcha').refresh_captcha()
 
   $(window).bind 'hashchange', ->
     locationHashChanged()
@@ -121,7 +124,8 @@ init = ->
   link_mail_captcha = form_mail_reclaim.find('a.captcha')
   $reg_mail_link = form_mail_reclaim.find('a.user-email')
 
-  link_mail_captcha.refresh_captcha()
+#  if at_page is 1
+#    link_mail_captcha.refresh_captcha()
 
   # 发送郵件60秒倒计时
   resend_mail_countdown = (sec)->
@@ -270,7 +274,8 @@ init = ->
   link_resend_code            = form_phone_reclaim.find('h5.resend-code')
   link_captcha                = form_phone_reclaim.find('a.captcha')
 
-  link_captcha.refresh_captcha()
+#  if at_page is 0
+#    link_captcha.refresh_captcha()
 
   # 函數：激活/禁止提交按鈕
   disableBtnPhoneRecSubmit = ->
@@ -303,6 +308,7 @@ init = ->
   # 函數：發送手機驗證碼請求
   sendPhoneCode = (rec_or_chg, phone,captcha,type)->
     $('.hand-loading').show()
+
     $.ajax {
       url: SITE_URL + 'services/service.php'
       type: "GET"
@@ -571,7 +577,8 @@ init = ->
     selected_region_input.val selected_region_text.text()
     location_dd.hide()
 
-  link_captcha_p_c.refresh_captcha()
+#  if at_page is 2
+#    link_captcha_p_c.refresh_captcha()
 
   # 函數：激活/禁止提交按鈕
   disableBtnPhoneChgSubmit = ->
