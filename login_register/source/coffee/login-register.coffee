@@ -224,29 +224,35 @@ init = ->
   reg_input_code = form_register.find('#mobCodeInput')
   reg_resend_code = form_register.find('#resend_code')
   btn_reg_info_submit = form_register.find('button#submitInfo')
+  configMap = {
+    isAccountExisted: false
+  }
 
   # DOM method
   isPhoneExist = (exisied)->
     if exisied
       showFormError('手机号已被注册', 310, 45)
+      configMap.isAccountExisted = true
+    else
+      configMap.isAccountExisted = false
   isEmailExist = (exisied)->
     if exisied
       showFormError('邮箱已被注册', 310, 45)
+      configMap.isAccountExisted = true
+    else
+      configMap.isAccountExisted = false
       
   # EventListener
   reg_input_captcha.on('input keyup', checkCaptcha)
 #  reg_input_phone.blur ->
-  reg_input_phone.keyup ->
-    user_phone = $.trim(reg_input_phone.val())
-    if validateMobile(user_phone)
-      checkAccount(user_phone, isPhoneExist)
-      btn_reg_info_submit.html('发送验证码到 ' + user_phone).addClass('send-code')
-    else
-      reg_input_code_row.hide()
-      reg_resend_code.hide()
-      checkAccount(user_phone, isEmailExist)
-      btn_reg_info_submit.html('立即注册').removeClass('send-code')
-
+  # reg_input_phone.keyup ->
+  #   user_phone = $.trim(reg_input_phone.val())
+  #   if validateMobile(user_phone)
+  #     checkAccount(user_phone, isPhoneExist)
+  #   else
+  #     reg_input_code_row.hide()
+  #     reg_resend_code.hide()
+  #     checkAccount(user_phone, isEmailExist)
 
   # 函數：激活/禁止提交按鈕
   disableBtnInfoSubmit = ->
@@ -344,6 +350,8 @@ init = ->
       disableBtnInfoSubmit()
       if !validateEmail(user_phone) && !validateMobile(user_phone)
         showFormError('邮箱/手机号有误', 310, 45)
+      else if configMap.isAccountExisted
+        showFormError('此账号已被注册', 310, 45)
       else if user_pass.length > 0 && (user_pass.length < 6 || user_pass.length > 20)
         showFormError('请输入6-12位密码', 310, 100)
       else if user_phone isnt '' and user_pass isnt '' and captcha isnt '' and captcha.length is 5 and reg_input_agree.is(':checked')
@@ -351,7 +359,10 @@ init = ->
           enableBtnInfoSubmit()
         else if btn_reg_info_submit.hasClass('code-sent') and user_code isnt '' and user_code.length is 5
           enableBtnInfoSubmit()
-          btn_reg_info_submit.html('提交注册')
+          if validateMobile(user_email)
+            btn_reg_info_submit.html('提交注册')
+          else
+            btn_reg_info_submit.html('发送验证码到 ' + user_phone).addClass('send-code')
         else
           enableBtnInfoSubmit()
 
@@ -388,11 +399,17 @@ init = ->
 
 
   # 動態檢查錄入
-  reg_input_phone.blur ->
-    validateRegisterForm(false)
+  # reg_input_phone.blur ->
+  #   validateRegisterForm(false)
   reg_input_phone.on 'propertychange input', ->
     acc = $(this).val()
-    if validateMobile(acc) || validateEmail(acc)
+    if validateMobile(acc)
+      checkAccount(acc, isPhoneExist)
+      validateRegisterForm(false)
+    else if validateEmail(acc)
+      reg_input_code_row.hide()
+      reg_resend_code.hide()
+      checkAccount(acc, isEmailExist)
       validateRegisterForm(false)
 #  reg_input_pass.on 'propertychange input', ->
 #    validateRegisterForm(false)
