@@ -42,7 +42,7 @@ validateEmail = (inputvalue)->
 
 # Character validation for Login
 validateCharacter = (inputvalue)->
-  pattern =  /^1[35874][0-9][0-9]{8}$|^[A-Za-z0-9]+$|^([a-zA-Z0-9_.-])+@([a-zA-Z0-9_.-])+\.([a-zA-Z])+([a-zA-Z])+/;
+  pattern =  /^1[35874][0-9][0-9]{8}$|^[A-Za-z0-9_.-]+$|^([a-zA-Z0-9_.-])+@([a-zA-Z0-9_.-])+\.([a-zA-Z])+([a-zA-Z])+/;
   pattern.test(inputvalue)
 
 #  Check if IE
