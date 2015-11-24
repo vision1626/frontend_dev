@@ -625,6 +625,13 @@ init = ->
     user_code       = $.trim(input_phone_chg_code.val())
     user_province   = selected_region_input.attr 'data-province'
     user_city       = selected_region_input.attr 'data-city'
+    account_lawful   = true
+
+    if validateMobile(user_phone)
+      checkAccount(user_phone, (result)->
+        account_lawful = result
+      )
+
 
     input_phone_chg_captcha.on('keyup', checkCaptcha)
 
@@ -632,6 +639,8 @@ init = ->
       disableBtnPhoneChgSubmit()
       if !validateMobile(user_phone)
         showFormError('旧号码输入有误', 310, 45)
+      else if !account_lawful
+        showFormError('该手机未注册', 310, 45)
       else if user_phone_new.length > 0 and !validateMobile(user_phone_new)
         showFormError('新号码输入有误', 310, 100)
         btn_phone_chg_submit.html('获取手机验证码')
@@ -639,7 +648,7 @@ init = ->
         showFormError('请输入6-12位密码', 310, 204)
       else if user_pass_again isnt '' and user_pass_again isnt user_pass
         showFormError('两次输入的密码不相同', 310, 255)
-      else if user_phone isnt '' and user_pass isnt '' and user_pass_again isnt '' and user_city isnt '0' and captcha isnt '' and captcha.length is 5
+      else if user_phone isnt '' and user_pass isnt '' and user_pass_again isnt '' and user_city isnt '0' and captcha isnt '' and captcha.length is 5 and account_lawful
         if btn_phone_chg_submit.hasClass('send-code')
           enableBtnPhoneChgSubmit()
         if btn_phone_chg_submit.hasClass('code-sent') and user_code isnt '' and user_code.length is 5
@@ -649,6 +658,8 @@ init = ->
         showFormError('请输入旧号码', 310, 45)
       else if !validateMobile(user_phone)
         showFormError('旧号码输入有误', 310, 45)
+      else if !account_lawful
+        showFormError('该手机未注册', 310, 45)
       else if user_phone_new is ''
         showFormError('请输入新号码', 310, 100)
       else if !validateMobile(user_phone_new)
