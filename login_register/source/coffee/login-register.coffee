@@ -44,7 +44,8 @@ init = ->
     $('.form-container').addClass 'at-register'
     $('#form-register').show()
     $('#form-register').find('input#captchaInput').val('')
-#    $('#form-register').find('a.captcha').refresh_captcha()
+#    $('#form-register').find('a.captcha').renew_captcha()
+    renew_captcha()
     $('#form-login').hide()
     form_w = $('.form-container').width()
     $('.switch-container').css 'left', -(form_w + 30)
@@ -92,7 +93,7 @@ init = ->
     else
       btn_goto_login.click()
 
-  locationHashChanged()
+#  locationHashChanged()
 
   # 鍵入，隱藏錯誤提示
   $('input[type=text],input[type=password]').on 'propertychange input', ->
@@ -234,7 +235,8 @@ init = ->
       
   # EventListener
   reg_input_captcha.on('input keyup', checkCaptcha)
-  reg_input_phone.blur ->
+#  reg_input_phone.blur ->
+  reg_input_phone.keyup ->
     user_phone = $.trim(reg_input_phone.val())
     if validateMobile(user_phone)
       checkAccount(user_phone, isPhoneExist)
