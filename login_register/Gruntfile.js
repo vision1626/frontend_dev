@@ -91,6 +91,10 @@ module.exports = function (grunt) {
                         '<%= globalConfig.jsSrcPath %>/util.coffee',
                         '<%= globalConfig.jsSrcPath %>/social-bind.coffee'
                     ],
+                    '<%= globalConfig.jsDebugPath %>/reset-password.js':[
+                        '<%= globalConfig.jsSrcPath %>/util.coffee',
+                        '<%= globalConfig.jsSrcPath %>/reset-password.coffee'
+                    ],
                     '<%= globalConfig.jsDebugPath %>/login-register-ie.js':[
                         '<%= globalConfig.jsSrcPath %>/ie.coffee'
                     ]
