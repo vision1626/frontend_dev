@@ -124,8 +124,9 @@ init = ->
   link_mail_captcha = form_mail_reclaim.find('a.captcha')
   $reg_mail_link = form_mail_reclaim.find('a.user-email')
 
-#  if at_page is 1
-#    link_mail_captcha.refresh_captcha()
+  #第一次打开,刷新一次邮件这边的验证码
+  if at_page is 1
+    link_mail_captcha.refresh_captcha()
 
   # 发送郵件60秒倒计时
   resend_mail_countdown = (sec)->
@@ -298,8 +299,12 @@ init = ->
       , 1000)
     else
       if rec_or_chg is 'rec'
+        input_phone_rec_captcha.val('')
+        link_captcha.refresh_captcha()
         link_resend_code.html("<a class='text click-to-resend'>重新发送</a>验证码")
       else
+        input_phone_chg_captcha.val('')
+        link_captcha_p_c.refresh_captcha()
         link_resend_code_p_c.html("<a class='text click-to-resend'>重新发送</a>验证码")
 
   # Evnet Listener
@@ -425,8 +430,8 @@ init = ->
       else if user_pass_again isnt '' and user_pass_again isnt user_pass
         showFormError('两次输入的密码不相同', 310, 145)
       else if user_phone isnt '' and user_pass isnt '' and user_pass_again isnt '' and captcha isnt '' and captcha.length is 5 and account_lawful
-        btn_phone_rec_submit.html('发送验证码到 ' + user_phone)
         if btn_phone_rec_submit.hasClass('send-code')
+          btn_phone_rec_submit.html('发送验证码到 ' + user_phone)
           enableBtnPhoneRecSubmit()
         else if btn_phone_rec_submit.hasClass('code-sent') and user_code isnt '' and user_code.length is 5
           enableBtnPhoneRecSubmit()
