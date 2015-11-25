@@ -599,26 +599,26 @@ init = ->
 
     $.ajax {
       url: SITE_URL +'services/service.php?m=user&a=resetapply',
-        type: "POST",
-        data: query,
-        cache: false,
-        dataType: "json",
-        success: (result)->
-          switch result.status
-            when 1
-              form_phone_changed.attr('data-redir', result.success_url)
-              form_phone_changed.find('p.desc').show()
-              form_phone_changed.find('p.desc').html('已收到您的请求。<br/>我们将在1-2个工作日内审核完毕<br />结果将发送至手机 ' + user_phone_new.substr(0,
-                  3) + '****' + user_phone_new.substr(-4))
-              afterSubmitSuccess('chg',user_phone_new,result.success_url,form_phone_changed)
-            when -12 # 无效的短信验证码
-              showSmallErrorTip '短信验证码错误，请重新输入'
-            else
-              if result.msg != ''
-                showSmallErrorTip result.msg
-        error: ->
-          $('.hand-loading').hide()
-          showSmallErrorTip '系统异常，请稍后重试'
+      type: "POST",
+      data: query,
+      cache: false,
+      dataType: "json",
+      success: (result)->
+        switch result.status
+          when 1
+            form_phone_changed.attr('data-redir', result.success_url)
+            form_phone_changed.find('p.desc').show()
+            form_phone_changed.find('p.desc').html('已收到您的请求。<br/>我们将在1-2个工作日内审核完毕<br />结果将发送至手机 ' + user_phone_new.substr(0,
+                3) + '****' + user_phone_new.substr(-4))
+            afterSubmitSuccess('chg',user_phone_new,result.success_url,form_phone_changed)
+          when -12 # 无效的短信验证码
+            showSmallErrorTip '短信验证码错误，请重新输入'
+          else
+            if result.msg != ''
+              showSmallErrorTip result.msg
+      error: ->
+        $('.hand-loading').hide()
+        showSmallErrorTip '系统异常，请稍后重试'
     }
 
   # 函數：檢查錄入
