@@ -416,6 +416,8 @@ init = ->
       reg_resend_code.hide()
       checkAccount(acc, isEmailExist)
       validateRegisterForm(false)
+    else
+      validateRegisterForm(false)
 #  reg_input_pass.on 'propertychange input', ->
 #    validateRegisterForm(false)
   reg_input_pass.blur ->
