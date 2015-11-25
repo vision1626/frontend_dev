@@ -46,9 +46,9 @@ init = ->
   $('.goto-phone-changed').click ->
     $('#form-phone-reclaim').hide()
     $('#form-phone-changed').show()
+    $('.form-error').hide()
     $('#form-phone-changed').find('input.captcha-input').val('')
     $('#form-phone-changed').find('a.captcha').refresh_captcha()
-    $('.form-error').hide()
     at_page = 2 #手機號碼更改
 
   btn_reveal_pw = $('.icon-unseen')
@@ -277,6 +277,9 @@ init = ->
 
 #  if at_page is 0
 #    link_captcha.refresh_captcha()
+  # 先隐藏两个密码输入框,等第一步发送完验证码之后再开放
+  input_phone_rec_pass.parent('li.input-row').hide()
+  input_phone_rec_pass_again.parent('li.input-row').hide()
 
   # 函數：激活/禁止提交按鈕
   disableBtnPhoneRecSubmit = ->
@@ -325,6 +328,8 @@ init = ->
         switch parseInt(result.status)
           when 1 # 短信验证码已经发送
             showSmallErrorTip '已发送验证码到你的手机', 1
+            input_phone_rec_pass.parent('li.input-row').show()
+            input_phone_rec_pass_again.parent('li.input-row').show()
             if rec_or_chg is 'rec'
               phoneSendCodeCountDown('rec')
               disableBtnPhoneRecSubmit()
@@ -425,11 +430,11 @@ init = ->
       else if !account_lawful
         showFormError('该手机未注册', 310, 45)
         btn_phone_rec_submit.html('获取手机验证码').addClass('send-code')
-      else if user_pass.length > 0 && (user_pass.length < 6 || user_pass.length > 20)
+      else if user_pass.length > 0 && (user_pass.length < 6 || user_pass.length > 20) and btn_phone_rec_submit.hasClass('code-sent')
         showFormError('请输入6-12位密码', 310, 100)
-      else if user_pass_again isnt '' and user_pass_again isnt user_pass
+      else if user_pass_again isnt '' and user_pass_again isnt user_pass and btn_phone_rec_submit.hasClass('code-sent')
         showFormError('两次输入的密码不相同', 310, 145)
-      else if user_phone isnt '' and user_pass isnt '' and user_pass_again isnt '' and captcha isnt '' and captcha.length is 5 and account_lawful
+      else if (user_phone isnt '' and user_pass isnt '' and user_pass_again isnt '' and captcha isnt '' and captcha.length is 5 and account_lawful and btn_phone_rec_submit.hasClass('code-sent')) or (user_phone isnt '' and captcha isnt '' and captcha.length is 5 and account_lawful and btn_phone_rec_submit.hasClass('send-code'))
         if btn_phone_rec_submit.hasClass('send-code')
           btn_phone_rec_submit.html('发送验证码到 ' + user_phone)
           enableBtnPhoneRecSubmit()
@@ -442,13 +447,13 @@ init = ->
         showFormError('手机输入有误', 310, 45)
       else if !account_lawful
         showFormError('该手机未注册', 310, 45)
-      else if user_pass is ''
+      else if user_pass is '' and btn_phone_rec_submit.hasClass('code-sent')
         showFormError('请输入密码', 310, 100)
-      else if user_pass.length > 0 && (user_pass.length < 6 || user_pass.length > 20)
+      else if user_pass.length > 0 && (user_pass.length < 6 || user_pass.length > 20) and btn_phone_rec_submit.hasClass('code-sent')
         showFormError('请输入6-12位密码', 310, 100)
-      else if user_pass_again is ''
+      else if user_pass_again is '' and btn_phone_rec_submit.hasClass('code-sent')
         showFormError('请重复输入密码', 310, 145)
-      else if user_pass_again isnt user_pass
+      else if user_pass_again isnt user_pass and btn_phone_rec_submit.hasClass('code-sent')
         showFormError('两次输入的密码不相同', 310, 145)
       else if btn_phone_rec_submit.hasClass('send-code')
         sendPhoneCode('rec',user_phone,captcha,'')
