@@ -75,7 +75,7 @@ init = ->
   submitReset = (pass,pass_again)->
     $('.hand-loading').show()
     query = new Object()
-    query.uid = {$uid}
+    query.uid = uid
     query.password = pass
     query.confirm_password = pass_again
     $.ajax {
@@ -89,10 +89,10 @@ init = ->
         if(result.status == 0)
           showSmallErrorTip(result.msg)
         else
-          $('#pwdDIV').hide();
-          $('#text').show();
           showSmallErrorTip "重置密码成功", 1
-          setTimeout(window.location.href = SITE_URL, 500);
+          setTimeout(->
+            window.location.href = SITE_URL
+          , 1000)
       error: ->
         showSmallErrorTip('操作失败，请稍后重新尝试')
         $('.hand-loading').fadeOut(100)
