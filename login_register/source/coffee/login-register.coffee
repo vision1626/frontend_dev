@@ -363,7 +363,7 @@ init = ->
           enableBtnInfoSubmit()
         else if btn_reg_info_submit.hasClass('code-sent') and user_code isnt '' and user_code.length is 5
           enableBtnInfoSubmit()
-          if validateMobile(user_email)
+          if validateEmail(user_phone)
             btn_reg_info_submit.html('提交注册')
           else
             btn_reg_info_submit.html('发送验证码到 ' + user_phone).addClass('send-code')
@@ -410,10 +410,15 @@ init = ->
     if validateMobile(acc)
       checkAccount(acc, isPhoneExist)
       validateRegisterForm(false)
+      reg_input_code_row.show()
+      reg_resend_code.show()
     else if validateEmail(acc)
       reg_input_code_row.hide()
       reg_resend_code.hide()
       checkAccount(acc, isEmailExist)
+      validateRegisterForm(false)
+    else
+      showFormError('邮箱/手机号输入不正确', 310, 45)
       validateRegisterForm(false)
 #  reg_input_pass.on 'propertychange input', ->
 #    validateRegisterForm(false)
