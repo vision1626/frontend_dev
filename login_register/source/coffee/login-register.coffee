@@ -352,24 +352,23 @@ init = ->
 
     if !submit_pressed
       disableBtnInfoSubmit()
-#      if !validateEmail(user_phone) && !validateMobile(user_phone)
-      if !validateMobile(user_phone)
+      if !validateEmail(user_phone) && !validateMobile(user_phone)
         showFormError('邮箱/手机号有误', 310, 45)
       else if configMap.isAccountExisted
         showFormError('此账号已被注册', 310, 45)
       else if user_pass.length > 0 && (user_pass.length < 6 || user_pass.length > 20)
         showFormError('请输入6-12位密码', 310, 100)
       else if user_phone isnt '' and user_pass isnt '' and captcha isnt '' and captcha.length is 5 and reg_input_agree.is(':checked')
-#        if btn_reg_info_submit.hasClass('send-code')
-#          enableBtnInfoSubmit()
-#        else if btn_reg_info_submit.hasClass('code-sent') and user_code isnt '' and user_code.length is 5
-        enableBtnInfoSubmit()
-        if validateMobile(user_phone)
-          btn_reg_info_submit.html('发送验证码到 ' + user_phone).addClass('send-code')
+        if btn_reg_info_submit.hasClass('send-code')
+          enableBtnInfoSubmit()
+        else if btn_reg_info_submit.hasClass('code-sent') and user_code isnt '' and user_code.length is 5
+          enableBtnInfoSubmit()
+          if validateMobile(user_email)
+            btn_reg_info_submit.html('提交注册')
+          else
+            btn_reg_info_submit.html('发送验证码到 ' + user_phone).addClass('send-code')
         else
-          btn_reg_info_submit.html('提交注册')
-#        else
-#          enableBtnInfoSubmit()
+          enableBtnInfoSubmit()
 
     else
       if user_phone is ''
