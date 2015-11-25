@@ -50,6 +50,7 @@ init = ->
     $('#form-phone-changed').find('input.captcha-input').val('')
     $('#form-phone-changed').find('a.captcha').refresh_captcha()
     at_page = 2 #手機號碼更改
+    $('.form-wrap').css('overflow','visible') #下拉菜单会因为form-wrap的overflow:hidden而被挡住,在此取消此样式
 
   btn_reveal_pw = $('.icon-unseen')
   btn_reveal_pw.click ->
@@ -328,14 +329,16 @@ init = ->
         switch parseInt(result.status)
           when 1 # 短信验证码已经发送
             showSmallErrorTip '已发送验证码到你的手机', 1
-            input_phone_rec_pass.parent('li.input-row').show()
-            input_phone_rec_pass_again.parent('li.input-row').show()
             if rec_or_chg is 'rec'
+              input_phone_rec_pass.parent('li.input-row').show()
+              input_phone_rec_pass_again.parent('li.input-row').show()
               phoneSendCodeCountDown('rec')
               disableBtnPhoneRecSubmit()
               row_phone_rec_code.show()
               btn_phone_rec_submit.removeClass('send-code').addClass('code-sent').html('提交')
             else
+              input_phone_chg_pass.parent('li.input-row').show()
+              input_phone_chg_pass_again.parent('li.input-row').show()
               disableBtnPhoneChgSubmit()
               phoneSendCodeCountDown('chg')
               row_phone_chg_code.show()
@@ -525,6 +528,10 @@ init = ->
   link_resend_code_p_c        = form_phone_changed.find('h5.resend-code')
   link_captcha_p_c            = form_phone_changed.find('a.captcha')
 
+  # 先隐藏两个密码输入框,等第一步发送完验证码之后再开放
+  input_phone_chg_pass.parent('li.input-row').hide()
+  input_phone_chg_pass_again.parent('li.input-row').hide()
+
   # 地區下拉菜單
   selected_region_text = form_phone_changed.find('.dd-result span')
   selected_region_input = form_phone_changed.find('.choose-region')
@@ -660,11 +667,11 @@ init = ->
       else if user_phone_new.length > 0 and !validateMobile(user_phone_new)
         showFormError('新号码输入有误', 310, 100)
         btn_phone_chg_submit.html('获取手机验证码')
-      else if user_pass.length > 0 && (user_pass.length < 6 || user_pass.length > 20)
+      else if user_pass.length > 0 && (user_pass.length < 6 || user_pass.length > 20) and btn_phone_chg_submit.hasClass('code-sent')
         showFormError('请输入6-12位密码', 310, 204)
-      else if user_pass_again isnt '' and user_pass_again isnt user_pass
+      else if user_pass_again isnt '' and user_pass_again isnt user_pass and btn_phone_chg_submit.hasClass('code-sent')
         showFormError('两次输入的密码不相同', 310, 255)
-      else if user_phone isnt '' and user_pass isnt '' and user_pass_again isnt '' and user_city isnt '0' and captcha isnt '' and captcha.length is 5 and account_lawful
+      else if (user_phone isnt '' and user_pass isnt '' and user_pass_again isnt '' and user_city isnt '0' and captcha isnt '' and captcha.length is 5 and account_lawful and btn_phone_chg_submit.hasClass('code-sent')) or (user_phone isnt '' and user_city isnt '0' and captcha isnt '' and captcha.length is 5 and account_lawful)
         if btn_phone_chg_submit.hasClass('send-code')
           enableBtnPhoneChgSubmit()
         if btn_phone_chg_submit.hasClass('code-sent') and user_code isnt '' and user_code.length is 5
@@ -682,13 +689,13 @@ init = ->
         showFormError('新号码输入有误', 310, 100)
       else if user_city is '0'
         showFormError('请选择完整省市',310,152)
-      else if user_pass is ''
+      else if user_pass is '' and btn_phone_chg_submit.hasClass('code-sent')
         showFormError('请输入密码', 310, 204)
-      else if user_pass.length > 0 && (user_pass.length < 6 || user_pass.length > 20)
+      else if user_pass.length > 0 && (user_pass.length < 6 || user_pass.length > 20) and btn_phone_chg_submit.hasClass('code-sent')
         showFormError('请输入6-12位密码', 310, 204)
-      else if user_pass_again is ''
+      else if user_pass_again is '' and btn_phone_chg_submit.hasClass('code-sent')
         showFormError('请重复输入密码', 310, 255)
-      else if user_pass_again isnt user_pass
+      else if user_pass_again isnt user_pass and btn_phone_chg_submit.hasClass('code-sent')
         showFormError('两次输入的密码不相同', 310, 255)
       else if btn_phone_chg_submit.hasClass('send-code')
         sendPhoneCode('chg',user_phone_new,captcha,'')
