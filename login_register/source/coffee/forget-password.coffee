@@ -352,6 +352,12 @@ init = ->
               link_captcha_p_c.refresh_captcha()
             showSmallErrorTip '短信验证码发送失败'
           else
+            if rec_or_chg is 'rec'
+              input_phone_rec_captcha.val('')
+              link_captcha.refresh_captcha()
+            else
+              input_phone_chg_captcha.val('')
+              link_captcha_p_c.refresh_captcha()
             if result.msg != ''
               showSmallErrorTip result.msg
       error: ->
