@@ -1,6 +1,6 @@
 #root
 .idea
-
+sftp-config.json
 
 .DS_Store
 core
