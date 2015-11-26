@@ -344,6 +344,12 @@ init = ->
               row_phone_chg_code.show()
               btn_phone_chg_submit.removeClass('send-code').addClass('code-sent').html('提交')
           when -2 # 短信验证码发送失败
+            if rec_or_chg is 'rec'
+              input_phone_rec_captcha.val('')
+              link_captcha.refresh_captcha()
+            else
+              input_phone_chg_captcha.val('')
+              link_captcha_p_c.refresh_captcha()
             showSmallErrorTip '短信验证码发送失败'
           else
             if result.msg != ''
@@ -442,6 +448,7 @@ init = ->
           btn_phone_rec_submit.html('发送验证码到 ' + user_phone)
           enableBtnPhoneRecSubmit()
         else if btn_phone_rec_submit.hasClass('code-sent') and user_code isnt '' and user_code.length is 5
+#          btn_phone_rec_submit.html('提交')
           enableBtnPhoneRecSubmit()
     else
       if user_phone is ''
@@ -655,7 +662,6 @@ init = ->
         account_lawful = result
       )
 
-
     input_phone_chg_captcha.on('input keyup', checkCaptcha)
 
     if !submit_pressed
@@ -717,9 +723,9 @@ init = ->
     validatePhoneChgForm(false)
   input_phone_chg_phone_new.blur ->
     validatePhoneChgForm(false)
-    user_phone_new = $.trim(input_phone_chg_phone_new.val())
-    if validateMobile(user_phone_new)
-      btn_phone_chg_submit.html('发送验证码到 ' + user_phone_new)
+#    user_phone_new = $.trim(input_phone_chg_phone_new.val())
+#    if validateMobile(user_phone_new)
+#      btn_phone_chg_submit.html('发送验证码到 ' + user_phone_new)
   input_phone_chg_pass.blur ->
     validatePhoneChgForm(false)
   input_phone_chg_pass_again.blur ->
