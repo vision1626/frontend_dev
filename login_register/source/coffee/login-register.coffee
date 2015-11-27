@@ -142,7 +142,7 @@ init = ->
 
   # -------------------------- 用户条款弹窗 - END -------------------------
 
-  # -------------------------- 登錄 - START -------------------------
+# -------------------------- 登錄 - START -------------------------
 
   log_input_phone = $('#form-login input.input-phone')
   log_input_pass = $('#form-login input.input-password')
@@ -217,6 +217,7 @@ init = ->
   # -------------------------- 登錄 - END -------------------------
 
 
+
   # -------------------------- 註冊 - START -------------------------
 
   form_register = $('#form-register')
@@ -235,13 +236,11 @@ init = ->
   # DOM method
   isPhoneExist = (exisied)->
     if exisied
-      showFormError('手机号已被注册', 310, 45)
       configMap.isAccountExisted = true
     else
       configMap.isAccountExisted = false
   isEmailExist = (exisied)->
     if exisied
-      showFormError('邮箱已被注册', 310, 45)
       configMap.isAccountExisted = true
     else
       configMap.isAccountExisted = false
@@ -278,7 +277,7 @@ init = ->
 
   # 函數：提交手机和电脑验证码获取短信验证码
   submitRegInfo = (phone, captcha)->
-
+    renew_captcha()
     $('.hand-loading').show()
     $.ajax {
       url: SITE_URL + "services/service.php"
@@ -352,8 +351,8 @@ init = ->
 
     if !submit_pressed
       disableBtnInfoSubmit()
-#      if !validateEmail(user_phone) && !validateMobile(user_phone)
-      if !validateMobile(user_phone)
+      if !validateEmail(user_phone) && !validateMobile(user_phone)
+      # if !validateMobile(user_phone)
         showFormError('邮箱/手机号有误', 310, 45)
       else if configMap.isAccountExisted
         showFormError('此账号已被注册', 310, 45)
@@ -366,6 +365,8 @@ init = ->
         enableBtnInfoSubmit()
         if validateMobile(user_phone)
           btn_reg_info_submit.html('发送验证码到 ' + user_phone).addClass('send-code')
+          if user_code.length is 5
+            btn_reg_info_submit.html('提交注册')
         else
           btn_reg_info_submit.html('提交注册')
 #        else
@@ -384,16 +385,18 @@ init = ->
         showFormError('验证码输入有误', 310, 150)
       else if !reg_input_agree.is(':checked')
         showFormError('请同意条款', 310, 203)
-      else if btn_reg_info_submit.hasClass('send-code')
-        submitRegInfo(user_phone,captcha)
       else if btn_reg_info_submit.hasClass('code-sent')
         submitRegister(user_phone,user_pass,'',user_code)
+      else if btn_reg_info_submit.hasClass('send-code')
+        submitRegInfo(user_phone,captcha)
+      
       else
         submitRegister(user_phone,user_pass,captcha)
 
   # 檢查輸入是否有效，彈出驗證碼
   $('#submitInfo').click ->
     validateRegisterForm(true)
+    # renew_captcha()
 
   # 重新發送驗證碼
   $(document).on 'click', 'a.click-to-resend', ->
@@ -406,7 +409,7 @@ init = ->
   # 動態檢查錄入
   # reg_input_phone.blur ->
   #   validateRegisterForm(false)
-  reg_input_phone.on 'propertychange input', ->
+  reg_input_phone.on 'blur', ->
     acc = $(this).val()
     if validateMobile(acc)
       checkAccount(acc, isPhoneExist)
@@ -420,14 +423,22 @@ init = ->
       validateRegisterForm(false)
 #  reg_input_pass.on 'propertychange input', ->
 #    validateRegisterForm(false)
-  reg_input_pass.blur ->
-    validateRegisterForm(false)
-  reg_input_captcha.on 'propertychange input', ->
-    validateRegisterForm(false)
+  # reg_input_captcha.on 'propertychange input', ->
+  #   validateRegisterForm(false)
   reg_input_agree.click ->
     validateRegisterForm(false)
-  reg_input_code.on 'propertychange input', ->
+  # reg_input_code.on 'propertychange input', ->
+  #   validateRegisterForm(false)
+  reg_input_code.blur ->
     validateRegisterForm(false)
+  reg_input_captcha.blur ->
+    validateRegisterForm(false)
+  reg_input_captcha.on 'propertychange input', ->
+    if $(this).val().length is 5
+      validateRegisterForm(false)
+  reg_input_code.on 'propertychange input', ->
+    if $(this).val().length is 5
+      validateRegisterForm(false)
 
   # -------------------------- 註冊 - END -------------------------
 

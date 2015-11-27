@@ -48,7 +48,7 @@ section.login-panel
                         button#submitMailReclaim.button.large.disabled.full-width(type='button') 发送验证邮件
                 .after-submit(style='display: none;')
                     p 我们已向您的
-                        a.user-email 注册邮箱
+                        a.user-email(target='_blank') 注册邮箱
                         | 中发送了重置密码的邮件，请按邮件中的步骤进行密码重置。
                     p 如收不到邮件，可于60秒后重试。
             form#form-phone-reclaim(autocomplete='off', style='display: none', data-action='services/service.php?m=user&a=resetpwd')
@@ -122,18 +122,16 @@ section.login-panel
                     li.input-row.phone-code-input-row(style='display: none')
                         i.icon.icon-sml.icon-phone
                         input.phone-code-input(type='text', value='', placeholder='短信中的验证码', autocomplete='off', maxlength='5')
-                h5.resend-code(style='display: none')
-                    span 55秒后
-                    a.text 重新发送
-                    | 验证码
+                //- h5.resend-code(style='display: none')
+                    //- span 55秒后
+                    //- a.text 重新发送
+                    //- | 验证码
+                h5.redirect(style='display: none')
                 .form-actions(style='top: 250px')
                     .form-options
                         a.forget.text(href='{u user/login}', title='返回登录', rel='nofollow') 返回登录
                     button#submitPhoneChanged.button.large.disabled.full-width.send-code(type='button') 获取手机验证码
-                p.desc(style='display:none')
-                    | 我们将在1-2个工作日内审核完毕
-                    br
-                    | 结果将发送至手机
+                p.desc(style='display:none') 成功更改登陆密码
         .form-error
             i.icon.icon-sml.icon-error
             label
