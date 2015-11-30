@@ -294,6 +294,8 @@ init = ->
             btn_reg_info_submit.html('请输入手机验证码').removeClass('send-code').addClass('code-sent').html('提交注册')
             disableBtnInfoSubmit()
             send_code_count_down()
+            reg_input_phone.attr('readonly', true).addClass('prohibited')
+            reg_input_captcha.attr('readonly', true).addClass('prohibited')
           when -2 # 短信验证码发送失败
             showSmallErrorTip '短信验证码发送失败'
           else
