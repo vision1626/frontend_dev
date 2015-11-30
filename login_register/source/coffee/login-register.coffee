@@ -9,7 +9,7 @@ init = ->
     form_w = $('.form-container').width()
     $('.switch-header').width form_w
     $('.form-header').width form_w
-    $('.switch-container').width form_w * 2 + 30
+    $('.switch-container').width form_w * 3 + 30
 
   resizeEle()
   $(window).resize ->
@@ -312,7 +312,6 @@ init = ->
         showSmallErrorTip '系统异常，请稍后重试'
     }
 
-
   # 函數: 提交註冊
   submitRegister = (user_phone, user_pass, v_code, m_code)->
     $('.hand-loading').show()
@@ -331,20 +330,22 @@ init = ->
       success: (result)->
         $('.hand-loading').fadeOut(200)
         if result.status > 0
-          showSmallErrorTip('注册成功！<br/>即将跳转到首页',1)
-          setTimeout(->
-            window.location.href = SITE_URL
-          , 2000)
+#          showSmallErrorTip('注册成功！<br/>即将跳转到首页',1)
+#          setTimeout(->
+#            window.location.href = SITE_URL
+#          , 2000)
 #         替换成注册成功后修改昵称
-#          $('.form-container').removeClass('at-register')
-#          $('.form-container').addClass 'at-nickname'
-#          $('#form-nickname').show()
-#          $('#form-register').hide()
-#          $('.social-login').hide()
-#          form_w = $('.form-container').width() * 2
-#          $('.switch-container').css 'left', -(form_w + 30)
-#          $('.form-error').hide()
-#          at_page = 2 # nickname
+          $('.form-container').removeClass('at-register')
+          $('.form-container').addClass 'at-nickname'
+          $('#form-nickname').show()
+          $('#form-register').hide()
+          $('.social-login').hide()
+          $('span.old-nickname').text(' ' + result.user_name)
+          $('a.nickname-skip').attr('data-href',result.success_url)
+          form_w = $('.form-container').width() * 2
+          $('.switch-container').css 'left', -(form_w + 30)
+          $('.form-error').hide()
+          at_page = 2 # nickname
         else
           if result.msg is ''
             showSmallErrorTip '系统异常，请稍后重试'
@@ -466,10 +467,83 @@ init = ->
   # -------------------------- 註冊 - END -------------------------
 
   # -------------------------- 修改昵称 - START -------------------------
+  form_nickname = $('#form-nickname')
+  nic_input_name = form_nickname.find('input.input-nickname')
+  btn_nic_info_submit = form_nickname.find('button#submitNickname')
+
+  # 函数: 激活/禁止提交按钮
+  disableBtnNicknameSubmit = ->
+    btn_nic_info_submit.addClass('disabled').removeClass('always-blue')
+  enableBtnNicknameSubmit = ->
+    btn_nic_info_submit.removeClass('disabled').addClass('always-blue')
+
+  # 函数：检查录入
+  validateNicknameForm = (submit_pressed)->
+    user_nickname = $.trim(nic_input_name.val())
+    if !submit_pressed
+      disableBtnNicknameSubmit()
+      if !validateNickname(user_nickname)
+        showFormError('昵称输入有误', 310, 45)
+      else if user_nickname isnt ''
+        enableBtnNicknameSubmit()
+    else
+      if user_nickname is ''
+        showFormError('请输入昵称', 310, 45)
+      else if !validateNickname(user_nickname)
+        showFormError('昵称输入有误', 310, 45)
+      else
+        submitNickname(user_nickname)
+
+  # 实时检查录入状态
+  nic_input_name.on 'propertychange input', ->
+    validateNicknameForm(false)
+
+  # 函数: 提交匿名
+  submitNickname = (user_nickname)->
+    $('.hand-loading').show()
+
+    $.ajax {
+      url: SITE_URL + "/services/service.php?m=user&a=update_nickname"
+      type: "POST"
+      data: {'nick_name':user_nickname}
+      cache: false
+      dataType: "json"
+      success: (result)->
+        $('.hand-loading').fadeOut(200)
+        if result.status > 0
+          showSmallErrorTip('昵称修改成功！<br/>即将跳转到首页',1)
+          setTimeout(->
+            window.location.href = SITE_URL
+          , 2000)
+        else
+          if result.msg is ''
+            showSmallErrorTip '系统异常，请稍后重试'
+          else
+            showSmallErrorTip result.msg
+
+      error: (result)->
+        $('.hand-loading').fadeOut(200)
+        if result.msg is ''
+          showSmallErrorTip '系统异常，请稍后重试'
+        else
+          showSmallErrorTip result.msg + ''
+    }
+
+  btn_nic_info_submit.click ->
+    validateNicknameForm(true)
+
+  $('a.nickname-skip').click ->
+    url = $(this).attr 'data-href'
+    location.href = url
 
   # -------------------------- 修改昵称 - END -------------------------
 
   # 偵測回車鍵
   $(document).keypress (e)->
     if(e.which == 13)
-      if at_page is 0 then validateLoginForm(true) else validateRegisterForm(true)
+      if at_page is 0
+        validateLoginForm(true)
+      else if at_page is 1
+        validateRegisterForm(true)
+      else if at_page is 2
+        validateNicknameForm(true)
