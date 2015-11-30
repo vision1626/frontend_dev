@@ -246,7 +246,7 @@ init = ->
       configMap.isAccountExisted = false
       
   # EventListener
-  reg_input_captcha.on('input keyup', checkCaptcha)
+  reg_input_captcha.on('keyup', checkCaptcha)
 #  reg_input_phone.blur ->
   # reg_input_phone.keyup ->
   #   user_phone = $.trim(reg_input_phone.val())
