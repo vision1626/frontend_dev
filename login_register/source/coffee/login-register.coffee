@@ -277,7 +277,7 @@ init = ->
 
   # 函數：提交手机和电脑验证码获取短信验证码
   submitRegInfo = (phone, captcha)->
-    renew_captcha()
+    # renew_captcha()
     $('.hand-loading').show()
     $.ajax {
       url: SITE_URL + "services/service.php"
