@@ -36,6 +36,12 @@ section.login-panel
                     //a.switch.goto-login(href="login.html") 登录
                     a.switch.goto-login 登录
                         i.icon.icon-sml.icon-switch
+                .form-header.nickname
+                    label.form-title
+                        span 注册成功
+                        img.logo(src="/tpl/hi1626/images/login/logo-1626-black.svg")
+                    a.switch.goto-register 新用户注册
+                        i.icon.icon-sml.icon-switch
 
         .form-wrap
             form#form-login(data-action='{u user/ajax_login}')
@@ -77,7 +83,23 @@ section.login-panel
                         label(for='agreed') 我已阅读并同意遵守
                         a.text.show-terms(data-href='http://www.1626.com/about/privacy.html', style='float:none') 1626服务条款
                     button#submitInfo.button.large.disabled.full-width(type="button") 立即注册
-                    
+
+            form#form-nickname(data-action='{u user/update_nickname}',autocomplete='off')
+                ul
+                    li.input-row
+                        a.text(style='float:none')
+                            | 你现在的昵称是
+                           span.text.old-nickname  aaaa
+                            br
+                            | 要做个性超人,怎么也得起个酷炫的名号吧:
+                    li.input-row
+                        i.icon.icon-sml.icon-user
+                            input.input-nickname(type='text', value='', placeholder='请输入昵称')
+                .form-actions
+                    button#submitInfo.button.large.disabled.full-width(type="button") 确  定
+                    h5
+                        a.text.nickname-skip(data-href='http://www.1626.com/') 跳过
+
         .form-error
             i.icon.icon-sml.icon-error
             label

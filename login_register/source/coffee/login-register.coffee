@@ -34,10 +34,13 @@ init = ->
   btn_goto_register = $('.goto-register')
   $('#form-login').show()
   $('#form-register').hide()
+  $('#form-nickname').hide()
   btn_goto_login.click ->
     $('.form-container').removeClass 'at-register'
     $('#form-login').show()
     $('#form-register').hide()
+    $('#form-nickname').hide()
+    $('.social-login').show()
     $('.switch-container').css 'left', 0
     $('.form-error').hide()
     $('.input-password').val('')
@@ -45,6 +48,8 @@ init = ->
   btn_goto_register.click ->
     $('.form-container').addClass 'at-register'
     $('#form-register').show()
+    $('#form-nickname').hide()
+    $('.social-login').show()
     $('#form-register').find('input#captchaInput').val('')
 #    $('#form-register').find('a.captcha').renew_captcha()
     renew_captcha()
@@ -330,6 +335,16 @@ init = ->
           setTimeout(->
             window.location.href = SITE_URL
           , 2000)
+#         替换成注册成功后修改昵称
+#          $('.form-container').removeClass('at-register')
+#          $('.form-container').addClass 'at-nickname'
+#          $('#form-nickname').show()
+#          $('#form-register').hide()
+#          $('.social-login').hide()
+#          form_w = $('.form-container').width() * 2
+#          $('.switch-container').css 'left', -(form_w + 30)
+#          $('.form-error').hide()
+#          at_page = 2 # nickname
         else
           if result.msg is ''
             showSmallErrorTip '系统异常，请稍后重试'
@@ -443,6 +458,10 @@ init = ->
       validateRegisterForm(false)
 
   # -------------------------- 註冊 - END -------------------------
+
+  # -------------------------- 修改昵称 - START -------------------------
+
+  # -------------------------- 修改昵称 - END -------------------------
 
   # 偵測回車鍵
   $(document).keypress (e)->
