@@ -482,15 +482,15 @@ init = ->
     user_nickname = $.trim(nic_input_name.val())
     if !submit_pressed
       disableBtnNicknameSubmit()
-      if !validateNickname(user_nickname)
-        showFormError('昵称输入有误', 310, 45)
+      if !validateNickname(user_nickname) and user_nickname.length < 2
+        showFormError('昵称输入有误', 310, 100)
       else if user_nickname isnt ''
         enableBtnNicknameSubmit()
     else
       if user_nickname is ''
         showFormError('请输入昵称', 310, 45)
-      else if !validateNickname(user_nickname)
-        showFormError('昵称输入有误', 310, 45)
+      else if !validateNickname(user_nickname) and user_nickname.length < 2
+        showFormError('昵称输入有误', 310, 100)
       else
         submitNickname(user_nickname)
 
