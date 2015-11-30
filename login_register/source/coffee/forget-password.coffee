@@ -329,6 +329,7 @@ init = ->
         switch parseInt(result.status)
           when 1 # 短信验证码已经发送
             showSmallErrorTip '已发送验证码到你的手机', 1
+#            input_phone_rec_phon.disable()
             if rec_or_chg is 'rec'
               input_phone_rec_pass.parent('li.input-row').show()
               input_phone_rec_pass_again.parent('li.input-row').show()
@@ -678,12 +679,14 @@ init = ->
         showFormError('该手机未注册', 310, 45)
       else if user_phone_new.length > 0 and !validateMobile(user_phone_new)
         showFormError('新号码输入有误', 310, 100)
+      else if user_phone_new is user_phone
+        showFormError('输入了相同的手机', 310, 100)
         btn_phone_chg_submit.html('获取手机验证码')
       else if user_pass.length > 0 && (user_pass.length < 6 || user_pass.length > 20) and btn_phone_chg_submit.hasClass('code-sent')
         showFormError('请输入6-12位密码', 310, 204)
       else if user_pass_again isnt '' and user_pass_again isnt user_pass and btn_phone_chg_submit.hasClass('code-sent')
         showFormError('两次输入的密码不相同', 310, 255)
-      else if (user_phone isnt '' and user_pass isnt '' and user_pass_again isnt '' and user_city isnt '0' and captcha isnt '' and captcha.length is 5 and account_lawful and btn_phone_chg_submit.hasClass('code-sent')) or (user_phone isnt '' and user_city isnt '0' and captcha isnt '' and captcha.length is 5 and account_lawful)
+      else if (user_phone isnt '' and user_phone_new isnt user_phone and user_pass isnt '' and user_pass_again isnt '' and user_city isnt '0' and captcha isnt '' and captcha.length is 5 and account_lawful and btn_phone_chg_submit.hasClass('code-sent')) or (user_phone isnt '' and user_phone_new isnt user_phone and user_city isnt '0' and captcha isnt '' and captcha.length is 5 and account_lawful)
         if btn_phone_chg_submit.hasClass('send-code')
           enableBtnPhoneChgSubmit()
         if btn_phone_chg_submit.hasClass('code-sent') and user_code isnt '' and user_code.length is 5
@@ -699,6 +702,8 @@ init = ->
         showFormError('请输入新号码', 310, 100)
       else if !validateMobile(user_phone_new)
         showFormError('新号码输入有误', 310, 100)
+      else if user_phone_new is user_phone
+        showFormError('输入了相同的手机', 310, 100)
       else if user_city is '0'
         showFormError('请选择完整省市',310,152)
       else if user_pass is '' and btn_phone_chg_submit.hasClass('code-sent')
