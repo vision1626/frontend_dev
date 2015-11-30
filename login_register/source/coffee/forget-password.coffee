@@ -628,11 +628,11 @@ init = ->
     query.rcode = phone_code
 
     $.ajax {
-      url: SITE_URL +'services/service.php?m=user&a=resetapply',
-      type: "POST",
-      data: query,
-      cache: false,
-      dataType: "json",
+      url: SITE_URL + 'services/service.php?m=user&a=resetapply'
+      type: "POST"
+      data: query
+      cache: false
+      dataType: "json"
       success: (result)->
         switch result.status
           when 1
