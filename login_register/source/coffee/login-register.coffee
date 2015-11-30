@@ -382,8 +382,9 @@ init = ->
         enableBtnInfoSubmit()
         if validateMobile(user_phone)
           btn_reg_info_submit.html('发送验证码到 ' + user_phone).addClass('send-code')
-          if user_code.length is 5
+          if btn_reg_info_submit.hasClass('code-sent')
             btn_reg_info_submit.html('提交注册')
+          else 
         else
           btn_reg_info_submit.html('提交注册')
 #        else
@@ -447,7 +448,10 @@ init = ->
   # reg_input_code.on 'propertychange input', ->
   #   validateRegisterForm(false)
   reg_input_code.blur ->
-    validateRegisterForm(false)
+    if $(this).val().length is 5  
+      validateRegisterForm(false)
+    else
+      disableBtnInfoSubmit()
   reg_input_captcha.blur ->
     validateRegisterForm(false)
   reg_input_captcha.on 'propertychange input', ->
@@ -456,6 +460,8 @@ init = ->
   reg_input_code.on 'propertychange input', ->
     if $(this).val().length is 5
       validateRegisterForm(false)
+    else 
+      disableBtnInfoSubmit()
 
   # -------------------------- 註冊 - END -------------------------
 
