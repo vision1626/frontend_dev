@@ -484,15 +484,13 @@ init = ->
 
     if validateNickname(user_nickname)
       checkNickname(user_nickname, (result)->
-        nickname_lawful = result
-      )
+      nickname_lawful = result
+    )
 
     if !submit_pressed
       disableBtnNicknameSubmit()
       if !validateNickname(user_nickname)
         showFormError('昵称输入有误', 310, 115)
-      else if !nickname_lawful
-        showFormError('昵称已被占用', 310, 115)
       else if user_nickname isnt '' and user_nickname.length > 2
         enableBtnNicknameSubmit()
     else
@@ -506,7 +504,7 @@ init = ->
         submitNickname(user_nickname)
 
   # 实时检查录入状态
-  nic_input_name.on 'propertychange input', ->
+  nic_input_name.blur ->
     validateNicknameForm(false)
 
   # 函数: 提交匿名
