@@ -1,4 +1,6 @@
 init = ->
+  issuccesssubmit = false
+
   $('input[type=text],input[type=password]').focus ->
     $(this).parent().addClass 'focus'
   .blur ->
@@ -310,7 +312,7 @@ init = ->
       link_resend_code.show()
     else
       link_resend_code_p_c.show()
-    if sec > 0
+    if sec > 0 and issuccesssubmit isnt true
       if rec_or_chg is 'rec' then link_resend_code.html(sec + '秒后重新发送验证码') else link_resend_code_p_c.html(sec + '秒后重新发送验证码')
       setTimeout(->
         phoneSendCodeCountDown(rec_or_chg,sec)
@@ -400,6 +402,7 @@ init = ->
     form.attr('data-redir', url)
     form.children('*').hide()
     form.find('p.desc').show()
+    issuccesssubmit = true
     if rec_or_chg is 'rec'
       form.find('p.desc').html('修改密码成功!')
       resetSuccessCountDown(rec_or_chg,link_resend_code)
