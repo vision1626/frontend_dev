@@ -484,7 +484,7 @@ init = ->
 
     if validateNickname(user_nickname)
       checkNickname(user_nickname, (result)->
-      nickname_lawful = result
+        nickname_lawful = result
     )
 
     if !submit_pressed
