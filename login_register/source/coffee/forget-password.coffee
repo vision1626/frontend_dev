@@ -304,7 +304,7 @@ init = ->
 
   # 发送手机验证码60秒倒计时
   phoneSendCodeCountDown = (rec_or_chg,sec)->
-    sec = sec || 60
+    sec = sec || 3
     sec--
     if rec_or_chg is 'rec'
       link_resend_code.show()
@@ -318,7 +318,7 @@ init = ->
     else
       if rec_or_chg is 'rec'
         input_phone_rec_captcha.val('')
-        link_captcha.refresh_captcha()
+#        link_captcha.refresh_captcha()
         link_resend_code.html("<a class='text click-to-resend'>重新发送</a>验证码")
       else
         input_phone_chg_captcha.val('')
@@ -500,8 +500,13 @@ init = ->
       resendCodeRec()
   resendCodeRec = ->
     btn_phone_rec_submit.addClass('send-code')
+    input_phone_rec_pass.parent('li.input-row').hide()
+    input_phone_rec_pass_again.parent('li.input-row').hide()
+    row_phone_rec_code.hide()
+    link_resend_code.hide()
     btn_phone_rec_submit.removeClass('code-sent')
-    validatePhoneRecForm(true)
+    link_captcha.refresh_captcha()
+#    validatePhoneRecForm(false)
 
   # 提交手機取回密碼表單
   btn_phone_rec_submit.click ->
