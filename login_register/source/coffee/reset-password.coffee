@@ -57,6 +57,7 @@ init = ->
   $('input[type=text],input[type=password]').on 'propertychange input', ->
     $('.form-error').fadeOut(300)
 
+
   # -------------------------- 重置密码 - START -------------------------
 
   form_reset = $('#form-reset')
@@ -64,6 +65,16 @@ init = ->
   input_pass_again = form_reset.find('input.input-password-again')
 
   btn_reset_submit = form_reset.find 'button#submitReset'
+
+  # 是否显示表单
+  if used is "0"
+    form_reset.find('ul').hide()
+    form_reset.find('.form-actions').hide()
+    form_reset.find('.after-submit').show()
+  else
+    form_reset.find('ul').show()
+    form_reset.find('.form-actions').show()
+    form_reset.find('.after-submit').hide()
 
   # 函數：激活/禁止提交按鈕
   disableBtnRstSubmit = ->
@@ -78,6 +89,7 @@ init = ->
     query.uid = uid
     query.password = pass
     query.confirm_password = pass_again
+    query.hash = hash
     $.ajax {
       url: SITE_URL + "services/service.php?m=user&a=resetpassword"
       type: "POST"
