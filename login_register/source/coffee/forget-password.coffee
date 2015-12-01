@@ -399,10 +399,9 @@ init = ->
   afterSubmitSuccess = (rec_or_chg,phone,url,form)->
     form.attr('data-redir', url)
     form.children('*').hide()
-    form.find('p.desc').html('已收到您的请求<br/>我们将在1-2个工作日内审核完毕<br />结果将发送至手机<br/><span> ' + phone.substr(0,
-        3) + '****' + phone.substr(-4)) + '</span>'
     form.find('p.desc').show()
     if rec_or_chg is 'rec'
+      form.find('p.desc').html('修改密码成功!')
       resetSuccessCountDown(rec_or_chg,link_resend_code)
     else
       resetSuccessCountDown(rec_or_chg,link_resend_code_p_c)
