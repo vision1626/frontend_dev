@@ -488,18 +488,21 @@ init = ->
     )
 
     if !submit_pressed
-      disableBtnNicknameSubmit()
+#      disableBtnNicknameSubmit()
+      enableBtnNicknameSubmit() #一开始要蓝色按钮喔,所以唔disable
       if !validateNickname(user_nickname)
         showFormError('昵称输入有误', 310, 115)
       else if user_nickname isnt '' and user_nickname.length > 1
         enableBtnNicknameSubmit()
     else
+
+
       if user_nickname is ''
         showFormError('请输入昵称', 310, 115)
       else if !validateNickname(user_nickname)
         showFormError('昵称输入有误', 310, 115)
       else if !nickname_lawful
-        showFormError('昵称已被占用', 310, 45)
+        showFormError('昵称已被占用', 310, 115)
       else
         submitNickname(user_nickname)
 
