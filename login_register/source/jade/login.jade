@@ -83,8 +83,8 @@ section.login-panel
                     button#submitInfo.button.large.disabled.full-width(type="button") 立即注册
 
             form#form-nickname(data-action='{u user/update_nickname}',autocomplete='off')
-                p
-                    label.text(style='float:none')
+                .above-input
+                    p
                         | 你现在的昵称是
                         span.text.old-nickname
                         br
@@ -92,7 +92,7 @@ section.login-panel
                 ul
                     li.input-row
                         i.icon.icon-sml.icon-user
-                            input.input-nickname(type='text', value='', placeholder='昵称', autocomplete='off', maxlength='20')
+                        input.input-nickname(type='text', value='', placeholder='昵称', autocomplete='off', maxlength='20')
                 .form-actions
                     button#submitNickname.button.large.disabled.full-width(type="button") 确    定
                     h5
