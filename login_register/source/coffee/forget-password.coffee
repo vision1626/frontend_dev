@@ -141,6 +141,12 @@ init = ->
       , 1000)
     else
       count_down_text.html("如收不到邮件，可<a class='text refresh-mail-reclaim' id=''>点击这里</a>重试。")
+      $(document).on 'click', '#form-mail-reclaim div.after-submit a.refresh-mail-reclaim', ->
+#        mail_rec_input_captcha.val ''
+#        link_mail_captcha.refresh_captcha()
+#        form_mail_reclaim.find('.before-submit').show()
+#        form_mail_reclaim.find('.after-submit').hide()
+#        $('.goto-phone').show()
       $('#pop-applycode .icon-set-b').show()
 
   # Event Listener
@@ -220,7 +226,8 @@ init = ->
     validateMailRecForm(true)
 
   # 刷新郵件重置密碼表單
-  $(document).on 'click', '.refresh-mail-reclaim', ->
+#  $(document).on 'click', '.refresh-mail-reclaim', ->
+  $(document).on 'click', '#form-mail-reclaim div.after-submit a.refresh-mail-reclaim', ->
     mail_rec_input_captcha.val ''
     link_mail_captcha.refresh_captcha()
     form_mail_reclaim.find('.before-submit').show()

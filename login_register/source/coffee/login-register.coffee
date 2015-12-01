@@ -480,17 +480,28 @@ init = ->
   # 函数：检查录入
   validateNicknameForm = (submit_pressed)->
     user_nickname = $.trim(nic_input_name.val())
+    nickname_lawful   = true
+
+    if validateNickname(user_nickname)
+      checkNickname(user_nickname, (result)->
+        nickname_lawful = result
+      )
+
     if !submit_pressed
       disableBtnNicknameSubmit()
-      if !validateNickname(user_nickname) and user_nickname.length < 2
-        showFormError('昵称输入有误', 310, 100)
-      else if user_nickname isnt ''
+      if !validateNickname(user_nickname)
+        showFormError('昵称输入有误', 310, 115)
+      else if !nickname_lawful
+        showFormError('昵称已被占用', 310, 115)
+      else if user_nickname isnt '' and user_nickname.length > 2
         enableBtnNicknameSubmit()
     else
       if user_nickname is ''
-        showFormError('请输入昵称', 310, 45)
-      else if !validateNickname(user_nickname) and user_nickname.length < 2
-        showFormError('昵称输入有误', 310, 100)
+        showFormError('请输入昵称', 310, 115)
+      else if !validateNickname(user_nickname)
+        showFormError('昵称输入有误', 310, 115)
+      else if !nickname_lawful
+        showFormError('昵称已被占用', 310, 45)
       else
         submitNickname(user_nickname)
 
@@ -520,7 +531,7 @@ init = ->
             showSmallErrorTip '系统异常，请稍后重试'
           else
             showSmallErrorTip result.msg
-
+            showFormError(result.msg, 310, 115)
       error: (result)->
         $('.hand-loading').fadeOut(200)
         if result.msg is ''

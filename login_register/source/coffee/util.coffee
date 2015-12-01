@@ -96,7 +96,7 @@ checkNickname = (userNickname,callBack) ->
   $.ajax {
     url: SITE_URL + "services/service.php"
     type: "GET"
-    data: {m: 'user', a: 'check_nickname_exist', ajax: 1, nick_name: userNickname,  type: 'reg'}
+    data: {m: 'user', a: 'check_nickname_exist', ajax: 1, nick_name: userNickname}
     cache: false
     async: false
     dataType: "json"
