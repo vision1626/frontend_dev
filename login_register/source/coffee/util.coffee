@@ -90,6 +90,27 @@ checkAccount = (userInfo,callBack) ->
       callBack(false)
   }
 
+# 函数: 昵称是否存在
+# 参数: userNickname: 用户昵称 类型:string
+checkNickname = (userNickname,callBack) ->
+  $.ajax {
+    url: SITE_URL + "services/service.php"
+    type: "GET"
+    data: {m: 'user', a: 'check_nickname_exist', ajax: 1, nick_name: userNickname,  type: 'reg'}
+    cache: false
+    async: false
+    dataType: "json"
+    success: (result)->
+# 状态如下:
+#0:非法操作
+#-1:昵称含非法字符，仅支持中英文、数字
+#-2:昵称长度为2-20个字符，可由中英文、数字组成
+#-3:昵称已存在
+#1:昵称可以使用
+      callBack(result.status is 1)
+    error: ->
+      callBack(false)
+  }
 
 
 imagePath = '/tpl/hi1626/images/login'
