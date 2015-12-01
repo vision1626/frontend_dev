@@ -393,8 +393,8 @@ init = ->
         else
           if validateMobile(user_phone)
             btn_reg_info_submit.html('发送验证码到 ' + user_phone).addClass('send-code')
-#        else
-#          btn_reg_info_submit.html('提交注册')
+          else
+            btn_reg_info_submit.html('提交注册')
 
     else
       if user_phone is ''
