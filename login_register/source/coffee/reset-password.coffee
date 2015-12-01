@@ -91,7 +91,7 @@ init = ->
         else
           showSmallErrorTip "重置密码成功", 1
           setTimeout(->
-            window.location.href = SITE_URL
+            window.location.href = result.success_url
           , 1000)
       error: ->
         showSmallErrorTip('操作失败，请稍后重新尝试')
