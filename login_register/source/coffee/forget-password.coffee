@@ -304,7 +304,7 @@ init = ->
 
   # 发送手机验证码60秒倒计时
   phoneSendCodeCountDown = (rec_or_chg,sec)->
-    sec = sec || 3
+    sec = sec || 60
     sec--
     if rec_or_chg is 'rec'
       link_resend_code.show()
