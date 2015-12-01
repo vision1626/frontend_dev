@@ -188,12 +188,12 @@ init = ->
     }
 
   # 函數：檢查錄入
-  validateMailRecForm = (submit_pressed,typing)->
+  validateMailRecForm = (submit_pressed,typing,emailchanged)->
     user_mail = mail_rec_input_mail.val()
     captcha = mail_rec_input_captcha.val()
     account_lawful   = true
 
-    if validateEmail(user_mail)
+    if validateEmail(user_mail) and emailchanged is true
       checkAccount(user_mail, (result)->
         account_lawful = result
       )
@@ -223,7 +223,7 @@ init = ->
 
   # 点击邮件修改密码按钮
   btn_mail_rec_submit.click ->
-    validateMailRecForm(true)
+    validateMailRecForm(true,null,true)
 
   # 刷新郵件重置密碼表單
   $(document).on 'click','.refresh-mail-reclaim', ->
@@ -243,7 +243,7 @@ init = ->
 
   # 動態檢查錄入
   mail_rec_input_mail.blur ->
-    validateMailRecForm(false)
+    validateMailRecForm(false,1,true)
   mail_rec_input_captcha.on 'propertychange input', ->
     mail = mail_rec_input_mail.val()
     if validateEmail(mail)
@@ -438,7 +438,7 @@ init = ->
     }
 
   # 函數：檢查錄入
-  validatePhoneRecForm = (submit_pressed)->
+  validatePhoneRecForm = (submit_pressed,phonechange)->
     user_phone      = $.trim(input_phone_rec_phone.val())
     user_pass       = $.trim(input_phone_rec_pass.val())
     user_pass_again = $.trim(input_phone_rec_pass_again.val())
@@ -446,7 +446,7 @@ init = ->
     user_code       = $.trim(input_phone_rec_code.val())
     account_lawful   = true
 
-    if validateMobile(user_phone)
+    if validateMobile(user_phone) and phonechange is true
       checkAccount(user_phone, (result)->
         account_lawful = result
       )
@@ -509,22 +509,22 @@ init = ->
 
   # 提交手機取回密碼表單
   btn_phone_rec_submit.click ->
-    validatePhoneRecForm(true)
+    validatePhoneRecForm(true,true)
 
   # 動態檢查錄入
   input_phone_rec_phone.blur ->
-    validatePhoneRecForm(false)
+    validatePhoneRecForm(false,true)
 #    user_phone      = $.trim(input_phone_rec_phone.val())
 #    if validateMobile(user_phone)
 #      btn_phone_rec_submit.html('发送验证码到 ' + user_phone)
   input_phone_rec_pass.blur ->
-    validatePhoneRecForm(false)
+    validatePhoneRecForm(false,false)
   input_phone_rec_pass_again.blur ->
-    validatePhoneRecForm(false)
+    validatePhoneRecForm(false,false)
   input_phone_rec_captcha.on 'propertychange input', ->
-    validatePhoneRecForm(false)
+    validatePhoneRecForm(false,false)
   input_phone_rec_code.on 'propertychange input', ->
-    validatePhoneRecForm(false)
+    validatePhoneRecForm(false,false)
 
 # 手機彈出框輸入驗證碼
 #  popup_phone_reclaim.find('button.send-code').click ->
@@ -677,7 +677,7 @@ init = ->
     }
 
   # 函數：檢查錄入
-  validatePhoneChgForm = (submit_pressed)->
+  validatePhoneChgForm = (submit_pressed,phonechange)->
     user_phone      = $.trim(input_phone_chg_phone.val())
     user_phone_new  = $.trim(input_phone_chg_phone_new.val())
     user_pass       = $.trim(input_phone_chg_pass.val())
@@ -688,7 +688,7 @@ init = ->
     user_city       = selected_region_input.attr 'data-city'
     account_lawful   = true
 
-    if validateMobile(user_phone)
+    if validateMobile(user_phone) and phonechange is true
       checkAccount(user_phone, (result)->
         account_lawful = result
       )
@@ -753,17 +753,17 @@ init = ->
   resendCodeChg = ->
     btn_phone_chg_submit.addClass('send-code')
     btn_phone_chg_submit.removeClass('code-sent')
-    validatePhoneChgForm(true)
+    validatePhoneChgForm(true,true)
 
   # 提交手機取回密碼表單
   btn_phone_chg_submit.click ->
-    validatePhoneChgForm(true)
+    validatePhoneChgForm(true,true)
 
   # 動態檢查錄入
   input_phone_chg_phone.blur ->
-    validatePhoneChgForm(false)
+    validatePhoneChgForm(false,true)
   input_phone_chg_phone_new.blur ->
-    validatePhoneChgForm(false)
+    validatePhoneChgForm(false,true)
 #    user_phone_new = $.trim(input_phone_chg_phone_new.val())
 #    if validateMobile(user_phone_new)
 #      btn_phone_chg_submit.html('发送验证码到 ' + user_phone_new)
@@ -784,10 +784,10 @@ init = ->
     if(e.which == 13)
       switch at_page
         when 0
-          validatePhoneRecForm(true)
+          validatePhoneRecForm(true,true)
         when 1
-          validateMailRecForm(true)
+          validateMailRecForm(true,null,true)
         when 2
-          validatePhoneChgForm(true)
+          validatePhoneChgForm(true,true)
 
 
