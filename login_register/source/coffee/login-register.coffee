@@ -300,16 +300,20 @@ init = ->
             disableBtnInfoSubmit()
             send_code_count_down()
             reg_input_phone.attr('readonly', true).addClass('prohibited')
-            renew_captcha()
-            reg_input_captcha.val('无需输入验证码')
-            # reg_input_captcha.parent('li').fadeOut('slow')
+            reg_input_captcha.attr('readonly', true).addClass('prohibited')
+            reg_input_code.parent('li').fadeIn('slow')
           when -2 # 短信验证码发送失败
             showSmallErrorTip '短信验证码发送失败'
             renew_captcha()
           else
-            if result.msg != ''
-              showSmallErrorTip result.msg
+            showSmallErrorTip result.msg
+            if result.msg is '验证码错误'
               renew_captcha()
+            else 
+              reg_input_code.val('').parent('li').fadeIn('slow')
+              btn_reg_info_submit.html('请输入手机验证码').removeClass('send-code').addClass('code-sent')
+              reg_input_phone.attr('readonly', true).addClass('prohibited')
+              reg_input_captcha .attr('readonly', true).addClass('prohibited')
       error: ->
         $('.hand-loading').hide()
         showSmallErrorTip '系统异常，请稍后重试'
@@ -420,13 +424,11 @@ init = ->
   # 重新發送驗證碼
   $(document).on 'click', 'a.click-to-resend', ->
     disableBtnInfoSubmit()
-    reg_input_code.val ''
-    if reg_input_captcha.val() is '无需输入验证码'
-      reg_input_captcha.val('') 
-    if reg_input_captcha.val().length is 5  
-      submitRegInfo($.trim(reg_input_phone.val()), $.trim(reg_input_captcha.val()))
-    else 
-      showFormError('验证码输入有误', 310, 150)
+    renew_captcha()
+    reg_input_captcha.removeClass('prohibited').attr('readonly', false)
+    reg_input_code.parent('li').fadeOut()
+    btn_reg_info_submit.removeClass 'code-sent'
+    $('#resend_code').fadeOut('slow')
 
   # 動態檢查錄入
   # reg_input_phone.blur ->
