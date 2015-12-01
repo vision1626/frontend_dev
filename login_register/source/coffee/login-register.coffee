@@ -491,7 +491,7 @@ init = ->
       disableBtnNicknameSubmit()
       if !validateNickname(user_nickname)
         showFormError('昵称输入有误', 310, 115)
-      else if user_nickname isnt '' and user_nickname.length > 2
+      else if user_nickname isnt '' and user_nickname.length > 1
         enableBtnNicknameSubmit()
     else
       if user_nickname is ''
