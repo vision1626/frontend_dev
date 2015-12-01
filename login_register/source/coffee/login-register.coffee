@@ -384,22 +384,25 @@ init = ->
       else if user_pass.length > 0 && (user_pass.length < 6 || user_pass.length > 20)
         showFormError('请输入6-12位密码', 310, 100)
       else if user_phone isnt '' and user_pass isnt '' and captcha isnt '' and captcha.length >= 5 and reg_input_agree.is(':checked')
-        if validateMobile(user_phone)
-          enableBtnInfoSubmit()
-          if btn_reg_info_submit.hasClass('code-sent')
-            btn_reg_info_submit.html('提交注册')
-            if user_code.length < 5
-              disableBtnInfoSubmit()
-          else
-            btn_reg_info_submit.html('发送验证码到 ' + user_phone).addClass('send-code')
-        else
+#        if validateMobile(user_phone)
+        enableBtnInfoSubmit()
+        if btn_reg_info_submit.hasClass('code-sent')
           btn_reg_info_submit.html('提交注册')
+          if user_code.length < 5
+            disableBtnInfoSubmit()
+        else
+          if validateMobile(user_phone)
+            btn_reg_info_submit.html('发送验证码到 ' + user_phone).addClass('send-code')
+          else
+            btn_reg_info_submit.html('提交注册')
 
     else
       if user_phone is ''
         showFormError('请输入用户名/邮箱/手机号', 310, 45)
       else if !validateEmail(user_phone) && !validateMobile(user_phone)
         showFormError('邮箱/手机号有误', 310, 45)
+      else if configMap.isAccountExisted
+        showFormError('此账号已被注册', 310, 45)
       else if user_pass is ''
         showFormError('请输入密码', 310, 100)
       else if user_pass.length > 0 && (user_pass.length < 6 || user_pass.length > 20)
@@ -482,10 +485,10 @@ init = ->
     user_nickname = $.trim(nic_input_name.val())
     nickname_lawful   = true
 
-    if validateNickname(user_nickname)
-      checkNickname(user_nickname, (result)->
-        nickname_lawful = result
-    )
+#    if validateNickname(user_nickname)
+#      checkNickname(user_nickname, (result)->
+#        nickname_lawful = result
+#    )
 
     if !submit_pressed
       disableBtnNicknameSubmit()
@@ -499,12 +502,13 @@ init = ->
       else if !validateNickname(user_nickname)
         showFormError('昵称输入有误', 310, 115)
       else if !nickname_lawful
-        showFormError('昵称已被占用', 310, 45)
+        showFormError('昵称已被占用', 310, 115)
       else
         submitNickname(user_nickname)
 
   # 实时检查录入状态
-  nic_input_name.blur ->
+#  nic_input_name.blur ->
+  nic_input_name.on 'propertychange input', ->
     validateNicknameForm(false)
 
   # 函数: 提交匿名
