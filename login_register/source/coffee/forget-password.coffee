@@ -226,13 +226,20 @@ init = ->
     validateMailRecForm(true)
 
   # 刷新郵件重置密碼表單
-#  $(document).on 'click', '.refresh-mail-reclaim', ->
-  $(document).on 'click', '#form-mail-reclaim div.after-submit a.refresh-mail-reclaim', ->
+  $(document).on 'click','.refresh-mail-reclaim', ->
+    if $(window).width() > 950
+      refreshMailReclaim()
+  $(document).on 'touchend','.refresh-mail-reclaim', ->
+    if $(window).width() < 951
+      refreshMailReclaim()
+
+  refreshMailReclaim = ->
     mail_rec_input_captcha.val ''
     link_mail_captcha.refresh_captcha()
     form_mail_reclaim.find('.before-submit').show()
     form_mail_reclaim.find('.after-submit').hide()
     $('.goto-phone').show()
+
 
   # 動態檢查錄入
   mail_rec_input_mail.blur ->
@@ -486,6 +493,12 @@ init = ->
 
   # 重新发送验证码
   $(document).on 'click','#form-phone-reclaim h5.resend-code a', ->
+    if $(window).width() > 950
+      resendCodeRec()
+  $(document).on 'touchend','#form-phone-reclaim h5.resend-code a', ->
+    if $(window).width() < 951
+      resendCodeRec()
+  resendCodeRec = ->
     btn_phone_rec_submit.addClass('send-code')
     btn_phone_rec_submit.removeClass('code-sent')
     validatePhoneRecForm(true)
@@ -728,6 +741,12 @@ init = ->
 
   # 重新发送验证码
   $(document).on 'click','#form-phone-changed h5.resend-code a', ->
+    if $(window).width() > 950
+      resendCodeChg()
+  $(document).on 'touchend','#form-phone-changed h5.resend-code a', ->
+    if $(window).width() < 950
+      resendCodeChg()
+  resendCodeChg = ->
     btn_phone_chg_submit.addClass('send-code')
     btn_phone_chg_submit.removeClass('code-sent')
     validatePhoneChgForm(true)
