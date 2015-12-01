@@ -296,13 +296,16 @@ init = ->
           when 1 # 短信验证码已经发送
             showSmallErrorTip('已发送验证码到你的手机',1)
             reg_input_code_row.show()
-            btn_reg_info_submit.html('请输入手机验证码').removeClass('send-code').addClass('code-sent').html('提交注册')
+            btn_reg_info_submit.html('请输入手机验证码').removeClass('send-code').addClass('code-sent')
             disableBtnInfoSubmit()
             send_code_count_down()
             reg_input_phone.attr('readonly', true).addClass('prohibited')
-            reg_input_captcha.attr('readonly', true).addClass('prohibited')
+            renew_captcha()
+            reg_input_captcha.val('无需输入验证码')
+            # reg_input_captcha.parent('li').fadeOut('slow')
           when -2 # 短信验证码发送失败
             showSmallErrorTip '短信验证码发送失败'
+            renew_captcha()
           else
             if result.msg != ''
               showSmallErrorTip result.msg
@@ -376,20 +379,17 @@ init = ->
         showFormError('此账号已被注册', 310, 45)
       else if user_pass.length > 0 && (user_pass.length < 6 || user_pass.length > 20)
         showFormError('请输入6-12位密码', 310, 100)
-      else if user_phone isnt '' and user_pass isnt '' and captcha isnt '' and captcha.length is 5 and reg_input_agree.is(':checked')
-#        if btn_reg_info_submit.hasClass('send-code')
-#          enableBtnInfoSubmit()
-#        else if btn_reg_info_submit.hasClass('code-sent') and user_code isnt '' and user_code.length is 5
-        enableBtnInfoSubmit()
+      else if user_phone isnt '' and user_pass isnt '' and captcha isnt '' and captcha.length >= 5 and reg_input_agree.is(':checked')
         if validateMobile(user_phone)
-          btn_reg_info_submit.html('发送验证码到 ' + user_phone).addClass('send-code')
+          enableBtnInfoSubmit()
           if btn_reg_info_submit.hasClass('code-sent')
             btn_reg_info_submit.html('提交注册')
-          else 
+            if user_code.length < 5
+              disableBtnInfoSubmit()
+          else
+            btn_reg_info_submit.html('发送验证码到 ' + user_phone).addClass('send-code')
         else
           btn_reg_info_submit.html('提交注册')
-#        else
-#          enableBtnInfoSubmit()
 
     else
       if user_phone is ''
@@ -400,15 +400,15 @@ init = ->
         showFormError('请输入密码', 310, 100)
       else if user_pass.length > 0 && (user_pass.length < 6 || user_pass.length > 20)
         showFormError('请输入6-12位密码', 310, 100)
-      else if captcha is '' or captcha.length isnt 5
-        showFormError('验证码输入有误', 310, 150)
       else if !reg_input_agree.is(':checked')
         showFormError('请同意条款', 310, 203)
       else if btn_reg_info_submit.hasClass('code-sent')
         submitRegister(user_phone,user_pass,'',user_code)
       else if btn_reg_info_submit.hasClass('send-code')
+        if captcha.length < 5
+          showFormError('验证码输入有误', 310, 150)
+        else
         submitRegInfo(user_phone,captcha)
-      
       else
         submitRegister(user_phone,user_pass,captcha)
 
@@ -421,9 +421,12 @@ init = ->
   $(document).on 'click', 'a.click-to-resend', ->
     disableBtnInfoSubmit()
     reg_input_code.val ''
-    btn_reg_info_submit.removeClass 'code-sent'
-    validateRegisterForm(true)
-
+    if reg_input_captcha.val() is '无需输入验证码'
+      reg_input_captcha.val('') 
+    if reg_input_captcha.val().length is 5  
+      submitRegInfo($.trim(reg_input_phone.val()), $.trim(reg_input_captcha.val()))
+    else 
+      showFormError('验证码输入有误', 310, 150)
 
   # 動態檢查錄入
   # reg_input_phone.blur ->
@@ -449,20 +452,15 @@ init = ->
   # reg_input_code.on 'propertychange input', ->
   #   validateRegisterForm(false)
   reg_input_code.blur ->
-    if $(this).val().length is 5  
-      validateRegisterForm(false)
-    else
-      disableBtnInfoSubmit()
+    validateRegisterForm(false)    
   reg_input_captcha.blur ->
     validateRegisterForm(false)
   reg_input_captcha.on 'propertychange input', ->
     if $(this).val().length is 5
       validateRegisterForm(false)
   reg_input_code.on 'propertychange input', ->
-    if $(this).val().length is 5
-      validateRegisterForm(false)
-    else 
-      disableBtnInfoSubmit()
+    validateRegisterForm(false)
+
 
   # -------------------------- 註冊 - END -------------------------
 
