@@ -549,6 +549,12 @@ init = ->
     location.href = url
 
   # -------------------------- 修改昵称 - END -------------------------
+   # 偵測回車鍵
+  form_nickname.find('input.input-nickname').keypress (e)->
+    # 此function为了解决在此输入框中按回车键时直接页面跳转的问题
+    if(e.which == 13)
+      validateNicknameForm(true)
+      false
 
   # 偵測回車鍵
   $(document).keypress (e)->
