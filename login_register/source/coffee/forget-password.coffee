@@ -206,7 +206,8 @@ init = ->
         else if result.msg isnt ''
           showSmallErrorTip(result.msg)
         $('.hand-loading').hide()
-        $('#form-mail-reclaim').find('a.captcha').refresh_captcha()
+        at_page = -1
+#        $('#form-mail-reclaim').find('a.captcha').refresh_captcha()
       error: ->
         showSmallErrorTip('操作失败，请稍后重新尝试')
         $('.hand-loading').hide()
@@ -260,11 +261,11 @@ init = ->
 
   refreshMailReclaim = ->
 #    mail_rec_input_captcha.val ''
+    at_page = 1
     link_mail_captcha.refresh_captcha()
     form_mail_reclaim.find('.before-submit').show()
     form_mail_reclaim.find('.after-submit').hide()
     $('.goto-phone').show()
-
 
   # 動態檢查錄入
   mail_rec_input_mail.blur ->
@@ -373,9 +374,12 @@ init = ->
               input_phone_rec_pass_again.parent('li.input-row').show()
               input_phone_rec_phone.attr('readonly', true).addClass('prohibited')
               input_phone_rec_captcha.attr('readonly', true).addClass('prohibited')
+              input_phone_rec_pass.val('')
+              input_phone_rec_code.val('')
+              input_phone_rec_pass_again.val('')
               phoneSendCodeCountDown('rec')
-              disableBtnPhoneRecSubmit()
-              row_phone_rec_code.show()
+              disableBtnPhoneRecSubmit('')
+              row_phone_rec_code.show('')
               btn_phone_rec_submit.removeClass('send-code').addClass('code-sent').html('提交')
             else
               input_phone_chg_pass.parent('li.input-row').show()
@@ -383,6 +387,9 @@ init = ->
               input_phone_chg_phone.attr('readonly', true).addClass('prohibited')
               input_phone_chg_phone_new.attr('readonly', true).addClass('prohibited')
               input_phone_chg_captcha.attr('readonly', true).addClass('prohibited')
+              input_phone_rec_pass.val('')
+              input_phone_rec_code.val('')
+              input_phone_rec_pass_again.val('')
               disableBtnPhoneChgSubmit()
               phoneSendCodeCountDown('chg')
               row_phone_chg_code.show()
@@ -537,6 +544,7 @@ init = ->
 #    input_phone_rec_phone.attr('readonly', true).addClass('prohibited')
     input_phone_rec_captcha.attr('readonly', false).removeClass('prohibited')
     link_captcha.refresh_captcha()
+    at_page = 0
 #    validatePhoneRecForm(false)
 
   # 提交手機取回密碼表單
@@ -785,6 +793,7 @@ init = ->
   resendCodeChg = ->
     btn_phone_chg_submit.addClass('send-code')
     btn_phone_chg_submit.removeClass('code-sent')
+    at_page = 2
     validatePhoneChgForm(true,true)
 
   # 提交手機取回密碼表單
