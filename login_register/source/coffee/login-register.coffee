@@ -111,8 +111,9 @@ init = ->
   # 更新電腦驗證碼
   renew_captcha = ->
     if !$('.input-row.captcha input').hasClass('prohibited')
-      $('.input-row.captcha .captcha').css("background-image",'url(' + SITE_URL + "services/service.php?m=index&a=verify&rand=" + Math.random() + ')');
-      $('.input-row.captcha input').val('');
+      $('.input-row.captcha .captcha').css("background-image",'url(' + SITE_URL + "services/service.php?m=index&a=verify&rand=" + Math.random() + ')')
+      $('.input-row.captcha input').val('')
+      $('.input-row.captcha input').focus()
   renew_captcha()
 
   # Click and change captcha image 點擊驗證碼刷新
@@ -350,6 +351,7 @@ init = ->
           form_w = $('.form-container').width() * 2
           $('.switch-container').css 'left', -(form_w + 30)
           $('.form-error').hide()
+          form_nickname.find('input.input-nickname').focus()
           at_page = 2 # nickname
         else
           if result.msg is ''
@@ -416,8 +418,9 @@ init = ->
             submitRegInfo(user_phone,captcha)
           else if validateEmail(user_phone)
             submitRegister(user_phone,user_pass,captcha)
-#      else
-#        submitRegister(user_phone,user_pass,captcha)
+      else if !btn_reg_info_submit.hasClass('send-code')
+        if validateEmail(user_phone)
+          submitRegister(user_phone,user_pass,captcha)
 
   # 檢查輸入是否有效，彈出驗證碼
   $('#submitInfo').click ->
@@ -552,6 +555,12 @@ init = ->
   # -------------------------- 修改昵称 - END -------------------------
 
   # 偵測回車鍵
+  form_nickname.find('input.input-nickname').keypress (e)->
+    # 此function为了解决在此输入框中按回车键时直接页面跳转的问题
+    if(e.which == 13)
+      validateNicknameForm(true)
+      false
+
   $(document).keypress (e)->
     if(e.which == 13)
       if at_page is 0
@@ -560,3 +569,4 @@ init = ->
         validateRegisterForm(true)
       else if at_page is 2
         validateNicknameForm(true)
+

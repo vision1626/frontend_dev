@@ -19,23 +19,30 @@ init = ->
 
   # 刷新電腦驗證碼
   $.fn.refresh_captcha = () ->
+    input_phone_rec_captcha     = $('#form-phone-reclaim').find('input.captcha-input')
+    mail_rec_input_captcha = $('#form-mail-reclaim').find('input.captcha-input')
+    input_phone_chg_captcha     = $('#form-phone-changed').find('input.captcha-input')
+
     dontchange = false
     switch at_page
       when 0
-        dontchange = $('#form-phone-reclaim').find('input.captcha-input').hasClass('prohibited')
+        dontchange = input_phone_rec_captcha.hasClass('prohibited')
       when 1
-        dontchange = $('#form-mail-reclaim').find('input.captcha-input').hasClass('prohibited')
+        dontchange = mail_rec_input_captcha.hasClass('prohibited')
       when 2
-        dontchange = $('#form-phone-changed').find('input.captcha-input').hasClass('prohibited')
+        dontchange = input_phone_chg_captcha.hasClass('prohibited')
 
     if !dontchange
       switch at_page
         when 0
-          $('#form-phone-reclaim').find('input.captcha-input').val('')
+          input_phone_rec_captcha.val('')
+          input_phone_rec_captcha.focus()
         when 1
-          $('#form-mail-reclaim').find('input.captcha-input').val('')
+          mail_rec_input_captcha.val('')
+          mail_rec_input_captcha.focus()
         when 2
-          $('#form-phone-changed').find('input.captcha-input').val('')
+          input_phone_chg_captcha.val('')
+          input_phone_chg_captcha.focus()
       $(this).css("background-image",'url(' + SITE_URL + "services/service.php?m=index&a=verify&rand=" + Math.random() + ')')
 
   at_page = 1
