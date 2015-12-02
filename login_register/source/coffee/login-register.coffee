@@ -40,7 +40,7 @@ init = ->
     $('#form-login').show()
     $('#form-register').hide()
     $('#form-nickname').hide()
-    $('.social-login').show()
+#    $('.social-login').show()
     $('.switch-container').css 'left', 0
     $('.form-error').hide()
     $('.input-password').val('')
@@ -49,7 +49,7 @@ init = ->
     $('.form-container').addClass 'at-register'
     $('#form-register').show()
     $('#form-nickname').hide()
-    $('.social-login').show()
+#    $('.social-login').show()
     $('#form-register').find('input#captchaInput').val('')
 #    $('#form-register').find('a.captcha').renew_captcha()
     renew_captcha()
