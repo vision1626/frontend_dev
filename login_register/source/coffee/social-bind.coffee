@@ -414,8 +414,9 @@ init = ->
             submitRegInfo(user_phone,captcha)
           else if validateEmail(user_phone)
             submitRegister(user_phone,user_pass,captcha)
-#      else
-#        submitRegister(user_phone,user_pass,captcha)
+      else if !btn_reg_info_submit.hasClass('send-code')
+        if validateEmail(user_phone)
+          submitRegister(user_phone,user_pass,captcha)
 
   # 檢查輸入是否有效，彈出驗證碼
   $('#submitInfo').click ->
@@ -553,8 +554,8 @@ init = ->
   $(document).keypress (e)->
     if(e.which == 13)
       if at_page is 0
-        validateLoginForm(true)
-      else if at_page is 1
         validateRegisterForm(true)
+      else if at_page is 1
+        validateLoginForm(true)
       else if at_page is 2
         validateNicknameForm(true)
