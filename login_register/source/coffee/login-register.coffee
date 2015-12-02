@@ -395,10 +395,9 @@ init = ->
             btn_reg_info_submit.html('发送验证码到 ' + user_phone).addClass('send-code')
           else
             btn_reg_info_submit.html('提交注册')
-
     else
       if user_phone is ''
-        showFormError('请输入用户名/邮箱/手机号', 310, 45)
+        showFormError('请输入邮箱/手机号', 310, 45)
       else if !validateEmail(user_phone) && !validateMobile(user_phone)
         showFormError('邮箱/手机号有误', 310, 45)
       else if configMap.isAccountExisted
@@ -415,9 +414,12 @@ init = ->
         if captcha.length < 5
           showFormError('验证码输入有误', 310, 150)
         else
-        submitRegInfo(user_phone,captcha)
-      else
-        submitRegister(user_phone,user_pass,captcha)
+          if validateMobile(user_phone)
+            submitRegInfo(user_phone,captcha)
+          else if validateEmail(user_phone)
+            submitRegister(user_phone,user_pass,captcha)
+#      else
+#        submitRegister(user_phone,user_pass,captcha)
 
   # 檢查輸入是否有效，彈出驗證碼
   $('#submitInfo').click ->
