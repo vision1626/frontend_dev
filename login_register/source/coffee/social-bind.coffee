@@ -67,7 +67,7 @@ init = ->
       setTimeout(->
         $(".form-error-mob").fadeOut(100)
       , 1000)
-      
+
   #  Form input error tip 彈出錯誤提示
   showSmallErrorTip = (text,mood)->
     mood = mood or 0 # 1是成功的笑臉，0是失敗的哭臉
@@ -82,14 +82,14 @@ init = ->
     , 1500)
 
   # 適應返回鍵
-#  locationHashChanged = ->
-#    if location.hash is "#register"
-#      btn_goto_register.click()
-#    else if location.hash is "#login"
-#      btn_goto_login.click()
-#
-#  $(window).bind 'hashchange', ->
-#    locationHashChanged()
+  #  locationHashChanged = ->
+  #    if location.hash is "#register"
+  #      btn_goto_register.click()
+  #    else if location.hash is "#login"
+  #      btn_goto_login.click()
+  #
+  #  $(window).bind 'hashchange', ->
+  #    locationHashChanged()
 
   $(window).bind 'load', ->
     if location.href.indexOf('register.html')>0
@@ -97,7 +97,7 @@ init = ->
     else
       btn_goto_login.click()
 
-#  locationHashChanged()
+  #  locationHashChanged()
 
   # 鍵入，隱藏錯誤提示
   $('input[type=text],input[type=password]').on 'propertychange input', ->
@@ -217,6 +217,7 @@ init = ->
   # -------------------------- 登錄 - END -------------------------
 
 
+
   # -------------------------- 註冊 - START -------------------------
 
   form_register = $('#form-register')
@@ -235,20 +236,18 @@ init = ->
   # DOM method
   isPhoneExist = (exisied)->
     if exisied
-      showFormError('手机号已被注册', 310, 45)
       configMap.isAccountExisted = true
     else
       configMap.isAccountExisted = false
   isEmailExist = (exisied)->
     if exisied
-      showFormError('邮箱已被注册', 310, 45)
       configMap.isAccountExisted = true
     else
       configMap.isAccountExisted = false
-      
+
   # EventListener
-  reg_input_captcha.on('input keyup', checkCaptcha)
-#  reg_input_phone.blur ->
+  reg_input_captcha.on('keyup', checkCaptcha)
+  #  reg_input_phone.blur ->
   # reg_input_phone.keyup ->
   #   user_phone = $.trim(reg_input_phone.val())
   #   if validateMobile(user_phone)
@@ -278,7 +277,7 @@ init = ->
 
   # 函數：提交手机和电脑验证码获取短信验证码
   submitRegInfo = (phone, captcha)->
-
+# renew_captcha()
     $('.hand-loading').show()
     $.ajax {
       url: SITE_URL + "services/service.php"
@@ -292,20 +291,28 @@ init = ->
           when 1 # 短信验证码已经发送
             showSmallErrorTip('已发送验证码到你的手机',1)
             reg_input_code_row.show()
-            btn_reg_info_submit.html('请输入手机验证码').removeClass('send-code').addClass('code-sent').html('提交注册')
+            btn_reg_info_submit.html('请输入手机验证码').removeClass('send-code').addClass('code-sent')
             disableBtnInfoSubmit()
             send_code_count_down()
+            reg_input_phone.attr('readonly', true).addClass('prohibited')
+            reg_input_captcha.attr('readonly', true).addClass('prohibited')
+            reg_input_code.parent('li').fadeIn('slow')
           when -2 # 短信验证码发送失败
             showSmallErrorTip '短信验证码发送失败'
+            renew_captcha()
           else
-            if result.msg != ''
-              showSmallErrorTip result.msg
+            showSmallErrorTip result.msg
+            if result.msg is '验证码错误'
               renew_captcha()
+            else
+              reg_input_code.val('').parent('li').fadeIn('slow')
+              btn_reg_info_submit.html('请输入手机验证码').removeClass('send-code').addClass('code-sent')
+              reg_input_phone.attr('readonly', true).addClass('prohibited')
+              reg_input_captcha .attr('readonly', true).addClass('prohibited')
       error: ->
         $('.hand-loading').hide()
         showSmallErrorTip '系统异常，请稍后重试'
     }
-
 
   # 函數: 提交註冊
   submitRegister = (user_phone, user_pass, v_code, m_code)->
@@ -325,10 +332,22 @@ init = ->
       success: (result)->
         $('.hand-loading').fadeOut(200)
         if result.status > 0
-          showSmallErrorTip('注册成功！<br/>即将跳转到首页',1)
-          setTimeout(->
-            window.location.href = SITE_URL
-          , 2000)
+#          showSmallErrorTip('注册成功！<br/>即将跳转到首页',1)
+#          setTimeout(->
+#            window.location.href = SITE_URL
+#          , 2000)
+#         替换成注册成功后修改昵称
+          $('.form-container').removeClass('at-register')
+          $('.form-container').addClass 'at-nickname'
+          $('#form-nickname').show()
+          $('#form-register').hide()
+          $('.social-login').hide()
+          $('span.old-nickname').text(' ' + result.user_name)
+          $('a.nickname-skip').attr('data-href',result.success_url)
+          form_w = $('.form-container').width() * 2
+          $('.switch-container').css 'left', -(form_w + 30)
+          $('.form-error').hide()
+          at_page = 2 # nickname
         else
           if result.msg is ''
             showSmallErrorTip '系统异常，请稍后重试'
@@ -352,61 +371,67 @@ init = ->
 
     if !submit_pressed
       disableBtnInfoSubmit()
-#      if !validateEmail(user_phone) && !validateMobile(user_phone)
-      if !validateMobile(user_phone)
+      if !validateEmail(user_phone) && !validateMobile(user_phone)
+# if !validateMobile(user_phone)
         showFormError('邮箱/手机号有误', 310, 45)
       else if configMap.isAccountExisted
         showFormError('此账号已被注册', 310, 45)
       else if user_pass.length > 0 && (user_pass.length < 6 || user_pass.length > 20)
         showFormError('请输入6-12位密码', 310, 100)
-      else if user_phone isnt '' and user_pass isnt '' and captcha isnt '' and captcha.length is 5 and reg_input_agree.is(':checked')
-#        if btn_reg_info_submit.hasClass('send-code')
-#          enableBtnInfoSubmit()
-#        else if btn_reg_info_submit.hasClass('code-sent') and user_code isnt '' and user_code.length is 5
+      else if user_phone isnt '' and user_pass isnt '' and captcha isnt '' and captcha.length >= 5 and reg_input_agree.is(':checked')
+#        if validateMobile(user_phone)
         enableBtnInfoSubmit()
-        if validateMobile(user_phone)
-          btn_reg_info_submit.html('发送验证码到 ' + user_phone).addClass('send-code')
-        else
+        if btn_reg_info_submit.hasClass('code-sent')
           btn_reg_info_submit.html('提交注册')
-#        else
-#          enableBtnInfoSubmit()
+          if user_code.length < 5
+            disableBtnInfoSubmit()
+        else
+          if validateMobile(user_phone)
+            btn_reg_info_submit.html('发送验证码到 ' + user_phone).addClass('send-code')
+          else
+            btn_reg_info_submit.html('提交注册')
 
     else
       if user_phone is ''
         showFormError('请输入用户名/邮箱/手机号', 310, 45)
       else if !validateEmail(user_phone) && !validateMobile(user_phone)
         showFormError('邮箱/手机号有误', 310, 45)
+      else if configMap.isAccountExisted
+        showFormError('此账号已被注册', 310, 45)
       else if user_pass is ''
         showFormError('请输入密码', 310, 100)
       else if user_pass.length > 0 && (user_pass.length < 6 || user_pass.length > 20)
         showFormError('请输入6-12位密码', 310, 100)
-      else if captcha is '' or captcha.length isnt 5
-        showFormError('验证码输入有误', 310, 150)
       else if !reg_input_agree.is(':checked')
         showFormError('请同意条款', 310, 203)
-      else if btn_reg_info_submit.hasClass('send-code')
-        submitRegInfo(user_phone,captcha)
       else if btn_reg_info_submit.hasClass('code-sent')
         submitRegister(user_phone,user_pass,'',user_code)
+      else if btn_reg_info_submit.hasClass('send-code')
+        if captcha.length < 5
+          showFormError('验证码输入有误', 310, 150)
+        else
+        submitRegInfo(user_phone,captcha)
       else
         submitRegister(user_phone,user_pass,captcha)
 
   # 檢查輸入是否有效，彈出驗證碼
   $('#submitInfo').click ->
     validateRegisterForm(true)
+  # renew_captcha()
 
   # 重新發送驗證碼
   $(document).on 'click', 'a.click-to-resend', ->
     disableBtnInfoSubmit()
-    reg_input_code.val ''
+    renew_captcha()
+    reg_input_captcha.removeClass('prohibited').attr('readonly', false)
+    reg_input_code.parent('li').fadeOut()
     btn_reg_info_submit.removeClass 'code-sent'
-    validateRegisterForm(true)
-
+    $('#resend_code').fadeOut('slow')
 
   # 動態檢查錄入
   # reg_input_phone.blur ->
   #   validateRegisterForm(false)
-  reg_input_phone.on 'propertychange input', ->
+  reg_input_phone.on 'blur', ->
     acc = $(this).val()
     if validateMobile(acc)
       checkAccount(acc, isPhoneExist)
@@ -418,20 +443,115 @@ init = ->
       validateRegisterForm(false)
     else
       validateRegisterForm(false)
-#  reg_input_pass.on 'propertychange input', ->
-#    validateRegisterForm(false)
-  reg_input_pass.blur ->
-    validateRegisterForm(false)
-  reg_input_captcha.on 'propertychange input', ->
-    validateRegisterForm(false)
+  #  reg_input_pass.on 'propertychange input', ->
+  #    validateRegisterForm(false)
+  # reg_input_captcha.on 'propertychange input', ->
+  #   validateRegisterForm(false)
   reg_input_agree.click ->
     validateRegisterForm(false)
+  # reg_input_code.on 'propertychange input', ->
+  #   validateRegisterForm(false)
+  reg_input_code.blur ->
+    validateRegisterForm(false)
+  reg_input_captcha.blur ->
+    validateRegisterForm(false)
+  reg_input_captcha.on 'propertychange input', ->
+    if $(this).val().length is 5
+      validateRegisterForm(false)
   reg_input_code.on 'propertychange input', ->
     validateRegisterForm(false)
 
+
   # -------------------------- 註冊 - END -------------------------
+
+  # -------------------------- 修改昵称 - START -------------------------
+  form_nickname = $('#form-nickname')
+  nic_input_name = form_nickname.find('input.input-nickname')
+  btn_nic_info_submit = form_nickname.find('button#submitNickname')
+
+  # 函数: 激活/禁止提交按钮
+  disableBtnNicknameSubmit = ->
+    btn_nic_info_submit.addClass('disabled').removeClass('always-blue')
+  enableBtnNicknameSubmit = ->
+    btn_nic_info_submit.removeClass('disabled').addClass('always-blue')
+
+  # 函数：检查录入
+  validateNicknameForm = (submit_pressed)->
+    user_nickname = $.trim(nic_input_name.val())
+    nickname_lawful   = true
+
+    #    if validateNickname(user_nickname)
+    #      checkNickname(user_nickname, (result)->
+    #        nickname_lawful = result
+    #    )
+
+    if !submit_pressed
+      disableBtnNicknameSubmit()
+      if !validateNickname(user_nickname)
+        showFormError('昵称输入有误', 310, 115)
+      else if user_nickname isnt '' and user_nickname.length > 1
+        enableBtnNicknameSubmit()
+    else
+      if user_nickname is ''
+        showFormError('请输入昵称', 310, 115)
+      else if !validateNickname(user_nickname)
+        showFormError('昵称输入有误', 310, 115)
+      else if !nickname_lawful
+        showFormError('昵称已被占用', 310, 115)
+      else
+        submitNickname(user_nickname)
+
+  # 实时检查录入状态
+  #  nic_input_name.blur ->
+  nic_input_name.on 'propertychange input', ->
+    validateNicknameForm(false)
+
+  # 函数: 提交匿名
+  submitNickname = (user_nickname)->
+    $('.hand-loading').show()
+
+    $.ajax {
+      url: SITE_URL + "/services/service.php?m=user&a=update_nickname"
+      type: "POST"
+      data: {'nick_name':user_nickname}
+      cache: false
+      dataType: "json"
+      success: (result)->
+        $('.hand-loading').fadeOut(200)
+        if result.status > 0
+          showSmallErrorTip('昵称修改成功！<br/>即将跳转到首页',1)
+          setTimeout(->
+            window.location.href = SITE_URL
+          , 2000)
+        else
+          if result.msg is ''
+            showSmallErrorTip '系统异常，请稍后重试'
+          else
+            showSmallErrorTip result.msg
+            showFormError(result.msg, 310, 115)
+      error: (result)->
+        $('.hand-loading').fadeOut(200)
+        if result.msg is ''
+          showSmallErrorTip '系统异常，请稍后重试'
+        else
+          showSmallErrorTip result.msg + ''
+    }
+
+  btn_nic_info_submit.click ->
+    validateNicknameForm(true)
+
+  $('a.nickname-skip').click ->
+    url = $(this).attr 'data-href'
+    location.href = url
+
+  # -------------------------- 修改昵称 - END -------------------------
 
   # 偵測回車鍵
   $(document).keypress (e)->
     if(e.which == 13)
-      if at_page is 0 then validateLoginForm(true) else validateRegisterForm(true)
+      if at_page is 0
+        validateLoginForm(true)
+      else if at_page is 1
+        validateRegisterForm(true)
+      else if at_page is 2
+        validateNicknameForm(true)
