@@ -110,12 +110,10 @@ init = ->
 
   # 更新電腦驗證碼
   renew_captcha = ->
-    $('.input-row.captcha .captcha').css("background-image",
-      'url(' + SITE_URL + "services/service.php?m=index&a=verify&rand=" + Math.random() + ')');
-    $('.input-row.captcha input').val('');
+    if !$('.input-row.captcha input').hasClass('prohibited')
+      $('.input-row.captcha .captcha').css("background-image",'url(' + SITE_URL + "services/service.php?m=index&a=verify&rand=" + Math.random() + ')');
+      $('.input-row.captcha input').val('');
   renew_captcha()
-
-
 
   # Click and change captcha image 點擊驗證碼刷新
   $("a.captcha").click ->
