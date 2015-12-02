@@ -18,9 +18,25 @@ init = ->
     resizeEle()
 
   # 刷新電腦驗證碼
-  $.fn.refresh_captcha = ->
-    $(this).css("background-image",
-      'url(' + SITE_URL + "services/service.php?m=index&a=verify&rand=" + Math.random() + ')')
+  $.fn.refresh_captcha = () ->
+    dontchange = false
+    switch at_page
+      when 0
+        dontchange = $('#form-phone-reclaim').find('input.captcha-input').hasClass('prohibited')
+      when 1
+        dontchange = $('#form-mail-reclaim').find('input.captcha-input').hasClass('prohibited')
+      when 2
+        dontchange = $('#form-phone-changed').find('input.captcha-input').hasClass('prohibited')
+
+    if !dontchange
+      switch at_page
+        when 0
+          $('#form-phone-reclaim').find('input.captcha-input').val('')
+        when 1
+          $('#form-mail-reclaim').find('input.captcha-input').val('')
+        when 2
+          $('#form-phone-changed').find('input.captcha-input').val('')
+      $(this).css("background-image",'url(' + SITE_URL + "services/service.php?m=index&a=verify&rand=" + Math.random() + ')')
 
   at_page = 1
 
@@ -32,7 +48,7 @@ init = ->
     $('#form-phone-reclaim').show()
     $('#form-mail-reclaim').hide()
     $('.form-error').hide()
-    $('#form-phone-reclaim').find('input.captcha-input').val('')
+#    $('#form-phone-reclaim').find('input.captcha-input').val('')
     $('#form-phone-reclaim').find('a.captcha').refresh_captcha()
     at_page = 0 #手機修改密碼
   $('.goto-mail').click ->
@@ -42,14 +58,14 @@ init = ->
     $('#form-phone-changed').hide()
     $('#form-mail-reclaim').show()
     $('.form-error').hide()
-    $('#form-mail-reclaim').find('input.captcha-input').val('')
+#    $('#form-mail-reclaim').find('input.captcha-input').val('')
     $('#form-mail-reclaim').find('a.captcha').refresh_captcha()
     at_page = 1 #郵箱修改密碼
   $('.goto-phone-changed').click ->
     $('#form-phone-reclaim').hide()
     $('#form-phone-changed').show()
     $('.form-error').hide()
-    $('#form-phone-changed').find('input.captcha-input').val('')
+#    $('#form-phone-changed').find('input.captcha-input').val('')
     $('#form-phone-changed').find('a.captcha').refresh_captcha()
     at_page = 2 #手機號碼更改
     $('.form-wrap').css('overflow','visible') #下拉菜单会因为form-wrap的overflow:hidden而被挡住,在此取消此样式
@@ -65,7 +81,7 @@ init = ->
 
   $('a.captcha').click ->
     $(this).refresh_captcha()
-    $(this).parent('.captcha').find('input').val('')
+#    $(this).parent('.captcha').find('input').val('')
 
   #  Form input error tip 彈出錯誤提示
   showFormError = (text, x, y)->
@@ -236,7 +252,7 @@ init = ->
       refreshMailReclaim()
 
   refreshMailReclaim = ->
-    mail_rec_input_captcha.val ''
+#    mail_rec_input_captcha.val ''
     link_mail_captcha.refresh_captcha()
     form_mail_reclaim.find('.before-submit').show()
     form_mail_reclaim.find('.after-submit').hide()
@@ -319,11 +335,11 @@ init = ->
       , 1000)
     else
       if rec_or_chg is 'rec'
-        input_phone_rec_captcha.val('')
+#        input_phone_rec_captcha.val('')
 #        link_captcha.refresh_captcha()
         link_resend_code.html("<a class='text click-to-resend'>重新发送</a>验证码")
       else
-        input_phone_chg_captcha.val('')
+#        input_phone_chg_captcha.val('')
         link_captcha_p_c.refresh_captcha()
         link_resend_code_p_c.html("<a class='text click-to-resend'>重新发送</a>验证码")
 
@@ -345,10 +361,11 @@ init = ->
         switch parseInt(result.status)
           when 1 # 短信验证码已经发送
             showSmallErrorTip '已发送验证码到你的手机', 1
-#            input_phone_rec_phon.disable()
             if rec_or_chg is 'rec'
               input_phone_rec_pass.parent('li.input-row').show()
               input_phone_rec_pass_again.parent('li.input-row').show()
+              input_phone_rec_phone.attr('readonly', true).addClass('prohibited')
+              input_phone_rec_captcha.attr('readonly', true).addClass('prohibited')
               phoneSendCodeCountDown('rec')
               disableBtnPhoneRecSubmit()
               row_phone_rec_code.show()
@@ -356,24 +373,27 @@ init = ->
             else
               input_phone_chg_pass.parent('li.input-row').show()
               input_phone_chg_pass_again.parent('li.input-row').show()
+              input_phone_chg_phone.attr('readonly', true).addClass('prohibited')
+              input_phone_chg_phone_new.attr('readonly', true).addClass('prohibited')
+              input_phone_chg_captcha.attr('readonly', true).addClass('prohibited')
               disableBtnPhoneChgSubmit()
               phoneSendCodeCountDown('chg')
               row_phone_chg_code.show()
               btn_phone_chg_submit.removeClass('send-code').addClass('code-sent').html('提交')
           when -2 # 短信验证码发送失败
             if rec_or_chg is 'rec'
-              input_phone_rec_captcha.val('')
+#              input_phone_rec_captcha.val('')
               link_captcha.refresh_captcha()
             else
-              input_phone_chg_captcha.val('')
+#              input_phone_chg_captcha.val('')
               link_captcha_p_c.refresh_captcha()
             showSmallErrorTip '短信验证码发送失败'
           else
             if rec_or_chg is 'rec'
-              input_phone_rec_captcha.val('')
+#              input_phone_rec_captcha.val('')
               link_captcha.refresh_captcha()
             else
-              input_phone_chg_captcha.val('')
+#              input_phone_chg_captcha.val('')
               link_captcha_p_c.refresh_captcha()
             if result.msg != ''
               showSmallErrorTip result.msg
@@ -507,6 +527,8 @@ init = ->
     row_phone_rec_code.hide()
     link_resend_code.hide()
     btn_phone_rec_submit.removeClass('code-sent')
+#    input_phone_rec_phone.attr('readonly', true).addClass('prohibited')
+    input_phone_rec_captcha.attr('readonly', false).removeClass('prohibited')
     link_captcha.refresh_captcha()
 #    validatePhoneRecForm(false)
 
