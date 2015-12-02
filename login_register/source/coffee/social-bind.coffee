@@ -7,9 +7,9 @@ init = ->
   #  Responsive 自適應
   resizeEle = ->
     form_w = $('.form-container').width()
-    $('.switch-header').width form_w
+    $('.switch-header-social').width form_w
     $('.form-header').width form_w
-    $('.switch-container').width form_w * 2 + 30
+    $('.switch-container-social').width form_w * 3 + 30
 
   resizeEle()
   $(window).resize ->
@@ -34,23 +34,26 @@ init = ->
   btn_goto_register = $('.goto-register')
   $('#form-login').hide()
   $('#form-register').show()
+  $('#form-nickname').hide()
   btn_goto_login.click ->
-    $('.form-container').removeClass 'at-register'
+    $('.form-container').addClass 'at-login'
     $('#form-login').show()
     $('#form-register').hide()
-    $('.switch-container').css 'left', 0
+    $('#form-nickname').hide()
+    form_w = $('.form-container').width()
+    $('.switch-container-social').css 'left', -(form_w + 30)
     $('.form-error').hide()
     $('.input-password').val('')
     at_page = 0 # login
   btn_goto_register.click ->
-    $('.form-container').addClass 'at-register'
+    $('.form-container').removeClass 'at-login'
     $('#form-register').show()
+    $('#form-nickname').hide()
     $('#form-register').find('input#captchaInput').val('')
 #    $('#form-register').find('a.captcha').renew_captcha()
     renew_captcha()
     $('#form-login').hide()
-    form_w = $('.form-container').width()
-    $('.switch-container').css 'left', -(form_w + 30)
+    $('.switch-container-social').css 'left', 0
     $('.form-error').hide()
     $('.input-password').val('')
     at_page = 1 # register
@@ -67,7 +70,7 @@ init = ->
       setTimeout(->
         $(".form-error-mob").fadeOut(100)
       , 1000)
-
+      
   #  Form input error tip 彈出錯誤提示
   showSmallErrorTip = (text,mood)->
     mood = mood or 0 # 1是成功的笑臉，0是失敗的哭臉
@@ -82,22 +85,22 @@ init = ->
     , 1500)
 
   # 適應返回鍵
-  #  locationHashChanged = ->
-  #    if location.hash is "#register"
-  #      btn_goto_register.click()
-  #    else if location.hash is "#login"
-  #      btn_goto_login.click()
-  #
-  #  $(window).bind 'hashchange', ->
-  #    locationHashChanged()
+#  locationHashChanged = ->
+#    if location.hash is "#register"
+#      btn_goto_register.click()
+#    else if location.hash is "#login"
+#      btn_goto_login.click()
+#
+#  $(window).bind 'hashchange', ->
+#    locationHashChanged()
 
-  $(window).bind 'load', ->
-    if location.href.indexOf('register.html')>0
-      btn_goto_register.click()
-    else
-      btn_goto_login.click()
+  # $(window).bind 'load', ->
+  #   if location.href.indexOf('register.html')>0
+  #     btn_goto_register.click()
+  #   else
+  #     btn_goto_login.click()
 
-  #  locationHashChanged()
+#  locationHashChanged()
 
   # 鍵入，隱藏錯誤提示
   $('input[type=text],input[type=password]').on 'propertychange input', ->
@@ -105,12 +108,10 @@ init = ->
 
   # 更新電腦驗證碼
   renew_captcha = ->
-    $('.input-row.captcha .captcha').css("background-image",
-      'url(' + SITE_URL + "services/service.php?m=index&a=verify&rand=" + Math.random() + ')');
-    $('.input-row.captcha input').val('');
+    if !$('.input-row.captcha input').hasClass('prohibited')
+      $('.input-row.captcha .captcha').css("background-image",'url(' + SITE_URL + "services/service.php?m=index&a=verify&rand=" + Math.random() + ')');
+      $('.input-row.captcha input').val('');
   renew_captcha()
-
-
 
   # Click and change captcha image 點擊驗證碼刷新
   $("a.captcha").click ->
@@ -142,7 +143,7 @@ init = ->
 
   # -------------------------- 用户条款弹窗 - END -------------------------
 
-  # -------------------------- 登錄 - START -------------------------
+# -------------------------- 登錄 - START -------------------------
 
   log_input_phone = $('#form-login input.input-phone')
   log_input_pass = $('#form-login input.input-password')
@@ -244,10 +245,10 @@ init = ->
       configMap.isAccountExisted = true
     else
       configMap.isAccountExisted = false
-
+      
   # EventListener
   reg_input_captcha.on('keyup', checkCaptcha)
-  #  reg_input_phone.blur ->
+#  reg_input_phone.blur ->
   # reg_input_phone.keyup ->
   #   user_phone = $.trim(reg_input_phone.val())
   #   if validateMobile(user_phone)
@@ -277,7 +278,7 @@ init = ->
 
   # 函數：提交手机和电脑验证码获取短信验证码
   submitRegInfo = (phone, captcha)->
-# renew_captcha()
+    # renew_captcha()
     $('.hand-loading').show()
     $.ajax {
       url: SITE_URL + "services/service.php"
@@ -304,7 +305,7 @@ init = ->
             showSmallErrorTip result.msg
             if result.msg is '验证码错误'
               renew_captcha()
-            else
+            else 
               reg_input_code.val('').parent('li').fadeIn('slow')
               btn_reg_info_submit.html('请输入手机验证码').removeClass('send-code').addClass('code-sent')
               reg_input_phone.attr('readonly', true).addClass('prohibited')
@@ -345,7 +346,7 @@ init = ->
           $('span.old-nickname').text(' ' + result.user_name)
           $('a.nickname-skip').attr('data-href',result.success_url)
           form_w = $('.form-container').width() * 2
-          $('.switch-container').css 'left', -(form_w + 30)
+          $('.switch-container-social').css 'left', -(form_w + 30)
           $('.form-error').hide()
           at_page = 2 # nickname
         else
@@ -372,7 +373,7 @@ init = ->
     if !submit_pressed
       disableBtnInfoSubmit()
       if !validateEmail(user_phone) && !validateMobile(user_phone)
-# if !validateMobile(user_phone)
+      # if !validateMobile(user_phone)
         showFormError('邮箱/手机号有误', 310, 45)
       else if configMap.isAccountExisted
         showFormError('此账号已被注册', 310, 45)
@@ -390,10 +391,9 @@ init = ->
             btn_reg_info_submit.html('发送验证码到 ' + user_phone).addClass('send-code')
           else
             btn_reg_info_submit.html('提交注册')
-
     else
       if user_phone is ''
-        showFormError('请输入用户名/邮箱/手机号', 310, 45)
+        showFormError('请输入邮箱/手机号', 310, 45)
       else if !validateEmail(user_phone) && !validateMobile(user_phone)
         showFormError('邮箱/手机号有误', 310, 45)
       else if configMap.isAccountExisted
@@ -410,14 +410,17 @@ init = ->
         if captcha.length < 5
           showFormError('验证码输入有误', 310, 150)
         else
-        submitRegInfo(user_phone,captcha)
-      else
-        submitRegister(user_phone,user_pass,captcha)
+          if validateMobile(user_phone)
+            submitRegInfo(user_phone,captcha)
+          else if validateEmail(user_phone)
+            submitRegister(user_phone,user_pass,captcha)
+#      else
+#        submitRegister(user_phone,user_pass,captcha)
 
   # 檢查輸入是否有效，彈出驗證碼
   $('#submitInfo').click ->
     validateRegisterForm(true)
-  # renew_captcha()
+    # renew_captcha()
 
   # 重新發送驗證碼
   $(document).on 'click', 'a.click-to-resend', ->
@@ -443,8 +446,8 @@ init = ->
       validateRegisterForm(false)
     else
       validateRegisterForm(false)
-  #  reg_input_pass.on 'propertychange input', ->
-  #    validateRegisterForm(false)
+#  reg_input_pass.on 'propertychange input', ->
+#    validateRegisterForm(false)
   # reg_input_captcha.on 'propertychange input', ->
   #   validateRegisterForm(false)
   reg_input_agree.click ->
@@ -452,7 +455,7 @@ init = ->
   # reg_input_code.on 'propertychange input', ->
   #   validateRegisterForm(false)
   reg_input_code.blur ->
-    validateRegisterForm(false)
+    validateRegisterForm(false)    
   reg_input_captcha.blur ->
     validateRegisterForm(false)
   reg_input_captcha.on 'propertychange input', ->
@@ -480,10 +483,10 @@ init = ->
     user_nickname = $.trim(nic_input_name.val())
     nickname_lawful   = true
 
-    #    if validateNickname(user_nickname)
-    #      checkNickname(user_nickname, (result)->
-    #        nickname_lawful = result
-    #    )
+#    if validateNickname(user_nickname)
+#      checkNickname(user_nickname, (result)->
+#        nickname_lawful = result
+#    )
 
     if !submit_pressed
       disableBtnNicknameSubmit()
@@ -502,7 +505,7 @@ init = ->
         submitNickname(user_nickname)
 
   # 实时检查录入状态
-  #  nic_input_name.blur ->
+#  nic_input_name.blur ->
   nic_input_name.on 'propertychange input', ->
     validateNicknameForm(false)
 

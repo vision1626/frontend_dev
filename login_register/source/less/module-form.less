@@ -70,6 +70,16 @@
 }
 .form-container {
   ._clearfix;
+  &.at-login {
+    .switch-container-social {
+      .login {
+        opacity: 1;
+      }
+      .register {
+        opacity: 0;
+      }
+    }
+  }
   &.at-register {
     #form-login {
       ul {
@@ -317,6 +327,40 @@
     }
   }
 }
+
+.switch-header-social{
+  height: 25px;
+  overflow: hidden;
+  width: @form-width;
+  .switch-container-social {
+    width: @form-width*3 + 30px;
+    ._clearfix;
+    position: relative;
+    left: 0;
+    transition: all 0.2s ease-out;
+  }
+  .login {
+    opacity: 0;
+    &.hidden {
+      //top: -50px;
+    }
+  }
+  .register {
+    &.hidden {
+      //top: 50px;
+    }
+    margin-right: 30px;
+  }
+  .form-header {
+    width: @form-width;
+    position: relative;
+    transition: all 0.2s linear;
+    float: left;
+    &.hidden {
+    }
+  }
+}
+
 .form-header {
   ._clearfix;
   a {
@@ -398,7 +442,7 @@
   }
 }
 .social-login {
-  display: none;
+  // display: none;
   .social-links {
     ._clearfix;
     width: (38px + @border-width*2 + 10px + 10px)*3;
