@@ -106,6 +106,9 @@ checkNickname = (userNickname,callBack) ->
 #-1:昵称含非法字符，仅支持中英文、数字
 #-2:昵称长度为2-20个字符，可由中英文、数字组成
 #-3:昵称已存在
+#-4:修改失败
+#-5:首字母不能为数字
+#-6:已经修改过,不能再修改
 #1:昵称可以使用
       callBack(result.status is 1)
     error: ->
