@@ -49,7 +49,7 @@ validateCharacter = (inputvalue)->
 
 # Nickname validation 只可以输入中文英文数字
 validateNickname = (inputvalue)->
-  pattern = /^[\u4E00-\u9FA5A-Za-z0-9]+$/;
+  pattern = /^[\u4E00-\u9FA5A-Za-z][\u4E00-\u9FA5A-Za-z0-9]+$/;
   pattern.test(inputvalue)
 
 #  Check if IE
