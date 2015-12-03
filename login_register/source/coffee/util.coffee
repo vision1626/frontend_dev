@@ -44,7 +44,7 @@ validateEmail = (inputvalue)->
 
 # Character validation for Login
 validateCharacter = (inputvalue)->
-  pattern =  /^1[35874][0-9][0-9]{8}$|^[A-Za-z0-9_.-]+$|^([a-zA-Z0-9_.-])+@([a-zA-Z0-9_.-])+\.([a-zA-Z])+([a-zA-Z])+/;
+  pattern =  /^1[35874][0-9][0-9]{8}$|^[\u4E00-\u9FA5A-Za-z0-9_.-]+$|^([a-zA-Z0-9_.-])+@([a-zA-Z0-9_.-])+\.([a-zA-Z])+([a-zA-Z])+/;
   pattern.test(inputvalue)
 
 # Nickname validation 只可以输入中文英文数字

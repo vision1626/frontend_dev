@@ -144,7 +144,7 @@ init = ->
 
   # -------------------------- 用户条款弹窗 - END -------------------------
 
-# -------------------------- 登錄 - START -------------------------
+  # -------------------------- 登錄 - START -------------------------
 
   log_input_phone = $('#form-login input.input-phone')
   log_input_pass = $('#form-login input.input-password')
