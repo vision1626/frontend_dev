@@ -494,16 +494,16 @@ init = ->
     if !submit_pressed
       disableBtnNicknameSubmit()
       if !validateNickname(user_nickname)
-        showFormError('昵称输入有误', 310, 115)
+        showFormError('用户名输入有误', 310, 115)
       else if user_nickname isnt '' and user_nickname.length > 1
         enableBtnNicknameSubmit()
     else
       if user_nickname is ''
-        showFormError('请输入昵称', 310, 115)
+        showFormError('请输入用户名', 310, 115)
       else if !validateNickname(user_nickname)
-        showFormError('昵称输入有误', 310, 115)
+        showFormError('用户名输入有误', 310, 115)
       else if !nickname_lawful
-        showFormError('昵称已被占用', 310, 115)
+        showFormError('用户名已被占用', 310, 115)
       else
         submitNickname(user_nickname)
 
@@ -525,7 +525,7 @@ init = ->
       success: (result)->
         $('.hand-loading').fadeOut(200)
         if result.status > 0
-          showSmallErrorTip('昵称修改成功！<br/>即将跳转到首页',1)
+          showSmallErrorTip('用户名修改成功！<br/>即将跳转到首页',1)
           setTimeout(->
             window.location.href = SITE_URL
           , 2000)
