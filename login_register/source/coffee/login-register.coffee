@@ -493,24 +493,39 @@ init = ->
 
     if !submit_pressed
       disableBtnNicknameSubmit()
-      if !validateNickname(user_nickname)
-        showFormError('用户名输入有误', 310, 115)
+      if user_nickname.length < 2
+        showFormError('请输入6-12位用户名', 310, 115)
+        false
+      else if !validateNickname(user_nickname,false)
+        showFormError('含有非法字符', 310, 115)
+        false
+      else if !validateNickname(user_nickname,true)
+        showFormError('用户名不能以数字开头', 310, 115)
+        false
       else if user_nickname isnt '' and user_nickname.length > 1
         enableBtnNicknameSubmit()
     else
       if user_nickname is ''
         showFormError('请输入用户名', 310, 115)
-      else if !validateNickname(user_nickname)
-        showFormError('用户名输入有误', 310, 115)
+        false
+      else if user_nickname.length < 2
+        showFormError('请输入6-12位用户名', 310, 115)
+        false
+      else if !validateNickname(user_nickname,false)
+        showFormError('含有非法字符', 310, 115)
+      else if !validateNickname(user_nickname,true)
+        showFormError('用户名不能以数字开头', 310, 115)
       else if !nickname_lawful
         showFormError('用户名已被占用', 310, 115)
       else
         submitNickname(user_nickname)
 
   # 实时检查录入状态
-#  nic_input_name.blur ->
   nic_input_name.on 'propertychange input', ->
-    validateNicknameForm(false)
+    if nic_input_name.val().length > 1
+      validateNicknameForm(false)
+#  nic_input_name.blur ->
+#    validateNicknameForm(false)
 
   # 函数: 提交匿名
   submitNickname = (user_nickname)->
