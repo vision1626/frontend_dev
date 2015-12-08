@@ -1,4 +1,4 @@
-＃ Style Guide
+# Style Guide
 * [css]
 * [javaScript]
 
