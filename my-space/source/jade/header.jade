@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+html(lang="en")
+head
+  meta(charset="UTF-8")
+  :php
+      $current_css[] = './tpl/hi1626/css/login/vendor/normalize.css';
+      $current_css[] = './tpl/hi1626/css/myspace/my-space.min.css';
+  link(rel="stylesheet", type="text/css", href="{css $current_css}", media="all")
+  link(rel="icon", href="{$_FANWE['site_root']}favicon.ico", type="image/x-icon")
+  title 我的潮品
+body
+  .fixed-nav-container
+    ul.fixed-nav
+      li 
+        a 手机更好玩
+      li 
+        a 帮助中心
+      li.fixed-nav__avatar
+        img
+        span 
+          a |退出
+      li 消息
+        span.fixed-nav__number.fixed-nav__number--blue 30
+      li
+        i 闪电
+        span.fixed-nav__number.fixed-nav__number--orange 2
+
+  .main-nav-container
+    ul.main-nav
+      li.main-nav__logo
+        a
+          img(src='/tpl/hi1626/images/login/logo-1626-black.svg')
+      li 首页
+      li 资讯
+      li 潮闪购
+      li 搭配
+      li 达人
+      li 
+        input(type='text')
+      li
+        img(src='fuck')
+        我的潮品
+      li
+        i
+        | 发布
+
+  div
+    div
+      img(src='icon')
+      h3 藤原浩•威廉姆斯
+      p 你现在阅读的，并不是真的文案
+    div
+      ul
+        li 新动态
+        li 喜欢
+        li 发布
+      ul
+        li 粉丝
+        li 关注

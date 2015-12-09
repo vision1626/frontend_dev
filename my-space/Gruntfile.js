@@ -12,7 +12,7 @@ module.exports = function (grunt) {
         jsDebugPath: '../../tpl/hi1626/js/myspace/debug',
         jsDistPath: '../../tpl/hi1626/js/myspace',
         htmlDistPath: '../../tpl/hi1626/page/u',
-        cssName: 'login-register',
+        cssName: 'my-space',
         jsName: 'scripts'
     };
 
@@ -23,10 +23,10 @@ module.exports = function (grunt) {
                 files: ['<%= globalConfig.cssSrcPath %>/*.less'],
                 tasks: ['less', 'autoprefixer', 'cssmin']
             },
-            js: {
-                files: ['<%= globalConfig.jsSrcPath %>/*.coffee'],
-                tasks: ['coffee', 'uglify']
-            },
+            // js: {
+            //     files: ['<%= globalConfig.jsSrcPath %>/*.coffee'],
+            //     tasks: ['coffee', 'uglify']
+            // },
             jade:{
                 files: ['<%= globalConfig.jadeSrcPath %>/*.jade'],
                 tasks: ['jade4php']
@@ -138,7 +138,7 @@ module.exports = function (grunt) {
         'less',
         'autoprefixer',
         'cssmin',
-        'coffee',
+        // 'coffee',
         'uglify',
         'jade4php'
     ]);

@@ -1,6 +1,9 @@
 #root
 .idea
+#a config file for sublime text sftp plugin
 sftp-config.json
+#should install dependencies locally
+node_modules/
 
 .DS_Store
 core
