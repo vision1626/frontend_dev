@@ -51,15 +51,151 @@
   }
 }
 .main-nav-container {
-  height: 60px;
-  border: 1px solid #000;
   .main-nav {
+    height: 60px;
+    border: 1px solid #000;
     li {
-      display: inline-block;
+      background-color: white;
+      float: left;
       line-height: 4;
+      font-size: 17px;
+      font-weight: bold;
+      height: 60px;
+      padding-left: 25px;
+      padding-right: 25px;
       border-left: 1px solid @grey;
+      -webkit-box-sizing: border-box;
+         -moz-box-sizing: border-box;
+              box-sizing: border-box;
+      a {
+        display: inline-block;
+        height: 60px;
+      }
+      &:hover {
+        border-bottom: 6px solid @blue;
+      }
+    }
+    .main-nav__logo {
+      line-height: 4.6;
+      &:hover {
+        border-bottom: none;
+      }
       img {
         width: 88px;
+      }
+    }
+    .main-nav__search {
+      &:hover {
+        border-bottom: none;
+      }
+      background-color: @light-grey;
+      width:100%;
+      position: absolute;
+      left: 582px;
+      padding-bottom: 21px;
+      input {
+        outline: none;
+        border: none;
+        background-color: @light-grey;
+        height: 97%;
+      }
+    }
+    .main-nav--right {
+      float: right;
+      position: absolute;
+      font-size: 13px;
+      line-height: 5;
+      &:hover {
+        border-bottom: none;
+      }
+    }
+    .main-nav__subscribe {
+      right: 0;
+    }
+    .main-nav__me {
+      right: 77px;
+    }
+  }
+}
+.profile-container {
+  height: 300px;
+  background-color: rgba(0, 0, 0, .5);
+  .profile {
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    width: 507px;
+    padding-top: 38px;
+    color: white;
+    img {
+      height: 100px;
+      width: 100px;
+      border-radius: 100px;
+      background-color: @black;
+    }
+    h3 {
+      font-size: 20px;
+      margin-top: 3px;
+    }
+    .profile__level {
+      position: absolute;
+      top: 153px;
+      right: 128px;
+      font-size: 12px;
+      background-color: @black;
+      width: 37px;
+      border-radius: 11px;
+    }
+    p {
+      font-size: 12px;
+    }
+    .profile__follow-btn {
+      position: absolute;
+      top: 149px;
+      right: 35px;
+      width: 75px;
+      height: 25px;
+      background-color: @black;
+      font-size: 14px;
+      border-radius: 38px;
+      line-height: 1.8;
+    }
+  }
+  .content {
+    background-color: rgba(0, 0, 0, 0.5);
+    height: 60px;
+    margin-top: 26px;
+    position: relative;
+    .content__actions {
+      margin-left: auto;
+      margin-right: auto;
+      width: 357px;
+      color: white;
+      font-size: 12px;
+      li {
+        float: left;
+        line-height: 5;
+        width: 33%;
+        text-align: center;
+        &:hover {
+          background: white;
+          color: @black;
+          border-radius: 8px 8px 0 0;
+        }
+      }
+    }
+    .content__relationship {
+      color: white;
+      font-size: 12px;
+      margin-right: 119px;
+      position: absolute;
+      right: 0;
+      top: 0;
+      li {
+        line-height: 5;
+        margin-left: 40px;
+        display: inline-block;
       }
     }
   }
