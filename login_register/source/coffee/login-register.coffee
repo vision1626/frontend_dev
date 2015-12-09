@@ -494,7 +494,7 @@ init = ->
     if !submit_pressed
       disableBtnNicknameSubmit()
       if user_nickname.length < 2
-        showFormError('请输入6-12位用户名', 310, 115)
+        showFormError('请输入2-15位用户名', 310, 115)
         false
       else if !validateNickname(user_nickname,false)
         showFormError('含有非法字符', 310, 115)
@@ -509,7 +509,7 @@ init = ->
         showFormError('请输入用户名', 310, 115)
         false
       else if user_nickname.length < 2
-        showFormError('请输入6-12位用户名', 310, 115)
+        showFormError('请输入2-15位用户名', 310, 115)
         false
       else if !validateNickname(user_nickname,false)
         showFormError('含有非法字符', 310, 115)
