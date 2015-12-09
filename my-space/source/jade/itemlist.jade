@@ -1,0 +1,30 @@
+doctype html
+html(lang='en')
+    head
+        meta(charset="UTF-8")
+        //:php
+            $current_css[] = './tpl/hi1626/css/login/vendor/normalize.css';
+            $current_css[] = './tpl/hi1626/css/myspace/my-space.min.css';
+        //link(rel="stylesheet", type="text/css", href="{css $current_css}", media="all")
+        //link(rel="stylesheet", type="text/css", href="./tpl/hi1626/css/login/vendor/normalize.css", media="all")
+        link(rel="stylesheet", type="text/css", href="../../css/myspace/my-space.min.css", media="all")
+        link(rel="icon", href="{$_FANWE['site_root']}favicon.ico", type="image/x-icon")
+        title 我的潮品
+    body
+        .item-filter
+        .item-container
+            dl
+                dd
+                    div
+                        .item-image
+                            img(src='http://cdn1626.clouddn.com/public/upload/share/000/044/126/73/69ca908e31ec4b129c8d87183809643fiCmBiT_310x310.jpg', alt='')
+                        .item-description
+                            // <div class="item-isnew">
+                            // <span>新发布</span>
+                            // <div/>
+                            .item-title
+                                span HYBRID Boots New Balance MRH996 BT MRH996BR 高帮运动靴 轻量化
+                            .item-price
+                                span ¥2334.00
+                            .item-additional
+                                img(src='')
