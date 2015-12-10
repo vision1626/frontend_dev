@@ -12,7 +12,7 @@ module.exports = function (grunt) {
         jsDebugPath: '../../tpl/hi1626/js/myspace/debug',
         jsDistPath: '../../tpl/hi1626/js/myspace',
         htmlDistPath: '../../tpl/hi1626/page/u',
-        cssName: 'my-space',
+        cssName: 'myspace',
         jsName: 'scripts'
     };
 
@@ -23,10 +23,10 @@ module.exports = function (grunt) {
                 files: ['<%= globalConfig.cssSrcPath %>/*.less'],
                 tasks: ['less', 'autoprefixer', 'cssmin']
             },
-            // js: {
-            //     files: ['<%= globalConfig.jsSrcPath %>/*.coffee'],
-            //     tasks: ['coffee', 'uglify']
-            // },
+            js: {
+                files: ['<%= globalConfig.jsSrcPath %>/*.coffee'],
+                tasks: ['coffee', 'uglify']
+            },
             jade:{
                 files: ['<%= globalConfig.jadeSrcPath %>/*.jade'],
                 tasks: ['jade4php']
@@ -79,24 +79,9 @@ module.exports = function (grunt) {
             },
             compile: {
                 files: {
-                    '<%= globalConfig.jsDebugPath %>/login-register.js':[
-                        '<%= globalConfig.jsSrcPath %>/util.coffee',
-                        '<%= globalConfig.jsSrcPath %>/login-register.coffee'
-                    ],
-                    '<%= globalConfig.jsDebugPath %>/forget-password.js':[
-                        '<%= globalConfig.jsSrcPath %>/util.coffee',
-                        '<%= globalConfig.jsSrcPath %>/forget-password.coffee'
-                    ],
-                    '<%= globalConfig.jsDebugPath %>/social-bind.js':[
-                        '<%= globalConfig.jsSrcPath %>/util.coffee',
-                        '<%= globalConfig.jsSrcPath %>/social-bind.coffee'
-                    ],
-                    '<%= globalConfig.jsDebugPath %>/reset-password.js':[
-                        '<%= globalConfig.jsSrcPath %>/util.coffee',
-                        '<%= globalConfig.jsSrcPath %>/reset-password.coffee'
-                    ],
-                    '<%= globalConfig.jsDebugPath %>/login-register-ie.js':[
-                        '<%= globalConfig.jsSrcPath %>/ie.coffee'
+                    '<%= globalConfig.jsDebugPath %>/myspace.js':[
+                        // '<%= globalConfig.jsSrcPath %>/util.coffee',
+                        '<%= globalConfig.jsSrcPath %>/header.coffee'
                     ]
                 }
             }
@@ -138,7 +123,7 @@ module.exports = function (grunt) {
         'less',
         'autoprefixer',
         'cssmin',
-        // 'coffee',
+        'coffee',
         'uglify',
         'jade4php'
     ]);

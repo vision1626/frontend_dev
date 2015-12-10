@@ -6,7 +6,7 @@
 @grey: #b4b4b4;
 @dark-grey: #808080;
 @orange: #ff5000;
-
+//blabla
 
 .fixed-nav-container {
   background-color: @black;
@@ -29,7 +29,7 @@
         height: 20px;
         border-radius: 12px;
       }
-      span {
+      .quit-span {
         margin-left: 20px;
       }
     }
@@ -57,7 +57,7 @@
     li {
       background-color: white;
       float: left;
-      line-height: 4;
+      line-height: 3.8;
       font-size: 17px;
       font-weight: bold;
       height: 60px;
@@ -67,6 +67,9 @@
       -webkit-box-sizing: border-box;
          -moz-box-sizing: border-box;
               box-sizing: border-box;
+      -webkit-transition: all 0.1s linear;
+      -moz-transition: all 0.1s linear;
+      transition: all 0.1s linear;
       a {
         display: inline-block;
         height: 60px;
@@ -92,28 +95,40 @@
       width:100%;
       position: absolute;
       left: 582px;
-      padding-bottom: 21px;
+      line-height: 3.7;
+      i {
+        color: @grey;
+        font-size: 12px;
+      }
       input {
         outline: none;
         border: none;
         background-color: @light-grey;
-        height: 97%;
+        font-size: 14px;
+        font-weight: bold;
       }
     }
     .main-nav--right {
       float: right;
       position: absolute;
-      font-size: 13px;
-      line-height: 5;
+      font-size: 14px;
+      font-weight: bold;
+      line-height: 4.5;
+      -webkit-transition: all 0.1s ease-out;
+      -moz-transition: all 0.1s ease-out;
+      transition: all 0.1s ease-out;
       &:hover {
         border-bottom: none;
+        background-color: @blue;
+        color: white;
       }
     }
+ 
     .main-nav__subscribe {
       right: 0;
     }
     .main-nav__me {
-      right: 77px;
+      right: 79px;
     }
   }
 }

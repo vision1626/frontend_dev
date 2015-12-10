@@ -2,12 +2,33 @@
 html(lang="en")
 head
   meta(charset="UTF-8")
+  meta(name='viewport', content='width=device-width, initial-scale=1 maximum-scale=1, user-scalable=no')
+  meta(name='apple-mobile-web-app-status-bar-style', content='black')
+  meta(name='apple-mobile-web-app-capable', content='yes')
+  meta(name='description')
+  - title = "{$_FANWE['title']}"
+  title= title
+  
   :php
       $current_css[] = './tpl/hi1626/css/login/vendor/normalize.css';
-      $current_css[] = './tpl/hi1626/css/myspace/my-space.min.css';
+      $current_css[] = './tpl/hi1626/css/myspace/myspace.min.css';
+      $current_js[] = './public/js/jquery-1.11.3.min.js';
+      $current_js[] = './tpl/hi1626/js/myspace/myspace.js';
+  
   link(rel="stylesheet", type="text/css", href="{css $current_css}", media="all")
   link(rel="icon", href="{$_FANWE['site_root']}favicon.ico", type="image/x-icon")
-  title 我的潮品
+  script(type='text/javascript').
+      var SITE_PATH = '$_FANWE[site_root]';
+      var SITE_URL = '$_FANWE[site_url]';
+      var TPL_PATH = '{TPL_PATH}';
+      var PUBLIC_PATH  = '{PUBLIC_PATH}';
+      var MODULE_NAME  = '{MODULE_NAME}';
+      var ACTION_NAME  = '{ACTION_NAME}';
+      var COOKIE_PRE = "$_FANWE['config']['cookie']['cookie_pre']";
+      var TPL_NAME = '$_FANWE["setting"]["site_tmpl"]';
+      var IS_POSTING = false;
+  script(type='text/javascript' src="{script $current_js}")
+  
 body
   .fixed-nav-container
     ul.fixed-nav
@@ -16,9 +37,14 @@ body
       li 
         a 帮助中心
       li.fixed-nav__avatar
-        img
-        span 
-          a |退出
+        //- if login
+        //- img
+        //- span 
+        //-   a |退出
+        //- else
+        a 登录
+        span |
+        a 注册
       li 消息
         span.fixed-nav__number.fixed-nav__number--blue 30
       li
@@ -41,7 +67,9 @@ body
       li 
         a 达人
       li.main-nav__search
-        input(type='text' placeholder='搜一下变美少女战士')
+        i 假装有个放大镜
+        input(type='text' placeholder='搜一下变交街架')
+        i 假装有个回车键
       li.main-nav__subscribe.main-nav--right
         i
         | 发布
@@ -49,10 +77,10 @@ body
         img
         我的潮品
 
-  div.profile-container
-    div.profile
-      img.profile__icon
-      h3 藤原浩•威廉姆斯
+  .profile-container
+    .profile
+      img(src='/tpl/hi1626/images/popslave/go_home.jpg').profile__icon
+      h3 刹亚人之神
       span.profile__level LV.2
       .medal
         a(href="")
@@ -62,7 +90,7 @@ body
       a.profile__follow-btn
         i
         | 关注Ta
-    div.content
+    .content
       ul.content__actions
         li 新动态
         li 喜欢
@@ -70,3 +98,8 @@ body
       ul.content__relationship
         li 粉丝
         li 关注
+  //- TODO: put script tag below into footer 
+  script(type='text/javascript').
+    $(document).ready(function () {
+      init();
+    });
