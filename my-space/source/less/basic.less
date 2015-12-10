@@ -47,6 +47,9 @@
       .fixed-nav__number--orange {
         border-bottom: 1px solid @orange;
       }
+      .icon {
+        font-size: 16px;
+      }
     }
   }
 }
@@ -96,16 +99,19 @@
       position: absolute;
       left: 582px;
       line-height: 3.7;
-      i {
+      .icon:before {
         color: @grey;
-        font-size: 12px;
+        font-size: 20px;
       }
-      input {
-        outline: none;
-        border: none;
-        background-color: @light-grey;
-        font-size: 14px;
-        font-weight: bold;
+      form {
+        display: inline-block;
+        input {
+          outline: none;
+          border: none;
+          background-color: @light-grey;
+          font-size: 14px;
+          font-weight: bold;
+        }
       }
     }
     .main-nav--right {
@@ -117,10 +123,18 @@
       -webkit-transition: all 0.1s ease-out;
       -moz-transition: all 0.1s ease-out;
       transition: all 0.1s ease-out;
+      .icon:before {
+        color: @blue;
+        font-size: 20px;
+        margin-right: 5px;
+      }
       &:hover {
         border-bottom: none;
         background-color: @blue;
         color: white;
+        .icon:before {
+          color: white;
+        }
       }
     }
  
@@ -128,7 +142,7 @@
       right: 0;
     }
     .main-nav__me {
-      right: 79px;
+      right: 104px;
     }
   }
 }
@@ -175,6 +189,10 @@
       font-size: 14px;
       border-radius: 38px;
       line-height: 1.8;
+      .icon:before {
+        font-size: 18px;
+        margin-right: 3px;
+      }
     }
   }
   .content {
@@ -196,7 +214,10 @@
         &:hover {
           background: white;
           color: @black;
-          border-radius: 8px 8px 0 0;
+          border-radius: 4px 4px 0 0;
+          .icon {
+            color: @blue;
+          }
         }
       }
     }
@@ -211,7 +232,14 @@
         line-height: 5;
         margin-left: 40px;
         display: inline-block;
+        text-align: center;
       }
+    }
+    .icon {
+        display: block;
+        font-size: 20px;
+        margin-bottom: -18px;
+        margin-top: 10px;
     }
   }
 }

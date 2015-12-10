@@ -32,7 +32,8 @@ head
 body
   .fixed-nav-container
     ul.fixed-nav
-      li 
+      li
+        i.icon.icon-phone
         a 手机更好玩
       li 
         a 帮助中心
@@ -67,11 +68,12 @@ body
       li 
         a 达人
       li.main-nav__search
-        i 假装有个放大镜
-        input(type='text' placeholder='搜一下变交街架')
-        i 假装有个回车键
+        i.icon.icon-search
+        form
+          input(type='text' placeholder='搜一下变交街架')
+        i.icon.icon-return
       li.main-nav__subscribe.main-nav--right
-        i
+        i.icon.icon-publish_solid
         | 发布
       li.main-nav__me.main-nav--right
         img
@@ -92,12 +94,22 @@ body
         | 关注Ta
     .content
       ul.content__actions
-        li 新动态
-        li 喜欢
-        li 发布
+        li
+          i.icon.icon-news
+          | 新动态
+        li 
+          i.icon.icon-heart
+          | 喜欢
+        li 
+          i.icon.icon-publish
+          | 发布
       ul.content__relationship
-        li 粉丝
-        li 关注
+        li 
+          i.icon.icon-fans
+          | 粉丝
+        li 
+          i.icon.icon-following
+          | 关注
   //- TODO: put script tag below into footer 
   script(type='text/javascript').
     $(document).ready(function () {
