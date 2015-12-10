@@ -1,12 +1,56 @@
+@item-nav-width: 95px;
 @item-image-button-wh : 40px;
+@margin-lr: 60px;
 
+//分类以及筛选部分
+.item-filter {
+  margin: 40px @margin-lr 0 @margin-lr;
+  position: relative;
+  height: 25px;
+}
+
+.item-filter .item-nav-container {
+  column-count: 4;
+  column-gap: 20px;
+  column-rule: 1px outset @dark-grey;
+  //column-width:@item-nav-width;
+  width: @item-nav-width*4;
+  margin-left: -10px;
+  float: left;
+}
+
+.item-filter .item-nav-container .item-nav {
+  width: @item-nav-width;
+  margin-left: 10px;
+  //text-align: center;
+  position: relative;
+}
+
+.item-filter .item-nav-container .item-nav.current {
+  font-weight: bold;
+  font-weight: bold;
+}
+
+.item-filter .item-nav-container .item-nav .count {
+  font-size: @font-size-xs;
+  background-color: @blue;
+  color: @white;
+  padding: 1px 6px;
+  border-radius: 8px;
+  //margin-left: 5px;
+  position: relative;
+  top: -2px;
+  left: 5px;
+}
+
+//列表部分
 .item-container {
-
+  margin: 0 @margin-lr;
 }
 
 .item-container dd {
   float: left;
-  margin: 20px 15px 10px 15px;
+  margin: 20px 30px 10px 0px;
   border-bottom: 2px solid @white;
   width: 280px;
   min-height: 435px;
@@ -36,11 +80,11 @@
   transition: width 0.2s ease-out;
 }
 
-.item-image .item-addtospecial span{
+.item-image .item-addtospecial span {
   display: none;
   font-size: @font-size-s;
-  color:@white;
-  height:@item-image-button-wh;
+  color: @white;
+  height: @item-image-button-wh;
   line-height: @item-image-button-wh;
 }
 
@@ -49,8 +93,8 @@
   width: @item-image-button-wh*2;
 }
 
-.item-image .item-addtospecial:hover span{
-  display:block;
+.item-image .item-addtospecial:hover span {
+  display: block;
 }
 
 .item-image .item-addtolike {
