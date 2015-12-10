@@ -30,30 +30,43 @@ body
       li.main-nav__logo
         a
           img(src='/tpl/hi1626/images/login/logo-1626-black.svg')
-      li 首页
-      li 资讯
-      li 潮闪购
-      li 搭配
-      li 达人
       li 
-        input(type='text')
-      li
-        img(src='fuck')
-        我的潮品
-      li
+        a 首页
+      li 
+        a 资讯
+      li 
+        a 潮闪购
+      li 
+        a 搭配
+      li 
+        a 达人
+      li.main-nav__search
+        input(type='text' placeholder='搜一下变美少女战士')
+      li.main-nav__subscribe.main-nav--right
         i
         | 发布
+      li.main-nav__me.main-nav--right
+        img
+        我的潮品
 
-  div
-    div
-      img(src='icon')
+  div.profile-container
+    div.profile
+      img.profile__icon
       h3 藤原浩•威廉姆斯
+      span.profile__level LV.2
+      .medal
+        a(href="")
+        a(href="")
+        a(href="")
       p 你现在阅读的，并不是真的文案
-    div
-      ul
+      a.profile__follow-btn
+        i
+        | 关注Ta
+    div.content
+      ul.content__actions
         li 新动态
         li 喜欢
         li 发布
-      ul
+      ul.content__relationship
         li 粉丝
         li 关注
