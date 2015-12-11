@@ -1,8 +1,6 @@
 init = ->
   $search = $('.main-nav__search').find('input');
-  $search_icon_font = $('.main-nav__search').find('i');
-  $main_nav_right = $('.main-nav--right')
-  
+  $search_icon_font = $('.main-nav__search').find('i');  
 
   # Event registers
   $search.on 'focus', ->
