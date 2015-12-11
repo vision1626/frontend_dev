@@ -7,11 +7,11 @@ html(lang='en')
         $current_css[] = './tpl/hi1626/css/myspace/my-space.min.css';
     //link(rel="stylesheet", type="text/css", href="{css $current_css}", media="all")
     //link(rel="stylesheet", type="text/css", href="./tpl/hi1626/css/login/vendor/normalize.css", media="all")
-    link(rel="stylesheet", type="text/css", href="../../css/myspace/my-space.min.css", media="all")
+    link(rel="stylesheet", type="text/css", href="../../css/myspace/myspace.min.css", media="all")
     link(rel="icon", href="{$_FANWE['site_root']}favicon.ico", type="image/x-icon")
     title 我的潮品
   body
-    .item-filter
+    .item-list-filter
       .item-nav-container
         .item-nav.first.current
           潮人
@@ -20,22 +20,42 @@ html(lang='en')
           a.count 30
         .item-nav
           潮店
-          a.count 30
+          a.count 3
         .item-nav
           专辑
           a.count 31
+      .item-filter-container
+        .item-filter
+          a(href='#')
+            span.icon-20__album
+            a(href='') 批量加入专辑
+        .item-filter
+          a(href='#') 全部分类
+        .item-filter
+          a(href='#')
+            span.icon-16__decendent
+            综合
+          a(href='#')
+            span.icon-16__decendent
+            人气
+        .item-filter
+          a(href='#')
+            span.icon-16__list-view
+          a(href='#')
+            span.icon-16__grid-view
 
-.item-container
+
+.item-list-container
   dl
     dd
       div
         .item-image
           img(src='http://cdn1626.clouddn.com/public/upload/share/000/044/126/73/69ca908e31ec4b129c8d87183809643fiCmBiT_310x310.jpg', alt='')
           .item-addtospecial
-            i.icon.icon-sml.icon-user
-            span 加入专辑
+            span.icon-20__album
+            span.addtext 加入专辑
           .item-addtolike
-            i.icon.icon-sml.icon-user
+            span.icon-20__heart
         .item-description
           // <div class="item-isnew">
           // <span>新发布</span>
@@ -47,243 +67,12 @@ html(lang='en')
           .item-additional
             img.owner(src='http://cdn1626.clouddn.com/public/upload/avatar/000/00/00/90_1398644613_middle.jpg')
             .item-value
-              i.icon.icon-sml.icon-user
+              span.icon-12__viewed
               span 123456
-              i.icon.icon-sml.icon-user
+              span.icon-12__comment
               span 234
-              i.icon.icon-sml.icon-user
+              span.icon-20__heart
               span 23
-    dd
-      div
-        .item-image
-          img(src='http://cdn1626.clouddn.com/public/upload/share/000/044/126/73/69ca908e31ec4b129c8d87183809643fiCmBiT_310x310.jpg', alt='')
-          .item-addtospecial
-            i.icon.icon-sml.icon-user
-            span 加入专辑
-          .item-addtolike
-            i.icon.icon-sml.icon-user
-        .item-description
-          // <div class="item-isnew">
-          // <span>新发布</span>
-          // <div/>
-          .item-title
-            span HYBRID Boots New Balance MRH996 BT MRH996BR 高帮运动靴 轻量化
-          .item-price
-            span ¥2334.00
-          .item-additional
-            img.owner(src='http://cdn1626.clouddn.com/public/upload/avatar/000/00/00/90_1398644613_middle.jpg')
-            .item-value
-              i.icon.icon-sml.icon-user
-              span 123456
-              i.icon.icon-sml.icon-user
-              span 234
-              i.icon.icon-sml.icon-user
-              span 23
-    dd
-      div
-        .item-image
-          img(src='http://cdn1626.clouddn.com/public/upload/share/000/044/126/73/69ca908e31ec4b129c8d87183809643fiCmBiT_310x310.jpg', alt='')
-          .item-addtospecial
-            i.icon.icon-sml.icon-user
-            span 加入专辑
-          .item-addtolike
-            i.icon.icon-sml.icon-user
-        .item-description
-          // <div class="item-isnew">
-          // <span>新发布</span>
-          // <div/>
-          .item-title
-            span HYBRID Boots New Balance MRH996 BT MRH996BR 高帮运动靴 轻量化
-          .item-price
-            span ¥2334.00
-          .item-additional
-            img.owner(src='http://cdn1626.clouddn.com/public/upload/avatar/000/00/00/90_1398644613_middle.jpg')
-            .item-value
-              i.icon.icon-sml.icon-user
-              span 123456
-              i.icon.icon-sml.icon-user
-              span 234
-              i.icon.icon-sml.icon-user
-              span 23
-    dd
-      div
-        .item-image
-          img(src='http://cdn1626.clouddn.com/public/upload/share/000/044/126/73/69ca908e31ec4b129c8d87183809643fiCmBiT_310x310.jpg', alt='')
-          .item-addtospecial
-            i.icon.icon-sml.icon-user
-            span 加入专辑
-          .item-addtolike
-            i.icon.icon-sml.icon-user
-        .item-description
-          // <div class="item-isnew">
-          // <span>新发布</span>
-          // <div/>
-          .item-title
-            span HYBRID Boots New Balance MRH996 BT MRH996BR 高帮运动靴 轻量化
-          .item-price
-            span ¥2334.00
-          .item-additional
-            img.owner(src='http://cdn1626.clouddn.com/public/upload/avatar/000/00/00/90_1398644613_middle.jpg')
-            .item-value
-              i.icon.icon-sml.icon-user
-              span 123456
-              i.icon.icon-sml.icon-user
-              span 234
-              i.icon.icon-sml.icon-user
-              span 23
-    dd
-      div
-        .item-image
-          img(src='http://cdn1626.clouddn.com/public/upload/share/000/044/126/73/69ca908e31ec4b129c8d87183809643fiCmBiT_310x310.jpg', alt='')
-          .item-addtospecial
-            i.icon.icon-sml.icon-user
-            span 加入专辑
-          .item-addtolike
-            i.icon.icon-sml.icon-user
-        .item-description
-          // <div class="item-isnew">
-          // <span>新发布</span>
-          // <div/>
-          .item-title
-            span HYBRID Boots New Balance MRH996 BT MRH996BR 高帮运动靴 轻量化
-          .item-price
-            span ¥2334.00
-          .item-additional
-            img.owner(src='http://cdn1626.clouddn.com/public/upload/avatar/000/00/00/90_1398644613_middle.jpg')
-            .item-value
-              i.icon.icon-sml.icon-user
-              span 123456
-              i.icon.icon-sml.icon-user
-              span 234
-              i.icon.icon-sml.icon-user
-              span 23
-    dd
-      div
-        .item-image
-          img(src='http://cdn1626.clouddn.com/public/upload/share/000/044/126/73/69ca908e31ec4b129c8d87183809643fiCmBiT_310x310.jpg', alt='')
-          .item-addtospecial
-            i.icon.icon-sml.icon-user
-            span 加入专辑
-          .item-addtolike
-            i.icon.icon-sml.icon-user
-        .item-description
-          // <div class="item-isnew">
-          // <span>新发布</span>
-          // <div/>
-          .item-title
-            span HYBRID Boots New Balance MRH996 BT MRH996BR 高帮运动靴 轻量化
-          .item-price
-            span ¥2334.00
-          .item-additional
-            img.owner(src='http://cdn1626.clouddn.com/public/upload/avatar/000/00/00/90_1398644613_middle.jpg')
-            .item-value
-              i.icon.icon-sml.icon-user
-              span 123456
-              i.icon.icon-sml.icon-user
-              span 234
-              i.icon.icon-sml.icon-user
-              span 23
-    dd
-      div
-        .item-image
-          img(src='http://cdn1626.clouddn.com/public/upload/share/000/044/126/73/69ca908e31ec4b129c8d87183809643fiCmBiT_310x310.jpg', alt='')
-          .item-addtospecial
-            i.icon.icon-sml.icon-user
-            span 加入专辑
-          .item-addtolike
-            i.icon.icon-sml.icon-user
-        .item-description
-          // <div class="item-isnew">
-          // <span>新发布</span>
-          // <div/>
-          .item-title
-            span HYBRID Boots New Balance MRH996 BT MRH996BR 高帮运动靴 轻量化
-          .item-price
-            span ¥2334.00
-          .item-additional
-            img.owner(src='http://cdn1626.clouddn.com/public/upload/avatar/000/00/00/90_1398644613_middle.jpg')
-            .item-value
-              i.icon.icon-sml.icon-user
-              span 123456
-              i.icon.icon-sml.icon-user
-              span 234
-              i.icon.icon-sml.icon-user
-              span 23
-    dd
-      div
-        .item-image
-          img(src='http://cdn1626.clouddn.com/public/upload/share/000/044/126/73/69ca908e31ec4b129c8d87183809643fiCmBiT_310x310.jpg', alt='')
-          .item-addtospecial
-            i.icon.icon-sml.icon-user
-            span 加入专辑
-          .item-addtolike
-            i.icon.icon-sml.icon-user
-        .item-description
-          // <div class="item-isnew">
-          // <span>新发布</span>
-          // <div/>
-          .item-title
-            span HYBRID Boots New Balance MRH996 BT MRH996BR 高帮运动靴 轻量化
-          .item-price
-            span ¥2334.00
-          .item-additional
-            img.owner(src='http://cdn1626.clouddn.com/public/upload/avatar/000/00/00/90_1398644613_middle.jpg')
-            .item-value
-              i.icon.icon-sml.icon-user
-              span 123456
-              i.icon.icon-sml.icon-user
-              span 234
-              i.icon.icon-sml.icon-user
-              span 23
-    dd
-      div
-        .item-image
-          img(src='http://cdn1626.clouddn.com/public/upload/share/000/044/126/73/69ca908e31ec4b129c8d87183809643fiCmBiT_310x310.jpg', alt='')
-          .item-addtospecial
-            i.icon.icon-sml.icon-user
-            span 加入专辑
-          .item-addtolike
-            i.icon.icon-sml.icon-user
-        .item-description
-          // <div class="item-isnew">
-          // <span>新发布</span>
-          // <div/>
-          .item-title
-            span HYBRID Boots New Balance MRH996 BT MRH996BR 高帮运动靴 轻量化
-          .item-price
-            span ¥2334.00
-          .item-additional
-            img.owner(src='http://cdn1626.clouddn.com/public/upload/avatar/000/00/00/90_1398644613_middle.jpg')
-            .item-value
-              i.icon.icon-sml.icon-user
-              span 123456
-              i.icon.icon-sml.icon-user
-              span 234
-              i.icon.icon-sml.icon-user
-              span 23
-    dd
-      div
-        .item-image
-          img(src='http://cdn1626.clouddn.com/public/upload/share/000/044/126/73/69ca908e31ec4b129c8d87183809643fiCmBiT_310x310.jpg', alt='')
-          .item-addtospecial
-            i.icon.icon-sml.icon-user
-            span 加入专辑
-          .item-addtolike
-            i.icon.icon-sml.icon-user
-        .item-description
-          // <div class="item-isnew">
-          // <span>新发布</span>
-          // <div/>
-          .item-title
-            span HYBRID Boots New Balance MRH996 BT MRH996BR 高帮运动靴 轻量化
-          .item-price
-            span ¥2334.00
-          .item-additional
-            img.owner(src='http://cdn1626.clouddn.com/public/upload/avatar/000/00/00/90_1398644613_middle.jpg')
-            .item-value
-              i.icon.icon-sml.icon-user
-              span 123456
-              i.icon.icon-sml.icon-user
-              span 234
-              i.icon.icon-sml.icon-user
-              span 23
+
+
+.item-pagiation

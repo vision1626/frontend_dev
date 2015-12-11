@@ -1,15 +1,16 @@
 @item-nav-width: 95px;
 @item-image-button-wh : 40px;
 @margin-lr: 60px;
+@list-filter-height: 25px;
 
 //分类以及筛选部分
-.item-filter {
-  margin: 40px @margin-lr 0 @margin-lr;
+.item-list-filter {
+  margin: 40px @margin-lr+15 0;
   position: relative;
-  height: 25px;
+  height: @list-filter-height;
 }
 
-.item-filter .item-nav-container {
+.item-list-filter .item-nav-container {
   column-count: 4;
   column-gap: 20px;
   column-rule: 1px outset @dark-grey;
@@ -19,19 +20,18 @@
   float: left;
 }
 
-.item-filter .item-nav-container .item-nav {
+.item-list-filter .item-nav-container .item-nav {
   width: @item-nav-width;
   margin-left: 10px;
   //text-align: center;
   position: relative;
 }
 
-.item-filter .item-nav-container .item-nav.current {
-  font-weight: bold;
+.item-list-filter .item-nav-container .item-nav.current {
   font-weight: bold;
 }
 
-.item-filter .item-nav-container .item-nav .count {
+.item-list-filter .item-nav-container .item-nav .count {
   font-size: @font-size-xs;
   background-color: @blue;
   color: @white;
@@ -43,32 +43,47 @@
   left: 5px;
 }
 
-//列表部分
-.item-container {
-  margin: 0 @margin-lr;
+.item-list-filter .item-filter-container {
+  float: right;
+  height: @list-filter-height;
 }
 
-.item-container dd {
+.item-list-filter .item-filter {
   float: left;
-  margin: 20px 30px 10px 0px;
+  border-left: solid 1px @dark-grey;
+}
+
+.item-list-filter .item-filter a {
+  margin: 0 5px;
+}
+
+//列表部分
+.item-list-container {
+  margin: 0 @margin-lr;
+
+}
+
+.item-list-container dd {
+  float: left;
+  margin: 20px 15px 10px 15px;
   border-bottom: 2px solid @white;
   width: 280px;
   min-height: 435px;
   box-shadow: 0 1px 3px @grey;
 }
 
-.item-container dd:hover {
+.item-list-container dd:hover {
   box-shadow: 0 1px 5px @dark-grey;
   border-bottom: 2px solid @blue;
 }
 
-.item-image {
+.item-list-container .item-image {
   height: 280px;
   overflow: hidden;
   position: relative;
 }
 
-.item-image .item-addtospecial {
+.item-list-container .item-image .item-addtospecial {
   position: absolute;
   left: 12px;
   bottom: 12px;
@@ -80,24 +95,36 @@
   transition: width 0.2s ease-out;
 }
 
-.item-image .item-addtospecial span {
-  display: none;
+.item-list-container .item-image .item-addtospecial span {
   font-size: @font-size-s;
-  color: @white;
   height: @item-image-button-wh;
-  line-height: @item-image-button-wh;
+  line-height: @item-image-button-wh+2;
+  color: @black;
 }
 
-.item-image .item-addtospecial:hover {
+.item-list-container .item-image .item-addtospecial span.icon-20__album{
+  margin: 0 11px;
+  font-size: @font-size-l;
+}
+
+.item-list-container .item-image .item-addtospecial span.addtext{
+  font-size: @font-size-m;
+  margin-top: -2px;
+  position:relative;
+  left:0;
+  top: -2px;
+}
+
+.item-list-container .item-image .item-addtospecial:hover {
   background-color: @blue;
-  width: @item-image-button-wh*2;
+  width: @item-image-button-wh*3;
 }
 
-.item-image .item-addtospecial:hover span {
-  display: block;
+.item-list-container .item-image .item-addtospecial:hover span {
+  color: @white;
 }
 
-.item-image .item-addtolike {
+.item-list-container .item-image .item-addtolike {
   position: absolute;
   right: 12px;
   bottom: 12px;
@@ -106,57 +133,61 @@
   height: @item-image-button-wh;
   border-radius: @item-image-button-wh/2;
   cursor: pointer;
+  text-align: center;
+  line-height: @item-image-button-wh+2;
+  font-size: @font-size-l;
+  color: @red;
 }
 
-.item-image .item-addtolike:hover {
+.item-list-container .item-image .item-addtolike:hover {
   background-color: @blue;
 }
 
-.item-description {
+.item-list-container .item-description {
   padding: 12px;
 }
 
-.item-description .item-isnew span {
+.item-list-container .item-description .item-isnew span {
   color: @grey
 }
 
-.item-description .item-title span {
+.item-list-container .item-description .item-title span {
   font-size: @font-size-m;
 }
 
-.item-description .item-price {
+.item-list-container .item-description .item-price {
   margin-top: 16px;
 }
 
-.item-description .item-price span {
+.item-list-container .item-description .item-price span {
   font-size: @font-size-m;
   font-weight: bold;
 }
 
-.item-description .item-additional {
+.item-list-container .item-description .item-additional {
   margin-top: 12px;
   height: 26px;
   position: relative;
 }
 
-.item-description .item-additional img {
+.item-list-container .item-description .item-additional img {
   width: 26px;
   height: 26px;
   border-radius: 50%;
 }
 
-.item-description .item-additional .item-value {
+.item-list-container .item-description .item-additional .item-value {
   position: absolute;
   right: 0;
   bottom: 2px;
 }
 
-.item-description .item-additional .item-value span {
+.item-list-container .item-description .item-additional .item-value span {
   color: @grey;
   font-size: @font-size-xs;
 }
 
-.item-description .item-additional .item-value i {
+.item-list-container .item-description .item-additional .item-value i {
   margin-left: 10px;
 }
 
