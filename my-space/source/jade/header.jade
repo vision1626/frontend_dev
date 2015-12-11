@@ -32,11 +32,36 @@ head
 body
   .fixed-nav-container
     ul.fixed-nav
-      li
-        i.icon.icon-phone
-        a 手机更好玩
-      li 
+      li.fixed-nav__phone
+        a 
+          i.icon.icon-phone
+          | 手机更好玩
+        .drop-down-list(style="z-index: 9000;")
+          .iOS-qrcode
+            img(src="/tpl/hi1626/images/hi1626_v2/top_pro_ios.jpg", alt="ios")
+            p 扫码下载
+          .os-choice
+            .iTunes
+              i.icon.icon-apple
+              | iTunes
+            .Android
+              i.icon.icon-android
+              | Android
+            p 直接下载
+          p.follow-us 关注我们！！
+          .wechat
+            img(src="/tpl/hi1626/images/hi1626_v2/top_pro_ios.jpg", alt="ios")
+            p 你敢扫吗
+          .weibo
+            img(src="/tpl/hi1626/images/hi1626_v2/top_pro_ios.jpg", alt="ios") 
+            p 潮人养成记 
+      li.fixed-nav__help
         a 帮助中心
+        ul.drop-down-list
+          li 
+            a 订单帮助
+          li 
+            a 发布指引
       li.fixed-nav__avatar
         //- if login
         //- img
@@ -50,7 +75,7 @@ body
         span.fixed-nav__number.fixed-nav__number--blue 30
       li
         i.icon.icon-flashbuy
-        span.fixed-nav__number.fixed-nav__number--orange 2
+        span.fixed-nav__number.fixed-nav__number--orange 2      
 
   .main-nav-container
     ul.main-nav
@@ -61,23 +86,26 @@ body
         a 首页
       li 
         a 资讯
-      li 
+      li.main-nav__flashbuy
         a 潮闪购
       li 
         a 搭配
       li 
         a 达人
-      li.main-nav__search
+    .main-nav__search
+      form
         i.icon.icon-search
-        form
-          input(type='text' placeholder='搜一下变交街架')
+        input(type='text' placeholder='搜一下变交街架')
         i.icon.icon-return
-      li.main-nav__subscribe.main-nav--right
-        i.icon.icon-publish_solid
-        | 发布
-      li.main-nav__me.main-nav--right
-        img
-        我的潮品
+    ul.main-nav--right
+      li.main-nav__me
+        a 
+          i.icon.icon-hand
+          | 我的潮品
+      li.main-nav__subscribe
+        a 
+          i.icon.icon-publish_solid
+          | 发布
 
   .profile-container
     .profile
@@ -90,7 +118,7 @@ body
         a(href="")
       p 你现在阅读的，并不是真的文案
       a.profile__follow-btn
-        i
+        i.icon.icon-follow
         | 关注Ta
     .content
       ul.content__actions
