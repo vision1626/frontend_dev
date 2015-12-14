@@ -1,7 +1,12 @@
 @item-nav-width: 95px;
-@item-image-button-wh : 40px;
+@item-b_image-button-wh : 40px;
 @margin-lr: 60px;
 @list-filter-height: 25px;
+@item-content-padding: 12px;
+@item-owner-img-wh: 26px;
+
+@b-image-wh: 280px;
+@s-image-wh: 185px;
 
 //分类以及筛选部分
 .item-list-filter {
@@ -58,138 +63,323 @@
 }
 
 //列表部分
-.item-list-container {
-  margin: 0 @margin-lr;
 
+//====================================大图列表 Start==================================================
+.item-list-container dl.big_img {
+  margin: 0 @margin-lr;
+  float: left;
 }
 
-.item-list-container dd {
+.item-list-container dl.big_img dd {
   float: left;
   margin: 20px 15px 10px 15px;
-  border-bottom: 2px solid @white;
-  width: 280px;
+  //border-bottom: 2px solid @white;
+  width: @b-image-wh;
   min-height: 435px;
   box-shadow: 0 1px 3px @grey;
+  transition: all 0.2s ease-out;
+  position: relative;
 }
 
-.item-list-container dd:hover {
+.item-list-container dl.big_img dd:hover  {
   box-shadow: 0 1px 5px @dark-grey;
-  border-bottom: 2px solid @blue;
+  //border-bottom: 2px solid @blue;
 }
 
-.item-list-container .item-image {
-  height: 280px;
+.item-list-container dl.big_img .item-b_image {
+  height: @b-image-wh;
   overflow: hidden;
   position: relative;
 }
 
-.item-list-container .item-image .item-addtospecial {
-  position: absolute;
-  left: 12px;
-  bottom: 12px;
-  background-color: @white;
-  width: @item-image-button-wh;
-  height: @item-image-button-wh;
-  border-radius: @item-image-button-wh/2;
-  cursor: pointer;
-  transition: width 0.2s ease-out;
+//.item-list-container dl.big_img .item-b_image .item-add_special {
+//  position: absolute;
+//  left: 12px;
+//  bottom: 12px;
+//  background-color: @white;
+//  width: @item-b_image-button-wh;
+//  height: @item-b_image-button-wh;
+//  border-radius: @item-b_image-button-wh/2;
+//  line-height: 38px;
+//  cursor: pointer;
+//  transition: width 0.2s ease-out;
+//  padding: 0;
+//}
+//
+//.item-list-container dl.big_img .item-b_image .item-add_special span {
+//  color: @black;
+//}
+//
+//.item-list-container dl.big_img .item-b_image .item-add_special .icon-album{
+//  margin: 0 11px;
+//  font-size: @font-size-l;
+//}
+//
+//.item-list-container dl.big_img .item-b_image .item-add_special .addtext{
+//  font-size: @font-size-m;
+//  position:relative;
+//  left:0;
+//  top: 2px;
+//}
+//
+//.item-list-container dl.big_img .item-b_image .item-add_special:hover {
+//  background-color: @blue;
+//  width: @item-b_image-button-wh*3;
+//}
+//
+//.item-list-container dl.big_img .item-b_image .item-add_special:hover span {
+//  color: @white;
+//}
+//
+//.item-list-container dl.big_img .item-b_image .item-add_like {
+//  position: absolute;
+//  right: 12px;
+//  bottom: 12px;
+//  background-color: @white;
+//  width: @item-b_image-button-wh;
+//  height: @item-b_image-button-wh;
+//  border-radius: @item-b_image-button-wh/2;
+//  cursor: pointer;
+//  text-align: center;
+//  line-height: @item-b_image-button-wh;
+//  font-size: @font-size-l;
+//  color: @red;
+//}
+//
+//.item-list-container dl.big_img .item-b_image .item-add_like:hover {
+//  background-color: @blue;
+//}
+
+.item-list-container dl.big_img .item-b_description {
+  padding: @item-content-padding;
 }
 
-.item-list-container .item-image .item-addtospecial span {
-  font-size: @font-size-s;
-  height: @item-image-button-wh;
-  line-height: @item-image-button-wh+2;
-  color: @black;
-}
-
-.item-list-container .item-image .item-addtospecial span.icon-20__album{
-  margin: 0 11px;
-  font-size: @font-size-l;
-}
-
-.item-list-container .item-image .item-addtospecial span.addtext{
-  font-size: @font-size-m;
-  margin-top: -2px;
-  position:relative;
-  left:0;
-  top: -2px;
-}
-
-.item-list-container .item-image .item-addtospecial:hover {
-  background-color: @blue;
-  width: @item-image-button-wh*3;
-}
-
-.item-list-container .item-image .item-addtospecial:hover span {
-  color: @white;
-}
-
-.item-list-container .item-image .item-addtolike {
-  position: absolute;
-  right: 12px;
-  bottom: 12px;
-  background-color: @white;
-  width: @item-image-button-wh;
-  height: @item-image-button-wh;
-  border-radius: @item-image-button-wh/2;
-  cursor: pointer;
-  text-align: center;
-  line-height: @item-image-button-wh+2;
-  font-size: @font-size-l;
-  color: @red;
-}
-
-.item-list-container .item-image .item-addtolike:hover {
-  background-color: @blue;
-}
-
-.item-list-container .item-description {
-  padding: 12px;
-}
-
-.item-list-container .item-description .item-isnew span {
-  color: @grey
-}
-
-.item-list-container .item-description .item-title span {
-  font-size: @font-size-m;
-}
-
-.item-list-container .item-description .item-price {
-  margin-top: 16px;
-}
-
-.item-list-container .item-description .item-price span {
-  font-size: @font-size-m;
-  font-weight: bold;
-}
-
-.item-list-container .item-description .item-additional {
-  margin-top: 12px;
-  height: 26px;
-  position: relative;
-}
-
-.item-list-container .item-description .item-additional img {
-  width: 26px;
-  height: 26px;
-  border-radius: 50%;
-}
-
-.item-list-container .item-description .item-additional .item-value {
-  position: absolute;
-  right: 0;
-  bottom: 2px;
-}
-
-.item-list-container .item-description .item-additional .item-value span {
+.item-list-container dl.big_img .item-b_description .item-b_isnew span {
   color: @grey;
   font-size: @font-size-xs;
 }
 
-.item-list-container .item-description .item-additional .item-value i {
+.item-list-container dl.big_img .item-b_description .item-b_isnew .item_tag{
+  color:@white;
+  background-color: @black;
+  padding: 0 5px;
+  border-radius: 10px;
+  font-size: @font-size-xxs;
+  margin-right: 3px;
+  position: relative;
+  top:-1px;
+}
+
+.item-list-container dl.big_img .item-b_description .item-b_title span {
+  font-size: @font-size-m;
+}
+
+.item-list-container dl.big_img .item-b_description .item-b_price {
+  margin-top: 16px;
+}
+
+.item-list-container dl.big_img .item-b_description .item-b_price span {
+  font-size: @font-size-m;
+  font-weight: bold;
+  color:@grey;
+}
+
+.item-list-container dl.big_img .item-b_additional {
+  padding: @item-content-padding;
+  height: 26px;
+  position: relative;
+  background-color: @light-grey;
+  border-bottom: 3px solid @light-grey;
+  transition: all 0.2s ease-out;
+}
+
+.item-list-container dl.big_img dd:hover .item-b_additional {
+  //box-shadow: 0 1px 5px @dark-grey;
+  border-bottom-color: @blue;
+}
+
+.item-list-container dl.big_img .item-b_additional img {
+  width: @item-owner-img-wh;
+  height: @item-owner-img-wh;
+  border-radius: 50%;
+  float: left;
+  margin-right: 10px;
+}
+
+.item-list-container dl.big_img .item-b_additional .item-value {
+  //position: absolute;
+  //right: 0;
+  //bottom: 2px;
+  float: left;
+}
+
+.item-list-container dl.big_img .item-b_additional .item-value span {
+  color: @grey;
+  font-size: @font-size-xs;
+  margin-right: 3px;
+}
+
+.item-list-container dl.big_img .item-b_additional .item-value .icon{
   margin-left: 10px;
 }
 
+.item-list-container dl.big_img .item-b_additional .item-value i {
+  margin-left: 10px;
+}
 
+.item-b_add_like{
+  position: absolute;
+  right:0;
+  bottom:0;
+  width:90px;
+  height:(@item-content-padding * 2) + @item-owner-img-wh + 3;
+  background-color: @white;
+  text-align: center;
+  cursor: pointer;
+}
 
+.item-b_add_like a{
+  //margin-top: 5px;
+}
+
+.item-b_add_like span{
+  color: @grey;
+  transition: all 0.2s ease-out;
+}
+
+.item-b_add_like .icon{
+  font-size: @font-size-l;
+  font-weight: bold;
+}
+
+.item-b_add_like .like_count{
+  font-size: @font-size-xs;
+}
+
+.item-b_add_like:hover span{
+  color: @red;
+}
+//====================================大图列表 End====================================================
+
+//====================================小图列表 Start==================================================
+.item-list-container dl.small_img{
+  margin: 0 @margin-lr;
+  float: left;
+}
+
+.item-list-container dl.small_img dd {
+  float: left;
+  margin: 20px 5px 10px 15px;
+    //border-bottom: 2px solid @white;
+  width: @s-image-wh;
+  height: @s-image-wh;
+  transition: all 0.2s ease-out;
+  position: relative;
+}
+
+.item-list-container dl.small_img .item-s_image{
+  overflow: hidden;
+  position: relative;
+  height: @s-image-wh;
+}
+
+.item-list-container dl.small_img .item-s_description{
+  position: absolute;
+  top:0;
+  left: 0;
+  background-color: rgba(0,0,0,0.7);
+  width:100%;
+  height:100%;
+  //display: none;
+  opacity: 0;
+  transition: all 0.2s;
+}
+
+.item-list-container dl.small_img dd:hover .item-s_description{
+  //background-color: rgba(0,0,0,0.7);
+  opacity: 1;
+  //display: block;
+}
+
+.item-list-container dl.small_img .item-s_description .item-s_owner{
+  float: left;
+  margin: @item-content-padding;
+}
+
+.item-list-container dl.small_img .item-s_description .item-s_owner img{
+  width:20px;
+  border-radius: 20px;
+}
+
+.item-list-container dl.small_img .item-s_description .item-s_action{
+  float: right;
+  margin: (@item-content-padding - 4) @item-content-padding;
+}
+
+.item-list-container dl.small_img .item-s_description .item-s_action a{
+  color:@white;
+  font-size: @font-size-l;
+  margin-left: 8px;
+  transition: all 0.2s;
+}
+
+.item-list-container dl.small_img .item-s_description .item-s_action a.action-add_like:hover{
+  color:@red;
+}
+
+.item-list-container dl.small_img .item-s_description .item-s_isnew{
+  float: left;
+  width: @s-image-wh - (@item-content-padding*2);
+  margin: 0 @item-content-padding;
+}
+
+.item-list-container dl.small_img .item-s_description .item-s_isnew span {
+  color: @grey;
+  font-size: @font-size-xs;
+  margin-right: 3px;
+}
+
+.item-list-container dl.small_img .item-s_description .item-s_title{
+  width: @s-image-wh - (@item-content-padding*2);
+  margin-top: @item-content-padding/2;
+  float: left;
+  height: @font-size-s*3+4;
+  line-height:@font-size-s;
+  overflow: hidden;
+  padding: 0 @item-content-padding;
+}
+
+.item-list-container dl.small_img .item-s_description .item-s_title span {
+  font-size: @font-size-s;
+  color:@white;
+}
+
+.item-list-container dl.small_img .item-s_description .item-s_price {
+  width: @s-image-wh - (@item-content-padding*2);
+  margin: @item-content-padding/2 @item-content-padding;
+  float: left;
+}
+
+.item-list-container dl.small_img .item-s_description .item-s_price span {
+  font-size: @font-size-l;
+  font-weight: bold;
+  color:@white;
+}
+
+.item-list-container dl.small_img .item-s_description .item-s_additional{
+  position: absolute;
+  bottom:@item-content-padding;
+  left:@item-content-padding;
+}
+
+.item-list-container dl.small_img .item-s_description .item-s_additional span{
+  color: @grey;
+  font-size: @font-size-xs;
+  margin-right: 2px;
+}
+
+.item-list-container dl.small_img .item-s_description .item-s_additional .count{
+  margin-right: 8px;
+}
+
+//====================================小图列表 End====================================================
