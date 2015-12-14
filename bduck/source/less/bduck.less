@@ -1,0 +1,120 @@
+@img-location:'/tpl/hi1626/images/bduck';
+@gold: #fccf00;
+
+
+body {
+  background: url('@{img-location}/bg.png') no-repeat center center fixed @gold;
+  -webkit-background-size: cover;
+     -moz-background-size: cover;
+       -o-background-size: cover;
+          background-size: cover;
+}
+
+.black-box {
+  background-color: rgba(0, 0, 0, 0.9);
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: -1626em;
+  z-index: 1626;
+  transition: all 0.3s linear;
+}
+
+.share {
+  img {
+    position: absolute;
+    left: 162px;
+    top: 0;
+    width: 45em;
+  }
+}
+
+.rules {
+  img.title {
+    position: absolute;
+    left: 50%;
+    top: 3em;
+    z-index: 1626;
+    margin-left: -16em;
+    width: 32em;
+  }
+  img.quit {
+    position: absolute;
+    right: 1em;
+    top: 7em;
+    z-index: 1626;
+    width: 7.5em;
+  }
+  .clown {
+    text-align: right;
+    list-style-type: none;
+    margin: -1em -1em -1em auto;
+    img {
+      width: 4em;   
+    }
+  }
+  ol {
+    background-color: @gold;
+    border: .1em solid white;
+    border-radius: 0.5em;
+    font-size: 3.2em;
+    width: 12em;
+    margin: 0 auto;
+    margin-top: 3em;
+    padding: 1em 2em;
+    line-height: 1.4;
+    position: relative;
+    li {
+      margin-bottom: 1.5em;
+      &:first-child {
+        margin-top: 1em;
+      }
+    }
+  }
+}
+
+.bigtitle {
+  text-align: center;
+  margin-top: 15px;
+  img {
+    width: 28em;
+  }
+}
+
+.bduck-body {
+  position: absolute;
+  top: 25%;
+  left: 50%;
+  margin-left: -23.5em;
+  img {
+    width: 47em;
+  }
+  .bduck-body__remain {
+    position: absolute;
+    bottom: -19px;
+    right: -6.5em;
+    img {
+      width: 345px;
+    }
+  }
+}
+
+.invitation-btn {
+  text-align: center;
+  margin-top: 51em;
+  img {
+    width: 54em;
+  }
+}
+
+.actions {
+  text-align: center;
+  margin-top: 30px;
+  a {
+    margin: 0 10px;
+  }
+  img {
+    height: 10em;
+  }
+}

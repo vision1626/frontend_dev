@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+html(lang="en")
+head
+  meta(charset="UTF-8")
+  title bduck
+
+  :php
+    $current_css[] = './tpl/hi1626/css/login/vendor/normalize.css';
+    $current_css[] = './tpl/hi1626/css/bduck/dist/bduck.min.css';
+    $current_js[] = './public/js/jquery-1.11.3.min.js';
+    $current_js[] = './tpl/hi1626/js/bduck/bduck.js'
+
+  link(rel="stylesheet", href="{css $current_css}" media="all")
+  script(src="{script $current_js}")
+body
+  h1.bigtitle
+    img(src="./tpl/hi1626/images/bduck/bigtitle.png")
+  .bduck-body
+    img(src="./tpl/hi1626/images/bduck/bduck.jpg")
+    .bduck-body__remain
+      img(src="./tpl/hi1626/images/bduck/remaining.png")
+  .invitation-btn
+    a 
+      img(src="./tpl/hi1626/images/bduck/invitation_btn.png")
+  .actions
+    a
+      img(src="./tpl/hi1626/images/bduck/helpers.png").hepers-btn
+    a
+      img(src="./tpl/hi1626/images/bduck/prize_detail.png").prize-detail-btn
+    a
+      img(src="./tpl/hi1626/images/bduck/rules.png").rules-btn
+  .share.black-box
+    img(src="./tpl/hi1626/images/bduck/share.png")
+  .rules.black-box
+    img(src="./tpl/hi1626/images/bduck/rules_title.png").title
+    img(src="./tpl/hi1626/images/bduck/quit.png").quit
+    ol
+      li 参与活动需要邀请好友为你点亮鸭子，点亮 B.Duck 后即可领取奖品；
+      li 点亮 B.Duck 后，填写中奖资料，奖品很快就会到达你手中；
+      li 
+        |活动一切解释权归官方微信：1626订阅号所有。
+      li.clown
+        img(src="./tpl/hi1626/images/bduck/clown.png")
+
+  .prize-detail.black-box
+
+  script.
+    $(document).ready(function () {
+      init();
+    });
+      
