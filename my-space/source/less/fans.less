@@ -1,0 +1,75 @@
+@fans-face_wh:100px;
+
+.fans-list-container dl {
+  margin: 0 @margin-lr;
+  float: left;
+}
+
+.fans-list-container dl dd {
+  float: left;
+  margin: 20px 15px 10px 15px;
+  //border-bottom: 2px solid @white;
+  width: 185px;
+
+  position: relative;
+}
+
+.fans-list-container .fans-face{
+  position: absolute;
+  width: 100%;
+  top:0;
+  left:0;
+  z-index: 999;
+  text-align: center;
+}
+
+.fans-list-container .fans-face img{
+  width:@fans-face_wh;
+  height:@fans-face_wh;
+  border-radius: @fans-face_wh/2;
+
+}
+
+.fans-list-container .fans-content{
+  margin-top: @fans-face_wh/2;
+  width:100%;
+  box-shadow: 0 1px 3px @grey;
+  transition: all 0.2s ease-out;
+}
+
+.fans-list-container .fans-content:hover {
+  box-shadow: 0 1px 5px @dark-grey;
+}
+
+.fans-list-container .fans-content .fans-text{
+  background-color: @light-grey;
+  height: 136px;
+  width:100%;
+  position: relative;
+}
+
+.fans-list-container .fans-content .fans-text .fans-name{
+  margin: 0 12px;
+  padding: 60px 0 5px 0;
+  text-align: center;
+}
+
+.fans-list-container .fans-content .fans-text .fans-name span{
+  font-size: @font-size-m;
+}
+
+.fans-list-container .fans-content .fans-text .fans-intro{
+  margin:0 12px;
+  line-height: @font-size-s;
+}
+
+.fans-list-container .fans-content .fans-text .fans-intro span{
+  font-size: @font-size-s;
+  color:@grey;
+}
+
+.fans-list-container .fans-content .fans-action{
+  background-color: @white;
+  height:162px;
+  width:100%;
+}
