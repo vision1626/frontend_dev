@@ -19,6 +19,7 @@
   column-count: 4;
   column-gap: 20px;
   column-rule: 1px outset @dark-grey;
+  column-fill: auto;
   //column-width:@item-nav-width;
   width: @item-nav-width*4;
   margin-left: -10px;
@@ -58,8 +59,17 @@
   border-left: solid 1px @dark-grey;
 }
 
+.item-list-filter .item-filter.first {
+  border: 0;
+}
+
 .item-list-filter .item-filter a {
   margin: 0 5px;
+  color: @grey;
+}
+
+.item-list-filter .item-filter a.current {
+  color: @blue;
 }
 
 //列表部分
@@ -81,7 +91,7 @@
   position: relative;
 }
 
-.item-list-container dl.big_img dd:hover  {
+.item-list-container dl.big_img dd:hover {
   box-shadow: 0 1px 5px @dark-grey;
   //border-bottom: 2px solid @blue;
 }
@@ -159,15 +169,15 @@
   font-size: @font-size-xs;
 }
 
-.item-list-container dl.big_img .item-b_description .item-b_isnew .item_tag{
-  color:@white;
+.item-list-container dl.big_img .item-b_description .item-b_isnew .item_tag {
+  color: @white;
   background-color: @black;
   padding: 0 5px;
   border-radius: 10px;
   font-size: @font-size-xxs;
   margin-right: 3px;
   position: relative;
-  top:-1px;
+  top: -1px;
 }
 
 .item-list-container dl.big_img .item-b_description .item-b_title span {
@@ -181,7 +191,7 @@
 .item-list-container dl.big_img .item-b_description .item-b_price span {
   font-size: @font-size-m;
   font-weight: bold;
-  color:@grey;
+  color: @grey;
 }
 
 .item-list-container dl.big_img .item-b_additional {
@@ -219,7 +229,7 @@
   margin-right: 3px;
 }
 
-.item-list-container dl.big_img .item-b_additional .item-value .icon{
+.item-list-container dl.big_img .item-b_additional .item-value .icon {
   margin-left: 10px;
 }
 
@@ -227,42 +237,43 @@
   margin-left: 10px;
 }
 
-.item-b_add_like{
+.item-b_add_like {
   position: absolute;
-  right:0;
-  bottom:0;
-  width:90px;
-  height:(@item-content-padding * 2) + @item-owner-img-wh + 3;
+  right: 0;
+  bottom: 0;
+  width: 90px;
+  height: (@item-content-padding * 2) + @item-owner-img-wh + 3;
   background-color: @white;
   text-align: center;
   cursor: pointer;
 }
 
-.item-b_add_like a{
+.item-b_add_like a {
   //margin-top: 5px;
 }
 
-.item-b_add_like span{
+.item-b_add_like span {
   color: @grey;
   transition: all 0.2s ease-out;
 }
 
-.item-b_add_like .icon{
+.item-b_add_like .icon {
   font-size: @font-size-l;
   font-weight: bold;
 }
 
-.item-b_add_like .like_count{
+.item-b_add_like .like_count {
   font-size: @font-size-xs;
 }
 
-.item-b_add_like:hover span{
+.item-b_add_like:hover span {
   color: @red;
 }
+
 //====================================大图列表 End====================================================
 
 //====================================小图列表 Start==================================================
-.item-list-container dl.small_img{
+.item-list-container dl.small_img {
   margin: 0 @margin-lr;
   float: left;
 }
@@ -270,64 +281,64 @@
 .item-list-container dl.small_img dd {
   float: left;
   margin: 20px 5px 10px 15px;
-    //border-bottom: 2px solid @white;
+  //border-bottom: 2px solid @white;
   width: @s-image-wh;
   height: @s-image-wh;
   transition: all 0.2s ease-out;
   position: relative;
 }
 
-.item-list-container dl.small_img .item-s_image{
+.item-list-container dl.small_img .item-s_image {
   overflow: hidden;
   position: relative;
   height: @s-image-wh;
 }
 
-.item-list-container dl.small_img .item-s_description{
+.item-list-container dl.small_img .item-s_description {
   position: absolute;
-  top:0;
+  top: 0;
   left: 0;
-  background-color: rgba(0,0,0,0.7);
-  width:100%;
-  height:100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  width: 100%;
+  height: 100%;
   //display: none;
   opacity: 0;
   transition: all 0.2s;
 }
 
-.item-list-container dl.small_img dd:hover .item-s_description{
+.item-list-container dl.small_img dd:hover .item-s_description {
   //background-color: rgba(0,0,0,0.7);
   opacity: 1;
   //display: block;
 }
 
-.item-list-container dl.small_img .item-s_description .item-s_owner{
+.item-list-container dl.small_img .item-s_description .item-s_owner {
   float: left;
   margin: @item-content-padding;
 }
 
-.item-list-container dl.small_img .item-s_description .item-s_owner img{
-  width:20px;
+.item-list-container dl.small_img .item-s_description .item-s_owner img {
+  width: 20px;
   border-radius: 20px;
 }
 
-.item-list-container dl.small_img .item-s_description .item-s_action{
+.item-list-container dl.small_img .item-s_description .item-s_action {
   float: right;
   margin: (@item-content-padding - 4) @item-content-padding;
 }
 
-.item-list-container dl.small_img .item-s_description .item-s_action a{
-  color:@white;
+.item-list-container dl.small_img .item-s_description .item-s_action a {
+  color: @white;
   font-size: @font-size-l;
   margin-left: 8px;
   transition: all 0.2s;
 }
 
-.item-list-container dl.small_img .item-s_description .item-s_action a.action-add_like:hover{
-  color:@red;
+.item-list-container dl.small_img .item-s_description .item-s_action a.action-add_like:hover {
+  color: @red;
 }
 
-.item-list-container dl.small_img .item-s_description .item-s_isnew{
+.item-list-container dl.small_img .item-s_description .item-s_isnew {
   float: left;
   width: @s-image-wh - (@item-content-padding*2);
   margin: 0 @item-content-padding;
@@ -339,19 +350,19 @@
   margin-right: 3px;
 }
 
-.item-list-container dl.small_img .item-s_description .item-s_title{
+.item-list-container dl.small_img .item-s_description .item-s_title {
   width: @s-image-wh - (@item-content-padding*2);
   margin-top: @item-content-padding/2;
   float: left;
   height: @font-size-s*3+4;
-  line-height:@font-size-s;
+  line-height: @font-size-s;
   overflow: hidden;
   padding: 0 @item-content-padding;
 }
 
 .item-list-container dl.small_img .item-s_description .item-s_title span {
   font-size: @font-size-s;
-  color:@white;
+  color: @white;
 }
 
 .item-list-container dl.small_img .item-s_description .item-s_price {
@@ -363,22 +374,22 @@
 .item-list-container dl.small_img .item-s_description .item-s_price span {
   font-size: @font-size-l;
   font-weight: bold;
-  color:@white;
+  color: @white;
 }
 
-.item-list-container dl.small_img .item-s_description .item-s_additional{
+.item-list-container dl.small_img .item-s_description .item-s_additional {
   position: absolute;
-  bottom:@item-content-padding;
-  left:@item-content-padding;
+  bottom: @item-content-padding;
+  left: @item-content-padding;
 }
 
-.item-list-container dl.small_img .item-s_description .item-s_additional span{
+.item-list-container dl.small_img .item-s_description .item-s_additional span {
   color: @grey;
   font-size: @font-size-xs;
   margin-right: 2px;
 }
 
-.item-list-container dl.small_img .item-s_description .item-s_additional .count{
+.item-list-container dl.small_img .item-s_description .item-s_additional .count {
   margin-right: 8px;
 }
 
