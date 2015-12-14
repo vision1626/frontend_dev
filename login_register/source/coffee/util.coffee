@@ -20,7 +20,7 @@ $.fn.windowCenter = ->
 
 # --------------- Handlers -----------------
 checkCaptcha = (event)-> 
-    if isAndroid(navigator.userAgent) and isQQBrowser(navigator.userAgent) 
+    if isAndroid(window.navigator.userAgent) and isQQBrowser(window.navigator.userAgent) or
       return
     if (!validateCaptcha(String.fromCharCode(event.which)) &&
         (event.which < 96 || event.which > 105) && (event.which < 8 || event.which >64))
