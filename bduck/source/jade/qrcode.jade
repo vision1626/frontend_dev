@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+html(lang="en")
+head
+  meta(charset="UTF-8")
+  meta(name='viewport', content='user-scalable=no')
+  meta(name="keywords" content="{$seo_keyword}")
+  meta(name="description" content="{$seo_description")
+  -title = {$seo_title}
+
+  :php
+    $current_css[] = './tpl/hi1626/css/login/vendor/normalize.css';
+    $current_css[] = './tpl/hi1626/css/bduck/dist/bduck.min.css';
+    $current_js[] = './public/js/jquery-1.11.3.min.js';
+    $current_js[] = './tpl/hi1626/js/bduck/bduck.js'
+
+  link(rel="stylesheet", href="{css $current_css}" media="all")
+  script(src="{script $current_js}")
+body.qrcode
+  .qrcode-title
+    img(src="./tpl/hi1626/images/bduck/free.png")
+  .qrcode-body
+    img(src="./tpl/hi1626/images/bduck/plane_duck.png")
+    img(src="./tpl/hi1626/images/hi1626_v2/top_pro_and.jpg").qrcode-wechat
+  p 温馨提示：关注后，点击活动链接
+
+  <!--{if $is_wx}-->
+  <!--{template inc/weixin_share}-->
+  <!--{/if}-->
+  <!--{template inc/count}-->
+
+  script.
+    $(document).ready(function () {
+      init();
+      //- setTimeout(function() {
+      //-   $('.bouncing-duck').hide();
+      //- }, 4000)
+    });
+      

@@ -27,23 +27,50 @@ init = ->
         $ele.attr('data-light', 'yes')
         $ele.fadeIn()
 
+  slotMachine = (endPoint, startPoint, time)->
+    if startPoint == endPoint
+      return true
+    else
+      currentPart = $($parts[startPoint])
+      if currentPart.attr('data-light') == 'no'
+        currentPart
+          .fadeIn(time)
+          .fadeOut(time)
+      else 
+        currentPart
+          .fadeOut(time)
+          .fadeIn(time)
+      startPoint++
+      setTimeout ->
+        slotMachine(endPoint, startPoint, time * 1.2)
+      , 300
+
   # handlers
   slotMachineDuck = ->
-    if largerThan7()
-      rn = getRandomInt(1, 6)
-      delayToggle $(part), rn for part in $parts
-    else
-      delayToggle $(part), 2 for part in $parts
+    if slotMachine($($parts[4]).attr('data-random'), 0, 200)
+      setTimeout ->
+        if largerThan7()
+          rn = getRandomInt(1, 6)
+          delayToggle $(part), rn for part in $parts
+        else
+          delayToggle $(part), 2 for part in $parts
+      , 2000 
     # only one click for each user
-    $bduck.unbind('click')
 
+  # Event registers
   $invite_btn.on 'click', ->
     $share.css({'left': 'auto'})
   $rules_btn.on 'click', (event)->
     $rules.css({'left': 'auto'})
     event.stopPropagation()
   $black_box.on 'click', (e)->
-    $(this).css({'left': '-1626em'})
+    $(this).css({'left': '-1626px'})
     event.stopPropagation()
   $bduck.on 'click', (e)->
     slotMachineDuck()
+    $(this).unbind('click')
+    $parts.unbind('click')
+  $parts.on 'click', ->
+    slotMachineDuck()
+    $(this).unbind('click')
+    $bduck.unbind('click')

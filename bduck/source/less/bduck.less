@@ -1,6 +1,7 @@
 @img-location:'/tpl/hi1626/images/bduck';
 @gold: #fccf00;
-
+// TBD
+@light-orange: #F3AD45; 
 
 html {
   background: url('@{img-location}/bg.png') no-repeat center center fixed @gold;
@@ -10,6 +11,51 @@ html {
           background-size: cover;
 }
 
+.congrats-form {
+  text-align: center;
+  .congrats-title {
+    margin-top: 2em;
+    img {
+      width: 51em;
+    }
+  }
+}
+
+.qrcode {
+  text-align: center;
+  .qrcode-title {
+    margin-top: 3em;
+    img {
+      width: 52em;
+    }
+  }
+  .qrcode-body {
+    position: relative;
+    width: 33em;
+    margin-top: 14em;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 3em 4em;
+    border: 0.5em solid black;
+    border-radius: 3em;
+    background-color: @light-orange;
+    img:first-child {
+      position: absolute;
+      top: -13em;
+      left: 50%;
+      margin-left: -24em;
+      width: 48em;
+    }
+    img {
+      width: 32em;
+    }
+  }
+  p {
+      font-size: 2em;
+      font-weight: bold;
+    }
+}
+
 .black-box {
   background-color: rgba(0, 0, 0, 0.9);
   width: 100%;
@@ -17,8 +63,7 @@ html {
   position: fixed;
   top: 0;
   left: -1626em;
-  z-index: 1626;
-  transition: all 0.3s linear;
+  z-index: 162616;
 }
 
 .js-bduck {

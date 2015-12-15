@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+html(lang="en")
+head
+  meta(charset="UTF-8")
+  meta(name='viewport', content='user-scalable=no')
+  meta(name="keywords" content="{$seo_keyword}")
+  meta(name="description" content="{$seo_description")
+  -title = {$seo_title}
+
+  :php
+    $current_css[] = './tpl/hi1626/css/login/vendor/normalize.css';
+    $current_css[] = './tpl/hi1626/css/bduck/dist/bduck.min.css';
+    $current_js[] = './public/js/jquery-1.11.3.min.js';
+    $current_js[] = './tpl/hi1626/js/bduck/bduck.js'
+
+  link(rel="stylesheet", href="{css $current_css}" media="all")
+  script(src="{script $current_js}")
+body.congrats-form
+  .congrats-title
+    img(src="./tpl/hi1626/images/bduck/congrats.png")
+  form
+    div
+      label 姓名：
+      input(type="text")
+    div
+      label 电话：
+      input(type="text")
+    div
+      lael 地址：
+      textarea
+
+  <!--{if $is_wx}-->
+  <!--{template inc/weixin_share}-->
+  <!--{/if}-->
+  <!--{template inc/count}-->
+
+  script.
+    $(document).ready(function () {
+      init();
+      //- setTimeout(function() {
+      //-   $('.bouncing-duck').hide();
+      //- }, 4000)
+    });
+      
