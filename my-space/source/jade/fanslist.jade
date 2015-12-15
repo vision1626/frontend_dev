@@ -1,3 +1,26 @@
-//
-   Created by Kenny on 15/12/14.
-
+doctype html
+html(lang='en')
+  head
+    meta(charset="UTF-8")
+    //:php
+        $current_css[] = './tpl/hi1626/css/login/vendor/normalize.css';
+        $current_css[] = './tpl/hi1626/css/myspace/my-space.min.css';
+    //link(rel="stylesheet", type="text/css", href="{css $current_css}", media="all")
+    //link(rel="stylesheet", type="text/css", href="./tpl/hi1626/css/login/vendor/normalize.css", media="all")
+    link(rel="stylesheet", type="text/css", href="../../css/myspace/myspace.min.css", media="all")
+    link(rel="icon", href="{$_FANWE['site_root']}favicon.ico", type="image/x-icon")
+    title 粉丝
+  body
+    .fans-list-container
+      dl
+        dd
+          .fans-container
+            .fans-face
+              img(src="http://cdn1626.clouddn.com/public/upload/avatar/000/33/39/65_1448233800_big.jpg" alt="某某某")
+            .fans-content
+              .fans-text
+                .fans-name
+                  span 藤原浩·威廉姆斯
+                .fans-intro
+                  span 你现在阅读的,并不是真的文案。
+              .fans-action
