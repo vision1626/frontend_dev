@@ -2,7 +2,10 @@
 html(lang="en")
 head
   meta(charset="UTF-8")
-  title bduck
+  meta(name='viewport', content='user-scalable=no')
+  meta(name="keywords" content="{$seo_keyword}")
+  meta(name="description" content="{$seo_description")
+  -title = {$seo_title}
 
   :php
     $current_css[] = './tpl/hi1626/css/login/vendor/normalize.css';
@@ -16,7 +19,13 @@ body
   h1.bigtitle
     img(src="./tpl/hi1626/images/bduck/bigtitle.png")
   .bduck-body
-    img(src="./tpl/hi1626/images/bduck/bduck.jpg")
+    img(src="./tpl/hi1626/images/bduck/bduck.jpg").bduck
+    img(src="./tpl/hi1626/images/bduck/bduck_hat.png" data-random="1" data-light="no").bduck-hat.js-bduck
+    img(src="./tpl/hi1626/images/bduck/bduck_head.png" data-random="2" data-light="no").bduck-head.js-bduck
+    img(src="./tpl/hi1626/images/bduck/bduck_wings.png" data-random="3" data-light="no").bduck-wings.js-bduck
+    img(src="./tpl/hi1626/images/bduck/bduck_10.png" data-random="4" data-light="no").bduck-10.js-bduck
+    img(src="./tpl/hi1626/images/bduck/bduck_th.png" data-random="5" data-light="no").bduck-th.js-bduck
+    img(src="./tpl/hi1626/images/bduck/bouncing_duck.gif").bouncing-duck
     .bduck-body__remain
       img(src="./tpl/hi1626/images/bduck/remaining.png")
   .invitation-btn
@@ -44,8 +53,16 @@ body
 
   .prize-detail.black-box
 
+  <!--{if $is_wx}-->
+  <!--{template inc/weixin_share}-->
+  <!--{/if}-->
+  <!--{template inc/count}-->
+
   script.
     $(document).ready(function () {
       init();
+      //- setTimeout(function() {
+      //-   $('.bouncing-duck').hide();
+      //- }, 4000)
     });
       
