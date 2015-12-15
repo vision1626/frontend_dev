@@ -2,7 +2,7 @@
 @gold: #fccf00;
 
 
-body {
+html {
   background: url('@{img-location}/bg.png') no-repeat center center fixed @gold;
   -webkit-background-size: cover;
      -moz-background-size: cover;
@@ -19,6 +19,42 @@ body {
   left: -1626em;
   z-index: 1626;
   transition: all 0.3s linear;
+}
+
+.js-bduck {
+  position: absolute;
+  z-index: 6261;
+  display: none;
+}
+
+.bduck-hat {
+  top: 2.1em;
+  left: 13.1em;
+  width: 9.2em;
+}
+
+.bduck-head {
+  top: 8.3em;
+  left: 15.31em;
+  width: 15.9em;
+}
+
+.bduck-wings {
+  top: 20.3em;
+  left: 13.35em;
+  width: 19.8em;
+}
+
+.bduck-10 {
+  top: 21.2em;
+  left: 8.1em;
+  width: 24.5em;
+}
+
+.bduck-th {
+  top: 23em;
+  left: 31.3em;
+  width: 9em;
 }
 
 .share {
@@ -87,8 +123,15 @@ body {
   top: 25%;
   left: 50%;
   margin-left: -23.5em;
-  img {
+  .bduck {
     width: 47em;
+  }
+  .bouncing-duck {
+    position: absolute;
+    left: 50%;
+    margin-left: -15.1em;
+    width: 32.6em;
+    top: 10px;
   }
   .bduck-body__remain {
     position: absolute;
