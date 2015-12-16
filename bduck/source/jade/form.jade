@@ -18,7 +18,7 @@ head
 body.congrats-form
   .congrats-title
     img(src="./tpl/hi1626/images/bduck/congrats.png")
-  form
+  form(action="")
     div
       label 姓名：
       input(type="text")
@@ -26,8 +26,9 @@ body.congrats-form
       label 电话：
       input(type="text")
     div
-      lael 地址：
-      textarea
+      label 地址：
+      textarea(rows="5")
+    button(type="submit") 提交
 
   <!--{if $is_wx}-->
   <!--{template inc/weixin_share}-->

@@ -1,7 +1,9 @@
 @img-location:'/tpl/hi1626/images/bduck';
 @gold: #fccf00;
 // TBD
-@light-orange: #F3AD45; 
+@light-orange: #f3ad45; 
+@orange: #f78108;
+@egg-shell: #f5e286;
 
 html {
   background: url('@{img-location}/bg.png') no-repeat center center fixed @gold;
@@ -9,6 +11,7 @@ html {
      -moz-background-size: cover;
        -o-background-size: cover;
           background-size: cover;
+  margin-bottom: 10em;
 }
 
 .congrats-form {
@@ -17,6 +20,40 @@ html {
     margin-top: 2em;
     img {
       width: 51em;
+    }
+  }
+  form {
+    text-align: left;
+    div {
+      margin-top: 1em;
+      margin-left: auto;
+      margin-right: auto;
+      padding: 2.2em 2em;
+      background-color: @egg-shell;
+      width: 50em;
+      border: .4em solid @orange;
+      border-radius: 1.7em;
+    }
+    label, input, textarea, button {
+      margin: 0;
+      font-size: 3.3em;
+      border: 0;
+      outline: none;
+      background-color: @egg-shell;
+    }
+    textarea {
+      vertical-align: top;
+      resize: none;
+    }
+    button {
+      font-size: 4em;
+      width: 13.7em;
+      padding: .5em 0;
+      color: white;
+      background-color: @orange;
+      border-radius: .1em;
+      display: block;
+      margin: .25em auto;
     }
   }
 }
