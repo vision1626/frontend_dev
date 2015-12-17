@@ -3,9 +3,18 @@ init = ->
   $share = $('.share')
   $rules_btn = $('.rules-btn')
   $rules = $('.rules')
+  $detail_btn = $('.prize-detail-btn')
+  $detail = $('.prize-detail')
   $black_box = $('.black-box')
   $bduck = $('.bouncing-duck')
   $parts = $('.js-bduck')
+
+  $img_holder = $(".js-img-holder")
+  $img_controllers = $(".js-img-controllers").find('li')
+
+  state_Map = {
+    idx_counter: 0;
+  }
 
   # helper method
   getRandomInt = (min, max)->
@@ -45,6 +54,13 @@ init = ->
         slotMachine(endPoint, startPoint, time * 1.2)
       , 300
 
+  lightController = ->
+    $img_controllers.each ->
+      if $(this).find('img').attr('src') is $img_holder.attr('src')
+        $(this).addClass('current-img')
+      else
+        $(this).removeClass('current-img')
+
   # handlers
   slotMachineDuck = ->
     if slotMachine($($parts[4]).attr('data-random'), 0, 200)
@@ -55,7 +71,24 @@ init = ->
         else
           delayToggle $(part), 2 for part in $parts
       , 2000 
-    # only one click for each user
+
+  slideAsce = ()->
+    if state_Map.idx_counter is 4
+      state_Map.idx_counter = 0
+      currentImg = $($img_controllers[state_Map.idx_counter])
+      $img_holder.attr('src', currentImg.find('img').attr('src'))
+    else 
+      currentImg = $($img_controllers[state_Map.idx_counter++])
+      $img_holder.attr('src', currentImg.next().find('img').attr('src'))
+  slideDesc = ()->
+    if state_Map.idx_counter is -1
+      state_Map.idx_counter = 3
+      currentImg = $($img_controllers[state_Map.idx_counter])
+      $img_holder.attr('src', currentImg.find('img').attr('src'))
+    else 
+      currentImg = $($img_controllers[state_Map.idx_counter--])
+      $img_holder.attr('src', currentImg.prev().find('img').attr('src'))
+
 
   # Event registers
   $invite_btn.on 'click', ->
@@ -63,14 +96,31 @@ init = ->
   $rules_btn.on 'click', (event)->
     $rules.css({'left': 'auto'})
     event.stopPropagation()
+  $detail_btn.on 'click', ->
+    $detail.css({'left': 'auto'})
   $black_box.on 'click', (e)->
-    $(this).css({'left': '-1626px'})
+    $(this).css({'left': '-1626em'})
     event.stopPropagation()
-  $bduck.on 'click', (e)->
-    slotMachineDuck()
-    $(this).unbind('click')
-    $parts.unbind('click')
-  $parts.on 'click', ->
-    slotMachineDuck()
-    $(this).unbind('click')
-    $bduck.unbind('click')
+
+
+  lightController()
+
+  # swipe
+  $img_holder.swipe({
+    swipeLeft: ->
+      slideAsce()
+      lightController()
+    swipeRight: ->
+      slideDesc()
+      lightController()
+  })
+  setTimeout ->
+    $bduck.on 'click', (e)->
+      slotMachineDuck()
+      $(this).unbind('click')
+      $parts.unbind('click')
+    $parts.on 'click', ->
+      slotMachineDuck()
+      $(this).unbind('click')
+      $bduck.unbind('click')
+  , 2000

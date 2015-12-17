@@ -179,7 +179,56 @@ html {
   }
 }
 
-.rules {
+.prize-detail {
+  // left: auto !important;
+  .detail {
+    background-color: @gold;
+    border: .1em solid white;
+    border-radius: 0.5em;
+    font-size: 3.2em;
+    width: 12em;
+    margin: 0 auto;
+    margin-top: 3em;
+    padding: 1em 2em;
+    line-height: 1.4;
+    position: relative;
+    ul {
+      overflow: hidden;
+      padding: 0;
+      margin: 0 auto;
+      width: 4em;
+      list-style-type: none;
+      li {
+        float: left;
+        margin-left: .3em;
+        &:before {
+          content: '\2022';
+          color: @egg-shell;
+        }
+        img {
+          display: none;
+        }
+      }
+      .current-img {
+        &:before {
+          content: '\2022';
+          color: @orange;
+        }
+      }
+    }
+    .bucket {
+      text-align: center;
+      list-style-type: none;
+      margin-bottom: 0;
+      img {
+        width: 13em;
+        display: block;
+      }
+    }
+  }
+}
+
+.rules, .prize-detail {
   img.title {
     position: absolute;
     left: 50%;
@@ -224,11 +273,15 @@ html {
 }
 
 .bigtitle {
+  position: absolute;
+  top: 0;
   text-align: center;
+  width: 100%;
   margin-top: 15px;
   img {
     width: 28em;
   }
+  animation: .5s cubic-bezier(0.22, 0.61, 0.36, 1) 0s 1 alternate title-slidedown;
 }
 
 .bduck-body {
@@ -256,9 +309,9 @@ html {
   }
 }
 
-.invitation-btn {
+.invitation-btn, .help-btn {
   text-align: center;
-  margin-top: 51em;
+  margin-top: 73em;
   img {
     width: 54em;
   }
@@ -274,3 +327,6 @@ html {
     height: 10em;
   }
 }
+
+// animations
+@keyframes title-slidedown {from {top: -10em; } to { top: 0; }}
