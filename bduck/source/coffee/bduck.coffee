@@ -92,14 +92,14 @@ init = ->
 
   # Event registers
   $invite_btn.on 'click', ->
-    $share.css({'left': 'auto'})
+    $share.addClass('show')
   $rules_btn.on 'click', (event)->
-    $rules.css({'left': 'auto'})
+    $rules.addClass('show')
     event.stopPropagation()
   $detail_btn.on 'click', ->
-    $detail.css({'left': 'auto'})
+    $detail.addClass('show')
   $black_box.on 'click', (e)->
-    $(this).css({'left': '-1626em'})
+    $(this).removeClass('show')
     event.stopPropagation()
 
 
