@@ -1,59 +1,66 @@
-doctype html
-html(lang='en')
-  head
-    meta(charset="UTF-8")
-    //:php
-        $current_css[] = './tpl/hi1626/css/login/vendor/normalize.css';
-        $current_css[] = './tpl/hi1626/css/myspace/my-space.min.css';
-    //link(rel="stylesheet", type="text/css", href="{css $current_css}", media="all")
-    //link(rel="stylesheet", type="text/css", href="./tpl/hi1626/css/login/vendor/normalize.css", media="all")
-    link(rel="stylesheet", type="text/css", href="../../css/myspace/myspace.min.css", media="all")
-    link(rel="icon", href="{$_FANWE['site_root']}favicon.ico", type="image/x-icon")
-    title 粉丝
-  body
-    .fans-list-container
-      dl.fans-list
-        dd.fans-list_item
-          .fans-container
-            .fans-face
-              img(src="http://cdn1626.clouddn.com/public/upload/avatar/000/33/39/65_1448233800_big.jpg" alt="某某某")
-            .fans-content
-              .fans-text
-                .fans-name
-                  span 藤原浩·威廉姆斯
-                .fans-intro
-                  span 你现在阅读的,并不是真的文案。
-              .fans-action
-                .fans-published
-                  dl
-                    dd
-                      a(href="#")
-                        img.fans-published_image(src="http://cdn1626.clouddn.com/public/upload/share/000/044/137/44/067ae462894968006e1256d6f74ffd4d795o09_310x310.jpg" alt="冠希上脚！Undefeated x NikeLab「LA」Cortez SP 联名配色")
-                    dd
-                      a(href="#")
-                        img.fans-published_image(src="http://cdn1626.clouddn.com/public/upload/share/000/044/137/44/067ae462894968006e1256d6f74ffd4d795o09_310x310.jpg" alt="冠希上脚！Undefeated x NikeLab「LA」Cortez SP 联名配色")
-                    dd
-                      a(href="#")
-                        img.fans-published_image(src="http://cdn1626.clouddn.com/public/upload/share/000/044/137/44/067ae462894968006e1256d6f74ffd4d795o09_310x310.jpg" alt="冠希上脚！Undefeated x NikeLab「LA」Cortez SP 联名配色")
-                    dd
-                      a(href="#")
-                        img.fans-published_image(src="http://cdn1626.clouddn.com/public/upload/share/000/044/137/44/067ae462894968006e1256d6f74ffd4d795o09_310x310.jpg" alt="冠希上脚！Undefeated x NikeLab「LA」Cortez SP 联名配色")
-                .fans-concemed
-                  .fans-concemed_fans
-                    div
-                      span.icon.icon-fans
-                    div
-                      span.fans-concemed_fans_count 1234
-                      粉丝
-                  .fans-concemed_follow
-                    div
-                      span.icon.icon-following
-                    div
-                      span.fans-concemed_follow_count 1234
-                      关注
-                .fans-follow
-                  a(href="#")
-                    span.icon.icon-follow
-                    label 关注Ta
+:php
+    $current_css[] = './tpl/hi1626/css/login/vendor/normalize.css';
+    $current_css[] = './tpl/hi1626/css/myspace/my-space.min.css';
+//template inc/header
+//{template page/u/u_header}
+.follow-list-container
+  //{if $follow_user}
+  dl.follow-list
+    //{loop $follow_user $k $item}
+    dd.follow-list_item
+      .fans-container
+        .fans-face
+          img(src="{$item['img_thumb']}" alt="{$item['user_name']}")
+        .fans-content
+          .fans-text
+            .fans-name
+              span {$item['user_name']}
+            .fans-intro
+              span {$item['introduce']}
+          .fans-action
+            .fans-published
+              dl
+                //{loop $item['newest_publish'] $n $publish}
+                dd
+                  a(href="{$publish['url']}")
+                    img.fans-published_image(src="{getimg $publish['img'] 32 32}" alt="")
+                //{/loop}
+            .fans-concemed
+              .fans-concemed_fans
+                div
+                  span.icon.icon-fans
+                div
+                  span.fans-concemed_fans_count {$item['fans']}
+                  label 粉丝
+              .fans-concemed_follow
+                div
+                  span.icon.icon-following
+                div
+                  span.fans-concemed_follow_count {$item['follows']}
+                  label 关注
+            .fans-follow
+              //{if $item['is_follow'] == 1}
+              //{if $item['is_gz'] == 0}
+              a(href="#")
+                span.icon.icon-follow
+                |取消关注
+              //{else}
+              a(href="#")
+                span.icon.icon-follow
+                |互相关注
+              //{/if}
+              //{else}
+              a(href="#")
+                span.icon.icon-follow
+                |关注Ta
+              //{/if}
+    //{/loop}
+  //{else}
+  .follow-empty 暂无任何关注
+  //{/if}
+//{if $pager['page_count']>1}
+.follow-pagination
 
+//{/if}
+//template inc/footer
 

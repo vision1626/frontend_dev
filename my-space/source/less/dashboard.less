@@ -6,6 +6,7 @@
 @item-owner-img-wh: 26px;
 
 @b-image-wh: 280px;
+@l-image-h: 371px;
 @s-image-wh: 185px;
 
 //分类以及筛选部分
@@ -76,11 +77,12 @@
 
 //====================================大图列表 Start==================================================
 .item-list-container dl.big_img {
-  margin: 0 @margin-lr;
-  float: left;
+  margin: 0 auto;
+  width:100%;
+  max-width: @b-image-wh*4+90+30;
 }
 
-.item-list-container dl.big_img dd {
+.item-list-container dl.big_img dd.item {
   float: left;
   margin: 20px 15px 10px 15px;
   //border-bottom: 2px solid @white;
@@ -91,7 +93,7 @@
   position: relative;
 }
 
-.item-list-container dl.big_img dd:hover {
+.item-list-container dl.big_img dd.item:hover {
   box-shadow: 0 1px 5px @dark-grey;
   //border-bottom: 2px solid @blue;
 }
@@ -100,6 +102,7 @@
   height: @b-image-wh;
   overflow: hidden;
   position: relative;
+  text-align: center;
 }
 
 //.item-list-container dl.big_img .item-b_image .item-add_special {
@@ -164,6 +167,10 @@
   padding: @item-content-padding;
 }
 
+.item-list-container dl.big_img .item-b_description .item-b_isnew a {
+  color: @black;
+}
+
 .item-list-container dl.big_img .item-b_description .item-b_isnew span {
   color: @grey;
   font-size: @font-size-xs;
@@ -178,6 +185,12 @@
   margin-right: 3px;
   position: relative;
   top: -1px;
+}
+
+.item-list-container dl.big_img .item-b_description .item-b_title {
+  margin-top: 8px;
+  height: @font-size-m*3-3;
+  overflow: hidden;
 }
 
 .item-list-container dl.big_img .item-b_description .item-b_title span {
@@ -268,6 +281,31 @@
 
 .item-b_add_like:hover span {
   color: @red;
+}
+
+//搭配部分
+.item-list-container dl.big_img .item-l_image {
+  height: @l-image-h;
+  overflow: hidden;
+  position: relative;
+  text-align: center;
+  position: relative;
+}
+
+.item-list-container dl.big_img .item-l_image dl.collocation {
+  position: absolute;
+  bottom: 12px;
+  left: 12px;
+
+}
+
+.item-list-container dl.big_img .item-l_image dd.collocation_item {
+  float: left;
+  margin-right: 10px;
+}
+
+.item-list-container dl.big_img .item-l_image dd.collocation_item img {
+  border: 0;
 }
 
 //====================================大图列表 End====================================================
