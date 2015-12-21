@@ -5,6 +5,13 @@
 @orange: #f78108;
 @egg-shell: #f5e286;
 
+// animations
+@keyframes title-slidedown {from {top: -10em; } to { top: 0; }}
+@keyframes airplane {from {margin-left: -100em; } to { margin-left: -24em; }}
+@keyframes share-rotate {from {transform: rotate(0deg);} to 
+{ transform: rotate(3deg); }}
+@break: cubic-bezier(.08,.81,.07,.81);
+
 html {
   background: url('@{img-location}/bg.png') no-repeat center center fixed @gold;
   -webkit-background-size: cover;
@@ -113,6 +120,7 @@ html {
       left: 50%;
       margin-left: -24em;
       width: 48em;
+      animation: 2s @break 0s 1 alternate airplane;
     }
     img {
       width: 32em;
@@ -129,9 +137,14 @@ html {
   width: 100%;
   height: 100%;
   position: fixed;
+  left: -126em;
   top: 0;
-  left: -1626em;
   z-index: 162616;
+  transition: all .8s ease-out;
+}
+
+.black-box.show {
+  left: 0;
 }
 
 .js-bduck {
@@ -176,10 +189,62 @@ html {
     left: 162px;
     top: 0;
     width: 45em;
+    transform: rotate(0deg);
+    animation: .5s linear 0s infinite alternate share-rotate;
   }
 }
 
-.rules {
+.prize-detail {
+  // left: auto !important;
+  .detail {
+    background-color: @gold;
+    border: .1em solid white;
+    border-radius: 0.5em;
+    font-size: 3.2em;
+    width: 12em;
+    margin: 0 auto;
+    margin-top: 3em;
+    padding: 1em 2em;
+    line-height: 1.4;
+    position: relative;
+    ul {
+      overflow: hidden;
+      padding: 0;
+      margin: 0 auto;
+      width: 100%;
+      text-align: center;
+      list-style-type: none;
+      li {
+        display: inline;
+        font-size: 2em;
+        &:before {
+          content: '\2022';
+          color: @egg-shell;
+        }
+        img {
+          display: none;
+        }
+      }
+      .current-img {
+        &:before {
+          content: '\2022';
+          color: @orange;
+        }
+      }
+    }
+    .bucket {
+      text-align: center;
+      list-style-type: none;
+      margin-bottom: 0;
+      img {
+        width: 13em;
+        display: block;
+      }
+    }
+  }
+}
+
+.rules, .prize-detail {
   img.title {
     position: absolute;
     left: 50%;
@@ -224,11 +289,15 @@ html {
 }
 
 .bigtitle {
+  position: absolute;
+  top: 0;
   text-align: center;
+  width: 100%;
   margin-top: 15px;
   img {
     width: 28em;
   }
+  animation: .5s cubic-bezier(0.22, 0.61, 0.36, 1) 0s 1 alternate title-slidedown;
 }
 
 .bduck-body {
@@ -256,9 +325,9 @@ html {
   }
 }
 
-.invitation-btn {
+.invitation-btn, .help-btn {
   text-align: center;
-  margin-top: 51em;
+  margin-top: 73em;
   img {
     width: 54em;
   }
@@ -274,3 +343,4 @@ html {
     height: 10em;
   }
 }
+

@@ -1,0 +1,78 @@
+#hungergames {
+  background: #c51719;
+  @content-w: 990px;
+  @act-img-location:'/tpl/hi1626/images/act/hungergames';
+  .set-content-w {
+    width: @content-w;
+    margin: auto;
+  }
+  header {
+    width: 100%;
+    .platforms {
+      width: 100%;
+      margin: auto;
+      background: #000;
+      text-align: center;
+      padding: 20px 0 15px;
+      img {
+        width: 232px;
+        height: 37px;
+        margin: auto;
+      }
+    }
+    .brands {
+      text-align: center;
+      padding: 20px 0 30px;
+      img {
+        margin:auto;
+        width: 500px;
+        height: 33px;
+      }
+    }
+  }
+  section {
+    .set-content-w;
+    article {
+      width: 990px;
+      margin-bottom: 30px;
+      position: relative;
+      a {
+        position: absolute;
+        display: block;
+        //background: rgba(220,220,220,0.7);
+      }
+      &.pt-1 {
+        height: 863px;
+        background: url("@{act-img-location}/1.jpg") no-repeat;
+      }
+      &.pt-2 {
+        height: 1028px;
+        background: url("@{act-img-location}/2.jpg") no-repeat;
+      }
+      &.pt-3 {
+        height: 847px;
+        background: url("@{act-img-location}/4.jpg") no-repeat;
+      }
+      &.pt-4 {
+        height: 562px;
+        background: url("@{act-img-location}/5.jpg") no-repeat;
+      }
+      &.pt-5 {
+        height: 389px;
+        background: url("@{act-img-location}/6.jpg") no-repeat;
+      }
+      &.pt-6 {
+        height: 608px;
+        background: url("@{act-img-location}/7.jpg") no-repeat;
+      }
+    }
+  }
+  footer {
+    .set-content-w;
+    height: 50px;
+    margin-bottom: 50px;
+    img {
+      width: 100%;
+    }
+  }
+}

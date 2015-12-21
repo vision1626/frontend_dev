@@ -1,0 +1,153 @@
+#arttitude {
+  @production:false;
+  @content-w: 990px;
+  width: 100%;
+  height: 100%;
+  * {
+    color:white;
+  }
+  .set-content-w {
+    width: @content-w;
+    margin: auto;
+  }
+  .fixed-bg {
+    background: url("@{act-img-path}/art-bg.jpg") center;
+    background-size: 50%;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 100%;
+  }
+  nav {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    height: 48px;
+    background: rgba(0,0,0,0.95);
+    ._clearfix;
+    li {
+      float: left;
+      width: 28%;
+      background: url("@{act-img-path}/nav-separator.jpg") left center no-repeat;
+      a {
+        color: @gold;
+        display: block;
+        text-align: center;
+        font-size: 14px;
+        width: 100%;
+        padding: 14px 0 10px;
+        border-bottom: 3px solid black;
+        &.current {
+          color: white;
+          border-bottom: 3px solid @gold;
+        }
+      }
+      &.home {
+        width: 16%;
+        background: none;
+        a {
+          padding: 16px 0 12px;
+          i {
+            ._block(16px,17px);
+            background: url("@{act-img-path}/icon-home-disactive.png") center no-repeat;
+            background-size: contain;
+            margin: auto;
+          }
+          &.current {
+            i {
+              background: url("@{act-img-path}/icon-home.png") center no-repeat;
+              background-size: contain;
+            }
+          }
+        }
+      }
+    }
+  }
+  .title-wrap {
+    background: linear-gradient(top, rgba(0,0,0,1),rgba(0,0,0,0.8) 75%,rgba(0,0,0,0));
+    width: 100%;
+    //height: 100px;
+    position: fixed;
+    display: none;
+    opacity: 0;
+    transition: all 0.8s cubic-bezier(.22, .24, .21, 1);
+    z-index: 999;
+    &.desized {
+      height: 90px;
+      //background: linear-gradient(top, rgba(0,0,0,0),rgba(0,0,0,0) 45%,rgba(0,0,0,0));
+      //background: linear-gradient(top, rgba(0,0,0,1),rgba(0,0,0,0.8) 20%,rgba(0,0,0,0) 40%,rgba(0,0,0,0));
+      .title__logo {
+        transform: scale(0.35) translate3d(0,-95%,0);
+      }
+      .title__slogan {
+        opacity: 0;
+      }
+    }
+  }
+  .title__logo {
+    ._block(95.4%,97px); //334px;
+    background: url("@{act-img-path}/arttitude-logo.png") center no-repeat;
+    background-size: contain;
+    margin: auto;
+    transform: scale(1) translate3d(0,0,0);
+    transition: all 0.6s cubic-bezier(.22, .24, .21, 1);
+    margin-top: 2%;
+  }
+  .title__slogan {
+    ._block(79.1%,29px);
+    background: url("@{act-img-path}/arttitude-slogan.png") center no-repeat;
+    background-size: contain;
+    margin: auto;
+  }
+  section {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    //overflow: hidden;
+    &.hidden {
+      opacity: 0;
+      z-index: -999;
+    }
+  }
+  .section__content {
+    margin: auto;
+    padding: 20% 0;
+    article {
+      padding: 0 10%;
+      h5 {
+        background: url("@{act-img-path}/article-separator.png") center no-repeat;
+        background-size: cover;
+        height: 15px;
+        font-size: 10px;
+        text-align: center;
+        letter-spacing: 4px;
+        padding-left: 4px;
+        font-weight: normal;
+      }
+      h2{
+        color: @gold;
+        font-weight: normal;
+        text-align: center;
+        font-size: 20px;
+      }
+      p{
+        font-size: 13px;
+        line-height: 22px;
+        margin-bottom: 40px;
+        text-align: justify;
+        br {
+          line-height: 30px;
+          display: block;
+          content: " ";
+          margin: 10px;
+        }
+      }
+      img {
+        width: 50%;
+        margin: auto;
+        display: block;
+      }
+    }
+  }
+}
