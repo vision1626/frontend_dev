@@ -1,0 +1,330 @@
+doctype html
+head(lang='en')
+    //META
+    meta(charset='UTF-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1 maximum-scale=1, user-scalable=no')
+    meta(name='apple-mobile-web-app-status-bar-style', content='black')
+    meta(name='apple-mobile-web-app-capable', content='yes')
+    meta(name='description')
+    title="ARTTITUDE"
+
+    - var act_name = 'arttitude'
+    - var production = true
+    if production
+        :php
+            $current_css[] = './tpl/hi1626/css/login/vendor/normalize.css';
+            $current_css[] = './tpl/hi1626/css/act/arttitude/arttitude.min.css';
+
+            $current_js[] = './public/js/jquery-1.11.3.min.js';
+            $current_js[] = './public/js/jquery.touchSwipe.min.js';
+            $current_js[] = './tpl/hi1626/js/act/arttitude/arttitude.js';
+
+        link(rel="stylesheet", type="text/css", href="{css $current_css}", media="all")
+        link(rel="icon", href="{$_FANWE['site_root']}favicon.ico", type="image/x-icon")
+        script(src="{script $current_js}")
+
+        - var image_path = './tpl/hi1626/images/act/'+act_name
+    else
+        link(rel="stylesheet", type="text/css", href="../../../css/login/dist/normalize.css", media="all")
+        link(rel="stylesheet", type="text/css", href="../../../css/act/#{act_name}/#{act_name}.min.css", media="all")
+        script(src="../../../js/vendor/jquery-1.11.3.min.js")
+        script(src="../../../js/vendor/jquery.touchSwipe.min.js")
+        script(src="../../../js/act/#{act_name}/#{act_name}.js")
+        - var image_path = '../../../img/act/'+act_name
+
+    <!--[if lt IE 10]>
+    :php
+        $current_js2[] = './public/js/html5shiv.min.js';
+    script(type='text/javascript',src="{script $current_js2}")
+    <![endif]-->
+
+html
+    body(style='background:#000;')
+        .wrap#arttitude
+            .fixed-bg
+            .title-wrap
+                .title__logo
+                .title__slogan
+            section.home
+                .brand-links.hidden
+                    ul
+                        li
+                            a
+                        li
+                            a
+                        li
+                            a
+                        li
+                            a
+                        li
+                            a
+                        li
+                            a
+                .show-desc.hidden 参展服装明星品牌：DEBRAND(吴克群) / 热血FEVER(陈建州) / NPC(李晨) / 宁死不屈(MC仁) / OUTERSPACE(廖人帅) / SHOUT EYEWEAR (Phat)
+
+            section.intro(style='display:none')
+                .section__content
+                    article
+                        h5 展览介绍
+                        h2 Art attitude, R for Revolution
+                        p
+                            |艺术与潮流的革命性结合，艺术态度，简称艺态，又称异态。
+                            br
+                            |品牌设计与艺术都是创意的体现，它们并不是不相容的，反而相互影响而变得更具吸引力。明星潮流品牌与艺术家碰撞出创意的火花。
+                            br
+                            |9位影响着现代年轻潮流的明星代言人，以及9位代表着新锐力量的艺术家，强强联手，展现新的艺术态度。
+                            br
+                            |这是一个属于创意与艺术的年代。
+                        h5 展览主题
+                        h2 买走黑暗
+                        p 每年奥比斯都会举行“买走黑暗”活动，呼吁大家关注眼疾患者，为其募捐。“潮流化”是现在大家都关注和热衷的概念，无论是艺术、慈善还是品牌，都向着更“潮流化”的方向前进，用潮流的态度去吸引更多受众的关注，会达到更大的效果。这一次展览的主题正是用“买走黑暗”的概念，邀请9个明星品牌以及9位艺术家共同为这个主题出创意，举行全国联展，从潮流和艺术的角度去诠释慈善的理念。
+                        h5 受惠机构
+                        h2 奥比斯
+                        span
+                            img
+                        p 奥比斯(ORBIS)成立于1982年，是一个国际性的非营利人道组织，肩负全球防盲救盲的使命，拥有世上唯一的一架眼科飞机医院，绕行全球进行培训，任务在医疗资源贫乏的开发中国家，传授眼科医疗技术、推广护眼教育，让医疗伙伴能全力预防及治疗眼疾，帮助视障患者获得可负担、方便及优质的眼科医疗服务。
+                        h5 展览信息
+                        h2 展览时间
+                        p(style='text-align:center;') 2015年12月16日起
+                        h2 展览地点
+                        p(style='text-align:center;') 南丰汇 2/F, 广州市海珠区新港东路618号
+
+            section.brands(style='display:none')
+                .section__content
+                    ul.bullets
+                        li.current
+                            img(src='#{image_path}/star-1-wkq-debrand.png')
+                        li
+                            img(src='#{image_path}/star-2-phat-shout.png')
+                        li
+                            img(src='#{image_path}/star-3-cjz-rx.png')
+                        li
+                            img(src='#{image_path}/star-4-mcyan-nsbq.png')
+                        li
+                            img(src='#{image_path}/star-5-lrs-outer.png')
+                        li
+                            img(src='#{image_path}/star-6-lc-npc.png')
+                    ul.products(cur-item='0')
+                        li
+                            .main-image
+                                img(src='#{image_path}/big-star-1.png')
+                            .cross-logo
+                                img(src='#{image_path}/crossover-logos-1.png')
+                            .tee-image
+                                img(src='#{image_path}/tee-image-1.jpg')
+                            a.buy(href='http://www.1626buy.cn/shangyi/txu/7968.html',target='_blank') 立即购买
+                            article
+                                h5 品牌
+                                h2 DEBRAND
+                                p
+                                    |主理人：吴克群
+                                    br
+                                    |2013年夏天由创作才子吴克群Kenji Wu所领军创立的潮流品牌，DEBRAND具有非品牌概念，风格主要以知名当代艺术家跨领域合作，融合潮流与艺术的概念，创造具自我的风格潮流趋势，传达自我价值的主宰就是自己，没有人可以帮其他人贴标签，因为自己的品牌要由自己创造，透过这样的理念提醒时下年轻人创造自我价值，勇于做自己，追求梦想，追求自我实现。
+                                h5 艺术家
+                                h2 张恺匀
+                                p
+                                    | 现居台北，於台湾艺术大学就读视觉设计研究所，专长為文宣排版、海报设计及各类影像创作。作品近年获得波兰华沙国际海报双年展、澳门设计双年展及义大利国际海报双年展。
+                                    br
+                                    |本次徵件以设计工作室Catbell Studio名义参加，Catbell Studio成立於2014年，由设计工作者张愷匀、徐嘉骏及摄影师李度组成，营运项目包涵平面绘画、复合媒材、平面设计、婚纱摄影，结合各艺术领域，追求多元的创作型态。
+                                h5 设计理念
+                                p
+                                    | 以后天盲者的角度去思考买走黑暗这件事
+                                    br
+                                    |黑暗是盲者的宿命，盲者透过盲前的记忆，身体的感知去拼凑出世界的面貌，想像的风景，将由破碎画面重组的视界，以不完整，不稳定的形态呈现，表现盲者对外在世界的不安与想像，藉由城市符号解构结合吴克群品牌代表元素合甲骨文符号的概念去填补元素间的缝隙，将传统元素赋予在未来的载体元素之上，打破虚幻与现实的界线，彷彿与过去未盲的自己交易，买走这片黑暗，才能够拥有属於自己眼前最特别的风景。
+                                    br
+                                    |后天盲者正是勇於追求梦，眼前所见与他人与眾不同的人物。
+                                    br
+                                    |藉由城市符号解构结合吴克群品牌代表元素合甲骨文符号的概念去填补元素间的缝隙，将传统元素赋予在未来的载体元素之上，空间的方块切割就是改成用甲骨文的方形和线条构成城市解构结合甲骨文符号的概念。
+                        li
+                            .main-image
+                                img(src='#{image_path}/big-star-2.png')
+                            .cross-logo
+                                img(src='#{image_path}/crossover-logos-2.png')
+                            .tee-image
+                                img(src='#{image_path}/tee-image-2.jpg')
+                            a.buy(href='http://www.1626buy.cn/shangyi/txu/7969.html',target='_blank') 立即购买
+                            article
+                                h5 品牌
+                                h2 Shouteyewear
+                                p
+                                    | 主理人：Phat@廿四味
+                                    br
+                                    |Shout eyewear成立于2015年，以款多量少高品质的材料及水准制作。主理人及创作总监为香港hip hop乐团24herbs廿四味的Phat Chan及香港潮流眼镜店Project eyewear的Alfred。Shout eyewear风格多变，由沉实的眉镜到功能性极强的钛金属以致专为小朋友而制作的student都有出品。
+                                h5 艺术家
+                                h2 Kelly & 郭健
+                                p
+                                    | Kelly & Kwokin 是一个两人的香港摄影单位。RELICS IMAGE 工作室。
+                                    br
+                                    | Kwokin主理富风格的人像及创意为本的摄影，Kelly则专注以时尚为根基的女性影像及美术指导。Kelly & Kwokin 均喜欢探索影像本身单纯的视觉美，有时又沉迷像电影一样的刻意桥段，甚至喜欢透过实验性影像寻找新的摄影刺激。Staged Photography (佈局摄影)、Fashion Photography (时尚摄影)及 数码影像后期均是常见於两人作品的手法。
+                                h5 设计理念
+                                p
+                                    |该次的影像创作是以shout eyewear作為一个创作命题，一个起点。shout eyewear作為眼镜品牌，联合Kelly和Kwokin 以摄影為主的创作单位，很顺理成章会联繫到视觉主题。 Kelly & Kwokin 由眼睛开始一系列视觉为先、不按常理的作品，去呼喊 (shout) 一种态度。同时也表达了希望大家不要带有色眼镜看人的愿望。
+                        li
+                            .main-image
+                                img(src='#{image_path}/big-star-3.png')
+                            .cross-logo
+                                img(src='#{image_path}/crossover-logos-3.png')
+                            .tee-image
+                                img(src='#{image_path}/tee-image-3.jpg')
+                            a.buy(href='http://www.1626buy.cn/shangyi/txu/7971.html',target='_blank') 立即购买
+                            article
+                                h5 品牌
+                                h2 Fever热血
+                                p
+                                    | 主理人：黑人陈建州
+                                    br
+                                    | 成立於2008年，由「黑人‧陈建州」领军打造的潮流时尚品牌
+                                    br
+                                    |【热血FEVER】代表娱乐、设计、创意感十足的潮流品牌，不仅仅只是时尚的代表，更是一种无可取代的精神指标，“热血”的态度就是不分性别、行业、年纪、种族，以正面的力量勇敢地去开拓任何无限可能与自我极限，秉持这样的精神迎接种种的挑战，当你穿上【热血FEVER】并不只是潮流的表现，更代表着背后的品牌精神。
+                                h5 艺术家
+                                h2 曾熙
+                                p
+                                    | 曾参展项目项目：
+                                    br
+                                    | 2015 Launched H₂ OS as Product Manager
+                                    br
+                                    |2014 「巴塞罗那﹣北京设计展」联展，巴塞罗那市政厅艺廊，巴塞罗那
+                                    br
+                                    |2014 「巴塞罗那亚洲节」联展，巴塞罗那当代文化中心，巴塞罗那
+                                    br
+                                    |2014 「南腔北调﹣巴塞罗那青年艺术学生展」联展，神圣家族大教堂图书馆艺术空间，巴塞罗那
+                                h5 设计理念
+                                p
+                                    | 有一些事物你睁开眼睛不一定看到，却有一些事物必须闭眼才能看到的。你可能什麼都看不到，你也可能从这裡发现日、月、目、明；你可能什麼都看不到，你也可能看到闭上眼才看到的星空；你可能什麼都看不到，你也可能看到自己什麼都看不到；你也可能什麼都看不到，但有的人真的什麼都看不到，却看到。
+                        li
+                            .main-image
+                                img(src='#{image_path}/big-star-4.png')
+                            .cross-logo
+                                img(src='#{image_path}/crossover-logos-4.png')
+                            .tee-image
+                                img(src='#{image_path}/tee-image-4.jpg')
+                            a.buy(href='http://www.1626buy.cn/shangyi/txu/7966.html',target='_blank') 立即购买
+                            article
+                                h5 品牌
+                                h2 宁死不屈
+                                p
+                                    | 主理人：MC仁
+                                    br
+                                    | “宁死不屈”，一个名字非常特别的华人街牌，作风低调但是每次都能推出经典的设计，由来自香港的说唱/涂鸦艺术家MC仁一手创办。虽然只有非常少数的潮店和网店不定期推出作品，仍大受欢迎。曾合作过的有香港的CLOT，日本的KUUMBA INTERNATIONAL，纽约的SSUR等顶尖街牌。
+                                h5 艺术家
+                                h2 杜宇坚
+                                p
+                                    |杜宇坚，大家都叫坚叔。深圳本土长大。04年前从事造型行业，专业化妆师与发型师以及服饰指导；05年跨行进入品牌设计领域。经验所至，其对潮流时尚以及色彩元素有着敏感的触觉。
+                                    br
+                                    |也因此服务过不同的时尚领域品牌。他坚信，将“潮流”、“文化”、“艺术”、“设计”、“情感”融入品牌，可将品牌价值无限放大。
+                                    br
+                                    |同途品牌设计与咨询 tooTo Design Ltd. 创办人及保姆
+                                    br
+                                    |tooTo and 17 潮牌创办人及设计师
+                                h5 设计理念
+                                p
+                                    |设计主题切入点会从摇滚巨星David Bowie入手，他本身的左眼发生过意外，导致瞳孔永久性放大，这本身事一个悲剧事件，但David却没有消极面对，甚至因看上去两个眼睛瞳孔颜色不一而成为最显著的特色之一。这就是一种宁死不屈的态度。
+                                    br
+                                    |而David再专辑《Aladdin Sane》更创造出闪电劈到眼睛的传世妆容。希望大家从这个励志故事中得到启发，并在这个闪电妆容的元素中进行创作。
+                        li
+                            .main-image
+                                img(src='#{image_path}/big-star-5.png')
+                            .cross-logo
+                                img(src='#{image_path}/crossover-logos-5.png')
+                            .tee-image
+                                img(src='#{image_path}/tee-image-5.jpg')
+                            a.buy(href='http://www.1626buy.cn/shangyi/txu/7967.html',target='_blank') 立即购买
+                            article
+                                h5 品牌
+                                h2 OUTERSPACE
+                                p
+                                    | 主理人：廖人帅Leo
+                                    br
+                                    |2007年7月生於台湾，品牌标语:Creativity is your super power!(创意就是你的超能力!)[ 来自外太空的创意精神 ]。每件服饰都有产地,可以轻松的标明MADE IN哪裡！但想法.创意.设计.脑袋...又应该如何标明呢？所以，我们不打算把品牌 MADE IN在哪个国家下面，而MADE IN OUTERSPACE(外太空)，正是我们选择的地方！太空思想无国界！OUTERSPACE！
+                                h5 艺术家
+                                h2 吴芊颐
+                                p
+                                    | 擅长拼贴艺术与复合媒材装置创作，多以身边所观察的生活现象為创作来源，以一种保持形式、改制内容、模拟效果等手法，打破日常现象原有的意义，并以反观的思考模式观看我们所熟悉的日常状态，这种看似与现实相似的状况，营造出相对於现实的感知落差。近年延续作品相关脉络，将传统意象转变为统一的视觉符号，结合网路平台，创造不同领域间的艺术可塑性。作品曾获「2012新北市创作新人奖」、「2015台湾美术新貌奖-平面创作第一名」、入选「台北美术奖」，并参与「台湾双年展」展出，2014年获邀参与「台北mt博」。
+                                h5 设计理念
+                                p
+                                    |主题是以"受器眼睛的疾病"做為主要符号，当视觉有异状时，对於矫正视觉的灯箱器材印象深刻，於是将这样的视觉样貌融入设计中，展台呈现一个个有如灯箱色光的手绘医学掛图，具实验性的场景搭配outerspace品牌精神与轻盈的色感，并将"受器眼睛"合成至马赛克的人脸上，并以拯救英文作为五官，借由解码五官符号并可看到主题诉求。
+                        li
+                            .main-image
+                                img(src='#{image_path}/big-star-6.png')
+                            .cross-logo
+                                img(src='#{image_path}/crossover-logos-6.png')
+                            .tee-image
+                                img(src='#{image_path}/tee-image-6.jpg')
+                            a.buy(href='http://www.1626buy.cn/shangyi/txu/7970.html',target='_blank') 立即购买
+                            article
+                                h5 品牌
+                                h2 MLGB
+                                p
+                                    | 主理人：李晨
+                                    br
+                                    | NPC（New Project Center）由著名歌手潘玮柏和知名VJ李晨Nic携手创立，为年轻人提供最新鲜有趣的潮流服饰。NPC除精心挑选国外潮流品牌限量单品之外，还鼓励内地原创，为有梦想的内地潮流品牌和设计师提供展示才华和实现梦想的平台。NPC讲究的是搭配和一种生活方式，其经营类别除了衣服、鞋子，还包括所有潮流的必备单品，顾客可以在NPC深刻感受潮流文化，走出自己的NPC style。
+                                    br
+                                    |目前李晨Nic创立的自家品牌有MLGB, CC is Coming, SDV和PANIC, 每个品牌都针对不同的消费群体，深受年轻人们的喜爱和追随。
+                                h5 艺术家
+                                h2 邱浩玮
+                                p
+                                    | 品牌“东的西”主理人
+                                    br
+                                    |原名“邱志东”，毕业于服装系在全英排名第三BRIGHTON UNIVERSITY，专业Fashion Design with Business（双科服装设计与工商管理）。英国新式裁缝店担任GREMSHAM BLAKE的助理，在London设计师品牌Alistair Carr鄂尔多斯担任羊绒设计师法路易娜担任高级设计师。
+                                    br
+                                    |2011年 正是正式成立“东的西”设计师品牌。
+                                h5 设计理念
+                                p
+                                    | 为本次展览“买走黑暗”所创作的主题，在与品牌沟通过后给出已确认的主题。
+                                    br
+                                    |在一个黑底白线条勾勒出的城市中，用代表和平的白鸽剪影覆盖在城市之中让杂乱的背景带出整体与光明。超出城市的背景涂鸦，代表着无线的可能在黑暗中，我们用心去勾勒我们心中的梦想。
+
+                    span.pager.prev
+                    span.pager.next
+
+            section.partners(style='display:none')
+                .section__content
+                    article
+                        h5 主办单位
+                        img(src='#{image_path}/org-logo-1.png')
+                        h2 亚洲青年创作平台
+                        p 每年均会挑选亚洲最具代表性的百多位新锐(35岁或以下)，结集成书出版并开展「AAM」(APPortfolio Asia Member)专属的创意活动，对外展示今日亚洲突飞猛进的思想新动力。平台跨越两岸四地、日本、韩国、马来西亚，莫视语言的限制，召集各界艺术和设计新锐, 以各种符号带来一场又一场的文化盛宴。
+
+                        img(src='#{image_path}/org-logo-2.png')
+                        h2 卡蜜丽亚工作室
+                        p 一家以生活艺术化为主旨的创意工作室，一个以跨界为乐趣的资源收发站，一个关注创意人的自媒体平台。 Arttitude, 宣扬全新的艺术态度，希望能够将艺术带进不同的生活和文化领域。关注创意产业，更关注创意产业的创造者，注重思想的交流，产生碰撞并衍生新的作品，让大众在生活中感受艺术的魅力。
+
+                        h5 活动赞助
+                        img(src='#{image_path}/org-logo-3.png')
+                        h2 南丰汇
+                        p 南丰汇，是广州琶洲的地标型建筑，也是香港南丰集团重点投资的综合体项目。囊括顶尖企业汇集的超甲级写字楼，拥有影院，特色餐饮的商场，五星级个性化服务的广州南丰朗豪酒店；国际化视野的国际会展中心。集交流、展示、消费于一体，以多元化的业态提升区域商业价值。
+
+                        h5 合作媒体
+                        img(src='#{image_path}/org-logo-4.png')
+                        h2 1626
+                        p 中国第一份原创潮流双周刊《1626》杂志是国内第一本针对年轻人及潮流市场并以推广及发展城市潮流文化为目的的潮流读物。从2004年创刊至今经过10年的发展，拥有广州、上海、北京、成都四个地域版本。 全中国最多读者、最有公信力的潮流杂志，月发行量过百万。
+
+                        h5 餐饮机构
+                        img(src='#{image_path}/org-logo-5.png')
+                        h2 A-Lab
+                        p A Lab for Art Life，Art Experience，All in One。它是一个创意艺术文化时尚可以随时发生化学效应的实验室、梦工场，它也是聚生活体验、创意美食于一体的空间与平台。
+
+                        h5 受惠机构
+                        img(src='#{image_path}/org-logo-6.png')
+                        h2 奧比斯 ORBIS
+                        p 奥比斯(ORBIS)成立於1982年，是一个国际性的非营利人道组织，肩负全球防盲救盲的使命，拥有世上唯一的一架眼科飞机医院，绕行全球进行培训任务在医疗资源贫乏的开发中国家，传授眼科医疗技术、推广护眼教育，让医疗伙伴能全力预防及治疗眼疾，帮助视障患者获得可负担、方便及优质的眼科医疗服务。
+            nav
+                ul
+                    li.home
+                        a.current
+                            i
+                    li
+                        a 展览介绍
+                    li
+                        a 明星品牌
+                    li
+                        a 合作机构
+
+        script(type='text/javascript').
+            $(document).ready(function () {
+                init();
+            });
+        <!--{if $is_wx}-->
+        <!--{template inc/weixin_share}-->
+        <!--{/if}-->
+        <!--{template inc/count}-->

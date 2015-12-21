@@ -1,0 +1,103 @@
+doctype html
+head(lang='en')
+    //META
+    meta(charset='UTF-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1 maximum-scale=1, user-scalable=no')
+    meta(name='apple-mobile-web-app-status-bar-style', content='black')
+    meta(name='apple-mobile-web-app-capable', content='yes')
+    meta(name='description')
+    title="1626 x 饥饿游戏"
+
+    - var production = true
+    if production
+        :php
+            $current_css[] = './tpl/hi1626/css/login/vendor/normalize.css';
+            $current_css[] = './tpl/hi1626/css/act/hungergames/hungergames.min.css';
+            link(rel="stylesheet", type="text/css", href="{css $current_css}", media="all")
+    else
+        link(rel="stylesheet", type="text/css", href="./tpl/hi1626/css/login/vendor/normalize.css", media="all")
+        link(rel="stylesheet", type="text/css", href="./tpl/hi1626/css/act/hungergames/hungergames.min.css", media="all")
+
+    link(rel="icon", href="{$_FANWE['site_root']}favicon.ico", type="image/x-icon")
+
+    <!--[if lt IE 10]>
+    :php
+        $current_js2[] = './public/js/html5shiv.min.js';
+    script(type='text/javascript',src="{script $current_js2}")
+    <![endif]-->
+
+html
+    body(style='background:#c51719;')
+        .wrap#hungergames
+            header
+                .platforms
+                    img(src='./tpl/hi1626/images/act/hungergames/top-logos.png')
+                .brands
+                    img(src='./tpl/hi1626/images/act/hungergames/top-brands.png')
+            section#hungergames
+                article.pt-1
+                article.pt-2
+                    a(href='https://jokester2010.taobao.com/category-1145951588.htm?spm=a1z10.4-c.w5003-12833257935.1.sLt1B5&scene=taobao_shop',
+                    style='left: 0;top: 0;width: 100%;height: 295px;',target='_blank')
+
+                    a(href='https://item.taobao.com/item.htm?spm=a1z10.5-c.w4002-10381096695.35.y8uBBG&id=523365085856',
+                    style='left: 220px;top: 530px;width: 220px;height: 280px;',target='_blank')
+
+                    a(href='https://item.taobao.com/item.htm?spm=a1z10.5-c.w4002-10381096695.23.y8uBBG&id=523361757308',
+                    style='left: 480px;top: 530px;width: 220px;height: 280px;',target='_blank')
+
+                    a(href='https://item.taobao.com/item.htm?spm=a1z10.5-c.w4002-10381096695.32.y8uBBG&id=523361634552',
+                    style='left: 750px;top: 530px;width: 220px;height: 280px;',target='_blank')
+
+                    a(href='https://item.taobao.com/item.htm?spm=a1z10.5-c.w4002-10381096695.29.y8uBBG&id=523364608435',
+                    style='left: 220px;top: 810px;width: 220px;height: 200px;',target='_blank')
+
+                    a(href='https://item.taobao.com/item.htm?spm=a1z10.5-c.w4002-10381096695.26.y8uBBG&id=523357066736',
+                    style='left: 480px;top: 810px;width: 220px;height: 200px;',target='_blank')
+
+                    a(href='https://item.taobao.com/item.htm?spm=a1z10.5-c.w4002-10381096695.35.y8uBBG&id=523365085856',
+                    style='left: 703px;top: 810px;width: 270px;height: 42px;',target='_blank')
+
+                    a(href='https://item.taobao.com/item.htm?spm=a1z10.5-c.w4002-10381096695.23.y8uBBG&id=523361757308',
+                    style='left: 703px;top: 853px;width: 270px;height: 42px;',target='_blank')
+
+                    a(href='https://item.taobao.com/item.htm?spm=a1z10.5-c.w4002-10381096695.32.y8uBBG&id=523361634552',
+                    style='left: 703px;top: 895px;width: 270px;height: 42px;',target='_blank')
+
+                    a(href='https://item.taobao.com/item.htm?spm=a1z10.5-c.w4002-10381096695.29.y8uBBG&id=523364608435',
+                    style='left: 703px;top: 935px;width: 270px;height: 42px;',target='_blank')
+
+                    a(href='https://item.taobao.com/item.htm?spm=a1z10.5-c.w4002-10381096695.26.y8uBBG&id=523357066736',
+                    style='left: 703px;top: 976px;width: 270px;height: 42px;',target='_blank')
+                article.pt-3
+                    a(href='https://detail.tmall.com/item.htm?spm=0.0.0.0.kjALYz&id=523989666607',
+                    style='left: 600px;top: 0px;width: 390px;height: 140px;',target='_blank')
+
+                    a(href='https://detail.tmall.com/item.htm?spm=0.0.0.0.iTqBrE&id=523989738231',
+                    style='left: 600px;top: 142px;width: 390px;height: 140px;',target='_blank')
+
+                    a(href='https://detail.tmall.com/item.htm?spm=0.0.0.0.r5KW5O&id=523975724263',
+                    style='left: 600px;top: 282px;width: 390px;height: 140px;',target='_blank')
+
+                    a(href='https://detail.tmall.com/item.htm?spm=0.0.0.0.EFhNbh&id=523975276049',
+                    style='left: 600px;top: 422px;width: 390px;height: 140px;',target='_blank')
+
+                    a(href='https://detail.tmall.com/item.htm?spm=0.0.0.0.RqKqt3&id=523964777695',
+                    style='left: 600px;top: 565px;width: 390px;height: 140px;',target='_blank')
+                article.pt-4
+                    a(href='https://item.taobao.com/item.htm?spm=0.0.0.0.w5GLpp&id=523966764136&qq-pf-to=pcqq.c2c',
+                    style='left: 0;top: 0;width: 100%;height: 100%;',target='_blank')
+                article.pt-5
+                    a(href='https://detail.tmall.com/item.htm?spm=a1z10.4-c.w5003-12833257935.13.sLt1B5&id=522678753682&scene=taobao_shop',
+                    style='left: 0;top: 0;width: 100%;height: 100%;',target='_blank')
+                article.pt-6
+                    a(href='https://item.taobao.com/item.htm?spm=a1z10.4-c.w5003-12833257935.14.sLt1B5&id=524407952454&ns=1&abbucket=7&scene=taobao_shop#detail',
+                    style='left: 0;top: 0;width: 100%;height: 100%;',target='_blank')
+            footer
+                img(src='./tpl/hi1626/images/act/hungergames/bottom-logos.png')
+
+
+        //script(type='text/javascript').
+        //    $(document).ready(function () {
+        //        init();
+        //    });

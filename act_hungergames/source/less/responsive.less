@@ -1,0 +1,44 @@
+.desktop-only {
+  @media @desktop-xl {
+    display: block !important;
+  }
+  @media @desktop {
+    display: block !important;
+  }
+  @media @tablet {
+    display: none !important;
+  }
+  @media @mobile {
+    display: none !important;
+  }
+}
+.mobile-only {
+  @media @desktop-xl {
+    display: none !important;
+  }
+  @media @desktop {
+    display: none !important;
+  }
+  @media @tablet {
+    display: none !important;
+  }
+  @media @mobile {
+    display: block !important;
+  }
+}
+.above-tablet {
+  display: block !important;
+  @media @above-tablet {
+  }
+  @media @below-tablet {
+    display: none !important;
+  }
+}
+.below-tablet {
+  display: none !important;
+  @media @above-tablet {
+  }
+  @media @below-tablet {
+    display: block !important;
+  }
+}

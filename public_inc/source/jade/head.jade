@@ -1,0 +1,49 @@
+doctype html
+<html>
+head(lang='en')
+  //META
+  meta(charset='UTF-8')
+  meta(name='viewport', content='width=device-width, initial-scale=1 maximum-scale=1, user-scalable=no')
+  meta(name='apple-mobile-web-app-status-bar-style', content='black')
+  meta(name='apple-mobile-web-app-capable', content='yes')
+  meta(name='description')
+  title="1626"
+
+  - var version = 'v2'
+  - var production = false //production是否本地开发或在230调试
+  - var local_file_path = '../..'
+
+  if production
+    :php
+      $current_css[]  = './tpl/hi1626/v2/css/vendor/normalize.css';
+      $current_css[]  = './tpl/hi1626/v2/css/global.css';
+      $current_js[]   = './tpl/hi1626/v2/js/vendor/jquery-1.11.3.min.js';
+    link(rel="stylesheet", type="text/css", href="{css $current_css}", media="all")
+    link(rel="icon", href="{$_FANWE['site_root']}favicon.ico", type="image/x-icon")
+    script(src="{script $current_js}")
+
+    script(type='text/javascript').
+      var SITE_PATH = '$_FANWE[site_root]';
+      var SITE_URL = '$_FANWE[site_url]';
+      var TPL_PATH = '{TPL_PATH}';
+      var PUBLIC_PATH  = '{PUBLIC_PATH}';
+      var MODULE_NAME  = '{MODULE_NAME}';
+      var ACTION_NAME  = '{ACTION_NAME}';
+      var COOKIE_PRE = "$_FANWE['config']['cookie']['cookie_pre']";
+      var TPL_NAME = '$_FANWE["setting"]["site_tmpl"]';
+      var IS_POSTING = false;
+
+  else
+    link( href="#{local_file_path}/css/vendor/normalize.css", rel="stylesheet", type="text/css", media="all")
+    link( href="#{local_file_path}/css/global.css", rel="stylesheet", type="text/css", media="all")
+    link( href="#{local_file_path}/css/global_header.css", rel="stylesheet", type="text/css", media="all")
+    script(src="#{local_file_path}/js/vendor/jquery-1.11.3.min.js")
+
+  <!--[if lt IE 10]>
+  :php
+    $current_js_ie[] = './tpl/hi1626/v2/js/vendor/html5shiv.min.js';
+    $current_js_ie[] = './tpl/hi1626/v2/js/vendor/placeholders.jquery.min.js';
+  script(type='text/javascript',src="{script $current_js_ie}")
+  <![endif]-->
+
+<body>

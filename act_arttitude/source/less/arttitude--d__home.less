@@ -1,0 +1,34 @@
+#arttitude {
+  section.brand-links {
+    width: 100%;
+    margin: 40px 0;
+    ul {
+      ._clearfix;
+      margin: auto;
+    }
+    li {
+      float: left;
+      width: 100/6%;
+      //height: 117px;
+      //margin: 10px 0;
+      a {
+        display: block;
+        //height: 100%;
+        transform: translate3d(0, 0, 0);
+        cursor: pointer;
+        img {
+          width: 100%;
+        }
+      }
+      @timing-fuction: cubic-bezier(.22, .24, .21, 1);
+      //@timing-fuction: ease-out;
+    }
+    &.hidden {
+      li {
+        a {
+          transform: translate3d(0, 1000%, 0);
+        }
+      }
+    }
+  }
+}

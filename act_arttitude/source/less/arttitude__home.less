@@ -1,0 +1,94 @@
+#arttitude {
+  section {
+    &.home {
+      //display: flex;
+      //align-items: center;
+      //justify-content: center;
+      height: 100%;
+      .brand-links {
+        width: 100%;
+        //transform: translateX(2%);
+        position: fixed;
+        left: 0;
+        ul {
+          width: 90%;
+          ._clearfix;
+          margin: auto;
+          max-width: 380px;
+        }
+        li {
+          float: left;
+          width: 33.33333333%;
+          height: 117px;
+          margin: 10px 0;
+          a {
+            display: block;
+            height: 100%;
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            transform: translate3d(0,0,0);
+          }
+          @timing-fuction: cubic-bezier(.22, .24, .21, 1);
+          //@timing-fuction: ease-out;
+          &:nth-child(1){
+            a {
+              transition: all 1.4s @timing-fuction;
+              background-image: url("@{act-img-path}/star-1-wkq-debrand.png");
+            }
+          }
+          &:nth-child(2){
+            a {
+              transition: all 1.3s @timing-fuction;
+              background-image: url("@{act-img-path}/star-2-phat-shout.png");
+            }
+          }
+          &:nth-child(3){
+            a {
+              transition: all 1.6s @timing-fuction;
+              background-image: url("@{act-img-path}/star-3-cjz-rx.png");
+            }
+          }
+          &:nth-child(4){
+            a {
+              transition: all 1.3s @timing-fuction;
+              background-image: url("@{act-img-path}/star-4-mcyan-nsbq.png");
+            }
+          }
+          &:nth-child(5){
+            a {
+              transition: all 1.6s @timing-fuction;
+              background-image: url("@{act-img-path}/star-5-lrs-outer.png");
+            }
+          }
+          &:nth-child(6){
+            a {
+              transition: all 1.4s @timing-fuction;
+              background-image: url("@{act-img-path}/star-6-lc-npc.png");
+            }
+          }
+        }
+        &.hidden {
+          li {
+            a {
+              transform: translate3d(0,1000%,0);
+            }
+          }
+        }
+      }
+      .show-desc {
+        color: @gold;
+        font-size: 10px;
+        text-align: center;
+        position: absolute;
+        bottom: 30px;
+        padding: 10%;
+        opacity: 1;
+        transition: all 1.4s ease-out;
+        &.hidden {
+          opacity: 0;
+        }
+      }
+    }
+  }
+}

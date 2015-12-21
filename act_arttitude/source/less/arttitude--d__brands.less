@@ -1,0 +1,107 @@
+#arttitude {
+  section {
+    &.brands {
+      ul.products {
+        position: relative;
+        transition: all 0.5s cubic-bezier(.22, .24, .21, 1);
+        left: 0;
+        li {
+          //float: left;
+          padding: 60px 0;
+          border-bottom: 1px dashed @gold;
+        }
+        .heros {
+          ._clearfix;
+        }
+        .main-image,.tee-image {
+          float: left;
+          width: 50%;
+          img {
+            width: 100%;
+          }
+        }
+        .cross-logo {
+          width: 45%;
+          margin: -20px auto 20px;
+          img {
+            width: 100%;
+          }
+        }
+        a.buy {
+          padding: 16px;
+          font-size: 18px;
+          background: @gold;
+          width: 200px;
+          margin: 20px auto;
+          display: block;
+          text-align: center;
+          color: black;
+          font-weight: bold;
+          &:hover {
+            background: #DBB975;
+          }
+        }
+      }
+      article {
+        padding: 0 10%;
+        margin: 50px 0 10px;
+        .intro {
+          ._clearfix;
+          .col {
+            float: left;
+            width: 45%;
+          }
+        }
+        .intro__brand {
+          padding-right: 5%;
+        }
+        .intro__artist {
+          padding-left: 5%;
+
+        }
+        h5 {
+          height: 15px;
+          font-size: 12px;
+          text-align: center;
+          letter-spacing: 4px;
+          padding-left: 4px;
+          font-weight: normal;
+          margin: 0;
+        }
+        h2{
+          color: @gold;
+          font-weight: normal;
+          text-align: center;
+          font-size: 20px;
+          margin-top: 4px;
+        }
+        h4 {
+          text-align: center;
+          color: @gold;
+        }
+        .concept {
+          padding: 20px 40px;
+          background: rgba(0,0,0,0.9);
+          border: 1px solid @gold;
+        }
+        p{
+          font-size: 14px;
+          line-height: 22px;
+          margin-bottom: 40px;
+          text-align: justify;
+          br {
+            line-height: 30px;
+            display: block;
+            content: " ";
+            margin: 10px;
+          }
+        }
+        img {
+          width: 30%;
+          margin: 40px auto;
+          display: block;
+        }
+      }
+    }
+  }
+}
