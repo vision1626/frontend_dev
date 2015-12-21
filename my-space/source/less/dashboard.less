@@ -74,12 +74,16 @@
 }
 
 //列表部分
+.item-list-container{
+  padding: 0 60px;
+}
 
-//====================================大图列表 Start==================================================
+  //====================================大图列表 Start==================================================
 .item-list-container dl.big_img {
   margin: 0 auto;
   width:100%;
   max-width: @b-image-wh*4+90+30;
+  columns: @b-image-wh 4;
 }
 
 .item-list-container dl.big_img dd.item {
@@ -432,3 +436,58 @@
 }
 
 //====================================小图列表 End====================================================
+
+//====================================列表为吉 Start==================================================
+.list-empty{
+  margin: 40px 60px 50px;
+  background-color: @light-grey;
+  height: 60px;
+  position: relative;
+  padding: 50px;
+}
+
+.list-empty .empty-content{
+  width:450px;
+  margin: 0 auto;
+}
+
+.list-empty .empty-content .empty-icon{
+  float: left;
+  margin-right: 20px;
+}
+
+.list-empty .empty-content .empty-icon span{
+  font-size: 60px;
+  line-height: 60px;
+}
+
+.list-empty .empty-content .empty-message{
+  float: left;
+  font-size: @font-size-m;
+  margin-right: 40px;
+  padding-top: 8px;
+}
+
+.list-empty .empty-content .empty-message span{
+  font-weight: bold;
+}
+
+.list-empty .empty-content .empty-action{
+  float: left;
+}
+
+.list-empty .empty-content .empty-action a{
+  line-height: 60px;
+  border: 2px solid @blue;
+  background-color: @white;
+  transition: all 0.2s;
+  color:@black;
+  padding: 8px 20px;
+  border-radius: 60px;
+}
+
+.list-empty .empty-content .empty-action a:hover{
+  background-color: @blue;
+  color:@white;
+}
+//====================================列表为吉 End====================================================

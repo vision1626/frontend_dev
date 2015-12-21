@@ -2,10 +2,11 @@
   $current_css[] = './tpl/hi1626/css/login/vendor/normalize.css';
   $current_css[] = './tpl/hi1626/css/myspace/my-space.min.css';
 //{template page/u/u_header}
+//{if $list}
 .item-list-filter
   .item-nav-container
     //.item-nav.first.current
-    //  |潮人
+    //  |热门单品
     //  a.count {$count}
     //.item-nav
     //  |潮牌
@@ -35,10 +36,12 @@
         span.icon.icon-list_view
       a(href='#')
         span.icon.icon-grid_view
-
+//{/if}
 .item-list-container
+  //{if $list}
   dl.big_img
     //{loop $list $k $item}
+    //{if $k < 12}
     dd.item
       div
         //{if $item['dynamic_type'] == 1}
@@ -113,7 +116,20 @@
             span.icon.icon-heart
             br
             span.like_count {$item['like_count']}
+    //{/if}
     //{/loop}
+  //{else}
+  .list-empty
+    .empty-content
+      .empty-icon
+        span.icon.icon-viewed
+      .empty-message
+        span 你还没有关注任何人
+        br
+        label 不如从下面这堆潮流达人开始吧!
+      .empty-action
+        a(href="#") 回首页
+  //{/if}
   //dl.small_img
   //  dd.item
   //    div
@@ -144,3 +160,5 @@
   //            span.count 234
 
 .item-pagiation
+script(type="text/javascript")
+  |var list_data = {$list_json};
