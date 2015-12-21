@@ -3,17 +3,15 @@ module.exports = function (grunt) {
     require('load-grunt-tasks')(grunt);
 
     var globalConfig = {
-        src: 'src',
-        dest: 'dev',
-        cssSrcPath: 'source/less',
-        jsSrcPath: 'source/coffee',
-        jadeSrcPath: 'source/jade',
-        cssDistPath: '../../tpl/hi1626/css/myspace',
-        jsDebugPath: '../../tpl/hi1626/js/myspace/debug',
-        jsDistPath: '../../tpl/hi1626/js/myspace',
-        htmlDistPath: '../../tpl/hi1626/page/u',
-        cssName: 'myspace',
-        jsName: 'scripts'
+        distPath:       '../../tpl/hi1626/v2',
+        cssSrcPath:     'source/less',
+        jsSrcPath:      'source/coffee',
+        jadeSrcPath:    'source/jade',
+        cssDistPath:    '<%= globalConfig.distPath %>/css/',
+        jsDebugPath:    '<%= globalConfig.distPath %>/js/debug',
+        jsDistPath:     '<%= globalConfig.distPath %>/js/',
+        htmlDistPath:   '<%= globalConfig.distPath %>/views/myspace',
+        viewName:       'myspace',
     };
 
     grunt.initConfig({
@@ -33,42 +31,77 @@ module.exports = function (grunt) {
             }
         },
 
+        //cssmin: {
+        //    target: {
+        //        files: {
+        //            '<%= globalConfig.cssDistPath %>/<%= globalConfig.viewName %>.min.css': [
+        //                '<%= globalConfig.cssDistPath %>/<%= globalConfig.viewName %>.min.css'
+        //            ]
+        //        }
+        //    }
+        //},
+
         cssmin: {
             target: {
-                files: {
-                    '<%= globalConfig.cssDistPath %>/<%= globalConfig.cssName %>.min.css': [
-                        '<%= globalConfig.cssDistPath %>/<%= globalConfig.cssName %>.min.css'
-                    ]
-                }
+                files: [{
+                    expand: true,
+                    cwd: '<%= globalConfig.cssDistPath %>',
+                    src: '**/*.css',
+                    dest: '<%= globalConfig.cssDistPath %>'
+                }]
             }
         },
+
+        //less: {
+        //    dist: {
+        //        files: {
+        //            '<%= globalConfig.cssDistPath %>/<%= globalConfig.viewName %>.min.css': [
+        //                '<%= globalConfig.cssSrcPath %>/app.less'
+        //            ]
+        //            //'assets/css/dist/ie.css':[
+        //            //    'assets/css/src/if-ie.less'
+        //            //]
+        //        },
+        //        options: {
+        //            compress: false,
+        //            sourceMap: true,
+        //            sourceMapFilename: '<%= globalConfig.cssDistPath %>/<%= globalConfig.viewName %>.min.css.map',
+        //            sourceMapURL: '<%= globalConfig.viewName %>.min.css.map'
+        //        }
+        //    }
+        //},
 
         less: {
-            dist: {
+            target: {
                 files: {
-                    '<%= globalConfig.cssDistPath %>/<%= globalConfig.cssName %>.min.css': [
-                        '<%= globalConfig.cssSrcPath %>/app.less'
-                    ]
-                    //'assets/css/dist/ie.css':[
-                    //    'assets/css/src/if-ie.less'
-                    //]
-                },
-                options: {
-                    compress: false,
-                    sourceMap: true,
-                    sourceMapFilename: '<%= globalConfig.cssDistPath %>/<%= globalConfig.cssName %>.min.css.map',
-                    sourceMapURL: '<%= globalConfig.cssName %>.min.css.map'
+                    '<%= globalConfig.cssDistPath %>/<%= globalConfig.viewName %>.css': '<%= globalConfig.cssSrcPath %>/**/*.less'
                 }
             }
+            //src: {
+            //    expand: true,
+            //    cwd: '<%= globalConfig.cssSrcPath %>',
+            //    src: '**/*.less',
+            //    dest: '<%= globalConfig.cssDistPath %>'
+            //}
         },
 
+        //autoprefixer: {
+        //    dist: {
+        //        files: {
+        //            '<%= globalConfig.cssDistPath %>/<%= globalConfig.viewName %>.min.css': [
+        //                '<%= globalConfig.cssDistPath %>/<%= globalConfig.viewName %>.min.css'
+        //            ]
+        //        }
+        //    }
+        //},
         autoprefixer: {
             dist: {
-                files: {
-                    '<%= globalConfig.cssDistPath %>/<%= globalConfig.cssName %>.min.css': [
-                        '<%= globalConfig.cssDistPath %>/<%= globalConfig.cssName %>.min.css'
-                    ]
-                }
+                files: [{
+                    expand: true,
+                    cwd: '<%= globalConfig.cssDistPath %>',
+                    src: '**/*.css',
+                    dest: '<%= globalConfig.cssDistPath %>'
+                }]
             }
         },
 
@@ -82,6 +115,10 @@ module.exports = function (grunt) {
                     '<%= globalConfig.jsDebugPath %>/myspace.js':[
                         // '<%= globalConfig.jsSrcPath %>/util.coffee',
                         '<%= globalConfig.jsSrcPath %>/header.coffee'
+                    ],
+                    '<%= globalConfig.jsDebugPath %>/dashboard.js':[
+                        '<%= globalConfig.jsSrcPath %>/util.coffee',
+                        '<%= globalConfig.jsSrcPath %>/dashboard.coffee'
                     ]
                 }
             }
@@ -107,13 +144,16 @@ module.exports = function (grunt) {
         jade4php: {
             compile: {
                 options: {
-                    pretty: true
+                    pretty: true,
+                    basedir: __dirname
                 },
-                expand: true,
-                cwd: '<%= globalConfig.jadeSrcPath %>/',
-                src: ['*.jade'],
-                dest: '<%= globalConfig.htmlDistPath %>/',
-                ext: '.htm'
+                files:[{
+                    expand: true,
+                    cwd: '<%= globalConfig.jadeSrcPath %>/',
+                    src: ['*.jade'],
+                    dest: '<%= globalConfig.htmlDistPath %>/',
+                    ext: '.htm'
+                }]
             }
         }
     });

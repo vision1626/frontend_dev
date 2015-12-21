@@ -1,8 +1,7 @@
-:php
-  $current_css[] = './tpl/hi1626/css/login/vendor/normalize.css';
-  $current_css[] = './tpl/hi1626/css/myspace/my-space.min.css';
-//{template page/u/u_header}
-//{if $list}
+- var production = false;
+if !production
+  include ../public_inc/source/jade/head.jade
+
 .item-list-filter
   .item-nav-container
     //.item-nav.first.current
@@ -160,5 +159,782 @@
   //            span.count 234
 
 .item-pagiation
-script(type="text/javascript")
-  |var list_data = {$list_json};
+
+script.
+  //var list_data = {$list_json};
+  var list_data = [
+    {
+      "uid": "236918",
+      "dapei_id": null,
+      "create_time": "1427243511",
+      "share_id": "2939787",
+      "is_dapei_like": null,
+      "is_share_fav": "1",
+      "like_count": "39",
+      "dynamic_type": 2,
+      "title": "台湾原创品牌“置死地 而后生”骷髅脚骨 中筒袜",
+      "goods_price": "45.00",
+      "comment_count": "-5",
+      "view_count": "272",
+      "img_thumb": "http://192.168.0.230//public/upload/avatar/000/09/13/38_1397525067_small.jpg",
+      "user_name": "何必TM",
+      "img": "./public/upload/share/000/029/397/87/7abacca064ca265b6ae5f8b37469b681E505ie.jpg",
+      "user_href": "http://192.168.0.230/u/talk-91338.html",
+      "url": "http://192.168.0.230/note/2939787.html",
+      "like_total": 2,
+      "like_user_list": [
+        {
+          "uid": "9230",
+          "user_name": "xmarcle",
+          "user_href": "http://192.168.0.230/u/talk-9230.html"
+        },
+        {
+          "uid": "236918",
+          "user_name": "abc123",
+          "user_href": "http://192.168.0.230/u/talk-236918.html"
+        }
+      ]
+    },
+    {
+      "uid": "236918",
+      "dapei_id": null,
+      "create_time": "1427243511",
+      "share_id": "2939723",
+      "is_dapei_like": null,
+      "is_share_fav": "1",
+      "like_count": "31",
+      "dynamic_type": 2,
+      "title": "首尔大叔▲SS14设计潮CAP 刺绣星空街头平沿棒球帽",
+      "goods_price": "132.00",
+      "comment_count": "-5",
+      "view_count": "86",
+      "img_thumb": "http://192.168.0.230//public/upload/avatar/000/04/49/70_1390285840_small.jpg",
+      "user_name": "didisea",
+      "img": "./public/upload/share/000/029/397/23/bc0f9c1072696333da01830db8446cc8zu0Uut.jpg",
+      "user_href": "http://192.168.0.230/u/talk-44970.html",
+      "url": "http://192.168.0.230/note/2939723.html",
+      "like_total": 2,
+      "like_user_list": [
+        {
+          "uid": "9230",
+          "user_name": "xmarcle",
+          "user_href": "http://192.168.0.230/u/talk-9230.html"
+        },
+        {
+          "uid": "236918",
+          "user_name": "abc123",
+          "user_href": "http://192.168.0.230/u/talk-236918.html"
+        }
+      ]
+    },
+    {
+      "uid": "236918",
+      "dapei_id": null,
+      "create_time": "1427243510",
+      "share_id": "2939337",
+      "is_dapei_like": null,
+      "is_share_fav": "1",
+      "like_count": "30",
+      "dynamic_type": 2,
+      "title": "星系腰间！JAM HOME MADE KZK MODEL 2nd CARD",
+      "goods_price": "850.00",
+      "comment_count": "-5",
+      "view_count": "229",
+      "img_thumb": "http://192.168.0.230//public/upload/avatar/000/07/49/13_1397081654_small.jpg",
+      "user_name": "小样样样样样儿",
+      "img": "./public/upload/share/000/029/393/37/036f6a340c8906c6a7021aa27ef83780N3Nb1m.jpg",
+      "user_href": "http://192.168.0.230/u/talk-74913.html",
+      "url": "http://192.168.0.230/note/2939337.html",
+      "like_total": 2,
+      "like_user_list": [
+        {
+          "uid": "9230",
+          "user_name": "xmarcle",
+          "user_href": "http://192.168.0.230/u/talk-9230.html"
+        },
+        {
+          "uid": "236918",
+          "user_name": "abc123",
+          "user_href": "http://192.168.0.230/u/talk-236918.html"
+        }
+      ]
+    },
+    {
+      "uid": "236918",
+      "dapei_id": null,
+      "create_time": "1427243509",
+      "share_id": "2939207",
+      "is_dapei_like": null,
+      "is_share_fav": "1",
+      "like_count": "21",
+      "dynamic_type": 2,
+      "title": "如此简单！POLO SHIRTS",
+      "goods_price": "550.00",
+      "comment_count": "-4",
+      "view_count": "157",
+      "img_thumb": "http://192.168.0.230//public/upload/avatar/000/07/49/13_1397081654_small.jpg",
+      "user_name": "小样样样样样儿",
+      "img": "./public/upload/share/000/029/392/07/7eede3a43e4ebf98983c4db390267552DuBbIq.jpg",
+      "user_href": "http://192.168.0.230/u/talk-74913.html",
+      "url": "http://192.168.0.230/note/2939207.html",
+      "like_total": 2,
+      "like_user_list": [
+        {
+          "uid": "9230",
+          "user_name": "xmarcle",
+          "user_href": "http://192.168.0.230/u/talk-9230.html"
+        },
+        {
+          "uid": "236918",
+          "user_name": "abc123",
+          "user_href": "http://192.168.0.230/u/talk-236918.html"
+        }
+      ]
+    },
+    {
+      "uid": "236918",
+      "dapei_id": null,
+      "create_time": "1427243509",
+      "share_id": "2939409",
+      "is_dapei_like": null,
+      "is_share_fav": "1",
+      "like_count": "138",
+      "dynamic_type": 2,
+      "title": "脚底风光！撞色脚底刺青阴阳袜",
+      "goods_price": "12.80",
+      "comment_count": "-5",
+      "view_count": "786",
+      "img_thumb": "http://192.168.0.230//public/upload/avatar/000/07/49/13_1397081654_small.jpg",
+      "user_name": "小样样样样样儿",
+      "img": "./public/upload/share/000/029/394/09/17add4b384f7dfaa2a03ca4d7ef8998770V7lj.jpg",
+      "user_href": "http://192.168.0.230/u/talk-74913.html",
+      "url": "http://192.168.0.230/note/2939409.html",
+      "like_total": 2,
+      "like_user_list": [
+        {
+          "uid": "9230",
+          "user_name": "xmarcle",
+          "user_href": "http://192.168.0.230/u/talk-9230.html"
+        },
+        {
+          "uid": "236918",
+          "user_name": "abc123",
+          "user_href": "http://192.168.0.230/u/talk-236918.html"
+        }
+      ]
+    },
+    {
+      "uid": "236918",
+      "dapei_id": null,
+      "create_time": "1427243508",
+      "share_id": "2889731",
+      "is_dapei_like": null,
+      "is_share_fav": "1",
+      "like_count": "61",
+      "dynamic_type": 2,
+      "title": "清凉感十足的凉鞋",
+      "goods_price": "224.00",
+      "comment_count": "-5",
+      "view_count": "276",
+      "img_thumb": "http://192.168.0.230//public/upload/avatar/000/00/55/38_1392851796_small.jpg",
+      "user_name": "时尚起义范er",
+      "img": "./public/upload/share/000/028/897/31/0dd78d3e21c9352bb0bd590d956b176bEUH6H6.jpg",
+      "user_href": "http://192.168.0.230/u/talk-5538.html",
+      "url": "http://192.168.0.230/note/2889731.html",
+      "like_total": 2,
+      "like_user_list": [
+        {
+          "uid": "9230",
+          "user_name": "xmarcle",
+          "user_href": "http://192.168.0.230/u/talk-9230.html"
+        },
+        {
+          "uid": "236918",
+          "user_name": "abc123",
+          "user_href": "http://192.168.0.230/u/talk-236918.html"
+        }
+      ]
+    },
+    {
+      "uid": "236918",
+      "dapei_id": null,
+      "create_time": "1427243507",
+      "share_id": "2937900",
+      "is_dapei_like": null,
+      "is_share_fav": "1",
+      "like_count": "83",
+      "dynamic_type": 2,
+      "title": "Kiel James Patrick 手工制作海洋风船锚手带 经典结系列 多色入",
+      "goods_price": "20.00",
+      "comment_count": "-5",
+      "view_count": "366",
+      "img_thumb": "http://192.168.0.230//public/upload/avatar/noavatar_small.jpg",
+      "user_name": "chiltonchun",
+      "img": "./public/upload/share/000/029/379/00/ba8fb71c2b38922d94fbfaee4adfac51PhjBtA.jpg",
+      "user_href": "http://192.168.0.230/u/talk-8972.html",
+      "url": "http://192.168.0.230/note/2937900.html",
+      "like_total": 2,
+      "like_user_list": [
+        {
+          "uid": "9230",
+          "user_name": "xmarcle",
+          "user_href": "http://192.168.0.230/u/talk-9230.html"
+        },
+        {
+          "uid": "236918",
+          "user_name": "abc123",
+          "user_href": "http://192.168.0.230/u/talk-236918.html"
+        }
+      ]
+    },
+    {
+      "uid": "236918",
+      "dapei_id": null,
+      "create_time": "1427243506",
+      "share_id": "2939878",
+      "is_dapei_like": null,
+      "is_share_fav": "1",
+      "like_count": "169",
+      "dynamic_type": 2,
+      "title": "夜光叶子！HUF GLOW IN THE DARK PLANTLIFE",
+      "goods_price": "279.00",
+      "comment_count": "-5",
+      "view_count": "477",
+      "img_thumb": "http://192.168.0.230//public/upload/avatar/000/07/49/13_1397081654_small.jpg",
+      "user_name": "小样样样样样儿",
+      "img": "./public/upload/share/000/029/398/78/3acfdb6c354e17ab935089410fa621e9tUnhWN.jpg",
+      "user_href": "http://192.168.0.230/u/talk-74913.html",
+      "url": "http://192.168.0.230/note/2939878.html",
+      "like_total": 2,
+      "like_user_list": [
+        {
+          "uid": "9230",
+          "user_name": "xmarcle",
+          "user_href": "http://192.168.0.230/u/talk-9230.html"
+        },
+        {
+          "uid": "236918",
+          "user_name": "abc123",
+          "user_href": "http://192.168.0.230/u/talk-236918.html"
+        }
+      ]
+    },
+    {
+      "uid": "236918",
+      "dapei_id": null,
+      "create_time": "1427243506",
+      "share_id": "2939756",
+      "is_dapei_like": null,
+      "is_share_fav": "1",
+      "like_count": "52",
+      "dynamic_type": 2,
+      "title": "LEBRON XI ELITE 642846-600",
+      "goods_price": "2450.00",
+      "comment_count": "-4",
+      "view_count": "255",
+      "img_thumb": "http://192.168.0.230//public/upload/avatar/000/09/13/38_1397525067_small.jpg",
+      "user_name": "何必TM",
+      "img": "./public/upload/share/000/029/397/56/36bf481266a1334137072fb3cad7f01a8ZPe9C.jpg",
+      "user_href": "http://192.168.0.230/u/talk-91338.html",
+      "url": "http://192.168.0.230/note/2939756.html",
+      "like_total": 2,
+      "like_user_list": [
+        {
+          "uid": "9230",
+          "user_name": "xmarcle",
+          "user_href": "http://192.168.0.230/u/talk-9230.html"
+        },
+        {
+          "uid": "236918",
+          "user_name": "abc123",
+          "user_href": "http://192.168.0.230/u/talk-236918.html"
+        }
+      ]
+    },
+    {
+      "uid": "236918",
+      "dapei_id": null,
+      "create_time": "1427243505",
+      "share_id": "2958996",
+      "is_dapei_like": null,
+      "is_share_fav": "1",
+      "like_count": "107",
+      "dynamic_type": 2,
+      "title": "NIKE AIR MAX 90 ICE 灰 冰",
+      "goods_price": "1450.00",
+      "comment_count": "-3",
+      "view_count": "367",
+      "img_thumb": "http://192.168.0.230//public/upload/avatar/000/00/49/45_small.jpg",
+      "user_name": "冯健灶",
+      "img": "./public/upload/share/000/029/589/96/e836a07a815985e0aef78b3b5a80049dAt01Tw.jpg",
+      "user_href": "http://192.168.0.230/u/talk-4945.html",
+      "url": "http://192.168.0.230/note/2958996.html",
+      "like_total": 2,
+      "like_user_list": [
+        {
+          "uid": "9230",
+          "user_name": "xmarcle",
+          "user_href": "http://192.168.0.230/u/talk-9230.html"
+        },
+        {
+          "uid": "236918",
+          "user_name": "abc123",
+          "user_href": "http://192.168.0.230/u/talk-236918.html"
+        }
+      ]
+    },
+    {
+      "uid": "236918",
+      "dapei_id": null,
+      "create_time": "1427243504",
+      "share_id": "2940662",
+      "is_dapei_like": null,
+      "is_share_fav": "1",
+      "like_count": "7",
+      "dynamic_type": 2,
+      "title": "大冉手作 纯手绘手机壳iPhone5s手机壳 吃椰子咯 怎么是椰子树啊",
+      "goods_price": "45.00",
+      "comment_count": "-5",
+      "view_count": "64",
+      "img_thumb": "http://192.168.0.230//public/upload/avatar/000/04/00/95_1392059076_small.jpg",
+      "user_name": "猫熊Colin",
+      "img": "./public/upload/share/000/029/406/62/67394992c8b31b903c360a430fd0ad94j576xj.jpg",
+      "user_href": "http://192.168.0.230/u/talk-40095.html",
+      "url": "http://192.168.0.230/note/2940662.html",
+      "like_total": 2,
+      "like_user_list": [
+        {
+          "uid": "9230",
+          "user_name": "xmarcle",
+          "user_href": "http://192.168.0.230/u/talk-9230.html"
+        },
+        {
+          "uid": "236918",
+          "user_name": "abc123",
+          "user_href": "http://192.168.0.230/u/talk-236918.html"
+        }
+      ]
+    },
+    {
+      "uid": "236918",
+      "dapei_id": null,
+      "create_time": "1427243503",
+      "share_id": "2937835",
+      "is_dapei_like": null,
+      "is_share_fav": "1",
+      "like_count": "57",
+      "dynamic_type": 2,
+      "title": "台东高山族原住民手作彩石手绳",
+      "goods_price": "15.00",
+      "comment_count": "-5",
+      "view_count": "222",
+      "img_thumb": "http://192.168.0.230//public/upload/avatar/noavatar_small.jpg",
+      "user_name": "chiltonchun",
+      "img": "./public/upload/share/000/029/378/35/7a261a5fba0251c479b70c609885201bZvvDrM.jpg",
+      "user_href": "http://192.168.0.230/u/talk-8972.html",
+      "url": "http://192.168.0.230/note/2937835.html",
+      "like_total": 2,
+      "like_user_list": [
+        {
+          "uid": "9230",
+          "user_name": "xmarcle",
+          "user_href": "http://192.168.0.230/u/talk-9230.html"
+        },
+        {
+          "uid": "236918",
+          "user_name": "abc123",
+          "user_href": "http://192.168.0.230/u/talk-236918.html"
+        }
+      ]
+    },
+    {
+      "uid": "236918",
+      "dapei_id": null,
+      "create_time": "1427243502",
+      "share_id": "2870403",
+      "is_dapei_like": null,
+      "is_share_fav": "1",
+      "like_count": "77",
+      "dynamic_type": 2,
+      "title": "【防水触摸指纹收集键盘】 - 键盘鼠标 其他文具_办公文具 - New Sanwa  - 趣玩网",
+      "goods_price": "2099.00",
+      "comment_count": "-5",
+      "view_count": "336",
+      "img_thumb": "http://192.168.0.230//public/upload/avatar/noavatar_small.jpg",
+      "user_name": "趣玩精品推荐",
+      "img": "./public/upload/share/000/028/704/03/7552014b9e3811042cac7caa2d08119fiqmqYp.jpg",
+      "user_href": "http://192.168.0.230/u/talk-164958.html",
+      "url": "http://192.168.0.230/note/2870403.html",
+      "like_total": 2,
+      "like_user_list": [
+        {
+          "uid": "9230",
+          "user_name": "xmarcle",
+          "user_href": "http://192.168.0.230/u/talk-9230.html"
+        },
+        {
+          "uid": "236918",
+          "user_name": "abc123",
+          "user_href": "http://192.168.0.230/u/talk-236918.html"
+        }
+      ]
+    },
+    {
+      "uid": "236918",
+      "dapei_id": null,
+      "create_time": "1427243502",
+      "share_id": "2939742",
+      "is_dapei_like": null,
+      "is_share_fav": "1",
+      "like_count": "31",
+      "dynamic_type": 2,
+      "title": "如此创意！水龙头造型USB充电器",
+      "goods_price": "158.00",
+      "comment_count": "-4",
+      "view_count": "126",
+      "img_thumb": "http://192.168.0.230//public/upload/avatar/000/07/49/13_1397081654_small.jpg",
+      "user_name": "小样样样样样儿",
+      "img": "./public/upload/share/000/029/397/42/0484cca9b10a03edd3dffe4fe5e9e774EssQEU.jpg",
+      "user_href": "http://192.168.0.230/u/talk-74913.html",
+      "url": "http://192.168.0.230/note/2939742.html",
+      "like_total": 2,
+      "like_user_list": [
+        {
+          "uid": "9230",
+          "user_name": "xmarcle",
+          "user_href": "http://192.168.0.230/u/talk-9230.html"
+        },
+        {
+          "uid": "236918",
+          "user_name": "abc123",
+          "user_href": "http://192.168.0.230/u/talk-236918.html"
+        }
+      ]
+    },
+    {
+      "uid": "236918",
+      "dapei_id": null,
+      "create_time": "1427243501",
+      "share_id": "2959114",
+      "is_dapei_like": null,
+      "is_share_fav": "1",
+      "like_count": "45",
+      "dynamic_type": 2,
+      "title": "85炫彩精灵TEE",
+      "goods_price": "66.00",
+      "comment_count": "-4",
+      "view_count": "235",
+      "img_thumb": "http://192.168.0.230//public/upload/avatar/000/09/80/84_1395782568_small.jpg",
+      "user_name": "老卡儿",
+      "img": "./public/upload/share/000/029/591/14/4db80d606a5f3eb80cc0a765995049adDrmr7W.jpg",
+      "user_href": "http://192.168.0.230/u/talk-98084.html",
+      "url": "http://192.168.0.230/note/2959114.html",
+      "like_total": 2,
+      "like_user_list": [
+        {
+          "uid": "9230",
+          "user_name": "xmarcle",
+          "user_href": "http://192.168.0.230/u/talk-9230.html"
+        },
+        {
+          "uid": "236918",
+          "user_name": "abc123",
+          "user_href": "http://192.168.0.230/u/talk-236918.html"
+        }
+      ]
+    },
+    {
+      "uid": "236918",
+      "dapei_id": null,
+      "create_time": "1427243500",
+      "share_id": "2940045",
+      "is_dapei_like": null,
+      "is_share_fav": "1",
+      "like_count": "62",
+      "dynamic_type": 2,
+      "title": "幻彩夏日！Adidas ZX Flux Multi-Color",
+      "goods_price": "1299.00",
+      "comment_count": "-4",
+      "view_count": "376",
+      "img_thumb": "http://192.168.0.230//public/upload/avatar/000/04/34/84_1398043338_small.jpg",
+      "user_name": "kenleung",
+      "img": "./public/upload/share/000/029/400/45/89cabbd011a6f18d6fe8b837cce2f4f308U7o0.jpg",
+      "user_href": "http://192.168.0.230/u/talk-43484.html",
+      "url": "http://192.168.0.230/note/2940045.html",
+      "like_total": 2,
+      "like_user_list": [
+        {
+          "uid": "9230",
+          "user_name": "xmarcle",
+          "user_href": "http://192.168.0.230/u/talk-9230.html"
+        },
+        {
+          "uid": "236918",
+          "user_name": "abc123",
+          "user_href": "http://192.168.0.230/u/talk-236918.html"
+        }
+      ]
+    },
+    {
+      "uid": "236918",
+      "dapei_id": null,
+      "create_time": "1427243499",
+      "share_id": "2940372",
+      "is_dapei_like": null,
+      "is_share_fav": "1",
+      "like_count": "13",
+      "dynamic_type": 2,
+      "title": "THETHING设计潮牌男士纯棉短袖T恤休闲圆领纯棉夏装肌肉疼2014",
+      "goods_price": "208.00",
+      "comment_count": "-5",
+      "view_count": "109",
+      "img_thumb": "http://192.168.0.230//public/upload/avatar/000/15/82/65_1398804822_small.jpg",
+      "user_name": "Lee90L",
+      "img": "./public/upload/share/000/029/403/72/909585fe727cff87756097c7ed13f5d12S9g3Y.jpg",
+      "user_href": "http://192.168.0.230/u/talk-158265.html",
+      "url": "http://192.168.0.230/note/2940372.html",
+      "like_total": 2,
+      "like_user_list": [
+        {
+          "uid": "9230",
+          "user_name": "xmarcle",
+          "user_href": "http://192.168.0.230/u/talk-9230.html"
+        },
+        {
+          "uid": "236918",
+          "user_name": "abc123",
+          "user_href": "http://192.168.0.230/u/talk-236918.html"
+        }
+      ]
+    },
+    {
+      "uid": "236918",
+      "dapei_id": null,
+      "create_time": "1427243499",
+      "share_id": "2938398",
+      "is_dapei_like": null,
+      "is_share_fav": "1",
+      "like_count": "24",
+      "dynamic_type": 2,
+      "title": "浪漫氛围的透款蕾丝T恤",
+      "goods_price": "125.00",
+      "comment_count": "-4",
+      "view_count": "88",
+      "img_thumb": "http://192.168.0.230//public/upload/avatar/000/00/55/38_1392851796_small.jpg",
+      "user_name": "时尚起义范er",
+      "img": "./public/upload/share/000/029/383/98/9c49ede970aafa29d146fa5315327e3f6hKw3j.jpg",
+      "user_href": "http://192.168.0.230/u/talk-5538.html",
+      "url": "http://192.168.0.230/note/2938398.html",
+      "like_total": 2,
+      "like_user_list": [
+        {
+          "uid": "9230",
+          "user_name": "xmarcle",
+          "user_href": "http://192.168.0.230/u/talk-9230.html"
+        },
+        {
+          "uid": "236918",
+          "user_name": "abc123",
+          "user_href": "http://192.168.0.230/u/talk-236918.html"
+        }
+      ]
+    },
+    {
+      "uid": "236918",
+      "dapei_id": null,
+      "create_time": "1427243498",
+      "share_id": "2941054",
+      "is_dapei_like": null,
+      "is_share_fav": "1",
+      "like_count": "40",
+      "dynamic_type": 2,
+      "title": "灰岩英雄！ NIKE LUNAR FORCE 1 HI 647902-001",
+      "goods_price": "1430.00",
+      "comment_count": "-5",
+      "view_count": "151",
+      "img_thumb": "http://192.168.0.230//public/upload/avatar/000/09/13/38_1397525067_small.jpg",
+      "user_name": "何必TM",
+      "img": "./public/upload/share/000/029/410/54/b9b9237bc780d558c2e906338ee05375377K4C.jpg",
+      "user_href": "http://192.168.0.230/u/talk-91338.html",
+      "url": "http://192.168.0.230/note/2941054.html",
+      "like_total": 2,
+      "like_user_list": [
+        {
+          "uid": "9230",
+          "user_name": "xmarcle",
+          "user_href": "http://192.168.0.230/u/talk-9230.html"
+        },
+        {
+          "uid": "236918",
+          "user_name": "abc123",
+          "user_href": "http://192.168.0.230/u/talk-236918.html"
+        }
+      ]
+    },
+    {
+      "uid": "236918",
+      "dapei_id": null,
+      "create_time": "1427243497",
+      "share_id": "2941237",
+      "is_dapei_like": null,
+      "is_share_fav": "1",
+      "like_count": "33",
+      "dynamic_type": 2,
+      "title": "时尚品牌 REINDEE LUSION 2014 S/S 格子拼接长袖衬衫",
+      "goods_price": "338.00",
+      "comment_count": "-4",
+      "view_count": "230",
+      "img_thumb": "http://192.168.0.230//public/upload/avatar/000/00/01/23_small.jpg",
+      "user_name": "UNIVERSE_STORE",
+      "img": "./public/upload/share/000/029/412/37/c24b62a264bbc5b74a178b6ca0318e3emcJ2z2.jpg",
+      "user_href": "http://192.168.0.230/u/talk-123.html",
+      "url": "http://192.168.0.230/note/2941237.html",
+      "like_total": 2,
+      "like_user_list": [
+        {
+          "uid": "9230",
+          "user_name": "xmarcle",
+          "user_href": "http://192.168.0.230/u/talk-9230.html"
+        },
+        {
+          "uid": "236918",
+          "user_name": "abc123",
+          "user_href": "http://192.168.0.230/u/talk-236918.html"
+        }
+      ]
+    },
+    {
+      "uid": "236918",
+      "dapei_id": null,
+      "create_time": "1427243496",
+      "share_id": "2939020",
+      "is_dapei_like": null,
+      "is_share_fav": "1",
+      "like_count": "39",
+      "dynamic_type": 2,
+      "title": "小细节爱生活！giorni x lisa larson 条纹猫多用布",
+      "goods_price": "22.00",
+      "comment_count": "-4",
+      "view_count": "152",
+      "img_thumb": "http://192.168.0.230//public/upload/avatar/000/07/49/13_1397081654_small.jpg",
+      "user_name": "小样样样样样儿",
+      "img": "./public/upload/share/000/029/390/20/aee283443c6b03f7b6e62b5d06a7c942lAuzqZ.jpg",
+      "user_href": "http://192.168.0.230/u/talk-74913.html",
+      "url": "http://192.168.0.230/note/2939020.html",
+      "like_total": 2,
+      "like_user_list": [
+        {
+          "uid": "9230",
+          "user_name": "xmarcle",
+          "user_href": "http://192.168.0.230/u/talk-9230.html"
+        },
+        {
+          "uid": "236918",
+          "user_name": "abc123",
+          "user_href": "http://192.168.0.230/u/talk-236918.html"
+        }
+      ]
+    },
+    {
+      "uid": "236918",
+      "dapei_id": null,
+      "create_time": "1427243495",
+      "share_id": "2961085",
+      "is_dapei_like": null,
+      "is_share_fav": "1",
+      "like_count": "9",
+      "dynamic_type": 2,
+      "title": "白色经典 KAMI HOUSE 皮质棒球帽",
+      "goods_price": "418.00",
+      "comment_count": "0",
+      "view_count": "38",
+      "img_thumb": "http://192.168.0.230//public/upload/avatar/000/03/39/90_1399156547_small.jpg",
+      "user_name": "小mi陈俊威",
+      "img": "./public/upload/share/000/029/610/85/1629f3b1fa4bb61245030e2f5c9df40fllANlH.jpg",
+      "user_href": "http://192.168.0.230/u/talk-33990.html",
+      "url": "http://192.168.0.230/note/2961085.html",
+      "like_total": 2,
+      "like_user_list": [
+        {
+          "uid": "9230",
+          "user_name": "xmarcle",
+          "user_href": "http://192.168.0.230/u/talk-9230.html"
+        },
+        {
+          "uid": "236918",
+          "user_name": "abc123",
+          "user_href": "http://192.168.0.230/u/talk-236918.html"
+        }
+      ]
+    },
+    {
+      "uid": "236918",
+      "dapei_id": null,
+      "create_time": "1427243494",
+      "share_id": "2959473",
+      "is_dapei_like": null,
+      "is_share_fav": "1",
+      "like_count": "57",
+      "dynamic_type": 2,
+      "title": "【G表弟】150双显 反光镜",
+      "goods_price": "868.00",
+      "comment_count": "-4",
+      "view_count": "220",
+      "img_thumb": "http://192.168.0.230//public/upload/avatar/000/06/38/83_1392708416_small.jpg",
+      "user_name": "不明真像的路人",
+      "img": "./public/upload/share/000/029/594/73/d43accbbb5321b256583580158482b6d1gjBa1.jpg",
+      "user_href": "http://192.168.0.230/u/talk-63883.html",
+      "url": "http://192.168.0.230/note/2959473.html",
+      "like_total": 2,
+      "like_user_list": [
+        {
+          "uid": "9230",
+          "user_name": "xmarcle",
+          "user_href": "http://192.168.0.230/u/talk-9230.html"
+        },
+        {
+          "uid": "236918",
+          "user_name": "abc123",
+          "user_href": "http://192.168.0.230/u/talk-236918.html"
+        }
+      ]
+    },
+    {
+      "uid": "236918",
+      "dapei_id": null,
+      "create_time": "1427243493",
+      "share_id": "2961733",
+      "is_dapei_like": null,
+      "is_share_fav": "1",
+      "like_count": "12",
+      "dynamic_type": 2,
+      "title": "测量神器 Fashionary身体测量卷尺",
+      "goods_price": "98.00",
+      "comment_count": "1",
+      "view_count": "84",
+      "img_thumb": "http://192.168.0.230//public/upload/avatar/000/00/01/03_1379024549_small.jpg",
+      "user_name": "B君",
+      "img": "./public/upload/share/000/029/617/33/0339e6b3ed092c914dfa9438d6958b04LIg4WX.jpg",
+      "user_href": "http://192.168.0.230/u/talk-103.html",
+      "url": "http://192.168.0.230/note/2961733.html",
+      "like_total": 2,
+      "like_user_list": [
+        {
+          "uid": "9230",
+          "user_name": "xmarcle",
+          "user_href": "http://192.168.0.230/u/talk-9230.html"
+        },
+        {
+          "uid": "236918",
+          "user_name": "abc123",
+          "user_href": "http://192.168.0.230/u/talk-236918.html"
+        }
+      ]
+    }
+  ];
+
+  $(document).ready(function () {
+    init_global_header();
+  });
+if !production
+  </body>

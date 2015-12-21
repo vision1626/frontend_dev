@@ -1,1 +1,1 @@
-#todo:乜都未有
+init_global_header = ->
