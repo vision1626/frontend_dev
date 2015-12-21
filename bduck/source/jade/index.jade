@@ -2,10 +2,13 @@
 html(lang="en")
 head
   meta(charset="UTF-8")
-  meta(name='viewport', content='user-scalable=no')
+  meta(name='viewport', content='width=device-width user-scalable=no maximum-scale=1')
   meta(name="keywords" content="{$seo_keyword}")
   meta(name="description" content="{$seo_description")
-  -title = {$seo_title}
+  meta(name='apple-mobile-web-app-status-bar-style', content='black')
+  meta(name='apple-mobile-web-app-capable', content='yes')
+  -title = "{$seo_title}"
+  title= title
 
   :php
     $current_css[] = './tpl/hi1626/css/login/vendor/normalize.css';
@@ -26,7 +29,9 @@ body
     img(src="./tpl/hi1626/images/bduck/bduck_wings.png" data-random="3" data-light="no").bduck-wings.js-bduck
     img(src="./tpl/hi1626/images/bduck/bduck_10.png" data-random="4" data-light="no").bduck-10.js-bduck
     img(src="./tpl/hi1626/images/bduck/bduck_th.png" data-random="5" data-light="no").bduck-th.js-bduck
+    {if ! $is_lighten}
     img(src="./tpl/hi1626/images/bduck/bouncing_duck.gif").bouncing-duck
+    {/if}
     .bduck-body__remain
       img(src="./tpl/hi1626/images/bduck/remaining.png")
   .invitation-btn
@@ -34,13 +39,22 @@ body
       img(src="./tpl/hi1626/images/bduck/invitation_btn.png")
   .actions
     a
-      img(src="./tpl/hi1626/images/bduck/helpers.png").hepers-btn
+      img(src="./tpl/hi1626/images/bduck/helpers.png").check-helpers-btn
     a
       img(src="./tpl/hi1626/images/bduck/prize_detail.png").prize-detail-btn
     a
       img(src="./tpl/hi1626/images/bduck/rules.png").rules-btn
   .share.black-box
     img(src="./tpl/hi1626/images/bduck/share.png")
+  .lighten-users
+    div
+      {loop $lighten_users $u}
+      {if $u['headimgurl'] == ""}
+      img(src="./tpl/hi1626/images/bduck/avaholder.png")
+      {else}
+      img(src="{$u['headimgurl']}", alt="")
+      {/if}
+      {/loop}
   .rules.black-box
     img(src="./tpl/hi1626/images/bduck/rules_title.png").title
     img(src="./tpl/hi1626/images/bduck/quit.png").quit
@@ -51,7 +65,6 @@ body
         |活动一切解释权归官方微信：1626订阅号所有。
       li.clown
         img(src="./tpl/hi1626/images/bduck/clown.png")
-
   .prize-detail.black-box
     img(src="./tpl/hi1626/images/bduck/prize_detail_title.png").title
     img(src="./tpl/hi1626/images/bduck/quit.png").quit
@@ -76,9 +89,9 @@ body
 
   script.
     $(document).ready(function () {
+      window.lighten_url = "{$api_urls['lighten']}";
+      window.deliver_url = "{$api_urls['save_address']}";
+      window.lighten_parts = "{$lighten_info['parts']}";
       init();
-      //- setTimeout(function() {
-      //-   $('.bouncing-duck').hide();
-      //- }, 4000)
     });
       

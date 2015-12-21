@@ -2,10 +2,14 @@
 html(lang="en")
 head
   meta(charset="UTF-8")
-  meta(name='viewport', content='user-scalable=no')
+  meta(name='viewport', content='width=device-width user-scalable=no maximum-scale=1')
   meta(name="keywords" content="{$seo_keyword}")
   meta(name="description" content="{$seo_description")
-  -title = {$seo_title}
+  meta(name='apple-mobile-web-app-status-bar-style', content='black')
+  meta(name='apple-mobile-web-app-capable', content='yes')
+  -title = "{$seo_title}"
+  title= title
+
 
   :php
     $current_css[] = './tpl/hi1626/css/login/vendor/normalize.css';
@@ -18,17 +22,17 @@ head
 body.congrats-form
   .congrats-title
     img(src="./tpl/hi1626/images/bduck/congrats.png")
-  form(action="")
+  form(action="{$api_urls['save_address']}")
     div
       label 姓名：
-      input(type="text")
+      input(type="text").input-name
     div
       label 电话：
-      input(type="text")
+      input(type="text").input-tel
     div
       label 地址：
-      textarea(rows="5")
-    button(type="submit") 提交
+      textarea(rows="5").input-addr
+    button(type="submit").form-submit 提交
 
   <!--{if $is_wx}-->
   <!--{template inc/weixin_share}-->
@@ -37,9 +41,8 @@ body.congrats-form
 
   script.
     $(document).ready(function () {
+      window.lighten_url = "{$api_urls['lighten']}";
+      window.deliver_url = "{$api_urls['save_address']}";
       init();
-      //- setTimeout(function() {
-      //-   $('.bouncing-duck').hide();
-      //- }, 4000)
     });
       

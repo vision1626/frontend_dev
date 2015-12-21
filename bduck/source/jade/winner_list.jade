@@ -2,10 +2,12 @@
 html(lang="en")
 head
   meta(charset="UTF-8")
-  meta(name='viewport', content='user-scalable=no')
+  meta(name='viewport', content='width=device-width user-scalable=no maximum-scale=1')
   meta(name="keywords" content="{$seo_keyword}")
   meta(name="description" content="{$seo_description")
-  -title = {$seo_title}
+  -title = "{$seo_title}"
+  title= title
+
 
   :php
     $current_css[] = './tpl/hi1626/css/login/vendor/normalize.css';
@@ -25,48 +27,11 @@ body.winner-list
           th 微信昵称
           th 手机号码
       tbody
+        {loop $winners $i}
         tr
-          th 木哈哈
-          th 13533409601
-        tr
-          th 木哈哈
-          th 13533409601
-        tr
-          th 木哈哈
-          th 13533409601
-        tr
-          th 木哈哈
-          th 13533409601
-        tr
-          th 木哈哈
-          th 13533409601
-        tr
-          th 木哈哈
-          th 13533409601
-        tr
-          th 木哈哈
-          th 13533409601
-        tr
-          th 木哈哈
-          th 13533409601
-        tr
-          th 木哈哈
-          th 13533409601
-        tr
-          th 木哈哈
-          th 13533409601
-        tr
-          th 木哈哈
-          th 13533409601
-        tr
-          th 木哈哈
-          th 13533409601
-        tr
-          th 木哈哈
-          th 13533409601
-        tr
-          th 木哈哈
-          th 13533409601
+          th {$i['nickname']}
+          th {$i['tel']}
+        {/loop}
     
 
   <!--{if $is_wx}-->
@@ -76,9 +41,8 @@ body.winner-list
 
   script.
     $(document).ready(function () {
+      window.lighten_url = "{$api_urls['lighten']}";
+      window.deliver_url = "{$api_urls['save_address']}";
       init();
-      //- setTimeout(function() {
-      //-   $('.bouncing-duck').hide();
-      //- }, 4000)
     });
       

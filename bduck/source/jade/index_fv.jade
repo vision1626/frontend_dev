@@ -2,10 +2,14 @@
 html(lang="en")
 head
   meta(charset="UTF-8")
-  meta(name='viewport', content='user-scalable=no')
+  meta(name='viewport', content='width=device-width user-scalable=no maximum-scale=1')
+  meta(name='apple-mobile-web-app-status-bar-style', content='black')
+  meta(name='apple-mobile-web-app-capable', content='yes')
   meta(name="keywords" content="{$seo_keyword}")
   meta(name="description" content="{$seo_description")
-  -title = {$seo_title}
+  -title = "{$seo_title}"
+  title= title
+
 
   :php
     $current_css[] = './tpl/hi1626/css/login/vendor/normalize.css';
@@ -20,21 +24,28 @@ body
   h1.bigtitle
     img(src="./tpl/hi1626/images/bduck/bigtitle.png")
   .bduck-body
+    .bduck-body__progress-prompt
+      | 已点亮
+      | {$lighten_info['light']}
+      | 个部件，还差
+      | {$lighten_info['notlight']}
+      | 个部件即中奖
     img(src="./tpl/hi1626/images/bduck/bduck.jpg").bduck
     img(src="./tpl/hi1626/images/bduck/bduck_hat.png" data-random="1" data-light="no").bduck-hat.js-bduck
     img(src="./tpl/hi1626/images/bduck/bduck_head.png" data-random="2" data-light="no").bduck-head.js-bduck
     img(src="./tpl/hi1626/images/bduck/bduck_wings.png" data-random="3" data-light="no").bduck-wings.js-bduck
     img(src="./tpl/hi1626/images/bduck/bduck_10.png" data-random="4" data-light="no").bduck-10.js-bduck
     img(src="./tpl/hi1626/images/bduck/bduck_th.png" data-random="5" data-light="no").bduck-th.js-bduck
-    img(src="./tpl/hi1626/images/bduck/bouncing_duck.gif").bouncing-duck
-    .bduck-body__remain
-      img(src="./tpl/hi1626/images/bduck/remaining.png")
-  .help-btn
-    a 
-      img(src="./tpl/hi1626/images/bduck/help_friend.png")
-  .actions
+  .help-or-helped
     a
-      img(src="./tpl/hi1626/images/bduck/helpers.png").hepers-btn
+      {if $is_lighten}
+      img(src="./tpl/hi1626/images/bduck/helped.png").helped-btn
+      {else}
+      img(src="./tpl/hi1626/images/bduck/help_friend.png").help-btn
+      {/if}
+  .actions
+    a(href="{u bduck/index}")
+      img(src="./tpl/hi1626/images/bduck/join.png")
     a
       img(src="./tpl/hi1626/images/bduck/prize_detail.png").prize-detail-btn
     a
@@ -75,9 +86,9 @@ body
 
   script.
     $(document).ready(function () {
+      window.lighten_url = "{$api_urls['lighten']}";
+      window.deliver_url = "{$api_urls['save_address']}";
+      window.lighten_parts = "{$lighten_info['parts']}";
       init();
-      //- setTimeout(function() {
-      //-   $('.bouncing-duck').hide();
-      //- }, 4000)
     });
       

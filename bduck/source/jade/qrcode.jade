@@ -2,10 +2,14 @@
 html(lang="en")
 head
   meta(charset="UTF-8")
-  meta(name='viewport', content='user-scalable=no')
+  meta(name='viewport', content='width=device-width, user-scalable=no, initial-scale=1')
+  meta(name='apple-mobile-web-app-status-bar-style', content='black')
+  meta(name='apple-mobile-web-app-capable', content='yes')
   meta(name="keywords" content="{$seo_keyword}")
   meta(name="description" content="{$seo_description")
-  -title = {$seo_title}
+  -title = "{$seo_title}"
+  title= title
+
 
   :php
     $current_css[] = './tpl/hi1626/css/login/vendor/normalize.css';
@@ -20,7 +24,7 @@ body.qrcode
     img(src="./tpl/hi1626/images/bduck/free.png")
   .qrcode-body
     img(src="./tpl/hi1626/images/bduck/plane_duck.png")
-    img(src="./tpl/hi1626/images/hi1626_v2/top_pro_and.jpg").qrcode-wechat
+    img(src="./tpl/hi1626/images/bduck/qrcode.jpg").qrcode-wechat
   p 温馨提示：关注后，点击活动链接
 
   <!--{if $is_wx}-->
@@ -30,9 +34,7 @@ body.qrcode
 
   script.
     $(document).ready(function () {
+      window.lighten_url = "{$api_urls['lighten']}";
+      window.deliver_url = "{$api_urls['save_address']}";
       init();
-      //- setTimeout(function() {
-      //-   $('.bouncing-duck').hide();
-      //- }, 4000)
     });
-      
