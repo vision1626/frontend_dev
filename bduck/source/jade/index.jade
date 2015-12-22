@@ -18,75 +18,74 @@ head
     $current_js[] = './tpl/hi1626/js/bduck/bduck.js'
 
   link(rel="stylesheet", href="{css $current_css}" media="all")
-  script(src="{script $current_js}")
 body
   h1.bigtitle
-    img(src="./tpl/hi1626/images/bduck/bigtitle.png")
+    img(src="./tpl/hi1626/images/bduck/bigtitle-min.png")
   .bduck-body
-    img(src="./tpl/hi1626/images/bduck/bduck.jpg").bduck
-    img(src="./tpl/hi1626/images/bduck/bduck_hat.png" data-random="1" data-light="no").bduck-hat.js-bduck
-    img(src="./tpl/hi1626/images/bduck/bduck_head.png" data-random="2" data-light="no").bduck-head.js-bduck
-    img(src="./tpl/hi1626/images/bduck/bduck_wings.png" data-random="3" data-light="no").bduck-wings.js-bduck
-    img(src="./tpl/hi1626/images/bduck/bduck_10.png" data-random="4" data-light="no").bduck-10.js-bduck
-    img(src="./tpl/hi1626/images/bduck/bduck_th.png" data-random="5" data-light="no").bduck-th.js-bduck
+    img(src="./tpl/hi1626/images/bduck/bduck-min.jpg").bduck
+    img(src="./tpl/hi1626/images/bduck/bduck_hat-min.png" data-random="1" data-light="no").bduck-hat.js-bduck
+    img(src="./tpl/hi1626/images/bduck/bduck_head-min.png" data-random="2" data-light="no").bduck-head.js-bduck
+    img(src="./tpl/hi1626/images/bduck/bduck_wings-min.png" data-random="3" data-light="no").bduck-wings.js-bduck
+    img(src="./tpl/hi1626/images/bduck/bduck_10-min.png" data-random="4" data-light="no").bduck-10.js-bduck
+    img(src="./tpl/hi1626/images/bduck/bduck_th-min.png" data-random="5" data-light="no").bduck-th.js-bduck
     {if ! $is_lighten}
     img(src="./tpl/hi1626/images/bduck/bouncing_duck.gif").bouncing-duck
     {/if}
     .bduck-body__remain
-      img(src="./tpl/hi1626/images/bduck/remaining.png")
+      img(src="./tpl/hi1626/images/bduck/remaining-min.png")
   .invitation-btn
     a 
-      img(src="./tpl/hi1626/images/bduck/invitation_btn.png")
+      img(src="./tpl/hi1626/images/bduck/invitation_btn-min.png")
   .actions
     a
-      img(src="./tpl/hi1626/images/bduck/helpers.png").check-helpers-btn
+      img(src="./tpl/hi1626/images/bduck/helpers-min.png").check-helpers-btn
     a
-      img(src="./tpl/hi1626/images/bduck/prize_detail.png").prize-detail-btn
+      img(src="./tpl/hi1626/images/bduck/prize_detail-min.png").prize-detail-btn
     a
-      img(src="./tpl/hi1626/images/bduck/rules.png").rules-btn
+      img(src="./tpl/hi1626/images/bduck/rules-min.png").rules-btn
   .share.black-box
-    img(src="./tpl/hi1626/images/bduck/share.png")
+    img(src="./tpl/hi1626/images/bduck/share-min.png")
   .lighten-users
     div
       {loop $lighten_users $u}
       {if $u['headimgurl'] == ""}
-      img(src="./tpl/hi1626/images/bduck/avaholder.png")
+      img(src="./tpl/hi1626/images/bduck/avaholder-min.png")
       {else}
       img(src="{$u['headimgurl']}", alt="")
       {/if}
       {/loop}
   .rules.black-box
-    img(src="./tpl/hi1626/images/bduck/rules_title.png").title
-    img(src="./tpl/hi1626/images/bduck/quit.png").quit
+    img(src="./tpl/hi1626/images/bduck/rules_title-min.png").title
+    img(src="./tpl/hi1626/images/bduck/quit-min.png").quit
     ol
       li 参与活动需要邀请好友为你点亮鸭子，点亮 B.Duck 后即可领取奖品；
       li 点亮 B.Duck 后，填写中奖资料，奖品很快就会到达你手中；
       li 
         |活动一切解释权归官方微信：1626订阅号所有。
       li.clown
-        img(src="./tpl/hi1626/images/bduck/clown.png")
+        img(src="./tpl/hi1626/images/bduck/clown-min.png")
   .prize-detail.black-box
-    img(src="./tpl/hi1626/images/bduck/prize_detail_title.png").title
-    img(src="./tpl/hi1626/images/bduck/quit.png").quit
+    img(src="./tpl/hi1626/images/bduck/prize_detail_title-min.png").title
+    img(src="./tpl/hi1626/images/bduck/quit-min.png").quit
     .detail
-      img(src="./tpl/hi1626/images/bduck/products/p0.jpg").js-img-holder
+      img(src="./tpl/hi1626/images/bduck/products/p0-min.jpg").js-img-holder
       ul.js-img-controllers
         li
-          img(src="./tpl/hi1626/images/bduck/products/p0.jpg")
+          img(src="./tpl/hi1626/images/bduck/products/p0-min.jpg")
         li 
-          img(src="./tpl/hi1626/images/bduck/products/p1.jpg")
+          img(src="./tpl/hi1626/images/bduck/products/p1-min.jpg")
         li
-          img(src="./tpl/hi1626/images/bduck/products/p2.jpg")
+          img(src="./tpl/hi1626/images/bduck/products/p2-min.jpg")
         li
-          img(src="./tpl/hi1626/images/bduck/products/p3.jpg")
+          img(src="./tpl/hi1626/images/bduck/products/p3-min.jpg")
       .bucket
-        img(src="./tpl/hi1626/images/bduck/bucket.png")
+        img(src="./tpl/hi1626/images/bduck/bucket-min.png")
 
   <!--{if $is_wx}-->
   <!--{template inc/weixin_share}-->
   <!--{/if}-->
   <!--{template inc/count}-->
-
+  script(src="{script $current_js}")
   script.
     $(document).ready(function () {
       window.lighten_url = "{$api_urls['lighten']}";

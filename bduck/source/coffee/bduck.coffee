@@ -164,7 +164,7 @@ init = ->
     if $help_btn.length > 0
       $help_btn.on 'click', (e)->
         slotMachineDuck()
-        $(this).unbind('click').attr('src', './tpl/hi1626/images/bduck/helped.png')
+        $(this).unbind('click').attr('src', './tpl/hi1626/images/bduck/helped-min.png')
         $helped_btn.fadeIn()
         $parts.unbind('click')
       $parts.on 'click', ->
