@@ -1,1 +1,1 @@
-init_global_header = ->
+# init_global_header = ->

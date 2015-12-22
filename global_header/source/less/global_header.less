@@ -88,19 +88,88 @@
         margin-left: 20px;
       }
     }
+    .fixed-nav__msg {
+      .drop-down-list {
+        &:before {
+          left: 80%;
+        }
+        li {
+          color: @grey;
+          width: 250px;
+          font-size: 10px;
+          border-bottom: 1px solid @light-grey;
+          &:hover {
+            .icon:before {
+              color: @black;
+            }
+          }
+          a {
+            color: black;
+            border-bottom: 2px solid @grey;
+            &:hover {
+              color: black;
+              border-bottom: 2px solid @blue;
+              cursor: pointer;
+            }
+          }
+          .icon:before {
+            font-size: 16px;
+            color: @grey;
+            margin-right: 7px;
+          }
+        }
+        li.check-all {
+          text-align: center;
+          a {
+            border-bottom: none;
+          }
+        }
+      }
+      &:hover {
+        color: @blue;
+        .drop-down-list {
+          right: 40px;
+          left: auto;
+        }
+      }
+    }
+    .fixed-nav__flash-buy {
+      iframe {
+        border: none;
+        border-bottom: 2px solid @orange;
+        margin-bottom: -5px;
+      }
+      .icon:before {
+        font-size: 17px;
+      }
+      .invisible-menu {
+        display: none;
+      }
+      &:hover {
+        .cart-num {
+          display: none;
+        }
+        .invisible-menu {
+          display: inline-block;
+        }
+      }
+      a:hover {
+        color: @blue;
+      }
+    }
     li {
       display: inline-block;
-      margin-left: 25px;
+      margin-left: 45px;
       .fixed-nav__number {
         font-size: 11px;
         margin-left: 2px;
         color: @light-grey;
       }
       .fixed-nav__number--blue {
-        border-bottom: 1px solid @blue;
+        border-bottom: 2px solid @blue;
       }
       .fixed-nav__number--orange {
-        border-bottom: 1px solid @orange;
+        border-bottom: 2px solid @orange;
       }
       .icon-phone:before {
         font-size: 20px;
@@ -159,7 +228,7 @@
   }
   .main-nav__search {
     line-height: 3.4em;
-    width: 100%;
+    width: 40%;
     padding: 0 1em;
     height: 60px;
     position: absolute;
@@ -222,103 +291,6 @@
         padding: 0 1.7em;
         line-height: 4.3em;
       }
-    }
-  }
-}
-.profile-container {
-  height: 300px;
-  background-color: rgba(0, 0, 0, .5);
-  .profile {
-    position: relative;
-    margin-left: auto;
-    margin-right: auto;
-    text-align: center;
-    width: 507px;
-    padding-top: 38px;
-    color: white;
-    img {
-      height: 100px;
-      width: 100px;
-      border-radius: 100px;
-      background-color: @black;
-    }
-    h3 {
-      font-size: 20px;
-      margin-top: 3px;
-    }
-    .profile__level {
-      position: absolute;
-      top: 153px;
-      right: 128px;
-      font-size: 12px;
-      background-color: @black;
-      width: 37px;
-      border-radius: 11px;
-    }
-    p {
-      font-size: 12px;
-    }
-    .profile__follow-btn {
-      position: absolute;
-      top: 149px;
-      right: 35px;
-      width: 75px;
-      height: 25px;
-      background-color: @black;
-      font-size: 14px;
-      border-radius: 38px;
-      line-height: 1.8;
-      .icon:before {
-        font-size: 18px;
-        margin-right: 3px;
-      }
-    }
-  }
-  .content {
-    background-color: rgba(0, 0, 0, 0.5);
-    height: 60px;
-    margin-top: 26px;
-    position: relative;
-    .content__actions {
-      margin-left: auto;
-      margin-right: auto;
-      width: 357px;
-      color: white;
-      font-size: 12px;
-      li {
-        float: left;
-        line-height: 5;
-        width: 33%;
-        text-align: center;
-        &:hover {
-          background: white;
-          color: @black;
-          border-radius: 4px 4px 0 0;
-          .icon {
-            color: @blue;
-          }
-        }
-      }
-    }
-    .content__relationship {
-      color: white;
-      font-size: 12px;
-      margin-right: 119px;
-      position: absolute;
-      right: 0;
-      top: 0;
-      li {
-        line-height: 5;
-        margin-left: 40px;
-        display: inline-block;
-        text-align: center;
-      }
-    }
-    .icon {
-      display: block;
-      font-size: 20px;
-      margin-bottom: -18px;
-      margin-top: 10px;
     }
   }
 }
