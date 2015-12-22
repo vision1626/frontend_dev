@@ -1,0 +1,111 @@
+@import "../../../public_inc/source/less/imports";
+.profile-container {
+  height: 300px;
+  background-color: rgba(0, 0, 0, .5);
+  .profile {
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    width: 507px;
+    padding-top: 38px;
+    color: white;
+    img {
+      height: 100px;
+      width: 100px;
+      border-radius: 100px;
+      background-color: @black;
+    }
+    h3 {
+      font-size: 20px;
+      margin-top: 3px;
+    }
+    .profile__level {
+      position: absolute;
+      top: 153px;
+      right: 128px;
+      font-size: 12px;
+      background-color: @black;
+      width: 37px;
+      border-radius: 11px;
+    }
+    p {
+      font-size: 12px;
+    }
+    .profile__follow-btn {
+      position: absolute;
+      top: 149px;
+      right: 11px;
+      width: 96px;
+      height: 30px;
+      background-color: @black;
+      font-size: 14px;
+      border-radius: 38px;
+      line-height: 2.3;
+      text-align: left;
+      cursor: pointer;
+      &:hover {
+        color: @blue;
+        .icon-follow {
+          transform: scale(1.4);
+        }
+      }
+      .icon-follow {
+        display: inline-block;
+        margin-top: -6px;
+      }
+      .icon:before {
+        font-size: 20px;
+        margin-right: 7px;
+        margin-left: 6px;
+      }
+    }
+  }
+  .content {
+    background-color: rgba(0, 0, 0, 0.5);
+    height: 60px;
+    margin-top: 26px;
+    position: relative;
+    .content__actions {
+      margin-left: auto;
+      margin-right: auto;
+      width: 357px;
+      color: white;
+      font-size: 12px;
+      li {
+        float: left;
+        line-height: 5;
+        width: 33%;
+        text-align: center;
+        &:hover {
+          background: white;
+          color: @black;
+          border-radius: 4px 4px 0 0;
+          .icon {
+            color: @blue;
+          }
+        }
+      }
+    }
+    .content__relationship {
+      color: white;
+      font-size: 12px;
+      margin-right: 119px;
+      position: absolute;
+      right: 0;
+      top: 0;
+      li {
+        line-height: 5;
+        margin-left: 40px;
+        display: inline-block;
+        text-align: center;
+      }
+    }
+    .icon {
+      display: block;
+      font-size: 20px;
+      margin-bottom: -18px;
+      margin-top: 10px;
+    }
+  }
+}

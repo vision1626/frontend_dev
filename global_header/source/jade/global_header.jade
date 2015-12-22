@@ -45,11 +45,55 @@ else
       a 登录
       span |
       a 注册
-    li 消息
+    li.fixed-nav__msg 
+      | 消息
       span.fixed-nav__number.fixed-nav__number--blue 30
-    li
+      ul.drop-down-list
+        li.get-likes
+          //- if like > 0
+          i.icon.icon-heart
+          | 获得了 
+          | 1 
+          | 次喜欢：
+          a.get-likes__title Supreme Hanes Boxer Briefs联名内裤
+          |  来自 
+          a.get-likes__viewer 陈开心
+        li.get-fans
+          //- new fans > 0
+          i.icon.icon-fans
+          | 新增 
+          | 17 
+          | 个粉丝：
+          //- loop fans
+          a.get-fans__name Slash
+          a.get-fans__name Kurt Cobain
+          |  等
+          | 17
+          | 人
+        li.get-comments
+          i.icon.icon-comment
+          | 有 
+          | 30 
+          | 个留言：
+          a.get-comments__title SealLayLowSing
+          |  来自 
+          a.get-comments__user 许冠杰
+        li.get-recomendded
+          i.icon.icon-news
+          | 您的潮品 
+          a.get-recomendded__good 风之手里剑
+          |  被推荐到首页
+        li.check-all 
+          a 查看全部
+    li.fixed-nav__flash-buy
       i.icon.icon-flashbuy
-      span.fixed-nav__number.fixed-nav__number--orange 2
+      iframe.cart-num(src="http://www.1626buy.cn/shangyi/txu/5326-1594.html" width="14px" height="14px" scrolling="no")
+      .invisible-menu
+        a 购物车
+        iframe(src="http://www.1626buy.cn/shangyi/txu/5326-1594.html" width="14px" height="14px" scrolling="no")
+        | |
+        a 我的订单
+
 
 .main-nav-container
   ul.main-nav
