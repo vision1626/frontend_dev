@@ -7,7 +7,7 @@
 @item-owner-img-wh: 26px;
 
 @b-image-wh: 280px;
-@l-image-h: 371px;
+@l-image-h: 373px;
 @s-image-wh: 185px;
 
 //分类以及筛选部分
@@ -15,6 +15,7 @@
   margin: 40px @margin-lr+15 0;
   position: relative;
   height: @list-filter-height;
+
 }
 
 .item-list-filter .item-nav-container {
@@ -68,6 +69,7 @@
 .item-list-filter .item-filter a {
   margin: 0 5px;
   color: @grey;
+  cursor: pointer;
 }
 
 .item-list-filter .item-filter a.current {
@@ -84,7 +86,8 @@
   margin: 0 auto;
   width:100%;
   max-width: @b-image-wh*4+90+30;
-  columns: @b-image-wh 4;
+  //columns: @b-image-wh 4;
+  display: none;
 }
 
 .item-list-container dl.big_img dd.item {
@@ -319,6 +322,7 @@
 .item-list-container dl.small_img {
   margin: 0 @margin-lr;
   float: left;
+  display: none;
 }
 
 .item-list-container dl.small_img dd {
@@ -385,6 +389,12 @@
   float: left;
   width: @s-image-wh - (@item-content-padding*2);
   margin: 0 @item-content-padding;
+  color: @grey;
+}
+
+.item-list-container dl.small_img .item-s_description .item-s_isnew a{
+  color: @white;
+  font-size: @font-size-xs;
 }
 
 .item-list-container dl.small_img .item-s_description .item-s_isnew span {
@@ -401,6 +411,10 @@
   line-height: @font-size-s;
   overflow: hidden;
   padding: 0 @item-content-padding;
+}
+
+.item-list-container dl.small_img .item-s_description .item-s_title a{
+  color: @white;
 }
 
 .item-list-container dl.small_img .item-s_description .item-s_title span {
@@ -445,6 +459,7 @@
   height: 60px;
   position: relative;
   padding: 50px;
+  display:none;
 }
 
 .list-empty .empty-content{
@@ -492,3 +507,36 @@
   color:@white;
 }
 //====================================列表为吉 End====================================================
+
+.item-pagiation{
+  float: left;
+  width:100%;
+  text-align: center;
+  margin: 40px auto;
+  //display: none;
+}
+
+.item-pagiation .show-more{
+  margin: 0 auto;
+  color: @grey;
+  height:60px;
+  width: @b-image-wh*2+30;
+  border-radius: 30px;
+  line-height: 60px;
+  font-size: @font-size-m;
+  cursor: pointer;
+  box-shadow: 0 1px 3px @grey;
+  transition: all 0.2s ease-out;
+}
+
+.item-pagiation .show-more:hover {
+  box-shadow: 0 1px 5px @dark-grey;
+}
+
+.list-loading{
+  margin: 40px 60px 50px;
+  background-color: @light-grey;
+  height: 60px;
+  position: relative;
+  padding: 50px;
+}
