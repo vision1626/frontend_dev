@@ -54,7 +54,7 @@
   .show-more 我要看更多
 script.
   $(document).ready(function () {
-    window.dashboard_count = 240;
+    window.dashboard_count = '{$count}';
     window.list_data = {$list_json};
 
     init_dashboard();
