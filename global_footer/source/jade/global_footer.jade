@@ -1,5 +1,7 @@
-- var production = false
-if !production
+- var production = true
+if production
+  - var image_path = '{$_FANWE[site_url]}/tpl/hi1626/v2/images'
+else
   include ../public_inc/source/jade/head.jade
   - var image_path  = local_file_path+'/images/'
 footer.global-footer
@@ -7,9 +9,9 @@ footer.global-footer
     .center-wrap.clear
       .mag-display
         .mag-cover
-          img(src='#{image_path}temp_footer-mag-cover.jpg')
+          img(src='#{image_path}/temp_footer-mag-cover.jpg')
         .mag-subtitle
-          img(src='#{image_path}temp_footer-mag-text.jpg')
+          img(src='#{image_path}/temp_footer-mag-text.jpg')
       .mag-buy
         span
           strong 261
@@ -42,25 +44,8 @@ footer.global-footer
           img(src='#{image_path}/footer-wechat-qr.jpg')
       .footer__sml-text-wrap
         if production
-          //{if $_FANWE['module_name'] == 'Index'}"
+          //{if $_FANWE['module_name'] == 'Index'}
         p.footer__sml-text.friend-links
-          |友情链接：&nbsp;
-          a(href='http://www.haibao.com/') 海报时尚网
-          |&nbsp;&nbsp;|&nbsp;&nbsp;
-          a(href='http://q.chinasspp.com/') o2o名品导购圈
-          |&nbsp;&nbsp;|&nbsp;&nbsp;
-          a(href='http://www.haibao.com/') 海报时尚网
-          |&nbsp;&nbsp;|&nbsp;&nbsp;
-          a(href='http://q.chinasspp.com/') o2o名品导购圈
-          |&nbsp;&nbsp;|&nbsp;&nbsp;
-          a(href='http://www.haibao.com/') 海报时尚网
-          |&nbsp;&nbsp;|&nbsp;&nbsp;
-          a(href='http://q.chinasspp.com/') o2o名品导购圈
-          |&nbsp;&nbsp;|&nbsp;&nbsp;
-          a(href='http://www.haibao.com/') 海报时尚网
-          |&nbsp;&nbsp;|&nbsp;&nbsp;
-          a(href='http://q.chinasspp.com/') o2o名品导购圈
-          |&nbsp;&nbsp;|&nbsp;&nbsp;
         if production
           //{/if}
         p.footer__sml-text.clear
@@ -70,10 +55,16 @@ footer.global-footer
           span(style='float:right')
             |© 2014 广东亿启数码科技有限公司 1626.com 版权所有
 
-
-script.
-  $(document).ready(function () {
-    init_global_footer();
-  });
-if !production
+if production
+  script.
+    $(document).ready(function () {
+      var friend_links_data = {$friendlinks_json};
+      init_global_footer(friend_links_data);
+    });
+else
+  script.
+    $(document).ready(function () {
+      var friend_links_data = $.parseJSON('[{"id":"5","name":"\u6d77\u62a5\u65f6\u5c1a\u7f51","url":"http:\/\/www.haibao.com\/","sort":"1"},{"id":"6","name":"o2o\u540d\u54c1\u5bfc\u8d2d\u5708","url":"http:\/\/q.chinasspp.com\/","sort":"2"},{"id":"8","name":"\u7f51\u6613\u5973\u4eba","url":"http:\/\/lady.163.com\/","sort":"3"},{"id":"9","name":"\u65b0\u6d6a\u5973\u6027","url":"http:\/\/eladies.sina.com.cn\/","sort":"4"},{"id":"10","name":"\u7231\u7f8e\u7f51","url":"http:\/\/www.lady8844.com\/","sort":"5"},{"id":"11","name":"\u5217\u8868\u7f51","url":"http:\/\/www.liebiao.com\/","sort":"6"},{"id":"12","name":"\u9b45\u7f51\u5973\u6027","url":"http:\/\/www.meyol.com\/ ","sort":"7"}]');
+      init_global_footer(friend_links_data);
+    });
   </body>
