@@ -33,10 +33,14 @@ module.exports = function (grunt) {
 
         cssmin: {
             target: {
+                //files: {
+                //    '<%= globalConfig.cssDistPath %>/<%= globalConfig.cssName %>.css': [
+                //        '<%= globalConfig.cssDistPath %>/<%= globalConfig.cssName %>.css'
+                //    ]
+                //}
                 files: {
-                    '<%= globalConfig.cssDistPath %>/<%= globalConfig.cssName %>.css': [
+                    '<%= globalConfig.cssDistPath %>/<%= globalConfig.cssName %>.css':
                         '<%= globalConfig.cssDistPath %>/<%= globalConfig.cssName %>.css'
-                    ]
                 }
             }
         },

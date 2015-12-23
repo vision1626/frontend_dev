@@ -1,1 +1,131 @@
 @import "../../../public_inc/source/less/imports";
+
+.global-footer {
+  margin-top: 70px;
+}
+.footer__mag {
+  background: #fff;
+  height: 70px;
+  border-top: 1px solid #000;
+  box-shadow: 0 -3px rgba(0,0,0,0.4);
+  cursor: pointer;
+  .mag-display {
+    float: left;
+    position: relative;
+    ._block(640px,70px);
+    ._clearfix;
+    .mag-cover {
+      ._block(120px,128px);
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      img {
+        width: 100%;
+      }
+    }
+    .mag-subtitle {
+      ._block(490px,30px);
+      position: absolute;
+      left: 150px;
+      top: 20px;
+      img {
+        width: 100%;
+      }
+    }
+  }
+  .mag-buy {
+    float: right;
+    padding-top: 14px;
+    span {
+      font-size: @font-size-l;
+      font-weight: bold;
+      position: relative;
+      top: 2px;
+      margin-right: 10px;
+    }
+    a {
+
+    }
+  }
+}
+.footer__main {
+  background: #000;
+  padding: 40px 0 30px 0;
+  a.footer__logo {
+    width: 86px;
+    height: 29px;
+    display: inline-block;
+    vertical-align: top;
+    margin-right: 64px;
+    img {
+      width: 100%;
+    }
+  }
+  ul.site-links {
+    display: inline-block;
+    li {
+      float: left;
+      margin-right: 38px;
+      h4 {
+        font-size: @font-size-s;
+        color:@grey;
+        margin: 0 0 8px 0;
+        font-weight: normal;
+      }
+      img {
+        width: 70px;
+      }
+    }
+    .links {
+      a {
+        line-height: 20px;
+        color: white;
+        display: block;
+        font-size: @font-size-xs;
+        &:hover {
+          color: @blue;
+        }
+      }
+    }
+  }
+  .footer__sml-text-wrap {
+    margin-top: 40px;
+  }
+  .footer__sml-text {
+    font-size: 10px;
+    color:@grey;
+    a {
+      color:@grey;
+      &:hover {
+        color: white;
+      }
+    }
+  }
+  p.friend-links {
+
+
+  }
+}
+
+//Temp public style
+.center-wrap {
+  width: 1210px;
+  margin: auto;
+}
+.button {
+  border-radius: 100px;
+  display: inline-block;
+  cursor: pointer;
+  &.orange {
+    background: @orange;
+    color: white;
+    border: 2px solid @orange;
+    &:hover {
+      background: #FF4200;
+    }
+  }
+  &.large {
+    padding: 8px 16px;
+    font-size: @font-size-s;
+  }
+}

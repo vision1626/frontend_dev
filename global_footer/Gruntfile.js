@@ -7,9 +7,9 @@ module.exports = function (grunt) {
         cssSrcPath:     'source/less',
         jsSrcPath:      'source/coffee',
         jadeSrcPath:    'source/jade',
-        cssDistPath:    '<%= globalConfig.distPath %>/css/',
+        cssDistPath:    '<%= globalConfig.distPath %>/css',
         jsDebugPath:    '<%= globalConfig.distPath %>/js/debug',
-        jsDistPath:     '<%= globalConfig.distPath %>/js/',
+        jsDistPath:     '<%= globalConfig.distPath %>/js',
         htmlDistPath:   '<%= globalConfig.distPath %>/views/public',
         viewName:       'global_footer'
     };
@@ -33,12 +33,16 @@ module.exports = function (grunt) {
 
         cssmin: {
             target: {
-                files: [{
-                    expand: true,
-                    cwd: '<%= globalConfig.cssDistPath %>',
-                    src: '**/*.css',
-                    dest: '<%= globalConfig.cssDistPath %>'
-                }]
+                //files: [{
+                //    expand: true,
+                //    cwd: '<%= globalConfig.cssDistPath %>',
+                //    src: '**/*.css',
+                //    dest: '<%= globalConfig.cssDistPath %>'
+                //}]
+                files: {
+                    '<%= globalConfig.cssDistPath %>/<%= globalConfig.viewName %>.css':
+                        '<%= globalConfig.cssDistPath %>/<%= globalConfig.viewName %>.css'
+                }
             }
         },
 
@@ -47,6 +51,7 @@ module.exports = function (grunt) {
                 files: {
                     '<%= globalConfig.cssDistPath %>/<%= globalConfig.viewName %>.css': '<%= globalConfig.cssSrcPath %>/**/*.less'
                 }
+
             }
             //src: {
             //    expand: true,
@@ -58,12 +63,16 @@ module.exports = function (grunt) {
 
         autoprefixer: {
             dist: {
-                files: [{
-                    expand: true,
-                    cwd: '<%= globalConfig.cssDistPath %>',
-                    src: '**/*.css',
-                    dest: '<%= globalConfig.cssDistPath %>'
-                }]
+                //files: [{
+                //    expand: true,
+                //    cwd: '<%= globalConfig.cssDistPath %>',
+                //    src: '**/*.css',
+                //    dest: '<%= globalConfig.cssDistPath %>'
+                //}]
+                files: {
+                    '<%= globalConfig.cssDistPath %>/<%= globalConfig.viewName %>.css':
+                        '<%= globalConfig.cssDistPath %>/<%= globalConfig.viewName %>.css'
+                }
             }
         },
 
@@ -95,12 +104,17 @@ module.exports = function (grunt) {
                 }
             },
             dist: {
-                files: [{
-                    expand: true,
-                    cwd: '<%= globalConfig.jsDebugPath %>',
-                    src: '**/*.js',
-                    dest: '<%= globalConfig.jsDistPath %>'
-                }]
+                //files: [{
+                //    expand: true,
+                //    cwd: '<%= globalConfig.jsDebugPath %>',
+                //    src: '**/*.js',
+                //    dest: '<%= globalConfig.jsDistPath %>'
+                //}]
+                files: {
+                    '<%= globalConfig.jsDistPath %>/<%= globalConfig.viewName %>.js':[
+                        '<%= globalConfig.jsDebugPath %>/<%= globalConfig.viewName %>.js'
+                    ]
+                }
             }
         },
 
@@ -110,13 +124,18 @@ module.exports = function (grunt) {
                     pretty: true,
                     basedir: __dirname
                 },
-                files:[{
-                expand: true,
-                cwd: '<%= globalConfig.jadeSrcPath %>/',
-                src: ['*.jade'],
-                dest: '<%= globalConfig.htmlDistPath %>/',
-                ext: '.htm'
-                }]
+                //files:[{
+                //expand: true,
+                //cwd: '<%= globalConfig.jadeSrcPath %>/',
+                //src: ['*.jade'],
+                //dest: '<%= globalConfig.htmlDistPath %>/',
+                //ext: '.htm'
+                //}]
+                files: {
+                    '<%= globalConfig.htmlDistPath %>/<%= globalConfig.viewName %>.htm':[
+                        '<%= globalConfig.jadeSrcPath %>/**/*.jade'
+                    ]
+                }
             }
         }
     });

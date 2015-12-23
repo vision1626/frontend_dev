@@ -1,3 +1,79 @@
 - var production = false
 if !production
-  extends ../public_inc/source/jade/head.jade
+  include ../public_inc/source/jade/head.jade
+  - var image_path  = local_file_path+'/images/'
+footer.global-footer
+  .footer__mag
+    .center-wrap.clear
+      .mag-display
+        .mag-cover
+          img(src='#{image_path}temp_footer-mag-cover.jpg')
+        .mag-subtitle
+          img(src='#{image_path}temp_footer-mag-text.jpg')
+      .mag-buy
+        span
+          strong 261
+          |期现已上市
+        a.button.orange.large 立即购买
+  .footer__main
+    .center-wrap.clear
+      a.footer__logo(href='http://www.1626.com',target='_blank')
+        img(src='#{image_path}/logo-1626-white.svg')
+      ul.site-links
+        li
+          h4 帮助中心
+          .links
+            a 发布指引
+            a 订单发布
+            a 帮助中心
+        li
+          h4 关于我们
+          .links
+            a 关于我们
+            a 联系我们
+            a 加入1626
+        li
+          h4 关注1626
+          .links
+            a(href='http://weibo.com/city1626',target='_blank') 官方微博
+            a APP下载
+        li
+          h4 微信公众号
+          img(src='#{image_path}/footer-wechat-qr.jpg')
+      .footer__sml-text-wrap
+        if production
+          //{if $_FANWE['module_name'] == 'Index'}"
+        p.footer__sml-text.friend-links
+          |友情链接：&nbsp;
+          a(href='http://www.haibao.com/') 海报时尚网
+          |&nbsp;&nbsp;|&nbsp;&nbsp;
+          a(href='http://q.chinasspp.com/') o2o名品导购圈
+          |&nbsp;&nbsp;|&nbsp;&nbsp;
+          a(href='http://www.haibao.com/') 海报时尚网
+          |&nbsp;&nbsp;|&nbsp;&nbsp;
+          a(href='http://q.chinasspp.com/') o2o名品导购圈
+          |&nbsp;&nbsp;|&nbsp;&nbsp;
+          a(href='http://www.haibao.com/') 海报时尚网
+          |&nbsp;&nbsp;|&nbsp;&nbsp;
+          a(href='http://q.chinasspp.com/') o2o名品导购圈
+          |&nbsp;&nbsp;|&nbsp;&nbsp;
+          a(href='http://www.haibao.com/') 海报时尚网
+          |&nbsp;&nbsp;|&nbsp;&nbsp;
+          a(href='http://q.chinasspp.com/') o2o名品导购圈
+          |&nbsp;&nbsp;|&nbsp;&nbsp;
+        if production
+          //{/if}
+        p.footer__sml-text.clear
+          span
+            |备案号：
+            a(target="_blank" href="http://www.miibeian.gov.cn/") 粤ICP备11022094号-1
+          span(style='float:right')
+            |© 2014 广东亿启数码科技有限公司 1626.com 版权所有
+
+
+script.
+  $(document).ready(function () {
+    init_global_footer();
+  });
+if !production
+  </body>
