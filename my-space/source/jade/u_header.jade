@@ -1,3 +1,4 @@
+- var production = true
 if production
   - var image_path  = './tpl/hi1626/v2/images/'
 else
@@ -28,9 +29,6 @@ else
       li 
         i.icon.icon-publish
         | 发布
-      li
-        i.icon.icon-follow
-        | 测试
     ul.content__relationship
       li 
         i.icon.icon-fans
@@ -39,7 +37,7 @@ else
         i.icon.icon-following
         | 关注
 //- TODO: put script tag below into footer 
-script(type='text/javascript').
-  $(document).ready(function () {
-    init();
-  });
+//- script(type='text/javascript').
+//-   $(document).ready(function () {
+//-     init();
+//-   });
