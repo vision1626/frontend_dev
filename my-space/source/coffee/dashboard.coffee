@@ -6,19 +6,16 @@ _dashboard_step_b = _dashboard_limit/2
 _dashboard_start_s = 0
 _dashboard_end_s = 0
 _dashboard_step_s = _dashboard_limit
-_dashboard_count = dashboard_count
 _dashboard_show_big = true
 
-SITE_URL = 'http://192.168.0.230/'
+#SITE_URL = 'http://192.168.0.230/'
 
 init_dashboard = ->
   biglist = $('.big_img')
   listempty = $('.list-empty')
   listloading = $('.list-loading')
-#  _dashboard_count = dashboard_count
   if list_data
     _dashboard_end_b = _dashboard_step_b
-#    _dashboard_end_s = _dashboard_step_s
     _dashboard_is_loading = true
     for ld,i in list_data
       if _dashboard_start_b < _dashboard_end_b
@@ -69,7 +66,7 @@ $(document).on 'click','.show-more', ->
     $.ajax {
       url: SITE_URL + 'services/service.php'
       type: "GET"
-      data: {m: 'u', a: 'get_dashboard_ajax', ajax: 1, page: page, count: _dashboard_count, sort: 'new',limit: _dashboard_limit}
+      data: {'m': 'u', 'a': 'get_dashboard_ajax', ajax: 1, 'page': page, 'count': window.dashboard_count, 'sort': 'new','limit': _dashboard_limit}
       cache: false
       dataType: "json"
       success: (result)->
