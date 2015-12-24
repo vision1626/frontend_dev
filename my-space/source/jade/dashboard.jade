@@ -14,17 +14,17 @@
     //  |专辑
     //  a.count 31
   .item-filter-container
+    //.item-filter
+    //  a(href='#')
+    //    span.icon.icon-album
+    //    a(href='') 批量加入专辑
+    //.item-filter
+    //  a(href='#') 全部分类
     .item-filter.first
-      a(href='#')
-        span.icon.icon-album
-        a(href='') 批量加入专辑
-    .item-filter
-      a(href='#') 全部分类
-    .item-filter
-      a.current(href='#')
+      a.show-new_list.current
         span.icon.icon-decendent
         |综合
-      a(href='#')
+      a.show-hot_list
         span.icon.icon-decendent
         |人气
     .item-filter
@@ -32,31 +32,28 @@
         span.icon.icon-list_view
       a.show-small_list
         span.icon.icon-grid_view
-.item-list-container
-  dl.big_img
-  dl.small_img
-  .list-empty
+.item-list-container.clear
+  dl.big_img#big_img
+  dl.small_img#small_img
+  .list-empty#list-empty
     .empty-content
       .empty-icon
-        span.icon.icon-viewed
+        span.icon.icon-sad
       .empty-message
         span 你还没有关注任何人
         br
         label 不如从下面这堆潮流达人开始吧!
       .empty-action
         a(href="#") 回首页
-
-  .list-loading
+  .list-loading#list-loading
     .loading-message
       span Loading....
-
-.item-pagiation.clear
+.item-pagiation.clear#item-pagiation
   .show-more 我要看更多
 script.
   $(document).ready(function () {
-    window.dashboard_count = '{$count}';
-    window.list_data = {$list_json};
+    window.dashboard_count = "{$count}";
+    window.dashboard_list_data =  {$list_json};
 
     init_dashboard();
   });
-if !production
