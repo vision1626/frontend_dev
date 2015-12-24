@@ -1,5 +1,6 @@
+-var production = true
 if production
-  - var image_path  = './tpl/hi1626/v2/images/'
+  - var image_path = '{$_FANWE[site_url]}/tpl/hi1626/v2/images'
 else
   include ../public_inc/source/jade/head.jade
   - var image_path  = local_file_path+'/images/'
@@ -37,14 +38,15 @@ else
         li
           a 发布指引
     li.fixed-nav__avatar
-      //- if login
-      //- img
-      //- span
-      //-   a |退出
-      //- else
-      a 登录
+      {if $_FANWE['uid'] > 0}
+      img(src="{avatar $_FANWE['uid'] s 1 $_FANWE['user']['img_thumb']}")
+      span.quit-span |
+        a(href="{u user/logout}") 退出
+      {else}
+      a(href="{u user/login}") 登录
       span |
-      a 注册
+      a(href="{u user/register}") 注册
+      {/if}
     li.fixed-nav__msg 
       | 消息
       span.fixed-nav__number.fixed-nav__number--blue 30
