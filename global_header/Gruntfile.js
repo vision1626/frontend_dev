@@ -62,12 +62,16 @@ module.exports = function (grunt) {
 
         autoprefixer: {
             dist: {
-                files: [{
-                    expand: true,
-                    cwd: '<%= globalConfig.cssDistPath %>',
-                    src: '**/*.css',
-                    dest: '<%= globalConfig.cssDistPath %>'
-                }]
+                //files: [{
+                //    expand: true,
+                //    cwd: '<%= globalConfig.cssDistPath %>',
+                //    src: '**/*.css',
+                //    dest: '<%= globalConfig.cssDistPath %>'
+                //}]
+                files: {
+                    '<%= globalConfig.cssDistPath %>/<%= globalConfig.viewName %>.css':
+                        '<%= globalConfig.cssDistPath %>/<%= globalConfig.viewName %>.css'
+                }
             }
         },
 

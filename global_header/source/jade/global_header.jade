@@ -1,4 +1,4 @@
--var production = true
+-var production = false
 if production
   - var image_path = '{$_FANWE[site_url]}/tpl/hi1626/v2/images'
 else
@@ -13,22 +13,23 @@ else
         | 手机更好玩
       .drop-down-list(style="z-index: 9000;")
         .iOS-qrcode
-          img(src="#{image_path}/top_pro_ios.jpg", alt="ios")
+          img(src="#{image_path}/qr-app.jpg", alt="app")
           p 扫码下载
         .os-choice
-          .iTunes
+          a(href='/').iTunes
             i.icon.icon-apple
-            | iTunes
-          .Android
+            b iTunes
+          a(href='/').Android
             i.icon.icon-android
-            | Android
+            b Android
           p 直接下载
-        p.follow-us 关注我们！！
+        p.follow-us
+          img(src="#{image_path}/text-nav-mobile-popup.png", alt="wechat")
         .wechat
-          img(src="#{image_path}/top_pro_ios.jpg", alt="ios")
+          img(src="#{image_path}/qr-wechat.jpg", alt="wechat")
           p 你敢扫吗
         .weibo
-          img(src="#{image_path}/top_pro_ios.jpg", alt="ios")
+          img(src="#{image_path}/qr-weibo.jpg", alt="weibo")
           p 潮人养成记
     li.fixed-nav__help
       a 帮助中心
@@ -38,15 +39,27 @@ else
         li
           a 发布指引
     li.fixed-nav__avatar
-      {if $_FANWE['uid'] > 0}
-      img(src="{avatar $_FANWE['uid'] s 1 $_FANWE['user']['img_thumb']}")
-      span.quit-span |
-        a(href="{u user/logout}") 退出
-      {else}
-      a(href="{u user/login}") 登录
-      span |
-      a(href="{u user/register}") 注册
-      {/if}
+      if production
+        {if $_FANWE['uid'] > 0}
+
+        span.quit-span
+          a(href='/')
+            img(src="{avatar $_FANWE['uid'] s 1 $_FANWE['user']['img_thumb']}")
+            |$_FANWE['user']['user_name']
+          |&nbsp;|&nbsp;
+          a(href="{u user/logout}") 退出
+        {else}
+        a(href="{u user/login}") 登录
+        span |
+        a(href="{u user/register}") 注册
+        {/if}
+      else
+        span.quit-span
+          a(href='/')
+            img(src="#{image_path}/temp_footer-mag-cover.jpg")
+            |jonexiu
+          |&nbsp;|&nbsp;
+          a(href="/") 退出
     li.fixed-nav__msg 
       | 消息
       span.fixed-nav__number.fixed-nav__number--blue 30
@@ -89,16 +102,19 @@ else
           a 查看全部
     li.fixed-nav__flash-buy
       i.icon.icon-flashbuy
-      iframe.cart-num(src="http://www.1626buy.cn/shangyi/txu/5326-1594.html" width="14px" height="14px" scrolling="no")
       .invisible-menu
-        a 购物车
+        .cart-link
+          a 购物车
         iframe(src="http://www.1626buy.cn/shangyi/txu/5326-1594.html" width="14px" height="14px" scrolling="no")
-        | |
-        a 我的订单
+
+        .order-link
+          .order-link__wrap
+            span &nbsp;|&nbsp;
+            a 我的订单
 
 
-.main-nav-container
-  ul.main-nav
+.main-nav-container.clear
+  ul.main-nav.clear
     li.main-nav__logo
       a(href='http://www.1626.com',target='_blank')
         img(src='#{image_path}/logo-1626-black.svg')
@@ -122,14 +138,14 @@ else
       a
         i.icon.icon-hand
         | 我的潮品
-    li.main-nav__subscribe
+    li.main-nav__publish
       a
         i.icon.icon-publish_solid
         | 发布
 
-//- script.
-//-   $(document).ready(function () {
-//-     init_global_header();
-//-   });
+script(type='text/javascript').
+  $(document).ready(function () {
+    init_global_header();
+  });
 if !production
   </body>
