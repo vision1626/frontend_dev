@@ -7,22 +7,40 @@ else
 
 .profile-container
   .profile
-    img(src='/tpl/hi1626/images/popslave/go_home.jpg').profile__icon
-    h3 刹亚人之神
+    img(src="{avatar $home_user['uid'] b 1 $home_user['img_thumb']}").profile__icon
+    h3 {$home_user['user_name']}
     span.profile__level LV.2
     .medal
       a(href="")
       a(href="")
       a(href="")
-    p 你现在阅读的，并不是真的文案
-    a.profile__follow-btn
-      i.icon.icon-follow
-      | 关注Ta
+    p {if $home_user['introduce'] == ""}
+      | 这个人太潮了，不屑于填写简介
+      {else}
+      | {$home_user['inroduce']}
+      {/if}
+    .profile__follow-btn
+      {if $home_user['uid'] == $_FANWE['uid']}
+      i.icon.icon-edit
+      a(href="/settings/psersonal.html") 修改资料
+      {else}
+      .slider
+        {if $home_user['is_follow'] == 0}
+        span.success-fo 已关注
+        i.icon.icon-follow
+        span 关注Ta
+        {else}
+        span 取消关注
+        i.icon.icon-android
+        {/if}
+      {/if}
   .content
     ul.content__actions
+      {if $home_user['uid'] == $_FANWE['uid']}
       li
         i.icon.icon-news
         | 新动态
+      {/if}
       li 
         i.icon.icon-heart
         | 喜欢
@@ -37,7 +55,9 @@ else
         i.icon.icon-following
         | 关注
 //- TODO: put script tag below into footer 
-//- script(type='text/javascript').
-//-   $(document).ready(function () {
-//-     init();
-//-   });
+script(type='text/javascript').
+  $(document).ready(function () {
+    window.uid = {$home_user['uid']};
+    window.myid = {$_FANWE['uid']};
+    init_u_header();
+  });
