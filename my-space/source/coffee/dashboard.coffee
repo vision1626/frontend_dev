@@ -165,13 +165,71 @@ init_dashboard_data = () ->
   query_Dashboard_Data()
 
 do_like = (obj) ->
-  sid = $(obj).attr('sid')
-  dtype = $(obj).attr('dtype')
-  ed = $(obj).attr('ed')
-#
-#  if dtype is 1
-#
-#  else if dtype is 2
-#
-#  else
+  me = $(obj)
+  sid = me.attr('sid')
+  dtype = me.attr('dtype')
+  ed = me.attr('ed')
+  liststyle = me.attr('l')
+  method = "GET"
 
+  job = 0
+
+  if dtype is 'd'
+    url = 'dapei.php?action=dp_fav'
+    method = "POST"
+  else if dtype is 's'
+    if ed is '0'
+      url = 'services/service.php?m=share&a=fav'
+      job = 1
+    else
+      url = 'services/service.php?m=share&a=removefav'
+      job = 2
+
+  $.ajax {
+    url: SITE_URL + url
+    type: method
+    data: {ajax: 1, 'id': sid}
+    cache: false
+    dataType: "json"
+    success: (result)->
+      after_like(me,dtype,result,job,liststyle)
+    error: (result)->
+      alert('errr: ' + result)
+  }
+
+after_like = (me,dtype,result,job,liststyle) ->
+  ed = 0
+  if dtype is 'd'
+    if result.status is 1
+      ed = 1
+  else if dtype is 's'
+    if job is 1
+      if result.status is 1
+        ed = 1
+    else if job is 2
+      if result.status is 1
+        ed = 0
+  if liststyle is 'b'
+    refresh_like_big(me,ed,result.count)
+  else if liststyle is 's'
+    refresh_like_small(me,ed,result.count)
+
+refresh_like_big = (me,ed,count) ->
+  my_icon = me.find('.icon')
+  my_count = me.find('.like_count')
+  if ed is 1
+    my_icon.removeClass('icon-heart').addClass('icon-hearted')
+  else
+    my_icon.removeClass('icon-hearted').addClass('icon-heart')
+  my_count.html(count)
+  me.attr('ed',ed)
+
+refresh_like_small = (me,ed,count) ->
+  my_icon = me.find('.icon')
+  my_count = me.parent().parent().find('.like_count')
+  if ed is 1
+    my_icon.removeClass('icon-heart').addClass('icon-hearted')
+  else
+    my_icon.removeClass('icon-hearted').addClass('icon-heart')
+  my_count.html(count)
+  me.attr('ed',ed)

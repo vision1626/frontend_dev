@@ -6,6 +6,11 @@ big_DashboardItem_Generater = (data,current_index) ->
     sid = data.share_id
     dtype = 's'
 
+  if data.is_fav is 0
+    isfav = 'icon-heart'
+  else
+    isfav = 'icon-hearted'
+
   dd = $('<dd class="item ' + sid + '" i="' + current_index + '" dtype="' + dtype + '">' +
       '<div>' +
       (if data.dynamic_type is 1
@@ -18,11 +23,11 @@ big_DashboardItem_Generater = (data,current_index) ->
             goods = []
             for g in data.goods
               goods.push ('<dd class="collocation_item">' +
-                '<div class="goods_item">' +
-                '<a href="' + g.url + '">' +
-                '<img src="' + g.img + '" alt=""/>' +
-                '</a>' +
-                '</div>' +
+                  '<div class="goods_item">' +
+                    '<a href="' + g.url + '">' +
+                      '<img src="' + g.img + '" alt=""/>' +
+                    '</a>' +
+                  '</div>' +
                 '</dd>')
             goods.join ''
           ) +
@@ -33,12 +38,14 @@ big_DashboardItem_Generater = (data,current_index) ->
           (
             if data.is_dapei_like is 1 or data.like_user_list
               (
+                likeusers = []
                 for lu in data.like_user_list
-                  '<span>'+
+                  likeusers.push('<span>'+
                     '<a href="' + lu.user_href + '">' +
                       lu.user_name +
                     '</a>' +
-                  '</span>'
+                  '</span>')
+                likeusers.join(',')
               )+
                 '<span> 喜欢此搭配</span>'
             else
@@ -58,12 +65,14 @@ big_DashboardItem_Generater = (data,current_index) ->
           (
             if data.is_share_fav is 1 or data.like_user_list
               (
+                likeusers = []
                 for lu in data.like_user_list
-                  '<span>'+
-                    '<a href="' + lu.user_href + '">' +
-                      lu.user_name +
-                    '</a>' +
-                  '</span>'
+                  likeusers.push('<span>'+
+                      '<a href="' + lu.user_href + '">' +
+                        lu.user_name +
+                      '</a>' +
+                    '</span>')
+                likeusers.join(',')
               )+
                 '<span> 喜欢此单品</span>'
             else
@@ -91,12 +100,12 @@ big_DashboardItem_Generater = (data,current_index) ->
         '<span>' + data.comment_count + '</span>' +
       '</div>' +
       '</div>' +
-      '<div class="item-b_add_like btn_like" sid="' + sid + '" dtype="' + dtype + '"  ed="' + data.is_fav + '">' +
+      '<div class="item-b_add_like btn_like" l="b" sid="' + sid + '" dtype="' + dtype + '"  ed="' + data.is_fav + '">' +
         '<a>' +
-          '<span class="icon icon-heart"></span>' +
+          '<span class="icon ' + isfav + '"></span>' +
           '<br/>' +
           '<span class="like_count">' +
-            data.like_total +
+            data.like_count +
           '</span>' +
         '</a>' +
       '</div>' +
@@ -110,6 +119,11 @@ small_DashboardItem_Generater = (data,current_index) ->
   else
     sid = data.share_id
     dtype = 's'
+
+  if data.is_fav is 0
+    isfav = 'icon-heart'
+  else
+    isfav = 'icon-hearted'
 
   dd = $('<dd class="item ' + sid + '" i="' + current_index + '" dtype="' + dtype + '">' +
       '<div>' +
@@ -126,8 +140,8 @@ small_DashboardItem_Generater = (data,current_index) ->
           '<a class="action-add_special">' +
             '<span class="icon icon-album"></span>' +
           '</a>' +
-          '<a class="action-add_like btn_like" sid="' + sid + '" dtype="' + dtype + '" ed="' + data.is_fav + '">' +
-            '<span class="icon icon-heart"></span>' +
+          '<a class="action-add_like btn_like" l="s" sid="' + sid + '" dtype="' + dtype + '" ed="' + data.is_fav + '">' +
+            '<span class="icon ' + isfav + '"></span>' +
           '</a>' +
         '</div>' +
         (
@@ -136,12 +150,14 @@ small_DashboardItem_Generater = (data,current_index) ->
               (
                 if data.is_dapei_like is 1 or data.like_user_list
                   (
+                    likeusers = []
                     for lu in data.like_user_list
-                      '<span>'+
-                        '<a href="' + lu.user_href + '">' +
-                        lu.user_name +
-                        '</a>' +
-                        '</span>'
+                      likeusers.push('<span>'+
+                          '<a href="' + lu.user_href + '">' +
+                            lu.user_name +
+                          '</a>' +
+                        '</span>')
+                    likeusers.join(',')
                   )+
                     '<span> 喜欢了</span>'
                 else
@@ -150,14 +166,16 @@ small_DashboardItem_Generater = (data,current_index) ->
               '</div>' +
               '<dl class="collocation">' +
               (
+                goods = []
                 for g in data.goods
-                  '<dd class="collocation_item">' +
-                    '<div class="goods_item">' +
-                    '<a href="' + g.url + '">' +
-                    '<img src="' + g.img + '" alt=""/>' +
-                    '</a>' +
-                    '</div>' +
-                    '</dd>'
+                  goods.push('<dd class="collocation_item">' +
+                      '<div class="goods_item">' +
+                        '<a href="' + g.url + '">' +
+                          '<img src="' + g.img + '" alt=""/>' +
+                        '</a>' +
+                      '</div>' +
+                    '</dd>')
+                goods.join ''
               ) +
               '</dl>'
           else
@@ -165,34 +183,39 @@ small_DashboardItem_Generater = (data,current_index) ->
               (
                 if data.is_share_fav is 1 or data.like_user_list
                   (
+                    likeusers = []
                     for lu in data.like_user_list
-                      '<span>'+
-                        '<a href="' + lu.user_href + '">' +
-                        lu.user_name +
-                        '</a>' +
-                        '</span>'
+                      likeusers.push('<span>'+
+                          '<a href="' + lu.user_href + '">' +
+                            lu.user_name +
+                          '</a>' +
+                        '</span>')
+                    likeusers.join(',')
                   )+
-                    '<span> 喜欢了</span>'
+                  '<span> 喜欢了</span>'
                 else
                   '<span>NEW</span>'
               ) +
               '</div>' +
               '<div class="item-s_title">' +
-              '<a href="' + data.url + '">' +
-              '<span>' + data.title + '</span>' +
-              '</a>' +
+                '<a href="' + data.url + '">' +
+                  '<span>' + data.title + '</span>' +
+                '</a>' +
               '</div>' +
               '<div class="item-s_price">' +
-              '<span>¥' + data.goods_price + '</span>' +
+                '<span>¥' + data.goods_price + '</span>' +
               '</div>'
         ) +
         '<div class="item-s_additional">' +
           '<span class="icon icon-viewed"></span>' +
           '<span class="count">' + data.view_count + '</span>' +
           '<span class="icon icon-hearted"></span>' +
-          '<span class="count">' + data.like_total + '</span>' +
+          '<span class="count like_count">' + data.like_count + '</span>' +
           '<span class="icon icon-comment"></span>' +
           '<span class="count">' + data.comment_count + '</span>' +
         '</div>' +
       '</div>' +
     '</dd>')
+
+#excite_Anim = (obj,className) ->
+#  $(obj).
