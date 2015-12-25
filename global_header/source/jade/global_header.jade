@@ -1,4 +1,4 @@
--var production = false
+-var production = true
 if production
   - var image_path = '{$_FANWE[site_url]}/tpl/hi1626/v2/images'
 else
@@ -104,13 +104,13 @@ else
       i.icon.icon-flashbuy
       .invisible-menu
         .cart-link
-          a 购物车
-        iframe(src="http://www.1626buy.cn/shangyi/txu/5326-1594.html" width="14px" height="14px" scrolling="no")
+          a(href="http://www.1626buy.cn/flow/",target='_blank') 购物车
+        iframe(src="http://192.168.0.231/api/get_cart.php?token=1626-cart-number" width="14px" height="14px" scrolling="no")
 
         .order-link
           .order-link__wrap
             span &nbsp;|&nbsp;
-            a 我的订单
+            a(href="http://www.1626buy.cn/user/act-order_list.html",target='_blank') 我的订单
 
 
 .main-nav-container.clear
@@ -119,15 +119,15 @@ else
       a(href='http://www.1626.com',target='_blank')
         img(src='#{image_path}/logo-1626-black.svg')
     li
-      a 首页
+      a(href='http://www.1626.com',target='_blank') 首页
     li
-      a 资讯
+      a(href='http://www.1626.com/zixun/',target='_blank') 资讯
     li.main-nav__flashbuy
-      a 潮闪购
+      a(href='http://www.1626buy.cn/flashbuy/',target='_blank') 潮闪购
     li
-      a 搭配
+      a(href='http://www.1626.com/dapei/c1.html',target='_blank') 搭配
     li
-      a 达人
+      a(href='http://www.1626.com/master',target='_blank') 达人
   .main-nav__search
     form
       i.icon.icon-search

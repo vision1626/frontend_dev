@@ -9,13 +9,11 @@ init_global_header = ->
 
   set_search_w = ->
     win_w = $(window).width()
-    $search_wrap.width win_w - $nav_right_w - $nav_left_w - 40 - 12
+    $search_wrap.width win_w - $nav_right_w - $nav_left_w - 40
 
   set_search_w()
   $(window).on "resize", ->
     set_search_w()
-
-
 
   # Event registers
   $search.on 'focus', ->
