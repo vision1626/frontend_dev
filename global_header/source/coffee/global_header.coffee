@@ -20,4 +20,10 @@ init_global_header = ->
     $search_icon_font.css({'color': 'black'})
   $search.on 'blur', ->
     $search_icon_font.css({'color': '#b4b4b4'})
-  
+  $search.on 'click', ->
+    get_search_kws(0, 'user')
+  $search.on 'keyup', ->
+    get_search_kws(0, 'user')
+  $search.on 'keydown', (e)->
+    if e.which == 13
+     check_search2()

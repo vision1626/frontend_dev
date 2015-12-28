@@ -111,8 +111,6 @@ else
           .order-link__wrap
             span &nbsp;|&nbsp;
             a(href="http://www.1626buy.cn/user/act-order_list.html",target='_blank') 我的订单
-
-
 .main-nav-container.clear
   ul.main-nav.clear
     li.main-nav__logo
@@ -129,10 +127,12 @@ else
     li
       a(href='http://www.1626.com/master',target='_blank') 达人
   .main-nav__search
-    form
+    div
       i.icon.icon-search
-      input(type='text' placeholder='搜一下变交街架')
+      input(type='text' id="jquery-search2" placeholder='搜一下变交街架' name="kw")
       i.icon.icon-return
+      .tips-menu.indshare-tips
+        .search-tips
   ul.main-nav--right
     li.main-nav__me
       a
