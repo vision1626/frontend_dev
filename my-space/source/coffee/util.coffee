@@ -217,5 +217,9 @@ small_DashboardItem_Generater = (data,current_index) ->
       '</div>' +
     '</dd>')
 
-#excite_Anim = (obj,className) ->
-#  $(obj).
+excite_Anim = (obj,animName) ->
+  $(obj).addClass(animName + ' animated').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', () ->
+    obj.removeClass(animName).removeClass('animated')
+  );
+
+
