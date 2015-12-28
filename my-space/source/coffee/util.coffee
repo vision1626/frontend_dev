@@ -1,3 +1,78 @@
+followItem_Generater = (data,current_index) ->
+  dd = $('<dd class="follow-list_item" i="' + current_index + '">'+
+    '<div class="fans-container">' +
+      '<div class="fans-face">' +
+        '<a href="#">' +
+          '<img src="' + data.img_thumb + '" alt="' + data.user_name + '"/>' +
+        '</a>' +
+      '</div>' +
+      '<div class="fans-content">' +
+        '<div class="fans-text">' +
+          '<div class="fans-name">' +
+            '<span>' + data.user_name + '</span>' +
+          '</div>' +
+          '<div class="fans-intro">' +
+            '<span>' + data.introduce + '</span>' +
+          '</div>' +
+        '</div>' +
+        '<div class="fans-action">' +
+          '<div class="fans-published">' +
+            '<dl>' +
+            (
+              goods = []
+              for g,j in data.newest_publish
+                goods.push(
+                  '<dd i="' + j + '">' +
+                    '<a href="' + g.url + '">' +
+                      '<img src="' + g.img_56 + '" alt=""/>' +
+                    '</a>' +
+                  '</dd>')
+              goods.join ''
+            ) +
+            '</dl>' +
+          '</div>' +
+          '<div class="fans-concemed">' +
+            '<div class="fans-concemed_fans">' +
+              '<div>' +
+                '<span class="icon icon-fans"></span>' +
+              '</div>' +
+              '<div>' +
+                '<span class="icon icon-concemed_fans_count"></span>' +
+                '<label>' + data.fans + ' 粉丝</label>' +
+              '</div>' +
+            '</div>' +
+            '<div class="fans-concemed_follow">' +
+              '<div>' +
+                '<span class="icon icon-following"></span>' +
+              '</div>' +
+              '<div>' +
+                '<span class="icon icon-concemed_follow_count"></span>' +
+                '<label>' + data.follows + ' 关注</label>' +
+              '</div>' +
+            '</div>' +
+          '</div>' +
+          '<div class="fans-follow">' +
+            (
+              if data.is_follow is 1
+                if data.is_gz is 0
+                  '<div class="action">' +
+                    '<span class="icon icon-unfollow"></span><label>取消关注</label>' +
+                  '<div/>'
+                else
+                  '<div class="action">' +
+                    '<span class="icon icon-unfollow"></span><label>互相关注</label>' +
+                  '</div>'
+              else
+                '<div class="action">' +
+                  '<span class="icon icon-follow"></span><label>关注Ta</label>' +
+                '</div>'
+            ) +
+          '</div>' +
+        '</div>' +
+      '</div>' +
+    '</div>' +
+  '</dd>')
+
 big_DashboardItem_Generater = (data,current_index) ->
   if data.dynamic_type is 1
     sid = data.dapei_id

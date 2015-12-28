@@ -116,9 +116,14 @@ module.exports = function (grunt) {
                         // '<%= globalConfig.jsSrcPath %>/util.coffee',
                         '<%= globalConfig.jsSrcPath %>/header.coffee'
                     ],
+                    '<%= globalConfig.jsDebugPath %>/util.js':[
+                        '<%= globalConfig.jsSrcPath %>/util.coffee'
+                    ],
                     '<%= globalConfig.jsDebugPath %>/dashboard.js':[
-                        '<%= globalConfig.jsSrcPath %>/util.coffee',
                         '<%= globalConfig.jsSrcPath %>/dashboard.coffee'
+                    ],
+                    '<%= globalConfig.jsDebugPath %>/follow.js':[
+                        '<%= globalConfig.jsSrcPath %>/follow.coffee'
                     ]
                 }
             }

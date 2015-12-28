@@ -1,57 +1,26 @@
+-var production = true
 .follow-list-container
-  //{if $follow_user}
-  dl.follow-list
-    //{loop $follow_user $k $item}
-    dd.follow-list_item
-      .fans-container
-        .fans-face
-          img(src="{$item['img_thumb']}" alt="{$item['user_name']}")
-        .fans-content
-          .fans-text
-            .fans-name
-              span {$item['user_name']}
-            .fans-intro
-              span {$item['introduce']}
-          .fans-action
-            .fans-published
-              dl
-                //{loop $item['newest_publish'] $n $publish}
-                dd
-                  a(href="{$publish['url']}")
-                    img.fans-published_image(src="{getimg $publish['img'] 32 32}" alt="")
-                //{/loop}
-            .fans-concemed
-              .fans-concemed_fans
-                div
-                  span.icon.icon-fans
-                div
-                  span.fans-concemed_fans_count {$item['fans']}
-                  label 粉丝
-              .fans-concemed_follow
-                div
-                  span.icon.icon-following
-                div
-                  span.fans-concemed_follow_count {$item['follows']}
-                  label 关注
-            .fans-follow
-              //{if $item['is_follow'] == 1}
-              //{if $item['is_gz'] == 0}
-              a(href="#")
-                span.icon.icon-follow
-                |取消关注
-              //{else}
-              a(href="#")
-                span.icon.icon-follow
-                |互相关注
-              //{/if}
-              //{else}
-              a(href="#")
-                span.icon.icon-follow
-                |关注Ta
-              //{/if}
-    //{/loop}
-  //{else}
-  .list-empty 暂无任何关注
-  //{/if}
-//{if $pager['page_count']>1}
-.follow-pagination
+  dl.follow-list#follow-list
+  .list-empty#list-empty
+    .empty-content
+      .empty-icon
+        span.icon.icon-sad
+      .empty-message
+        span 你还没有关注任何人
+        br
+        label 不如从下面这堆潮流达人开始吧!
+      .empty-action
+        a(href="#") 回首页
+  .list-loading#list-loading
+    .loading-message
+      span Loading....
+.clear
+.item-pagiation.clear#item-pagiation
+  .show-more 我要看更多
+script.
+  $(document).ready(function () {
+    window.follow_count = "{$count}";
+    window.follow_list_data = $.parseJSON('{$follow_user_json}');
+
+    init_follow();
+  });
