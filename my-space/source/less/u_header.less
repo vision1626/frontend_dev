@@ -5,6 +5,7 @@
   height: 300px;
   background: url("/tpl/hi1626/v2/images/test_bg.jpg") no-repeat center center fixed rgba(0, 0, 0, .5);
   background-size: cover;
+  position: relative;
   .profile {
     position: relative;
     margin-left: auto;
@@ -38,7 +39,7 @@
     .profile__follow-btn {
       position: absolute;
       top: 149px;
-      right: 11px;
+      right: 59px;
       width: 96px;
       height: 30px;
       background-color: @black;
@@ -59,16 +60,33 @@
         display: inline-block;
         transition: margin-left .5s linear;
       }
-      .slider.slideleft {
+      .slider.slideright {
         margin-left: 60px;
       }
-      .icon-follow.slideleft{
+      .icon-follow.slideright {
         animation: .5s linear 0s 1 normal rotate;
       }
-      .success-fo {
-        display: none;
-        margin-left: -46px;
+      .icon-unfollow.slideleft {
+        animation: .5s linear 0s 1 reverse rotate;
       }
+      .slider.slideleft {
+        margin-left: 0;
+      }
+
+      // .status_text {
+      //   display: none;
+      // }
+      // .status_text.slideright{
+      //   margin-left: -44px;
+      // }
+      // .success-fo {
+      //   display: none;
+      //   margin-left: -46px;
+      // }
+      // span.followed {
+      //   margin-left: 11px;
+      //   margin-right: 5px;
+      // }
       &:hover {
         color: @blue;
         .slider {
@@ -86,7 +104,7 @@
         margin-top: -6px;
         // transition: 1s linear 0s;
       }
-      .icon-follow:before {
+      .icon-follow:before, .icon-unfollow:before {
         font-size: 20px;
         margin-right: 7px;
         margin-left: 6px;
@@ -102,7 +120,9 @@
     background-color: rgba(0, 0, 0, 0.5);
     height: 60px;
     margin-top: 29px;
-    position: relative;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
     .content__actions {
       margin-left: auto;
       margin-right: auto;
@@ -114,13 +134,14 @@
         line-height: 5;
         width: 33%;
         text-align: center;
-        background-size: 200% 100%;
-        background-image: linear-gradient(to left, rgba(0,0,0,0) 50%, white 50%);
+        // background-size: 200% 100%;
+        // background-image: linear-gradient(to left, rgba(0,0,0,0) 50%, white 50%);
         transition: background-position 1s;
         border-radius: 4px 4px 0 0;
         &:hover {
+          background-color: white;
           color: @black;
-          background-position: -100% 0;
+          // background-position: -100% 0;
           .icon {
             color: @blue;
           }
