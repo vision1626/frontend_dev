@@ -2,139 +2,157 @@
 @fans-face_wh:100px;
 @margin-lr: 60px;
 
-.follow-list-container dl.follow-list {
-  margin: 0 @margin-lr;
-  float: left;
+.follow-list-container{
+  clear:both;
+
+  dl.follow-list {
+    margin: 0 @margin-lr;
+    float: left;
+  }
+
+  dd.follow-list_item {
+    float: left;
+    margin: 20px 15px 10px 15px;
+    //border-bottom: 2px solid @white;
+    width: 185px;
+    position: relative;
+
+    .fans-face {
+      position: absolute;
+      width: 100%;
+      top: 0;
+      left: 0;
+      z-index: 999;
+      text-align: center;
+
+      img {
+        width: @fans-face_wh;
+        height: @fans-face_wh;
+        border-radius: @fans-face_wh/2;
+      }
+    }
+
+    .fans-content{
+      margin-top: @fans-face_wh/2;
+      width:100%;
+      box-shadow: 0 1px 3px @grey;
+      transition: all 0.2s ease-out;
+
+      .fans-text{
+        background-color: @light-grey;
+        height: 136px;
+        width:100%;
+        position: relative;
+
+        .fans-name{
+          margin: 0 12px;
+          padding: 60px 0 5px 0;
+          text-align: center;
+
+          span{
+            font-size: @font-size-m;
+          }
+        }
+
+        .fans-intro{
+          margin:5px 12px;
+          line-height: @font-size-s;
+          word-break: break-all;
+          overflow: hidden;
+          height: 30px;
+
+          span{
+            font-size: @font-size-s;
+            color:@grey;
+          }
+        }
+      }
+
+      .fans-action{
+        background-color: @white;
+        height:162px;
+        width:100%;
+
+        .fans-published{
+          //width:100%;
+          height:56px;
+          margin-top: 12px;
+          margin-left: 12px;
+
+          dd{
+            float: left;
+            margin-right: 10px;
+            width:32px;
+            height:32px;
+
+            img{
+              width:32px;
+              height: 32px;
+              border: 0;
+            }
+          }
+        }
+
+        .fans-concemed{
+          column-count:2;
+          column-gap:10px;
+          text-align: center;
+          font-size: @font-size-xs;
+          margin: 0 12px;
+
+          .icon{
+            font-size: 24px;
+          }
+        }
+
+        .fans-follow{
+          text-align: center;
+          font-size: @font-size-m;
+          margin-top: 14px;
+          position: relative;
+
+          div.action{
+            height: 30px;
+            line-height: 28px;
+            width: 105px;
+            margin: 0 auto;
+            border: solid 1px @dark-grey;
+            border-radius: 15px;
+            padding: 0 5px;
+            background-color: @white;
+            transition: all 0.2s ease-out;
+            color:@black;
+            cursor: pointer;
+            font-size: @font-size-s;
+            text-align: left;
+          }
+
+          div.action:hover{
+            background-color: @blue;
+            color:@white;
+            padding: 0 5px 0 3px;
+          }
+
+          .icon{
+            font-size: 25px;
+            margin-right: 3px;
+          }
+
+          div.action:hover span{
+            font-size: 28px;
+          }
+
+          label{
+            position: relative;
+            top:2px;
+          }
+        }
+      }
+    }
+  }
+
+  dd.follow-list_item:hover .fans-content{
+    box-shadow: 0 1px 5px @dark-grey;
+  }
 }
 
-.follow-list-container dl.follow-list dd.follow-list_item {
-  float: left;
-  margin: 20px 15px 10px 15px;
-  //border-bottom: 2px solid @white;
-  width: 185px;
-
-  position: relative;
-}
-
-.follow-list-container .fans-face{
-  position: absolute;
-  width: 100%;
-  top:0;
-  left:0;
-  z-index: 999;
-  text-align: center;
-}
-
-.follow-list-container .fans-face img{
-  width:@fans-face_wh;
-  height:@fans-face_wh;
-  border-radius: @fans-face_wh/2;
-
-}
-
-.follow-list-container .fans-content{
-  margin-top: @fans-face_wh/2;
-  width:100%;
-  box-shadow: 0 1px 3px @grey;
-  transition: all 0.2s ease-out;
-}
-
-.follow-list-container .fans-content:hover {
-  box-shadow: 0 1px 5px @dark-grey;
-}
-
-.follow-list-container .fans-content .fans-text{
-  background-color: @light-grey;
-  height: 136px;
-  width:100%;
-  position: relative;
-}
-
-.follow-list-container .fans-content .fans-text .fans-name{
-  margin: 0 12px;
-  padding: 60px 0 5px 0;
-  text-align: center;
-}
-
-.follow-list-container .fans-content .fans-text .fans-name span{
-  font-size: @font-size-m;
-}
-
-.follow-list-container .fans-content .fans-text .fans-intro{
-  margin:0 12px;
-  line-height: @font-size-s;
-}
-
-.follow-list-container .fans-content .fans-text .fans-intro span{
-  font-size: @font-size-s;
-  color:@grey;
-}
-
-.follow-list-container .fans-content .fans-action{
-  background-color: @white;
-  height:162px;
-  width:100%;
-}
-
-.follow-list-container .fans-content .fans-action .fans-published{
-  //width:100%;
-  height:56px;
-  margin-top: 12px;
-  margin-left: 12px;
-}
-
-.follow-list-container .fans-content .fans-action .fans-published dd{
-  float: left;
-  margin-right: 10px;
-  width:32px;
-  height:32px;
-}
-
-.follow-list-container .fans-content .fans-action .fans-published dd img{
-  width:32px;
-  border: 0;
-}
-
-.follow-list-container .fans-content .fans-action .fans-concemed{
-  column-count:2;
-  column-gap:10px;
-  text-align: center;
-  font-size: @font-size-xs;
-  margin: 0 12px;
-}
-
-.follow-list-container .fans-content .fans-action .fans-concemed .icon{
-  font-size: 24px;
-}
-
-.follow-list-container .fans-content .fans-action .fans-follow{
-  text-align: center;
-  font-size: @font-size-m;
-  margin-top: 14px;
-  position: relative;
-}
-
-.follow-list-container .fans-content .fans-action .fans-follow a{
-  height:28px;
-  border: solid 1px @dark-grey;
-  border-radius: 20px;
-  padding: 4px 12px 8px 4px;
-  background-color: @white;
-  transition: all 0.2s ease-out;
-  color:@black;
-}
-
-.follow-list-container .fans-content .fans-action .fans-follow a:hover{
-  background-color: @blue;
-  color:@white;
-}
-
-.follow-list-container .fans-content .fans-action .fans-follow .icon{
-  font-size: 28px;
-  margin-right: 3px;
-}
-
-.follow-list-container .fans-content .fans-action .fans-follow label{
-  position: relative;
-  top:2px;
-}
