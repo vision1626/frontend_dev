@@ -79,13 +79,13 @@ big_DashboardItem_Generater = (data,current_index) ->
               '<span class="item_tag">NEW</span>' +
               '<span>新发布</span>'
           ) +
-          '</div>' +
+          '</div>' + "<a href='#{data.url}'>" +
           '<div class="item-b_title">' +
             '<span>' + data.title + '</span>' +
           '</div>' +
           '<div class="item-b_price">' +
             '<span>¥' + data.goods_price + '</span>' +
-          '</div>' +
+          '</div>' + '</a>' +
         '</div>'
       ) +
 
@@ -96,7 +96,7 @@ big_DashboardItem_Generater = (data,current_index) ->
       '<div class="item-value">' +
         '<span class="icon icon-viewed"></span>' +
         '<span>' + data.view_count + '</span>' +
-        '<span class="icon icon-comment"></span>' +
+        '<span class="icon icon-comment--s"></span>' +
         '<span>' + data.comment_count + '</span>' +
       '</div>' +
       '</div>' +
