@@ -29,7 +29,12 @@ init_dashboard = ->
     _dashboard_is_loading = false
     listloading.hide()
     biglist.show()
-    pagiation.show()
+    if parseInt(dashboard_count) > _dashboard_limit
+      pagiation.show()
+      _dashboard_has_more = true
+    else
+      pagiation.hide()
+      _dashboard_has_more = false
   else
     listloading.hide()
     listempty.show()
