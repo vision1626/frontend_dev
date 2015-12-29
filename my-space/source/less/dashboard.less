@@ -144,6 +144,9 @@
         display: block;
         height: 100%;
       }
+      img{
+        width:@b-image-wh;
+      }
     }
     .item-b_description {
       padding: @item-content-padding;
@@ -213,6 +216,7 @@
     }
     .item-value {
       float: left;
+      padding-top: 3px;
       span {
         color: @grey;
         font-size: @font-size-xs;
@@ -240,7 +244,7 @@
   cursor: pointer;
   a {
     position: relative;
-    top: 7px;
+    top: 11px;
   }
   span {
     color: @dark-grey;
@@ -269,7 +273,9 @@
   overflow: hidden;
   position: relative;
   text-align: center;
-
+  img{
+    width:@b-image-wh;
+  }
   dl.collocation {
     position: absolute;
     bottom: 12px;
@@ -282,6 +288,8 @@
     height: 56px;
     img {
       border: 0;
+      width: 56px;
+      height: 56px;
     }
   }
 
@@ -307,6 +315,9 @@
     overflow: hidden;
     position: relative;
     height: @s-image-wh;
+    img{
+      width: @s-image-wh;
+    }
   }
   .item-s_description {
     position: absolute;
