@@ -12,7 +12,7 @@
   .mag-display {
     float: left;
     position: relative;
-    ._block(640px,70px);
+    height: 70px;
     ._clearfix;
     .mag-cover {
       ._block(120px,128px);
@@ -28,6 +28,9 @@
       position: absolute;
       left: 150px;
       top: 20px;
+      @media @mq-col-2 {
+        display: none;
+      }
       img {
         width: 100%;
       }
@@ -109,8 +112,9 @@
 
 //Temp public style
 .center-wrap {
-  width: 1210px;
+  //width: 1210px;
   margin: auto;
+  ._1626-breakpoints("others");
 }
 .button {
   border-radius: 100px;
