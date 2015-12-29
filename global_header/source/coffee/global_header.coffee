@@ -15,6 +15,10 @@ init_global_header = ->
   $(window).on "resize", ->
     set_search_w()
 
+
+  if /dashboard/i.test(window.location.pathname)
+    $('.main-nav__me').find('a').addClass('current-page')
+
   # Event registers
   $search.on 'focus', ->
     $search_icon_font.css({'color': 'black'})
@@ -27,3 +31,5 @@ init_global_header = ->
   $search.on 'keydown', (e)->
     if e.which == 13
      check_search2()
+
+
