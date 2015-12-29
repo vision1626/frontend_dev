@@ -1,4 +1,5 @@
 init_u_header = ->
+  $profile = $('.profile-container')
   $slider = $('.slider')
   $i_follow = if $('.icon-follow').length > 0 then $('.icon-follow') else $('.icon-unfollow') 
   $success_fo = $('.success-fo')
@@ -23,6 +24,8 @@ init_u_header = ->
       $(this).css('left': '7px').text("取消关注")
     $status_text.on 'mouseout', ->
       $(this).css('left': '21px').text("已关注")
+
+  parallax($profile)
 
   $follow_btn.on 'click', ->
     $.ajax({
