@@ -117,7 +117,6 @@ init = ->
   $rules_btn.on 'click', (event)->
     $rules.addClass('show')
     event.stopPropagation()
-  $help_btn
   $detail_btn.on 'click', ->
     $detail.addClass('show')
   $black_box.on 'click', (e)->
@@ -163,15 +162,19 @@ init = ->
   setTimeout ->
     if $help_btn.length > 0
       $help_btn.on 'click', (e)->
-        slotMachineDuck()
-        $(this).unbind('click').attr('src', './tpl/hi1626/images/bduck/helped-min.png')
-        $helped_btn.fadeIn()
-        $parts.unbind('click')
+        if islighten == 1
+          $share.addClass('show')
+        else
+          slotMachineDuck()
+          $(this).unbind('click')
+          $helped_btn.fadeIn()
+          $parts.unbind('click')
       $parts.on 'click', ->
-        slotMachineDuck()
-        $(this).unbind('click')
-        $bduck.unbind('click')
-        $help_btn.unbind('click')
+        if islighten == 0
+          slotMachineDuck()
+          $(this).unbind('click')
+          $bduck.unbind('click')
+          $help_btn.unbind('click')
     else if $bduck.length > 0
       $bduck.on 'click', (e)->
         slotMachineDuck()

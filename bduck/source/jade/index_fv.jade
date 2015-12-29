@@ -38,11 +38,7 @@ body
     img(src="./tpl/hi1626/images/bduck/bduck_th-min.png" data-random="5" data-light="no").bduck-th.js-bduck
   .help-or-helped
     a
-      {if $is_lighten}
-      img(src="./tpl/hi1626/images/bduck/helped-min.png").helped-btn
-      {else}
       img(src="./tpl/hi1626/images/bduck/help_friend-min.png").help-btn
-      {/if}
   .actions
     a(href="{u bduck/index}")
       img(src="./tpl/hi1626/images/bduck/join-min.png")
@@ -89,6 +85,7 @@ body
       window.lighten_url = "{$api_urls['lighten']}";
       window.deliver_url = "{$api_urls['save_address']}";
       window.lighten_parts = "{$lighten_info['parts']}";
+      window.islighten = {$is_lighten};
       init();
     });
       
