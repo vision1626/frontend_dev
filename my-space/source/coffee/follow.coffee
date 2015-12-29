@@ -48,7 +48,6 @@ do_follow = (obj,status) ->
   uid = me.attr('uid')
   gz = me.attr('gz')
 
-
   url = 'services/service.php?m=user&a=follow'
   method = 'post'
   $.ajax{
