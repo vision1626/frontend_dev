@@ -70,7 +70,7 @@ followItem_Generater = (data,current_index) ->
                 status_text = '关注Ta'
                 status_icon = 'icon-follow'
 
-              '<div class="action ' + status_class + '" uid="' + data.uid + '" gz="' + data.is_gz + '">' +
+              '<div class="action ' + status_class + '" uid="' + data.uid + '">' +
                 '<span class="icon ' + status_icon + '"></span><label>' + status_text + '</label>' +
               '</div>'
             ) +

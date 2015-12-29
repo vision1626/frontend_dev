@@ -1,6 +1,7 @@
 @import "../../../public_inc/source/less/imports";
 @fans-face_wh:100px;
 @margin-lr: 60px;
+@b-image-wh: 280px;
 
 .follow-list-container{
   clear:both;
@@ -110,6 +111,7 @@
           font-size: @font-size-m;
           margin-top: 14px;
           position: relative;
+          cursor: pointer;
 
           div.action{
             height: 30px;
@@ -121,7 +123,7 @@
             //padding: 0 5px;
             background-color: @white;
             color:@black;
-            cursor: pointer;
+
             font-size: @font-size-s;
             text-align: left;
             position: relative;
@@ -134,6 +136,7 @@
 
             label{
               position: absolute;
+              cursor: pointer;
             }
           }
 
@@ -183,4 +186,36 @@
   }
 }
 
+.item-pagiation{
+  //float: left;
+  width:100%;
+  text-align: center;
+  margin: 0 auto;
+  padding-top: 40px;
+  //display: none;
+  clear: both;
+  .show-more{
+    margin: 0 auto;
+    color: @grey;
+    height:60px;
+    width: @b-image-wh*2+30;
+    border-radius: 30px;
+    line-height: 60px;
+    font-size: @font-size-m;
+    cursor: pointer;
+    box-shadow: 0 1px 3px @grey;
+    transition: all 0.2s ease-out;
+    &:hover {
+      box-shadow: 0 1px 5px @dark-grey;
+    }
+  }
+}
 
+.list-loading{
+  margin: 40px 60px 50px;
+  background-color: @light-grey;
+  height: 60px;
+  position: relative;
+  padding: 50px;
+  display: none;
+}
