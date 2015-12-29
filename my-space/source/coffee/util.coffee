@@ -203,7 +203,7 @@ small_DashboardItem_Generater = (data,current_index) ->
   dd = $('<dd class="item ' + sid + '" i="' + current_index + '" dtype="' + dtype + '">' +
       '<div>' +
         '<div class="item-s_image">' +
-        '<img src="' + data.img_small + '" alt="' + data.title + '"/>' +
+        '<img src="' + data.img + '" alt="' + data.title + '"/>' +
       '</div>' +
       '<div class="item-s_description">' +
         '<div class="item-s_owner">' +
