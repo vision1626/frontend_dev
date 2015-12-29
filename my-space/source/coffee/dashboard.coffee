@@ -34,7 +34,10 @@ init_dashboard = ->
     listloading.hide()
     listempty.show()
 
-$(window).scroll ->
+$(window).bind 'scroll', (e)->
+  parallax($('.profile-container'))
+  e.stopPropagation()
+
   if ($(this).scrollTop() + $(window).height() + 100 >= $(document).height() && $(this).scrollTop() > 100)
     gen_Dashboard_Item()
 

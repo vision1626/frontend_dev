@@ -12,7 +12,7 @@ followItem_Generater = (data,current_index) ->
             '<span>' + data.user_name + '</span>' +
           '</div>' +
           '<div class="fans-intro">' +
-            '<span>' + data.introduce + '</span>' +
+            '<span>' + (if data.introduce isnt '' then data.introduce else '这个人太潮了，不屑于填写简介') + '</span>' +
           '</div>' +
         '</div>' +
         '<div class="fans-action">' +
@@ -53,19 +53,26 @@ followItem_Generater = (data,current_index) ->
           '</div>' +
           '<div class="fans-follow">' +
             (
+              status_class = ''
+              status_text = ''
+              status_icon = ''
+
               if data.is_follow is 1
+                status_class = 'follow_ed'
+                status_icon = 'icon-unfollow'
                 if data.is_gz is 0
-                  '<div class="action">' +
-                    '<span class="icon icon-unfollow"></span><label>取消关注</label>' +
-                  '<div/>'
+#                  status_text = '取消关注'
+                  status_text = '已经关注'
                 else
-                  '<div class="action">' +
-                    '<span class="icon icon-unfollow"></span><label>互相关注</label>' +
-                  '</div>'
+                  status_text = '互相关注'
               else
-                '<div class="action">' +
-                  '<span class="icon icon-follow"></span><label>关注Ta</label>' +
-                '</div>'
+                status_class = 'follow_nt'
+                status_text = '关注Ta'
+                status_icon = 'icon-follow'
+
+              '<div class="action ' + status_class + '" uid="' + data.uid + '" gz="' + data.is_gz + '">' +
+                '<span class="icon ' + status_icon + '"></span><label>' + status_text + '</label>' +
+              '</div>'
             ) +
           '</div>' +
         '</div>' +
@@ -291,6 +298,10 @@ small_DashboardItem_Generater = (data,current_index) ->
         '</div>' +
       '</div>' +
     '</dd>')
+
+parallax = (obj)->
+  y = $('body').scrollTop()
+  obj.css({'background-position-y': -(y / 5) + 'px'})
 
 excite_Anim = (obj,animName) ->
   $(obj).addClass(animName + ' animated').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', () ->
