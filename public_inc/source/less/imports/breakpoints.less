@@ -22,6 +22,25 @@
   }
 }
 
+._1626-breakpoints(@content-type) when (@content-type = "small-goods") {
+  @min-width: (@small-goods__width + @small-goods__margin) * 2;
+  @max-width: (@small-goods__width + @small-goods__margin) * 6;
+  min-width: @min-width;
+  max-width: @max-width;
+  @media @mq-col-5 {
+    width: @max-width;
+  }
+  @media @mq-col-4 {
+    width: (@small-goods__width + @small-goods__margin) * 4;
+  }
+  @media @mq-col-3 {
+    width: (@small-goods__width + @small-goods__margin) * 3;
+  }
+  @media @mq-col-2 {
+    width: @min-width;
+  }
+}
+
 ._1626-breakpoints(@content-type) when (@content-type = "others") {
   @min-width: (@big-goods__width + @big-goods__margin) * 2 - 30px;
   @max-width: (@big-goods__width + @big-goods__margin) * 5 - 30px;

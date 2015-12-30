@@ -141,4 +141,9 @@ module.exports = function (grunt) {
     grunt.registerTask('dev', [
         'watch'
     ]);
+    grunt.registerTask('css', [
+        'less',
+        'autoprefixer',
+        'cssmin'
+    ]);
 };
