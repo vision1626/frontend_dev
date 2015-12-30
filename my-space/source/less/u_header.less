@@ -2,7 +2,7 @@
 @keyframes rotate {from {transform: rotate(0);} to {transform: rotate(360deg);}};
 @keyframes slideright {from {margin-left: 6px;} to {margin-left: 60px;}};
 .profile-container {
-  height: 300px;
+  height: 360px;
   background: url("/tpl/hi1626/v2/images/test_bg.jpg") no-repeat center center rgba(0, 0, 0, .5);
   background-size: cover;
   position: relative;
@@ -11,18 +11,22 @@
     margin-left: auto;
     margin-right: auto;
     text-align: center;
-    width: 507px;
-    padding-top: 38px;
+    //width: 507px;
+    padding-top: 80px;
     color: white;
     img {
       height: 100px;
       width: 100px;
       border-radius: 100px;
+      margin: auto;
+      display: block;
       background-color: @black;
     }
     h3 {
       font-size: 20px;
-      margin-top: 3px;
+      margin-top: 8px;
+      margin-bottom: 5px;
+      font-weight: normal;
     }
     .profile__level {
       position: absolute;
@@ -35,6 +39,8 @@
     }
     p {
       font-size: 12px;
+      margin: 5px 0;
+      color: @grey;
     }
     .profile__follow-btn {
       position: absolute;
@@ -119,7 +125,7 @@
   .content {
     background-color: rgba(0, 0, 0, 0.5);
     height: 60px;
-    margin-top: 29px;
+    //margin-top: 29px;
     position: absolute;
     bottom: 0;
     width: 100%;
@@ -129,6 +135,7 @@
       width: 357px;
       color: white;
       font-size: 12px;
+      ._clearfix;
       li {
         float: left;
         line-height: 5;
