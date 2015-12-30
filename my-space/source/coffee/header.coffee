@@ -13,18 +13,32 @@ init_u_header = ->
   $fans = $('.relation-fans')
   $slide_tab_bg = $('.js-slide-bg')
 
+  isInActions = ->
+    if (location.pathname.indexOf('dashboard') > 0) or 
+    (location.pathname.indexOf('fav') > 0) or 
+    (location.pathname.indexOf('talk') > 0)
+      return true
+    else
+      return false
+
   if (window.myid != window.uid)
     $('.content__actions').find('li').css({'width': '50%'})
 
   user_action_async = (action)->
-    if (window.location.pathname.indexOf(action) < 0)
-      history.pushState('', '', action + '-' + uid + '.html')
-      init_dashboard_data()
+    if isInActions()
+      if (window.location.pathname.indexOf(action) < 0)
+        history.pushState('', '', action + '-' + uid + '.html')
+        init_dashboard_data()
+    else
+      window.location.pathname = '/u/' + action + '-' + uid + '.html'
 
   user_relation_async = (action)->
-    if (window.location.pathname.indexOf(action) < 0)
-      history.pushState('', '', action + '-' + uid + '.html')
-      init_follow_data()
+    if !isInActions()
+      if (window.location.pathname.indexOf(action) < 0)
+        history.pushState('', '', action + '-' + uid + '.html')
+        init_follow_data()
+    else
+      window.location.pathname = '/u/' + action + '-' + uid + '.html'
 
   slideToCurrent = ()->
     tab_width = $(this).css('width')
@@ -87,6 +101,7 @@ init_u_header = ->
             $(this).css('left': '34px').text("关注Ta")
           $status_text.html("关注Ta").css({'left': '34px'})
     })
+  
   $fav.on 'click', ->
     slideToCurrent.apply(this)
     user_action_async('fav')

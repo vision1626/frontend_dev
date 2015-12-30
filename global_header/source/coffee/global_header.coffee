@@ -15,6 +15,46 @@ init_global_header = ->
   $(window).on "resize", ->
     set_search_w()
 
+  check_new_msg = ->
+    $.ajax({
+      url: SITE_URL + '/services/service.php?m=index&a=check_new_message',
+      dataType: 'json'
+      success: (result)->
+        data = result.data
+        if result.status == 0
+          $('.fixed-nav__number').html(0)
+          $('.check-all').find('a').html("没有新消息")
+        else 
+          $('.fixed-nav__number').html(result.sum)
+          for d in data
+            if d['type']=="1" && d['ge_sum']!="0"
+              $('.get-likes').html("<i class='icon icon-heart'></icon>" + 
+                "<a href='" + d['url'] + "'>" + "获得了" + 
+                  "<span class='number'>" + d['ge_sum'] + "</span>" + 
+                    "条系统消息" + "</a>")
+            if d['type']=="2" && d['ge_sum']!="0"
+              $('.get-comments').html("<i class='icon icon-comment'></icon>" + 
+                "<a href='" + d['url'] + "'>" + "收到" + 
+                  "<span class='number'>" + d['ge_sum'] + "</span>" + 
+                    "条系统消息" + "</a>")
+            if d['type']=="3" && d['ge_sum']!="0"
+              $('.get-fans').html("<i class='icon icon-fans'></icon>" + 
+                "<a href='" + d['url'] + "'>" + "新增" + 
+                  "<span class='number'>" + d['ge_sum'] + "</span>" + 
+                  "条系统消息" + "</a>")
+            if d['type']=="4" && d['ge_sum']!="0"
+              $('.get-recomendded').html("<i class='icon icon-news'></icon>" + 
+                "<a href='" + d['url'] + "'>" + "有" + 
+                  "<span class='number'>" + d['ge_sum'] + "</span>" + 
+                    "条系统消息" + "</a>")
+            $('.check-all ').find('a').html("知道了")
+    })
+
+  check_new_msg()
+
+  setInterval ->
+    check_new_msg()
+  , 300000
 
   if /dashboard/i.test(window.location.pathname)
     $('.main-nav__me').find('a').addClass('current-page')

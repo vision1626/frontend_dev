@@ -1,4 +1,4 @@
--var production = false
+-var production = true
 if production
   - var image_path = '{$_FANWE[site_url]}/tpl/hi1626/v2/images'
 else
@@ -61,45 +61,15 @@ else
           |&nbsp;|&nbsp;
           a(href="/") 退出
     li.fixed-nav__msg 
-      | 消息
+      a(href="/messagetip/") 消息
       span.fixed-nav__number.fixed-nav__number--blue 30
       ul.drop-down-list
         li.get-likes
-          //- if like > 0
-          i.icon.icon-heart
-          | 获得了 
-          | 1 
-          | 次喜欢：
-          a.get-likes__title Supreme Hanes Boxer Briefs联名内裤
-          |  来自 
-          a.get-likes__viewer 陈开心
         li.get-fans
-          //- new fans > 0
-          i.icon.icon-fans
-          | 新增 
-          | 17 
-          | 个粉丝：
-          //- loop fans
-          a.get-fans__name Slash
-          a.get-fans__name Kurt Cobain
-          |  等
-          | 17
-          | 人
         li.get-comments
-          i.icon.icon-comment
-          | 有 
-          | 30 
-          | 个留言：
-          a.get-comments__title SealLayLowSing
-          |  来自 
-          a.get-comments__user 许冠杰
         li.get-recomendded
-          i.icon.icon-news
-          | 您的潮品 
-          a.get-recomendded__good 风之手里剑
-          |  被推荐到首页
         li.check-all 
-          a 查看全部
+          a
     li.fixed-nav__flash-buy
       i.icon.icon-flashbuy
       .invisible-menu

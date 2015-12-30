@@ -114,16 +114,20 @@
         }
         li {
           color: @grey;
-          width: 250px;
+          width: auto;
+          min-width: 110px;
           font-size: 10px;
-          border-bottom: 1px solid @light-grey;
           &:hover {
             .icon:before {
               color: @black;
             }
           }
+          .number {
+            color: @orange;
+          }
           a {
             color: black;
+            font-size: 13px;
             border-bottom: 2px solid @grey;
             &:hover {
               color: black;
@@ -147,7 +151,7 @@
       &:hover {
         color: @blue;
         .drop-down-list {
-          right: 40px;
+          right: 70px;
           left: auto;
         }
       }
