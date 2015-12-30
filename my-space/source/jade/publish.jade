@@ -40,17 +40,21 @@ else
         span.icon.icon-grid_view
 .item-list-container
   dl.big_img#big_img
+    dd.item
+      i.icon.icon-publish
   dl.small_img#small_img
   .list-empty#list-empty
     .empty-content
       .empty-icon
         span.icon.icon-sad
       .empty-message
-        span 你还没有关注任何人
+        span 你还没有发布任何单品
         br
-        label 不如从下面这堆潮流达人开始吧!
+        label 赶快发布一个,让别人膜拜你的品位吧!
       .empty-action
-        a(href="#") 回首页
+        a(href="#")
+          i.icon.icon-publish_solid
+          |发布
   .list-loading#list-loading
     .loading-message
       span Loading....
