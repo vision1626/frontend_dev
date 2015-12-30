@@ -6,13 +6,37 @@ init_u_header = ->
   $success_unfo = $('.success-unfo')
   $status_text = $('.status_text')
   $follow_btn = $('.profile__follow-btn')
-  $introduction = $('profile__introduction')
+  $fav = $('.actions-fav')
+  $db = $('.actions-db')
+  $pub = $('.actions-pub')
+  $slide_tab_bg = $('.js-slide-bg')
 
   if (window.myid != window.uid)
     $('.content__actions').find('li').css({"width": "50%"})
 
-  # if $.trim($introduction.text()) == ""
+  tab_width = $('.content__actions').find('li').css("width")
+  $slide_tab_bg.css({"width": tab_width})
 
+  user_action_async = (action)->
+    # $.ajax({
+    #   url: SITE_URL + 'services/service.php?m=u&a=get_' + action + '_ajax',
+    #   type: 'post',
+    #   dataType: 'json',
+    #   data: {hid: uid, page: 1, count: count, sort: 'new', limit: 12, type: ''},
+    #   success: (result)->
+    #     data = result.data
+    #     more = result.more
+    #     $item_list = $('.item-list-container')
+    #     $big_list = $('<dl id="big_img" class="big_img" style="display: block;"></dl>')
+    #     $item_list.empty()
+    #     if data != null
+    #       for d, i in data
+    #         $big_list.append(big_DashboardItem_Generater(d, i))
+    #       $item_list.append($big_list)
+    # })
+    if (window.location.pathname.indexOf(action) < 0)
+      history.pushState('', '', action + '-' + uid + '.html')
+      init_dashboard_data()
 
   if window.isfollow == 0
     $status_text.on 'mouseover', ->
@@ -57,3 +81,15 @@ init_u_header = ->
             $(this).css('left': '34px').text("关注Ta")
           $status_text.html("关注Ta").css({'left': '34px'})
     })
+  $fav.on 'click', ->
+    self = $(this)
+    user_action_async('fav')
+    $slide_tab_bg.css({"left": self.offset().left})
+  $db.on 'click', ->
+    self = $(this)
+    user_action_async('dashboard')
+    $slide_tab_bg.css({"left": self.offset().left})
+  $pub.on 'click', ->
+    self = $(this)
+    user_action_async('talk')
+    $slide_tab_bg.css({"left": self.offset().left})

@@ -129,6 +129,13 @@
     position: absolute;
     bottom: 0;
     width: 100%;
+    .js-slide-bg {
+      position: absolute;
+      height: 60px;
+      background-color: white;
+      border-radius: 5px 5px 0 0;
+      transition: left .5s ease-out;
+    }
     .content__actions {
       margin-left: auto;
       margin-right: auto;
@@ -141,14 +148,8 @@
         line-height: 5;
         width: 33%;
         text-align: center;
-        // background-size: 200% 100%;
-        // background-image: linear-gradient(to left, rgba(0,0,0,0) 50%, white 50%);
-        transition: background-position 1s;
-        border-radius: 4px 4px 0 0;
+        cursor: pointer;
         &:hover {
-          background-color: white;
-          color: @black;
-          // background-position: -100% 0;
           .icon {
             color: @blue;
           }
