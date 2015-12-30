@@ -1,12 +1,12 @@
 @import "../../../public_inc/source/less/imports";
 @fans-face_wh:100px;
-@list-containter-padding: 60px;
+@list-containter-padding: 30px;
 
 .follow-list-container{
   padding: 0 @list-containter-padding;
   clear:both;
   margin: auto;
-  ._1626-breakpoints("small-goods");
+  ._1626-breakpoints("big-goods");
 
   dl.follow-list {
     //margin: 0 @margin-lr;
@@ -16,10 +16,11 @@
 
   dd.follow-list_item {
     float: left;
-    margin: 20px 10px 10px 10px;
+    //margin: 20px 10px 10px 10px;
     //border-bottom: 2px solid @white;
-    width: 185px;
+    width: @small-goods__width;
     position: relative;
+    ._1626-breakpoints("small-goods-margin");
 
     .fans-face {
       position: absolute;

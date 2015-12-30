@@ -1,5 +1,5 @@
 _follow_is_loading = false
-_follow_limit = 6
+_follow_limit = 14
 _follow_start = 0
 _follow_end = 0
 _follow_step = _follow_limit

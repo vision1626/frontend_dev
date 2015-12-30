@@ -13,8 +13,7 @@
   ._clearfix;
   position: relative;
   //height: @list-filter-height;
-  margin: auto;
-  margin-top: 30px;
+  margin: 30px auto 0 ;
   //padding: 0 15px;
 
   ._1626-breakpoints("others");
@@ -44,7 +43,7 @@
         font-size: @font-size-xs;
         background-color: @blue;
         color: @white;
-        padding: 0px 6px;
+        padding: 0 6px;
         border-radius: 14px;
         //margin-left: 5px;
         position: relative;
@@ -102,7 +101,7 @@
 }
 
 //列表部分
-.item-list-container{
+.item-list-container {
   padding: 0 @big-goods__margin;
   //clear: both;
   margin: auto;
@@ -110,10 +109,6 @@
 
   //====================================大图列表 Start==================================================
   dl.big_img {
-    //margin: 0 auto;
-    //width:100%;
-    //max-width: @big-goods__width*4+90+30;
-    //columns: @big-goods__width 4;
     display: none;
     ._clearfix;
 
@@ -124,368 +119,366 @@
       //border-bottom: 2px solid @white;
       width: @big-goods__width;
       min-height: 470px;
-      box-shadow: 0 0 5px rgba(0,0,0,.3);
+      box-shadow: 0 0 5px rgba(0, 0, 0, .3);
       transition: all 0.2s ease-out;
       position: relative;
       //cursor: pointer;
-      &:hover {
-        box-shadow: 0 1px 8px rgba(0,0,0,.7);
-      }
-    }
-    .item-b_image {
-      height: @big-goods__width;
-      overflow: hidden;
-      position: relative;
-      text-align: center;
-      a {
-        display: block;
-        height: 100%;
-      }
-      img{
-        width:@big-goods__width;
-      }
-    }
-    .item-b_description {
-      padding: @item-content-padding;
-      .item-b_isnew {
-        height: 22px;
-      }
-      .item-b_isnew {
+
+      .item-b_image {
+        height: @big-goods__width;
+        overflow: hidden;
+        position: relative;
+        text-align: center;
         a {
-          color: @black;
-          border-bottom: 2px solid @grey;
-          &:hover {
-            border-bottom: 2px solid @blue;
+          display: block;
+          height: 100%;
+        }
+        img {
+          width: @big-goods__width;
+        }
+      }
+      .item-b_description {
+        padding: @item-content-padding;
+        .item-b_isnew {
+          height: 22px;
+        }
+        .item-b_isnew {
+          a {
+            color: @black;
+            border-bottom: 2px solid @grey;
+            &:hover {
+              border-bottom: 2px solid @blue;
+            }
+          }
+          span {
+            color: @dark-grey;
+
+            font-size: @font-size-xs;
+          }
+          .item_tag {
+            color: @white;
+            background-color: @black;
+            padding: 0 5px;
+            border-radius: 10px;
+            font-size: @font-size-xxs;
+            margin-right: 3px;
+            position: relative;
+            top: -1px;
           }
         }
-        span {
-          color: @dark-grey;
-
-          font-size: @font-size-xs;
+        .item-b_title {
+          margin-top: 8px;
+          height: @font-size-m*3-3;
+          overflow: hidden;
         }
-        .item_tag {
-          color: @white;
-          background-color: @black;
-          padding: 0 5px;
-          border-radius: 10px;
-          font-size: @font-size-xxs;
-          margin-right: 3px;
-          position: relative;
-          top: -1px;
-        }
-      }
-      .item-b_title {
-        margin-top: 8px;
-        height: @font-size-m*3-3;
-        overflow: hidden;
-      }
-      span {
-        font-size: @font-size-s;
-        color: black;
-      }
-      .item-b_price {
-        margin-top: 16px;
         span {
           font-size: @font-size-s;
-          font-weight: bold;
-          color: @dark-grey;
+          color: black;
+        }
+        .item-b_price {
+          margin-top: 16px;
+          span {
+            font-size: @font-size-s;
+            font-weight: bold;
+            color: @dark-grey;
+          }
         }
       }
-    }
-    .item-b_additional {
-      padding: @item-content-padding;
-      height: 26px;
-      position: absolute;
-      bottom:0;
-      background-color: @light-grey;
-      border-bottom: 3px solid @light-grey;
-      transition: all 0.2s ease-out;
-      width:(@big-goods__width - 90);
-      img {
-        width: @item-owner-img-wh;
-        height: @item-owner-img-wh;
-        border-radius: 50%;
-        float: left;
-        margin-right: 10px;
+      .item-b_additional {
+        padding: @item-content-padding;
+        height: 26px;
+        position: absolute;
+        bottom: 0;
+        background-color: @light-grey;
+        border-bottom: 3px solid @light-grey;
+        transition: all 0.2s ease-out;
+        width: (@big-goods__width - 90);
+        img {
+          width: @item-owner-img-wh;
+          height: @item-owner-img-wh;
+          border-radius: 50%;
+          float: left;
+          margin-right: 10px;
+        }
+        .item-value {
+          float: left;
+          margin-top: 5px;
+
+          span {
+            color: @dark-grey;
+            font-size: @font-size-xs;
+            margin-right: 3px;
+          }
+          .icon {
+            margin-left: 10px;
+          }
+          i {
+            margin-left: 10px;
+          }
+        }
       }
-    }
-    dd:hover .item-b_additional {
-      //box-shadow: 0 1px 5px @dark-grey;
-      border-bottom-color: @blue;
-    }
-    .item-value {
-      float: left;
-      margin-top: 5px;
-
-      span {
-        color: @dark-grey;
-        font-size: @font-size-xs;
-        margin-right: 3px;
-      }
-      .icon {
-        margin-left: 10px;
-      }
-      i {
-        margin-left: 10px;
-      }
-    }
-  }
-}
-
-
-.item-b_add_like {
-  position: absolute;
-  right: 0;
-  bottom: 0;
-  width: 90px;
-  height: (@item-content-padding * 2) + @item-owner-img-wh + 3;
-  background-color: @white;
-  text-align: center;
-  cursor: pointer;
-  a {
-    position: relative;
-    top: 11px;
-  }
-  span {
-    color: @dark-grey;
-    transition: all 0.2s ease-out;
-  }
-  .icon {
-    font-size: @font-size-xl;
-    &.icon-hearted {
-      color: @red;
-    }
-  }
-  .like_count {
-    font-size: @font-size-xs;
-    position: relative;
-    top: -4px;
-  }
-  &:hover * {
-    color: @red;
-  }
-}
-
-
-//搭配部分
-.item-list-container dl.big_img .item-l_image {
-  height: @l-image-h;
-  overflow: hidden;
-  position: relative;
-  text-align: center;
-  img {
-    width: 100%;
-    /* vertical-align: middle; */
-    //top: 0;
-    //bottom: 0;
-    //position: absolute;
-    //left: 0;
-    //right: 0;
-    margin: auto;
-  }
-
-  dl.collocation {
-    position: absolute;
-    bottom: 12px;
-    left: 12px;
-  }
-  dd.collocation_item {
-    float: left;
-    margin-left: 7px;
-    width: 56px;
-    height: 56px;
-    img {
-      border: 0;
-      width: 56px;
-      height: 56px;
-    }
-  }
-
-}
-//====================================大图列表 End====================================================
-
-//====================================小图列表 Start==================================================
-.item-list-container dl.small_img {
-  margin: 0 @margin-lr;
-  float: left;
-  display: none;
-  dd.item {
-    float: left;
-    background-color: @white;
-    margin: 20px 5px 10px 15px;
-    //border-bottom: 2px solid @white;
-    width: @small-goods__width;
-    height: @small-goods__width;
-    transition: all 0.2s ease-out;
-    position: relative;
-  }
-  .item-s_image {
-    overflow: hidden;
-    position: relative;
-    height: @small-goods__width;
-    img{
-      width: @small-goods__width;
-    }
-  }
-  .item-s_description {
-    position: absolute;
-    top: 0;
-    left: 0;
-    background-color: rgba(0, 0, 0, 0.7);
-    width: 100%;
-    height: 100%;
-    //display: none;
-    opacity: 0;
-    transition: all 0.2s;
-    .item-s_action {
-      float: right;
-      margin: (@item-content-padding - 4) @item-content-padding;
-      a {
-        color: @white;
-        font-size: @font-size-l;
-        margin-left: 8px;
-        transition: all 0.2s;
+      .item-b_add_like {
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        width: 90px;
+        height: (@item-content-padding * 2) + @item-owner-img-wh + 3;
+        background-color: @white;
+        text-align: center;
         cursor: pointer;
-        &.action-add_like:hover {
+        a {
+          position: relative;
+          top: 11px;
+        }
+        span {
+          color: @dark-grey;
+          transition: all 0.2s ease-out;
+        }
+        .icon {
+          font-size: @font-size-xl;
+          &.icon-hearted {
+            color: @red;
+          }
+        }
+        .like_count {
+          font-size: @font-size-xs;
+          position: relative;
+          top: -4px;
+        }
+        &:hover * {
           color: @red;
         }
       }
-    }
-    .item-s_owner {
-      float: left;
-      margin: @item-content-padding;
-      img {
-        width: 20px;
-        border-radius: 20px;
+      //搭配部分
+      .item-l_image {
+        height: @l-image-h;
+        overflow: hidden;
+        position: relative;
+        text-align: center;
+        img {
+          width: 100%;
+          /* vertical-align: middle; */
+          //top: 0;
+          //bottom: 0;
+          //position: absolute;
+          //left: 0;
+          //right: 0;
+          margin: auto;
+        }
+
+        dl.collocation {
+          position: absolute;
+          bottom: 12px;
+          left: 12px;
+        }
+        dd.collocation_item {
+          float: left;
+          margin-left: 7px;
+          width: 56px;
+          height: 56px;
+          img {
+            border: 0;
+            width: 56px;
+            height: 56px;
+          }
+        }
+      }
+
+      &:hover {
+        box-shadow: 0 1px 8px rgba(0, 0, 0, .7);
+
+        .item-b_additional {
+          //box-shadow: 0 1px 5px @dark-grey;
+          border-bottom-color: @blue;
+        }
       }
     }
-    .item-s_isnew {
+  }
+  //====================================大图列表 End====================================================
+
+  //====================================小图列表 Start==================================================
+  dl.small_img {
+    ._clearfix;
+    display: none;
+    dd.item {
       float: left;
-      width: @small-goods__width - (@item-content-padding*2);
-      margin: 0 @item-content-padding;
-      color: @grey;
-      a{
-        color: @white;
-        font-size: @font-size-xs;
-      }
-      span {
-        color: @grey;
-        font-size: @font-size-xs;
-        margin-right: 3px;
-      }
+      background-color: @white;
+      //margin: 20px 10px 10px 10px;
+      //border-bottom: 2px solid @white;
+      width: @small-goods__width;
+      height: @small-goods__width;
+      transition: all 0.2s ease-out;
+      position: relative;
+      ._1626-breakpoints("small-goods-margin");
+
     }
-    .item-s_title {
-      width: @small-goods__width - (@item-content-padding*2);
-      margin-top: @item-content-padding/2;
-      float: left;
-      height: @font-size-s*3+4;
-      line-height: @font-size-s;
+    .item-s_image {
       overflow: hidden;
-      padding: 0 @item-content-padding;
-      a{
-        color: @white;
-      }
-      span {
-        font-size: @font-size-s;
-        color: @white;
+      position: relative;
+      height: @small-goods__width;
+      img {
+        width: @small-goods__width;
       }
     }
-    .item-s_price {
-      width: @small-goods__width - (@item-content-padding*2);
-      margin: @item-content-padding/2 @item-content-padding;
-      float: left;
-      span {
-        font-size: @font-size-l;
-        font-weight: bold;
-        color: @white;
-      }
-    }
-    .item-s_additional {
+    .item-s_description {
       position: absolute;
-      bottom: @item-content-padding;
-      left: @item-content-padding;
-      span {
+      top: 0;
+      left: 0;
+      background-color: rgba(0, 0, 0, 0.7);
+      width: 100%;
+      height: 100%;
+      //display: none;
+      opacity: 0;
+      transition: all 0.2s;
+      .item-s_action {
+        float: right;
+        margin: (@item-content-padding - 4) @item-content-padding;
+        a {
+          color: @white;
+          font-size: @font-size-l;
+          margin-left: 8px;
+          transition: all 0.2s;
+          cursor: pointer;
+          &.action-add_like:hover {
+            color: @red;
+          }
+        }
+      }
+      .item-s_owner {
+        float: left;
+        margin: @item-content-padding;
+        img {
+          width: 20px;
+          border-radius: 20px;
+        }
+      }
+      .item-s_isnew {
+        float: left;
+        width: @small-goods__width - (@item-content-padding*2);
+        margin: 0 @item-content-padding;
         color: @grey;
-        font-size: @font-size-xs;
-        margin-right: 2px;
+        a {
+          color: @white;
+          font-size: @font-size-xs;
+        }
+        span {
+          color: @grey;
+          font-size: @font-size-xs;
+          margin-right: 3px;
+        }
       }
-      .count {
-        margin-right: 8px;
+      .item-s_title {
+        width: @small-goods__width - (@item-content-padding*2);
+        margin-top: @item-content-padding/2;
+        float: left;
+        height: @font-size-s*3+4;
+        line-height: @font-size-s;
+        overflow: hidden;
+        padding: 0 @item-content-padding;
+        a {
+          color: @white;
+        }
+        span {
+          font-size: @font-size-s;
+          color: @white;
+        }
+      }
+      .item-s_price {
+        width: @small-goods__width - (@item-content-padding*2);
+        margin: @item-content-padding/2 @item-content-padding;
+        float: left;
+        span {
+          font-size: @font-size-l;
+          font-weight: bold;
+          color: @white;
+        }
+      }
+      .item-s_additional {
+        position: absolute;
+        bottom: @item-content-padding;
+        left: @item-content-padding;
+        span {
+          color: @grey;
+          font-size: @font-size-xs;
+          margin-right: 2px;
+        }
+        .count {
+          margin-right: 8px;
+        }
       }
     }
-  }
-  dd:hover .item-s_description {
-    opacity: 1;
-  }
-  dl.collocation {
-    position: absolute;
-    bottom: 40px;
-    //left: 12px;
-  }
-  dd.collocation_item {
-    float: left;
-    margin-left: 11px;
-    .goods_item{
-      width: 32px;
-      height:32px;
-      overflow: hidden;
-      img {
-        border: 0;
-        width:32px;
-        height:32px;
-      }
+    dd:hover .item-s_description {
+      opacity: 1;
     }
-  }
-}
-
-//====================================小图列表 End====================================================
-
-//====================================列表为吉 Start==================================================
-.list-empty{
-  margin: 40px 60px 50px;
-  background-color: @light-grey;
-  height: 60px;
-  position: relative;
-  padding: 50px;
-  display:none;
-  .empty-content{
-    width:450px;
-    margin: 0 auto;
-    .empty-icon{
+    dl.collocation {
+      position: absolute;
+      bottom: 40px;
+      //left: 12px;
+    }
+    dd.collocation_item {
       float: left;
-      margin-right: 20px;
-      span{
-        font-size: 60px;
-        line-height: 60px;
-      }
-    }
-    .empty-message{
-      float: left;
-      font-size: @font-size-m;
-      margin-right: 40px;
-      padding-top: 8px;
-      span{
-        font-weight: bold;
-      }
-    }
-    .empty-action{
-      float: left;
-      a{
-        line-height: 60px;
-        border: 2px solid @blue;
-        background-color: @white;
-        transition: all 0.2s;
-        color:@black;
-        padding: 8px 20px;
-        border-radius: 60px;
-        &:hover{
-          background-color: @blue;
-          color:@white;
+      margin-left: 11px;
+      .goods_item {
+        width: 32px;
+        height: 32px;
+        overflow: hidden;
+        img {
+          border: 0;
+          width: 32px;
+          height: 32px;
         }
       }
     }
   }
 }
+//====================================小图列表 End====================================================
+
+//====================================列表为吉 Start==================================================
+  .list-empty{
+    margin: 40px 60px 50px;
+    background-color: @light-grey;
+    height: 60px;
+    position: relative;
+    padding: 50px;
+    display:none;
+    .empty-content{
+      width:450px;
+      margin: 0 auto;
+      .empty-icon{
+        float: left;
+        margin-right: 20px;
+        span{
+          font-size: 60px;
+          line-height: 60px;
+        }
+      }
+      .empty-message{
+        float: left;
+        font-size: @font-size-m;
+        margin-right: 40px;
+        padding-top: 8px;
+        span{
+          font-weight: bold;
+        }
+      }
+      .empty-action{
+        float: left;
+        a{
+          line-height: 60px;
+          border: 2px solid @blue;
+          background-color: @white;
+          transition: all 0.2s;
+          color:@black;
+          padding: 8px 20px;
+          border-radius: 60px;
+          &:hover{
+            background-color: @blue;
+            color:@white;
+          }
+        }
+      }
+    }
+  }
 
 //====================================列表为吉 End====================================================
 

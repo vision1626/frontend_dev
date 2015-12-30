@@ -1,5 +1,5 @@
 _dashboard_is_loading = false
-_dashboard_limit = 24
+_dashboard_limit = 28
 _dashboard_start_b = 0
 _dashboard_end_b = 0
 _dashboard_step_b = _dashboard_limit/2
@@ -18,8 +18,8 @@ init_dashboard = ->
   listloading = $('#list-loading')
   pagiation = $('#item-pagiation')
 
-  if dashboard_count is ''
-    dashboard_count = 0
+#  if window.dashboard_count is ''
+#    window.dashboard_count = 0
 
   listloading.show()
   if dashboard_list_data
@@ -33,7 +33,7 @@ init_dashboard = ->
     listloading.hide()
     biglist.show()
 
-    if parseInt(dashboard_count) > _dashboard_limit
+    if parseInt(window.dashboard_count) > _dashboard_limit
       pagiation.show()
       _dashboard_has_more = true
     else
@@ -91,12 +91,12 @@ $(document).on 'click','.btn_like', ->
   do_like(this)
 
 query_Dashboard_Data = () ->
-  if dashboard_list_data isnt undefined
-    btn_ShowMore = $(document).find('.show-more')
+  btn_ShowMore = $(document).find('.show-more')
 
-    if !_dashboard_is_loading and _dashboard_has_more
-      _dashboard_is_loading = true
+  if !_dashboard_is_loading and _dashboard_has_more
+    _dashboard_is_loading = true
 
+    if dashboard_list_data isnt null
       if dashboard_list_data.length > 0
         if _dashboard_end_b > _dashboard_end_s
           page = (_dashboard_end_b/_dashboard_limit)+1
@@ -106,55 +106,70 @@ query_Dashboard_Data = () ->
           page = (_dashboard_end_b/_dashboard_limit)+1
       else
         page = 1
+    else
+      page = 1
 
-      btn_ShowMore.html('正在努力加载中...').addClass('loading')
-      $.ajax {
-        url: SITE_URL + 'services/service.php'
-        type: "GET"
-        data: {'m': 'u', 'a': 'get_dashboard_ajax', ajax: 1, 'page': page, 'count': window.dashboard_count, 'sort': _dashboard_show_new_hot,'limit': _dashboard_limit}
-        cache: false
-        dataType: "json"
-        success: (result)->
+    if window.location.pathname.indexOf('fav') > 0
+      action = 'get_fav_ajax'
+    else if window.location.pathname.indexOf('talk') > 0
+      action = 'get_publish_ajax'
+    else
+      action = 'get_dashboard_ajax'
+
+    btn_ShowMore.html('正在努力加载中...').addClass('loading')
+    $.ajax {
+      url: SITE_URL + 'services/service.php'
+      type: "GET"
+      data: {'m': 'u', 'a': action, ajax: 1, 'page': page, 'count': window.dashboard_count, 'sort': _dashboard_show_new_hot,'limit': _dashboard_limit, 'hid': window.uid}
+      cache: false
+      dataType: "json"
+      success: (result)->
+        window.dashboard_count = result.count
+        if result.data
           for d in result.data
             dashboard_list_data.push(d)
           gen_Dashboard_Item()
-          _dashboard_is_loading = false
-          if result.more is 1
-            btn_ShowMore.html('我要看更多').removeClass('loading')
-            _dashboard_has_more = true
-          else
-            btn_ShowMore.html('已经全部看完了').removeClass('loading')
-            _dashboard_has_more = false
-        error: (result)->
-          alert('errr: ' + result)
-          _dashboard_is_loading = false
+        _dashboard_is_loading = false
+        if result.more is 1
           btn_ShowMore.html('我要看更多').removeClass('loading')
-      }
+          _dashboard_has_more = true
+        else
+          btn_ShowMore.html('已经全部看完了').removeClass('loading')
+          _dashboard_has_more = false
+      error: (result)->
+        alert('errr: ' + result)
+        _dashboard_is_loading = false
+        btn_ShowMore.html('我要看更多').removeClass('loading')
+    }
 
 gen_Dashboard_Item = () ->
   _dashboard_is_loading = true
   biglist = $('#big_img')
   smalllist = $('#small_img')
   listloading = $('#list-loading')
+  listempty = $('#list-empty')
 
-  if _dashboard_show_big
-    if _dashboard_end_b < dashboard_list_data.length
-      _dashboard_end_b += _dashboard_step_b
-      for ld,i in dashboard_list_data
-        if _dashboard_start_b < _dashboard_end_b and i >= _dashboard_start_b
-          biglist.append(big_DashboardItem_Generater(ld,i))
-          _dashboard_start_b++
-    biglist.show()
-    listloading.hide()
+  if dashboard_list_data
+    if _dashboard_show_big
+      if _dashboard_end_b < dashboard_list_data.length
+        _dashboard_end_b += _dashboard_step_b
+        for ld,i in dashboard_list_data
+          if _dashboard_start_b < _dashboard_end_b and i >= _dashboard_start_b
+            biglist.append(big_DashboardItem_Generater(ld,i))
+            _dashboard_start_b++
+      biglist.show()
+    else
+      if _dashboard_end_s < dashboard_list_data.length
+        _dashboard_end_s += _dashboard_step_s
+        for ld,j in dashboard_list_data
+          if _dashboard_start_s < _dashboard_end_s and j >= _dashboard_start_s
+            smalllist.append(small_DashboardItem_Generater(ld,j))
+            _dashboard_start_s++
+      smalllist.show()
   else
-    if _dashboard_end_s < dashboard_list_data.length
-      _dashboard_end_s += _dashboard_step_s
-      for ld,j in dashboard_list_data
-        if _dashboard_start_s < _dashboard_end_s and j >= _dashboard_start_s
-          smalllist.append(small_DashboardItem_Generater(ld,j))
-          _dashboard_start_s++
-    smalllist.show()
-    listloading.hide()
+    listempty.show()
+
+  listloading.hide()
   _dashboard_is_loading = false
 
 init_dashboard_data = () ->
@@ -168,7 +183,11 @@ init_dashboard_data = () ->
   _dashboard_end_b = 0
   _dashboard_start_s = 0
   _dashboard_end_s = 0
-  dashboard_list_data.length = 0
+  if dashboard_list_data
+    dashboard_list_data.length = 0
+  else
+    dashboard_list_data = $.parseJSON('{}')
+  window.dashboard_count = ''
   listloading.show()
   biglist.html('')
   biglist.hide()
