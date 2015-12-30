@@ -12,7 +12,7 @@ followItem_Generater = (data,current_index) ->
             '<span>' + data.user_name + '</span>' +
           '</div>' +
           '<div class="fans-intro">' +
-            '<span>' + (if data.introduce isnt '' then data.introduce else '这个人太潮了，不屑于填写简介') + '</span>' +
+            '<span>' + (if data.introduce isnt '' and data.introduce isnt null then data.introduce else '这个人太潮了，不屑于填写简介') + '</span>' +
           '</div>' +
         '</div>' +
         '<div class="fans-action">' +

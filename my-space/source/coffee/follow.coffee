@@ -108,7 +108,7 @@ query_follow_Data = () ->
     $.ajax {
       url: SITE_URL + url
       type: method
-      data: {'m': 'u', 'a': action, ajax: 1, 'count': follow_count ,'page': page ,'limit': _follow_limit , 'hid': h_id}
+      data: {'m': 'u', 'a': action, ajax: 1, 'count': follow_count ,'page': page ,'limit': _follow_limit , 'hid': window.uid}
       cache: false
       dataType: "json"
       success: (result)->
