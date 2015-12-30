@@ -1,19 +1,22 @@
 @import "../../../public_inc/source/less/imports";
 @fans-face_wh:100px;
-@margin-lr: 60px;
-@b-image-wh: 280px;
+@list-containter-padding: 60px;
 
 .follow-list-container{
+  padding: 0 @list-containter-padding;
   clear:both;
+  margin: auto;
+  ._1626-breakpoints("small-goods");
 
   dl.follow-list {
-    margin: 0 @margin-lr;
-    float: left;
+    //margin: 0 @margin-lr;
+    //float: left;
+    ._clearfix;
   }
 
   dd.follow-list_item {
     float: left;
-    margin: 20px 15px 10px 15px;
+    margin: 20px 10px 10px 10px;
     //border-bottom: 2px solid @white;
     width: 185px;
     position: relative;
@@ -198,7 +201,7 @@
     margin: 0 auto;
     color: @grey;
     height:60px;
-    width: @b-image-wh*2+30;
+    width: @big-goods__width*2+30;
     border-radius: 30px;
     line-height: 60px;
     font-size: @font-size-m;

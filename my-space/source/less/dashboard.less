@@ -6,11 +6,7 @@
 @list-filter-height: 25px;
 @item-content-padding: 12px;
 @item-owner-img-wh: 26px;
-@item-margin: 30px;
-@list-containter-padding: 30px;
-@b-image-wh: 280px;
 @l-image-h: 371px;
-@s-image-wh: 185px;
 
 //分类以及筛选部分
 .item-list-filter {
@@ -107,7 +103,7 @@
 
 //列表部分
 .item-list-container{
-  padding: 0 @list-containter-padding;
+  padding: 0 @big-goods__margin;
   //clear: both;
   margin: auto;
   ._1626-breakpoints("big-goods");
@@ -116,8 +112,8 @@
   dl.big_img {
     //margin: 0 auto;
     //width:100%;
-    //max-width: @b-image-wh*4+90+30;
-    //columns: @b-image-wh 4;
+    //max-width: @big-goods__width*4+90+30;
+    //columns: @big-goods__width 4;
     display: none;
     ._clearfix;
 
@@ -126,7 +122,7 @@
       background-color: @white;
       margin: 20px 15px 10px 15px;
       //border-bottom: 2px solid @white;
-      width: @b-image-wh;
+      width: @big-goods__width;
       min-height: 470px;
       box-shadow: 0 0 5px rgba(0,0,0,.3);
       transition: all 0.2s ease-out;
@@ -137,7 +133,7 @@
       }
     }
     .item-b_image {
-      height: @b-image-wh;
+      height: @big-goods__width;
       overflow: hidden;
       position: relative;
       text-align: center;
@@ -146,7 +142,7 @@
         height: 100%;
       }
       img{
-        width:@b-image-wh;
+        width:@big-goods__width;
       }
     }
     .item-b_description {
@@ -204,7 +200,7 @@
       background-color: @light-grey;
       border-bottom: 3px solid @light-grey;
       transition: all 0.2s ease-out;
-      width:(@b-image-wh - 90);
+      width:(@big-goods__width - 90);
       img {
         width: @item-owner-img-wh;
         height: @item-owner-img-wh;
@@ -318,17 +314,17 @@
     background-color: @white;
     margin: 20px 5px 10px 15px;
     //border-bottom: 2px solid @white;
-    width: @s-image-wh;
-    height: @s-image-wh;
+    width: @small-goods__width;
+    height: @small-goods__width;
     transition: all 0.2s ease-out;
     position: relative;
   }
   .item-s_image {
     overflow: hidden;
     position: relative;
-    height: @s-image-wh;
+    height: @small-goods__width;
     img{
-      width: @s-image-wh;
+      width: @small-goods__width;
     }
   }
   .item-s_description {
@@ -365,7 +361,7 @@
     }
     .item-s_isnew {
       float: left;
-      width: @s-image-wh - (@item-content-padding*2);
+      width: @small-goods__width - (@item-content-padding*2);
       margin: 0 @item-content-padding;
       color: @grey;
       a{
@@ -379,7 +375,7 @@
       }
     }
     .item-s_title {
-      width: @s-image-wh - (@item-content-padding*2);
+      width: @small-goods__width - (@item-content-padding*2);
       margin-top: @item-content-padding/2;
       float: left;
       height: @font-size-s*3+4;
@@ -395,7 +391,7 @@
       }
     }
     .item-s_price {
-      width: @s-image-wh - (@item-content-padding*2);
+      width: @small-goods__width - (@item-content-padding*2);
       margin: @item-content-padding/2 @item-content-padding;
       float: left;
       span {
@@ -505,7 +501,7 @@
     margin: 0 auto;
     color: @grey;
     height:60px;
-    width: @b-image-wh*2+30;
+    width: @big-goods__width*2+30;
     border-radius: 30px;
     line-height: 60px;
     font-size: @font-size-m;
