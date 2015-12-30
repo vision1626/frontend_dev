@@ -19,6 +19,7 @@
   .show-more#folloe-show-more 我要看更多
 script.
   $(document).ready(function () {
+    window.h_id = "{$home_uid}"
     window.follow_count = "{$count}";
     window.follow_list_data = $.parseJSON('{$follow_user_json}');
 
