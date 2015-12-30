@@ -18,6 +18,9 @@ init_dashboard = ->
   listloading = $('#list-loading')
   pagiation = $('#item-pagiation')
 
+  if dashboard_count is ''
+    dashboard_count = 0
+
   listloading.show()
   if dashboard_list_data
     _dashboard_end_b = _dashboard_step_b
@@ -29,6 +32,7 @@ init_dashboard = ->
     _dashboard_is_loading = false
     listloading.hide()
     biglist.show()
+
     if parseInt(dashboard_count) > _dashboard_limit
       pagiation.show()
       _dashboard_has_more = true
@@ -38,6 +42,8 @@ init_dashboard = ->
   else
     listloading.hide()
     listempty.show()
+    pagiation.hide()
+    _dashboard_has_more = false
 
 $(window).bind 'scroll', (e)->
   parallax($('.profile-container'))
