@@ -91,7 +91,7 @@ $(document).on 'click','.btn_like', ->
   do_like(this)
 
 query_Dashboard_Data = () ->
-  btn_ShowMore = $(document).find('.show-more')
+  btn_ShowMore = $(document).find('#dashboard-show-more')
 
   if !_dashboard_is_loading and _dashboard_has_more
     _dashboard_is_loading = true
@@ -125,10 +125,15 @@ query_Dashboard_Data = () ->
       dataType: "json"
       success: (result)->
         window.dashboard_count = result.count
+
         if result.data
-          for d in result.data
-            dashboard_list_data.push(d)
-          gen_Dashboard_Item()
+          if dashboard_list_data
+            for d in result.data
+              window.dashboard_list_data.push(d)
+          else
+            window.dashboard_list_data = result.data
+        gen_Dashboard_Item()
+
         _dashboard_is_loading = false
         if result.more is 1
           btn_ShowMore.html('我要看更多').removeClass('loading')
@@ -148,25 +153,35 @@ gen_Dashboard_Item = () ->
   smalllist = $('#small_img')
   listloading = $('#list-loading')
   listempty = $('#list-empty')
+  pagiation = $('#item-pagiation')
 
   if dashboard_list_data
-    if _dashboard_show_big
-      if _dashboard_end_b < dashboard_list_data.length
-        _dashboard_end_b += _dashboard_step_b
-        for ld,i in dashboard_list_data
-          if _dashboard_start_b < _dashboard_end_b and i >= _dashboard_start_b
-            biglist.append(big_DashboardItem_Generater(ld,i))
-            _dashboard_start_b++
-      biglist.show()
+    if dashboard_list_data.length > 0
+      if _dashboard_show_big
+        if _dashboard_end_b < dashboard_list_data.length
+          _dashboard_end_b += _dashboard_step_b
+          for ld,i in dashboard_list_data
+            if _dashboard_start_b < _dashboard_end_b and i >= _dashboard_start_b
+              biglist.append(big_DashboardItem_Generater(ld,i))
+              _dashboard_start_b++
+        biglist.show()
+      else
+        if _dashboard_end_s < dashboard_list_data.length
+          _dashboard_end_s += _dashboard_step_s
+          for ld,j in dashboard_list_data
+            if _dashboard_start_s < _dashboard_end_s and j >= _dashboard_start_s
+              smalllist.append(small_DashboardItem_Generater(ld,j))
+              _dashboard_start_s++
+        smalllist.show()
+      if parseInt(window.dashboard_count) > _dashboard_limit
+        pagiation.show()
+      else
+        pagiation.hide()
     else
-      if _dashboard_end_s < dashboard_list_data.length
-        _dashboard_end_s += _dashboard_step_s
-        for ld,j in dashboard_list_data
-          if _dashboard_start_s < _dashboard_end_s and j >= _dashboard_start_s
-            smalllist.append(small_DashboardItem_Generater(ld,j))
-            _dashboard_start_s++
-      smalllist.show()
+      pagiation.hide()
+      listempty.show()
   else
+    pagiation.hide()
     listempty.show()
 
   listloading.hide()
@@ -177,7 +192,8 @@ init_dashboard_data = () ->
   smalllist = $('#small_img')
   listloading = $('#list-loading')
   pagiation = $('#item-pagiation')
-  btn_ShowMore = $(document).find('.show-more')
+  listempty = $('#list-empty')
+  btn_ShowMore = $(document).find('#dashboard-show-more')
 
   _dashboard_start_b = 0
   _dashboard_end_b = 0
@@ -185,14 +201,13 @@ init_dashboard_data = () ->
   _dashboard_end_s = 0
   if dashboard_list_data
     dashboard_list_data.length = 0
-  else
-    dashboard_list_data = $.parseJSON('{}')
   window.dashboard_count = ''
   listloading.show()
   biglist.html('')
   biglist.hide()
   smalllist.html('')
   smalllist.hide()
+  listempty.hide()
   btn_ShowMore.html('我要看更多').removeClass('loading')
   _dashboard_has_more = true
 
