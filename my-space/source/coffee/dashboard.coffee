@@ -18,6 +18,9 @@ init_dashboard = ->
   listloading = $('#list-loading')
   pagiation = $('#item-pagiation')
 
+  if dashboard_count is ''
+    dashboard_count = 0
+
   listloading.show()
   if dashboard_list_data
     _dashboard_end_b = _dashboard_step_b
@@ -29,6 +32,7 @@ init_dashboard = ->
     _dashboard_is_loading = false
     listloading.hide()
     biglist.show()
+
     if parseInt(dashboard_count) > _dashboard_limit
       pagiation.show()
       _dashboard_has_more = true
@@ -38,6 +42,8 @@ init_dashboard = ->
   else
     listloading.hide()
     listempty.show()
+    pagiation.hide()
+    _dashboard_has_more = false
 
 $(window).bind 'scroll', (e)->
   parallax($('.profile-container'))
@@ -78,51 +84,52 @@ $(document).on 'click','.show-small_list', ->
     $('dl.big_img').hide()
     $('dl.small_img').show()
 
-$(document).on 'click','.show-more', ->
+$(document).on 'click','#dashboard-show-more', ->
   query_Dashboard_Data()
 
 $(document).on 'click','.btn_like', ->
   do_like(this)
 
 query_Dashboard_Data = () ->
-  btn_ShowMore = $(document).find('.show-more')
+  if dashboard_list_data isnt undefined
+    btn_ShowMore = $(document).find('.show-more')
 
-  if !_dashboard_is_loading and _dashboard_has_more
-    _dashboard_is_loading = true
+    if !_dashboard_is_loading and _dashboard_has_more
+      _dashboard_is_loading = true
 
-    if dashboard_list_data.length > 0
-      if _dashboard_end_b > _dashboard_end_s
-        page = (_dashboard_end_b/_dashboard_limit)+1
-      else if _dashboard_end_s > _dashboard_end_b
-        page = (_dashboard_end_s/_dashboard_limit)+1
-      else
-        page = (_dashboard_end_b/_dashboard_limit)+1
-    else
-      page = 1
-
-    btn_ShowMore.html('正在努力加载中...').addClass('loading')
-    $.ajax {
-      url: SITE_URL + 'services/service.php'
-      type: "GET"
-      data: {'m': 'u', 'a': 'get_dashboard_ajax', ajax: 1, 'page': page, 'count': window.dashboard_count, 'sort': _dashboard_show_new_hot,'limit': _dashboard_limit}
-      cache: false
-      dataType: "json"
-      success: (result)->
-        for d in result.data
-          dashboard_list_data.push(d)
-        gen_Dashboard_Item()
-        _dashboard_is_loading = false
-        if result.more is 1
-          btn_ShowMore.html('我要看更多').removeClass('loading')
-          _dashboard_has_more = true
+      if dashboard_list_data.length > 0
+        if _dashboard_end_b > _dashboard_end_s
+          page = (_dashboard_end_b/_dashboard_limit)+1
+        else if _dashboard_end_s > _dashboard_end_b
+          page = (_dashboard_end_s/_dashboard_limit)+1
         else
-          btn_ShowMore.html('已经全部看完了').removeClass('loading')
-          _dashboard_has_more = false
-      error: (result)->
-        alert('errr: ' + result)
-        _dashboard_is_loading = false
-        btn_ShowMore.html('我要看更多').removeClass('loading')
-    }
+          page = (_dashboard_end_b/_dashboard_limit)+1
+      else
+        page = 1
+
+      btn_ShowMore.html('正在努力加载中...').addClass('loading')
+      $.ajax {
+        url: SITE_URL + 'services/service.php'
+        type: "GET"
+        data: {'m': 'u', 'a': 'get_dashboard_ajax', ajax: 1, 'page': page, 'count': window.dashboard_count, 'sort': _dashboard_show_new_hot,'limit': _dashboard_limit}
+        cache: false
+        dataType: "json"
+        success: (result)->
+          for d in result.data
+            dashboard_list_data.push(d)
+          gen_Dashboard_Item()
+          _dashboard_is_loading = false
+          if result.more is 1
+            btn_ShowMore.html('我要看更多').removeClass('loading')
+            _dashboard_has_more = true
+          else
+            btn_ShowMore.html('已经全部看完了').removeClass('loading')
+            _dashboard_has_more = false
+        error: (result)->
+          alert('errr: ' + result)
+          _dashboard_is_loading = false
+          btn_ShowMore.html('我要看更多').removeClass('loading')
+      }
 
 gen_Dashboard_Item = () ->
   _dashboard_is_loading = true
