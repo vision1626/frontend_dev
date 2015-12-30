@@ -22,10 +22,10 @@ init_dashboard = ->
 #    window.dashboard_count = 0
 
   listloading.show()
-  if dashboard_list_data
+  if window.dashboard_list_data
     _dashboard_end_b = _dashboard_step_b
     _dashboard_is_loading = true
-    for ld,i in dashboard_list_data
+    for ld,i in window.dashboard_list_data
       if _dashboard_start_b < _dashboard_end_b
         biglist.append(big_DashboardItem_Generater(ld,i))
         _dashboard_start_b++
@@ -94,16 +94,20 @@ query_Dashboard_Data = () ->
   btn_ShowMore = $(document).find('#dashboard-show-more')
 
   if !_dashboard_is_loading and _dashboard_has_more
+
     _dashboard_is_loading = true
 
-    if dashboard_list_data isnt null
-      if dashboard_list_data.length > 0
-        if _dashboard_end_b > _dashboard_end_s
-          page = (_dashboard_end_b/_dashboard_limit)+1
-        else if _dashboard_end_s > _dashboard_end_b
-          page = (_dashboard_end_s/_dashboard_limit)+1
+    if window.dashboard_list_data
+      if window.dashboard_list_data isnt null
+        if window.dashboard_list_data.length > 0
+          if _dashboard_end_b > _dashboard_end_s
+            page = (_dashboard_end_b/_dashboard_limit)+1
+          else if _dashboard_end_s > _dashboard_end_b
+            page = (_dashboard_end_s/_dashboard_limit)+1
+          else
+            page = (_dashboard_end_b/_dashboard_limit)+1
         else
-          page = (_dashboard_end_b/_dashboard_limit)+1
+          page = 1
       else
         page = 1
     else
@@ -127,7 +131,7 @@ query_Dashboard_Data = () ->
         window.dashboard_count = result.count
 
         if result.data
-          if dashboard_list_data
+          if window.dashboard_list_data
             for d in result.data
               window.dashboard_list_data.push(d)
           else
@@ -155,20 +159,20 @@ gen_Dashboard_Item = () ->
   listempty = $('#list-empty')
   pagiation = $('#item-pagiation')
 
-  if dashboard_list_data
-    if dashboard_list_data.length > 0
+  if window.dashboard_list_data
+    if window.dashboard_list_data.length > 0
       if _dashboard_show_big
-        if _dashboard_end_b < dashboard_list_data.length
+        if _dashboard_end_b < window.dashboard_list_data.length
           _dashboard_end_b += _dashboard_step_b
-          for ld,i in dashboard_list_data
+          for ld,i in window.dashboard_list_data
             if _dashboard_start_b < _dashboard_end_b and i >= _dashboard_start_b
               biglist.append(big_DashboardItem_Generater(ld,i))
               _dashboard_start_b++
         biglist.show()
       else
-        if _dashboard_end_s < dashboard_list_data.length
+        if _dashboard_end_s < window.dashboard_list_data.length
           _dashboard_end_s += _dashboard_step_s
-          for ld,j in dashboard_list_data
+          for ld,j in window.dashboard_list_data
             if _dashboard_start_s < _dashboard_end_s and j >= _dashboard_start_s
               smalllist.append(small_DashboardItem_Generater(ld,j))
               _dashboard_start_s++
@@ -199,8 +203,8 @@ init_dashboard_data = () ->
   _dashboard_end_b = 0
   _dashboard_start_s = 0
   _dashboard_end_s = 0
-  if dashboard_list_data
-    dashboard_list_data.length = 0
+  if window.dashboard_list_data
+    window.dashboard_list_data.length = 0
   window.dashboard_count = ''
   listloading.show()
   biglist.html('')
