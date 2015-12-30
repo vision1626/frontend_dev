@@ -9,34 +9,40 @@ init_u_header = ->
   $fav = $('.actions-fav')
   $db = $('.actions-db')
   $pub = $('.actions-pub')
+  $follow = $('.relation-follow')
+  $fans = $('.relation-fans')
   $slide_tab_bg = $('.js-slide-bg')
 
   if (window.myid != window.uid)
-    $('.content__actions').find('li').css({"width": "50%"})
-
-  tab_width = $('.content__actions').find('li').css("width")
-  $slide_tab_bg.css({"width": tab_width})
+    $('.content__actions').find('li').css({'width': '50%'})
 
   user_action_async = (action)->
-    # $.ajax({
-    #   url: SITE_URL + 'services/service.php?m=u&a=get_' + action + '_ajax',
-    #   type: 'post',
-    #   dataType: 'json',
-    #   data: {hid: uid, page: 1, count: count, sort: 'new', limit: 12, type: ''},
-    #   success: (result)->
-    #     data = result.data
-    #     more = result.more
-    #     $item_list = $('.item-list-container')
-    #     $big_list = $('<dl id="big_img" class="big_img" style="display: block;"></dl>')
-    #     $item_list.empty()
-    #     if data != null
-    #       for d, i in data
-    #         $big_list.append(big_DashboardItem_Generater(d, i))
-    #       $item_list.append($big_list)
-    # })
     if (window.location.pathname.indexOf(action) < 0)
       history.pushState('', '', action + '-' + uid + '.html')
       init_dashboard_data()
+
+  user_relation_async = (action)->
+    if (window.location.pathname.indexOf(action) < 0)
+      history.pushState('', '', action + '-' + uid + '.html')
+      init_follow_data()
+
+  slideToCurrent = ()->
+    tab_width = $(this).css('width')
+    $slide_tab_bg.css({"width": tab_width})
+    $slide_tab_bg.css({'left': $(this).offset().left})
+    $(this).parent().parent().find('li').removeClass('current')
+    $(this).addClass('current')
+
+  if window.location.pathname.indexOf('fav') > 0
+    slideToCurrent.apply($fav)
+  else if window.location.pathname.indexOf('dashboard') > 0
+    slideToCurrent.apply($db)
+  else if window.location.pathname.indexOf('talk') > 0
+    slideToCurrent.apply($pub)
+  else if window.location.pathname.indexOf('fans') > 0
+    slideToCurrent.apply($fans)
+  else if window.location.pathname.indexOf('follow') > 0
+    slideToCurrent.apply($follow)
 
   if window.isfollow == 0
     $status_text.on 'mouseover', ->
@@ -82,14 +88,25 @@ init_u_header = ->
           $status_text.html("关注Ta").css({'left': '34px'})
     })
   $fav.on 'click', ->
-    self = $(this)
+    slideToCurrent.apply(this)
     user_action_async('fav')
-    $slide_tab_bg.css({"left": self.offset().left})
   $db.on 'click', ->
-    self = $(this)
+    slideToCurrent.apply(this)
     user_action_async('dashboard')
-    $slide_tab_bg.css({"left": self.offset().left})
   $pub.on 'click', ->
-    self = $(this)
+    slideToCurrent.apply(this)
     user_action_async('talk')
-    $slide_tab_bg.css({"left": self.offset().left})
+  $fans.on 'click', ->
+    slideToCurrent.apply(this)
+    user_relation_async('fans')
+  $follow.on 'click', ->
+    slideToCurrent.apply(this)
+    user_relation_async('follow')
+
+  $(window).on 'resize', ->
+    if window.location.pathname.indexOf('fav') > 0
+      slideToCurrent.apply($fav)
+    else if window.location.pathname.indexOf('dashboard') > 0
+      slideToCurrent.apply($db)
+    else if window.location.pathname.indexOf('talk') > 0
+      slideToCurrent.apply($pub)
