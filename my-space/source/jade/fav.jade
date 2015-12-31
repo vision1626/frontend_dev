@@ -60,6 +60,9 @@ if !production
   script(src="../../js/mock/dashboard_listdata_20151228.js")
   script.
     $(document).ready(function () {
+      window.user_photos_count = "{$_FANWE['user']['photos']}";
+      window.user_mail_status = "{$_FANWE['user']['email_status']}";
+      window.user_mobile = "{$_FANWE['user']['mobile']}";
       window.dashboard_count = "{$count}";
       window.dashboard_list_data = $.parseJSON(MOCK_DATA);
       init_dashboard();
@@ -67,6 +70,9 @@ if !production
 else
   script.
     $(document).ready(function () {
+      window.user_photos_count = "{$_FANWE['user']['photos']}";
+      window.user_mail_status = "{$_FANWE['user']['email_status']}";
+      window.user_mobile = "{$_FANWE['user']['mobile']}";
       window.dashboard_count = "{$count}";
       window.dashboard_list_data = $.parseJSON('{$list_json}');
 

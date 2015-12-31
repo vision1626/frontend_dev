@@ -11,6 +11,7 @@ _dashboard_show_new_hot = 'new'
 _dashboard_has_more = true
 _dashboard_has_publish_btn_b = false
 _dashboard_has_publish_btn_s = false
+_user_mail_vrification = true
 
 #SITE_URL = 'http://192.168.0.230/'
 
@@ -95,12 +96,18 @@ $(document).on 'click','.btn_like', ->
   do_like(this)
 
 $(document).on 'click','div.publish_entrance', ->
-  url = ['u/addshare-',myid,'.html'].join('')
-  location.href = SITE_URL + url
+  if _user_mail_vrification
+    url = ['u/addshare-',myid,'.html'].join('')
+    location.href = SITE_URL + url
+  else
+    alert('老板,您还未验证E-Mail')
 
 $(document).on 'click','dd.publish_entrance', ->
-  url = ['u/addshare-',myid,'.html'].join('')
-  location.href = SITE_URL + url
+  if _user_mail_vrification
+    url = ['u/addshare-',myid,'.html'].join('')
+    location.href = SITE_URL + url
+  else
+    alert('老板,您还未验证E-Mail')
 
 $(document).on 'click','div.return_home', ->
   location.href = SITE_URL
@@ -270,6 +277,9 @@ init_empty_message = () ->
   else
     txtEmptytitle.html([who,'还没有关注任何人'].join(''))
     txtEmptycontent.html('不如从下面这堆潮流达人开始吧!')
+
+  if parseInt(window.user_photos_count) is 0 and parseInt(window.user_mail_status) is 0 and window.user_mobile is ''
+    _user_mail_vrification = false
 
 do_like = (obj) ->
   me = $(obj)
