@@ -98,6 +98,10 @@ $(document).on 'click','div.publish_entrance', ->
   url = ['u/addshare-',myid,'.html'].join('')
   location.href = SITE_URL + url
 
+$(document).on 'click','dd.publish_entrance', ->
+  url = ['u/addshare-',myid,'.html'].join('')
+  location.href = SITE_URL + url
+
 $(document).on 'click','div.return_home', ->
   location.href = SITE_URL
 
