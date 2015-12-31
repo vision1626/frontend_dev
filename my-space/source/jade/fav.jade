@@ -37,7 +37,6 @@ else
         i.icon.icon-list_view
       a.show-small_list
         i.icon.icon-grid_view
-        span.icon.icon-grid_view
 .item-list-container
   dl.big_img#big_img
   dl.small_img#small_img
@@ -46,11 +45,11 @@ else
       .empty-icon
         span.icon.icon-sad
       .empty-message
-        span 你还没有喜欢任何单品
+        span.empty-title 你还没有喜欢任何单品
         br
-        label 先看看其他人喜欢了什么吧!
-      .empty-action
-        a(href="#") 回首页
+        label.empty-content 先看看其他人喜欢了什么吧!
+      .empty-action.return_home
+        a 回首页
   .list-loading#list-loading
     .loading-message
       span Loading....

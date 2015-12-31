@@ -13,15 +13,16 @@ init_follow = ->
 
   listloading.show()
   if window.follow_list_data
-    if window.follow_list_data.length > _follow_limit
-      _follow_end = _follow_step
-    else
-      _follow_end = window.follow_list_data.length
+#    if window.follow_list_data.length > _follow_limit
+#      _follow_end = _follow_step
+#    else
+#      _follow_end = window.follow_list_data.length
     _follow_is_loading = true
-    for ld,i in window.follow_list_data
-      if _follow_start < _follow_end
-        followlist.append(followItem_Generater(ld,i))
-        _follow_start++
+#    for ld,i in window.follow_list_data
+#      if _follow_start < _follow_end
+#        followlist.append(followItem_Generater(ld,i))
+#        _follow_start++
+    gen_follow_Item()
     _follow_is_loading = false
     listloading.hide()
     followlist.show()

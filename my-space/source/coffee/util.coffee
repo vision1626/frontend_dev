@@ -93,7 +93,8 @@ big_DashboardItem_Generater = (data,current_index) ->
   else
     isfav = 'icon-hearted'
 
-  dd = $('<dd class="item ' + sid + '" i="' + current_index + '" dtype="' + dtype + '">' +
+  dd = $(
+    '<dd class="item ' + sid + '" i="' + current_index + '" dtype="' + dtype + '">' +
       '<div>' +
       (if data.dynamic_type is 1
         '<div class="item-l_image">' +
@@ -175,24 +176,24 @@ big_DashboardItem_Generater = (data,current_index) ->
         '<a href="' + data.user_href + '">' +
           '<img src="' + data.img_thumb + '"/>' +
         '</a>' +
-      '<div class="item-value">' +
-        '<span class="icon icon-viewed"></span>' +
-        '<span>' + data.view_count + '</span>' +
-        '<span class="icon icon-comment--s"></span>' +
-        '<span>' + data.comment_count + '</span>' +
+        '<div class="item-value">' +
+          '<span class="icon icon-viewed"></span>' +
+          '<span>' + data.view_count + '</span>' +
+          '<span class="icon icon-comment--s"></span>' +
+          '<span>' + data.comment_count + '</span>' +
+        '</div>' +
+        '</div>' +
+        '<div class="item-b_add_like btn_like" l="b" sid="' + sid + '" dtype="' + dtype + '"  ed="' + data.is_fav + '">' +
+          '<a>' +
+            '<span class="icon ' + isfav + '"></span>' +
+            '<br/>' +
+            '<span class="like_count">' +
+              data.like_count +
+            '</span>' +
+          '</a>' +
+        '</div>' +
       '</div>' +
-      '</div>' +
-      '<div class="item-b_add_like btn_like" l="b" sid="' + sid + '" dtype="' + dtype + '"  ed="' + data.is_fav + '">' +
-        '<a>' +
-          '<span class="icon ' + isfav + '"></span>' +
-          '<br/>' +
-          '<span class="like_count">' +
-            data.like_count +
-          '</span>' +
-        '</a>' +
-      '</div>' +
-    '</div>' +
-  '</dd>')
+    '</dd>')
 
 small_DashboardItem_Generater = (data,current_index) ->
   if data.dynamic_type is 1
@@ -298,6 +299,17 @@ small_DashboardItem_Generater = (data,current_index) ->
         '</div>' +
       '</div>' +
     '</dd>')
+
+publishItem_Generater = (myid) ->
+  dd = $(
+    '<dd class="item publish_entrance">' +
+      '<div>' +
+#        '<i class="icon icon-publish"></i><br/>' +icon-publish_solid
+        '<i class="icon icon-publish_solid"></i><br/>' +
+        '<span class="clear">发布潮品</span>' +
+      '</div>' +
+    '</dd>'
+  )
 
 parallax = (obj)->
   y = $('body').scrollTop()

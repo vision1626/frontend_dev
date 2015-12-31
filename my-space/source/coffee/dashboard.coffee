@@ -2,13 +2,15 @@ _dashboard_is_loading = false
 _dashboard_limit = 28
 _dashboard_start_b = 0
 _dashboard_end_b = 0
-_dashboard_step_b = _dashboard_limit/2
+_dashboard_step_b = 10
 _dashboard_start_s = 0
 _dashboard_end_s = 0
-_dashboard_step_s = _dashboard_limit
+_dashboard_step_s = 14
 _dashboard_show_big = true
 _dashboard_show_new_hot = 'new'
 _dashboard_has_more = true
+_dashboard_has_publish_btn_b = false
+_dashboard_has_publish_btn_s = false
 
 #SITE_URL = 'http://192.168.0.230/'
 
@@ -21,14 +23,16 @@ init_dashboard = ->
 #  if window.dashboard_count is ''
 #    window.dashboard_count = 0
 
+  init_empty_message()
   listloading.show()
   if window.dashboard_list_data
-    _dashboard_end_b = _dashboard_step_b
+#    _dashboard_end_b = _dashboard_step_b
     _dashboard_is_loading = true
-    for ld,i in window.dashboard_list_data
-      if _dashboard_start_b < _dashboard_end_b
-        biglist.append(big_DashboardItem_Generater(ld,i))
-        _dashboard_start_b++
+#    for ld,i in window.dashboard_list_data
+#      if _dashboard_start_b < _dashboard_end_b
+#        biglist.append(big_DashboardItem_Generater(ld,i))
+#        _dashboard_start_b++
+    gen_Dashboard_Item()
     _dashboard_is_loading = false
     listloading.hide()
     biglist.show()
@@ -90,6 +94,13 @@ $(document).on 'click','#dashboard-show-more', ->
 $(document).on 'click','.btn_like', ->
   do_like(this)
 
+$(document).on 'click','div.publish_entrance', ->
+  url = ['u/addshare-',myid,'.html'].join('')
+  location.href = SITE_URL + url
+
+$(document).on 'click','div.return_home', ->
+  location.href = SITE_URL
+
 query_Dashboard_Data = () ->
   btn_ShowMore = $(document).find('#dashboard-show-more')
 
@@ -129,7 +140,6 @@ query_Dashboard_Data = () ->
       dataType: "json"
       success: (result)->
         window.dashboard_count = result.count
-
         if result.data
           if window.dashboard_list_data
             for d in result.data
@@ -162,6 +172,11 @@ gen_Dashboard_Item = () ->
   if window.dashboard_list_data
     if window.dashboard_list_data.length > 0
       if _dashboard_show_big
+        if window.location.pathname.indexOf('talk') > 0
+          if myid is uid
+            if !_dashboard_has_publish_btn_b
+              biglist.append(publishItem_Generater(myid))
+              _dashboard_has_publish_btn_b = true
         if _dashboard_end_b < window.dashboard_list_data.length
           _dashboard_end_b += _dashboard_step_b
           for ld,i in window.dashboard_list_data
@@ -170,6 +185,11 @@ gen_Dashboard_Item = () ->
               _dashboard_start_b++
         biglist.show()
       else
+        if window.location.pathname.indexOf('talk') > 0
+          if myid is uid
+            if !_dashboard_has_publish_btn_s
+              smalllist.append(publishItem_Generater(myid))
+              _dashboard_has_publish_btn_s = true
         if _dashboard_end_s < window.dashboard_list_data.length
           _dashboard_end_s += _dashboard_step_s
           for ld,j in window.dashboard_list_data
@@ -206,6 +226,8 @@ init_dashboard_data = () ->
   if window.dashboard_list_data
     window.dashboard_list_data.length = 0
   window.dashboard_count = ''
+  _dashboard_has_publish_btn_b = false
+  _dashboard_has_publish_btn_s = false
   listloading.show()
   biglist.html('')
   biglist.hide()
@@ -215,7 +237,35 @@ init_dashboard_data = () ->
   btn_ShowMore.html('我要看更多').removeClass('loading')
   _dashboard_has_more = true
 
+  init_empty_message()
   query_Dashboard_Data()
+
+init_empty_message = () ->
+  txtEmptytitle = $(document).find('span.empty-title')
+  txtEmptycontent = $(document).find('label.empty-content')
+  btnReturnhome = $(document).find('div.return_home')
+  btnPublish = $(document).find('div#btnPublish')
+
+  if myid is uid
+    who = '你'
+  else
+    who = 'Ta'
+
+  if window.location.pathname.indexOf('fav') > 0
+    txtEmptytitle.html(who + '还没有喜欢任何单品')
+    txtEmptycontent.html('先看看其他人喜欢了什么吧!')
+  else if window.location.pathname.indexOf('talk') > 0
+    txtEmptytitle.html([who,'还没有发布任何单品'].join(''))
+    txtEmptycontent.html('赶快发布一个,让别人膜拜你的品位吧!')
+    if myid is uid
+      btnReturnhome.hide()
+      btnPublish.show()
+    else
+      btnReturnhome.show()
+      btnPublish.hide()
+  else
+    txtEmptytitle.html([who,'还没有关注任何人'].join(''))
+    txtEmptycontent.html('不如从下面这堆潮流达人开始吧!')
 
 do_like = (obj) ->
   me = $(obj)

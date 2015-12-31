@@ -293,6 +293,23 @@
         }
       }
     }
+
+    //关于发布那一块
+    .publish_entrance{
+      text-align: center;
+      display: box;
+      box-orient: horizontal;
+      box-pack: center;
+      box-align: center;
+      cursor: pointer;
+      i{
+        color:@blue;
+        font-size: 70px;
+      }
+      span{
+        padding:10px;
+      }
+    }
   }
   //====================================大图列表 End====================================================
 
@@ -429,6 +446,25 @@
         }
       }
     }
+
+    //关于发布那一块
+    .publish_entrance{
+      text-align: center;
+      display: box;
+      box-orient: horizontal;
+      box-pack: center;
+      box-align: center;
+      cursor: pointer;
+      border: 1px solid @blue;
+      i{
+        color:@blue;
+        font-size: 40px;
+        font-weight: lighter;
+      }
+      span,br{
+        display: none;
+      }
+    }
   }
 }
 //====================================小图列表 End====================================================
@@ -463,6 +499,7 @@
       }
       .empty-action{
         float: left;
+        cursor: pointer;
         a{
           line-height: 60px;
           border: 2px solid @blue;
