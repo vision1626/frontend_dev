@@ -252,7 +252,7 @@ init_empty_message = () ->
     who = 'Ta'
 
   if window.location.pathname.indexOf('fav') > 0
-    txtEmptytitle.html(who + '还没有喜欢任何单品')
+    txtEmptytitle.html([who,'还没有喜欢任何单品'].join(''))
     txtEmptycontent.html('先看看其他人喜欢了什么吧!')
   else if window.location.pathname.indexOf('talk') > 0
     txtEmptytitle.html([who,'还没有发布任何单品'].join(''))

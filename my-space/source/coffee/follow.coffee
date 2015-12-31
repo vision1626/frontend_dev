@@ -11,6 +11,7 @@ init_follow = ->
   listloading = $('#list-loading')
   pagiation = $('#pagiation')
 
+  init_empty_message()
   listloading.show()
   if window.follow_list_data
 #    if window.follow_list_data.length > _follow_limit
@@ -35,6 +36,7 @@ init_follow = ->
   else
     listloading.hide()
     listempty.show()
+    pagiation.hide()
 
 $(document).on 'click','div.follow_ed', ->
   do_follow(this,'ed')
@@ -44,6 +46,9 @@ $(document).on 'click','div.follow_nt', ->
 
 $(document).on 'click','#folloe-show-more', ->
   query_follow_Data()
+
+$(document).on 'click','div.return_home', ->
+  location.href = SITE_URL
 
 $(window).bind 'scroll', (e)->
   parallax($('.profile-container'))
@@ -185,4 +190,22 @@ init_follow_data = () ->
   followlist.hide()
   btn_ShowMore.html('我要看更多').removeClass('loading')
 
+  init_empty_message()
   query_follow_Data()
+
+init_empty_message = () ->
+  txtEmptytitle = $(document).find('span.empty-title')
+  txtEmptycontent = $(document).find('label.empty-content')
+  btnReturnhome = $(document).find('div.return_home')
+
+  if myid is uid
+    who = '你'
+  else
+    who = 'Ta'
+
+  if window.location.pathname.indexOf('fans') > 0
+    txtEmptytitle.html([who,'还没有粉丝'].join(''))
+    txtEmptycontent.html('无无无无无无无无文案!')
+  else
+    txtEmptytitle.html([who,'还没有关注'].join(''))
+    txtEmptycontent.html('无无无无无无无无文案!')
