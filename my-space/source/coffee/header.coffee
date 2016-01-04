@@ -21,13 +21,21 @@ init_u_header = ->
     else
       return false
 
+  isInCurrentAction = (action) ->
+    window.location.pathname.indexOf(action) > 0 or window.state == action
+
+  changeState = (action)->
+    if window.history.pushState
+      history.pushState(null, null, action + '-' + uid + '.html')
+    window.state = action
+
   if (window.myid != window.uid)
     $('.content__actions').find('li').css({'width': '50%'})
 
   user_action_async = (action)->
     if isInActions()
       if (window.location.pathname.indexOf(action) < 0)
-        history.pushState('', '', action + '-' + uid + '.html')
+        changeState(action)
         init_dashboard_data()
     else
       window.location.pathname = '/u/' + action + '-' + uid + '.html'
@@ -35,7 +43,7 @@ init_u_header = ->
   user_relation_async = (action)->
     if !isInActions()
       if (window.location.pathname.indexOf(action) < 0)
-        history.pushState('', '', action + '-' + uid + '.html')
+        changeState(action)
         init_follow_data()
     else
       window.location.pathname = '/u/' + action + '-' + uid + '.html'
@@ -47,18 +55,23 @@ init_u_header = ->
     $(this).parent().parent().find('li').removeClass('current')
     $(this).addClass('current')
 
-  if window.location.pathname.indexOf('fav') > 0
+  if isInCurrentAction('fav')
+    changeState('fav')
     slideToCurrent.apply($fav)
-  else if window.location.pathname.indexOf('dashboard') > 0
+  else if isInCurrentAction('dashboard')
+    changeState('dashboard')
     slideToCurrent.apply($db)
-  else if window.location.pathname.indexOf('talk') > 0
+  else if isInCurrentAction('talk')
+    changeState('talk')
     slideToCurrent.apply($pub)
-  else if window.location.pathname.indexOf('fans') > 0
+  else if isInCurrentAction('fans')
+    changeState('fans')
     slideToCurrent.apply($fans)
-  else if window.location.pathname.indexOf('follow') > 0
+  else if isInCurrentAction('follow')
+    changeState('follow')
     slideToCurrent.apply($follow)
 
-  if window.isfollow == 0
+  if window.isfollow == "0"
     $status_text.on 'mouseover', ->
       $(this).css('left': '34px').text("关注Ta")
     $status_text.on 'mouseout', ->
@@ -119,9 +132,18 @@ init_u_header = ->
     user_relation_async('follow')
 
   $(window).on 'resize', ->
-    if window.location.pathname.indexOf('fav') > 0
+    if isInCurrentAction('fav')
+      changeState('fav')
       slideToCurrent.apply($fav)
-    else if window.location.pathname.indexOf('dashboard') > 0
+    else if isInCurrentAction('dashboard')
+      changeState('dashboard')
       slideToCurrent.apply($db)
-    else if window.location.pathname.indexOf('talk') > 0
+    else if isInCurrentAction('talk')
+      changeState('talk')
       slideToCurrent.apply($pub)
+    else if isInCurrentAction('fans')
+      changeState('fans')
+      slideToCurrent.apply($fans)
+    else if isInCurrentAction('follow')
+      changeState('follow')
+      slideToCurrent.apply($follow)

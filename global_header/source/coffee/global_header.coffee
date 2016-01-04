@@ -29,19 +29,19 @@ init_global_header = ->
           for d in data
             if d['type']=="1" && d['ge_sum']!="0"
               $('.get-likes').html("<i class='icon icon-heart'></icon>" + 
-                "<a href='" + d['url'] + "'>" + "获得了" + 
+                "<a href='" + d['url'] + "'>" + "获得" + 
                   "<span class='number'>" + d['ge_sum'] + "</span>" + 
-                    "条系统消息" + "</a>")
+                    "次喜欢" + "</a>")
             if d['type']=="2" && d['ge_sum']!="0"
               $('.get-comments').html("<i class='icon icon-comment'></icon>" + 
                 "<a href='" + d['url'] + "'>" + "收到" + 
                   "<span class='number'>" + d['ge_sum'] + "</span>" + 
-                    "条系统消息" + "</a>")
+                    "条留言" + "</a>")
             if d['type']=="3" && d['ge_sum']!="0"
               $('.get-fans').html("<i class='icon icon-fans'></icon>" + 
                 "<a href='" + d['url'] + "'>" + "新增" + 
                   "<span class='number'>" + d['ge_sum'] + "</span>" + 
-                  "条系统消息" + "</a>")
+                  "个粉丝" + "</a>")
             if d['type']=="4" && d['ge_sum']!="0"
               $('.get-recomendded').html("<i class='icon icon-news'></icon>" + 
                 "<a href='" + d['url'] + "'>" + "有" + 

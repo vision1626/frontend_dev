@@ -1,91 +1,91 @@
 <!DOCTYPE html>
-html(lang="en")
-head
-  meta(charset="UTF-8")
-  meta(name='viewport', content='width=device-width user-scalable=no maximum-scale=1')
-  meta(name='apple-mobile-web-app-status-bar-style', content='black')
-  meta(name='apple-mobile-web-app-capable', content='yes')
-  meta(name="keywords" content="{$seo_keyword}")
-  meta(name="description" content="{$seo_description")
-  -title = "{$seo_title}"
-  title= title
+html
+  head(lang="en")
+    meta(charset="UTF-8")
+    meta(name='viewport', content='width=device-width user-scalable=no maximum-scale=1')
+    meta(name='apple-mobile-web-app-status-bar-style', content='black')
+    meta(name='apple-mobile-web-app-capable', content='yes')
+    meta(name="keywords" content="{$seo_keyword}")
+    meta(name="description" content="{$seo_description")
+    -title = "{$seo_title}"
+    title= title
 
 
-  :php
-    $current_css[] = './tpl/hi1626/css/login/vendor/normalize.css';
-    $current_css[] = './tpl/hi1626/css/bduck/dist/bduck.min.css';
-    $current_js[] = './public/js/jquery-1.11.3.min.js';
-    $current_js[] = './public/js/jquery.touchSwipe.min.js';
-    $current_js[] = './tpl/hi1626/js/bduck/bduck.js'
+    :php
+      $current_css[] = './tpl/hi1626/css/login/vendor/normalize.css';
+      $current_css[] = './tpl/hi1626/css/bduck/dist/bduck.min.css';
+      $current_js[] = './public/js/jquery-1.11.3.min.js';
+      $current_js[] = './public/js/jquery.touchSwipe.min.js';
+      $current_js[] = './tpl/hi1626/js/bduck/bduck.js'
 
-  link(rel="stylesheet", href="{css $current_css}" media="all")
-  script(src="{script $current_js}")
-body
-  h1.bigtitle
-    img(src="./tpl/hi1626/images/bduck/bigtitle-min.png")
-  .bduck-body
-    .bduck-body__progress-prompt
-      | 已点亮
-      | {$lighten_info['light']}
-      | 个部件，还差
-      | {$lighten_info['notlight']}
-      | 个部件即中奖
-    img(src="./tpl/hi1626/images/bduck/bduck-min.jpg").bduck
-    img(src="./tpl/hi1626/images/bduck/bduck_hat-min.png" data-random="1" data-light="no").bduck-hat.js-bduck
-    img(src="./tpl/hi1626/images/bduck/bduck_head-min.png" data-random="2" data-light="no").bduck-head.js-bduck
-    img(src="./tpl/hi1626/images/bduck/bduck_wings-min.png" data-random="3" data-light="no").bduck-wings.js-bduck
-    img(src="./tpl/hi1626/images/bduck/bduck_10-min.png" data-random="4" data-light="no").bduck-10.js-bduck
-    img(src="./tpl/hi1626/images/bduck/bduck_th-min.png" data-random="5" data-light="no").bduck-th.js-bduck
-  .help-or-helped
-    a
-      img(src="./tpl/hi1626/images/bduck/help_friend-min.png").help-btn
-  .actions
-    a(href="{u bduck/index}")
-      img(src="./tpl/hi1626/images/bduck/join-min.png")
-    a
-      img(src="./tpl/hi1626/images/bduck/prize_detail-min.png").prize-detail-btn
-    a
-      img(src="./tpl/hi1626/images/bduck/rules-min.png").rules-btn
-  .share.black-box
-    img(src="./tpl/hi1626/images/bduck/share-min.png")
-  .rules.black-box
-    img(src="./tpl/hi1626/images/bduck/rules_title-min.png").title
-    img(src="./tpl/hi1626/images/bduck/quit-min.png").quit
-    ol
-      li 参与活动需要邀请好友为你点亮鸭子，点亮 B.Duck 后即可领取奖品；
-      li 点亮 B.Duck 后，填写中奖资料，奖品很快就会到达你手中；
-      li 
-        |活动一切解释权归官方微信：1626订阅号所有。
-      li.clown
-        img(src="./tpl/hi1626/images/bduck/clown-min.png")
-  .prize-detail.black-box
-    img(src="./tpl/hi1626/images/bduck/prize_detail_title-min.png").title
-    img(src="./tpl/hi1626/images/bduck/quit-min.png").quit
-    .detail
-      img(src="./tpl/hi1626/images/bduck/products/p0-min.jpg").js-img-holder
-      ul.js-img-controllers
-        li
-          img(src="./tpl/hi1626/images/bduck/products/p0-min.jpg")
+    link(rel="stylesheet", href="{css $current_css}" media="all")
+    script(src="{script $current_js}")
+  body
+    h1.bigtitle
+      img(src="./tpl/hi1626/images/bduck/bigtitle-min.png")
+    .bduck-body
+      .bduck-body__progress-prompt
+        | 已点亮
+        | {$lighten_info['light']}
+        | 个部件，还差
+        | {$lighten_info['notlight']}
+        | 个部件即中奖
+      img(src="./tpl/hi1626/images/bduck/bduck-min.jpg").bduck
+      img(src="./tpl/hi1626/images/bduck/bduck_hat-min.png" data-random="1" data-light="no").bduck-hat.js-bduck
+      img(src="./tpl/hi1626/images/bduck/bduck_head-min.png" data-random="2" data-light="no").bduck-head.js-bduck
+      img(src="./tpl/hi1626/images/bduck/bduck_wings-min.png" data-random="3" data-light="no").bduck-wings.js-bduck
+      img(src="./tpl/hi1626/images/bduck/bduck_10-min.png" data-random="4" data-light="no").bduck-10.js-bduck
+      img(src="./tpl/hi1626/images/bduck/bduck_th-min.png" data-random="5" data-light="no").bduck-th.js-bduck
+    .help-or-helped
+      a
+        img(src="./tpl/hi1626/images/bduck/help_friend-min.png").help-btn
+    .actions
+      a(href="{u bduck/index}")
+        img(src="./tpl/hi1626/images/bduck/join-min.png")
+      a
+        img(src="./tpl/hi1626/images/bduck/prize_detail-min.png").prize-detail-btn
+      a
+        img(src="./tpl/hi1626/images/bduck/rules-min.png").rules-btn
+    .share.black-box
+      img(src="./tpl/hi1626/images/bduck/share-min.png")
+    .rules.black-box
+      img(src="./tpl/hi1626/images/bduck/rules_title-min.png").title
+      img(src="./tpl/hi1626/images/bduck/quit-min.png").quit
+      ol
+        li 参与活动需要邀请好友为你点亮鸭子，点亮 B.Duck 后即可领取奖品；
+        li 点亮 B.Duck 后，填写中奖资料，奖品很快就会到达你手中；
         li 
-          img(src="./tpl/hi1626/images/bduck/products/p1-min.jpg")
-        li
-          img(src="./tpl/hi1626/images/bduck/products/p2-min.jpg")
-        li
-          img(src="./tpl/hi1626/images/bduck/products/p3-min.jpg")
-      .bucket
-        img(src="./tpl/hi1626/images/bduck/bucket-min.png")
+          |活动一切解释权归官方微信：1626订阅号所有。
+        li.clown
+          img(src="./tpl/hi1626/images/bduck/clown-min.png")
+    .prize-detail.black-box
+      img(src="./tpl/hi1626/images/bduck/prize_detail_title-min.png").title
+      img(src="./tpl/hi1626/images/bduck/quit-min.png").quit
+      .detail
+        img(src="./tpl/hi1626/images/bduck/products/p0-min.jpg").js-img-holder
+        ul.js-img-controllers
+          li
+            img(src="./tpl/hi1626/images/bduck/products/p0-min.jpg")
+          li 
+            img(src="./tpl/hi1626/images/bduck/products/p1-min.jpg")
+          li
+            img(src="./tpl/hi1626/images/bduck/products/p2-min.jpg")
+          li
+            img(src="./tpl/hi1626/images/bduck/products/p3-min.jpg")
+        .bucket
+          img(src="./tpl/hi1626/images/bduck/bucket-min.png")
 
-  <!--{if $is_wx}-->
-  <!--{template inc/weixin_share}-->
-  <!--{/if}-->
-  <!--{template inc/count}-->
+    <!--{if $is_wx}-->
+    <!--{template inc/weixin_share}-->
+    <!--{/if}-->
+    <!--{template inc/count}-->
 
-  script.
-    $(document).ready(function () {
-      window.lighten_url = "{$api_urls['lighten']}";
-      window.deliver_url = "{$api_urls['save_address']}";
-      window.lighten_parts = "{$lighten_info['parts']}";
-      window.islighten = {$is_lighten};
-      init();
-    });
-      
+    script.
+      $(document).ready(function () {
+        window.lighten_url = "{$api_urls['lighten']}";
+        window.deliver_url = "{$api_urls['save_address']}";
+        window.lighten_parts = "{$lighten_info['parts']}";
+        window.islighten = {$is_lighten};
+        init();
+      });
+        

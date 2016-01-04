@@ -1,0 +1,37 @@
+-var production = false
+if production
+  - var image_path = '{$_FANWE[site_url]}/tpl/hi1626/v2/images'
+else
+  include ../public_inc/source/jade/head.jade
+  - var image_path  = local_file_path+'/images/'
+
+div(style="background:gray;position:fixed;top:0;width:100%; height:100%")
+.popup__wrap
+  .popup
+    .popup__content
+      .emoji-hint
+        i.icon.icon-glad
+        .empty-message
+          span 发布成功!
+          br
+          label
+            a 去看看
+          |!
+      .separator
+        span 或者
+      .goods-link
+        label 再发布一个:
+        form.form__goods-link.gray-background
+          .input-row
+            i.icon.icon-link
+            input.input__link(placeholder="请输入商品购买地址（淘宝/天猫）")
+            button.button.large.blue 读取信息
+    .popup__close
+      i.icon.icon-closepop
+
+script(type='text/javascript').
+  $(document).ready(function () {
+    init_form_publish();
+  });
+if !production
+  </body>

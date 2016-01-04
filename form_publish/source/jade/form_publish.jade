@@ -1,0 +1,18 @@
+-var production = false
+if production
+  - var image_path = '{$_FANWE[site_url]}/tpl/hi1626/v2/images'
+else
+  include ../public_inc/source/jade/head.jade
+  - var image_path  = local_file_path+'/images/'
+
+.form__header
+  |发布潮品
+form
+
+
+script(type='text/javascript').
+  $(document).ready(function () {
+    init_form_publish();
+  });
+if !production
+  </body>
