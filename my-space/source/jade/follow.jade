@@ -20,7 +20,8 @@
 script.
   $(document).ready(function () {
     window.follow_count = "{$count}";
-    window.follow_list_data = $.parseJSON('{$follow_user_json}');
+    window.follow_list_string = '{$follow_user_json}';
+    window.follow_list_data = {};
 
     init_follow();
   });

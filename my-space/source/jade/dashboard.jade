@@ -4,7 +4,7 @@ if production
 else
   include ../public_inc/source/jade/head.jade
   - var image_path  = local_file_path+'/images/'
-.item-list-filter
+.item-list-filter#list-filter
   .item-nav-container
     .item-nav.first.current
       a 热门单品
@@ -50,6 +50,7 @@ else
         label.empty-content
       .empty-action.return_home
         a 回首页
+  dl.empty_recommend#recommend
   .list-loading#list-loading
     .loading-message
       span Loading....
@@ -75,7 +76,8 @@ else
       window.user_mail_status = "{$_FANWE['user']['email_status']}";
       window.user_mobile = "{$_FANWE['user']['mobile']}";
       window.dashboard_count = "{$count}";
-      window.dashboard_list_data = $.parseJSON('{$list_json}');
+      window.dashboard_list_string = '{$list_json}'
+      window.dashboard_list_data = {};
 
       init_dashboard();
     });

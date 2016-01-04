@@ -11,6 +11,9 @@ init_follow = ->
   listloading = $('#list-loading')
   pagiation = $('#pagiation')
 
+  if window.follow_list_string isnt ''
+    window.follow_list_data = $.parseJSON(window.follow_list_string)
+
   init_empty_message()
   listloading.show()
   if window.follow_list_data
@@ -205,7 +208,7 @@ init_empty_message = () ->
 
   if window.location.pathname.indexOf('fans') > 0
     txtEmptytitle.html([who,'还没有粉丝'].join(''))
-    txtEmptycontent.html('无无无无无无无无文案!')
+    txtEmptycontent.html('您还没有粉丝，发布潮品越多 粉丝越多哦！')
   else
     txtEmptytitle.html([who,'还没有关注'].join(''))
-    txtEmptycontent.html('无无无无无无无无文案!')
+    txtEmptycontent.html('你还没有关注任何人，关注潮人能看到他们的最新动态哦！')

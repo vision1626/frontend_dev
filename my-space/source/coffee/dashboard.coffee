@@ -12,6 +12,7 @@ _dashboard_has_more = true
 _dashboard_has_publish_btn_b = false
 _dashboard_has_publish_btn_s = false
 _user_mail_vrification = true
+_show_me = false
 
 #SITE_URL = 'http://192.168.0.230/'
 
@@ -20,9 +21,17 @@ init_dashboard = ->
   listempty = $('#list-empty')
   listloading = $('#list-loading')
   pagiation = $('#item-pagiation')
+  filter = $('#list-filter')
 
 #  if window.dashboard_count is ''
 #    window.dashboard_count = 0
+  if myid is uid
+    _show_me = true
+  else
+    _show_me = false
+
+  if window.dashboard_list_string isnt ''
+    window.dashboard_list_data = $.parseJSON(window.dashboard_list_string)
 
   init_empty_message()
   listloading.show()
@@ -48,6 +57,7 @@ init_dashboard = ->
     listloading.hide()
     listempty.show()
     pagiation.hide()
+    filter.hide()
     _dashboard_has_more = false
 
 $(window).bind 'scroll', (e)->
@@ -172,6 +182,14 @@ query_Dashboard_Data = () ->
         btn_ShowMore.html('我要看更多').removeClass('loading')
     }
 
+query_Dashboard_Recommd_Data = (type) ->
+#  if window.location.pathname.indexOf('fav') > 0
+#    action = 'get_fav_ajax'
+#  else if window.location.pathname.indexOf('talk') > 0
+#    action = 'get_publish_ajax'
+#  else
+#    action = 'get_dashboard_ajax'
+
 gen_Dashboard_Item = () ->
   _dashboard_is_loading = true
   biglist = $('#big_img')
@@ -179,12 +197,13 @@ gen_Dashboard_Item = () ->
   listloading = $('#list-loading')
   listempty = $('#list-empty')
   pagiation = $('#item-pagiation')
+  filter = $('#list-filter')
 
   if window.dashboard_list_data
     if window.dashboard_list_data.length > 0
       if _dashboard_show_big
         if window.location.pathname.indexOf('talk') > 0
-          if myid is uid
+          if _show_me
             if !_dashboard_has_publish_btn_b
               biglist.append(publishItem_Generater(myid))
               _dashboard_has_publish_btn_b = true
@@ -195,9 +214,10 @@ gen_Dashboard_Item = () ->
               biglist.append(big_DashboardItem_Generater(ld,i))
               _dashboard_start_b++
         biglist.show()
+        filter.show()
       else
         if window.location.pathname.indexOf('talk') > 0
-          if myid is uid
+          if _show_me
             if !_dashboard_has_publish_btn_s
               smalllist.append(publishItem_Generater(myid))
               _dashboard_has_publish_btn_s = true
@@ -208,6 +228,7 @@ gen_Dashboard_Item = () ->
               smalllist.append(small_DashboardItem_Generater(ld,j))
               _dashboard_start_s++
         smalllist.show()
+        filter.show()
       if parseInt(window.dashboard_count) > _dashboard_limit
         pagiation.show()
       else
@@ -215,9 +236,14 @@ gen_Dashboard_Item = () ->
     else
       pagiation.hide()
       listempty.show()
+      filter.hide()
+      query_Dashboard_Recommd_Data()
+
   else
     pagiation.hide()
     listempty.show()
+    filter.hide()
+    query_Dashboard_Recommd_Data()
 
   listloading.hide()
   _dashboard_is_loading = false
@@ -229,6 +255,7 @@ init_dashboard_data = () ->
   pagiation = $('#item-pagiation')
   listempty = $('#list-empty')
   btn_ShowMore = $(document).find('#dashboard-show-more')
+  filter = $('#list-filter')
 
   _dashboard_start_b = 0
   _dashboard_end_b = 0
@@ -242,11 +269,17 @@ init_dashboard_data = () ->
   listloading.show()
   biglist.html('')
   biglist.hide()
+  filter.hide()
   smalllist.html('')
   smalllist.hide()
   listempty.hide()
   btn_ShowMore.html('我要看更多').removeClass('loading')
   _dashboard_has_more = true
+
+  if myid is uid
+    _show_me = true
+  else
+    _show_me = false
 
   init_empty_message()
   query_Dashboard_Data()
@@ -257,7 +290,7 @@ init_empty_message = () ->
   btnReturnhome = $(document).find('div.return_home')
   btnPublish = $(document).find('div#btnPublish')
 
-  if myid is uid
+  if _show_me
     who = '你'
   else
     who = 'Ta'
@@ -268,7 +301,7 @@ init_empty_message = () ->
   else if window.location.pathname.indexOf('talk') > 0
     txtEmptytitle.html([who,'还没有发布任何单品'].join(''))
     txtEmptycontent.html('赶快发布一个,让别人膜拜你的品位吧!')
-    if myid is uid
+    if _show_me
       btnReturnhome.hide()
       btnPublish.show()
     else
