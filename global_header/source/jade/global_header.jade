@@ -16,10 +16,10 @@ else
           img(src="#{image_path}/qr-app.jpg", alt="app")
           p 扫码下载
         .os-choice
-          a(href='/').iTunes
+          a(href='https://itunes.apple.com/cn/app/1626-ke-jian-ji-ke-mai-chao/id668631637?mt=8&utm_source=iosapp_1626&utm_medium=app_1626&utm_campaign=app_1626').iTunes
             i.icon.icon-apple
             b iTunes
-          a(href='/').Android
+          a(href='http://www.1626.com/downloads/andriod').Android
             i.icon.icon-android
             b Android
           p 直接下载
@@ -32,12 +32,12 @@ else
           img(src="#{image_path}/qr-weibo.jpg", alt="weibo")
           p 潮人养成记
     li.fixed-nav__help
-      a 帮助中心
+      a(href="/about/help.html") 帮助中心
       ul.drop-down-list
         li
-          a 订单帮助
+          a(href="/about/help.html") 订单帮助
         li
-          a 发布指引
+          a(href="/about/help.html") 发布指引
     li.fixed-nav__avatar
       if production
         {if $_FANWE['uid'] > 0}

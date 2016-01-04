@@ -78,7 +78,7 @@ init_u_header = ->
       dataType: 'json',
       data: { uid: window.uid },
       success: (result)->
-        if result.status == 1 
+        if result.status == 1 or result.status == 2
           $slider.removeClass('slideleft').addClass('slideright')
           $i_follow.removeClass('slideleft').addClass('slideright')
           setTimeout ->
