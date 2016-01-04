@@ -1,40 +1,40 @@
 <!DOCTYPE html>
-html(lang="en")
-head
-  meta(charset="UTF-8")
-  meta(name='viewport', content='width=device-width, user-scalable=no, initial-scale=1')
-  meta(name='apple-mobile-web-app-status-bar-style', content='black')
-  meta(name='apple-mobile-web-app-capable', content='yes')
-  meta(name="keywords" content="{$seo_keyword}")
-  meta(name="description" content="{$seo_description")
-  -title = "{$seo_title}"
-  title= title
+html
+  head(lang="en")
+    meta(charset="UTF-8")
+    meta(name='viewport', content='width=device-width, user-scalable=no, initial-scale=1')
+    meta(name='apple-mobile-web-app-status-bar-style', content='black')
+    meta(name='apple-mobile-web-app-capable', content='yes')
+    meta(name="keywords" content="{$seo_keyword}")
+    meta(name="description" content="{$seo_description")
+    -title = "{$seo_title}"
+    title= title
 
 
-  :php
-    $current_css[] = './tpl/hi1626/css/login/vendor/normalize.css';
-    $current_css[] = './tpl/hi1626/css/bduck/dist/bduck.min.css';
-    $current_js[] = './public/js/jquery-1.11.3.min.js';
-    $current_js[] = './tpl/hi1626/js/bduck/bduck.js'
+    :php
+      $current_css[] = './tpl/hi1626/css/login/vendor/normalize.css';
+      $current_css[] = './tpl/hi1626/css/bduck/dist/bduck.min.css';
+      $current_js[] = './public/js/jquery-1.11.3.min.js';
+      $current_js[] = './tpl/hi1626/js/bduck/bduck.js'
 
-  link(rel="stylesheet", href="{css $current_css}" media="all")
-  script(src="{script $current_js}")
-body.qrcode
-  .qrcode-title
-    img(src="./tpl/hi1626/images/bduck/free-min.png")
-  .qrcode-body
-    img(src="./tpl/hi1626/images/bduck/plane_duck-min.png")
-    img(src="./tpl/hi1626/images/bduck/qrcode-min.jpg").qrcode-wechat
-  p 温馨提示：关注后，点击活动链接
+    link(rel="stylesheet", href="{css $current_css}" media="all")
+    script(src="{script $current_js}")
+  body.qrcode
+    .qrcode-title
+      img(src="./tpl/hi1626/images/bduck/free-min.png")
+    .qrcode-body
+      img(src="./tpl/hi1626/images/bduck/plane_duck-min.png")
+      img(src="./tpl/hi1626/images/bduck/qrcode-min.jpg").qrcode-wechat
+    p 温馨提示：关注后，点击活动链接
 
-  <!--{if $is_wx}-->
-  <!--{template inc/weixin_share}-->
-  <!--{/if}-->
-  <!--{template inc/count}-->
+    <!--{if $is_wx}-->
+    <!--{template inc/weixin_share}-->
+    <!--{/if}-->
+    <!--{template inc/count}-->
 
-  script.
-    $(document).ready(function () {
-      window.lighten_url = "{$api_urls['lighten']}";
-      window.deliver_url = "{$api_urls['save_address']}";
-      init();
-    });
+    script.
+      $(document).ready(function () {
+        window.lighten_url = "{$api_urls['lighten']}";
+        window.deliver_url = "{$api_urls['save_address']}";
+        init();
+      });
