@@ -18,7 +18,7 @@ module.exports = function (grunt) {
         globalConfig: globalConfig,
         watch: {
             less: {
-                files: ['<%= globalConfig.cssSrcPath %>/*.less'],
+                files: ['<%= globalConfig.cssSrcPath %>/**/*.less'],
                 tasks: ['less', 'autoprefixer', 'cssmin']
             }
             //js: {
@@ -129,7 +129,7 @@ module.exports = function (grunt) {
     grunt.registerTask('default', [
         'less',
         'autoprefixer',
-        'cssmin',
+        'cssmin'
         //'coffee',
         //'uglify',
         //'jade4php'
