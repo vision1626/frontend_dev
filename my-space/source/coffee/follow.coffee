@@ -14,7 +14,7 @@ init_follow = ->
   if window.follow_list_string isnt ''
     window.follow_list_data = $.parseJSON(window.follow_list_string)
 
-  init_empty_message()
+  init_follow_empty_message()
   listloading.show()
   if window.follow_list_data
 #    if window.follow_list_data.length > _follow_limit
@@ -193,10 +193,10 @@ init_follow_data = () ->
   followlist.hide()
   btn_ShowMore.html('我要看更多').removeClass('loading')
 
-  init_empty_message()
+  init_follow_empty_message()
   query_follow_Data()
 
-init_empty_message = () ->
+init_follow_empty_message = () ->
   txtEmptytitle = $(document).find('span.empty-title')
   txtEmptycontent = $(document).find('label.empty-content')
   btnReturnhome = $(document).find('div.return_home')

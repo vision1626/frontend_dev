@@ -2,10 +2,10 @@ _dashboard_is_loading = false
 _dashboard_limit = 28
 _dashboard_start_b = 0
 _dashboard_end_b = 0
-_dashboard_step_b = 10
+_dashboard_step_b = _dashboard_limit
 _dashboard_start_s = 0
 _dashboard_end_s = 0
-_dashboard_step_s = 14
+_dashboard_step_s = _dashboard_limit
 _dashboard_show_big = true
 _dashboard_show_new_hot = 'new'
 _dashboard_has_more = true
@@ -33,7 +33,7 @@ init_dashboard = ->
   if window.dashboard_list_string isnt ''
     window.dashboard_list_data = $.parseJSON(window.dashboard_list_string)
 
-  init_empty_message()
+  init_dashboard_empty_message()
   listloading.show()
   if window.dashboard_list_data
 #    _dashboard_end_b = _dashboard_step_b
@@ -42,7 +42,7 @@ init_dashboard = ->
 #      if _dashboard_start_b < _dashboard_end_b
 #        biglist.append(big_DashboardItem_Generater(ld,i))
 #        _dashboard_start_b++
-    gen_Dashboard_Item()
+    gen_dashboard_item()
     _dashboard_is_loading = false
     listloading.hide()
     biglist.show()
@@ -58,14 +58,16 @@ init_dashboard = ->
     listempty.show()
     pagiation.hide()
     filter.hide()
+    if state is 'fav' or state is 'dashboard'
+      query_dashboard_recommand_data()
     _dashboard_has_more = false
 
 $(window).bind 'scroll', (e)->
   parallax($('.profile-container'))
   e.stopPropagation()
 
-  if ($(this).scrollTop() + $(window).height() + 100 >= $(document).height() && $(this).scrollTop() > 100)
-    gen_Dashboard_Item()
+#  if ($(this).scrollTop() + $(window).height() + 200 >= $(document).height() && $(this).scrollTop() > 200)
+#    gen_dashboard_item()
 
 $(document).on 'click','.show-new_list', ->
   if !$(this).hasClass('current')
@@ -86,21 +88,21 @@ $(document).on 'click','.show-big_list', ->
     $(this).addClass('current')
     $('.show-small_list').removeClass('current')
     _dashboard_show_big = true
-    gen_Dashboard_Item()
-    $('dl.big_img').show()
-    $('dl.small_img').hide()
+    gen_dashboard_item()
+    $('dl#big_img').show()
+    $('dl#small_img').hide()
 
 $(document).on 'click','.show-small_list', ->
   if !$(this).hasClass('current')
     $(this).addClass('current')
     $('.show-big_list').removeClass('current')
     _dashboard_show_big = false
-    gen_Dashboard_Item()
-    $('dl.big_img').hide()
-    $('dl.small_img').show()
+    gen_dashboard_item()
+    $('dl#big_img').hide()
+    $('dl#small_img').show()
 
 $(document).on 'click','#dashboard-show-more', ->
-  query_Dashboard_Data()
+  query_dashboard_data()
 
 $(document).on 'click','.btn_like', ->
   do_like(this)
@@ -122,7 +124,7 @@ $(document).on 'click','dd.publish_entrance', ->
 $(document).on 'click','div.return_home', ->
   location.href = SITE_URL
 
-query_Dashboard_Data = () ->
+query_dashboard_data = () ->
   btn_ShowMore = $(document).find('#dashboard-show-more')
 
   if !_dashboard_is_loading and _dashboard_has_more
@@ -145,9 +147,9 @@ query_Dashboard_Data = () ->
     else
       page = 1
 
-    if window.location.pathname.indexOf('fav') > 0
+    if state is 'fav'
       action = 'get_fav_ajax'
-    else if window.location.pathname.indexOf('talk') > 0
+    else if state is 'talk'
       action = 'get_publish_ajax'
     else
       action = 'get_dashboard_ajax'
@@ -162,12 +164,12 @@ query_Dashboard_Data = () ->
       success: (result)->
         window.dashboard_count = result.count
         if result.data
-          if window.dashboard_list_data
+          if window.dashboard_list_data and window.dashboard_list_data.length > 0
             for d in result.data
               window.dashboard_list_data.push(d)
           else
             window.dashboard_list_data = result.data
-        gen_Dashboard_Item()
+        gen_dashboard_item()
 
         _dashboard_is_loading = false
         if result.more is 1
@@ -182,20 +184,35 @@ query_Dashboard_Data = () ->
         btn_ShowMore.html('我要看更多').removeClass('loading')
     }
 
-query_Dashboard_Recommd_Data = (type) ->
-#  if window.location.pathname.indexOf('fav') > 0
-#    action = 'get_fav_ajax'
-#  else if window.location.pathname.indexOf('talk') > 0
-#    action = 'get_publish_ajax'
-#  else
-#    action = 'get_dashboard_ajax'
+query_dashboard_recommand_data = () ->
+  if state is 'fav'
+    action = 'get_approve_fav_ajax'
+    recommand_limit = 5
+  else
+    action = 'get_approve_user_ajax'
+    recommand_limit = 7
 
-gen_Dashboard_Item = () ->
+  $.ajax {
+    url: SITE_URL + 'services/service.php'
+    type: "GET"
+    data: {'m': 'u', 'a': action, ajax: 1, 'page': 1, 'count': '', 'limit': recommand_limit, 'follow',0}
+    cache: false
+    dataType: "json"
+    success: (result)->
+      if result.data
+        gen_dashboard_recommand_item(result.data)
+    error: (result)->
+      alert('errr: ' + result)
+  }
+
+gen_dashboard_item = () ->
   _dashboard_is_loading = true
   biglist = $('#big_img')
   smalllist = $('#small_img')
   listloading = $('#list-loading')
   listempty = $('#list-empty')
+  recommandTitle = $('#recommandTitle')
+  recommandList = $('#recommand')
   pagiation = $('#item-pagiation')
   filter = $('#list-filter')
 
@@ -214,7 +231,6 @@ gen_Dashboard_Item = () ->
               biglist.append(big_DashboardItem_Generater(ld,i))
               _dashboard_start_b++
         biglist.show()
-        filter.show()
       else
         if window.location.pathname.indexOf('talk') > 0
           if _show_me
@@ -228,25 +244,47 @@ gen_Dashboard_Item = () ->
               smalllist.append(small_DashboardItem_Generater(ld,j))
               _dashboard_start_s++
         smalllist.show()
-        filter.show()
       if parseInt(window.dashboard_count) > _dashboard_limit
         pagiation.show()
       else
         pagiation.hide()
+
+      filter.show()
+      listempty.hide()
+      recommandTitle.hide()
+      recommandList.hide()
     else
       pagiation.hide()
       listempty.show()
       filter.hide()
-      query_Dashboard_Recommd_Data()
-
+      if state is 'fav' or state is 'dashboard' and _show_me
+        query_dashboard_recommand_data()
   else
     pagiation.hide()
     listempty.show()
     filter.hide()
-    query_Dashboard_Recommd_Data()
+    if state is 'fav' or state is 'dashboard' and _show_me
+      query_dashboard_recommand_data()
 
   listloading.hide()
   _dashboard_is_loading = false
+
+gen_dashboard_recommand_item = (data) ->
+  recommandTitle = $('#recommandTitle')
+  recommandList = $('#recommand')
+  if state is 'fav'
+    for ld,i in data
+      recommandList.append(big_DashboardItem_Generater(ld,i))
+      recommandList.removeClass('follow-list').addClass('big_img')
+      recommandTitle.find('.item-nav.first').find('a').html('热门单品')
+  else
+    for ld,i in data
+      recommandList.append(followItem_Generater(ld,i))
+      recommandList.removeClass('big_img').addClass('follow-list')
+      recommandTitle.find('.item-nav.first').find('a').html('热门潮人')
+
+  recommandTitle.show()
+  recommandList.show()
 
 init_dashboard_data = () ->
   biglist = $('#big_img')
@@ -256,6 +294,8 @@ init_dashboard_data = () ->
   listempty = $('#list-empty')
   btn_ShowMore = $(document).find('#dashboard-show-more')
   filter = $('#list-filter')
+  recommandTitle = $('#recommandTitle')
+  recommandList = $('#recommand')
 
   _dashboard_start_b = 0
   _dashboard_end_b = 0
@@ -273,6 +313,9 @@ init_dashboard_data = () ->
   smalllist.html('')
   smalllist.hide()
   listempty.hide()
+  recommandList.html('')
+  recommandTitle.hide()
+  recommandList.hide()
   btn_ShowMore.html('我要看更多').removeClass('loading')
   _dashboard_has_more = true
 
@@ -281,10 +324,10 @@ init_dashboard_data = () ->
   else
     _show_me = false
 
-  init_empty_message()
-  query_Dashboard_Data()
+  init_dashboard_empty_message()
+  query_dashboard_data()
 
-init_empty_message = () ->
+init_dashboard_empty_message = () ->
   txtEmptytitle = $(document).find('span.empty-title')
   txtEmptycontent = $(document).find('label.empty-content')
   btnReturnhome = $(document).find('div.return_home')
@@ -295,10 +338,12 @@ init_empty_message = () ->
   else
     who = 'Ta'
 
-  if window.location.pathname.indexOf('fav') > 0
+  if state is 'fav'
     txtEmptytitle.html([who,'还没有喜欢任何单品'].join(''))
     txtEmptycontent.html('先看看其他人喜欢了什么吧!')
-  else if window.location.pathname.indexOf('talk') > 0
+    btnReturnhome.show()
+    btnPublish.hide()
+  else if state is 'talk'
     txtEmptytitle.html([who,'还没有发布任何单品'].join(''))
     txtEmptycontent.html('赶快发布一个,让别人膜拜你的品位吧!')
     if _show_me
@@ -310,6 +355,8 @@ init_empty_message = () ->
   else
     txtEmptytitle.html([who,'还没有关注任何人'].join(''))
     txtEmptycontent.html('不如从下面这堆潮流达人开始吧!')
+    btnReturnhome.show()
+    btnPublish.hide()
 
   if parseInt(window.user_photos_count) is 0 and parseInt(window.user_mail_status) is 0 and window.user_mobile is ''
     _user_mail_vrification = false
