@@ -2,13 +2,17 @@ _dashboard_is_loading = false
 _dashboard_limit = 28
 _dashboard_start_b = 0
 _dashboard_end_b = 0
-_dashboard_step_b = _dashboard_limit/2
+_dashboard_step_b = 10
 _dashboard_start_s = 0
 _dashboard_end_s = 0
-_dashboard_step_s = _dashboard_limit
+_dashboard_step_s = 14
 _dashboard_show_big = true
 _dashboard_show_new_hot = 'new'
 _dashboard_has_more = true
+_dashboard_has_publish_btn_b = false
+_dashboard_has_publish_btn_s = false
+_user_mail_vrification = true
+_show_me = false
 
 #SITE_URL = 'http://192.168.0.230/'
 
@@ -17,18 +21,28 @@ init_dashboard = ->
   listempty = $('#list-empty')
   listloading = $('#list-loading')
   pagiation = $('#item-pagiation')
+  filter = $('#list-filter')
 
 #  if window.dashboard_count is ''
 #    window.dashboard_count = 0
+  if myid is uid
+    _show_me = true
+  else
+    _show_me = false
 
+  if window.dashboard_list_string isnt ''
+    window.dashboard_list_data = $.parseJSON(window.dashboard_list_string)
+
+  init_empty_message()
   listloading.show()
-  if dashboard_list_data
-    _dashboard_end_b = _dashboard_step_b
+  if window.dashboard_list_data
+#    _dashboard_end_b = _dashboard_step_b
     _dashboard_is_loading = true
-    for ld,i in dashboard_list_data
-      if _dashboard_start_b < _dashboard_end_b
-        biglist.append(big_DashboardItem_Generater(ld,i))
-        _dashboard_start_b++
+#    for ld,i in window.dashboard_list_data
+#      if _dashboard_start_b < _dashboard_end_b
+#        biglist.append(big_DashboardItem_Generater(ld,i))
+#        _dashboard_start_b++
+    gen_Dashboard_Item()
     _dashboard_is_loading = false
     listloading.hide()
     biglist.show()
@@ -43,6 +57,7 @@ init_dashboard = ->
     listloading.hide()
     listempty.show()
     pagiation.hide()
+    filter.hide()
     _dashboard_has_more = false
 
 $(window).bind 'scroll', (e)->
@@ -90,20 +105,41 @@ $(document).on 'click','#dashboard-show-more', ->
 $(document).on 'click','.btn_like', ->
   do_like(this)
 
+$(document).on 'click','div.publish_entrance', ->
+  if _user_mail_vrification
+    url = ['u/addshare-',myid,'.html'].join('')
+    location.href = SITE_URL + url
+  else
+    alert('老板,您还未验证E-Mail')
+
+$(document).on 'click','dd.publish_entrance', ->
+  if _user_mail_vrification
+    url = ['u/addshare-',myid,'.html'].join('')
+    location.href = SITE_URL + url
+  else
+    alert('老板,您还未验证E-Mail')
+
+$(document).on 'click','div.return_home', ->
+  location.href = SITE_URL
+
 query_Dashboard_Data = () ->
-  btn_ShowMore = $(document).find('.show-more')
+  btn_ShowMore = $(document).find('#dashboard-show-more')
 
   if !_dashboard_is_loading and _dashboard_has_more
+
     _dashboard_is_loading = true
 
-    if dashboard_list_data isnt null
-      if dashboard_list_data.length > 0
-        if _dashboard_end_b > _dashboard_end_s
-          page = (_dashboard_end_b/_dashboard_limit)+1
-        else if _dashboard_end_s > _dashboard_end_b
-          page = (_dashboard_end_s/_dashboard_limit)+1
+    if window.dashboard_list_data
+      if window.dashboard_list_data isnt null
+        if window.dashboard_list_data.length > 0
+          if _dashboard_end_b > _dashboard_end_s
+            page = (_dashboard_end_b/_dashboard_limit)+1
+          else if _dashboard_end_s > _dashboard_end_b
+            page = (_dashboard_end_s/_dashboard_limit)+1
+          else
+            page = (_dashboard_end_b/_dashboard_limit)+1
         else
-          page = (_dashboard_end_b/_dashboard_limit)+1
+          page = 1
       else
         page = 1
     else
@@ -126,9 +162,13 @@ query_Dashboard_Data = () ->
       success: (result)->
         window.dashboard_count = result.count
         if result.data
-          for d in result.data
-            dashboard_list_data.push(d)
-          gen_Dashboard_Item()
+          if window.dashboard_list_data
+            for d in result.data
+              window.dashboard_list_data.push(d)
+          else
+            window.dashboard_list_data = result.data
+        gen_Dashboard_Item()
+
         _dashboard_is_loading = false
         if result.more is 1
           btn_ShowMore.html('我要看更多').removeClass('loading')
@@ -142,32 +182,68 @@ query_Dashboard_Data = () ->
         btn_ShowMore.html('我要看更多').removeClass('loading')
     }
 
+query_Dashboard_Recommd_Data = (type) ->
+#  if window.location.pathname.indexOf('fav') > 0
+#    action = 'get_fav_ajax'
+#  else if window.location.pathname.indexOf('talk') > 0
+#    action = 'get_publish_ajax'
+#  else
+#    action = 'get_dashboard_ajax'
+
 gen_Dashboard_Item = () ->
   _dashboard_is_loading = true
   biglist = $('#big_img')
   smalllist = $('#small_img')
   listloading = $('#list-loading')
   listempty = $('#list-empty')
+  pagiation = $('#item-pagiation')
+  filter = $('#list-filter')
 
-  if dashboard_list_data
-    if _dashboard_show_big
-      if _dashboard_end_b < dashboard_list_data.length
-        _dashboard_end_b += _dashboard_step_b
-        for ld,i in dashboard_list_data
-          if _dashboard_start_b < _dashboard_end_b and i >= _dashboard_start_b
-            biglist.append(big_DashboardItem_Generater(ld,i))
-            _dashboard_start_b++
-      biglist.show()
+  if window.dashboard_list_data
+    if window.dashboard_list_data.length > 0
+      if _dashboard_show_big
+        if window.location.pathname.indexOf('talk') > 0
+          if _show_me
+            if !_dashboard_has_publish_btn_b
+              biglist.append(publishItem_Generater(myid))
+              _dashboard_has_publish_btn_b = true
+        if _dashboard_end_b < window.dashboard_list_data.length
+          _dashboard_end_b += _dashboard_step_b
+          for ld,i in window.dashboard_list_data
+            if _dashboard_start_b < _dashboard_end_b and i >= _dashboard_start_b
+              biglist.append(big_DashboardItem_Generater(ld,i))
+              _dashboard_start_b++
+        biglist.show()
+        filter.show()
+      else
+        if window.location.pathname.indexOf('talk') > 0
+          if _show_me
+            if !_dashboard_has_publish_btn_s
+              smalllist.append(publishItem_Generater(myid))
+              _dashboard_has_publish_btn_s = true
+        if _dashboard_end_s < window.dashboard_list_data.length
+          _dashboard_end_s += _dashboard_step_s
+          for ld,j in window.dashboard_list_data
+            if _dashboard_start_s < _dashboard_end_s and j >= _dashboard_start_s
+              smalllist.append(small_DashboardItem_Generater(ld,j))
+              _dashboard_start_s++
+        smalllist.show()
+        filter.show()
+      if parseInt(window.dashboard_count) > _dashboard_limit
+        pagiation.show()
+      else
+        pagiation.hide()
     else
-      if _dashboard_end_s < dashboard_list_data.length
-        _dashboard_end_s += _dashboard_step_s
-        for ld,j in dashboard_list_data
-          if _dashboard_start_s < _dashboard_end_s and j >= _dashboard_start_s
-            smalllist.append(small_DashboardItem_Generater(ld,j))
-            _dashboard_start_s++
-      smalllist.show()
+      pagiation.hide()
+      listempty.show()
+      filter.hide()
+      query_Dashboard_Recommd_Data()
+
   else
+    pagiation.hide()
     listempty.show()
+    filter.hide()
+    query_Dashboard_Recommd_Data()
 
   listloading.hide()
   _dashboard_is_loading = false
@@ -177,26 +253,66 @@ init_dashboard_data = () ->
   smalllist = $('#small_img')
   listloading = $('#list-loading')
   pagiation = $('#item-pagiation')
-  btn_ShowMore = $(document).find('.show-more')
+  listempty = $('#list-empty')
+  btn_ShowMore = $(document).find('#dashboard-show-more')
+  filter = $('#list-filter')
 
   _dashboard_start_b = 0
   _dashboard_end_b = 0
   _dashboard_start_s = 0
   _dashboard_end_s = 0
-  if dashboard_list_data
-    dashboard_list_data.length = 0
-  else
-    dashboard_list_data = $.parseJSON('{}')
+  if window.dashboard_list_data
+    window.dashboard_list_data.length = 0
   window.dashboard_count = ''
+  _dashboard_has_publish_btn_b = false
+  _dashboard_has_publish_btn_s = false
   listloading.show()
   biglist.html('')
   biglist.hide()
+  filter.hide()
   smalllist.html('')
   smalllist.hide()
+  listempty.hide()
   btn_ShowMore.html('我要看更多').removeClass('loading')
   _dashboard_has_more = true
 
+  if myid is uid
+    _show_me = true
+  else
+    _show_me = false
+
+  init_empty_message()
   query_Dashboard_Data()
+
+init_empty_message = () ->
+  txtEmptytitle = $(document).find('span.empty-title')
+  txtEmptycontent = $(document).find('label.empty-content')
+  btnReturnhome = $(document).find('div.return_home')
+  btnPublish = $(document).find('div#btnPublish')
+
+  if _show_me
+    who = '你'
+  else
+    who = 'Ta'
+
+  if window.location.pathname.indexOf('fav') > 0
+    txtEmptytitle.html([who,'还没有喜欢任何单品'].join(''))
+    txtEmptycontent.html('先看看其他人喜欢了什么吧!')
+  else if window.location.pathname.indexOf('talk') > 0
+    txtEmptytitle.html([who,'还没有发布任何单品'].join(''))
+    txtEmptycontent.html('赶快发布一个,让别人膜拜你的品位吧!')
+    if _show_me
+      btnReturnhome.hide()
+      btnPublish.show()
+    else
+      btnReturnhome.show()
+      btnPublish.hide()
+  else
+    txtEmptytitle.html([who,'还没有关注任何人'].join(''))
+    txtEmptycontent.html('不如从下面这堆潮流达人开始吧!')
+
+  if parseInt(window.user_photos_count) is 0 and parseInt(window.user_mail_status) is 0 and window.user_mobile is ''
+    _user_mail_vrification = false
 
 do_like = (obj) ->
   me = $(obj)

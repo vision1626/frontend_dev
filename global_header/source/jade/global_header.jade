@@ -1,4 +1,4 @@
--var production = false
+-var production = true
 if production
   - var image_path = '{$_FANWE[site_url]}/tpl/hi1626/v2/images'
 else
@@ -16,10 +16,10 @@ else
           img(src="#{image_path}/qr-app.jpg", alt="app")
           p 扫码下载
         .os-choice
-          a(href='/').iTunes
+          a(href='https://itunes.apple.com/cn/app/1626-ke-jian-ji-ke-mai-chao/id668631637?mt=8&utm_source=iosapp_1626&utm_medium=app_1626&utm_campaign=app_1626').iTunes
             i.icon.icon-apple
             b iTunes
-          a(href='/').Android
+          a(href='http://www.1626.com/downloads/andriod').Android
             i.icon.icon-android
             b Android
           p 直接下载
@@ -32,12 +32,12 @@ else
           img(src="#{image_path}/qr-weibo.jpg", alt="weibo")
           p 潮人养成记
     li.fixed-nav__help
-      a 帮助中心
+      a(href="/about/help.html") 帮助中心
       ul.drop-down-list
         li
-          a 订单帮助
+          a(href="/about/help.html") 订单帮助
         li
-          a 发布指引
+          a(href="/about/help.html") 发布指引
     li.fixed-nav__avatar
       if production
         {if $_FANWE['uid'] > 0}
@@ -61,45 +61,15 @@ else
           |&nbsp;|&nbsp;
           a(href="/") 退出
     li.fixed-nav__msg 
-      | 消息
+      a(href="/messagetip/") 消息
       span.fixed-nav__number.fixed-nav__number--blue 30
       ul.drop-down-list
         li.get-likes
-          //- if like > 0
-          i.icon.icon-heart
-          | 获得了 
-          | 1 
-          | 次喜欢：
-          a.get-likes__title Supreme Hanes Boxer Briefs联名内裤
-          |  来自 
-          a.get-likes__viewer 陈开心
         li.get-fans
-          //- new fans > 0
-          i.icon.icon-fans
-          | 新增 
-          | 17 
-          | 个粉丝：
-          //- loop fans
-          a.get-fans__name Slash
-          a.get-fans__name Kurt Cobain
-          |  等
-          | 17
-          | 人
         li.get-comments
-          i.icon.icon-comment
-          | 有 
-          | 30 
-          | 个留言：
-          a.get-comments__title SealLayLowSing
-          |  来自 
-          a.get-comments__user 许冠杰
         li.get-recomendded
-          i.icon.icon-news
-          | 您的潮品 
-          a.get-recomendded__good 风之手里剑
-          |  被推荐到首页
         li.check-all 
-          a 查看全部
+          a
     li.fixed-nav__flash-buy
       i.icon.icon-flashbuy
       .invisible-menu

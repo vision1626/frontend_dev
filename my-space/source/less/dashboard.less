@@ -293,6 +293,23 @@
         }
       }
     }
+
+    //关于发布那一块
+    .publish_entrance{
+      text-align: center;
+      display: box;
+      box-orient: horizontal;
+      box-pack: center;
+      box-align: center;
+      cursor: pointer;
+      i{
+        color:@blue;
+        font-size: 70px;
+      }
+      span{
+        padding:10px;
+      }
+    }
   }
   //====================================大图列表 End====================================================
 
@@ -429,20 +446,39 @@
         }
       }
     }
+
+    //关于发布那一块
+    .publish_entrance{
+      text-align: center;
+      display: box;
+      box-orient: horizontal;
+      box-pack: center;
+      box-align: center;
+      cursor: pointer;
+      border: 1px solid @blue;
+      i{
+        color:@blue;
+        font-size: 40px;
+        font-weight: lighter;
+      }
+      span,br{
+        display: none;
+      }
+    }
   }
 }
 //====================================小图列表 End====================================================
 
 //====================================列表为吉 Start==================================================
   .list-empty{
-    margin: 40px 60px 50px;
+    margin: 40px auto 50px;
     background-color: @light-grey;
     height: 60px;
     position: relative;
     padding: 50px;
     display:none;
     .empty-content{
-      width:450px;
+      width:550px;
       margin: 0 auto;
       .empty-icon{
         float: left;
@@ -463,6 +499,7 @@
       }
       .empty-action{
         float: left;
+        cursor: pointer;
         a{
           line-height: 60px;
           border: 2px solid @blue;
@@ -471,9 +508,18 @@
           color:@black;
           padding: 8px 20px;
           border-radius: 60px;
+          i{
+            position: relative;
+            top:-2px;
+            margin-right: 5px;
+            //color:@blue;
+          }
           &:hover{
             background-color: @blue;
             color:@white;
+            //i{
+            //  color:@white;
+            //}
           }
         }
       }

@@ -4,7 +4,7 @@ if production
 else
   include ../public_inc/source/jade/head.jade
   - var image_path  = local_file_path+'/images/'
-.item-list-filter
+.item-list-filter#list-filter
   .item-nav-container
     .item-nav.first.current
       a 热门单品
@@ -37,7 +37,6 @@ else
         i.icon.icon-list_view
       a.show-small_list
         i.icon.icon-grid_view
-        //span.icon.icon-grid_view
 .item-list-container
   dl.big_img#big_img
   dl.small_img#small_img
@@ -46,11 +45,12 @@ else
       .empty-icon
         span.icon.icon-sad
       .empty-message
-        span 你还没有关注任何人
+        span.empty-title
         br
-        label 不如从下面这堆潮流达人开始吧!
-      .empty-action
-        a(href="#") 回首页
+        label.empty-content
+      .empty-action.return_home
+        a 回首页
+  dl.empty_recommend#recommend
   .list-loading#list-loading
     .loading-message
       span Loading....
@@ -62,6 +62,9 @@ if !production
   script(src="../../js/mock/dashboard_listdata_20151228.js")
   script.
     $(document).ready(function () {
+      window.user_photos_count = "{$_FANWE['user']['photos']}";
+      window.user_mail_status = "{$_FANWE['user']['email_status']}";
+      window.user_mobile = "{$_FANWE['user']['mobile']}";
       window.dashboard_count = "{$count}";
       window.dashboard_list_data = $.parseJSON(MOCK_DATA);
       init_dashboard();
@@ -69,8 +72,12 @@ if !production
 else
   script.
     $(document).ready(function () {
+      window.user_photos_count = "{$_FANWE['user']['photos']}";
+      window.user_mail_status = "{$_FANWE['user']['email_status']}";
+      window.user_mobile = "{$_FANWE['user']['mobile']}";
       window.dashboard_count = "{$count}";
-      window.dashboard_list_data = $.parseJSON('{$list_json}');
+      window.dashboard_list_string = '{$list_json}'
+      window.dashboard_list_data = {};
 
       init_dashboard();
     });
