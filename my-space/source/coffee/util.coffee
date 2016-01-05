@@ -2,7 +2,7 @@ followItem_Generater = (data,current_index) ->
   dd = $('<dd class="follow-list_item" i="' + current_index + '">'+
     '<div class="fans-container">' +
       '<div class="fans-face">' +
-        '<a href="#">' +
+        '<a href="' + data.user_href + '">' +
           '<img src="' + data.img_thumb + '" alt="' + data.user_name + '"/>' +
         '</a>' +
       '</div>' +
