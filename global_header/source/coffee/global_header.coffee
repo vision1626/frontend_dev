@@ -72,7 +72,7 @@ init_global_header = ->
     if e.which == 13
      check_search2()
 
-$(document).on 'mouseover','div.invisible-menu', ->
+$(document).on 'mouseover','li.fixed-nav__flash-buy', ->
   $(this).find('.cart-link').addClass('cart-link_show')
   $(this).find('.order-link').addClass('order-link_show')
 
