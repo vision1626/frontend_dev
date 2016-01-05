@@ -65,6 +65,16 @@ $(window).bind 'scroll', (e)->
   parallax($('.profile-container'))
   e.stopPropagation()
 
+$(document).on 'click','.fans-concemed_fans', ->
+  uid = $(this).attr('uid')
+  url = ['u/fans-',uid,'.html'].join('')
+  location.href = SITE_URL + url
+
+$(document).on 'click','.fans-concemed_follow', ->
+  uid = $(this).attr('uid')
+  url = ['u/follow-',uid,'.html'].join('')
+  location.href = SITE_URL + url
+
 do_follow = (obj,status) ->
   me = $(obj)
   uid = me.attr('uid')

@@ -12,7 +12,7 @@
     margin-right: auto;
     text-align: center;
     //width: 507px;
-    padding-top: 80px;
+    padding-top: 50px;
     color: white;
     img {
       height: 100px;
@@ -22,12 +22,114 @@
       display: block;
       background-color: @black;
     }
-    h3 {
-      font-size: 20px;
-      margin-top: 8px;
-      margin-bottom: 5px;
-      font-weight: normal;
+    .name_container{
+      height: 85px;
+      //overflow: hidden;
+      display: table;
+      margin: auto;
+
+      h3 {
+        font-size: 24px;
+        margin-top: 8px;
+        margin-bottom: 5px;
+        font-weight: normal;
+      }
+      .profile__follow-btn {
+        position: relative;
+        top: -35px;
+        left: calc(96px + 10px);
+        width: 96px;
+        height: 30px;
+        background-color: @black;
+        font-size: 14px;
+        border-radius: 38px;
+        line-height: 2.3;
+        text-align: left;
+        cursor: pointer;
+        overflow: hidden;
+        float: right;
+        a,
+        a:link,
+        a:visited,
+        a:hover
+        a:active {
+          color: inherit;
+        }
+        .slider {
+          display: inline-block;
+          transition: margin-left .5s linear;
+        }
+        .slider.slideright {
+          margin-left: 60px;
+        }
+        .icon-follow.slideright {
+          animation: .5s linear 0s 1 normal rotate;
+        }
+        .icon-unfollow.slideleft {
+          animation: .5s linear 0s 1 reverse rotate;
+        }
+        .slider.slideleft {
+          margin-left: 0;
+        }
+
+        // .status_text {
+        //   display: none;
+        // }
+        // .status_text.slideright{
+        //   margin-left: -44px;
+        // }
+        // .success-fo {
+        //   display: none;
+        //   margin-left: -46px;
+        // }
+        // span.followed {
+        //   margin-left: 11px;
+        //   margin-right: 5px;
+        // }
+        &:hover {
+          color: @blue;
+          .slider {
+            // animation: 1s linear 0s 1 normal slideright;
+            // margin-left: 60px;
+          }
+          .icon-follow {
+            transform: scale(1.4);
+            // animation: 1s linear 0s 1 normal rotate;
+            // transform: rotate(360deg);
+          }
+        }
+        .icon-follow {
+          display: inline-block;
+          margin-top: -6px;
+          // transition: 1s linear 0s;
+        }
+        .icon-follow:before, .icon-unfollow:before {
+          font-size: 20px;
+          margin-right: 7px;
+          margin-left: 6px;
+        }
+        .icon-edit:before {
+          font-size: 20px;
+          margin-right: 4px;
+          margin-left: 6px;
+        }
+      }
+      .profile__total-like{
+        clear: both;
+        display: table;
+        margin: auto;
+        position: relative;
+        top: -10px;
+        background-color: @light-grey;
+        padding: 2px 8px 2px 10px;
+        height:20px;
+        line-height: 20px;
+        color: @black;
+        border-radius: 15px;
+      }
+
     }
+
     .profile__level {
       position: absolute;
       top: 153px;
@@ -42,85 +144,7 @@
       margin: 5px 0;
       color: @grey;
     }
-    .profile__follow-btn {
-      position: absolute;
-      top: 149px;
-      right: 59px;
-      width: 96px;
-      height: 30px;
-      background-color: @black;
-      font-size: 14px;
-      border-radius: 38px;
-      line-height: 2.3;
-      text-align: left;
-      cursor: pointer;
-      overflow: hidden;
-      a,
-      a:link,
-      a:visited,
-      a:hover
-      a:active {
-        color: inherit;
-      }
-      .slider {
-        display: inline-block;
-        transition: margin-left .5s linear;
-      }
-      .slider.slideright {
-        margin-left: 60px;
-      }
-      .icon-follow.slideright {
-        animation: .5s linear 0s 1 normal rotate;
-      }
-      .icon-unfollow.slideleft {
-        animation: .5s linear 0s 1 reverse rotate;
-      }
-      .slider.slideleft {
-        margin-left: 0;
-      }
 
-      // .status_text {
-      //   display: none;
-      // }
-      // .status_text.slideright{
-      //   margin-left: -44px;
-      // }
-      // .success-fo {
-      //   display: none;
-      //   margin-left: -46px;
-      // }
-      // span.followed {
-      //   margin-left: 11px;
-      //   margin-right: 5px;
-      // }
-      &:hover {
-        color: @blue;
-        .slider {
-          // animation: 1s linear 0s 1 normal slideright;
-          // margin-left: 60px;
-        }
-        .icon-follow {
-          transform: scale(1.4);
-          // animation: 1s linear 0s 1 normal rotate;
-          // transform: rotate(360deg);
-        }
-      }
-      .icon-follow {
-        display: inline-block;
-        margin-top: -6px;
-        // transition: 1s linear 0s;
-      }
-      .icon-follow:before, .icon-unfollow:before {
-        font-size: 20px;
-        margin-right: 7px;
-        margin-left: 6px;
-      }
-      .icon-edit:before {
-        font-size: 20px;
-        margin-right: 4px;
-        margin-left: 6px;
-      }
-    }
   }
   .content {
     background-color: rgba(0, 0, 0, 0.5);
