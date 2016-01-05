@@ -12,55 +12,55 @@ _dashboard_has_more = true
 _dashboard_has_publish_btn_b = false
 _dashboard_has_publish_btn_s = false
 _user_mail_vrification = true
-_show_me = false
+_dashboard_show_me = false
 
 #SITE_URL = 'http://192.168.0.230/'
 
 init_dashboard = ->
-  biglist = $('#big_img')
-  listempty = $('#list-empty')
-  listloading = $('#list-loading')
-  pagiation = $('#item-pagiation')
-  filter = $('#list-filter')
+#  biglist = $('#big_img')
+#  listempty = $('#list-empty')
+#  listloading = $('#list-loading')
+#  pagiation = $('#item-pagiation')
+#  filter = $('#list-filter')
 
 #  if window.dashboard_count is ''
 #    window.dashboard_count = 0
+
   if myid is uid
-    _show_me = true
+    _dashboard_show_me = true
   else
-    _show_me = false
+    _dashboard_show_me = false
 
   if window.dashboard_list_string isnt ''
     window.dashboard_list_data = $.parseJSON(window.dashboard_list_string)
 
   init_dashboard_empty_message()
-  listloading.show()
-  if window.dashboard_list_data
-#    _dashboard_end_b = _dashboard_step_b
-    _dashboard_is_loading = true
-#    for ld,i in window.dashboard_list_data
-#      if _dashboard_start_b < _dashboard_end_b
-#        biglist.append(big_DashboardItem_Generater(ld,i))
-#        _dashboard_start_b++
-    gen_dashboard_item()
-    _dashboard_is_loading = false
-    listloading.hide()
-    biglist.show()
-
-    if parseInt(window.dashboard_count) > _dashboard_limit
-      pagiation.show()
-      _dashboard_has_more = true
-    else
-      pagiation.hide()
-      _dashboard_has_more = false
-  else
-    listloading.hide()
-    listempty.show()
-    pagiation.hide()
-    filter.hide()
-    if state is 'fav' or state is 'dashboard'
-      query_dashboard_recommand_data()
-    _dashboard_has_more = false
+  gen_dashboard_item()
+#  listloading.show()
+#  if window.dashboard_list_data
+##    _dashboard_end_b = _dashboard_step_b
+#    _dashboard_is_loading = true
+##    for ld,i in window.dashboard_list_data
+##      if _dashboard_start_b < _dashboard_end_b
+##        biglist.append(big_DashboardItem_Generater(ld,i))
+##        _dashboard_start_b++
+#    gen_dashboard_item()
+#    _dashboard_is_loading = false
+#    listloading.hide()
+#    biglist.show()
+#
+#    if parseInt(window.dashboard_count) > _dashboard_limit
+#      pagiation.show()
+#      _dashboard_has_more = true
+#    else
+#      pagiation.hide()
+#      _dashboard_has_more = false
+#  else
+#    listloading.hide()
+#    listempty.show()
+#    pagiation.hide()
+#    filter.hide()
+#    _dashboard_has_more = false
 
 $(window).bind 'scroll', (e)->
   parallax($('.profile-container'))
@@ -220,7 +220,7 @@ gen_dashboard_item = () ->
     if window.dashboard_list_data.length > 0
       if _dashboard_show_big
         if window.location.pathname.indexOf('talk') > 0
-          if _show_me
+          if _dashboard_show_me
             if !_dashboard_has_publish_btn_b
               biglist.append(publishItem_Generater(myid))
               _dashboard_has_publish_btn_b = true
@@ -233,7 +233,7 @@ gen_dashboard_item = () ->
         biglist.show()
       else
         if window.location.pathname.indexOf('talk') > 0
-          if _show_me
+          if _dashboard_show_me
             if !_dashboard_has_publish_btn_s
               smalllist.append(publishItem_Generater(myid))
               _dashboard_has_publish_btn_s = true
@@ -257,14 +257,16 @@ gen_dashboard_item = () ->
       pagiation.hide()
       listempty.show()
       filter.hide()
-      if state is 'fav' or state is 'dashboard' and _show_me
-        query_dashboard_recommand_data()
+      if _dashboard_show_me
+        if state is 'fav' or state is 'dashboard'
+          query_dashboard_recommand_data()
   else
     pagiation.hide()
     listempty.show()
     filter.hide()
-    if state is 'fav' or state is 'dashboard' and _show_me
-      query_dashboard_recommand_data()
+    if _dashboard_show_me
+      if state is 'fav' or state is 'dashboard'
+        query_dashboard_recommand_data()
 
   listloading.hide()
   _dashboard_is_loading = false
@@ -303,6 +305,7 @@ init_dashboard_data = () ->
   _dashboard_end_s = 0
   if window.dashboard_list_data
     window.dashboard_list_data.length = 0
+
   window.dashboard_count = ''
   _dashboard_has_publish_btn_b = false
   _dashboard_has_publish_btn_s = false
@@ -312,6 +315,7 @@ init_dashboard_data = () ->
   filter.hide()
   smalllist.html('')
   smalllist.hide()
+  pagiation.hide()
   listempty.hide()
   recommandList.html('')
   recommandTitle.hide()
@@ -320,9 +324,9 @@ init_dashboard_data = () ->
   _dashboard_has_more = true
 
   if myid is uid
-    _show_me = true
+    _dashboard_show_me = true
   else
-    _show_me = false
+    _dashboard_show_me = false
 
   init_dashboard_empty_message()
   query_dashboard_data()
@@ -333,7 +337,7 @@ init_dashboard_empty_message = () ->
   btnReturnhome = $(document).find('div.return_home')
   btnPublish = $(document).find('div#btnPublish')
 
-  if _show_me
+  if _dashboard_show_me
     who = '你'
   else
     who = 'Ta'
@@ -346,7 +350,7 @@ init_dashboard_empty_message = () ->
   else if state is 'talk'
     txtEmptytitle.html([who,'还没有发布任何单品'].join(''))
     txtEmptycontent.html('赶快发布一个,让别人膜拜你的品位吧!')
-    if _show_me
+    if _dashboard_show_me
       btnReturnhome.hide()
       btnPublish.show()
     else

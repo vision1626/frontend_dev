@@ -4,42 +4,50 @@ _follow_start = 0
 _follow_end = 0
 _follow_step = _follow_limit
 _follow_has_more = true
+_follow_show_me = false
 
 init_follow = ->
-  followlist = $('#follow-list')
-  listempty = $('#list-empty')
-  listloading = $('#list-loading')
-  pagiation = $('#pagiation')
+#  followlist = $('#follow-list')
+#  listempty = $('#list-empty')
+#  listloading = $('#list-loading')
+#  pagiation = $('#pagiation')
+
+  if myid is uid
+    _follow_show_me = true
+  else
+    _follow_show_me = false
 
   if window.follow_list_string isnt ''
     window.follow_list_data = $.parseJSON(window.follow_list_string)
 
   init_follow_empty_message()
-  listloading.show()
-  if window.follow_list_data
-#    if window.follow_list_data.length > _follow_limit
-#      _follow_end = _follow_step
+  gen_follow_Item()
+
+#  listloading.show()
+#  if window.follow_list_data
+##    if window.follow_list_data.length > _follow_limit
+##      _follow_end = _follow_step
+##    else
+##      _follow_end = window.follow_list_data.length
+#    _follow_is_loading = true
+##    for ld,i in window.follow_list_data
+##      if _follow_start < _follow_end
+##        followlist.append(followItem_Generater(ld,i))
+##        _follow_start++
+#    gen_follow_Item()
+#    _follow_is_loading = false
+#    listloading.hide()
+#    followlist.show()
+#    if parseInt(window.follow_count) > _follow_limit
+#      pagiation.show()
+#      _follow_has_more = true
 #    else
-#      _follow_end = window.follow_list_data.length
-    _follow_is_loading = true
-#    for ld,i in window.follow_list_data
-#      if _follow_start < _follow_end
-#        followlist.append(followItem_Generater(ld,i))
-#        _follow_start++
-    gen_follow_Item()
-    _follow_is_loading = false
-    listloading.hide()
-    followlist.show()
-    if parseInt(window.follow_count) > _follow_limit
-      pagiation.show()
-      _follow_has_more = true
-    else
-      pagiation.hide()
-      _follow_has_more = false
-  else
-    listloading.hide()
-    listempty.show()
-    pagiation.hide()
+#      pagiation.hide()
+#      _follow_has_more = false
+#  else
+#    listloading.hide()
+#    listempty.show()
+#    pagiation.hide()
 
 $(document).on 'click','div.follow_ed', ->
   do_follow(this,'ed')
@@ -144,12 +152,41 @@ query_follow_Data = () ->
         btn_ShowMore.html('我要看更多').removeClass('loading')
     }
 
+query_follow_recommand_data = () ->
+  if state is 'follow'
+    action = 'get_approve_user_ajax'
+    recommand_limit = 7
+
+  $.ajax {
+    url: SITE_URL + 'services/service.php'
+    type: "GET"
+    data: {'m': 'u', 'a': action, ajax: 1, 'page': 1, 'count': '', 'limit': recommand_limit, 'follow',0}
+    cache: false
+    dataType: "json"
+    success: (result)->
+      if result.data
+        gen_follow_recommand_item(result.data)
+    error: (result)->
+      alert('errr: ' + result)
+  }
+
+gen_follow_recommand_item = (data) ->
+  recommandTitle = $('#recommandTitle')
+  recommandList = $('#recommand')
+  if state is 'follow'
+    for ld,i in data
+      recommandList.append(followItem_Generater(ld,i))
+      recommandList.removeClass('big_img').addClass('follow-list')
+      recommandTitle.find('.item-nav.first').find('a').html('热门潮人')
+  recommandTitle.show()
+  recommandList.show()
+
 gen_follow_Item = () ->
   _follow_is_loading = true
   followlist = $('#follow-list')
   listloading = $('#list-loading')
   listempty = $('#list-empty')
-  pagiation = $('#item-pagiation')
+  pagiation = $('#pagiation')
 
   if window.follow_list_data
     if window.follow_list_data.length > 0
@@ -167,9 +204,15 @@ gen_follow_Item = () ->
     else
       pagiation.hide()
       listempty.show()
+      if _follow_show_me
+        if state is 'follow'
+          query_follow_recommand_data()
   else
     pagiation.hide()
     listempty.show()
+    if _follow_show_me
+      if state is 'follow'
+        query_follow_recommand_data()
 
   listloading.hide()
   _follow_is_loading = false
@@ -178,6 +221,9 @@ init_follow_data = () ->
   followlist = $('#follow-list')
   listloading = $('#list-loading')
   pagiation = $('#pagiation')
+  listempty = $('#list-empty')
+  recommandTitle = $('#recommandTitle')
+  recommandList = $('#recommand')
   btn_ShowMore = $(document).find('#folloe-show-more')
   _follow_is_loading = false
   _follow_start = 0
@@ -191,6 +237,11 @@ init_follow_data = () ->
   listloading.show()
   followlist.html('')
   followlist.hide()
+  pagiation.hide()
+  listempty.hide()
+  recommandList.html('')
+  recommandTitle.hide()
+  recommandList.hide()
   btn_ShowMore.html('我要看更多').removeClass('loading')
 
   init_follow_empty_message()
@@ -200,8 +251,9 @@ init_follow_empty_message = () ->
   txtEmptytitle = $(document).find('span.empty-title')
   txtEmptycontent = $(document).find('label.empty-content')
   btnReturnhome = $(document).find('div.return_home')
+  btnPublish = $(document).find('div#btnPublish')
 
-  if myid is uid
+  if _follow_show_me
     who = '你'
   else
     who = 'Ta'
@@ -209,6 +261,14 @@ init_follow_empty_message = () ->
   if window.location.pathname.indexOf('fans') > 0
     txtEmptytitle.html([who,'还没有粉丝'].join(''))
     txtEmptycontent.html('您还没有粉丝，发布潮品越多 粉丝越多哦！')
+    if _follow_show_me
+      btnReturnhome.hide()
+      btnPublish.show()
+    else
+      btnReturnhome.show()
+      btnPublish.hide()
   else
     txtEmptytitle.html([who,'还没有关注'].join(''))
     txtEmptycontent.html('你还没有关注任何人，关注潮人能看到他们的最新动态哦！')
+    btnReturnhome.show()
+    btnPublish.hide()

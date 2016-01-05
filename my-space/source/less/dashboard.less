@@ -530,7 +530,42 @@
     }
   }
 
+  .empty_recommand_title{
+    display: none;
+  }
+
+  .empty_recommand{
+    display: none;
+  }
+
 //====================================列表为吉 End====================================================
+//====================================加载中 Start==================================================
+  .list-loading {
+    margin: 40px auto 50px;
+    background-color: @light-grey;
+    height: 60px;
+    position: relative;
+    padding: 50px;
+    display: none;
+    .loading-message{
+      margin: auto;
+      display: table;
+      i{
+        font-size: 40px;
+        line-height: 50px;
+      }
+      span{
+        font-size: @font-size-m;
+        margin-left: 20px;
+        font-weight: bold;
+        position: relative;
+        top:5px;
+      }
+    }
+  }
+
+
+//====================================加载中 End====================================================
 
 .item-pagiation{
   //float: left;
@@ -557,11 +592,3 @@
   }
 }
 
-.list-loading{
-  margin: 40px 60px 50px;
-  background-color: @light-grey;
-  height: 60px;
-  position: relative;
-  padding: 50px;
-  display: none;
-}
