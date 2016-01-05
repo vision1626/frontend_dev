@@ -1,48 +1,48 @@
 <!DOCTYPE html>
 html(lang="en")
-head
-  meta(charset="UTF-8")
-  meta(name='viewport', content='width=device-width user-scalable=no maximum-scale=1')
-  meta(name="keywords" content="{$seo_keyword}")
-  meta(name="description" content="{$seo_description")
-  -title = "{$seo_title}"
-  title= title
+  head
+    meta(charset="UTF-8")
+    meta(name='viewport', content='width=device-width user-scalable=no maximum-scale=1')
+    meta(name="keywords" content="{$seo_keyword}")
+    meta(name="description" content="{$seo_description")
+    -title = "{$seo_title}"
+    title= title
 
 
-  :php
-    $current_css[] = './tpl/hi1626/css/login/vendor/normalize.css';
-    $current_css[] = './tpl/hi1626/css/bduck/dist/bduck.min.css';
-    $current_js[] = './public/js/jquery-1.11.3.min.js';
-    $current_js[] = './tpl/hi1626/js/bduck/bduck.js'
+    :php
+      $current_css[] = './tpl/hi1626/css/login/vendor/normalize.css';
+      $current_css[] = './tpl/hi1626/css/bduck/dist/bduck.min.css';
+      $current_js[] = './public/js/jquery-1.11.3.min.js';
+      $current_js[] = './tpl/hi1626/js/bduck/bduck.js'
 
-  link(rel="stylesheet", href="{css $current_css}" media="all")
-  script(src="{script $current_js}")
-body.winner-list
-  .list-title
-    img(src="./tpl/hi1626/images/bduck/coffeecup-min.png")
-  .winner-listing
-    table
-      thead
-        tr
-          th 微信昵称
-          th 手机号码
-      tbody
-        {loop $winners $i}
-        tr
-          th {$i['nickname']}
-          th {$i['tel']}
-        {/loop}
-    
+    link(rel="stylesheet", href="{css $current_css}" media="all")
+    script(src="{script $current_js}")
+  body.winner-list
+    .list-title
+      img(src="./tpl/hi1626/images/bduck/coffeecup-min.png")
+    .winner-listing
+      table
+        thead
+          tr
+            th 微信昵称
+            th 手机号码
+        tbody
+          {loop $winners $i}
+          tr
+            th {$i['nickname']}
+            th {$i['tel']}
+          {/loop}
+      
 
-  <!--{if $is_wx}-->
-  <!--{template inc/weixin_share}-->
-  <!--{/if}-->
-  <!--{template inc/count}-->
+    <!--{if $is_wx}-->
+    <!--{template inc/weixin_share}-->
+    <!--{/if}-->
+    <!--{template inc/count}-->
 
-  script.
-    $(document).ready(function () {
-      window.lighten_url = "{$api_urls['lighten']}";
-      window.deliver_url = "{$api_urls['save_address']}";
-      init();
-    });
+    script.
+      $(document).ready(function () {
+        window.lighten_url = "{$api_urls['lighten']}";
+        window.deliver_url = "{$api_urls['save_address']}";
+        init();
+      });
       

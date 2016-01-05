@@ -1,14 +1,100 @@
--var production = false
+-var production = true
 if production
   - var image_path = '{$_FANWE[site_url]}/tpl/hi1626/v2/images'
 else
   include ../public_inc/source/jade/head.jade
   - var image_path  = local_file_path+'/images/'
 
-.form__header
-  |发布潮品
-form
-
+.form__container.item-list-container
+  h4.form__header
+    |发布潮品
+  form.form__body
+    dl.big_img.static
+      dd.item
+        .item-b_image
+          .dragger
+            i.icon.icon-drag
+          //- img(src= image_path + "/pikachu.jpeg")
+        .item-b_description
+          .item-b_isnew
+            span.item_tag new
+            span 新发布
+          a
+            .item-b_title 
+              span 轰龙逆鳞，龙属性MAX，2016新货，现买赠送桃毛兽的毛
+            .item-b_price
+              span ¥4000 
+        .item-b_additional
+          a
+            img(src= image_path + "/test_bg.jpg")
+          .item-value
+            span.icon.icon-viewed
+            span 0
+            span.icon.icon-comment--s
+            span 0
+        .item-b_add_like.btn_like
+          a
+            span.icon.icon-heart
+            br
+            span.like_count 0
+    .form__editor
+      .url-info
+        .url-input
+          i.icon.icon-link
+          input(type="text")
+        a 重新读取
+      .url-img-processor
+        .url-img
+          img(src= image_path + "/pikachu.jpeg")
+        .url-img
+          img(src= image_path + "/pikachu.jpeg")
+        .img-adder
+          div
+            i.icon.icon-publish 
+        p 支持JPG、GIF、PNG、JPEG格式图片，每张大小5M内
+          br
+          | 请保证图片清晰无水印，否则无法通过审核！
+      .item-details
+        h3 单品信息
+        input.item-details__title(type="text" placeholder="标题")
+        input.item-details__price(type="text" placeholder="价格")
+        input.item-details__brand(type="text" placeholder="品牌（选填）")
+        input.item-details__category(type="text" placeholder="品类")
+        input.item-details__color(type="text" placeholder="颜色（选填）")
+        input.item-details__style(type="text" placeholder="风格（选填）")
+      .item-tags
+        h3 标签
+        .tag-input
+          i.icon.icon-label
+          input(type="input")
+        ul.mytags
+          li.tag-title 我的标签：
+          li.unselected 复古
+          li 秋冬
+          li 军事
+        ul.hit-tags
+          li.tag-title 常用标签：
+          li.selected ′★.．/丄偙 请 吥 喓 夺赱___莪恴 緈鍢 恏吗?_▂_▂_▂。 °
+          li 卟许dong涐旳感情 .？
+      .item-recommendation
+        h3 推荐理由
+        .item-recommendation-container
+          textarea(rows="4" placeholder="说吧，说了我也不会买")
+          p 0/300
+      .buttons
+        button.publish(type="submit") 发布
+        button.cancel(type="reset") 取消
+    .form__share
+      div
+        img(src= image_path + "/pikachu.jpeg")
+        .inline-block
+          h4 采集工具
+          p 拖拽左侧“手掌”图标至浏览器书签栏
+            br
+            | 逛到潮品，一键分享到1626
+      div
+        i.icon.icon-heart
+        a 发布教程
 
 script(type='text/javascript').
   $(document).ready(function () {

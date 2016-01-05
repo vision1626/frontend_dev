@@ -162,7 +162,7 @@ init = ->
   setTimeout ->
     if $help_btn.length > 0
       $help_btn.on 'click', (e)->
-        if islighten == 1
+        if islighten == "1"
           $share.addClass('show')
         else
           slotMachineDuck()
@@ -170,7 +170,7 @@ init = ->
           $helped_btn.fadeIn()
           $parts.unbind('click')
       $parts.on 'click', ->
-        if islighten == 0
+        if islighten == "0"
           slotMachineDuck()
           $(this).unbind('click')
           $bduck.unbind('click')

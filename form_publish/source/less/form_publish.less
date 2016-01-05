@@ -1,5 +1,266 @@
 @import "../../../public_inc/source/less/imports";
 
-.fuck {
-  display: none;
+.form__container {
+  h3, h4 {
+    &:before {
+      content: "";
+      border-left: 4px solid @blue;
+      margin-right: 4px;
+    }
+  }
+  h3 {
+    font-size: @font-size-s;
+  }
+  .form__header {
+    margin: 0 auto;
+    font-size: @font-size-m;
+    ._1626-breakpoints("others");
+  }
+  .form__body {
+    overflow: hidden;
+    dl.big_img.static {
+      display: block;
+      float: left;
+      margin-bottom: 0;
+      dd.item {
+        width: @big-goods__width + 4px;
+        .item-b_image {
+          overflow: visible;
+          border: 2px dotted @blue;
+          background: url("/tpl/hi1626/v2/images/lego_bg.jpg") no-repeat center center;
+          background-size: cover;
+          .dragger {
+            position: absolute;
+            bottom: 5px;
+            right: 5px;
+            cursor: pointer;
+            .icon {
+              font-size: 20px;
+            }
+          }
+        }
+      }
+    }
+    .form__editor {
+      input {
+        padding: 6px 0;
+      }
+      &>div {
+        width: 95%;
+        margin: 0 auto;
+        margin-bottom: 40px;
+      }
+      width: @big-goods__width * 2;
+      margin: 20px 15px 10px 15px;
+      float: left;
+      background-color: @light-grey;
+      padding: 29px 16px 0;
+      input, textarea {
+        border: none;
+        outline: none;
+        font-size: @font-size-s;
+        border-radius: 4px;
+        padding-left: 14px;
+        box-sizing: border-box;
+      }
+      .url-info {
+        .url-input {
+          display: inline-block;
+          background-color: white;
+          width: 75%;
+          margin-right: 23px;
+          padding-left: 9px;
+          border-bottom: 2px dotted @dark-grey;
+          .icon {
+            font-size: 20px;
+          }
+          input {
+            width: 90%;
+          }
+        }
+        a {
+          border-bottom: 2px solid @grey;
+          font-size: @font-size-s;
+        }
+      }
+      .url-img-processor {
+        margin-top: -20px;
+        overflow: hidden;
+        .url-img, .img-adder {
+          float: left;
+        }
+        .url-img {
+          border: 1px solid @dark-grey;
+          width: 80px;
+          height: 80px;
+          margin-right: 10px;
+          position: relative;
+          img {
+            max-width: 100%;
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            margin: auto;
+          }
+        }
+        .img-adder {
+          border: 1px dotted @dark-grey;
+          width: 80px;
+          height: 80px;
+          margin-right: 10px;
+          position: relative;
+          background-color: white;
+          div {
+            position: absolute;
+            top: 0;
+            right: 0;
+            left: 0;
+            bottom: 0;
+            width: 22px;
+            height: 22px;
+            margin: auto;
+            cursor: pointer;
+            .icon {
+              font-size: 22px;
+              color: @grey;
+            }
+          }
+        }
+        p {
+          clear: left;
+          margin: 0;
+          font-size: @font-size-xs;
+          color: @grey;
+        }
+      }
+      .item-details {
+        input {
+          border-bottom: 2px dotted @dark-grey;
+          margin-bottom: 12px;
+        }
+        .item-details__title {
+          width: 100%;
+        }
+        .item-details__price, 
+        .item-details__brand {
+          width: 49%;
+        }
+        .item-details__price {
+          margin-right: 6px;
+        }
+        .item-details__category,
+        .item-details__color,
+        .item-details__style {
+          width: 32%;
+          // margin-right: 1.333333333%; 
+        }
+        .item-details__category,
+        .item-details__color {
+          margin-right: 6px;
+        }
+      }
+      .item-tags {
+        ul {
+          overflow: hidden;
+          .tag-title {
+            color: @grey;
+          }
+          .unselected {
+            border-bottom: 2px solid @grey;
+          }
+          .selected {
+            border-bottom: none;
+            color: @grey;
+          }
+        }
+        ul li {
+          float: left;
+          font-size: @font-size-xs;
+          margin-right: 7px;
+          margin-top : 6px;
+        }
+        .hit-tags {
+          clear: left;
+        }
+        .tag-input {
+          background-color: white;
+          padding-left: 9px;
+          border-bottom: 2px dotted @dark-grey;
+          .icon {
+            font-size: 20px;
+          }
+        }
+      }
+      .item-recommendation {
+        clear: left;
+        .item-recommendation-container {
+          border-bottom: 2px dotted @dark-grey;
+          background-color: white;
+          textarea {
+            border: none;
+            outline: none;
+            width: 100%;
+            resize: none;
+          }
+          p {
+            text-align: right;
+            font-size: @font-size-xs;
+            color: @grey;
+            text-align: right;
+            padding-right: 10px;
+            margin: 0;
+          }
+        }
+      }
+      .buttons {
+        button {
+          border: none;
+          outline: none;
+          border-radius: 22px;
+          color: white;
+          font-size: @font-size-m;
+        }
+        .publish {
+          background-color: @blue;
+          padding: 11px 45px;
+        }
+        .cancel {
+          background-color: @grey;
+          padding: 11px 28px;
+          margin-left: 10px;
+        }
+      }
+    }
+    .form__share {
+      width: @big-goods__width;
+      margin: 20px 15px 10px 15px; 
+      float: left; 
+      div {
+        .inline-block {
+          display: inline-block;
+        }
+        img {
+          display: inline-block;
+          width: 85px;
+        }
+        h4 {
+          margin: 0 0 8px 0;
+          &:before {
+            border: none;
+            margin: 0;
+          }
+        }
+        p {
+          font-size: @font-size-xs;
+          margin: 0;
+        }
+        a {
+          border-bottom: 2px solid @grey;
+          font-size: @font-size-s;
+          margin-top: 15px;
+          display: inline-block;
+        }
+      }
+    }
+  }
 }
