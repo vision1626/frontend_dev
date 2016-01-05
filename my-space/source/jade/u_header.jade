@@ -8,6 +8,21 @@ else
 .profile-container
   .profile
     img(src="{avatar $home_user['uid'] b 1 $home_user['img_thumb']}").profile__icon
+    .profile__follow-btn
+      //{if $home_user['uid'] == $_FANWE['uid']}
+      i.icon.icon-edit
+      a(href="/settings/psersonal.html") 修改资料
+      //{else}
+      //{if $home_user['is_follow'] == 0}
+      .slider
+        i.icon.icon-follow
+        span.status_text(style="position:absolute; left:34px;") 关注Ta
+      //{else}
+      .slider.slideright
+        span.status_text(style="position:absolute; left:21px;") 已关注
+        i.icon.icon-unfollow
+      //{/if}
+      //{/if}
     .name_container
       h3.name {$home_user['user_name']}
       //- span.profile__level LV.2
@@ -15,23 +30,10 @@ else
       //-   a(href="")
       //-   a(href="")
       //-   a(href="")
-      .profile__follow-btn
-        //{if $home_user['uid'] == $_FANWE['uid']}
-        i.icon.icon-edit
-        a(href="/settings/psersonal.html") 修改资料
-        //{else}
-        //{if $home_user['is_follow'] == 0}
-        .slider
-          i.icon.icon-follow
-          span.status_text(style="position:absolute; left:34px;") 关注Ta
-        //{else}
-        .slider.slideright
-          span.status_text(style="position:absolute; left:21px;") 已关注
-          i.icon.icon-unfollow
-        //{/if}
-        //{/if}
+
       .profile__total-like
-        span 发布被喜欢: {$_FANWE['all_like_count']}
+        span 发布被喜欢:&nbsp;
+        b {$_FANWE['all_like_count']}
     p.profile__introduction {if $home_user['introduce'] == ""}
       | 这个人太潮了，不屑于填写简介
       //{else}
@@ -39,26 +41,27 @@ else
       //{/if}
 
   .content
-    .js-slide-bg
-    ul.content__actions
-      //{if $home_user['uid'] == $_FANWE['uid']}
-      li.actions-db
-        i.icon.icon-news
-        | $home_user['dynamic_count']新动态
-      //{/if}
-      li.actions-fav
-        i.icon.icon-heart
-        | $home_user['collects']喜欢
-      li.actions-pub
-        i.icon.icon-publish
-        | $home_user['publish_count']发布
-    ul.content__relationship
-      li.relation-fans
-        i.icon.icon-fans
-        | $home_user['fans']粉丝
-      li.relation-follow
-        i.icon.icon-following
-        | $home_user['follows']关注
+    .center-wrap
+      .js-slide-bg
+      ul.content__actions
+        //{if $home_user['uid'] == $_FANWE['uid']}
+        li.actions-db
+          i.icon.icon-news
+          | $home_user['dynamic_count']新动态
+        //{/if}
+        li.actions-fav
+          i.icon.icon-heart
+          | $home_user['favs']喜欢
+        li.actions-pub
+          i.icon.icon-publish
+          | $home_user['publish_count']发布
+      ul.content__relationship
+        li.relation-fans
+          i.icon.icon-fans
+          | $home_user['fans']粉丝
+        li.relation-follow
+          i.icon.icon-following
+          | $home_user['follows']关注
 //- TODO: put script tag below into footer 
 script(type='text/javascript').
   $(document).ready(function () {

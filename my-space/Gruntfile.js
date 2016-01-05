@@ -31,26 +31,26 @@ module.exports = function (grunt) {
             }
         },
 
-        //cssmin: {
-        //    target: {
-        //        files: {
-        //            '<%= globalConfig.cssDistPath %>/<%= globalConfig.viewName %>.min.css': [
-        //                '<%= globalConfig.cssDistPath %>/<%= globalConfig.viewName %>.min.css'
-        //            ]
-        //        }
-        //    }
-        //},
-
         cssmin: {
             target: {
-                files: [{
-                    expand: true,
-                    cwd: '<%= globalConfig.cssDistPath %>',
-                    src: '**/*.css',
-                    dest: '<%= globalConfig.cssDistPath %>'
-                }]
+                files: {
+                    '<%= globalConfig.cssDistPath %>/<%= globalConfig.viewName %>.css': [
+                        '<%= globalConfig.cssDistPath %>/<%= globalConfig.viewName %>.css'
+                    ]
+                }
             }
         },
+
+        //cssmin: {
+        //    target: {
+        //        files: [{
+        //            expand: true,
+        //            cwd: '<%= globalConfig.cssDistPath %>',
+        //            src: '**/*.css',
+        //            dest: '<%= globalConfig.cssDistPath %>'
+        //        }]
+        //    }
+        //},
 
         //less: {
         //    dist: {
@@ -85,25 +85,25 @@ module.exports = function (grunt) {
             //}
         },
 
-        //autoprefixer: {
-        //    dist: {
-        //        files: {
-        //            '<%= globalConfig.cssDistPath %>/<%= globalConfig.viewName %>.min.css': [
-        //                '<%= globalConfig.cssDistPath %>/<%= globalConfig.viewName %>.min.css'
-        //            ]
-        //        }
-        //    }
-        //},
         autoprefixer: {
             dist: {
-                files: [{
-                    expand: true,
-                    cwd: '<%= globalConfig.cssDistPath %>',
-                    src: '**/*.css',
-                    dest: '<%= globalConfig.cssDistPath %>'
-                }]
+                files: {
+                    '<%= globalConfig.cssDistPath %>/<%= globalConfig.viewName %>.css': [
+                        '<%= globalConfig.cssDistPath %>/<%= globalConfig.viewName %>.css'
+                    ]
+                }
             }
         },
+        //autoprefixer: {
+        //    dist: {
+        //        files: [{
+        //            expand: true,
+        //            cwd: '<%= globalConfig.cssDistPath %>',
+        //            src: '**/*.css',
+        //            dest: '<%= globalConfig.cssDistPath %>'
+        //        }]
+        //    }
+        //},
 
         coffee: {
             options: {
@@ -137,12 +137,17 @@ module.exports = function (grunt) {
                 }
             },
             dist: {
-                files: [{
-                    expand: true,
-                    cwd: '<%= globalConfig.jsDebugPath %>',
-                    src: '**/*.js',
-                    dest: '<%= globalConfig.jsDistPath %>'
-                }]
+                //files: [{
+                //    expand: true,
+                //    cwd: '<%= globalConfig.jsDebugPath %>',
+                //    src: '**/*.js',
+                //    dest: '<%= globalConfig.jsDistPath %>'
+                //}]
+                files: {
+                    '<%= globalConfig.jsDistPath %>/<%= globalConfig.viewName %>.js': [
+                        '<%= globalConfig.jsDebugPath %>/<%= globalConfig.viewName %>.js'
+                    ]
+                }
             }
         },
 

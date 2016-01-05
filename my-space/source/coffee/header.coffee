@@ -29,8 +29,20 @@ init_u_header = ->
       history.pushState(null, null, action + '-' + uid + '.html')
     window.state = action
 
-  if (window.myid != window.uid)
-    $('.content__actions').find('li').css({'width': '50%'})
+#  if (window.myid != window.uid)
+#    $('.content__actions').find('li').css({'width': '50%'})
+
+  # Set Tab Width
+  setTabWidth = ()->
+    $cnt_tab_ul = $('.content__actions')
+    $cnt_tab = $cnt_tab_ul.find('li')
+    $cnt_tab_ul_w = 0
+    $cnt_tab.each ->
+      this_w = Math.ceil($(this).width()) + 60
+      $cnt_tab_ul_w += this_w
+    $cnt_tab_ul.width $cnt_tab_ul_w
+
+  setTabWidth()
 
   user_action_async = (action)->
     if isInActions()
@@ -48,10 +60,14 @@ init_u_header = ->
     else
       window.location.pathname = '/u/' + action + '-' + uid + '.html'
 
-  slideToCurrent = ()->
-    tab_width = $(this).css('width')
-    $slide_tab_bg.css({"width": tab_width})
-    $slide_tab_bg.css({'left': $(this).offset().left})
+  slideToCurrent = (padding)->
+    padding = padding or 60
+    tab_width = $(this).width() + padding
+    cnt_wrap_w = $('.content .center-wrap').width()
+    win_w = $(window).width()
+    wrap_offset = (win_w - cnt_wrap_w) / 2
+    $slide_tab_bg.width tab_width
+    $slide_tab_bg.css({'left': $(this).offset().left - wrap_offset})
     $(this).parent().parent().find('li').removeClass('current')
     $(this).addClass('current')
 
@@ -66,10 +82,10 @@ init_u_header = ->
     slideToCurrent.apply($pub)
   else if isInCurrentAction('fans')
     changeState('fans')
-    slideToCurrent.apply($fans)
+    slideToCurrent.apply($fans,[36])
   else if isInCurrentAction('follow')
     changeState('follow')
-    slideToCurrent.apply($follow)
+    slideToCurrent.apply($follow,[36])
 
   if window.isfollow == "0"
     $status_text.on 'mouseover', ->
@@ -125,10 +141,10 @@ init_u_header = ->
     slideToCurrent.apply(this)
     user_action_async('talk')
   $fans.on 'click', ->
-    slideToCurrent.apply(this)
+    slideToCurrent.apply(this,[36])
     user_relation_async('fans')
   $follow.on 'click', ->
-    slideToCurrent.apply(this)
+    slideToCurrent.apply(this,[36])
     user_relation_async('follow')
 
   $(window).on 'resize', ->
@@ -143,7 +159,7 @@ init_u_header = ->
       slideToCurrent.apply($pub)
     else if isInCurrentAction('fans')
       changeState('fans')
-      slideToCurrent.apply($fans)
+      slideToCurrent.apply($fans,[36])
     else if isInCurrentAction('follow')
       changeState('follow')
-      slideToCurrent.apply($follow)
+      slideToCurrent.apply($follow,[36])
