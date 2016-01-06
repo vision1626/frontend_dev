@@ -7,9 +7,9 @@ module.exports = function (grunt) {
         cssSrcPath:     'source/less',
         jsSrcPath:      'source/coffee',
         jadeSrcPath:    'source/jade',
-        cssDistPath:    '<%= globalConfig.distPath %>/css/',
+        cssDistPath:    '<%= globalConfig.distPath %>/css',
         jsDebugPath:    '<%= globalConfig.distPath %>/js/debug',
-        jsDistPath:     '<%= globalConfig.distPath %>/js/',
+        jsDistPath:     '<%= globalConfig.distPath %>/js',
         htmlDistPath:   '<%= globalConfig.distPath %>/views/myspace',
         viewName:       'myspace',
     };
@@ -110,23 +110,30 @@ module.exports = function (grunt) {
                 sourceMap: true,
                 bare: true
             },
-            compile: {
+            target: {
                 files: {
-                    '<%= globalConfig.jsDebugPath %>/myspace.js':[
-                        // '<%= globalConfig.jsSrcPath %>/util.coffee',
-                        '<%= globalConfig.jsSrcPath %>/header.coffee'
-                    ],
-                    '<%= globalConfig.jsDebugPath %>/util.js':[
-                        '<%= globalConfig.jsSrcPath %>/util.coffee'
-                    ],
-                    '<%= globalConfig.jsDebugPath %>/dashboard.js':[
-                        '<%= globalConfig.jsSrcPath %>/dashboard.coffee'
-                    ],
-                    '<%= globalConfig.jsDebugPath %>/follow.js':[
-                        '<%= globalConfig.jsSrcPath %>/follow.coffee'
-                    ]
+                    '<%= globalConfig.jsDebugPath %>/<%= globalConfig.viewName %>.js':
+                      '<%= globalConfig.jsSrcPath %>/**/*.coffee'
                 }
             }
+            //compile: {
+
+                //files: {
+                //    '<%= globalConfig.jsDebugPath %>/.js':[
+                //        // '<%= globalConfig.jsSrcPath %>/util.coffee',
+                //        '<%= globalConfig.jsSrcPath %>/header.coffee'
+                //    ],
+                //    '<%= globalConfig.jsDebugPath %>/util.js':[
+                //        '<%= globalConfig.jsSrcPath %>/util.coffee'
+                //    ],
+                //    '<%= globalConfig.jsDebugPath %>/dashboard.js':[
+                //        '<%= globalConfig.jsSrcPath %>/dashboard.coffee'
+                //    ],
+                //    '<%= globalConfig.jsDebugPath %>/follow.js':[
+                //        '<%= globalConfig.jsSrcPath %>/follow.coffee'
+                //    ]
+                //}
+            //}
         },
 
         uglify: {
