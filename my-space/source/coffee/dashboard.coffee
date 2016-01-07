@@ -13,6 +13,7 @@ _dashboard_has_publish_btn_b = false
 _dashboard_has_publish_btn_s = false
 _user_mail_vrification = true
 _dashboard_show_me = false
+_dashboard_doing_like = false
 
 #SITE_URL = 'http://192.168.0.230/'
 
@@ -25,7 +26,6 @@ init_dashboard = ->
 
 #  if window.dashboard_count is ''
 #    window.dashboard_count = 0
-
   if myid is uid
     _dashboard_show_me = true
   else
@@ -105,21 +105,18 @@ $(document).on 'click','#dashboard-show-more', ->
   query_dashboard_data()
 
 $(document).on 'click','.btn_like', ->
-  do_like(this)
+  if !_dashboard_doing_like
+    _dashboard_doing_like = true
+    do_like(this)
 
-$(document).on 'click','div.publish_entrance', ->
+$(document).on 'click','.publish_entrance', ->
   if _user_mail_vrification
-    url = ['u/addshare-',myid,'.html'].join('')
-    location.href = SITE_URL + url
+#    url = ['u/addshare-',myid,'.html'].join('')
+#    location.href = SITE_URL + url
+    $('.popup__blackbox').fadeIn(300)
   else
     alert('老板,您还未验证E-Mail')
 
-$(document).on 'click','dd.publish_entrance', ->
-  if _user_mail_vrification
-    url = ['u/addshare-',myid,'.html'].join('')
-    location.href = SITE_URL + url
-  else
-    alert('老板,您还未验证E-Mail')
 
 $(document).on 'click','div.return_home', ->
   location.href = SITE_URL
@@ -416,21 +413,40 @@ after_like = (me,dtype,result,job,liststyle) ->
     refresh_like_small(me,ed,result.count)
 
 refresh_like_big = (me,ed,count) ->
+  smalllist = $('#big_img')
   my_icon = me.find('.icon')
   my_count = me.find('.like_count')
+  harting = me.find('.harting')
+  harting_img_url = SITE_URL + window.image_path + 'icon-heart-ing.gif'
   if ed is 1
-    my_icon.removeClass('icon-heart').addClass('icon-hearted')
+    harting.attr('src',harting_img_url)
+    harting.show()
+    setTimeout ->
+      my_icon.removeClass('icon-heart').addClass('icon-hearted')
+      harting.attr('src','')
+      harting.hide()
+    , 1500
   else
     my_icon.removeClass('icon-hearted').addClass('icon-heart')
   my_count.html(count)
   me.attr('ed',ed)
+  _dashboard_doing_like = false
 
 refresh_like_small = (me,ed,count) ->
   my_icon = me.find('.icon')
   my_count = me.parent().parent().find('.like_count')
+  harting = me.find('.harting')
+  harting_img_url = SITE_URL + window.image_path + 'icon-heart-ing.gif'
   if ed is 1
-    my_icon.removeClass('icon-heart').addClass('icon-hearted')
+    harting.attr('src',harting_img_url)
+    harting.show()
+    setTimeout ->
+      my_icon.removeClass('icon-heart').addClass('icon-hearted')
+      harting.attr('src','')
+      harting.hide()
+    , 1500
   else
     my_icon.removeClass('icon-hearted').addClass('icon-heart')
   my_count.html(count)
   me.attr('ed',ed)
+  _dashboard_doing_like = false

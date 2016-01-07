@@ -93,8 +93,13 @@ big_DashboardItem_Generater = (data,current_index) ->
   else
     isfav = 'icon-hearted'
 
+  if state is 'dashboard' and _dashboard_show_me
+    boxsize = ' longer'
+  else
+    boxsize = ''
+
   dd = $(
-    '<dd class="item ' + sid + '" i="' + current_index + '" dtype="' + dtype + '">' +
+    '<dd class="item' + boxsize + ' ' + sid + '" i="' + current_index + '" dtype="' + dtype + '">' +
       '<div>' +
       (if data.dynamic_type is 1
         '<div class="item-l_image">' +
@@ -117,25 +122,30 @@ big_DashboardItem_Generater = (data,current_index) ->
           '</dl>' +
         '</div>' +
         '<div class="item-b_description">' +
-          '<div class="item-b_isnew">' +
           (
-            if data.is_dapei_like is 1 or data.like_user_list
+            if state is 'dashboard' and _dashboard_show_me
+              '<div class="item-b_isnew">' +
               (
-                likeusers = []
-                for lu in data.like_user_list
-                  likeusers.push('<span>'+
-                    '<a href="' + lu.user_href + '">' +
-                      lu.user_name +
-                    '</a>' +
-                  '</span>')
-                likeusers.join(',')
-              )+
-                '<span> 喜欢此搭配</span>'
+                if data.is_dapei_like is 1 or data.like_user_list
+                  (
+                    likeusers = []
+                    for lu in data.like_user_list
+                      likeusers.push('<span>'+
+                        '<a href="' + lu.user_href + '">' +
+                          lu.user_name +
+                        '</a>' +
+                      '</span>')
+                    likeusers.join(',')
+                  )+
+                    '<span> 喜欢此搭配</span>'
+                else
+                  '<span class="item_tag">NEW</span>' +
+                  '<span>新发布</span>'
+              ) +
+              '</div>'
             else
-              '<span class="item_tag">NEW</span>' +
-              '<span>新发布</span>'
+              ''
           ) +
-          '</div>' +
         '</div>'
       else
         '<div class="item-b_image">' +
@@ -144,34 +154,40 @@ big_DashboardItem_Generater = (data,current_index) ->
           '</a>' +
         '</div>' +
         '<div class="item-b_description">' +
-          '<div class="item-b_isnew">' +
           (
-            if data.is_share_fav is 1 or data.like_user_list
+            if state is 'dashboard' and _dashboard_show_me
+              '<div class="item-b_isnew">' +
               (
-                likeusers = []
-                for lu in data.like_user_list
-                  likeusers.push('<span>'+
-                      '<a href="' + lu.user_href + '">' +
-                        lu.user_name +
-                      '</a>' +
-                    '</span>')
-                likeusers.join(',')
-              )+
-                '<span> 喜欢此单品</span>'
+                if data.is_share_fav is 1 or data.like_user_list
+                  (
+                    likeusers = []
+                    for lu in data.like_user_list
+                      likeusers.push('<span>'+
+                          '<a href="' + lu.user_href + '">' +
+                            lu.user_name +
+                          '</a>' +
+                        '</span>')
+                    likeusers.join(',')
+                  )+
+                    '<span> 喜欢此单品</span>'
+                else
+                  '<span class="item_tag">NEW</span>' +
+                  '<span>新发布</span>'
+              ) +
+              '</div>'
             else
-              '<span class="item_tag">NEW</span>' +
-              '<span>新发布</span>'
+              ''
           ) +
-          '</div>' + "<a href='#{data.url}'>" +
           '<div class="item-b_title">' +
-            '<span>' + data.title + '</span>' +
+            '<a href="' + data.url + '">' +
+              '<span>' + data.title + '</span>' +
+            '</a>' +
           '</div>' +
-          '<div class="item-b_price">' +
+          '<div class="item-b_price' + boxsize + '">' +
             '<span>¥' + data.goods_price + '</span>' +
-          '</div>' + '</a>' +
+          '</div>' +
         '</div>'
       ) +
-
       '<div class="item-b_additional">' +
         '<a href="' + data.user_href + '">' +
           '<img src="' + data.img_thumb + '"/>' +
@@ -184,13 +200,11 @@ big_DashboardItem_Generater = (data,current_index) ->
         '</div>' +
         '</div>' +
         '<div class="item-b_add_like btn_like" l="b" sid="' + sid + '" dtype="' + dtype + '"  ed="' + data.is_fav + '">' +
-          '<a>' +
-            '<span class="icon ' + isfav + '"></span>' +
-            '<br/>' +
-            '<span class="like_count">' +
-              data.like_count +
-            '</span>' +
-          '</a>' +
+          '<img src="" alt="" class="harting"/>' +
+          '<i class="icon ' + isfav + '"></i>' +
+          '<span class="like_count">' +
+            data.like_count +
+          '</span>' +
         '</div>' +
       '</div>' +
     '</dd>')
@@ -220,12 +234,13 @@ small_DashboardItem_Generater = (data,current_index) ->
           '</a>' +
         '</div>' +
         '<div class="item-s_action">' +
-          '<a class="action-add_special">' +
+          '<div class="action-add_special">' +
             '<span class="icon icon-album"></span>' +
-          '</a>' +
-          '<a class="action-add_like btn_like" l="s" sid="' + sid + '" dtype="' + dtype + '" ed="' + data.is_fav + '">' +
-            '<span class="icon ' + isfav + '"></span>' +
-          '</a>' +
+          '</div>' +
+          '<div class="action-add_like btn_like" l="s" sid="' + sid + '" dtype="' + dtype + '" ed="' + data.is_fav + '">' +
+            '<img src="" alt="" class="harting"/>' +
+            '<i class="icon ' + isfav + '"></i>' +
+          '</div>' +
         '</div>' +
         (
           if data.dynamic_type is 1
@@ -300,7 +315,7 @@ small_DashboardItem_Generater = (data,current_index) ->
       '</div>' +
     '</dd>')
 
-publishItem_Generater = (myid) ->
+publishItem_Generater = () ->
   dd = $(
     '<dd class="item publish_entrance">' +
       '<div>' +
