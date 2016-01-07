@@ -137,6 +137,8 @@ query_follow_Data = () ->
       action = 'get_follow_ajax'
 
     url = 'services/service.php'
+
+    btn_ShowMore.html('正在努力加载中...').addClass('loading')
     method = 'GET'
     $.ajax {
       url: SITE_URL + url
@@ -158,10 +160,10 @@ query_follow_Data = () ->
         _follow_is_loading = false
         if result.more is 1
           btn_ShowMore.html('我要看更多').removeClass('loading')
-          _follow_is_loading = true
+          _follow_has_more = true
         else
           btn_ShowMore.html('已经全部看完了').removeClass('loading')
-          _follow_is_loading = false
+          _follow_has_more = false
       error: (result)->
         alert('errr: ' + result)
         _follow_is_loading = false
