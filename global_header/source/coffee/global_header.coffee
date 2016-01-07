@@ -47,7 +47,7 @@ init_global_header = ->
                 "<a href='" + d['url'] + "'>" + "有" + 
                   "<span class='number'>" + d['ge_sum'] + "</span>" + 
                     "条系统消息" + "</a>")
-            $('.check-all ').find('a').html("知道了")
+            $('.check-all').find('a').html("知道了")
     })
 
   check_new_msg()
@@ -55,6 +55,24 @@ init_global_header = ->
   setInterval ->
     check_new_msg()
   , 300000
+
+  $('.check-all').on 'click', (e)->
+    alert($(this).find('a').html() == "知道了")
+    self = $(this)
+    if $(this).find('a').html() == "知道了"
+      $.ajax({
+        url: SITE_URL + '/services/service.php?m=index&a=del_unread_message&_=1452061658478',
+        type: 'get',
+        dataType: 'json',
+        success: (result)->
+          if result.status == 1
+            # self.parent().css({'left': '-999em'})
+          else
+            # alert('fuck')
+      })
+    else
+      # self.parent().css({'left': '-999em'})
+
 
   if /dashboard/i.test(window.location.pathname)
     $('.main-nav__me').find('a').addClass('current-page')

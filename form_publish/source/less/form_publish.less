@@ -1,6 +1,8 @@
 @import "../../../public_inc/source/less/imports";
 
 .form__container {
+  margin-top: 30px;
+  display: none;
   h3, h4 {
     &:before {
       content: "";
@@ -67,7 +69,7 @@
         .url-input {
           display: inline-block;
           background-color: white;
-          width: 75%;
+          width: 83.4%;
           margin-right: 23px;
           padding-left: 9px;
           border-bottom: 2px dotted @dark-grey;
@@ -85,7 +87,9 @@
       }
       .url-img-processor {
         margin-top: -20px;
-        overflow: hidden;
+        & > div {
+          overflow: hidden;
+        }
         .url-img, .img-adder {
           float: left;
         }
@@ -93,8 +97,13 @@
           border: 1px solid @dark-grey;
           width: 80px;
           height: 80px;
-          margin-right: 10px;
+          margin-right: 7.9px;
           position: relative;
+          &:hover {
+            .img-editor {
+              visibility: visible;
+            }
+          }
           img {
             max-width: 100%;
             position: absolute;
@@ -102,12 +111,37 @@
             bottom: 0;
             margin: auto;
           }
+          .img-editor {
+            visibility: hidden;
+            position: absolute;
+            z-index: 1626;
+            width: 100%;
+            height: 100%;
+            left: 0;
+            text-align: center;
+            line-height: 4.5;
+            background: rgba(0, 0, 0, .8);
+            span {
+              font-size: @font-size-xs;
+              color: white;
+              border-bottom: 1px solid white;
+              cursor: pointer;
+            }
+            .icon {
+              position: absolute;
+              top: 0;
+              right: 0;
+              font-size: 17px;
+              color: white;
+              cursor: pointer;
+            }
+          }
         }
         .img-adder {
           border: 1px dotted @dark-grey;
           width: 80px;
           height: 80px;
-          margin-right: 10px;
+          margin-right: 0;
           position: relative;
           background-color: white;
           div {
@@ -129,6 +163,7 @@
         p {
           clear: left;
           margin: 0;
+          margin-top: 7px;
           font-size: @font-size-xs;
           color: @grey;
         }
@@ -260,6 +295,123 @@
           margin-top: 15px;
           display: inline-block;
         }
+      }
+    }
+  }
+}
+
+.popup__blackbox {
+  background: rgba(255, 255, 255, .7);
+  position: fixed;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  z-index: 1626;
+  display: none;
+  .popup__wrap {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    margin: auto;
+    height: 376px;
+    .popup__loading {
+      margin: 0 auto;
+      width: 70px;
+      display: none;
+    }
+    .popup {
+      width: @big-goods__width * 2;
+      margin: auto;
+      background-color: @light-grey;
+      border: 2px solid @grey;
+      box-shadow: 0 0 5px rgba(0, 0, 0, .3);
+      padding: 36px 36px;
+      position: relative;
+      .emoji-hint {
+        width: 200px;
+        overflow: hidden;
+        margin: 0 auto;
+        display: none;
+        .icon {
+          float: left;
+          font-size: 62px;
+        }
+        .empty-message {
+          float: left;
+          margin: 3px 0 0 16px;
+          span {
+            font-weight: bold;
+          }
+          a {
+            border-bottom: 2px solid @grey;
+          }
+        }
+      }
+      .separator {
+        text-align: center;
+        border-bottom: 1px solid @grey;
+        line-height: 0.1em;
+        margin: 50px 0 30px;
+        display: none;
+        span {
+          background-color: @light-grey;
+          padding: 0 17px;
+        }
+      }
+      .goods-link {
+        label {
+          display: none;
+        }
+        .url-warning {
+          color: red;
+          font-size: @font-size-xs;
+        }
+        .input-row {
+          padding: 5px 0 5px 10px;
+          border-bottom: 2px dotted grey;
+          background-color: white;
+          margin-top: 10px;
+          display: inline-block;
+          width: 78%;
+          .icon {
+            font-size: 20px;
+          }
+          input {
+            border: none;
+            outline: none;
+            width: 90%;
+            font-size: 14px;
+          }
+        }
+        button {
+          margin-left: 13px;
+          padding: 9px 20px;
+          border: none;
+          outline: none;
+          color: white;
+          background-color: @blue;
+        }
+        p {
+          font-size: @font-size-s;
+          color: @grey;
+          a {
+            color: black;
+            border-bottom: 2px solid @grey;
+          }
+        }
+      }
+    }
+    .popup__close {
+      position: absolute;
+      top: -20px;
+      right: -20px;
+      background-color: @grey;
+      border-radius: 27px;
+      .icon {
+        font-size: 41px;
+        color: white;
       }
     }
   }
