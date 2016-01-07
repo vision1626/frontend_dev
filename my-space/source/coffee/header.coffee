@@ -62,7 +62,7 @@ init_u_header = ->
 
   slideToCurrent = (padding)->
     padding = padding or 60
-    tab_width = $(this).width() + padding
+    tab_width = Math.ceil($(this).width()) + padding
     cnt_wrap_w = $('.content .center-wrap').width()
     win_w = $(window).width()
     wrap_offset = (win_w - cnt_wrap_w) / 2
