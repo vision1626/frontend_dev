@@ -38,7 +38,7 @@ init_u_header = ->
     $cnt_tab = $cnt_tab_ul.find('li')
     $cnt_tab_ul_w = 0
     $cnt_tab.each ->
-      this_w = Math.ceil($(this).width()) + 60
+      this_w = Math.ceil($(this).width()) + 65
       $cnt_tab_ul_w += this_w
     $cnt_tab_ul.width $cnt_tab_ul_w
 

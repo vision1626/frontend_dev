@@ -5,6 +5,7 @@ _follow_end = 0
 _follow_step = _follow_limit
 _follow_has_more = true
 _follow_show_me = false
+_dashboard_doing_follow = false
 
 init_follow = ->
 #  followlist = $('#follow-list')
@@ -50,10 +51,14 @@ init_follow = ->
 #    pagiation.hide()
 
 $(document).on 'click','div.follow_ed', ->
-  do_follow(this,'ed')
+  if !_dashboard_doing_follow
+    _dashboard_doing_follow = true
+    do_follow(this,'ed')
 
 $(document).on 'click','div.follow_nt', ->
-  do_follow(this,'nt')
+  if !_dashboard_doing_follow
+    _dashboard_doing_follow = true
+    do_follow(this,'nt')
 
 $(document).on 'click','#folloe-show-more', ->
   query_follow_Data()
@@ -97,15 +102,16 @@ after_follow = (me,status)->
   if status is 1
     me.removeClass('follow_nt').addClass('follow_ed')
     me.find('.icon').removeClass('icon-follow').addClass('icon-unfollow')
-    me.find('label').html('已经关注')
+    me.find('label.sl1').html('已关注')
   else if status is 2
     me.removeClass('follow_nt').addClass('follow_ed')
     me.find('.icon').removeClass('icon-follow').addClass('icon-unfollow')
-    me.find('label').html('互相关注')
+    me.find('label.sl1').html('互相关注')
   else
     me.removeClass('follow_ed').addClass('follow_nt')
-    me.find('label').html('关注Ta')
+    me.find('label.sl1').html('关注Ta')
     me.find('.icon').removeClass('icon-unfollow').addClass('icon-follow')
+  _dashboard_doing_follow = false
 
 query_follow_Data = () ->
   btn_ShowMore = $(document).find('#folloe-show-more')
@@ -265,12 +271,20 @@ init_follow_empty_message = () ->
 
   if _follow_show_me
     who = '你'
+    if state is 'fans'
+      content_text = "发布潮品越多 粉丝越多哦！"
+    else
+      content_text = "关注潮人能看到他们的最新动态哦！"
   else
     who = 'Ta'
+    if state is 'fans'
+      content_text = "赶紧关注他，成为他的第一个粉丝吧！"
+    else
+      content_text = "你可以先去别的地方逛逛！"
 
   if window.location.pathname.indexOf('fans') > 0
     txtEmptytitle.html([who,'还没有粉丝'].join(''))
-    txtEmptycontent.html('您还没有粉丝，发布潮品越多 粉丝越多哦！')
+    txtEmptycontent.html(content_text)
     if _follow_show_me
       btnReturnhome.hide()
       btnPublish.show()
@@ -278,7 +292,7 @@ init_follow_empty_message = () ->
       btnReturnhome.show()
       btnPublish.hide()
   else
-    txtEmptytitle.html([who,'还没有关注'].join(''))
-    txtEmptycontent.html('你还没有关注任何人，关注潮人能看到他们的最新动态哦！')
+    txtEmptytitle.html([who,'还没有关注任何人'].join(''))
+    txtEmptycontent.html(content_text)
     btnReturnhome.show()
     btnPublish.hide()

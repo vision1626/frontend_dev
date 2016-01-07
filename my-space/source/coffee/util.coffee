@@ -12,7 +12,7 @@ followItem_Generater = (data,current_index) ->
             '<span>' + data.user_name + '</span>' +
           '</div>' +
           '<div class="fans-intro">' +
-            '<span>' + (if data.introduce isnt '' and data.introduce isnt null then data.introduce else '这个人太潮了，不屑于填写简介') + '</span>' +
+            '<span>' + (if data.introduce isnt '' and data.introduce isnt null then decodeURIComponent(data.introduce) else '这个人太潮了，不屑于填写简介') + '</span>' +
           '</div>' +
         '</div>' +
         '<div class="fans-action">' +
@@ -61,8 +61,7 @@ followItem_Generater = (data,current_index) ->
                 status_class = 'follow_ed'
                 status_icon = 'icon-unfollow'
                 if data.is_gz is 0
-#                  status_text = '取消关注'
-                  status_text = '已经关注'
+                  status_text = '已关注'
                 else
                   status_text = '互相关注'
               else
@@ -71,7 +70,7 @@ followItem_Generater = (data,current_index) ->
                 status_icon = 'icon-follow'
 
               '<div class="action ' + status_class + '" uid="' + data.uid + '">' +
-                '<span class="icon ' + status_icon + '"></span><label>' + status_text + '</label>' +
+                '<span class="icon ' + status_icon + '"></span><label class="sl1">' + status_text + '</label><label class="sl2">取消关注</label>' +
               '</div>'
             ) +
           '</div>' +
@@ -137,7 +136,12 @@ big_DashboardItem_Generater = (data,current_index) ->
                       '</span>')
                     likeusers.join(',')
                   )+
-                    '<span> 喜欢此搭配</span>'
+                  (
+                    if data.like_count > 2
+                      '<span> 等' + data.like_count + '人喜欢此搭配</span>'
+                    else
+                      '<span> 喜欢此搭配</span>'
+                  )
                 else
                   '<span class="item_tag">NEW</span>' +
                   '<span>新发布</span>'
@@ -169,7 +173,12 @@ big_DashboardItem_Generater = (data,current_index) ->
                         '</span>')
                     likeusers.join(',')
                   )+
-                    '<span> 喜欢此单品</span>'
+                    (
+                      if data.like_count > 2
+                        '<span> 等' + data.like_count + '人喜欢此单品</span>'
+                      else
+                        '<span> 喜欢此单品</span>'
+                    )
                 else
                   '<span class="item_tag">NEW</span>' +
                   '<span>新发布</span>'
@@ -180,7 +189,7 @@ big_DashboardItem_Generater = (data,current_index) ->
           ) +
           '<div class="item-b_title">' +
             '<a href="' + data.url + '">' +
-              '<span>' + data.title + '</span>' +
+              '<span>' + decodeURIComponent(data.title) + '</span>' +
             '</a>' +
           '</div>' +
           '<div class="item-b_price' + boxsize + '">' +
@@ -297,7 +306,7 @@ small_DashboardItem_Generater = (data,current_index) ->
               '</div>' +
               '<div class="item-s_title">' +
                 '<a href="' + data.url + '">' +
-                  '<span>' + data.title + '</span>' +
+                  '<span>' + decodeURIComponent(data.title) + '</span>' +
                 '</a>' +
               '</div>' +
               '<div class="item-s_price">' +

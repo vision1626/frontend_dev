@@ -333,20 +333,36 @@ init_dashboard_empty_message = () ->
   txtEmptycontent = $(document).find('label.empty-content')
   btnReturnhome = $(document).find('div.return_home')
   btnPublish = $(document).find('div#btnPublish')
+  totalFollow = parseInt(window.user_follow_count)
 
   if _dashboard_show_me
     who = '你'
+    if state is 'fav'
+      content_text = '先看看其他人喜欢了什么吧!'
+    else if state is 'talk'
+      content_text = '赶快发布一个,让别人膜拜你的品位吧!'
+    else
+      if parseInt(window.user_follow_count) > 0
+        content_text = '关注以下地球人，看看他们的动态吧！'
+      else
+        content_text = '不如从下面这堆潮流达人开始吧!'
   else
     who = 'Ta'
+#    if state is 'fav'
+#      content_text = ''
+#    else if state is 'talk'
+#      content_text = ''
+#    else
+    content_text = '你可以先去别的地方逛逛！'
 
   if state is 'fav'
     txtEmptytitle.html([who,'还没有喜欢任何单品'].join(''))
-    txtEmptycontent.html('先看看其他人喜欢了什么吧!')
+    txtEmptycontent.html(content_text)
     btnReturnhome.show()
     btnPublish.hide()
   else if state is 'talk'
     txtEmptytitle.html([who,'还没有发布任何单品'].join(''))
-    txtEmptycontent.html('赶快发布一个,让别人膜拜你的品位吧!')
+    txtEmptycontent.html(content_text)
     if _dashboard_show_me
       btnReturnhome.hide()
       btnPublish.show()
@@ -354,8 +370,12 @@ init_dashboard_empty_message = () ->
       btnReturnhome.show()
       btnPublish.hide()
   else
-    txtEmptytitle.html([who,'还没有关注任何人'].join(''))
-    txtEmptycontent.html('不如从下面这堆潮流达人开始吧!')
+    if parseInt(window.user_follow_count) > 0
+      txtEmptytitle.html([who,'关注的人去外太空了'].join(''))
+      txtEmptycontent.html(content_text)
+    else
+      txtEmptytitle.html([who,'还没有关注任何人'].join(''))
+      txtEmptycontent.html(content_text)
     btnReturnhome.show()
     btnPublish.hide()
 
@@ -413,7 +433,7 @@ after_like = (me,dtype,result,job,liststyle) ->
     refresh_like_small(me,ed,result.count)
 
 refresh_like_big = (me,ed,count) ->
-  smalllist = $('#big_img')
+  smalllist = $('#small_img')
   my_icon = me.find('.icon')
   my_count = me.find('.like_count')
   harting = me.find('.harting')
@@ -433,6 +453,7 @@ refresh_like_big = (me,ed,count) ->
   _dashboard_doing_like = false
 
 refresh_like_small = (me,ed,count) ->
+  biglist = $('#big_img')
   my_icon = me.find('.icon')
   my_count = me.parent().parent().find('.like_count')
   harting = me.find('.harting')

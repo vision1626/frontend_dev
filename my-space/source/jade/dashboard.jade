@@ -73,6 +73,7 @@ if !production
       window.user_photos_count = "{$_FANWE['user']['photos']}";
       window.user_mail_status = "{$_FANWE['user']['email_status']}";
       window.user_mobile = "{$_FANWE['user']['mobile']}";
+      window.user_follow_count = "$home_user['follows']";
       window.dashboard_count = "{$count}";
       window.dashboard_list_data = $.parseJSON(MOCK_DATA);
       init_dashboard();
@@ -83,11 +84,11 @@ else
       window.user_photos_count = "{$_FANWE['user']['photos']}";
       window.user_mail_status = "{$_FANWE['user']['email_status']}";
       window.user_mobile = "{$_FANWE['user']['mobile']}";
+      window.user_follow_count = "$home_user['follows']";
       window.dashboard_count = "{$count}";
       window.dashboard_list_string = '{$list_json}'
       window.dashboard_list_data = {};
       window.image_path = '#{image_path}'
-
       init_dashboard();
     });
 
