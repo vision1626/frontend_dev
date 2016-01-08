@@ -85,23 +85,27 @@ do_follow = (obj,status) ->
   me = $(obj)
   uid = me.attr('uid')
 
-  if uid is myid
-    alert(_follow_nofllowme_text)
-    _dashboard_doing_follow = false
+  if parseInt(myid) > 0
+    if uid is myid
+      alert(_follow_nofllowme_text)
+      _dashboard_doing_follow = false
+    else
+      url = 'services/service.php?m=user&a=follow'
+      method = 'POST'
+      $.ajax {
+        url: SITE_URL + url
+        type: method
+        data: {'uid': uid}
+        cache: false
+        dataType: "json"
+        success: (result)->
+          after_follow(me,result.status)
+        error: (result)->
+          alert('errr: ' + result)
+      }
   else
-    url = 'services/service.php?m=user&a=follow'
-    method = 'POST'
-    $.ajax {
-      url: SITE_URL + url
-      type: method
-      data: {'uid': uid}
-      cache: false
-      dataType: "json"
-      success: (result)->
-        after_follow(me,result.status)
-      error: (result)->
-        alert('errr: ' + result)
-    }
+    _dashboard_doing_follow = false
+    location.href = SITE_URL + 'user/login.html'
 
 after_follow = (me,status)->
   if status is 1
