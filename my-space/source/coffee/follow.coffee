@@ -6,6 +6,7 @@ _follow_step = _follow_limit
 _follow_has_more = true
 _follow_show_me = false
 _dashboard_doing_follow = false
+_follow_nofllowme_text = '你不能关注自己哦！'
 
 init_follow = ->
 #  followlist = $('#follow-list')
@@ -73,30 +74,34 @@ $(window).bind 'scroll', (e)->
 $(document).on 'click','.fans-concemed_fans', ->
   uid = $(this).attr('uid')
   url = ['u/fans-',uid,'.html'].join('')
-  location.href = SITE_URL + url
+  window.open(SITE_URL + url)
 
 $(document).on 'click','.fans-concemed_follow', ->
   uid = $(this).attr('uid')
   url = ['u/follow-',uid,'.html'].join('')
-  location.href = SITE_URL + url
+  window.open(SITE_URL + url)
 
 do_follow = (obj,status) ->
   me = $(obj)
   uid = me.attr('uid')
 
-  url = 'services/service.php?m=user&a=follow'
-  method = 'POST'
-  $.ajax {
-    url: SITE_URL + url
-    type: method
-    data: {'uid': uid}
-    cache: false
-    dataType: "json"
-    success: (result)->
-      after_follow(me,result.status)
-    error: (result)->
-      alert('errr: ' + result)
-  }
+  if uid is myid
+    alert(_follow_nofllowme_text)
+    _dashboard_doing_follow = false
+  else
+    url = 'services/service.php?m=user&a=follow'
+    method = 'POST'
+    $.ajax {
+      url: SITE_URL + url
+      type: method
+      data: {'uid': uid}
+      cache: false
+      dataType: "json"
+      success: (result)->
+        after_follow(me,result.status)
+      error: (result)->
+        alert('errr: ' + result)
+    }
 
 after_follow = (me,status)->
   if status is 1

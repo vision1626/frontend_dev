@@ -2,7 +2,7 @@ followItem_Generater = (data,current_index) ->
   dd = $('<dd class="follow-list_item" i="' + current_index + '">'+
     '<div class="fans-container">' +
       '<div class="fans-face">' +
-        '<a href="' + data.user_href + '">' +
+        '<a href="' + data.user_href + '" target="_blank">' +
           '<img src="' + data.img_thumb + '" alt="' + data.user_name + '"/>' +
         '</a>' +
       '</div>' +
@@ -23,7 +23,7 @@ followItem_Generater = (data,current_index) ->
               for g,j in data.newest_publish
                 goods.push(
                   '<dd i="' + j + '">' +
-                    '<a href="' + g.url + '">' +
+                    '<a href="' + g.url + '" target="_blank">' +
                       '<img src="' + g.img_56 + '" alt=""/>' +
                     '</a>' +
                   '</dd>')
@@ -102,7 +102,7 @@ big_DashboardItem_Generater = (data,current_index) ->
       '<div>' +
       (if data.dynamic_type is 1
         '<div class="item-l_image">' +
-          '<a href="' + data.url + '">' +
+          '<a href="' + data.url + '" target="_blank">' +
             '<img src="' + data.img + '" alt="' + data.title + '"/>' +
           '</a>' +
           '<dl class="collocation">' +
@@ -111,7 +111,7 @@ big_DashboardItem_Generater = (data,current_index) ->
             for g in data.goods
               goods.push ('<dd class="collocation_item">' +
                   '<div class="goods_item">' +
-                    '<a href="' + g.url + '">' +
+                    '<a href="' + g.url + '" target="_blank">' +
                       '<img src="' + g.img + '" alt=""/>' +
                     '</a>' +
                   '</div>' +
@@ -130,7 +130,7 @@ big_DashboardItem_Generater = (data,current_index) ->
                     likeusers = []
                     for lu in data.like_user_list
                       likeusers.push('<span>'+
-                        '<a href="' + lu.user_href + '">' +
+                        '<a href="' + lu.user_href + '" target="_blank">' +
                           lu.user_name +
                         '</a>' +
                       '</span>')
@@ -153,7 +153,7 @@ big_DashboardItem_Generater = (data,current_index) ->
         '</div>'
       else
         '<div class="item-b_image">' +
-          '<a href="' + data.url + '">' +
+          '<a href="' + data.url + '" target="_blank">' +
             '<img src="' + data.img + '" alt="' + data.title + '"/>' +
           '</a>' +
         '</div>' +
@@ -167,7 +167,7 @@ big_DashboardItem_Generater = (data,current_index) ->
                     likeusers = []
                     for lu in data.like_user_list
                       likeusers.push('<span>'+
-                          '<a href="' + lu.user_href + '">' +
+                          '<a href="' + lu.user_href + '" target="_blank">' +
                             lu.user_name +
                           '</a>' +
                         '</span>')
@@ -188,7 +188,7 @@ big_DashboardItem_Generater = (data,current_index) ->
               ''
           ) +
           '<div class="item-b_title">' +
-            '<a href="' + data.url + '">' +
+            '<a href="' + data.url + '" target="_blank">' +
               '<span>' + decodeURIComponent(data.title) + '</span>' +
             '</a>' +
           '</div>' +
@@ -238,7 +238,7 @@ small_DashboardItem_Generater = (data,current_index) ->
       '</div>' +
       '<div class="item-s_description">' +
         '<div class="item-s_owner">' +
-          '<a href="' + data.user_href + '">' +
+          '<a href="' + data.user_href + '" target="_blank">' +
             '<img src="' + data.img_thumb + '"/>' +
           '</a>' +
         '</div>' +
@@ -260,7 +260,7 @@ small_DashboardItem_Generater = (data,current_index) ->
                     likeusers = []
                     for lu in data.like_user_list
                       likeusers.push('<span>'+
-                          '<a href="' + lu.user_href + '">' +
+                          '<a href="' + lu.user_href + '" target="_blank">' +
                             lu.user_name +
                           '</a>' +
                         '</span>')
@@ -277,7 +277,7 @@ small_DashboardItem_Generater = (data,current_index) ->
                 for g in data.goods
                   goods.push('<dd class="collocation_item">' +
                       '<div class="goods_item">' +
-                        '<a href="' + g.url + '">' +
+                        '<a href="' + g.url + '" target="_blank">' +
                           '<img src="' + g.img + '" alt=""/>' +
                         '</a>' +
                       '</div>' +
@@ -293,7 +293,7 @@ small_DashboardItem_Generater = (data,current_index) ->
                     likeusers = []
                     for lu in data.like_user_list
                       likeusers.push('<span>'+
-                          '<a href="' + lu.user_href + '">' +
+                          '<a href="' + lu.user_href + '" target="_blank">' +
                             lu.user_name +
                           '</a>' +
                         '</span>')
@@ -305,7 +305,7 @@ small_DashboardItem_Generater = (data,current_index) ->
               ) +
               '</div>' +
               '<div class="item-s_title">' +
-                '<a href="' + data.url + '">' +
+                '<a href="' + data.url + '" target="_blank">' +
                   '<span>' + decodeURIComponent(data.title) + '</span>' +
                 '</a>' +
               '</div>' +
