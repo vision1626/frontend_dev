@@ -21,9 +21,9 @@ else
             span 新发布
           a
             .item-b_title 
-              span 轰龙逆鳞，龙属性MAX，2016新货，现买赠送桃毛兽的毛
+              span N/A
             .item-b_price
-              span ¥4000 
+              span N/A
         .item-b_additional
           a
             img(src= image_path + "/test_bg.jpg")
@@ -51,7 +51,10 @@ else
           //-   img(src= image_path + "/pikachu.jpeg")
           .img-adder
             div
-              i.icon.icon-publish 
+              i.icon.icon-publish
+          input(type="file" id="file1" name="file1")
+         img(id="test")
+
         p 支持JPG、GIF、PNG、JPEG格式图片，每张大小5M内
           br
           | 请保证图片清晰无水印，否则无法通过审核！
@@ -60,23 +63,26 @@ else
         input.item-details__title(type="text" placeholder="标题" name="title")
         input.item-details__price(type="text" placeholder="价格" name="price")
         input.item-details__brand(type="text" placeholder="品牌（选填）" name="brand")
-        input.item-details__category(type="text" placeholder="品类" name="category")
-        input.item-details__color(type="text" placeholder="颜色（选填）" name="color")
-        input.item-details__style(type="text" placeholder="风格（选填）" name="style")
+        select.item-details__category(type="text" placeholder="品类" name="category")
+          | 类别
+        select.item-details__category2(type="text" placeholder="颜色（选填）" name="category2") 
+          | 颜色
+        select.item-details__style(type="text" placeholder="风格（选填）" name="style") 
+          | 风格
       .item-tags
         h3 标签
         .tag-input
           i.icon.icon-label
-          input(type="input")
+          input(type="input" name="tag" placeholder="请以逗号分隔各个标签")
         ul.mytags
           li.tag-title 我的标签：
           li.unselected 复古
-          li 秋冬
-          li 军事
-        ul.hit-tags
-          li.tag-title 常用标签：
-          li.selected ′★.．/丄偙 请 吥 喓 夺赱___莪恴 緈鍢 恏吗?_▂_▂_▂。 °
-          li 卟许dong涐旳感情 .？
+          li.unselected 秋冬
+          li.unselected 军事
+        //- ul.hit-tags
+        //-   li.tag-title 常用标签：
+        //-   li.selected ′★.．/丄偙 请 吥 喓 夺赱___莪恴 緈鍢 恏吗?_▂_▂_▂。 °
+        //-   li 卟许dong涐旳感情 .？
       .item-recommendation
         h3 推荐理由
         .item-recommendation-container
@@ -85,7 +91,7 @@ else
       .buttons
         button.publish(type="submit") 发布
         button.cancel(type="reset") 取消
-      .tips
+      .warning
     .form__share
       div
         img(src= image_path + "/pikachu.jpeg")
