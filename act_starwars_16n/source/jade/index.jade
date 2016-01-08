@@ -1,3 +1,31 @@
-//
-   Created by Kenny on 16/1/8.
+<!DOCTYPE html>
+html
+  head(lang="en")
+    meta(charset="UTF-8")
+    meta(name='viewport', content='width=device-width user-scalable=no maximum-scale=1')
+    meta(name="keywords" content="{$seo_keyword}")
+    meta(name="description" content="{$seo_description")
+    meta(name='apple-mobile-web-app-status-bar-style', content='black')
+    meta(name='apple-mobile-web-app-capable', content='yes')
+    -title = "{$seo_title}"
+    title= title
+    :php
+      $current_css[] = './tpl/hi1626/css/login/vendor/normalize.css';
+      $current_css[] = './tpl/hi1626/css/starwars/starwars.min.css';
+      $current_js[] = './public/js/jquery-1.11.3.min.js';
+      $current_js[] = './public/js/jquery.touchSwipe.min.js';
+      $current_js[] = './tpl/hi1626/js/starwars/starwars.js'
 
+    link(rel="stylesheet", href="{css $current_css}" media="all")
+  body
+    h1 hello starwars
+
+    //<!--{if $is_wx}-->
+    //<!--{template inc/weixin_share}-->
+    //<!--{/if}-->
+    //<!--{template inc/count}-->
+    script(src="{script $current_js}")
+    script.
+      $(document).ready(function () {
+        init();
+      });
