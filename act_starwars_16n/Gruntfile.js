@@ -38,7 +38,7 @@ module.exports = function (grunt) {
             target: {
                 files: {
                     '<%= globalConfig.cssDistPath %>/<%= globalConfig.cssName %>.min.css': [
-                        '<%= globalConfig.cssDistPath %>/<%= globalConfig.cssName %>.min.css'
+                        '<%= globalConfig.cssDistPath %>/<%= globalConfig.cssName %>.css'
                     ]
                 }
             }
@@ -47,8 +47,8 @@ module.exports = function (grunt) {
         less: {
             dist: {
                 files: {
-                    '<%= globalConfig.cssDistPath %>/<%= globalConfig.cssName %>.min.css': [
-                        '<%= globalConfig.cssSrcPath %>/app.less'
+                    '<%= globalConfig.cssDistPath %>/<%= globalConfig.cssName %>.css': [
+                        '<%= globalConfig.cssSrcPath %>/starwars.less'
                     ]
                 },
                 options: {
@@ -79,7 +79,7 @@ module.exports = function (grunt) {
                 files: {
                     '<%= globalConfig.jsDebugPath %>/<%= globalConfig.jsName %>.js':[
                         '<%= globalConfig.jsSrcPath %>/util.coffee',
-                        '<%= globalConfig.jsSrcPath %>/arttitude.coffee'
+                        '<%= globalConfig.jsSrcPath %>/starwars.coffee'
                     ]
                 }
             }
