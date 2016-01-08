@@ -101,35 +101,38 @@ init_u_header = ->
   parallax($profile)
 
   $follow_btn.on 'click', ->
-    $.ajax({
-      url: '/services/service.php?m=user&a=follow',
-      type: 'post',
-      dataType: 'json',
-      data: { uid: window.uid },
-      success: (result)->
-        if result.status == 1 or result.status == 2
-          $slider.removeClass('slideleft').addClass('slideright')
-          $i_follow.removeClass('slideleft').addClass('slideright')
-          setTimeout ->
-            $i_follow.addClass('icon-unfollow').removeClass('icon-follow')
-          ,500
-          $status_text.html("已关注").css({'left': '21px'})
-          $status_text.on 'mouseover', ->
-            $(this).css('left': '7px').text("取消关注")
-          $status_text.on 'mouseout', ->
-            $(this).css('left': '21px').text("已关注")
-        else
-          $slider.removeClass('slideright').addClass('slideleft')
-          $i_follow.removeClass('slideright').addClass('slideleft')
-          setTimeout ->
-            $i_follow.removeClass('icon-unfollow').addClass('icon-follow')
-          ,500
-          $status_text.on 'mouseover', ->
-            $(this).css('left': '34px').text("关注Ta")
-          $status_text.on 'mouseout', ->
-            $(this).css('left': '34px').text("关注Ta")
-          $status_text.html("关注Ta").css({'left': '34px'})
-    })
+    if parseInt(myid) > 0
+      $.ajax({
+        url: '/services/service.php?m=user&a=follow',
+        type: 'post',
+        dataType: 'json',
+        data: { uid: window.uid },
+        success: (result)->
+          if result.status == 1 or result.status == 2
+            $slider.removeClass('slideleft').addClass('slideright')
+            $i_follow.removeClass('slideleft').addClass('slideright')
+            setTimeout ->
+              $i_follow.addClass('icon-unfollow').removeClass('icon-follow')
+            ,500
+            $status_text.html("已关注").css({'left': '21px'})
+            $status_text.on 'mouseover', ->
+              $(this).css('left': '7px').text("取消关注")
+            $status_text.on 'mouseout', ->
+              $(this).css('left': '21px').text("已关注")
+          else
+            $slider.removeClass('slideright').addClass('slideleft')
+            $i_follow.removeClass('slideright').addClass('slideleft')
+            setTimeout ->
+              $i_follow.removeClass('icon-unfollow').addClass('icon-follow')
+            ,500
+            $status_text.on 'mouseover', ->
+              $(this).css('left': '34px').text("关注Ta")
+            $status_text.on 'mouseout', ->
+              $(this).css('left': '34px').text("关注Ta")
+            $status_text.html("关注Ta").css({'left': '34px'})
+      })
+    else
+      location.href = SITE_URL + 'user/login.html'
   
   $fav.on 'click', ->
     slideToCurrent.apply(this)
