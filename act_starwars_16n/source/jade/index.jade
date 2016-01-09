@@ -1,3 +1,11 @@
+-var production = false
+if production
+  - var image_path  = './tpl/hi1626/images/starwars/'
+else
+  - var local_file_path = '../..'
+  - var image_path  = local_file_path +'/images/starwars/'
+- var top_link = 'http://www.1626.com'
+
 <!DOCTYPE html>
 html
   head(lang="en")
@@ -9,23 +17,79 @@ html
     meta(name='apple-mobile-web-app-capable', content='yes')
     -title = "{$seo_title}"
     title= title
-    :php
-      $current_css[] = './tpl/hi1626/css/login/vendor/normalize.css';
-      $current_css[] = './tpl/hi1626/css/starwars/starwars.min.css';
-      $current_js[] = './public/js/jquery-1.11.3.min.js';
-      $current_js[] = './public/js/jquery.touchSwipe.min.js';
-      $current_js[] = './tpl/hi1626/js/starwars/starwars.js'
 
-    link(rel="stylesheet", href="{css $current_css}" media="all")
+    if production
+      :php
+        $current_css[]  = './tpl/hi1626/v2/css/vendor/normalize.css';
+        $current_css[]  = './tpl/hi1626/v2/css/global.css';
+        $current_css[]  = './tpl/hi1626/v2/css/form_publish.css';
+        $current_css[] = './tpl/hi1626/css/starwars/starwars.css';
+        $current_js[] = './public/js/jquery-1.11.3.min.js';
+        $current_js[] = './public/js/jquery.touchSwipe.min.js';
+        $current_js[] = './tpl/hi1626/js/starwars/starwars.js'
+
+      link(rel="stylesheet", href="{css $current_css}" media="all")
+    else
+      //本地调试用
+      link(rel="stylesheet", href="../../v2/css/vendor/normalize.css" media="all")
+      link(rel="stylesheet", href="../../v2/css/global.css" media="all")
+      link(rel="stylesheet", href="../../v2/css/form_publish.css" media="all")
+      link(rel="stylesheet", href="../../css/starwars/starwars.min.css" media="all")
+      script(src="../../js/jquery-1.11.3.min.js")
+      script(src="../../js/jquery.touchSwipe.min.js")
+      script(src="../../js/starwars/starwars.js")
+
   body
-    h1 hello starwars
+    .wapper
+      .outside.view#outside
+        .store
+          img.nlogo(src=image_path + 'logo-16N.png',alt='')
+        .enter
+          h3#present PRESENT
+      .entrance.view#entrance
+        include ./source/jade/top_logo.jade
+        .enter#start
+          img(src=image_path + 'entrance.gif',alt='')
+      .start.question.view#startquestion
+        include ./source/jade/top_logo.jade
+        .info_text
+          div
+            |终于等到你了
+            br
+            |绝地
+            br
+            |这里,7个问题
+            br
+            |要尽可能回答正确
+            br
+            |才能觉醒原力
+            br
+            |当然
+            br
+            |最后你会获得奖励的
+            br
+            |马上开始吧
+        .go_question#gogogo
+          .go_buttons
+            .go_left
+              img(src=image_path + 'go_left.png',alt='')
+            .go_button
+              img(src=image_path + 'go_button.png',alt='')
+            .go_right
+              img(src=image_path + 'go_right.png',alt='')
+        include ./source/jade/16eme.jade
 
     //<!--{if $is_wx}-->
     //<!--{template inc/weixin_share}-->
     //<!--{/if}-->
     //<!--{template inc/count}-->
-    script(src="{script $current_js}")
+    if production
+      script(src="{script $current_js}")
     script.
+      _outside = $('#outside')
+      _entrance = $('#entrance')
+      _start = $('#startquestion')
+
       $(document).ready(function () {
         init();
       });

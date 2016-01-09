@@ -1,3 +1,221 @@
-body{
+@import "../../../public_inc/source/less/imports";
+//@img-location:'/tpl/hi1626/images/starwars';
+@img-location:'../../images/starwars';
+@desert: #ffd0b5;
+@red: #da0012;
+@page-maxwidth :515px;
+img{
+  border: 0;
+}
+
+a{
+  color:@white;
+  &:hover{
+    color:@white;
+  }
+}
+
+body,html{
   background-color: black;
+  height:100%;
+  margin: 0;
+
+  .wapper{
+    //display: table;
+    width: 100%;
+    height: 100%;
+    display:table;
+
+    .view{
+      width: 100%;
+      height:100%;
+      max-width: @page-maxwidth;
+      //position: fixed;
+      display: none;
+      margin: auto;
+      position: absolute;
+      top:0;
+      bottom:0;
+      left: 0;
+      right:0;
+      background-repeat: no-repeat;
+      background-position: center center;
+      background-size: auto 100%;
+      overflow: hidden;
+
+      .toplogo{
+        position: absolute;
+        top:20px;
+        left:20px;
+        img{
+          width: 140px;
+        }
+      }
+
+      .bottomlogo{
+        position: absolute;
+        bottom:10px;
+        left:0;
+        right:0;
+        color:@white;
+        span{
+          font-size: 16px;
+          margin-right: -5px;
+        }
+        label{
+          font-size: 14px;
+        }
+      }
+    }
+
+    .outside{
+      .store{
+        background-image: url('@{img-location}/entranceBG.png');
+        background-repeat: no-repeat;
+        background-position: center center;
+        background-size: 100% auto;
+        margin: auto;
+        display: table;
+        position: absolute;
+        width:100%;
+        height: 50%;
+        max-height: 380px;
+
+        top:0;
+        bottom:0;
+        left: 0;
+        right:0;
+
+        img.nlogo{
+          position: absolute;
+          top:0;
+          bottom:0;
+          left: 0;
+          right:0;
+          margin: auto;
+          width: 30%;
+          max-width: 200px;
+        }
+
+      }
+      .enter{
+        margin: auto;
+        position: absolute;
+        text-align: center;
+        top: auto;
+        bottom: 28%;
+        left: 0;
+        right: 0;
+
+        h3{
+          color: @white;
+          font-size: 1.2em;
+          display:table;
+          margin: auto;
+          cursor: pointer;
+        }
+      }
+    }
+
+    .entrance{
+      background-image: url('@{img-location}/BG-17.jpg');
+      .enter{
+        padding: 0;
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: auto;
+        bottom: 5px;
+        background-color: rgba(0,0,0,0.6);
+        cursor: pointer;
+        img{
+          width: 100%;
+        }
+      }
+    }
+
+    .question{
+      background-image: url('@{img-location}/questionBG.jpg');
+    }
+
+    .start{
+      text-align: center;
+      -webkit-perspective: 200;
+      .info_text{
+        color:@desert;
+        font-size: 2.2em;
+        position: absolute;
+        top: -80px;
+        bottom:0;
+        left: 0;
+        right: 0;
+        transform: rotateX(30deg);
+        text-shadow: 0 0 2.2em @red;
+        div{
+          transform: scale(0.7,1);
+        }
+      }
+      .go_question{
+        position: absolute;
+        left:0;
+        right:0;
+        bottom:45px;
+        cursor: pointer;
+
+        .go_buttons{
+          display: table;
+          margin: auto;
+          .go_button{
+            background-color: rgba(0,0,0,0.1);
+            box-shadow: 0 0 10px @red, inset 0 0 10px @red;
+            width:auto;
+            border: solid 1px @desert;
+            border-radius: 5px;
+            position: relative;
+            top:-1px;
+            padding: 5px 10px;
+            margin-left: 5px;
+            margin-right: 5px;
+            transition: all 0.2s;
+            img{
+              height:70px;
+            }
+
+
+          }
+          .go_left {
+            position: absolute;
+            left:-55px;
+            top:0;
+            bottom:0;
+            text-align: right;
+            width:50%;
+            padding-right: 50px;
+            img {
+              height: 85px;
+            }
+          }
+          .go_right {
+            position: absolute;
+            right:-55px;
+            top:0;
+            bottom:0;
+            text-align: left;
+            width:50%;
+            padding-left: 50px;
+            img {
+              height: 85px;
+            }
+          }
+
+          &:hover{
+            .go_button {
+              background-color: rgba(255, 208, 181, 0.2);
+            }
+          }
+        }
+      }
+    }
+
+  }
 }
