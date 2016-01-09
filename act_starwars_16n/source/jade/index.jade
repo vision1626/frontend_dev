@@ -1,4 +1,4 @@
--var production = true
+-var production = false
 if production
   - var image_path  = './tpl/hi1626/images/starwars/'
 else
@@ -45,40 +45,58 @@ html
         .store
           img.nlogo(src=image_path + 'logo-16N.png',alt='')
         .enter
-          h3#present PRESENT
+          h3.nexstep(s='-1') PRESENT
       .entrance.view#entrance
         include ./source/jade/top_logo.jade
-        .enter#start
+        .enter.nexstep(s='0')
           img(src=image_path + 'entrance.gif',alt='')
-      .start.question.view#startquestion
+      .start.view#startquestion
         include ./source/jade/top_logo.jade
         .info_text
-          div
-            |终于等到你了
-            br
-            |绝地
-            br
-            |这里,7个问题
-            br
-            |要尽可能回答正确
-            br
-            |才能觉醒原力
-            br
-            |当然
-            br
-            |最后你会获得奖励的
-            br
-            |马上开始吧
-        .go_question#gogogo
+          div.out
+            div.in
+              |终于等到你了
+              br
+              |绝地
+              br
+              |这里,7个问题
+              br
+              |要尽可能回答正确
+              br
+              |才能觉醒原力
+              br
+              |当然
+              br
+              |最后你会获得奖励的
+              br
+              |马上开始吧
+        .go_question.nexstep(s='1')
           .go_buttons
             .go_left
-              img(src=image_path + 'go_left.png',alt='')
+              img(src=image_path + 'go_arrow.png',alt='')
             .go_button
               img(src=image_path + 'go_button.png',alt='')
             .go_right
-              img(src=image_path + 'go_right.png',alt='')
+              img(src=image_path + 'go_arrow.png',alt='')
         include ./source/jade/16eme.jade
-
+      .questions.view#questions
+        include ./source/jade/top_logo.jade
+        .question_index
+          .index_buttons
+            .index_left.change(c='p')
+              img(src=image_path + 'question_arrow.png',alt='')
+            .question_no
+              span
+            .index_right.change(c='n')
+              img(src=image_path + 'question_arrow.png',alt='')
+        .question_content
+          span
+        .question_answer
+          .answer1
+            span
+          .answer2
+            span
+        include ./source/jade/16eme.jade
     //<!--{if $is_wx}-->
     //<!--{template inc/weixin_share}-->
     //<!--{/if}-->
@@ -86,9 +104,6 @@ html
     if production
       script(src="{script $current_js}")
     script.
-      _outside = $('#outside')
-      _entrance = $('#entrance')
-      _start = $('#startquestion')
 
       $(document).ready(function () {
         init();
