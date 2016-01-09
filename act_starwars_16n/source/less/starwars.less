@@ -1,6 +1,6 @@
 @import "../../../public_inc/source/less/imports";
-//@img-location:'/tpl/hi1626/images/starwars';
-@img-location:'../../images/starwars';
+@img-location:'/tpl/hi1626/images/starwars';
+//@img-location:'../../images/starwars';
 @desert: #ffd0b5;
 @red: #da0012;
 @page-maxwidth :515px;
@@ -150,9 +150,18 @@ body,html{
         left: 0;
         right: 0;
         transform: rotateX(30deg);
-        text-shadow: 0 0 2.2em @red;
+
         div{
           transform: scale(0.7,1);
+          font-weight: bold;
+          //text-shadow: 0 0 5px @red,
+          //0 0 10px @red,
+          //0 0 15px @red,
+          //0 0 20px @red,
+          //0 0 35px @red,
+          //0 0 40px @red,
+          //0 0 50px @red;
+          animation: redlight 1.5s ease-in-out infinite alternate;
         }
       }
       .go_question{
@@ -168,6 +177,7 @@ body,html{
           .go_button{
             background-color: rgba(0,0,0,0.1);
             box-shadow: 0 0 10px @red, inset 0 0 10px @red;
+            animation: redlight 1.5s ease-in-out infinite alternate;
             width:auto;
             border: solid 1px @desert;
             border-radius: 5px;
@@ -217,5 +227,24 @@ body,html{
       }
     }
 
+  }
+}
+
+@-webkit-keyframes redlight {
+  from {
+    text-shadow: 0 0 10px @red,
+    0 0 20px  @red,
+    0 0 30px  @red,
+    0 0 40px  @red,
+    0 0 70px  @red,
+    0 0 80px  @red;
+  }
+  to {
+    text-shadow: 0 0 5px @red,
+    0 0 10px @red,
+    0 0 15px @red,
+    0 0 20px @red,
+    0 0 35px @red,
+    0 0 40px @red;
   }
 }
