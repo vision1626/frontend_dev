@@ -11,7 +11,7 @@ else
   form.form__body
     dl.big_img.static
       dd.item.longer
-        .item-b_image
+        .item-b_image.preview
           .dragger
             i.icon.icon-drag
           //- img(src= image_path + "/pikachu.jpeg")
@@ -52,9 +52,7 @@ else
           .img-adder
             div
               i.icon.icon-publish
-          input(type="file" id="file1" name="file1")
-         img(id="test")
-
+            input(type="file" id="file1" name="image[]" multiple="multiple")
         p 支持JPG、GIF、PNG、JPEG格式图片，每张大小5M内
           br
           | 请保证图片清晰无水印，否则无法通过审核！
@@ -94,14 +92,14 @@ else
       .warning
     .form__share
       div
-        img(src= image_path + "/pikachu.jpeg")
+        img(src= image_path + "/publish-tool.png")
         .inline-block
           h4 采集工具
           p 拖拽左侧“手掌”图标至浏览器书签栏
             br
             | 逛到潮品，一键分享到1626
       div
-        i.icon.icon-heart
+        i.icon.icon-question
         a 发布教程
 
 if !production
