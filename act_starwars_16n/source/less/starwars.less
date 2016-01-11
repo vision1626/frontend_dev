@@ -1,9 +1,13 @@
 @import "../../../public_inc/source/less/imports";
 @img-location:'/tpl/hi1626/images/starwars';
 //@img-location:'../../images/starwars';
-@desert: #ffd0b5;
-@red: #da0012;
+@starwars_desert: #ffd0b5;
+@starwars_red: #da0012;
+@starwars_blue: #3333ff;
+@starwars_light_blue: #b8c2ff;
+@starwars_transparent : rgba(0,0,0,0);
 @page-maxwidth :515px;
+
 img{
   border: 0;
 }
@@ -25,6 +29,43 @@ body,html{
     width: 100%;
     height: 100%;
     display:table;
+
+    .eye{
+      position: absolute;
+      left:0;
+      right:0;
+      height: 50%;
+      //background-color: rgba(255,0,0,0.5);
+      background-color: @black;
+      width: 100%;
+      z-index: 9999;
+      box-shadow: 0 0 10px @black,
+      0 0 20px @black,
+      0 0 30px @black,
+      0 0 40px @black;
+      transition: all 1s;
+
+      &.eye_top{
+        top:0;
+        bottom:auto
+      }
+      &.eye_bottom{
+        top:auto;
+        bottom:0;
+      }
+      &.open_top1{
+        top: -17%;
+      }
+      &.open_top2{
+        top: -50%
+      }
+      &.open_bottom1{
+        bottom:-17%;
+      }
+      &.open_bottom2{
+        bottom:-50%;
+      }
+    }
 
     .view{
       width: 100%;
@@ -95,6 +136,11 @@ body,html{
           margin: auto;
           width: 30%;
           max-width: 200px;
+          opacity:0;
+          transition: all 1s;
+          &.show{
+            opacity:1;
+          }
         }
 
       }
@@ -103,21 +149,28 @@ body,html{
         position: absolute;
         text-align: center;
         top: auto;
-        bottom: 28%;
+        bottom: 26%;
         left: 0;
         right: 0;
+        z-index: 10000;
 
         h3{
           color: @white;
           font-size: 1.2em;
           display:table;
           margin: auto;
-          cursor: pointer;
+          //cursor: pointer;
+          opacity: 0;
+          transition: all 1s;
+          &.show{
+            opacity:1;
+          }
         }
       }
     }
 
     .entrance{
+      text-align: center;
       background-image: url('@{img-location}/BG-17.jpg');
       .enter{
         padding: 0;
@@ -125,50 +178,91 @@ body,html{
         left: 0;
         right: 0;
         top: auto;
-        bottom: 5px;
-        background-color: rgba(0,0,0,0.6);
+        bottom: 15px;
+        //background-color: rgba(0,0,0,0.5);
         cursor: pointer;
         img{
           width: 100%;
         }
       }
-    }
-
-    .question{
-      background-image: url('@{img-location}/questionBG.jpg');
+      span.copyright{
+        color: #fff;
+        position: absolute;
+        bottom: 210px;
+        right: 8px;
+        font-size: 12px;
+      }
     }
 
     .start{
+      background-image: url('@{img-location}/questionBG.jpg');
       text-align: center;
-      -webkit-perspective: 200;
       .info_text{
-        color:@desert;
+        color:@starwars_desert;
         font-size: 2.2em;
         position: absolute;
-        top: -80px;
-        bottom:0;
+        top: auto;
+        bottom:-25px;
         left: 0;
         right: 0;
-        transform: rotateX(30deg);
+        height: 600px;
+        -webkit-perspective: 200;
 
-        div{
-          transform: scale(0.7,1);
-          font-weight: bold;
-          //text-shadow: 0 0 5px @red,
-          //0 0 10px @red,
-          //0 0 15px @red,
-          //0 0 20px @red,
-          //0 0 35px @red,
-          //0 0 40px @red,
-          //0 0 50px @red;
-          animation: redlight 1.5s ease-in-out infinite alternate;
+        div.out {
+          transform: rotateX(30deg);
+          div.in {
+            position: relative;
+            top:370px;
+            //left: -94px;
+            //transform: scale(0.6, 0.95);
+            //font-weight: bold;
+            //text-shadow: 0 0 10px @starwars_red,
+            //0 0 20px  @starwars_red,
+            //0 0 30px  @starwars_red,
+            //0 0 40px  @starwars_red,
+            //0 0 70px  @starwars_red,
+            //0 0 80px  @starwars_red;
+            //animation: redlight 1.5s ease-in-out infinite alternate;
+            //animation: run 50s ease-out infinite normal;
+            img{
+              width:100%;
+            }
+          }
         }
+      }
+      .top_mask{
+        position: absolute;
+        top: 0;
+        height: 50px;
+        width: 100%;
+        background-color: @black;
+        box-shadow: 0 0 10px @black,
+        0 0 20px @black,
+        0 0 30px @black,
+        0 0 40px @black,
+        0 0 70px @black,
+        0 0 80px @black;
+        //background: -webkit-gradient(top, rgba(0,0,0,1),rgba(0,0,0,0.8) 75%,@starwars_transparent);
+      }
+      .bottom_mask{
+        position: absolute;
+        bottom: 0;
+        height: 135px;
+        width: 100%;
+        background-color: @black;
+        box-shadow: 0 0 10px @black,
+        0 0 20px @black,
+        0 0 30px @black,
+        0 0 40px @black,
+        0 0 70px @black,
+        0 0 80px @black;
+        //background: linear-gradient(top, rgba(0,0,0,1),rgba(0,0,0,0.8) 75%,@starwars_transparent);
       }
       .go_question{
         position: absolute;
         left:0;
         right:0;
-        bottom:45px;
+        bottom:40px;
         cursor: pointer;
 
         .go_buttons{
@@ -176,10 +270,10 @@ body,html{
           margin: auto;
           .go_button{
             background-color: rgba(0,0,0,0.1);
-            box-shadow: 0 0 10px @red, inset 0 0 10px @red;
+            box-shadow: 0 0 10px @starwars_red, inset 0 0 10px @starwars_red;
             animation: redlight 1.5s ease-in-out infinite alternate;
             width:auto;
-            border: solid 1px @desert;
+            border: solid 1px @starwars_desert;
             border-radius: 5px;
             position: relative;
             top:-1px;
@@ -215,6 +309,7 @@ body,html{
             padding-left: 50px;
             img {
               height: 85px;
+              transform:rotate(180deg);
             }
           }
 
@@ -227,24 +322,172 @@ body,html{
       }
     }
 
+    .questions{
+      background-image: url('@{img-location}/questionBG.jpg');
+      text-align: center;
+      .question_index{
+        position: absolute;
+        left:0;
+        right:0;
+        top:17%;
+        bottom:auto;
+        cursor: pointer;
+
+        .index_buttons{
+          display: table;
+          margin: auto;
+          .question_no{
+            font-size: 70px;
+            width:auto;
+            position: relative;
+            top:-21px;
+            font-weight: bold;
+            //padding: 5px 10px;
+            //margin-left: 5px;
+            //margin-right: 5px;
+            transition: all 0.2s;
+            //color: @starwars_transparent;
+            text-shadow: 0 0 1px @starwars_desert,
+            0 0 2px @starwars_desert,
+            0 0 3px @starwars_desert,
+            0 0 10px @starwars_red,
+            0 0 20px  @starwars_red,
+            0 0 30px  @starwars_red,
+            0 0 40px  @starwars_red,
+            0 0 70px  @starwars_red,
+            0 0 80px  @starwars_red;
+
+          }
+          .index_left {
+            position: absolute;
+            left:-36px;
+            top:0;
+            bottom:0;
+            text-align: right;
+            width:50%;
+            img {
+              height: 55px;
+            }
+          }
+          .index_right {
+            position: absolute;
+            right:-36px;
+            top:0;
+            bottom:0;
+            text-align: left;
+            width:50%;
+            img {
+              height: 55px;
+              transform:rotate(180deg);
+            }
+          }
+
+        }
+      }
+      .question_content{
+        position: absolute;
+        left: 10px;
+        right: 10px;
+        bottom: auto;
+        top: 35%;
+        //text-align: left;
+        color: @starwars_desert;
+        font-size: 1.4em;
+        text-shadow: 0 0 1px @starwars_desert,
+        0 0 10px @starwars_red,
+        0 0 20px  @starwars_red,
+        0 0 30px  @starwars_red;
+      }
+      .question_answer{
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 6%;
+        top: auto;
+        .answer1,.answer2{
+          position: relative;
+          background-color: @starwars_transparent;
+          width:190px;
+          height:70px;
+          border: 1px solid @starwars_desert;
+          border-radius: 5px;
+          margin: 20px auto;
+          padding: 0 15px;
+          font-size: 24px;
+          font-weight: bold;
+          color:@starwars_desert;
+          text-align: center;
+          box-shadow: 0 0 10px @starwars_desert,
+          inset 0 0 10px @starwars_desert;
+          display: box;
+          display: -webkit-box;
+          display: -moz-box;
+          -webkit-box-pack:center;
+          -moz-box-pack:center;
+          -webkit-box-align:center;
+          -moz-box-align:center;
+          cursor: pointer;
+          transition: all 0.3s;
+          label{
+            //margin: auto;
+            //position: absolute;
+            //top:0;
+            //bottom:0;
+            //left: 0;
+            //right:0;
+          }
+          &.right{
+            background-color: @starwars_red;
+            box-shadow: 0 0 10px @starwars_desert,
+            inset 0 0 10px @starwars_desert,
+            inset 0 0 30px @starwars_desert;
+            span {
+              color: @starwars_desert;
+              font-size: 34px;
+            }
+          }
+          &.wrong{
+            background-color: @black;
+            border: 1px solid @starwars_light_blue;
+            box-shadow: 0 0 10px @starwars_blue,
+            inset 0 0 10px @starwars_blue,
+            inset 0 0 20px @starwars_blue,
+            inset 0 0 30px @starwars_blue;
+            span {
+              color: @starwars_light_blue;
+              font-size: 34px;
+            }
+          }
+        }
+      }
+    }
   }
 }
 
-@-webkit-keyframes redlight {
+@keyframes redlight {
   from {
-    text-shadow: 0 0 10px @red,
-    0 0 20px  @red,
-    0 0 30px  @red,
-    0 0 40px  @red,
-    0 0 70px  @red,
-    0 0 80px  @red;
+    text-shadow: 0 0 10px @starwars_red,
+    0 0 20px  @starwars_red,
+    0 0 30px  @starwars_red,
+    0 0 40px  @starwars_red,
+    0 0 70px  @starwars_red,
+    0 0 80px  @starwars_red;
   }
   to {
-    text-shadow: 0 0 5px @red,
-    0 0 10px @red,
-    0 0 15px @red,
-    0 0 20px @red,
-    0 0 35px @red,
-    0 0 40px @red;
+    text-shadow: 0 0 5px @starwars_red,
+    0 0 10px @starwars_red,
+    0 0 15px @starwars_red,
+    0 0 20px @starwars_red,
+    0 0 35px @starwars_red,
+    0 0 40px @starwars_red;
+  }
+}
+
+@keyframes run {
+  from {
+    top: 370px;
+  }
+  to{
+    top: -700px;
   }
 }

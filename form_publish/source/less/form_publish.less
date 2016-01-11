@@ -16,10 +16,13 @@
   .form__header {
     margin: 0 auto;
     font-size: @font-size-m;
-    ._1626-breakpoints("others");
+    width: @big-goods__width * 4 + 2 * @big-goods__margin + 51px;
   }
   .form__body {
+    margin: 0 auto;
     overflow: hidden;
+    ._1626-breakpoints("big-goods");
+    width: @big-goods__width * 4 + 2 * @big-goods__margin + 51px;
     dl.big_img.static {
       display: block;
       float: left;
@@ -27,15 +30,23 @@
       dd.item {
         width: @big-goods__width + 4px;
         .item-b_image {
-          overflow: visible;
+          overflow: hidden;
           border: 2px dotted @blue;
-          background: url("/tpl/hi1626/v2/images/lego_bg.jpg") no-repeat center center;
           background-size: cover;
+          img {
+            position: absolute;
+            top: 0;
+            right: 0;
+            left: 0;
+            bottom :0;
+            margin: auto;
+          }
           .dragger {
             position: absolute;
             bottom: 5px;
             right: 5px;
             cursor: pointer;
+            z-index: 1626;
             .icon {
               font-size: 20px;
             }
@@ -144,6 +155,19 @@
           margin-right: 0;
           position: relative;
           background-color: white;
+          input {
+            position: absolute;
+            top: 0;
+            left: 0;
+            outline: 0;
+            cursor: pointer;
+            opacity: 0;
+            display: block;
+            width: 100%;
+            height: 100%;
+            padding : 0;
+            z-index: 1626;
+          }
           #img-adder {
             position: absolute;
             left: 0;
@@ -294,10 +318,12 @@
       div {
         .inline-block {
           display: inline-block;
+          margin-left: 13px;
         }
         img {
           display: inline-block;
-          width: 85px;
+          width: 74px;
+          float: left;
         }
         h4 {
           margin: 0 0 8px 0;
@@ -308,7 +334,11 @@
         }
         p {
           font-size: @font-size-xs;
-          margin: 0;
+          margin-top: 17px;
+        }
+        .icon {
+          font-size: 20px;
+          margin-right: 3px;
         }
         a {
           border-bottom: 2px solid @grey;
@@ -391,7 +421,7 @@
         label {
           display: none;
         }
-        .url-warning {
+        .urlwarning {
           color: red;
           font-size: @font-size-xs;
         }

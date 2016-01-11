@@ -26,7 +26,7 @@ init_form_publish = ->
   $preview = $form_publish.find('dl.big_img.static')
   $preview_title = $preview.find('.item-b_title')
   $preview_price = $preview.find('.item-b_price')
-  $draggable_bg = $preview.find('.item-b_image')
+  $draggable_bg = $preview.find('.item-b_image.preview')
   # imgs_proccessor
   $imgs_proccessor = $('.url-img-processor')
   $img_adder = $imgs_proccessor.find('.img-adder')
@@ -47,8 +47,7 @@ init_form_publish = ->
     })
 
   renderImg = (url)->
-    img = $('<img src=' + '"' + SITE_URL + 
-      url.substring() + '"' + '>')
+    img = $('<img src='+ url.substring() + '>')
     img_wrapper = $('<div class="url-img"></div>')
     img_editor = $('<div class="img-editor">' +
                      '<span>设为主图</span>' +
@@ -70,11 +69,34 @@ init_form_publish = ->
       id = Number($(this).val())
       get2ndCate(id)
 
+  setPreviewImg = ()->
+    img = $draggable_bg.find('img')
+    nozero = ()->
+      return img.width() != 0 && img.height() != 0
+    wrapper_width = $draggable_bg.width()
+    wrapper_height = $draggable_bg.height()
+    # 宽图
+    if ((img.width() > img.height()) && nozero())
+      img.draggable({axis: 'x', cursor: '-webkit-grabbing'})
+      img.css({
+        height: '100%',
+        width: 'auto',
+        'margin-left': -(img.width() - wrapper_width)/2 + 'px'
+      })
+    # 高图
+    if ((img.height() > img.width()) && nozero())
+      img.css({
+        width: '100%',
+        height: 'auto',
+        'margin-top': -(img.height() - wrapper_height)/2 + 'px'
+      })
+      img.draggable({axis: 'y', cursor: '-webkit-grabbing'})
+
   updateBg = (url)->
-    $draggable_bg.css({
-      'background': 'url("' + url + '") no-repeat center center',
-      'background-size': 'cover'
-    })
+    img = $('<img src=' + url + '>');
+    $draggable_bg.find('img').remove()
+    $draggable_bg.append(img)
+    setPreviewImg()
 
   updatePreview = (o)->
     if o['goods_name']
@@ -116,6 +138,31 @@ init_form_publish = ->
   getImgLength = ->
     $('.url-img').length
 
+  imageUpload = ->
+    if getImgLength() == 5
+      alert '已经不能再上传了'
+      reRenderFileInput()
+    else 
+      $.ajaxFileUpload({
+        url: SITE_URL + "services/service.php?m=share&a=uploadsharefile&num=1",
+        secureuri: false,
+        fileElementId: 'file1',
+        dataType:'json',
+        success: (result) -> 
+          renderImg(result['data'][0]['src'])
+          setImgEditor()
+          reRenderFileInput()
+        error: (e)->
+          alert e
+      })
+
+  reRenderFileInput = ->
+    $('#file1').remove()
+    new_input = $('<input data="test" type="file" id="file1" name="image[]">')
+    new_input.on 'change', ->
+      imageUpload()
+    $('.img-adder').append(new_input)
+
   makeTag = (text)->
     span = $('<span class="pub-tag">' + 
                 text +
@@ -132,14 +179,25 @@ init_form_publish = ->
           $(this).removeClass('unselected')
         else
           $(this).addClass('unselected')
+
   ### popup ###
   $popup_close.on 'click', ->
     $blackbox.fadeOut(500)
   $popup_btn.on 'click', (e)->
+    link = $popup_url.val()
+    urlreg=/^((https|http|ftp|rtsp|mms)?:\/\/)+[A-Za-z0-9\_\-]+\.[A-Za-z0-9\_\-]+[\/=\?%\-&_~`@[\]\':+!]*([^<>\"\"])*$/
+    if (!urlreg.test(link))
+      $(".urlwarning").html('请输入完整的链接地址')
+      return false
+    else
+      $(".urlwarining")
+        .css({color: '#00d0dc'})
+        .html('正在获取信息...')
+
     obj = {
-            url: encodeURIComponent($popup_url.val()),
-            type: 'local'
-          }
+      url: encodeURIComponent(link),
+      type: 'local'
+    }
     $popup.fadeOut(500)
     $popup_loading.fadeIn(500)
     $.ajax({
@@ -155,11 +213,12 @@ init_form_publish = ->
           gentarateTags()
           g_expire = result['expire_time']
           if result['url_arr'].length > 0
-            renderImg url for url in result['url_arr']
+            renderImg(SITE_URL + url) for url in result['url_arr']
             updateBg(SITE_URL + '/' + result['url_arr'][0])
           $('.url-img').first().find('img').addClass('main-img')
           renderStyle style for style in result['fengge_list']
           renderCatgory cate for cate in result['category_list']
+          get2ndCate($form_cate_select.val()) 
           updatePreview(result)
           $blackbox.fadeOut(500)
           $('.item-list-filter').fadeOut(500)
@@ -186,20 +245,10 @@ init_form_publish = ->
     if $(this).val() == '' && (e.which == 8 || e.which == 46)
       if $(this).prev().is('span')
         $(this).prev().remove()
-  $img_adder.on 'click', ->
-    if getImgLength() == 5
-      alert '已经不能再上传了'
-    else 
-      $.ajaxFileUpload({
-        url: SITE_URL + "services/service.php?m=share&a=uploadsharefile&num=1",
-        secureuri: false,
-        fileElementId: 'file1',
-        dataType:'json',
-        success: (result) ->
-          alert "result" + result
-        error: (e)->
-          alert err for err in e
-      })
+  
+  $('#file1').on 'change', ->
+    imageUpload()
+    
   $form_submit_btn.on 'click', (e)->
     link    = $form_url_input.val()
     str = link.match(/http:\/\/.+/)
@@ -238,7 +287,17 @@ init_form_publish = ->
     img_arr.push $(img).attr('src') for img in $('.url-img-processor').find('img').not('.main-img')
     tags = []
     tags.push $(tag).text() for tag in $('.pub-tag')
-    alert tags
+
+    img_info = {}
+    ratioX = $draggable_bg.find('img').width() / $draggable_bg.find('img')[0].naturalWidth
+    ratioY = $draggable_bg.find('img').height() / $draggable_bg.find('img')[0].naturalHeight
+    deltaX = $draggable_bg.offset().left - 
+        $draggable_bg.find('img').offset().left + 2 # 2px for border width
+    deltaY = $draggable_bg.offset().top - 
+        $draggable_bg.find('img').offset().top + 2
+    img_info.x = ratioX * deltaX
+    img_info.y = ratioY * deltaY
+
     obj = {
       'goods_name' :  title,
       'goods_price':  price,
@@ -247,8 +306,9 @@ init_form_publish = ->
       'fengge'     :  style,
       'img_arr'    :  img_arr,
       'expire'     :  g_expire,
-      'content'    :  recommendation
-      'tags'       :  tags
+      'content'    :  recommendation,
+      'tags'       :  tags,
+      'img_info'   :  img_info
     }
     $blackbox.fadeIn(500)
     $.ajax({

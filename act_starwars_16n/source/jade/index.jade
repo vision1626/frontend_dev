@@ -1,4 +1,4 @@
--var production = false
+-var production = true
 if production
   - var image_path  = './tpl/hi1626/images/starwars/'
 else
@@ -41,35 +41,41 @@ html
 
   body
     .wapper
+      .eye.eye_top
+      .eye.eye_bottom
       .outside.view#outside
         .store
           img.nlogo(src=image_path + 'logo-16N.png',alt='')
         .enter
-          h3.nexstep(s='-1') PRESENT
+          //h3.nexstep(s='-1') PRESENT
+          h3 PRESENT
       .entrance.view#entrance
         include ./source/jade/top_logo.jade
+        span.copyright © & ™ Lucasfilm Ltd.
         .enter.nexstep(s='0')
           img(src=image_path + 'entrance.gif',alt='')
+        include ./source/jade/16eme.jade
       .start.view#startquestion
-        include ./source/jade/top_logo.jade
         .info_text
           div.out
             div.in
-              |终于等到你了
-              br
-              |绝地
-              br
-              |这里,7个问题
-              br
-              |要尽可能回答正确
-              br
-              |才能觉醒原力
-              br
-              |当然
-              br
-              |最后你会获得奖励的
-              br
-              |马上开始吧
+              //|终于等到你了
+              //br
+              //|绝地
+              //br
+              //|这里,7个问题
+              //br
+              //|要尽可能回答正确
+              //br
+              //|才能觉醒原力
+              //br
+              //|当然
+              //br
+              //|最后你会获得奖励的
+              //br
+              //|马上开始吧
+              img(src=image_path + 'info_text.png',alt='')
+        .bottom_mask
         .go_question.nexstep(s='1')
           .go_buttons
             .go_left
@@ -78,23 +84,27 @@ html
               img(src=image_path + 'go_button.png',alt='')
             .go_right
               img(src=image_path + 'go_arrow.png',alt='')
+        .top_mask
+        include ./source/jade/top_logo.jade
         include ./source/jade/16eme.jade
       .questions.view#questions
         include ./source/jade/top_logo.jade
         .question_index
           .index_buttons
-            .index_left.change(c='p')
+            //.index_left.change(c='p')
+            .index_left
               img(src=image_path + 'question_arrow.png',alt='')
             .question_no
               span
-            .index_right.change(c='n')
+            //.index_right.change(c='n')
+            .index_right
               img(src=image_path + 'question_arrow.png',alt='')
         .question_content
           span
         .question_answer
-          .answer1
+          .answer1.select_answer(a=1)
             span
-          .answer2
+          .answer2.select_answer(a=2)
             span
         include ./source/jade/16eme.jade
     //<!--{if $is_wx}-->
