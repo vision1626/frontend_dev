@@ -61,6 +61,11 @@ $(document).on 'click','div.follow_nt', ->
     _dashboard_doing_follow = true
     do_follow(this,'nt')
 
+$(document).on 'click','div.follow_empty', ->
+  if !_dashboard_doing_follow
+    _dashboard_doing_follow = true
+    do_follow(this,'nt',uid)
+
 $(document).on 'click','#folloe-show-more', ->
   query_follow_Data()
 
@@ -81,12 +86,13 @@ $(document).on 'click','.fans-concemed_follow', ->
   url = ['u/follow-',uid,'.html'].join('')
   window.open(SITE_URL + url)
 
-do_follow = (obj,status) ->
+do_follow = (obj,status,tid) ->
   me = $(obj)
-  uid = me.attr('uid')
+  if !tid
+    tid = me.attr('uid')
 
   if parseInt(myid) > 0
-    if uid is myid
+    if tid is myid
       alert(_follow_nofllowme_text)
       _dashboard_doing_follow = false
     else
@@ -95,7 +101,7 @@ do_follow = (obj,status) ->
       $.ajax {
         url: SITE_URL + url
         type: method
-        data: {'uid': uid}
+        data: {'uid': tid}
         cache: false
         dataType: "json"
         success: (result)->
@@ -107,20 +113,23 @@ do_follow = (obj,status) ->
     _dashboard_doing_follow = false
     location.href = SITE_URL + 'user/login.html'
 
-after_follow = (me,status)->
-  if status is 1
-    me.removeClass('follow_nt').addClass('follow_ed')
-    me.find('.icon').removeClass('icon-follow').addClass('icon-unfollow')
-    me.find('label.sl1').html('已关注')
-  else if status is 2
-    me.removeClass('follow_nt').addClass('follow_ed')
-    me.find('.icon').removeClass('icon-follow').addClass('icon-unfollow')
-    me.find('label.sl1').html('互相关注')
+after_follow = (me,result)->
+  if state is 'fans'
+    init_follow_data()
   else
-    me.removeClass('follow_ed').addClass('follow_nt')
-    me.find('label.sl1').html('关注Ta')
-    me.find('.icon').removeClass('icon-unfollow').addClass('icon-follow')
-  _dashboard_doing_follow = false
+    if result is 1
+      me.removeClass('follow_nt').addClass('follow_ed')
+      me.find('.icon').removeClass('icon-follow').addClass('icon-unfollow')
+      me.find('label.sl1').html('已关注')
+    else if result is 2
+      me.removeClass('follow_nt').addClass('follow_ed')
+      me.find('.icon').removeClass('icon-follow').addClass('icon-unfollow')
+      me.find('label.sl1').html('互相关注')
+    else
+      me.removeClass('follow_ed').addClass('follow_nt')
+      me.find('label.sl1').html('关注Ta')
+      me.find('.icon').removeClass('icon-unfollow').addClass('icon-follow')
+    _dashboard_doing_follow = false
 
 query_follow_Data = () ->
   btn_ShowMore = $(document).find('#folloe-show-more')
@@ -279,6 +288,7 @@ init_follow_empty_message = () ->
   txtEmptycontent = $(document).find('label.empty-content')
   btnReturnhome = $(document).find('div.return_home')
   btnPublish = $(document).find('div#btnPublish')
+  btnFollow = $(document).find('div#btnFollow')
 
   if _follow_show_me
     who = '你'
@@ -293,17 +303,20 @@ init_follow_empty_message = () ->
     else
       content_text = "你可以先去别的地方逛逛！"
 
-  if window.location.pathname.indexOf('fans') > 0
+  if state is 'fans'
     txtEmptytitle.html([who,'还没有粉丝'].join(''))
     txtEmptycontent.html(content_text)
     if _follow_show_me
       btnReturnhome.hide()
       btnPublish.show()
+      btnFollow.hide()
     else
-      btnReturnhome.show()
+      btnReturnhome.hide()
       btnPublish.hide()
+      btnFollow.show()
   else
     txtEmptytitle.html([who,'还没有关注任何人'].join(''))
     txtEmptycontent.html(content_text)
     btnReturnhome.show()
     btnPublish.hide()
+    btnFollow.hide()

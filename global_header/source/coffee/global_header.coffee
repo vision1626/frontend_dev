@@ -42,7 +42,7 @@ init_global_header = ->
                 "<a href='" + d['url'] + "'>" + "新增" + 
                   "<span class='number'>" + d['ge_sum'] + "</span>" + 
                   "个粉丝" + "</a>")
-            if d['type']=="4" && d['ge_sum']!="0"
+            if d['type']==4 && d['ge_sum']!="0"
               $('.get-recomendded').html("<i class='icon icon-news'></icon>" + 
                 "<a href='" + d['url'] + "'>" + "有" + 
                   "<span class='number'>" + d['ge_sum'] + "</span>" + 
@@ -66,7 +66,7 @@ init_global_header = ->
         dataType: 'json',
         success: (result)->
           if result.status == 1
-            # self.parent().css({'left': '-999em'})
+            $('.check-all').prevAll().remove()
           else
             # alert('fuck')
       })
@@ -82,10 +82,10 @@ init_global_header = ->
     $search_icon_font.css({'color': 'black'})
   $search.on 'blur', ->
     $search_icon_font.css({'color': '#b4b4b4'})
-  $search.on 'click', ->
-    get_search_kws(0, 'user')
-  $search.on 'keyup', ->
-    get_search_kws(0, 'user')
+  # $search.on 'click', ->
+  #   get_search_kws(0, 'user')
+  # $search.on 'keyup', ->
+    # get_search_kws(0, 'user')
   $search.on 'keydown', (e)->
     if e.which == 13
      check_search2()

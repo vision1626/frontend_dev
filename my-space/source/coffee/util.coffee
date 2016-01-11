@@ -198,7 +198,7 @@ big_DashboardItem_Generater = (data,current_index) ->
         '</div>'
       ) +
       '<div class="item-b_additional">' +
-        '<a href="' + data.user_href + '">' +
+        '<a href="' + data.user_href + '" title="' + data.user_name + '">' +
           '<img src="' + data.img_thumb + '"/>' +
         '</a>' +
         '<div class="item-value">' +
@@ -238,7 +238,7 @@ small_DashboardItem_Generater = (data,current_index) ->
       '</div>' +
       '<div class="item-s_description">' +
         '<div class="item-s_owner">' +
-          '<a href="' + data.user_href + '" target="_blank">' +
+          '<a href="' + data.user_href + '" target="_blank" title="' + data.user_name + '">' +
             '<img src="' + data.img_thumb + '"/>' +
           '</a>' +
         '</div>' +
