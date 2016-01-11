@@ -74,6 +74,17 @@
         .icon {
           //margin-left: -2px;
         }
+        &.to-unfollow {
+          a {
+            color: white !important;
+          }
+          .icon {
+            color: white !important;
+            &:before {
+              content: '\e913' !important;
+            }
+          }
+        }
 
       }
       &.slider--on {
@@ -84,17 +95,20 @@
           &.icon-followed {
             color: @blue;
           }
+          &.icon-friends {
+            color: @blue;
+          }
         }
         a.status_text {
           left: 7px;
           //color: @dark-grey;
         }
         &:hover {
-          color: white;
+          //color: white;
           .icon-followed {
-            color: @white;
+            //color: @white;
             &:before {
-              content: '\e913';
+              //content: '\e913';
             }
           }
         }
@@ -112,6 +126,9 @@
         &.slide-to-right {
           animation: slide-to-right 0.6s forwards ease-out;
         }
+        &.slide-to-left {
+          animation: slide-to-left 0.6s forwards ease-out;
+        }
         @keyframes slide-to-right {
           0% {
             left: 6px;
@@ -119,7 +136,7 @@
             opacity: 1;
           }
           60% {
-            left: 20px;
+            left: 30px;
             width: 50px;
             opacity: 1;
           }
@@ -130,6 +147,28 @@
           }
           100% {
             left: 63px;
+            width: 19px;
+            opacity: 0;
+          }
+        }
+        @keyframes slide-to-left {
+          0% {
+            left: 63px;
+            width: 19px;
+            opacity: 0;
+          }
+          60% {
+            left: 30px;
+            width: 50px;
+            opacity: 1;
+          }
+          99% {
+            left: 6px;
+            width: 19px;
+            opacity: 1;
+          }
+          100% {
+            left: 6px;
             width: 19px;
             opacity: 0;
           }

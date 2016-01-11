@@ -93,51 +93,67 @@ init_u_header = ->
   $slider_icon = $slider.find '.icon'
   $slider_text = $slider.find 'a.status_text'
   $slider_btn = $follow_btn.find '.slider-btn'
-  getFollowStatus = ()->
-    $slider.attr "follow-status"
 
-  window.isfollow = "0"
-  initFollowStatus = ()->
-    is_follow = window.isfollow
-    $follow_btn.attr "follow-status", is_follow
-    switch is_follow
+  setFollowStatus = (status)->
+    $slider.css 'opacity',1
+    $slider.removeClass 'to-unfollow'
+    $follow_btn.attr "follow-status", status
+    switch status
       when "0"
+        $follow_btn.removeClass 'slider--on'
+        $slider_icon.removeClass 'icon-followed'
+        $slider_icon.removeClass 'icon-friends'
         $slider_icon.addClass 'icon-follow'
         $slider_text.html '关注Ta'
       when "1"
         $follow_btn.addClass 'slider--on'
+        $slider_icon.removeClass 'icon-follow'
+        $slider_icon.removeClass 'icon-friends'
         $slider_icon.addClass 'icon-followed'
         $slider_text.html '已关注'
       when "2"
         $follow_btn.addClass 'slider--on'
-        $slider_icon.addClass 'icon-followed'
+        $slider_icon.removeClass 'icon-follow'
+        $slider_icon.removeClass 'icon-followed'
+        $slider_icon.addClass 'icon-friends'
         $slider_text.html '互相关注'
+
+  initFollowStatus = ()->
+    is_follow = window.isfollow
+    setFollowStatus(is_follow)
 
   initFollowStatus()
 
   $follow_btn.mouseenter ->
-    switch $follow_btn.attr "follow-status"
-      when '1'
-        $slider_text.html "取消关注"
+    is_follow = $follow_btn.attr "follow-status"
+    if is_follow is "1" or is_follow is "2"
+      $slider.addClass 'to-unfollow'
+      $slider_text.html "取消关注"
 
   $follow_btn.mouseleave ->
+    $slider.removeClass 'to-unfollow'
     switch $follow_btn.attr "follow-status"
-      when '1'
+      when "1"
         $slider_text.html "已关注"
+      when "2"
+        $slider_text.html "互相关注"
 
 
-  sliderToRight = ->
-    $slider_btn.addClass('slide-to-right')
+  sliderToRight = (status)->
+    $slider_btn.addClass('slide-to-right').removeClass('slide-to-left')
     $slider.css 'opacity',0
-    $follow_btn.attr "follow-status", 1
+    $follow_btn.attr "follow-status", status
     setTimeout ->
-      $follow_btn.addClass 'slider--on'
-      $slider_icon.addClass 'icon-followed'
-      $slider_text.html '已关注'
-      $slider.css 'opacity',1
+      setFollowStatus(status)
     ,500
-  sliderToRight()
 
+  sliderToLeft = ->
+    $slider_btn.removeClass('slide-to-right').addClass('slide-to-left')
+    $slider.css 'opacity',0
+    $follow_btn.attr "follow-status", 0
+    setTimeout ->
+      setFollowStatus("0")
+    ,500
 
 #  if window.isfollow == "0"
 #    $status_text.on 'mouseover', ->
@@ -160,28 +176,10 @@ init_u_header = ->
         dataType: 'json',
         data: { uid: window.uid },
         success: (result)->
-          if result.status == 1 or result.status == 2
-            $slider.removeClass('slideleft').addClass('slideright')
-            $i_follow.removeClass('slideleft').addClass('slideright')
-            setTimeout ->
-              $i_follow.addClass('icon-unfollow').removeClass('icon-follow')
-            ,500
-            $status_text.html("已关注").css({'left': '21px'})
-            $status_text.on 'mouseover', ->
-              $(this).css('left': '7px').text("取消关注")
-            $status_text.on 'mouseout', ->
-              $(this).css('left': '21px').text("已关注")
+          if result.status is 1 or result.status is 2
+            sliderToRight("#{result.status}")
           else
-            $slider.removeClass('slideright').addClass('slideleft')
-            $i_follow.removeClass('slideright').addClass('slideleft')
-            setTimeout ->
-              $i_follow.removeClass('icon-unfollow').addClass('icon-follow')
-            ,500
-            $status_text.on 'mouseover', ->
-              $(this).css('left': '34px').text("关注Ta")
-            $status_text.on 'mouseout', ->
-              $(this).css('left': '34px').text("关注Ta")
-            $status_text.html("关注Ta").css({'left': '34px'})
+            sliderToLeft()
       })
     else
       location.href = SITE_URL + 'user/login.html'
