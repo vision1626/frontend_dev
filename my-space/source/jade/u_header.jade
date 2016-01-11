@@ -13,15 +13,10 @@ else
       i.icon.icon-edit
       a(href="/settings/psersonal.html") 修改资料
       //{else}
-      //{if $home_user['is_follow'] == 0}
       .slider
-        i.icon.icon-follow
-        span.status_text(style="position:absolute; left:34px;") 关注Ta
-      //{else}
-      .slider.slideright
-        span.status_text(style="position:absolute; left:21px;") 已关注
-        i.icon.icon-unfollow
-      //{/if}
+        i.icon
+        a.status_text
+      .slider-btn
       //{/if}
     .name_container
       h3.name {$home_user['user_name']}
