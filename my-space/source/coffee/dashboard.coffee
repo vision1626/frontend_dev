@@ -144,11 +144,11 @@ query_dashboard_data = () ->
     else
       page = 1
 
-    if state is 'fav'
+    if state is 'fav' #喜欢
       action = 'get_fav_ajax'
-    else if state is 'talk'
+    else if state is 'talk' #发布页
       action = 'get_publish_ajax'
-    else
+    else #动态
       action = 'get_dashboard_ajax'
 
     btn_ShowMore.html('正在努力加载中...').addClass('loading')
