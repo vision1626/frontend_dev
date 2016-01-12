@@ -126,7 +126,7 @@
       //cursor: pointer;
 
       &.longer{
-        height: 470px;
+        height: 456px;
       }
 
       .item-b_image {
@@ -180,7 +180,7 @@
         padding: @item-content-padding;
         .item-b_isnew {
           height: 22px;
-          margin-bottom: 15px;
+          margin-bottom: 4px;
 
           a {
             color: @black;
@@ -206,12 +206,15 @@
           }
         }
         .item-b_title {
-          height: @font-size-m*3-3;
+          height: 42px;
           overflow: hidden;
+          a {
+            display: block;
+            color: black;
+            font-size: @font-size-s;
+          }
         }
         span {
-          font-size: @font-size-s;
-          color: black;
         }
         .item-b_price {
           margin-top: 4px;
@@ -243,7 +246,7 @@
         }
         .item-value {
           float: left;
-          margin-top: 5px;
+          margin-top: 1px;
 
           span {
             color: @dark-grey;
@@ -297,8 +300,13 @@
           left: 0;
           font-size: @font-size-xs;
         }
-        &:hover * {
-          color: @red;
+        &:hover {
+          .icon {
+            color: @red;
+          }
+          span {
+            color: black;
+          }
         }
       }
       //搭配部分
@@ -372,6 +380,7 @@
     ._clearfix;
     display: none;
     margin-bottom: 40px;
+    margin-top: 9px;
     dd.item {
       float: left;
       background-color: @white;
@@ -396,7 +405,7 @@
       position: absolute;
       top: 0;
       left: 0;
-      background-color: rgba(0, 0, 0, 0.7);
+      background-color: rgba(0, 0, 0, 0.8);
       width: 100%;
       height: 100%;
       //display: none;
@@ -404,27 +413,31 @@
       transition: all 0.2s;
       .item-s_action {
         position: absolute;
-        right:0;
-        top:0;
-        div.action-add_special{
-          position: absolute;
-          top:8px;
-          right:40px;
-          color: @white;
+        right:12px;
+        top:8px;
+        >div {
+          position: relative;
+          display: inline-block;
           font-size: @font-size-l;
-          margin-left: 8px;
-          transition: all 0.2s;
+          color: @white;
           cursor: pointer;
+          transition: all 0.2s;
+          margin-left: 8px;
+          &:hover {
+            .icon {
+              color: @blue;
+            }
+          }
+        }
+        div.action-add_special{
+        }
+        div.action-edit {
+        }
+        div.action-delete {
+
         }
         div.action-add_like {
-          position: absolute;
-          top:8px;
-          right:12px;
-          color: @white;
-          font-size: @font-size-l;
-          margin-left: 8px;
-          transition: all 0.2s;
-          cursor: pointer;
+          //right:12px;
           img{
             position: absolute;
             width: 33px;
@@ -450,20 +463,32 @@
         float: left;
         margin: @item-content-padding;
         img {
-          width: 20px;
+          width: 24px;
           border-radius: 20px;
         }
       }
+      .item-s_info {
+        position: absolute;
+        bottom: 28px;
+        width: 161px;
+        padding: 0 12px;
+      }
       .item-s_isnew {
-        float: left;
+        //float: left;
         width: @small-goods__width - (@item-content-padding*2);
-        margin: 0 @item-content-padding @item-content-padding;
+        margin: 0;
         color: @grey;
-        height:20px;
-        overflow: hidden;
+        line-height: 16px;
+        //height:20px;
+        //overflow: hidden;
         a {
-          color: @white;
+          color: @grey;
           font-size: @font-size-xs;
+          border-bottom: 2px solid @grey;
+          &:hover {
+            color: white;
+            border-bottom: 2px solid @blue;
+          }
         }
         span {
           color: @grey;
@@ -472,34 +497,39 @@
         }
       }
       .item-s_title {
-        width: @small-goods__width - (@item-content-padding*2);
+        //width: @small-goods__width - (@item-content-padding*2);
         margin-top: @item-content-padding/2;
-        float: left;
-        height: @font-size-s*2+2;
-        line-height: @font-size-s;
-        overflow: hidden;
-        padding: 0 @item-content-padding;
+        //float: left;
+        //height: 35px;
+        //overflow: hidden;
+        //padding: 0 @item-content-padding;
         a {
           color: @white;
+          font-size: @font-size-s;
+          line-height: 18px;
+          display: block;
+          max-height: 36px;
+          //-webkit-line-clamp: $lines-to-show;
+          -webkit-box-orient: vertical;
+          overflow: hidden;
+          text-overflow: ellipsis;
         }
         span {
-          font-size: @font-size-s;
-          color: @white;
         }
       }
       .item-s_price {
-        width: @small-goods__width - (@item-content-padding*2);
-        margin: @item-content-padding/2 @item-content-padding;
-        float: left;
+        //width: @small-goods__width - (@item-content-padding*2);
+        margin: 6px 0;
+        //float: left;
         span {
-          font-size: @font-size-l;
-          font-weight: bold;
-          color: @white;
+          font-size: @font-size-m;
+          //font-weight: bold;
+          color: @grey;
         }
       }
       .item-s_additional {
         position: absolute;
-        bottom: @item-content-padding;
+        bottom: @item-content-padding - 4;
         left: @item-content-padding;
         span {
           color: @grey;

@@ -156,7 +156,10 @@ big_DashboardItem_Generater = (data,current_index) ->
           '<a href="' + data.url + '" target="_blank">' +
             '<img src="' + data.img + '" alt="' + data.title + '"/>' +
           '</a>' +
-          '<div class="actions"><span><i class="icon icon-edit"></i></span><span><i class="icon icon-garbage"></i></span></div>' +
+          (
+            if state is 'talk' and _dashboard_show_me
+              '<div class="actions"><span><i class="icon icon-edit"></i></span><span><i class="icon icon-garbage"></i></span></div>'
+          ) +
         '</div>' +
         '<div class="item-b_description">' +
           (
@@ -190,7 +193,7 @@ big_DashboardItem_Generater = (data,current_index) ->
           ) +
           '<div class="item-b_title">' +
             '<a href="' + data.url + '" target="_blank">' +
-              '<span>' + decodeURIComponent(data.title) + '</span>' +
+              decodeURIComponent(data.title) +
             '</a>' +
           '</div>' +
           '<div class="item-b_price' + boxsize + '">' +
@@ -244,14 +247,19 @@ small_DashboardItem_Generater = (data,current_index) ->
           '</a>' +
         '</div>' +
         '<div class="item-s_action">' +
-          '<div class="action-add_special">' +
-            '<span class="icon icon-album"></span>' +
-          '</div>' +
+#          '<div class="action-add_special">' +
+#            '<span class="icon icon-album"></span>' +
+#          '</div>' +
+          (
+            if state is 'talk' and _dashboard_show_me
+              '<div class="action-edit"><i class="icon icon-edit"></i></div>' +
+              '<div class="action-delete"><i class="icon icon-garbage"></i></div>'
+          ) +
           '<div class="action-add_like btn_like" l="s" sid="' + sid + '" dtype="' + dtype + '" ed="' + data.is_fav + '">' +
             '<img src="" alt="" class="harting"/>' +
             '<i class="icon ' + isfav + '"></i>' +
           '</div>' +
-        '</div>' +
+        '</div>' + '<div class="item-s_info">' +
         (
           if data.dynamic_type is 1
             '<div class="item-s_isnew">' +
@@ -307,13 +315,13 @@ small_DashboardItem_Generater = (data,current_index) ->
               '</div>' +
               '<div class="item-s_title">' +
                 '<a href="' + data.url + '" target="_blank">' +
-                  '<span>' + decodeURIComponent(data.title) + '</span>' +
+                  decodeURIComponent(data.title) +
                 '</a>' +
               '</div>' +
               '<div class="item-s_price">' +
                 '<span>¥' + data.goods_price + '</span>' +
               '</div>'
-        ) +
+        ) + '</div>' +
         '<div class="item-s_additional">' +
           '<span class="icon icon-viewed"></span>' +
           '<span class="count">' + data.view_count + '</span>' +
