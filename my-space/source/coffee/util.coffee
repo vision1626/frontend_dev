@@ -156,6 +156,7 @@ big_DashboardItem_Generater = (data,current_index) ->
           '<a href="' + data.url + '" target="_blank">' +
             '<img src="' + data.img + '" alt="' + data.title + '"/>' +
           '</a>' +
+          '<div class="actions"><span><i class="icon icon-edit"></i></span><span><i class="icon icon-garbage"></i></span></div>' +
         '</div>' +
         '<div class="item-b_description">' +
           (
