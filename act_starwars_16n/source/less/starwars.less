@@ -462,6 +462,114 @@ body,html{
       background-image: url('@{img-location}/questionBG.jpg');
       text-align: center;
 
+      .first_complete {
+        .absolute_center;
+        height:72%;
+        .light_sword_container {
+          .horizontal_center;
+          //top: 15%;
+          .light_sword {
+            position: relative;
+            margin: auto;
+            .desert_box;
+            height: 7px;
+            width: 90%;
+            img {
+              position: absolute;
+              left: -4px;
+              top: -8px;
+              height: 24px;
+            }
+            .light_body {
+              .desert_box;
+              background-color: @starwars_desert;
+              position: absolute;
+              left: 0;
+              top: 0;
+              bottom: 0;
+              width: 23%;
+              transition: all 0.3s;
+              &.l1 {
+                width: 34%
+              }
+              &.l2 {
+                width: 45%
+              }
+              &.l3 {
+                width: 56%
+              }
+              &.l4 {
+                width: 67%
+              }
+              &.l5 {
+                width: 78%
+              }
+              &.l6 {
+                width: 89%
+              }
+              &.l7 {
+                width: 100%
+              }
+            }
+          }
+        }
+        .text{
+          .horizontal_center;
+          position: absolute;
+          left: 10px;
+          right: 10px;
+          //text-align: left;
+          color: @starwars_desert;
+          text-shadow: 0 0 1px @starwars_desert,
+          0 0 10px @starwars_red,
+          0 0 20px  @starwars_red,
+          0 0 30px  @starwars_red;
+
+          &.complete_description{
+            top:7%;
+            .n_logo;
+          }
+          &.user_information{
+            bottom:59%;
+            font-size: 16px;
+          }
+        }
+        .user_form{
+          .horizontal_center;
+          margin: auto;
+          bottom:20%;
+          left: 15%;
+          right: 15%;
+          .input_container{
+            .desert_box;
+            background-color: @starwars_transparent_black;
+            height:32px;
+            margin-bottom: 10px;
+            input{
+              line-height: 32px;
+              font-size: 14px;
+              text-align: center;
+              background-color: @starwars_transparent;
+              border: 0;
+              color: @starwars_desert;
+              width:100%;
+            }
+          }
+          .submit_button {
+            .desert_box;
+            background-color: @starwars_transparent;
+            height: 32px;
+            margin-top: 25px;
+            span{
+              font-size: 14px;
+              line-height: 32px;
+              color: @starwars_desert;
+            }
+          }
+        }
+
+      }
+
       .result_action{
         .horizontal_center;
         bottom:75px;
@@ -486,7 +594,6 @@ body,html{
                 font-size: 1.2em;
               }
             }
-
 
           }
           .result_action_left {
@@ -544,12 +651,12 @@ body,html{
         0 0 20px  @starwars_red,
         0 0 30px  @starwars_red;
         &.title{
-          top:12%;
+          top:10%;
           .n_logo;
         }
         &.description1{
           font-size: 12px;
-          top:42%;
+          top:51%;
         }
         &.description2{
           font-size: 12px;
@@ -564,7 +671,7 @@ body,html{
           display: table;
           margin: auto;
           .question_no{
-            font-size: 24px;
+            font-size: 20px;
             width:auto;
             position: relative;
             //top:-21px;
@@ -580,36 +687,33 @@ body,html{
             0 0 10px @starwars_red,
             0 0 20px  @starwars_red,
             0 0 30px  @starwars_red,
-            0 0 40px  @starwars_red,
-            0 0 70px  @starwars_red,
-            0 0 80px  @starwars_red;
-
+            0 0 40px  @starwars_red;
           }
           .index_left {
             .vertical_center;
-            left:-40px;
+            left:-35px;
             text-align: right;
             width:50%;
             img {
-              height: 32px;
+              height: 26px;
             }
           }
           .index_right {
             .vertical_center;
-            right:-40px;
+            right:-35px;
             text-align: left;
             width:50%;
             img {
-              height: 32px;
+              height: 26px;
               transform:rotate(180deg);
             }
           }
         }
         &.index1{
-          top:15%;
+          top:14%;
         }
         &.index2{
-          top:60%;
+          top:58%;
         }
       }
       .prize_container{
@@ -643,7 +747,7 @@ body,html{
           border-bottom: 0;
           position: absolute;
           top:15px;
-          width:70%;
+          width: 235px;
           height:40px;
         }
         .prizes{
@@ -697,16 +801,14 @@ body,html{
           }
         }
         &.container1{
-          top:25%;
+          top:20%;
         }
         &.container2{
-          top:70%;
+          top:64%;
         }
       }
     }
   }
-
-
 }
 
 @keyframes redlight {

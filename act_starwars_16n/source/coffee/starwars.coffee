@@ -85,10 +85,14 @@ set_step = (step) ->
           help_img.attr('src',_image_path + 'help2.png')
         help.fadeIn 0
       when 3
-        eye_top.addClass 'open_top2'
-        eye_bottom.addClass 'open_bottom2'
+        eye_top.hide()
+        eye_bottom.hide()
 
-        result.fadeIn 0
+        result.fadeIn 0, ->
+          if _score > 0
+            setTimeout ->
+              result.find('.light_body').addClass(['l',_score].join(''))
+            , 500
       else
         logo = outside.find('img')
         present = outside.find('h3')

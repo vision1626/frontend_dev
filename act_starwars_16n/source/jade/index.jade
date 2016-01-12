@@ -94,12 +94,10 @@ html
         include ./source/jade/top_logo.jade
         .question_index
           .index_buttons
-            //.index_left.change(c='p')
             .index_left
               img(src=image_path + 'question_arrow.png',alt='')
             .question_no
               span
-            //.index_right.change(c='n')
             .index_right
               img(src=image_path + 'question_arrow.png',alt='')
         .question_content
@@ -110,7 +108,6 @@ html
           .answer2.select_answer(a=2)
             span
         include ./source/jade/16eme.jade
-
       .help.view#help
         include ./source/jade/top_logo.jade
         include ./source/jade/16eme.jade
@@ -137,6 +134,30 @@ html
       .result.view#result
         include ./source/jade/top_logo.jade
         include ./source/jade/16eme.jade
+        .first_complete
+          .light_sword_container
+            .light_sword
+              .light_body
+              img(src=image_path + 'light_sword.png',alt='')
+          .text.complete_description
+            span.d1 成功觉醒原力
+            br
+            span.d2 恭喜你,拿起激光剑去战斗吧!
+          .text.user_information
+            span 别忘了留下你的信息
+            br
+            span 16
+            label ÈME
+            span N
+            label ORD
+            span 将抽出幸运者
+          .user_form
+            .input_container.mobile_box
+              input.mobile#mobile(value='电话号码')
+            .input_container.name_box
+              input.name#name(value='姓名')
+            .submit_button
+              span 确认提交
         .result_action
           .result_action_buttons
             .result_action_left
@@ -148,7 +169,6 @@ html
                 span 马上分享
             .result_action_right
               img(src=image_path + 'go_arrow.png',alt='')
-
       .prize.view#prize
         include ./source/jade/top_logo.jade
         include ./source/jade/16eme.jade
