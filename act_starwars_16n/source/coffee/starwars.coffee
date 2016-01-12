@@ -2,31 +2,17 @@ _step = -2
 _q_n= 0
 _done = 0
 _score = 0
-_not_answer = true
+_not_answer = false
+_image_path  = './tpl/hi1626/images/starwars/'
+#_not_show_prize = true
 
 init = ->
-  set_step(_step)
+#  set_step(_step)
+  set_step(3)
 
 $(document).on 'click','.nexstep', ->
   step = $(this).attr('s')
   set_step(parseInt(step))
-
-#$(document).on 'click','.change', ->
-#  me = $(this)
-#  if me.attr('c') is 'p'
-#    if _q_n >= 0
-#      _q_n -= 1
-#      set_question()
-#    else
-#      _q_n = 0
-#      set_question()
-#  else
-#    if _q_n <=6
-#      _q_n += 1
-#      set_question()
-#    else
-#      _q_n = 6
-#      set_question()
 
 $(document).on 'click','.select_answer', ->
   me = $(this)
@@ -36,14 +22,10 @@ $(document).on 'click','.select_answer', ->
     _not_answer = false
     me.find('span').html('')
     if parseInt(my_select) is parseInt(q.answer)
-#      me.find('span').html("✔")
-#      me.find('span').html("对滴")
       me.addClass "right"
       me.find('span').addClass('icon').addClass('icon-glad')
       _score += 1
     else
-#      me.find('span').html("✘")
-#      me.find('span').html("错啦")
       me.addClass "wrong"
       me.find('span').addClass('icon').addClass('icon-sad')
     setTimeout ->
@@ -51,11 +33,22 @@ $(document).on 'click','.select_answer', ->
         _q_n += 1
         me.removeClass('right').removeClass('wrong')
         me.find('span').removeClass('icon').removeClass('icon-glad').removeClass('icon-sad')
-        set_question()
+        if _q_n is 3 or _q_n is 6
+          set_step(2)
+        else
+          set_question()
       else
-        alert(_score)
+        set_step(3)
     , 2000
 
+$('.hide_prize').click ->
+  toggle_prize()
+
+$(document).on 'click','.show_prize', ->
+  toggle_prize()
+
+$(document).on 'click','.share_now', ->
+  alert(2)
 
 set_step = (step) ->
   _step = step
@@ -66,6 +59,9 @@ set_step = (step) ->
   entrance = $('#entrance')
   start = $('#startquestion')
   questions = $('#questions')
+  help = $('#help')
+  show = $('#show')
+  result = $('#result')
 
   views.fadeOut 0, ->
     switch step
@@ -81,6 +77,18 @@ set_step = (step) ->
       when 1
         questions.fadeIn 0
         set_question()
+      when 2
+        help_img = help.find('.help_img').find('img')
+        if _q_n is 3
+          help_img.attr('src',_image_path + 'help1.png')
+        else
+          help_img.attr('src',_image_path + 'help2.png')
+        help.fadeIn 0
+      when 3
+        eye_top.addClass 'open_top2'
+        eye_bottom.addClass 'open_bottom2'
+
+        result.fadeIn 0
       else
         logo = outside.find('img')
         present = outside.find('h3')
@@ -102,30 +110,23 @@ set_step = (step) ->
             , 2500
           , 300
 
+toggle_prize = () ->
+  prize = $('#prize')
+  if prize.hasClass('showout')
+    prize.removeClass 'showout', ->
+      prize.hide()
+  else
+    prize.show 0, ->
+      prize.addClass 'showout'
+
+
 set_question = () ->
   _not_answer = true
   questions = $('#questions')
   q = question_list[_q_n]
-#  selected = selected_answers[_q_n]
   questions.find('.question_no').find('span').html(q.num)
   questions.find('.question_content').find('span').html(decodeURIComponent(q.content))
-#  if selected is 0
   questions.find('.question_answer').find('.answer1').find('span').html(q.options[1])
   questions.find('.question_answer').find('.answer2').find('span').html(q.options[2])
-#  else
-#    if selected is q.answer
-#      q_result = "✔"
-#    else
-#      q_result = "✘"
-#
-#    if selected is 1
-#      questions.find('.question_answer').find('.answer1').find('span').html(q_result)
-#      questions.find('.question_answer').find('.answer2').find('span').html(q.options[2])
-#    else if selected is 2
-#      questions.find('.question_answer').find('.answer1').find('span').html(q.options[1])
-#      questions.find('.question_answer').find('.answer2').find('span').html(q_result)
-
-text_animate = (obj,begin,end) ->
-  alert(obj.style.top)
 
 

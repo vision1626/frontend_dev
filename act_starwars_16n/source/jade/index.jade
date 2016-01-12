@@ -1,10 +1,10 @@
--var production = true
+-var production = false
 if production
   - var image_path  = './tpl/hi1626/images/starwars/'
 else
   - var local_file_path = '../..'
   - var image_path  = local_file_path +'/images/starwars/'
-- var top_link = 'http://www.1626.com'
+- var top_link = ''
 
 <!DOCTYPE html>
 html
@@ -49,12 +49,14 @@ html
         .enter
           //h3.nexstep(s='-1') PRESENT
           h3 PRESENT
+
       .entrance.view#entrance
         include ./source/jade/top_logo.jade
         span.copyright © & ™ Lucasfilm Ltd.
         .enter.nexstep(s='0')
           img(src=image_path + 'entrance.gif',alt='')
         include ./source/jade/16eme.jade
+
       .start.view#startquestion
         .info_text
           div.out
@@ -87,6 +89,7 @@ html
         .top_mask
         include ./source/jade/top_logo.jade
         include ./source/jade/16eme.jade
+
       .questions.view#questions
         include ./source/jade/top_logo.jade
         .question_index
@@ -107,6 +110,107 @@ html
           .answer2.select_answer(a=2)
             span
         include ./source/jade/16eme.jade
+
+      .help.view#help
+        include ./source/jade/top_logo.jade
+        include ./source/jade/16eme.jade
+        .help_title
+          span 有时候,你需要一些协助
+        .help_img
+          img(src="" alt="")
+        .help_description
+          span 16
+          label ÈME
+          span N
+          label ORD
+          span 潮流服装
+          br
+          span 有下一题的答案
+        .next_question.nexstep(s='1')
+          .next_buttons
+            .next_left
+              img(src=image_path + 'go_arrow.png',alt='')
+            .next_button
+              img(src=image_path + 'next_button.png',alt='')
+            .next_right
+              img(src=image_path + 'go_arrow.png',alt='')
+      .result.view#result
+        include ./source/jade/top_logo.jade
+        include ./source/jade/16eme.jade
+        .result_action
+          .result_action_buttons
+            .result_action_left
+              img(src=image_path + 'go_arrow.png',alt='')
+            .action_buttons
+              .show_prize
+                span 查看奖品
+              .share_now
+                span 马上分享
+            .result_action_right
+              img(src=image_path + 'go_arrow.png',alt='')
+
+      .prize.view#prize
+        include ./source/jade/top_logo.jade
+        include ./source/jade/16eme.jade
+        .hide_prize
+          span.icon.icon-cross
+        .prize_text.title
+          span 奖品由潮牌
+          span 16
+          label ÈME
+          span N
+          label ORD
+          span 提供
+        .prize_index.index1
+          .index_buttons
+            .index_left
+              img(src=image_path + 'question_arrow.png',alt='')
+            .question_no
+              span 奖品1
+            .index_right
+              img(src=image_path + 'question_arrow.png',alt='')
+        .prize_container.container1
+          .prize_branch
+          .prize_name
+            div
+              span 星战特别版卫衣
+          .prizes.prizes1
+            .prize_item
+            .prize_item
+            .prize_item
+            .prize_count.count1
+              span 1件
+            .prize_count.count2
+              span 1件
+            .prize_count.count3
+              span 1件
+        .prize_text.description1
+          span 将从参与者中抽取3位幸运儿,将于2月25日公布获奖名单并有专人与中奖者联系!
+        .prize_index.index2
+          .index_buttons
+            .index_left
+              img(src=image_path + 'question_arrow.png',alt='')
+            .question_no
+              span 奖品2
+            .index_right
+              img(src=image_path + 'question_arrow.png',alt='')
+        .prize_container.container2
+          .prize_branch
+          .prize_name
+            //span 16
+            //label ÈME
+            //span N
+            //label ORD
+            div
+              span 16N天猫旗舰店无门槛优惠券
+          .prizes.prizes2
+            .prize_item
+            .prize_item
+            .prize_item
+        .prize_text.description2
+          span 互动参与者按照答题正确数并留下联系方式即可获得
+
+
     //<!--{if $is_wx}-->
     //<!--{template inc/weixin_share}-->
     //<!--{/if}-->
@@ -114,7 +218,6 @@ html
     if production
       script(src="{script $current_js}")
     script.
-
       $(document).ready(function () {
         init();
       });
