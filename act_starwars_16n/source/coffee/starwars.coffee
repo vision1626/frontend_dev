@@ -34,18 +34,23 @@ $(document).on 'click','.select_answer', ->
   q = question_list[_q_n]
   if _not_answer
     _not_answer = false
+    me.find('span').html('')
     if parseInt(my_select) is parseInt(q.answer)
-      me.find('span').html("✔")
+#      me.find('span').html("✔")
+#      me.find('span').html("对滴")
       me.addClass "right"
+      me.find('span').addClass('icon').addClass('icon-glad')
       _score += 1
     else
-      me.find('span').html("✘")
+#      me.find('span').html("✘")
+#      me.find('span').html("错啦")
       me.addClass "wrong"
+      me.find('span').addClass('icon').addClass('icon-sad')
     setTimeout ->
       if _q_n < question_list.length-1
         _q_n += 1
-        me.removeClass 'right'
-        me.removeClass 'wrong'
+        me.removeClass('right').removeClass('wrong')
+        me.find('span').removeClass('icon').removeClass('icon-glad').removeClass('icon-sad')
         set_question()
       else
         alert(_score)
@@ -71,7 +76,7 @@ set_step = (step) ->
       when 0
         info_text = start.find('div.in')
         start.fadeIn 0
-        info_text.animate({top:'-900px'},60000)
+        info_text.animate({top:'-900px'},50000)
 #        text_animate(info_text,400,-700)
       when 1
         questions.fadeIn 0
