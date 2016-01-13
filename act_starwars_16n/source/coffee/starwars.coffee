@@ -6,11 +6,16 @@ _not_answer = false
 _image_path  = './tpl/hi1626/images/starwars/'
 _virgin = true
 _waittime = 1000
+
+_mobile_empty_msg = '请输入电话号码'
+_mobile_error_msg = '请输入正确的电话号码'
+_name_empty_msg = '请输入姓名'
+_name_error_msg = '请输入正确的姓名,仅支持中英文'
 #_not_show_prize = true
 
 init = ->
-#  set_step(_step)
-  set_step(3)
+  set_step(_step)
+#  set_step(3)
 
 $(document).on 'click','.nexstep', ->
   _virgin = parseInt(window.virgin_score) is -1
@@ -32,18 +37,18 @@ $(document).on 'click','.select_answer', ->
     else
       me.addClass "wrong"
       me.find('span').addClass('icon').addClass('icon-sad')
-#    setTimeout ->
-    if _q_n < question_list.length-1
-      _q_n += 1
-      me.removeClass('right').removeClass('wrong')
-      me.find('span').removeClass('icon').removeClass('icon-glad').removeClass('icon-sad')
-      if _q_n is 3 or _q_n is 6
-        set_step(2)
+    setTimeout ->
+      if _q_n < question_list.length-1
+        _q_n += 1
+        me.removeClass('right').removeClass('wrong')
+        me.find('span').removeClass('icon').removeClass('icon-glad').removeClass('icon-sad')
+        if _q_n is 3 or _q_n is 6
+          set_step(2)
+        else
+          set_question()
       else
-        set_question()
-    else
-      set_step(3)
-#    , _waittime
+        set_step(3)
+    , _waittime
 
 $('.hide_prize').click ->
   toggle_prize()
@@ -61,22 +66,11 @@ $('.alert_mask').click ->
 $('.share_mask').click ->
   $('.share_mask').hide()
 
-#$(document).on 'click','.submit_button', ->
+$(document).on 'click','#submit_button', ->
+  before_submit()
+
 $('#submit_button').click ->
-  name = '丢那星'
-  mobile = '13800238000'
-  $.ajax {
-    url: SITE_URL + 'starwars/submit.html'
-    type: "GET"
-    data: {'name': name, 'mobile': mobile, 'score': _score}
-    cache: false
-    dataType: "json"
-    success: (result)->
-      alert(result.msg)
-      after_submit()
-    error: (result)->
-      alert('errr: ' + result)
-  }
+  before_submit()
 
 $('#copy_button').click ->
   $(this).zclip
@@ -112,6 +106,51 @@ $(document).on 'blur','input', ->
   else
     me.addClass('empty')
     me.val(me.attr('ev'))
+
+before_submit = () ->
+  result = $('#result')
+  error = []
+  input_mobile = result.find('.user_form').find('input.mobile')
+  input_name = result.find('.user_form').find('input.name')
+
+  if input_mobile.hasClass('empty')
+    error.push(_mobile_empty_msg)
+  else if input_mobile.hasClass('error')
+    error.push(_mobile_error_msg)
+
+  if input_name.hasClass('empty')
+    error.push(_name_empty_msg)
+  else if input_name.hasClass('error')
+    error.push(_name_error_msg)
+
+  if error.length > 0
+    show_error(error)
+  else
+#    name = '丢那星'
+    name = input_name.val()
+#    mobile = '13800238000'
+    mobile = input_mobile.val()
+    $.ajax {
+      url: SITE_URL + 'starwars/submit.html'
+      type: "GET"
+      data: {'name': name, 'mobile': mobile, 'score': _score}
+      cache: false
+      dataType: "json"
+      success: (result)->
+        alert(result.msg)
+        after_submit()
+      error: (result)->
+        alert('errr: ' + result)
+    }
+
+show_error = (error_list) ->
+  if error_list.length > 1
+    msg = error_list.join('<br>')
+  else
+    msg = error_list[0]
+  alert_message = $('.alert_mask').find('.alert_message').find('span')
+  alert_message.html('').html(msg)
+  $('.alert_mask').show()
 
 set_step = (step) ->
   _step = step

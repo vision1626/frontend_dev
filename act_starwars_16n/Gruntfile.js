@@ -80,7 +80,8 @@ module.exports = function (grunt) {
                     '<%= globalConfig.jsDebugPath %>/<%= globalConfig.jsName %>.js':[
                         '<%= globalConfig.jsSrcPath %>/util.coffee',
                         '<%= globalConfig.jsSrcPath %>/starwars.coffee',
-                        '<%= globalConfig.jsSrcPath %>/questions.coffee'
+                        '<%= globalConfig.jsSrcPath %>/questions.coffee',
+                        '<%= globalConfig.jsSrcPath %>/rewards.coffee'
                     ]
                 }
             }
