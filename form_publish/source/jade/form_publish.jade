@@ -21,12 +21,12 @@ else
             span 新发布
           a
             .item-b_title 
-              span N/A
+              span 商品标题
             .item-b_price
-              span N/A
+              span ¥0.00
         .item-b_additional
           a
-            img(src= image_path + "/test_bg.jpg")
+            img(src="{avatar $_FANWE['uid'] s 1 $_FANWE['user']['img_thumb']}")
           .item-value
             span.icon.icon-viewed
             span 0
@@ -42,7 +42,8 @@ else
         .url-input
           i.icon.icon-link
           input(type="text" name="url")
-        a 重新读取
+        a.reload 重新读取
+        .form-urlwarning
       .url-img-processor
         .imgs-wrapper
           //- .url-img
@@ -66,7 +67,7 @@ else
         select.item-details__category2(type="text" placeholder="颜色（选填）" name="category2") 
           | 颜色
         select.item-details__style(type="text" placeholder="风格（选填）" name="style") 
-          | 风格
+          option 风格（选填）
       .item-tags
         h3 标签
         .tag-input
@@ -74,13 +75,11 @@ else
           input(type="input" name="tag" placeholder="请以逗号分隔各个标签")
         ul.mytags
           li.tag-title 我的标签：
-          li.unselected 复古
-          li.unselected 秋冬
-          li.unselected 军事
+          //- li.unselected 复古
+          //- li.unselected 秋冬
+          //- li.unselected 军事
         //- ul.hit-tags
         //-   li.tag-title 常用标签：
-        //-   li.selected ′★.．/丄偙 请 吥 喓 夺赱___莪恴 緈鍢 恏吗?_▂_▂_▂。 °
-        //-   li 卟许dong涐旳感情 .？
       .item-recommendation
         h3 推荐理由
         .item-recommendation-container
@@ -92,7 +91,8 @@ else
       .warning
     .form__share
       div
-        img(src= image_path + "/publish-tool.png")
+        a.publish-tool(href='javascript:void((function(){var e= document.createElement("script");e.setAttribute("type","text/javascript");e.setAttribute("charset","UTF-8");e.setAttribute("src","{$_FANWE[site_url]}public/js/im.ping.js?v="+Math.random()*99999999);document.body.appendChild(e)})());')
+          span 分享至1626
         .inline-block
           h4 采集工具
           p 拖拽左侧“手掌”图标至浏览器书签栏
@@ -100,7 +100,7 @@ else
             | 逛到潮品，一键分享到1626
       div
         i.icon.icon-question
-        a 发布教程
+        a.pubtutorial(href="/about/help.html" target="_blank") 发布教程
 
 if !production
   </body>
