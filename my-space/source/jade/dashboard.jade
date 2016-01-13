@@ -9,15 +9,15 @@ else
     .item-nav.first.current
       a 热门单品
       span {$count}
-    .item-nav
-      a 潮牌
-      span 30
-    .item-nav
-      a 潮店
-      span 3
-    .item-nav
-      a 专辑
-      span 31
+    //.item-nav
+    //  a 潮牌
+    //  span 30
+    //.item-nav
+    //  a 潮店
+    //  span 3
+    //.item-nav
+    //  a 专辑
+    //  span 31
   .item-filter-container
     //.item-filter
     //  a(href='#')
@@ -25,6 +25,10 @@ else
     //    a(href='') 批量加入专辑
     //.item-filter
     //  a(href='#') 全部分类
+    .item-filter.search
+      form
+        i.icon.icon-search
+        input(type='text',placeholder='搜索喜欢')
     .item-filter.sort
       a.show-new_list.current
         i.icon.icon-decendent
