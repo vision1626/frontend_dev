@@ -125,7 +125,8 @@ big_DashboardItem_Generater = (data,current_index) ->
             if state is 'dashboard' and _dashboard_show_me
               '<div class="item-b_isnew">' +
               (
-                if data.is_dapei_like is 1 or data.like_user_list
+#                if data.is_dapei_like is 1 and data.like_user_list
+                if data.like_user_list
                   (
                     likeusers = []
                     for lu in data.like_user_list
@@ -264,7 +265,8 @@ small_DashboardItem_Generater = (data,current_index) ->
           if data.dynamic_type is 1
             '<div class="item-s_isnew">' +
               (
-                if data.is_dapei_like is 1 or data.like_user_list
+#                if data.is_dapei_like is 1 or data.like_user_list
+                if data.like_user_list
                   (
                     likeusers = []
                     for lu in data.like_user_list
