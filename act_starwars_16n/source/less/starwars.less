@@ -1,10 +1,12 @@
 @import "../../../public_inc/source/less/imports";
 
-//@img-location:'/tpl/hi1626/images/starwars';
-@img-location:'../../images/starwars';
+@img-location:'/tpl/hi1626/images/starwars';
+//@img-location:'../../images/starwars';
 
 @starwars_desert: #ffd0b5;
+@starwars_transparent_desert: rgba(255,208,181,0.6);
 @starwars_red: #da0012;
+@starwars_transparent_red: rgba(218,0,18,0.3);
 @starwars_blue: #3333ff;
 @starwars_light_blue: #b8c2ff;
 @starwars_transparent : rgba(0,0,0,0.1);
@@ -354,13 +356,7 @@ body,html{
           color:@starwars_desert;
           text-align: center;
           .desert_box;
-          display: box;
-          display: -webkit-box;
-          display: -moz-box;
-          -webkit-box-pack:center;
-          -moz-box-pack:center;
-          -webkit-box-align:center;
-          -moz-box-align:center;
+          .box_center;
           cursor: pointer;
           transition: all 0.3s;
 
@@ -465,6 +461,7 @@ body,html{
       .first_complete {
         .absolute_center;
         height:72%;
+        display:none;
         .light_sword_container {
           .horizontal_center;
           //top: 15%;
@@ -515,7 +512,6 @@ body,html{
         }
         .text{
           .horizontal_center;
-          position: absolute;
           left: 10px;
           right: 10px;
           //text-align: left;
@@ -541,19 +537,36 @@ body,html{
           left: 15%;
           right: 15%;
           .input_container{
+            position: relative;
             .desert_box;
             background-color: @starwars_transparent_black;
             height:32px;
             margin-bottom: 10px;
             input{
+              .absolute_center;
+              margin: auto;
+              //width: 100%;
               line-height: 32px;
               font-size: 14px;
               text-align: center;
               background-color: @starwars_transparent;
+              border-radius: 5px;
               border: 0;
               color: @starwars_desert;
-              width:100%;
+              transition: all 0.2s;
+              &.empty{
+                color: @starwars_transparent_desert;
+              }
+              &.error{
+                background-color: @starwars_transparent_red;
+              }
+              &:focus{
+                color: @starwars_desert;
+                //text-align:left;
+                outline: none;
+              }
             }
+
           }
           .submit_button {
             .desert_box;
@@ -567,7 +580,87 @@ body,html{
             }
           }
         }
-
+      }
+      .all_completion{
+        .absolute_center;
+        height:72%;
+        display:none;
+        .receive_description{
+          .horizontal_center;
+          position: absolute;
+          left: 10px;
+          right: 10px;
+          color: @starwars_desert;
+          text-shadow: 0 0 1px @starwars_desert,
+          0 0 10px @starwars_red,
+          0 0 20px  @starwars_red,
+          0 0 30px  @starwars_red;
+        }
+        .key_title {
+          .horizontal_center;
+          bottom:68%;
+          .key_content {
+            .key_center {
+              font-size: 20px;
+              width: auto;
+              font-weight: bold;
+              transition: all 0.2s;
+              text-shadow: 0 0 1px @starwars_desert,
+              0 0 2px @starwars_desert,
+              0 0 3px @starwars_desert,
+              0 0 10px @starwars_red,
+              0 0 20px  @starwars_red,
+              0 0 30px  @starwars_red,
+              0 0 40px  @starwars_red;
+            }
+            .key_left {
+              .vertical_center;
+              left: -76px;
+              text-align: right;
+              width: 50%;
+              img {
+                height: 26px;
+              }
+            }
+            .key_right {
+              .vertical_center;
+              right: -76px;
+              text-align: left;
+              width: 50%;
+              img {
+                height: 26px;
+                transform: rotate(180deg);
+              }
+            }
+          }
+        }
+        .key_text{
+          .horizontal_center;
+          .desert_box;
+          margin: auto;
+          background-color: @starwars_transparent_black;
+          width:80%;
+          padding:10px;
+          height:80px;
+          bottom:37%;
+          .box_center;
+          span{
+            font-size: 14px;
+            color:@starwars_desert;
+          }
+        }
+        .copy_button{
+          .horizontal_center;
+          .desert_box;
+          left: 25%;
+          right: 25%;
+          bottom:20%;
+          padding: 10px 20px;
+          span{
+            font-size: 1.2em;
+            color:@starwars_desert;
+          }
+        }
       }
 
       .result_action{
@@ -638,6 +731,14 @@ body,html{
           color:@white;
           font-size: 24px;
           .absolute_center;
+        }
+      }
+      .prize_full_img{
+        .absolute_center;
+        img{
+          .absolute_center;
+          top:20px;
+          width:90%;
         }
       }
       .prize_text{
@@ -808,6 +909,34 @@ body,html{
         }
       }
     }
+
+    .share_mask,.alert_mask{
+      .absolute_center;
+      margin: auto;
+      background-color: @starwars_transparent_black;
+      z-index: 1000000;
+      display: none;
+      img{
+        .absolute_center;
+        bottom:auto;
+        width:90%
+      }
+      .alert_message{
+        .horizontal_center;
+        .desert_box;
+        margin: auto;
+        background-color: @starwars_transparent_red;
+        width:80%;
+        padding:10px;
+        height:80px;
+        bottom:37%;
+        .box_center;
+        span{
+          font-size: 14px;
+          color:@starwars_desert;
+        }
+      }
+    }
   }
 }
 
@@ -901,6 +1030,16 @@ body,html{
   position: absolute;
   top: 0;
   bottom:0;
+}
+
+.box_center(){
+  display: box;
+  display: -webkit-box;
+  display: -moz-box;
+  -webkit-box-pack:center;
+  -moz-box-pack:center;
+  -webkit-box-align:center;
+  -moz-box-align:center;
 }
 
 .n_logo(){

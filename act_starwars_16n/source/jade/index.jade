@@ -1,4 +1,4 @@
--var production = false
+-var production = true
 if production
   - var image_path  = './tpl/hi1626/images/starwars/'
 else
@@ -26,9 +26,13 @@ html
         $current_css[] = './tpl/hi1626/css/starwars/starwars.css';
         $current_js[] = './public/js/jquery-1.11.3.min.js';
         $current_js[] = './public/js/jquery.touchSwipe.min.js';
+        $current_js[] = './public/js/jquery.zclip.min.js';
         $current_js[] = './tpl/hi1626/js/starwars/starwars.js'
 
       link(rel="stylesheet", href="{css $current_css}" media="all")
+      script(type='text/javascript').
+        var SITE_URL = '$_FANWE[site_url]';
+
     else
       //本地调试用
       link(rel="stylesheet", href="../../v2/css/vendor/normalize.css" media="all")
@@ -37,6 +41,7 @@ html
       link(rel="stylesheet", href="../../css/starwars/starwars.min.css" media="all")
       script(src="../../js/jquery-1.11.3.min.js")
       script(src="../../js/jquery.touchSwipe.min.js")
+      script(src="../../js/jquery.zclip.min.js")
       script(src="../../js/starwars/starwars.js")
 
   body
@@ -116,10 +121,7 @@ html
         .help_img
           img(src="" alt="")
         .help_description
-          span 16
-          label ÈME
-          span N
-          label ORD
+          include ./source/jade/16eme_name.jade
           span 潮流服装
           br
           span 有下一题的答案
@@ -140,24 +142,43 @@ html
               .light_body
               img(src=image_path + 'light_sword.png',alt='')
           .text.complete_description
-            span.d1 成功觉醒原力
+            span.d1
             br
-            span.d2 恭喜你,拿起激光剑去战斗吧!
+            span.d2
           .text.user_information
             span 别忘了留下你的信息
             br
-            span 16
-            label ÈME
-            span N
-            label ORD
+            include ./source/jade/16eme_name.jade
             span 将抽出幸运者
           .user_form
             .input_container.mobile_box
-              input.mobile#mobile(value='电话号码')
+              input.mobile.empty#mobile(value='电话号码',ev='电话号码',maxlength='11')
             .input_container.name_box
-              input.name#name(value='姓名')
-            .submit_button
+              input.name.empty#name(value='姓名',ev='姓名',maxlength='6')
+            .submit_button#submit_button
               span 确认提交
+        .all_completion
+          .receive_description
+            span 亲,你已经领过
+            include ./source/jade/16eme_name.jade
+            span 优惠券了,
+            br
+            span 按照下面提示,赶快进入
+            include ./source/jade/16eme_name.jade
+            br
+            span 天猫旗舰店瞧瞧呗!
+          .key_title
+            .key_content
+              .key_left
+                img(src=image_path + 'question_arrow.png',alt='')
+              .key_center
+                span 已领取的优惠券
+              .key_right
+                img(src=image_path + 'question_arrow.png',alt='')
+          .key_text
+            span
+          .copy_button#copy_button
+            span 一键盘复制
         .result_action
           .result_action_buttons
             .result_action_left
@@ -174,61 +195,65 @@ html
         include ./source/jade/16eme.jade
         .hide_prize
           span.icon.icon-cross
-        .prize_text.title
-          span 奖品由潮牌
-          span 16
-          label ÈME
-          span N
-          label ORD
-          span 提供
-        .prize_index.index1
-          .index_buttons
-            .index_left
-              img(src=image_path + 'question_arrow.png',alt='')
-            .question_no
-              span 奖品1
-            .index_right
-              img(src=image_path + 'question_arrow.png',alt='')
-        .prize_container.container1
-          .prize_branch
-          .prize_name
-            div
-              span 星战特别版卫衣
-          .prizes.prizes1
-            .prize_item
-            .prize_item
-            .prize_item
-            .prize_count.count1
-              span 1件
-            .prize_count.count2
-              span 1件
-            .prize_count.count3
-              span 1件
-        .prize_text.description1
-          span 将从参与者中抽取3位幸运儿,将于2月25日公布获奖名单并有专人与中奖者联系!
-        .prize_index.index2
-          .index_buttons
-            .index_left
-              img(src=image_path + 'question_arrow.png',alt='')
-            .question_no
-              span 奖品2
-            .index_right
-              img(src=image_path + 'question_arrow.png',alt='')
-        .prize_container.container2
-          .prize_branch
-          .prize_name
-            //span 16
-            //label ÈME
-            //span N
-            //label ORD
-            div
-              span 16N天猫旗舰店无门槛优惠券
-          .prizes.prizes2
-            .prize_item
-            .prize_item
-            .prize_item
-        .prize_text.description2
-          span 互动参与者按照答题正确数并留下联系方式即可获得
+        .prize_full_img
+          img(src=image_path + 'prize.png',alt='')
+        //.prize_text.title
+        //  span 奖品由潮牌
+        //  include ./source/jade/16eme_name.jade
+        //  span 提供
+        //.prize_index.index1
+        //  .index_buttons
+        //    .index_left
+        //      img(src=image_path + 'question_arrow.png',alt='')
+        //    .question_no
+        //      span 奖品1
+        //    .index_right
+        //      img(src=image_path + 'question_arrow.png',alt='')
+        //.prize_container.container1
+        //  .prize_branch
+        //  .prize_name
+        //    div
+        //      span 星战特别版卫衣
+        //  .prizes.prizes1
+        //    .prize_item
+        //    .prize_item
+        //    .prize_item
+        //    .prize_count.count1
+        //      span 1件
+        //    .prize_count.count2
+        //      span 1件
+        //    .prize_count.count3
+        //      span 1件
+        //.prize_text.description1
+        //  span 将从参与者中抽取3位幸运儿,将于2月25日公布获奖名单并有专人与中奖者联系!
+        //.prize_index.index2
+        //  .index_buttons
+        //    .index_left
+        //      img(src=image_path + 'question_arrow.png',alt='')
+        //    .question_no
+        //      span 奖品2
+        //    .index_right
+        //      img(src=image_path + 'question_arrow.png',alt='')
+        //.prize_container.container2
+        //  .prize_branch
+        //  .prize_name
+        //    //span 16
+        //    //label ÈME
+        //    //span N
+        //    //label ORD
+        //    div
+        //      span 16N天猫旗舰店无门槛优惠券
+        //  .prizes.prizes2
+        //    .prize_item
+        //    .prize_item
+        //    .prize_item
+        //.prize_text.description2
+        //  span 互动参与者按照答题正确数并留下联系方式即可获得
+      .alert_mask
+        .alert_message
+          span alslakjda
+      .share_mask
+        img#share_img(src=image_path + 'share.png',alt='')
 
 
     //<!--{if $is_wx}-->
@@ -239,5 +264,6 @@ html
       script(src="{script $current_js}")
     script.
       $(document).ready(function () {
+        window.virgin_score = {$votes};
         init();
       });

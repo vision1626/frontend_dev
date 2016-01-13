@@ -17,3 +17,26 @@ $.fn.horizontalCenter = ()->
 $.fn.windowCenter = ->
   $(this).verticalCenter()
   $(this).horizontalCenter()
+
+
+validateMobile = (inputvalue)->
+  pattern = /^1[35874][0-9][0-9]{8}$/;
+  pattern.test(inputvalue)
+
+# Nickname validation 只可以输入中文英文数字
+validateNickname = (inputvalue,checkfirstchar)->
+  if checkfirstchar
+    pattern = /^[\u4E00-\u9FA5A-Za-z][\u4E00-\u9FA5A-Za-z0-9]+$/;
+  else
+    pattern = /^[\u4E00-\u9FA5A-Za-z0-9]+$/;
+  pattern.test(inputvalue)
+#
+#copyToClipboard = (me,target) ->
+#  me.zclip
+#    path: '../../js/ZeroClipboard.swf'
+#    copy: ->
+#      target.html()
+#    beforeCopy: ->
+#      alert(target)
+#    afterCopy: ->
+#      alert('copy done')
