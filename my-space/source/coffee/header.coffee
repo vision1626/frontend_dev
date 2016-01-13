@@ -187,18 +187,24 @@ init_u_header = ->
   $fav.on 'click', ->
     slideToCurrent.apply(this)
     user_action_async('fav')
+    toggleGoods(true)
   $db.on 'click', ->
     slideToCurrent.apply(this)
     user_action_async('dashboard')
+    toggleGoods(true)
   $pub.on 'click', ->
     slideToCurrent.apply(this)
     user_action_async('talk')
+    toggleGoods(true)
   $fans.on 'click', ->
     slideToCurrent.apply(this,[36])
     user_relation_async('fans')
+    toggleGoods(true)
   $follow.on 'click', ->
     slideToCurrent.apply(this,[36])
     user_relation_async('follow')
+    toggleGoods(true)
+
 
   $(window).on 'resize', ->
     if isInCurrentAction('fav')

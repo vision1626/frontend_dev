@@ -1,3 +1,17 @@
+toggleGoods = (show)->
+  if show
+    $('.item-list-filter').fadeIn(500)
+    $('.item-list-container').fadeIn(500)
+    $('.item-pagiation').fadeIn(500)
+    $('.show-more').fadeIn(500)
+    $('.form__container').hide()
+  else
+    $('.item-list-filter').fadeOut(500)
+    $('.item-list-container').fadeOut(500)
+    $('.item-pagiation').fadeOut(500)
+    $('.show-more').fadeOut(500)
+    $('.form__container').fadeIn(500)
+
 followItem_Generater = (data,current_index) ->
   dd = $('<dd class="follow-list_item" i="' + current_index + '">'+
     '<div class="fans-container">' +

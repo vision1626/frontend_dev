@@ -1,6 +1,7 @@
 @import "../../../public_inc/source/less/imports";
 
 .form__container {
+  ._1626-breakpoints("form_publish");
   margin-top: 30px;
   display: none;
   h3, h4 {
@@ -15,14 +16,14 @@
   }
   .form__header {
     margin: 0 auto;
+    padding-left: @big-goods__margin / 2;
     font-size: @font-size-m;
-    width: @big-goods__width * 4 + 2 * @big-goods__margin + 51px;
+    ._1626-breakpoints("form_publish");
   }
   .form__body {
     margin: 0 auto;
     overflow: hidden;
-    ._1626-breakpoints("big-goods");
-    width: @big-goods__width * 4 + 2 * @big-goods__margin + 51px;
+    ._1626-breakpoints("form_publish");
     dl.big_img.static {
       display: block;
       float: left;
@@ -94,6 +95,12 @@
         a {
           border-bottom: 2px solid @grey;
           font-size: @font-size-s;
+          cursor: pointer;
+        }
+       .form-urlwarning {
+          margin: 0;
+          font-size: @font-size-xs;
+          color: @orange;
         }
       }
       .url-img-processor {
@@ -320,10 +327,17 @@
           display: inline-block;
           margin-left: 13px;
         }
-        img {
+        a.publish-tool {
           display: inline-block;
           width: 74px;
+          height: 74px;
           float: left;
+          background: url('/tpl/hi1626/v2/images/publish-tool.png');
+          background-size: cover;
+          background-position: center;
+          span {
+            opacity: 0;
+          }
         }
         h4 {
           margin: 0 0 8px 0;
@@ -340,7 +354,7 @@
           font-size: 20px;
           margin-right: 3px;
         }
-        a {
+        a.pubtutorial {
           border-bottom: 2px solid @grey;
           font-size: @font-size-s;
           margin-top: 15px;
@@ -422,8 +436,18 @@
           display: none;
         }
         .urlwarning {
-          color: red;
+          color: @orange;
           font-size: @font-size-xs;
+          a {
+            &:link,
+            &:visited,
+            &:hover,
+            &:hover {
+              border-bottom: 2px solid @grey;
+              margin-left: 2px;
+              color: black;
+            }
+          }
         }
         .input-row {
           padding: 5px 0 5px 10px;
@@ -453,9 +477,10 @@
         p {
           font-size: @font-size-s;
           color: @grey;
-          a {
+          a.manually-upload {
             color: black;
             border-bottom: 2px solid @grey;
+            cursor: pointer;
           }
         }
       }

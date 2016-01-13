@@ -94,3 +94,15 @@
     width: @min-width;
   }
 }
+
+._1626-breakpoints(@content-type) when (@content-type = "form_publish") {
+  @media only screen and (min-width:1246px) {
+    width: 1246px;
+  }
+  @media only screen and (min-width: 936px) and (max-width:1245px) {
+    width: 936px;
+  }
+  @media only screen and (max-width:904px) {
+    width: 620px;
+  }
+}

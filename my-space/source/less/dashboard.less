@@ -63,6 +63,7 @@
   .item-filter {
     float: left;
     border-left: solid 1px @grey;
+    padding-left: 10px;
     &:nth-child(1){
       border:none;
     }
@@ -92,9 +93,29 @@
       }
     }
     &.mode {
-      padding-left: 10px;
       i {
         margin-right: 0;
+      }
+    }
+    &.sort {
+      border-left: none;
+    }
+    &.search {
+      margin: -4px 10px 0 0;
+      form {
+        border-bottom: 2px dotted @dark-grey;
+        .icon {
+          font-size: @font-size-m;
+          color: @dark-grey;
+        }
+        input {
+          border: none;
+          font-size: @font-size-xs;
+          width: 100px;
+          &:focus {
+            outline: none;
+          }
+        }
       }
     }
   }
