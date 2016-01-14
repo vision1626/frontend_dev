@@ -64,6 +64,7 @@ init_dashboard = ->
 
 $(window).bind 'scroll', (e)->
   parallax($('.profile-container'))
+  fixMainnav()
   e.stopPropagation()
 
 #  if ($(this).scrollTop() + $(window).height() + 200 >= $(document).height() && $(this).scrollTop() > 200)

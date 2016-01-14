@@ -7,10 +7,6 @@ init_global_header = ->
   $nav_right_w = $nav_right.width()
   $nav_left_w = $nav_left.width()
 
-  set_search_w = ->
-    win_w = $(window).width()
-    $search_wrap.width win_w - $nav_right_w - $nav_left_w - 40
-
   set_search_w()
   $(window).on "resize", ->
     set_search_w()

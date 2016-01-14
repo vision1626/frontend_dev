@@ -62,7 +62,7 @@ else
           a(href="/") 退出
     li.fixed-nav__msg 
       a(href="/messagetip/") 消息
-      span.fixed-nav__number.fixed-nav__number--blue 30
+      span.fixed-nav__number.fixed-nav__number--blue 0
       ul.drop-down-list.right
         li.get-likes
         li.get-fans
@@ -112,7 +112,25 @@ else
       a(href="u/talk.html")
         i.icon.icon-publish_solid
         | 发布
-
+    li.main-nav__msg
+      if production
+        {if $_FANWE['uid'] > 0}
+        span.quit-span
+          a(href='/settings/psersonal.html')
+            img(src="{avatar $_FANWE['uid'] s 1 $_FANWE['user']['img_thumb']}")
+        {else}
+        a(href="{u user/login}") 登录
+        span |
+        a(href="{u user/register}") 注册
+        {/if}
+      span.fixed-nav__number.fixed-nav__number--blue 0
+      ul.drop-down-list.right
+        li.get-likes
+        li.get-fans
+        li.get-comments
+        li.get-recomendded
+        li.check-all
+          a
 script(type='text/javascript').
   $(document).ready(function () {
     init_global_header();

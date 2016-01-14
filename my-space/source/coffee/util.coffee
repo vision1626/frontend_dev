@@ -47,47 +47,41 @@ followItem_Generater = (data,current_index) ->
           '</div>' +
           '<div class="fans-concemed">' +
             '<div class="fans-concemed_fans" uid="' + data.uid + '">' +
-              '<div>' +
                 '<span class="icon icon-fans"></span>' +
-              '</div>' +
-              '<div>' +
-                '<span class="icon icon-concemed_fans_count"></span>' +
                 '<label>' + data.fans + ' 粉丝</label>' +
-              '</div>' +
             '</div>' +
             '<div class="fans-concemed_follow" uid="' + data.uid + '">' +
-              '<div>' +
                 '<span class="icon icon-following"></span>' +
-              '</div>' +
-              '<div>' +
-                '<span class="icon icon-concemed_follow_count"></span>' +
                 '<label>' + data.follows + ' 关注</label>' +
-              '</div>' +
             '</div>' +
           '</div>' +
-          '<div class="fans-follow">' +
             (
               status_class = ''
               status_text = ''
               status_icon = ''
-
+              status_btn = ''
               if data.is_follow is 1
                 status_class = 'follow_ed'
-                status_icon = 'icon-unfollow'
+                status_btn = 'slider--on'
                 if data.is_gz is 0
+                  status_icon = 'icon-followed'
                   status_text = '已关注'
                 else
+                  status_icon = 'icon-friends'
                   status_text = '互相关注'
               else
                 status_class = 'follow_nt'
                 status_text = '关注Ta'
                 status_icon = 'icon-follow'
 
-              '<div class="action ' + status_class + '" uid="' + data.uid + '">' +
-                '<span class="icon ' + status_icon + '"></span><label class="sl1">' + status_text + '</label><label class="sl2">取消关注</label>' +
-              '</div>'
+              "<div class='fans__follow-btn #{status_btn}'>" +
+                "<div class='slider'>" +
+                  "<i class='icon #{status_icon}'></i>" +
+                  "<a class='status_text'>#{status_text}</a>" +
+                "</div>" +
+                "<div class='slider-btn'></div>" +
+              "</div>"
             ) +
-          '</div>' +
         '</div>' +
       '</div>' +
     '</div>' +
@@ -174,6 +168,8 @@ big_DashboardItem_Generater = (data,current_index) ->
           (
             if state is 'talk' and _dashboard_show_me
               '<div class="actions"><span><i class="icon icon-edit"></i></span><span><i class="icon icon-garbage"></i></span></div>'
+            else
+              ''
           ) +
         '</div>' +
         '<div class="item-b_description">' +
@@ -269,6 +265,8 @@ small_DashboardItem_Generater = (data,current_index) ->
             if state is 'talk' and _dashboard_show_me
               '<div class="action-edit"><i class="icon icon-edit"></i></div>' +
               '<div class="action-delete"><i class="icon icon-garbage"></i></div>'
+            else
+              ''
           ) +
           '<div class="action-add_like btn_like" l="s" sid="' + sid + '" dtype="' + dtype + '" ed="' + data.is_fav + '">' +
             '<img src="" alt="" class="harting"/>' +
@@ -363,6 +361,29 @@ publishItem_Generater = () ->
 parallax = (obj)->
   y = $('body').scrollTop()
   obj.css({'background-position-y': -(y / 5) + 'px'})
+
+set_search_w = ->
+  win_w = $(window).width()
+  $('.main-nav__search').width win_w - 
+    $('.main-nav--right').width() - 
+    $('.main-nav').width() - 40
+
+fixMainnav = ->
+  $icon_hand = $('.main-nav__me').find('.icon')
+  if $('body').scrollTop() >= 250
+    $('.main-nav-container').addClass('ucantseeme')
+    $('.fixed-nav-container').addClass('ucantseeme')
+    $icon_hand.hide()
+  else
+    $('.main-nav-container').removeClass('ucantseeme')
+    $('.fixed-nav-container').removeClass('ucantseeme')
+    $icon_hand.show()
+
+  if $('body').scrollTop() >= 400
+    $('.main-nav-container').addClass('fixed')
+  else 
+    $('.main-nav-container').removeClass('fixed')
+  set_search_w()
 
 excite_Anim = (obj,animName) ->
   $(obj).addClass(animName + ' animated').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', () ->
