@@ -5,7 +5,7 @@ _score = 0
 _not_answer = false
 _image_path  = './tpl/hi1626/images/starwars/'
 _virgin = true
-_waittime = 10
+_waittime = 1000
 
 _mobile_empty_msg = '请输入电话号码'
 _mobile_error_msg = '请输入正确的电话号码'
@@ -14,9 +14,15 @@ _name_error_msg = '请输入正确的姓名,仅支持中英文'
 #_not_show_prize = true
 
 init = ->
+#  alert(navigator.userAgent)
   _virgin = parseInt(window.virgin_score) is -1
   set_step(_step)
 #  set_step(3)
+
+#$('.nexstep').click ->
+#  alert('n2')
+#  step = $(this).attr('s')
+#  set_step(parseInt(step))
 
 $(document).on 'click','.nexstep', ->
   step = $(this).attr('s')
@@ -98,8 +104,14 @@ $(document).on 'focus','input', ->
   else
     this.select()
 
-$(document).on 'focus','textarea', ->
-  this.select()
+#$('#key_text').click ->
+#  this.contents().find('body').select()
+
+#$(document).on 'click','#key_text', ->
+#  this.contents().find('body').select()
+
+$(document).on 'change','textarea', ->
+  set_result(parseInt(window.virgin_score))
 
 $(document).on 'blur','input', ->
   me = $(this)
@@ -186,64 +198,74 @@ set_step = (step) ->
   show = $('#show')
   result = $('#result')
 
-  views.fadeOut 0, ->
-    switch step
-      when -1
-        eye_top.addClass 'open_top2'
-        eye_bottom.addClass 'open_bottom2'
-        entrance.fadeIn 0
-      when 0
-        info_text = start.find('div.in')
-        start.fadeIn 0
-        info_text.animate({top:'-900px'},50000)
+  views.hide()
+  switch step
+    when -1
+#      eye_top.animate({height:'0'},1000)
+      eye_top.addClass 'open_position2'
+#      eye_bottom.animate({height:'0'},1000)
+      eye_bottom.addClass 'open_position2'
+      entrance.fadeIn 0
+    when 0
+      info_text = start.find('div.in')
+      start.fadeIn 0
+      info_text.animate({top:'-900px'},50000,'linear')
 #        text_animate(info_text,400,-700)
-      when 1
-        questions.fadeIn 0
-        set_question()
-      when 2
-        help_img = help.find('.help_img').find('img')
-        if _q_n is 3
-          help_img.attr('src',_image_path + 'help1.png')
-        else
-          help_img.attr('src',_image_path + 'help2.png')
-        help.fadeIn 0
-      when 3
-        eye_top.hide()
-        eye_bottom.hide()
-
-        if _virgin
-          result.find('.first_complete').show()
-          result.find('.all_completion').hide()
-          set_result(_score)
-          result.fadeIn 0, ->
-            if _score > 0
-              setTimeout ->
-                result.find('.light_body').addClass(['l',_score].join(''))
-              , 500
-        else
-          result.fadeIn 0, ->
-            set_result(parseInt(window.virgin_score))
-            after_submit();
+    when 1
+      questions.fadeIn 0
+      set_question()
+    when 2
+      help_img = help.find('.help_img').find('img')
+      if _q_n is 3
+        help_img.attr('src',_image_path + 'help1.png')
       else
-        logo = outside.find('img')
-        present = outside.find('h3')
+        help_img.attr('src',_image_path + 'help2.png')
+      help.fadeIn 0
+    when 3
+      eye_top.hide()
+      eye_bottom.hide()
 
-        outside.fadeIn 0, ->
-          setTimeout ->
-            eye_top.addClass 'open_top1'
-            eye_bottom.addClass 'open_bottom1'
-            present.addClass 'show'
-            logo.addClass 'show'
+      if _virgin
+        result.find('.first_complete').show()
+        result.find('.all_completion').hide()
+        set_result(_score)
+        result.fadeIn 0, ->
+          if _score > 0
             setTimeout ->
-              eye_top.removeClass 'open_top1'
-              eye_bottom.removeClass 'open_bottom1'
-              present.removeClass 'show'
-              logo.removeClass 'show'
-              setTimeout ->
-                set_step(-1)
-              , 1300
-            , 2500
+              result.find('.light_body').addClass(['l',_score].join(''))
+            , 500
+      else
+        result.fadeIn 0, ->
+          set_result(parseInt(window.virgin_score))
+          after_submit();
+    else
+      logo = outside.find('img')
+      present = outside.find('h3')
+
+      outside.fadeIn 0
+      setTimeout ->
+        eye_top.addClass 'open_position1'
+#        eye_top.animate({height:'33%'},1000)
+        eye_bottom.addClass 'open_position1'
+#        eye_bottom.animate({height:'33%'},1000)
+        present.addClass 'show'
+#        present.animate({opacity:'1'},1000)
+        logo.addClass 'show'
+#        logo.animate({opacity:'1'},1000)
+        setTimeout ->
+          eye_top.removeClass 'open_position1'
+#          eye_top.animate({height:'100%'},1000)
+          eye_bottom.removeClass 'open_position1'
+#          eye_bottom.animate({height:'100%'},1000)
+          present.removeClass 'show'
+#          present.animate({opacity:'0'},1000)
+          logo.removeClass 'show'
+#          logo.animate({opacity:'0'},1000)
+          setTimeout ->
+            set_step(-1)
           , 300
+        , 2500
+      , 300
 
 set_result = (score) ->
   result = $('#result')
@@ -260,6 +282,7 @@ set_result = (score) ->
   desc1.html(reward_list[rank].description1)
   desc2.html(reward_list[rank].description2)
   tb_key.val(reward_list[rank].tb_key)
+#  tb_key.contents().find('body').append(reward_list[rank].tb_key)
 
 after_submit = () ->
   if _virgin
@@ -272,8 +295,8 @@ after_submit = () ->
 toggle_prize = () ->
   prize = $('#prize')
   if prize.hasClass('showout')
-    prize.removeClass 'showout', ->
-      prize.hide()
+    prize.removeClass 'showout'
+    prize.hide()
   else
     prize.show 0, ->
       prize.addClass 'showout'

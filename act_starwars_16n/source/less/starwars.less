@@ -34,10 +34,11 @@ body,html{
     width: 100%;
     height: 100%;
     display:table;
+    overflow: hidden;
 
     .eye{
       .horizontal_center;
-      height: 50%;
+      height: 100%;
       //background-color: rgba(255,0,0,0.5);
       background-color: @black;
       width: 100%;
@@ -46,27 +47,21 @@ body,html{
       0 0 20px @black,
       0 0 30px @black,
       0 0 40px @black;
-      transition: all 1s;
+      transition: height 0.8s;
 
       &.eye_top{
         top:0;
-        bottom:auto
+        bottom:auto;
       }
       &.eye_bottom{
         top:auto;
         bottom:0;
       }
-      &.open_top1{
-        top: -17%;
+      &.open_position1{
+        height: 33%;
       }
-      &.open_top2{
-        top: -50%
-      }
-      &.open_bottom1{
-        bottom:-17%;
-      }
-      &.open_bottom2{
-        bottom:-50%;
+      &.open_position2{
+        height:0;
       }
     }
 
@@ -195,7 +190,7 @@ body,html{
           transform: rotateX(30deg);
           div.in {
             position: relative;
-            top:370px;
+            top:380px;
             //left: -94px;
             //transform: scale(0.6, 0.95);
             //font-weight: bold;
@@ -320,7 +315,7 @@ body,html{
             width:50%;
             img {
               height: 55px;
-              transform:rotate(180deg);
+              //transform:rotate(180deg);
             }
           }
 
@@ -389,7 +384,7 @@ body,html{
     .help{
       background-image: url('@{img-location}/questionBG.jpg');
       text-align: center;
-
+      display:none;
       .help_title,.help_description{
         position: absolute;
         left: 10px;
@@ -629,7 +624,7 @@ body,html{
               width: 50%;
               img {
                 height: 26px;
-                transform: rotate(180deg);
+                //transform: rotate(180deg);
               }
             }
           }
@@ -641,8 +636,8 @@ body,html{
           background-color: @starwars_transparent_black;
           width:80%;
           padding:10px;
-          height:100px;
-          bottom:30%;
+          height:120px;
+          bottom:26%;
           .box_center;
           textarea{
             .absolute_center;
@@ -817,7 +812,7 @@ body,html{
             width:50%;
             img {
               height: 26px;
-              transform:rotate(180deg);
+              //transform:rotate(180deg);
             }
           }
         }
@@ -924,7 +919,7 @@ body,html{
     .share_mask,.alert_mask{
       .absolute_center;
       margin: auto;
-      background-color: @starwars_transparent_black;
+      background-color: rgba(0,0,0,0.8);;
       z-index: 1000000;
       display: none;
       img{
@@ -1024,7 +1019,7 @@ body,html{
   padding-left: 50px;
   img {
     height: 85px;
-    transform:rotate(180deg);
+    //transform:rotate(180deg);
   }
 }
 
