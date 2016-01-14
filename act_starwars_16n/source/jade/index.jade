@@ -176,9 +176,10 @@ html
               .key_right
                 img(src=image_path + 'question_arrow.png',alt='')
           .key_text
-            span
-          .copy_button#copy_button
-            span 一键盘复制
+            textarea
+          //.copy_button
+          //  a#copy_button(href="javascript:void(0)")
+          //    span 一键盘复制
         .result_action
           .result_action_buttons
             .result_action_left
@@ -265,5 +266,20 @@ html
     script.
       $(document).ready(function () {
         window.virgin_score = '{$votes}';
+
+        var swf_path = '../../js/ZeroClipboard.swf';
+        $("#copy_button").zclip({
+          path: swf_path,
+          copy: function () {
+            return swf_path.html();
+          },
+          beforeCopy: function () {
+            alert('before');
+          },
+          afterCopy: function () {
+            alert('copy done');
+          }
+        });
+
         init();
       });

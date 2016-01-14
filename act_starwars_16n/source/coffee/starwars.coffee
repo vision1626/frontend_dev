@@ -1,11 +1,11 @@
 _step = -2
 _q_n= 0
 _done = 0
-_score = 7
+_score = 0
 _not_answer = false
 _image_path  = './tpl/hi1626/images/starwars/'
 _virgin = true
-_waittime = 1000
+_waittime = 10
 
 _mobile_empty_msg = '请输入电话号码'
 _mobile_error_msg = '请输入正确的电话号码'
@@ -14,12 +14,11 @@ _name_error_msg = '请输入正确的姓名,仅支持中英文'
 #_not_show_prize = true
 
 init = ->
+  _virgin = parseInt(window.virgin_score) is -1
   set_step(_step)
 #  set_step(3)
 
 $(document).on 'click','.nexstep', ->
-  _virgin = parseInt(window.virgin_score) is -1
-
   step = $(this).attr('s')
   set_step(parseInt(step))
 
@@ -32,16 +31,16 @@ $(document).on 'click','.select_answer', ->
     me.find('span').html('')
     if parseInt(my_select) is parseInt(q.answer)
       me.addClass "right"
-      me.find('span').addClass('icon').addClass('icon-glad')
+      me.find('span').addClass('icon').addClass('icon-tick')
       _score += 1
     else
       me.addClass "wrong"
-      me.find('span').addClass('icon').addClass('icon-sad')
+      me.find('span').addClass('icon').addClass('icon-cross')
     setTimeout ->
       if _q_n < question_list.length-1
         _q_n += 1
         me.removeClass('right').removeClass('wrong')
-        me.find('span').removeClass('icon').removeClass('icon-glad').removeClass('icon-sad')
+        me.find('span').removeClass('icon').removeClass('icon-tick').removeClass('icon-cross')
         if _q_n is 3 or _q_n is 6
           set_step(2)
         else
@@ -57,32 +56,39 @@ $(document).on 'click','.show_prize', ->
   toggle_prize()
 
 $(document).on 'click','.share_now', ->
-#  $('.alert_mask').show()
   $('.share_mask').show()
 
+$(document).on 'click','.alert_mask', ->
+  close_alert()
+
 $('.alert_mask').click ->
-  $('.alert_mask').hide()
+  close_alert()
+
+$(document).on 'click','.share_mask', ->
+  $('.share_mask').hide()
 
 $('.share_mask').click ->
   $('.share_mask').hide()
 
-$(document).on 'click','#submit_button', ->
-  before_submit()
+#$(document).on 'click','#submit_button', ->
+#  before_submit()
+##  after_submit()
 
 $('#submit_button').click ->
   before_submit()
+#  after_submit()
 
-$('#copy_button').click ->
-  $(this).zclip
-
-$('#copy_button').zclip ->
-  path: './public/js/ZeroClipboard.swf'
-  copy: ->
-    'what the f**k!'
-  beforeCopy: ->
-    alert('before')
-  afterCopy: ->
-    alert('copy done')
+#$('#copy_button').click ->
+#  $(this).zclip
+#
+#$('#copy_button').zclip ->
+#  path: './public/js/ZeroClipboard.swf'
+#  copy: ->
+#    'what the f**k!'
+#  beforeCopy: ->
+#    alert('before')
+#  afterCopy: ->
+#    alert('copy done')
 
 $(document).on 'focus','input', ->
   me = $(this)
@@ -91,6 +97,9 @@ $(document).on 'focus','input', ->
     me.val('')
   else
     this.select()
+
+$(document).on 'focus','textarea', ->
+  this.select()
 
 $(document).on 'blur','input', ->
   me = $(this)
@@ -109,22 +118,22 @@ $(document).on 'blur','input', ->
 
 before_submit = () ->
   result = $('#result')
-  error = []
+  alert_message = []
   input_mobile = result.find('.user_form').find('input.mobile')
   input_name = result.find('.user_form').find('input.name')
 
   if input_mobile.hasClass('empty')
-    error.push(_mobile_empty_msg)
+    alert_message.push(_mobile_empty_msg)
   else if input_mobile.hasClass('error')
-    error.push(_mobile_error_msg)
+    alert_message.push(_mobile_error_msg)
 
   if input_name.hasClass('empty')
-    error.push(_name_empty_msg)
+    alert_message.push(_name_empty_msg)
   else if input_name.hasClass('error')
-    error.push(_name_error_msg)
+    alert_message.push(_name_error_msg)
 
-  if error.length > 0
-    show_error(error)
+  if alert_message.length > 0
+    show_alert(alert_message,'error')
   else
 #    name = '丢那星'
     name = input_name.val()
@@ -137,20 +146,32 @@ before_submit = () ->
       cache: false
       dataType: "json"
       success: (result)->
-        alert(result.msg)
-        after_submit()
+        if result.status is 1
+          after_submit()
+        else
+          alert_message.push(result.msg)
+          show_alert(alert_message,'error')
       error: (result)->
-        alert('errr: ' + result)
+        alert_message.push('网络超时')
+        show_alert(alert_message,'error')
     }
 
-show_error = (error_list) ->
-  if error_list.length > 1
-    msg = error_list.join('<br>')
+show_alert = (msg_list,type) ->
+  alert_box = $('.alert_mask')
+  if msg_list.length > 1
+    msg = msg_list.join('<br>')
   else
-    msg = error_list[0]
-  alert_message = $('.alert_mask').find('.alert_message').find('span')
+    msg = msg_list[0]
+  alert_message = alert_box.find('.alert_message').find('span')
   alert_message.html('').html(msg)
-  $('.alert_mask').show()
+  if type
+    alert_box.find('.alert_message').addClass(type)
+  alert_box.show()
+
+close_alert = () ->
+  alert_box = $('.alert_mask')
+  alert_box.find('.alert_message').removeClass('error').removeClass('alert')
+  alert_box.hide()
 
 set_step = (step) ->
   _step = step
@@ -200,9 +221,9 @@ set_step = (step) ->
                 result.find('.light_body').addClass(['l',_score].join(''))
               , 500
         else
-          result.find('.first_complete').hide()
-          result.find('.all_completion').show()
-          set_result(parseInt(window.virgin_score))
+          result.fadeIn 0, ->
+            set_result(parseInt(window.virgin_score))
+            after_submit();
       else
         logo = outside.find('img')
         present = outside.find('h3')
@@ -228,7 +249,7 @@ set_result = (score) ->
   result = $('#result')
   desc1 = result.find('.first_complete').find('span.d1')
   desc2 = result.find('.first_complete').find('span.d2')
-  tb_key = result.find('.key_text').find('span')
+  tb_key = result.find('.key_text').find('textarea')
   rank = 0
 
   if score >= 3 and score <= 5
@@ -238,11 +259,12 @@ set_result = (score) ->
 
   desc1.html(reward_list[rank].description1)
   desc2.html(reward_list[rank].description2)
-  tb_key.html(reward_list[rank].tb_key)
+  tb_key.val(reward_list[rank].tb_key)
 
 after_submit = () ->
-  window.virgin_score = _score
-  _virgin = false
+  if _virgin
+    window.virgin_score = _score
+    _virgin = false
   result = $('#result')
   result.find('.first_complete').hide()
   result.find('.all_completion').show()

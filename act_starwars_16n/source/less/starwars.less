@@ -641,12 +641,23 @@ body,html{
           background-color: @starwars_transparent_black;
           width:80%;
           padding:10px;
-          height:80px;
-          bottom:37%;
+          height:100px;
+          bottom:30%;
           .box_center;
-          span{
-            font-size: 14px;
+          textarea{
+            .absolute_center;
+            top: 10px;
+            bottom:10px;
+            left:10px;
+            right:10px;
+            margin: auto;
+            border: 0;
+            background-color: @starwars_transparent;
+            font-size: 16px;
             color:@starwars_desert;
+            &:focus{
+              color: @starwars_desert;
+            }
           }
         }
         .copy_button{
@@ -925,7 +936,6 @@ body,html{
         .horizontal_center;
         .desert_box;
         margin: auto;
-        background-color: @starwars_transparent_red;
         width:80%;
         padding:10px;
         height:80px;
@@ -935,7 +945,14 @@ body,html{
           font-size: 14px;
           color:@starwars_desert;
         }
+        &.error{
+          background-color: @starwars_transparent_red;
+        }
+        &.alert{
+          background-color: @starwars_transparent_black;
+        }
       }
+
     }
   }
 }
