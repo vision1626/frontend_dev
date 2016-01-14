@@ -90,7 +90,7 @@ html
             .go_button
               img(src=image_path + 'go_button.png',alt='')
             .go_right
-              img(src=image_path + 'go_arrow.png',alt='')
+              img(src=image_path + 'go_arrow_2.png',alt='')
         .top_mask
         include ./source/jade/top_logo.jade
         include ./source/jade/16eme.jade
@@ -104,7 +104,7 @@ html
             .question_no
               span
             .index_right
-              img(src=image_path + 'question_arrow.png',alt='')
+              img(src=image_path + 'question_arrow_2.png',alt='')
         .question_content
           span
         .question_answer
@@ -132,7 +132,7 @@ html
             .next_button
               img(src=image_path + 'next_button.png',alt='')
             .next_right
-              img(src=image_path + 'go_arrow.png',alt='')
+              img(src=image_path + 'go_arrow_2.png',alt='')
       .result.view#result
         include ./source/jade/top_logo.jade
         include ./source/jade/16eme.jade
@@ -174,9 +174,10 @@ html
               .key_center
                 span 已领取的优惠券
               .key_right
-                img(src=image_path + 'question_arrow.png',alt='')
+                img(src=image_path + 'question_arrow_2.png',alt='')
           .key_text
-            textarea
+            textarea#key_text
+            //textarea#key_text(readonly=true)
           //.copy_button
           //  a#copy_button(href="javascript:void(0)")
           //    span 一键盘复制
@@ -190,7 +191,7 @@ html
               .share_now
                 span 马上分享
             .result_action_right
-              img(src=image_path + 'go_arrow.png',alt='')
+              img(src=image_path + 'go_arrow_2.png',alt='')
       .prize.view#prize
         include ./source/jade/top_logo.jade
         include ./source/jade/16eme.jade
@@ -209,7 +210,7 @@ html
         //    .question_no
         //      span 奖品1
         //    .index_right
-        //      img(src=image_path + 'question_arrow.png',alt='')
+        //      img(src=image_path + 'question_arrow_2.png',alt='')
         //.prize_container.container1
         //  .prize_branch
         //  .prize_name
@@ -234,7 +235,7 @@ html
         //    .question_no
         //      span 奖品2
         //    .index_right
-        //      img(src=image_path + 'question_arrow.png',alt='')
+        //      img(src=image_path + 'question_arrow_2.png',alt='')
         //.prize_container.container2
         //  .prize_branch
         //  .prize_name
