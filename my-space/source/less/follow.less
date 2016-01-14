@@ -67,20 +67,20 @@ dl.follow-list {
           height: 30px;
 
           span{
-            font-size: @font-size-s;
-            color:@grey;
+            font-size: @font-size-xs;
+            color:@dark-grey;
           }
         }
       }
 
       .fans-action{
         background-color: @white;
-        height:162px;
+        height:150px;
         width:100%;
-
+        border-bottom: 2px solid @white;
         .fans-published{
           //width:100%;
-          height:56px;
+          height:50px;
           margin-top: 12px;
           margin-left: 12px;
 
@@ -103,20 +103,28 @@ dl.follow-list {
           column-gap:10px;
           text-align: center;
           font-size: @font-size-xs;
-          margin: 0 12px;
+          margin: 0 20px;
 
           .fans-concemed_fans,.fans-concemed_follow{
             cursor: pointer;
+
+            label {
+              line-height: 24px;
+              color: @dark-grey;
+              cursor: pointer;
+            }
           }
           .icon{
-            font-size: 24px;
+            font-size: 20px;
+            color: @dark-grey;
+            display: block;
           }
         }
 
         .fans-follow{
           text-align: center;
           font-size: @font-size-m;
-          margin-top: 14px;
+          margin-top: 10px;
           position: relative;
           cursor: pointer;
 
@@ -130,7 +138,6 @@ dl.follow-list {
             //padding: 0 5px;
             background-color: @white;
             color:@black;
-
             font-size: @font-size-s;
             text-align: left;
             position: relative;
@@ -200,8 +207,13 @@ dl.follow-list {
       }
     }
 
-    &:hover .fans-content{
-      box-shadow: 0 1px 5px @dark-grey;
+    &:hover {
+      .fans-content{
+        box-shadow: 0 1px 5px @dark-grey;
+        .fans-action {
+          border-bottom: 2px solid @blue;
+        }
+      }
     }
   }
 }
