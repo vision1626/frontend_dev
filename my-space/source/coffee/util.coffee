@@ -13,7 +13,7 @@ toggleGoods = (show)->
     $('.form__container').fadeIn(500)
 
 followItem_Generater = (data,current_index) ->
-  dd = $('<dd class="follow-list_item" i="' + current_index + '">'+
+  dd = $('<dd class="follow-list_item" i="' + current_index + '" t-uid=' + data.uid + '>'+
     '<div class="fans-container">' +
       '<div class="fans-face">' +
         '<a href="' + data.user_href + '" target="_blank">' +
@@ -56,31 +56,38 @@ followItem_Generater = (data,current_index) ->
             '</div>' +
           '</div>' +
             (
-              status_class = ''
-              status_text = ''
-              status_icon = ''
-              status_btn = ''
-              if data.is_follow is 1
-                status_class = 'follow_ed'
-                status_btn = 'slider--on'
-                if data.is_gz is 0
-                  status_icon = 'icon-followed'
-                  status_text = '已关注'
+              if parseInt(data.uid) isnt parseInt(window.myid)
+                status_class = ''
+                status_text = ''
+                status_icon = ''
+                status_btn = ''
+                status_code = ''
+                if data.is_follow is 1
+                  status_class = 'follow_ed'
+                  status_btn = 'slider--on'
+                  if data.is_gz is 0
+                    status_icon = 'icon-followed'
+                    status_text = '已关注'
+                    status_code = '1'
+                  else
+                    status_icon = 'icon-friends'
+                    status_text = '互相关注'
+                    status_code = '2'
                 else
-                  status_icon = 'icon-friends'
-                  status_text = '互相关注'
-              else
-                status_class = 'follow_nt'
-                status_text = '关注Ta'
-                status_icon = 'icon-follow'
+                  status_class = 'follow_nt'
+                  status_text = '关注Ta'
+                  status_icon = 'icon-follow'
+                  status_code = '0'
 
-              "<div class='fans__follow-btn #{status_btn}'>" +
-                "<div class='slider'>" +
-                  "<i class='icon #{status_icon}'></i>" +
-                  "<a class='status_text'>#{status_text}</a>" +
-                "</div>" +
-                "<div class='slider-btn'></div>" +
-              "</div>"
+                "<div class='fans__follow-btn follow-btn #{status_btn}' follow-status='#{status_code}'>" +
+                  "<div class='slider'>" +
+                    "<i class='icon #{status_icon}'></i>" +
+                    "<a class='status_text'>#{status_text}</a>" +
+                  "</div>" +
+                  "<div class='slider-btn'></div>" +
+                "</div>"
+              else
+                ''
             ) +
         '</div>' +
       '</div>' +

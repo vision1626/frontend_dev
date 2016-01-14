@@ -1,5 +1,5 @@
 @import "../../../public_inc/source/less/imports";
-.profile__follow-btn {
+.profile__follow-btn,.edit-profile-btn {
   top: -35px;
   left: 60px;
   display: inline-block;
@@ -8,12 +8,32 @@
   &:hover {
     color: @blue;
   }
+  .slider {
+    &.to-unfollow {
+      a {
+        color: white !important;
+      }
+      .icon {
+        color: white !important;
+      }
+    }
+  }
 }
 .fans__follow-btn {
   margin: 10px auto 0;
   border: 1px solid @grey;
+  .slider {
+    &.to-unfollow {
+      a {
+        color: black !important;
+      }
+      .icon {
+        color: black !important;
+      }
+    }
+  }
 }
-.fans__follow-btn,.profile__follow-btn{
+.fans__follow-btn,.profile__follow-btn,.edit-profile-btn{
   position: relative;
   //position: absolute;
 
@@ -30,9 +50,10 @@
   &:hover {
     .icon-follow {
       transition: all 0.1s linear;
+      color: @blue;
     }
   }
-  a {
+  .status_text {
     top: 8px;
     left: 28px;
     position: absolute;
@@ -59,11 +80,7 @@
     .icon {
     }
     &.to-unfollow {
-      a {
-        color: white !important;
-      }
       .icon {
-        color: white !important;
         &:before {
           content: '\e913' !important;
         }
@@ -81,7 +98,7 @@
         color: @blue;
       }
     }
-    a.status_text {
+    .status_text {
       left: 7px;
     }
     &:hover {

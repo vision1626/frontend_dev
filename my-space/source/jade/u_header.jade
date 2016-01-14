@@ -8,16 +8,17 @@ else
 .profile-container
   .profile
     img(src="{avatar $home_user['uid'] b 1 $home_user['img_thumb']}").profile__icon
-    .profile__follow-btn
-      //{if $home_user['uid'] == $_FANWE['uid']}
+    //{if $home_user['uid'] == $_FANWE['uid']}
+    .profile__follow-btn.edit-profile-btn
       i.icon.icon-edit
-      a(href="/settings/psersonal.html") 修改资料
-      //{else}
+      a.status_text(href="/settings/psersonal.html") 修改资料
+    //{else}
+    .profile__follow-btn.follow-btn
       .slider
         i.icon
         a.status_text
       .slider-btn
-      //{/if}
+    //{/if}
     .name_container
       h3.name {$home_user['user_name']}
       //- span.profile__level LV.2
