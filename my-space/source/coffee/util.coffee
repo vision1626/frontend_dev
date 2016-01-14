@@ -364,6 +364,29 @@ parallax = (obj)->
   y = $('body').scrollTop()
   obj.css({'background-position-y': -(y / 5) + 'px'})
 
+set_search_w = ->
+  win_w = $(window).width()
+  $('.main-nav__search').width win_w - 
+    $('.main-nav--right').width() - 
+    $('.main-nav').width() - 40
+
+fixMainnav = ->
+  $icon_hand = $('.main-nav__me').find('.icon')
+  if $('body').scrollTop() >= 250
+    $('.main-nav-container').addClass('ucantseeme')
+    $('.fixed-nav-container').addClass('ucantseeme')
+    $icon_hand.hide()
+  else
+    $('.main-nav-container').removeClass('ucantseeme')
+    $('.fixed-nav-container').removeClass('ucantseeme')
+    $icon_hand.show()
+
+  if $('body').scrollTop() >= 400
+    $('.main-nav-container').addClass('fixed')
+  else 
+    $('.main-nav-container').removeClass('fixed')
+  set_search_w()
+
 excite_Anim = (obj,animName) ->
   $(obj).addClass(animName + ' animated').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', () ->
     obj.removeClass(animName).removeClass('animated')
