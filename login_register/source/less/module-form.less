@@ -299,7 +299,7 @@
   overflow: hidden;
   width: @form-width;
   .switch-container {
-    width: @form-width*3 + 30px;
+    //width: @form-width*3 + 30px;
     ._clearfix;
     position: relative;
     left: 0;
@@ -313,7 +313,7 @@
   }
   .register {
     //top: -27px;
-    opacity: 0;
+    //opacity: 0;
     &.hidden {
       //top: 50px;
     }
@@ -442,23 +442,24 @@
   }
 }
 .social-login {
-  // display: none;
+  @icon-w: 26px;
+  @margin:10px;
+  @padding:6px;
   .social-links {
     ._clearfix;
-    //width: (38px + @border-width*2 + 10px + 10px)*3;
-    width: 38px + @border-width*2 + 10px + 10px;
+    width: (@icon-w + (@margin + @border-width + @padding) * 2) * 1;
     margin: auto;
   }
   a {
-    ._block(26px,26px);
+    ._square(@icon-w);
     border-radius: 50%;
     border: @border-width solid @gray;
     float: left;
-    padding: 6px;
-    margin: 0 10px;
+    padding: @padding;
+    margin: 0 @margin;
     background: #fff;
     i {
-      font-size: 26px;
+      font-size: @icon-w;
       color: #000;
     }
     &:hover {
@@ -478,8 +479,15 @@
         color: #fff;
       }
     }
-
-
+  }
+  a.wechat, a.taobao, a.qq {
+    opacity: 0;
+    position: relative;
+    top: 200px;
+    left: -300px;
+  }
+  a.weibo {
+    position: absolute;
   }
 }
 article.form-sidebar {
@@ -659,4 +667,11 @@ article.form-sidebar {
 .prohibited {
   cursor: not-allowed;
   color: #ccc;
+}
+
+.temp-to-show {
+  display: none !important;
+}
+.temp-to-hide {
+  display: block !important;
 }

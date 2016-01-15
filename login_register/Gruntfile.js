@@ -122,7 +122,8 @@ module.exports = function (grunt) {
         jade4php: {
             compile: {
                 options: {
-                    pretty: true
+                    pretty: true,
+                    basedir: __dirname
                 },
                 expand: true,
                 cwd: '<%= globalConfig.jadeSrcPath %>/',

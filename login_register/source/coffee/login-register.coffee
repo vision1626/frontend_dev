@@ -6,10 +6,10 @@ init = ->
 
   #  Responsive 自適應
   resizeEle = ->
-    form_w = $('.form-container').width()
-    $('.switch-header').width form_w
-    $('.form-header').width form_w
-    $('.switch-container').width form_w * 3 + 30
+#    form_w = $('.form-container').width()
+#    $('.switch-header').width form_w
+#    $('.form-header').width form_w
+#    $('.switch-container').width form_w * 3 + 30
 
   resizeEle()
   $(window).resize ->
@@ -30,35 +30,35 @@ init = ->
       $(this).addClass 'icon-unseen'
 
   #  Switch login and register 註冊登錄切換
-  btn_goto_login = $('.goto-login')
-  btn_goto_register = $('.goto-register')
-  $('#form-login').show()
-  $('#form-register').hide()
-  $('#form-nickname').hide()
-  btn_goto_login.click ->
-    $('.form-container').removeClass 'at-register'
-    $('#form-login').show()
-    $('#form-register').hide()
-    $('#form-nickname').hide()
-    $('.social-login').show()
-    $('.switch-container').css 'left', 0
-    $('.form-error').hide()
-    $('.input-password').val('')
-    at_page = 0 # login
-  btn_goto_register.click ->
-    $('.form-container').addClass 'at-register'
-    $('#form-register').show()
-    $('#form-nickname').hide()
-    $('.social-login').hide()
-    $('#form-register').find('input#captchaInput').val('')
-#    $('#form-register').find('a.captcha').renew_captcha()
-    renew_captcha()
-    $('#form-login').hide()
-    form_w = $('.form-container').width()
-    $('.switch-container').css 'left', -(form_w + 30)
-    $('.form-error').hide()
-    $('.input-password').val('')
-    at_page = 1 # register
+#  btn_goto_login = $('.goto-login')
+#  btn_goto_register = $('.goto-register')
+#  $('#form-login').show()
+#  $('#form-register').hide()
+#  $('#form-nickname').hide()
+#  btn_goto_login.click ->
+#    $('.form-container').removeClass 'at-register'
+#    $('#form-login').show()
+#    $('#form-register').hide()
+#    $('#form-nickname').hide()
+#    $('.social-login').show()
+#    $('.switch-container').css 'left', 0
+#    $('.form-error').hide()
+#    $('.input-password').val('')
+#    at_page = 0 # login
+#  btn_goto_register.click ->
+#    $('.form-container').addClass 'at-register'
+#    $('#form-register').show()
+#    $('#form-nickname').hide()
+#    $('.social-login').hide()
+#    $('#form-register').find('input#captchaInput').val('')
+##    $('#form-register').find('a.captcha').renew_captcha()
+#    renew_captcha()
+#    $('#form-login').hide()
+#    form_w = $('.form-container').width()
+#    $('.switch-container').css 'left', -(form_w + 30)
+#    $('.form-error').hide()
+#    $('.input-password').val('')
+#    at_page = 1 # register
 
   #  Form input error tip 彈出錯誤提示
   showFormError = (text, x, y, pass)->
@@ -96,11 +96,11 @@ init = ->
 #  $(window).bind 'hashchange', ->
 #    locationHashChanged()
 
-  $(window).bind 'load', ->
-    if location.href.indexOf('register.html')>0
-      btn_goto_register.click()
-    else
-      btn_goto_login.click()
+#  $(window).bind 'load', ->
+#    if location.href.indexOf('register.html')>0
+#      btn_goto_register.click()
+#    else
+#      btn_goto_login.click()
 
 #  locationHashChanged()
 
@@ -113,7 +113,7 @@ init = ->
     if !$('.input-row.captcha input').hasClass('prohibited')
       $('.input-row.captcha .captcha').css("background-image",'url(' + SITE_URL + "services/service.php?m=index&a=verify&rand=" + Math.random() + ')')
       $('.input-row.captcha input').val('')
-      $('.input-row.captcha input').focus()
+#      $('.input-row.captcha input').focus()
   renew_captcha()
 
   # Click and change captcha image 點擊驗證碼刷新
