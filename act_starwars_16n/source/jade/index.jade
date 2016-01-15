@@ -55,14 +55,14 @@ html
           //h3.nexstep(s='-1') PRESENT
           h3 PRESENT
 
-      .entrance.view#entrance
+      .entrance.view.nexstep#entrance(s='0')
         include ./source/jade/top_logo.jade
         span.copyright © & ™ Lucasfilm Ltd.
-        .enter.nexstep(s='0')
+        .enter
           img(src=image_path + 'entrance.gif',alt='')
         include ./source/jade/16eme.jade
 
-      .start.view#startquestion
+      .start.view.nexstep#startquestion(s='1')
         .info_text
           div.out
             div.in
@@ -113,11 +113,11 @@ html
           .answer2.select_answer(a=2)
             span
         include ./source/jade/16eme.jade
-      .help.view#help
+      .help.view.kill#help
         include ./source/jade/top_logo.jade
         include ./source/jade/16eme.jade
         .help_title
-          span 有时候,你需要一些协助
+          span
         .help_img
           img(src="" alt="")
         .help_description

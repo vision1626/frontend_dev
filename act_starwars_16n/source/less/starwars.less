@@ -75,7 +75,7 @@ body,html{
       .absolute_center;
       background-repeat: no-repeat;
       background-position: center center;
-      background-size: 102% 100%;
+      background-size: 101% auto;
       overflow: hidden;
 
       .toplogo{
@@ -523,6 +523,7 @@ body,html{
           &.user_information{
             bottom:59%;
             font-size: 16px;
+            .n_logo;
           }
         }
         .user_form{
@@ -580,6 +581,7 @@ body,html{
         .absolute_center;
         height:72%;
         display:none;
+
         .receive_description{
           .horizontal_center;
           position: absolute;
@@ -590,6 +592,7 @@ body,html{
           0 0 10px @starwars_red,
           0 0 20px  @starwars_red,
           0 0 30px  @starwars_red;
+          .n_logo;
         }
         .key_title {
           .horizontal_center;
@@ -717,10 +720,16 @@ body,html{
       z-index: 99999;
       background-image: url('@{img-location}/questionBG.jpg');
       text-align: center;
-      top:200%;
-      transition: all 0.5s;
+      opacity: 0;
+      transition: opacity 0.5s;
       &.showout{
+        opacity: 1;
+      }
+      &.live{
         top:0;
+      }
+      &.kill{
+        top:200%;
       }
       .hide_prize{
         z-index: 100000000;

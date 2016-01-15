@@ -5,7 +5,7 @@ _score = 0
 _not_answer = false
 _image_path  = './tpl/hi1626/images/starwars/'
 _virgin = true
-_waittime = 10
+_waittime = 1000
 
 _mobile_empty_msg = '请输入电话号码'
 _mobile_error_msg = '请输入正确的电话号码'
@@ -23,6 +23,10 @@ init = ->
 #  alert('n2')
 #  step = $(this).attr('s')
 #  set_step(parseInt(step))
+
+$('.nexstep').click ->
+  step = $(this).attr('s')
+  set_step(parseInt(step))
 
 $(document).on 'click','.nexstep', ->
   step = $(this).attr('s')
@@ -216,14 +220,17 @@ set_step = (step) ->
       set_question()
     when 2
       help_img = help.find('.help_img').find('img')
+      help_title = help.find('.help_title').find('span')
       if _q_n is 3
         help_img.attr('src',_image_path + 'help1.png')
+        help_title.html('有时候,你需要一些协助')
       else
         help_img.attr('src',_image_path + 'help2.png')
+        help_title.html('接下来的一题目，超难！')
       help.fadeIn 0
     when 3
-      eye_top.hide()
-      eye_bottom.hide()
+#      eye_top.hide()
+#      eye_bottom.hide()
 
       if _virgin
         result.find('.first_complete').show()
@@ -281,7 +288,7 @@ set_result = (score) ->
 
   desc1.html(reward_list[rank].description1)
   desc2.html(reward_list[rank].description2)
-  tb_key.val(reward_list[rank].tb_key)
+  tb_key.val(decodeURIComponent(reward_list[rank].tb_key))
 #  tb_key.contents().find('body').append(reward_list[rank].tb_key)
 
 after_submit = () ->
@@ -295,11 +302,17 @@ after_submit = () ->
 toggle_prize = () ->
   prize = $('#prize')
   if prize.hasClass('showout')
-    prize.removeClass 'showout', ->
+    prize.removeClass 'showout'
+    setTimeout ->
+      prize.addClass 'kill'
+      prize.removeClass 'live'
       prize.hide()
+    , 500
   else
 #    prize.show 0, ->
     prize.show ->
+      prize.addClass 'live'
+      prize.removeClass 'kill'
       prize.addClass 'showout'
 
 set_question = () ->

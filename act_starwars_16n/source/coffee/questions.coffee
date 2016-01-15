@@ -3,7 +3,7 @@ selected_answers = [0,0,0,0,0,0,0]
 question_list = [
   {
     "num": 1,
-    "content": "第七部«星球大战»系列电影的名称是?",
+    "content": "«星球大战»系列电影<br>第七部的名称是?",
     "options": {
       "1": "«星球大战7:原力觉醒»",
       "2": "«愿原力与你同在»"
@@ -46,7 +46,7 @@ question_list = [
     "content": "绝地武士使用的招牌武器是?",
     "options": {
       "1": "菜刀",
-      "2": "光剑"
+      "2": "激光剑"
     },
     "answer": 2,
     "selected":""
