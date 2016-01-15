@@ -117,33 +117,18 @@ init = ->
   $("a.captcha").click ->
     renew_captcha()
 
-  # -------------------------- 用户条款弹窗 - START -------------------------
+  # -------------------------- 绑定成功提示页 - START - 2016.01.15新增 @中 -------------------------
 
-  popup = $('.popup-wrap')
-  popup_content = popup.find '.popup-content'
+  $('#showRegForm').click ->
+    $('.after-bind').hide()
+    $('.switch-header-social').show()
+    $('.form-wrap').show()
+  $('.skip-reg').click ->
+    $('#form-login').hide()
+    $('#form-register').hide()
+    $('#form-nickname').show()
 
-  changePopupPosForIE = ->
-    popup_content_w = popup_content.width() + 96
-    popup_content.css 'left': ($(window).width() - popup_content_w) / 2, 'top': 200
-
-  # 触发弹窗
-  $('a.show-terms').click ->
-    if $(window).width() > 950
-      url = $(this).attr 'data-href'
-      window.open(url, '_blank')
-    else
-      popup_content.find('article').html(USERTERMS) #Separate JS @ /www.hi1626.com/public/js/user-terms.js
-      popup.fadeIn(100)
-      if checkIE()
-        changePopupPosForIE()
-
-  # 關閉彈窗
-  $('.close-popup').click ->
-    popup.fadeOut(100)
-
-  # -------------------------- 用户条款弹窗 - END -------------------------
-
-# -------------------------- 登錄 - START -------------------------
+  # -------------------------- 登錄 - START -------------------------
 
   log_input_phone = $('#form-login input.input-phone')
   log_input_pass = $('#form-login input.input-password')
@@ -549,9 +534,38 @@ init = ->
     location.href = url
 
   # -------------------------- 修改昵称 - END -------------------------
-   # 偵測回車鍵
+
+
+  # -------------------------- 用户条款弹窗 - START -------------------------
+
+  popup = $('.popup-wrap')
+  popup_content = popup.find '.popup-content'
+
+  changePopupPosForIE = ->
+    popup_content_w = popup_content.width() + 96
+    popup_content.css 'left': ($(window).width() - popup_content_w) / 2, 'top': 200
+
+  # 触发弹窗
+  $('a.show-terms').click ->
+    if $(window).width() > 950
+      url = $(this).attr 'data-href'
+      window.open(url, '_blank')
+    else
+      popup_content.find('article').html(USERTERMS) #Separate JS @ /www.hi1626.com/public/js/user-terms.js
+      popup.fadeIn(100)
+      if checkIE()
+        changePopupPosForIE()
+
+  # 關閉彈窗
+  $('.close-popup').click ->
+    popup.fadeOut(100)
+
+# -------------------------- 用户条款弹窗 - END -------------------------
+
+
+  # 偵測回車鍵
   form_nickname.find('input.input-nickname').keypress (e)->
-    # 此function为了解决在此输入框中按回车键时直接页面跳转的问题
+  # 此function为了解决在此输入框中按回车键时直接页面跳转的问题
     if(e.which == 13)
       validateNicknameForm(true)
       false
