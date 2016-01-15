@@ -455,7 +455,6 @@ body,html{
 
       .first_complete {
         .absolute_center;
-        z-index: 1000;
         height:72%;
         display:none;
         .light_sword_container {
@@ -530,7 +529,7 @@ body,html{
         .user_form{
           .horizontal_center;
           margin: auto;
-          bottom: 14%;
+          bottom: 12%;
           padding: 10% 15%;
           &.black
           {
@@ -540,6 +539,7 @@ body,html{
             background-size: 101% auto;
             top:0;
             bottom:0;
+            z-index: 1000;
           }
           .input_container{
             position: relative;
@@ -588,10 +588,8 @@ body,html{
       }
       .all_completion{
         .absolute_center;
-        z-index: 1000;
         height:72%;
         display:none;
-        min-height: 370px;
         .receive_description{
           .horizontal_center;
           position: absolute;
@@ -652,7 +650,7 @@ body,html{
           height:120px;
           bottom:26%;
           .box_center;
-          textarea{
+          span{
             .absolute_center;
             top: 10px;
             bottom:10px;

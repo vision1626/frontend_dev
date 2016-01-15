@@ -285,7 +285,7 @@ set_result = (score) ->
   result = $('#result')
   desc1 = result.find('.first_complete').find('span.d1')
   desc2 = result.find('.first_complete').find('span.d2')
-  tb_key = result.find('.key_text').find('textarea')
+  tb_key = result.find('.key_text').find('span')
   rank = 0
 
   if score >= 3 and score <= 5
@@ -295,7 +295,7 @@ set_result = (score) ->
 
   desc1.html(reward_list[rank].description1)
   desc2.html(reward_list[rank].description2)
-  tb_key.val(decodeURIComponent(reward_list[rank].tb_key))
+  tb_key.html(decodeURIComponent(reward_list[rank].tb_key))
 #  tb_key.contents().find('body').append(reward_list[rank].tb_key)
 
 after_submit = () ->
