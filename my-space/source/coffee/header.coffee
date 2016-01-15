@@ -45,6 +45,8 @@ init_u_header = ->
     if isInActions()
       if (window.location.pathname.indexOf(action) < 0)
         changeState(action)
+        if _dashboard_is_loading
+          _dashboard_ajax_process.abort()
         init_dashboard_data()
     else
       window.location.pathname = '/u/' + action + '-' + uid + '.html'
@@ -53,6 +55,8 @@ init_u_header = ->
     if !isInActions()
       if (window.location.pathname.indexOf(action) < 0)
         changeState(action)
+        if _follow_is_loading
+          _follow_ajax_process.abort()
         init_follow_data()
     else
       window.location.pathname = '/u/' + action + '-' + uid + '.html'

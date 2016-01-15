@@ -14,6 +14,7 @@ _dashboard_has_publish_btn_s = false
 _user_mail_vrification = true
 _dashboard_show_me = false
 _dashboard_doing_like = false
+_dashboard_ajax_process = null
 
 #SITE_URL = 'http://192.168.0.230/'
 
@@ -153,13 +154,13 @@ query_dashboard_data = () ->
       action = 'get_dashboard_ajax'
 
     btn_ShowMore.html('正在努力加载中...').addClass('loading')
-    $.ajax {
+    _dashboard_ajax_process = $.ajax {
       url: SITE_URL + 'services/service.php'
       type: "GET"
       data: {'m': 'u', 'a': action, ajax: 1, 'page': page, 'count': window.dashboard_count, 'sort': _dashboard_show_new_hot,'limit': _dashboard_limit, 'hid': window.uid}
       cache: false
       dataType: "json"
-      success: (result)->
+      success: (result,status,response)->
         window.dashboard_count = result.count
         if result.data
           if window.dashboard_list_data and window.dashboard_list_data.length > 0
@@ -177,7 +178,8 @@ query_dashboard_data = () ->
           btn_ShowMore.html('已经全部看完了').removeClass('loading')
           _dashboard_has_more = false
       error: (result)->
-        alert('errr: ' + result)
+        if result.status isnt 0
+          alert('服务器君跑到外太空去了,刷新试试看!')
         _dashboard_is_loading = false
         btn_ShowMore.html('我要看更多').removeClass('loading')
     }
@@ -200,7 +202,8 @@ query_dashboard_recommand_data = () ->
       if result.data
         gen_dashboard_recommand_item(result.data)
     error: (result)->
-      alert('errr: ' + result)
+      if result.status isnt 0
+        alert('服务器君跑到外太空去了,刷新试试看!')
   }
 
 gen_dashboard_item = () ->
@@ -287,6 +290,7 @@ gen_dashboard_recommand_item = (data) ->
   recommandList.show()
 
 init_dashboard_data = () ->
+  _dashboard_is_loading = false
   biglist = $('#big_img')
   smalllist = $('#small_img')
   listloading = $('#list-loading')
@@ -413,7 +417,8 @@ do_like = (obj) ->
     success: (result)->
       after_like(me,dtype,result,job,liststyle)
     error: (result)->
-      alert('errr: ' + result)
+      if result.status isnt 0
+        alert('服务器君跑到外太空去了,刷新试试看!')
   }
 
 after_like = (me,dtype,result,job,liststyle) ->

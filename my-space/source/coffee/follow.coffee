@@ -6,6 +6,7 @@ _follow_step = _follow_limit
 _follow_has_more = true
 _follow_show_me = false
 _dashboard_doing_follow = false
+_follow_ajax_process = null
 
 init_follow = ->
 #  followlist = $('#follow-list')
@@ -101,7 +102,7 @@ query_follow_Data = () ->
 
     btn_ShowMore.html('正在努力加载中...').addClass('loading')
     method = 'GET'
-    $.ajax {
+    _follow_ajax_process = $.ajax {
       url: SITE_URL + url
       type: method
       data: {'m': 'u', 'a': action, ajax: 1, 'count': follow_count ,'page': page ,'limit': _follow_limit , 'hid': window.uid}
@@ -129,7 +130,8 @@ query_follow_Data = () ->
           btn_ShowMore.html('已经全部看完了').removeClass('loading')
           _follow_has_more = false
       error: (result)->
-        alert('errr: ' + result)
+        if result.status isnt 0
+          alert('服务器君跑到外太空去了,刷新试试看!')
         _follow_is_loading = false
         btn_ShowMore.html('我要看更多').removeClass('loading')
     }
@@ -150,7 +152,8 @@ query_follow_recommand_data = () ->
 #      if result.data
 #        gen_follow_recommand_item(result.data)
 #    error: (result)->
-#      alert('errr: ' + result)
+#      if result.status isnt 0
+#        alert('服务器君跑到外太空去了,刷新试试看!')
 #  }
 
 gen_follow_recommand_item = (data) ->
@@ -201,6 +204,7 @@ gen_follow_Item = () ->
   _follow_is_loading = false
 
 init_follow_data = () ->
+  _follow_is_loading = false
   followlist = $('#follow-list')
   listloading = $('#list-loading')
   pagiation = $('#pagiation')
