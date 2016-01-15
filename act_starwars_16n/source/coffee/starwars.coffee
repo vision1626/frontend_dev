@@ -5,7 +5,7 @@ _score = 0
 _not_answer = false
 _image_path  = './tpl/hi1626/images/starwars/'
 _virgin = true
-_waittime = 1000
+_waittime = 10
 
 _mobile_empty_msg = '请输入电话号码'
 _mobile_error_msg = '请输入正确的电话号码'
@@ -295,10 +295,11 @@ after_submit = () ->
 toggle_prize = () ->
   prize = $('#prize')
   if prize.hasClass('showout')
-    prize.removeClass 'showout'
-    prize.hide()
+    prize.removeClass 'showout', ->
+      prize.hide()
   else
-    prize.show 0, ->
+#    prize.show 0, ->
+    prize.show ->
       prize.addClass 'showout'
 
 set_question = () ->
