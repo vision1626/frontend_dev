@@ -114,6 +114,13 @@ $(document).on 'focus','input', ->
 #$(document).on 'click','#key_text', ->
 #  this.contents().find('body').select()
 
+$(window).resize ->
+  me = $(this)
+  if me.height() < 500
+    $('.user_form').addClass('black')
+  else
+    $('.user_form').removeClass('black')
+
 $(document).on 'change','textarea', ->
   set_result(parseInt(window.virgin_score))
 

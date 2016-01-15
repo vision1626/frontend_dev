@@ -455,6 +455,7 @@ body,html{
 
       .first_complete {
         .absolute_center;
+        z-index: 1000;
         height:72%;
         display:none;
         .light_sword_container {
@@ -529,9 +530,17 @@ body,html{
         .user_form{
           .horizontal_center;
           margin: auto;
-          bottom:20%;
-          left: 15%;
-          right: 15%;
+          bottom: 14%;
+          padding: 10% 15%;
+          &.black
+          {
+            background-image: url('@{img-location}/questionBG.jpg');
+            background-repeat: no-repeat;
+            background-position: center center;
+            background-size: 101% auto;
+            top:0;
+            bottom:0;
+          }
           .input_container{
             position: relative;
             .desert_box;
@@ -579,9 +588,10 @@ body,html{
       }
       .all_completion{
         .absolute_center;
+        z-index: 1000;
         height:72%;
         display:none;
-
+        min-height: 370px;
         .receive_description{
           .horizontal_center;
           position: absolute;
