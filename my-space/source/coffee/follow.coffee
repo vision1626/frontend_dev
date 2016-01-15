@@ -6,7 +6,6 @@ _follow_step = _follow_limit
 _follow_has_more = true
 _follow_show_me = false
 _dashboard_doing_follow = false
-_follow_nofllowme_text = '你不能关注自己哦！'
 
 init_follow = ->
 #  followlist = $('#follow-list')
@@ -51,21 +50,6 @@ init_follow = ->
 #    listempty.show()
 #    pagiation.hide()
 
-$(document).on 'click','div.follow_ed', ->
-  if !_dashboard_doing_follow
-    _dashboard_doing_follow = true
-    do_follow(this,'ed')
-
-$(document).on 'click','div.follow_nt', ->
-  if !_dashboard_doing_follow
-    _dashboard_doing_follow = true
-    do_follow(this,'nt')
-
-$(document).on 'click','div.follow_empty', ->
-  if !_dashboard_doing_follow
-    _dashboard_doing_follow = true
-    do_follow(this,'nt',uid)
-
 $(document).on 'click','#folloe-show-more', ->
   query_follow_Data()
 
@@ -86,50 +70,6 @@ $(document).on 'click','.fans-concemed_follow', ->
   url = ['u/follow-',uid,'.html'].join('')
   window.open(SITE_URL + url)
 
-do_follow = (obj,status,tid) ->
-  me = $(obj)
-  if !tid
-    tid = me.attr('uid')
-
-  if parseInt(myid) > 0
-    if tid is myid
-      alert(_follow_nofllowme_text)
-      _dashboard_doing_follow = false
-    else
-      url = 'services/service.php?m=user&a=follow'
-      method = 'POST'
-      $.ajax {
-        url: SITE_URL + url
-        type: method
-        data: {'uid': tid}
-        cache: false
-        dataType: "json"
-        success: (result)->
-          after_follow(me,result.status)
-        error: (result)->
-          alert('errr: ' + result)
-      }
-  else
-    _dashboard_doing_follow = false
-    location.href = SITE_URL + 'user/login.html'
-
-after_follow = (me,result)->
-  if state is 'fans'
-    init_follow_data()
-  else
-    if result is 1
-      me.removeClass('follow_nt').addClass('follow_ed')
-      me.find('.icon').removeClass('icon-follow').addClass('icon-unfollow')
-      me.find('label.sl1').html('已关注')
-    else if result is 2
-      me.removeClass('follow_nt').addClass('follow_ed')
-      me.find('.icon').removeClass('icon-follow').addClass('icon-unfollow')
-      me.find('label.sl1').html('互相关注')
-    else
-      me.removeClass('follow_ed').addClass('follow_nt')
-      me.find('label.sl1').html('关注Ta')
-      me.find('.icon').removeClass('icon-unfollow').addClass('icon-follow')
-    _dashboard_doing_follow = false
 
 query_follow_Data = () ->
   btn_ShowMore = $(document).find('#folloe-show-more')
@@ -313,7 +253,7 @@ init_follow_empty_message = () ->
     else
       btnReturnhome.hide()
       btnPublish.hide()
-      btnFollow.show()
+      btnFollow.show().attr('uid',uid)
   else
     txtEmptytitle.html([who,'还没有关注任何人'].join(''))
     txtEmptycontent.html(content_text)

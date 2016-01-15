@@ -3,7 +3,6 @@ init_u_header = ->
   $i_follow = if $('.icon-follow').length > 0 then $('.icon-follow') else $('.icon-unfollow')
   $success_fo = $('.success-fo')
   $success_unfo = $('.success-unfo')
-  $status_text = $('.status_text')
   $fav = $('.actions-fav')
   $db = $('.actions-db')
   $pub = $('.actions-pub')
