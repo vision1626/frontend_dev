@@ -15,7 +15,7 @@ _name_error_msg = '请输入正确的姓名,仅支持中英文'
 
 init = ->
 #  alert(navigator.userAgent)
-  _virgin = parseInt(window.virgin_score) is -1
+  _virgin = window.virgin_score is '' or  parseInt(window.virgin_score) is -1
   set_step(_step)
 #  set_step(3)
 
