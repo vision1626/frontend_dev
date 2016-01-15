@@ -15,7 +15,7 @@ html
     meta(name="description" content="{$seo_description")
     meta(name='apple-mobile-web-app-status-bar-style', content='black')
     meta(name='apple-mobile-web-app-capable', content='yes')
-    -title = "{$seo_title}"
+    -title = "16eme NORD"
     title= title
 
     if production
@@ -26,7 +26,6 @@ html
         $current_css[] = './tpl/hi1626/css/starwars/starwars.css';
         $current_js[] = './public/js/jquery-1.11.3.min.js';
         $current_js[] = './public/js/jquery.touchSwipe.min.js';
-        $current_js[] = './public/js/jquery.zclip.min.js';
         $current_js[] = './tpl/hi1626/js/starwars/starwars.js'
 
       link(rel="stylesheet", href="{css $current_css}" media="all")
@@ -41,7 +40,6 @@ html
       link(rel="stylesheet", href="../../css/starwars/starwars.min.css" media="all")
       script(src="../../js/jquery-1.11.3.min.js")
       script(src="../../js/jquery.touchSwipe.min.js")
-      script(src="../../js/jquery.zclip.min.js")
       script(src="../../js/starwars/starwars.js")
 
   body
@@ -55,14 +53,14 @@ html
           //h3.nexstep(s='-1') PRESENT
           h3 PRESENT
 
-      .entrance.view#entrance
+      .entrance.view.nexstep#entrance(s='0')
         include ./source/jade/top_logo.jade
         span.copyright © & ™ Lucasfilm Ltd.
-        .enter.nexstep(s='0')
+        .enter
           img(src=image_path + 'entrance.gif',alt='')
         include ./source/jade/16eme.jade
 
-      .start.view#startquestion
+      .start.view.nexstep#startquestion(s='1')
         .info_text
           div.out
             div.in
@@ -113,11 +111,11 @@ html
           .answer2.select_answer(a=2)
             span
         include ./source/jade/16eme.jade
-      .help.view#help
+      .help.view.kill#help
         include ./source/jade/top_logo.jade
         include ./source/jade/16eme.jade
         .help_title
-          span 有时候,你需要一些协助
+          span
         .help_img
           img(src="" alt="")
         .help_description
@@ -177,7 +175,8 @@ html
                 img(src=image_path + 'question_arrow_2.png',alt='')
           .key_text
             //textarea#key_text
-            textarea#key_text(readonly=true)
+            //textarea#key_text(readonly=true)
+            span#key_text(readonly=true)
           //.copy_button
           //  a#copy_button(href="javascript:void(0)")
           //    span 一键盘复制
@@ -199,58 +198,7 @@ html
           span.icon.icon-cross
         .prize_full_img
           img(src=image_path + 'prize.png',alt='')
-        //.prize_text.title
-        //  span 奖品由潮牌
-        //  include ./source/jade/16eme_name.jade
-        //  span 提供
-        //.prize_index.index1
-        //  .index_buttons
-        //    .index_left
-        //      img(src=image_path + 'question_arrow.png',alt='')
-        //    .question_no
-        //      span 奖品1
-        //    .index_right
-        //      img(src=image_path + 'question_arrow_2.png',alt='')
-        //.prize_container.container1
-        //  .prize_branch
-        //  .prize_name
-        //    div
-        //      span 星战特别版卫衣
-        //  .prizes.prizes1
-        //    .prize_item
-        //    .prize_item
-        //    .prize_item
-        //    .prize_count.count1
-        //      span 1件
-        //    .prize_count.count2
-        //      span 1件
-        //    .prize_count.count3
-        //      span 1件
-        //.prize_text.description1
-        //  span 将从参与者中抽取3位幸运儿,将于2月25日公布获奖名单并有专人与中奖者联系!
-        //.prize_index.index2
-        //  .index_buttons
-        //    .index_left
-        //      img(src=image_path + 'question_arrow.png',alt='')
-        //    .question_no
-        //      span 奖品2
-        //    .index_right
-        //      img(src=image_path + 'question_arrow_2.png',alt='')
-        //.prize_container.container2
-        //  .prize_branch
-        //  .prize_name
-        //    //span 16
-        //    //label ÈME
-        //    //span N
-        //    //label ORD
-        //    div
-        //      span 16N天猫旗舰店无门槛优惠券
-        //  .prizes.prizes2
-        //    .prize_item
-        //    .prize_item
-        //    .prize_item
-        //.prize_text.description2
-        //  span 互动参与者按照答题正确数并留下联系方式即可获得
+
       .alert_mask
         .alert_message
           span alslakjda
@@ -267,20 +215,5 @@ html
     script.
       $(document).ready(function () {
         window.virgin_score = '{$votes}';
-
-        var swf_path = '../../js/ZeroClipboard.swf';
-        $("#copy_button").zclip({
-          path: swf_path,
-          copy: function () {
-            return swf_path.html();
-          },
-          beforeCopy: function () {
-            alert('before');
-          },
-          afterCopy: function () {
-            alert('copy done');
-          }
-        });
-
         init();
       });

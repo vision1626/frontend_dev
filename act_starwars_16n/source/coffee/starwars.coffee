@@ -15,7 +15,7 @@ _name_error_msg = '请输入正确的姓名,仅支持中英文'
 
 init = ->
 #  alert(navigator.userAgent)
-  _virgin = parseInt(window.virgin_score) is -1
+  _virgin = window.virgin_score is '' or  parseInt(window.virgin_score) is -1
   set_step(_step)
 #  set_step(3)
 
@@ -23,6 +23,10 @@ init = ->
 #  alert('n2')
 #  step = $(this).attr('s')
 #  set_step(parseInt(step))
+
+$('.nexstep').click ->
+  step = $(this).attr('s')
+  set_step(parseInt(step))
 
 $(document).on 'click','.nexstep', ->
   step = $(this).attr('s')
@@ -109,6 +113,13 @@ $(document).on 'focus','input', ->
 
 #$(document).on 'click','#key_text', ->
 #  this.contents().find('body').select()
+
+$(window).resize ->
+  me = $(this)
+  if me.height() < 500
+    $('.user_form').addClass('black')
+  else
+    $('.user_form').removeClass('black')
 
 $(document).on 'change','textarea', ->
   set_result(parseInt(window.virgin_score))
@@ -216,14 +227,17 @@ set_step = (step) ->
       set_question()
     when 2
       help_img = help.find('.help_img').find('img')
+      help_title = help.find('.help_title').find('span')
       if _q_n is 3
         help_img.attr('src',_image_path + 'help1.png')
+        help_title.html('有时候,你需要一些协助')
       else
         help_img.attr('src',_image_path + 'help2.png')
+        help_title.html('接下来的一题目，超难！')
       help.fadeIn 0
     when 3
-      eye_top.hide()
-      eye_bottom.hide()
+#      eye_top.hide()
+#      eye_bottom.hide()
 
       if _virgin
         result.find('.first_complete').show()
@@ -271,7 +285,7 @@ set_result = (score) ->
   result = $('#result')
   desc1 = result.find('.first_complete').find('span.d1')
   desc2 = result.find('.first_complete').find('span.d2')
-  tb_key = result.find('.key_text').find('textarea')
+  tb_key = result.find('.key_text').find('span')
   rank = 0
 
   if score >= 3 and score <= 5
@@ -281,7 +295,7 @@ set_result = (score) ->
 
   desc1.html(reward_list[rank].description1)
   desc2.html(reward_list[rank].description2)
-  tb_key.val(reward_list[rank].tb_key)
+  tb_key.html(decodeURIComponent(reward_list[rank].tb_key))
 #  tb_key.contents().find('body').append(reward_list[rank].tb_key)
 
 after_submit = () ->
@@ -296,9 +310,16 @@ toggle_prize = () ->
   prize = $('#prize')
   if prize.hasClass('showout')
     prize.removeClass 'showout'
-    prize.hide()
+    setTimeout ->
+      prize.addClass 'kill'
+      prize.removeClass 'live'
+      prize.hide()
+    , 500
   else
-    prize.show 0, ->
+#    prize.show 0, ->
+    prize.show ->
+      prize.addClass 'live'
+      prize.removeClass 'kill'
       prize.addClass 'showout'
 
 set_question = () ->

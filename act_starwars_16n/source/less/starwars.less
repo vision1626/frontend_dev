@@ -75,7 +75,7 @@ body,html{
       .absolute_center;
       background-repeat: no-repeat;
       background-position: center center;
-      background-size: 102% 100%;
+      background-size: 101% auto;
       overflow: hidden;
 
       .toplogo{
@@ -149,7 +149,7 @@ body,html{
 
     .entrance{
       text-align: center;
-      background-image: url('@{img-location}/BG-17.jpg');
+      background-image: url('@{img-location}/BG-18.jpg');
       .enter{
         padding: 0;
         position: absolute;
@@ -523,14 +523,24 @@ body,html{
           &.user_information{
             bottom:59%;
             font-size: 16px;
+            .n_logo;
           }
         }
         .user_form{
           .horizontal_center;
           margin: auto;
-          bottom:20%;
-          left: 15%;
-          right: 15%;
+          bottom: 12%;
+          padding: 10% 15%;
+          &.black
+          {
+            background-image: url('@{img-location}/questionBG.jpg');
+            background-repeat: no-repeat;
+            background-position: center center;
+            background-size: 101% auto;
+            top:0;
+            bottom:0;
+            z-index: 1000;
+          }
           .input_container{
             position: relative;
             .desert_box;
@@ -590,6 +600,7 @@ body,html{
           0 0 10px @starwars_red,
           0 0 20px  @starwars_red,
           0 0 30px  @starwars_red;
+          .n_logo;
         }
         .key_title {
           .horizontal_center;
@@ -639,7 +650,7 @@ body,html{
           height:120px;
           bottom:26%;
           .box_center;
-          textarea{
+          span{
             .absolute_center;
             top: 10px;
             bottom:10px;
@@ -717,10 +728,16 @@ body,html{
       z-index: 99999;
       background-image: url('@{img-location}/questionBG.jpg');
       text-align: center;
-      top:200%;
-      transition: all 0.3s;
+      opacity: 0;
+      transition: opacity 0.5s;
       &.showout{
+        opacity: 1;
+      }
+      &.live{
         top:0;
+      }
+      &.kill{
+        top:200%;
       }
       .hide_prize{
         z-index: 100000000;

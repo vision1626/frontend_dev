@@ -21,6 +21,9 @@ init_follow = ->
   if window.follow_list_string isnt ''
     window.follow_list_data = $.parseJSON(window.follow_list_string)
 
+  if window.follow_recommand_string isnt ''
+    window.follow_recommand_data = $.parseJSON(window.follow_recommand_string)
+
   init_follow_empty_message()
   gen_follow_Item()
 
@@ -107,12 +110,15 @@ query_follow_Data = () ->
       success: (result)->
         window.follow_count = result.count
 
-        if result.data
-          if window.follow_list_data
-            for d in result.data
-              window.follow_list_data.push(d)
-          else
-            window.follow_list_data = result.data
+        if result.count > 0
+          if result.data
+            if window.follow_list_data
+              for d in result.data
+                window.follow_list_data.push(d)
+            else
+              window.follow_list_data = result.data
+        else
+          window.follow_recommand_data = result.data
         gen_follow_Item()
 
         _follow_is_loading = false
@@ -129,22 +135,23 @@ query_follow_Data = () ->
     }
 
 query_follow_recommand_data = () ->
-  if state is 'follow'
-    action = 'get_approve_user_ajax'
-    recommand_limit = 7
-
-  $.ajax {
-    url: SITE_URL + 'services/service.php'
-    type: "GET"
-    data: {'m': 'u', 'a': action, ajax: 1, 'page': 1, 'count': '', 'limit': recommand_limit, 'follow',0}
-    cache: false
-    dataType: "json"
-    success: (result)->
-      if result.data
-        gen_follow_recommand_item(result.data)
-    error: (result)->
-      alert('errr: ' + result)
-  }
+  gen_follow_recommand_item(window.follow_recommand_data)
+#  if state is 'follow'
+#    action = 'get_approve_user_ajax'
+#    recommand_limit = 7
+#
+#  $.ajax {
+#    url: SITE_URL + 'services/service.php'
+#    type: "GET"
+#    data: {'m': 'u', 'a': action, ajax: 1, 'page': 1, 'count': '', 'limit': recommand_limit, 'follow',0}
+#    cache: false
+#    dataType: "json"
+#    success: (result)->
+#      if result.data
+#        gen_follow_recommand_item(result.data)
+#    error: (result)->
+#      alert('errr: ' + result)
+#  }
 
 gen_follow_recommand_item = (data) ->
   recommandTitle = $('#recommandTitle')
