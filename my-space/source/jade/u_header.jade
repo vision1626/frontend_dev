@@ -43,21 +43,31 @@ else
         //{if $home_user['uid'] == $_FANWE['uid']}
         li.actions-db
           i.icon.icon-news
-          | $home_user['dynamic_count']新动态
+          span
+            b $home_user['dynamic_count']
+            |新动态
         //{/if}
         li.actions-fav
           i.icon.icon-heart
-          | $home_user['favs']喜欢
+          span
+            b $home_user['favs']
+            |喜欢
         li.actions-pub
           i.icon.icon-publish
-          | $home_user['publish_count']发布
+          span
+            b $home_user['publish_count']
+            |发布
       ul.content__relationship
         li.relation-fans
           i.icon.icon-fans-16
-          | $home_user['fans']粉丝
+          span
+            b $home_user['fans']
+            |粉丝
         li.relation-follow
           i.icon.icon-following
-          | $home_user['follows']关注
+          span
+            b $home_user['follows']
+            |关注
 //- TODO: put script tag below into footer 
 script(type='text/javascript').
   $(document).ready(function () {

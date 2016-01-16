@@ -47,12 +47,12 @@ followItem_Generater = (data,current_index) ->
           '</div>' +
           '<div class="fans-concemed">' +
             '<div class="fans-concemed_fans" uid="' + data.uid + '">' +
-                '<span class="icon icon-fans"></span>' +
-                '<label>' + data.fans + ' 粉丝</label>' +
+                '<i class="icon icon-fans"></i>' +
+                '<span><b>' + data.fans + '</b>粉丝</span>' +
             '</div>' +
             '<div class="fans-concemed_follow" uid="' + data.uid + '">' +
-                '<span class="icon icon-following"></span>' +
-                '<label>' + data.follows + ' 关注</label>' +
+                '<i class="icon icon-following"></i>' +
+                '<span><b>' + data.follows + '</b>关注</span>' +
             '</div>' +
           '</div>' +
             (

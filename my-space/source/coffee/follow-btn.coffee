@@ -84,10 +84,13 @@ initFollowBtn = ()->
   $(document).on 'click', '.follow-btn', ->
     $button = $(this)
     if parseInt(window.myid) > 0
-      if $button.hasClass 'profile__follow-btn' or $button.hasClass 'empty-action'
+      btn_type = ''
+      if $button.hasClass('profile__follow-btn') or $button.hasClass('empty-action')
         uid = parseInt($button.attr('uid'))
+        btn_type = 'u_header'
       else
         uid = parseInt($button.parent().parent().parent().parent().attr('t-uid'))
+        btn_type = 'follow_list'
       if uid is window.myid
         alert '你不能关注自己哦！'
       else
@@ -97,24 +100,14 @@ initFollowBtn = ()->
           dataType: 'json',
           data: { uid: uid },
           success: (result)->
-            fans_count = 0
-            if $button.hasClass 'profile__follow-btn'
-              fans_count = parseInt($('.relation-fans').text())
-            else
-              fans_count = parseInt($button.parent().find('.fans-concemed_fans label').text())
-
             if result.status is 1 or result.status is 2
               sliderToRight($button, "#{result.status}")
-              fans_count++
+              changeFollowCount('up',btn_type, $button)
+              if $button.hasClass('empty-action') and !_follow_show_me
+                sliderToRight($('.profile__follow-btn'), "#{result.status}")
             else
               sliderToLeft($button)
-              fans_count--
-
-            if $button.hasClass 'profile__follow-btn'
-              $('.relation-fans').html "<i class='icon icon-fans'></i>#{fans_count}粉丝"
-            else
-              $button.parent().find('.fans-concemed_fans label').text("#{fans_count}粉丝")
-
+              changeFollowCount('down',btn_type, $button)
           error: (result)->
             alert('errr: ' + result)
         })
@@ -122,20 +115,30 @@ initFollowBtn = ()->
       location.href = SITE_URL + 'user/login.html'
 
 
-#  after_follow = (me,result)->
-#    if state is 'fans'
-#      init_follow_data()
-#    else
-#      if result is 1
-#        me.removeClass('follow_nt').addClass('follow_ed')
-#        me.find('.icon').removeClass('icon-follow').addClass('icon-unfollow')
-#        me.find('label.sl1').html('已关注')
-#      else if result is 2
-#        me.removeClass('follow_nt').addClass('follow_ed')
-#        me.find('.icon').removeClass('icon-follow').addClass('icon-unfollow')
-#        me.find('label.sl1').html('互相关注')
-#      else
-#        me.removeClass('follow_ed').addClass('follow_nt')
-#        me.find('label.sl1').html('关注Ta')
-#        me.find('.icon').removeClass('icon-unfollow').addClass('icon-follow')
-##      _dashboard_doing_follow = false
+  changeFollowCount = (change, btn_type, $obj)->
+    $following_count_text = $('')
+    following_count = 0
+
+    changeCount = ->
+      following_count = parseInt($following_count_text.text())
+      if change is 'up'
+        following_count++
+      else
+        following_count--
+      $following_count_text.text following_count
+
+    if btn_type is 'u_header' #点击u_header的关注按钮
+
+      if _follow_show_me #在我自己的关注/粉丝列表,改变「关注」数
+        $following_count_text = $('.content__relationship').find('.relation-follow b')
+      else #在別人的关注/粉丝列表,改变「粉丝」数
+        $following_count_text = $('.content__relationship').find('.relation-fans b')
+      changeCount()
+
+    else if btn_type is 'follow_list'
+      $following_count_text = $obj.parent().find('.fans-concemed_fans b') #改变点击那个人的「粉丝」数
+      changeCount()
+      if _follow_show_me #在我自己的关注/粉丝列表,改变「关注」数
+        $following_count_text = $('.content__relationship').find('.relation-follow b')
+        changeCount()
+
