@@ -54,7 +54,7 @@ else
             div
               i.icon.icon-publish
             input(type="file" id="file1" name="image[]" multiple="multiple")
-        p 支持JPG、GIF、PNG、JPEG格式图片，每张大小5M内
+        p 支持JPG、GIF、PNG、JPEG格式图片，每张大小1M内
           br
           | 请保证图片清晰无水印，否则无法通过审核！
       .item-details
@@ -86,7 +86,7 @@ else
           textarea(rows="4" placeholder="说吧，说了我也不会买")
           p 0/300
       .buttons
-        button.publish(type="submit") 发布
+        button.publish(type="submit" data-target="new") 发布
         button.cancel(type="reset") 取消
       .warning
     .form__share

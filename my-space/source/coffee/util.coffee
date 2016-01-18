@@ -12,6 +12,19 @@ toggleGoods = (show)->
     $('.show-more').fadeOut(500)
     $('.form__container').fadeIn(500)
 
+isEditingGood = ->
+  return $('.form__container').is(':visible')
+
+giveupEditing = ->
+  if isEditingGood()
+    if confirm('是否放弃编辑单品？')
+      toggleGoods(true)
+      return true
+    else
+      return false
+  else
+    return true
+
 followItem_Generater = (data,current_index) ->
   dd = $('<dd class="follow-list_item" i="' + current_index + '" t-uid=' + data.uid + '>'+
     '<div class="fans-container">' +

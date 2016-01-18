@@ -116,6 +116,8 @@ $(document).on 'click','.publish_entrance', ->
 #    url = ['u/addshare-',myid,'.html'].join('')
 #    location.href = SITE_URL + url
     $('.popup__blackbox').fadeIn(300)
+    $('.popup').show()
+    $('.popup__loading').hide()
   else
     alert('老板,您还未验证E-Mail')
 
