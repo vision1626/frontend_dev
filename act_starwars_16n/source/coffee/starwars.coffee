@@ -229,10 +229,10 @@ set_step = (step) ->
       help_img = help.find('.help_img').find('img')
       help_title = help.find('.help_title').find('span')
       if _q_n is 3
-        help_img.attr('src',_image_path + 'help1.png')
+        help_img.attr('src',_image_path + 'help1a.png')
         help_title.html('有时候,你需要一些协助')
       else
-        help_img.attr('src',_image_path + 'help2.png')
+        help_img.attr('src',_image_path + 'help2a.png')
         help_title.html('接下来的一题目，超难！')
       help.fadeIn 0
     when 3
