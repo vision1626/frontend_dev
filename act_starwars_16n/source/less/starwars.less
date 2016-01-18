@@ -75,7 +75,7 @@ body,html{
       .absolute_center;
       background-repeat: no-repeat;
       background-position: center center;
-      background-size: 101% auto;
+      background-size: 101% 101%;
       overflow: hidden;
 
       .toplogo{
@@ -150,6 +150,8 @@ body,html{
     .entrance{
       text-align: center;
       background-image: url('@{img-location}/BG-18.jpg');
+      background-position: top center;
+      background-size: auto 90%;
       .enter{
         padding: 0;
         position: absolute;
@@ -160,16 +162,19 @@ body,html{
         //background-color: rgba(0,0,0,0.5);
         cursor: pointer;
         img{
-          width: 100%;
+          width: 95%;
+          //background-color: black;
+        }
+        span.copyright{
+          color: #fff;
+          position: absolute;
+          //bottom: 38%;
+          right:8px;
+          top: 0px;
+          font-size: 10px;
         }
       }
-      span.copyright{
-        color: #fff;
-        position: absolute;
-        bottom: 40%;
-        right: 8px;
-        font-size: 12px;
-      }
+
     }
 
     .start{
@@ -463,7 +468,10 @@ body,html{
           .light_sword {
             position: relative;
             margin: auto;
-            .desert_box;
+            border: 1px solid #db6d62;
+            border-radius: 5px;
+            box-shadow: 0 0 10px #db6d62,
+            inset 0 0 10px #db6d62;
             height: 7px;
             width: 90%;
             img {
@@ -473,14 +481,17 @@ body,html{
               height: 24px;
             }
             .light_body {
-              .desert_box;
-              background-color: @starwars_desert;
+              //border-top: 1px solid #f0cdb4;
+              //border-bottom: 1px solid #f0cdb4;
+              border-radius: 5px;
+              box-shadow: 0 0 10px #db6d62, inset 0 0 1px #db6d62, inset 0 0 2px #db6d62, inset 0 0 5px #db6d62;
+              background-color: #f0cdb4;
               position: absolute;
               left: 0;
-              top: 0;
-              bottom: 0;
+              top: -1px;
+              bottom: -1px;
               width: 23%;
-              transition: all 0.3s;
+              transition: all 0.4s;
               &.l1 {
                 width: 34%
               }

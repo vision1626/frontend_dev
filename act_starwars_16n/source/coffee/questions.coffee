@@ -13,10 +13,10 @@ question_list = [
   },
   {
     "num": 2,
-    "content": "«星球大战»发生在哪里?",
+    "content": "负责修理飞船的技工机器人<br>叫什么名字",
     "options": {
-      "1": "火星",
-      "2": "银河系"
+      "1": "C-3PO",
+      "2": "R2-D2"
     },
     "answer": 2,
     "selected":""
@@ -43,20 +43,20 @@ question_list = [
   },
   {
     "num": 5,
-    "content": "绝地武士使用的招牌武器是?",
+    "content": "当一个星战迷对你说“I Love you.”<br>你的正确回应是",
     "options": {
-      "1": "菜刀",
-      "2": "激光剑"
+      "1": "Good bye",
+      "2": "I Know"
     },
     "answer": 2,
     "selected":""
   },
   {
     "num": 6,
-    "content": "绝地武士的宿敌是?",
+    "content": "最后杀死希夫·帕尔帕廷的人是？",
     "options": {
-      "1": "西斯、黑暗绝地",
-      "2": "怪兽"
+      "1": "达斯·维德",
+      "2": "卢克.天行者"
     },
     "answer": 1,
     "selected":""
