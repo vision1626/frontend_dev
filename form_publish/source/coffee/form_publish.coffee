@@ -1,5 +1,7 @@
 init_form_publish = ->
   g_expire = ''
+  g_shareid = ''
+  g_hasChangedImg = 0
 
   $popup_close = $('.popup__close')
   $blackbox = $('.popup__blackbox')
@@ -22,6 +24,7 @@ init_form_publish = ->
   $form_recommendation = $form_publish.find('textarea')
   $form_imgs_wrapper = $form_publish.find('.imgs-wrapper')
   $form_submit_btn = $form_publish.find('.publish')
+  $form_cancel_btn = $form_publish.find('.cancel')
   # preview
   $preview = $form_publish.find('dl.big_img.static')
   $preview_title = $preview.find('.item-b_title')
@@ -69,26 +72,31 @@ init_form_publish = ->
       id = Number($(this).val())
       get2ndCate(id)
 
+  generate2ndCategory = (category)->
+    option = $('<option value="' + category['id'] + 
+      '">' + category['name'] + '</option>')
+    $form_cate_select2.append(option)
+
   setPreviewImg = ()->
     img = $draggable_bg.find('img')
-    nozero = ()->
-      return img.width() != 0 && img.height() != 0
+    # nozero = ()->
+    #   return ((img.width() != 0) && (img.height() != 0))
     wrapper_width = $draggable_bg.width()
     wrapper_height = $draggable_bg.height()
     # 宽图
-    if ((img.width() > img.height()) && nozero())
+    if img.width() > img.height()
       img.draggable({axis: 'x', cursor: '-webkit-grabbing'})
       img.css({
         height: '100%',
         width: 'auto',
-        'margin-left': -(img.width() - wrapper_width)/2 + 'px'
+        # 'margin-left': -(img.width() - wrapper_width)/2 + 'px'
       })
     # 高图
-    if ((img.height() > img.width()) && nozero())
+    else if img.height() > img.width()
       img.css({
         width: '100%',
         height: 'auto',
-        'margin-top': -(img.height() - wrapper_height)/2 + 'px'
+        # 'margin-top': -(img.height() - wrapper_height)/2 + 'px'
       })
       img.draggable({axis: 'y', cursor: '-webkit-grabbing'})
 
@@ -114,15 +122,16 @@ init_form_publish = ->
                       .parent()
                       .find('img')
                       .attr('src')
-        $.post(SITE_PATH+"services/service.php?m=index&a=del_upload_gallery", {'del_img': select_src})
+        $(this).parent().parent('.url-img').remove()
+        $.post(SITE_PATH + "services/service.php?m=index&a=del_upload_gallery", {'del_img': select_src})
         new_bg_src = $img_remove
                               .parent()
                               .parent()
                               .find('img')
                               .eq(0)
                               .attr('src')
+        $img_remove.parent().parent().find('img').eq(0).addClass('main-img')                     
         updateBg(new_bg_src)
-        $(this).parent().parent('.url-img').remove()
         getImgLength()
     $img_set_main.each (index)->
       $(this).on 'click', ->
@@ -135,7 +144,7 @@ init_form_publish = ->
         selected_img.addClass('main-img')
         selected_src = selected_img.attr('src')
         updateBg(selected_src)
-
+        g_hasChangedImg = 1
   getImgLength = ->
     len = $('.url-img').length
     if $('.url-img').length >= 6
@@ -150,6 +159,8 @@ init_form_publish = ->
 
     $('.url-img').css('margin-right': '7.9px')
     $('.url-img').last().css('margin-right': 0)
+
+    g_hasChangedImg = 1
     return len
 
   imageUpload = ->
@@ -166,10 +177,11 @@ init_form_publish = ->
           generateImg(result['data'][0]['src'])
           setImgEditor()
           regenerateFileInput()
-          updateBg(result['data'][0]['src'])
+          # updateBg(result['data'][0]['src'])
           getImgLength()
         error: (e)->
-          alert e
+          alert '仅支持1M以内图片文件！'
+          regenerateFileInput()
       })
 
   regenerateFileInput = ->
@@ -221,6 +233,78 @@ init_form_publish = ->
     $popup_url.val('')
     # $('.urlwarning').html('')
 
+  ajaxEditAndDelete = ->
+    $('.item-list-container').find('.icon-edit').parent().on 'click', ->
+      refreshForm()
+      id = Number($(this)
+                    .parents('dd')
+                    .attr('class')
+                    .split(' ')
+                    .pop())
+      $popup.hide()
+      $popup_loading.show()
+      $blackbox.fadeIn(500)
+      $.ajax({
+        url: SITE_URL + 'services/service.php?m=share&a=get_share_detail',
+        data: {id: id},
+        dataType: 'json',
+        success: (result) ->
+          if result.status == 1
+            $form_submit_btn.attr('data-target', 'update')
+            $form_submit_btn.text('保存')
+            $form_url_input.val(result['data']['goods_link'])
+            $form_title_input.val(result['data']['goods_name'])
+            $form_price_input.val(result['data']['goods_price'])
+            $form_brand_input.val(result['data']['brand'])
+            g_expire = result['data']['expire_time']
+            g_shareid = result['data']['share_id']
+            generateImg(result['data']['main_img'])
+            if result['data']['gallery'] && result['data']['gallery'].length > 0
+              generateImg(url['img']) for url in result['data']['gallery']
+            updateBg(result['data']['main_img'])
+            $('.url-img').first().find('img').addClass('main-img')
+            setImgEditor()
+            getImgLength()
+            generateStyle style for style in result['data']['style_list']
+            generateCategory cate for cate in result['data']['category_list']
+            generate2ndCategory cate for cate in result['data']['sub_category_list']
+            getMyTagName tag for tag in result['data']['all_my_tags']
+            makeTag tag['tag_name'], tag['tag_id'] for tag in result['data']['share_tags']
+            $form_cate_select.val(Number(result['data']['pc_id']))
+            $form_cate_select2.val(Number(result['data']['catid'])) 
+            # $form_style_select.text
+            $form_recommendation.val(result['data']['content'])
+            updatePreview(result['data'])
+            $popup_loading.hide()
+            $blackbox.fadeOut(500)
+            toggleGoods(false)
+          # else if result.status == 0
+            # $popup_loading.hide()
+            # $popup.show()
+            # $(".urlwarning").html('该单品已经发布过啦<a href="' +
+            #   result.url + '">去看看</a>')
+      })
+
+    $('.item-list-container').find('.icon-garbage').parent().on 'click', ->
+      id = Number($(this)
+                    .parents('dd')
+                    .attr('class')
+                    .split(' ')
+                    .pop())
+      if confirm('确定删除该信息？')
+        obj = {id: id}
+        $.ajax({
+          url: SITE_URL + 'manage/manage.php?m=share&a=delete',
+          type: 'post',
+          data: obj,
+          dataType: 'json',
+          success: (result)->
+            if result.status = 1
+              init_dashboard_data()
+              ajaxEditAndDelete()
+        })
+
+
   ### popup ###
   $popup_close.on 'click', ->
     $blackbox.fadeOut(500)
@@ -235,6 +319,8 @@ init_form_publish = ->
       type: 'get',
       dataType: 'json',
       success: (result)->
+        $form_submit_btn.attr('data-target', 'new')
+        $form_submit_btn.text('发布')
         generateCategory cate for cate in result['category']
         get2ndCate($form_cate_select.val())
         getMyTagName tag for tag in result['tags']
@@ -264,6 +350,8 @@ init_form_publish = ->
       dataType: "json",
       success: (result)->
         if result.status == 1
+          $form_submit_btn.attr('data-target', 'new')
+          $form_submit_btn.text('发布')
           $form_url_input.val(result['url'])
           $form_title_input.val(result['goods_name'])
           $form_price_input.val(result['goods_price'])
@@ -302,8 +390,17 @@ init_form_publish = ->
     obj['goods_price'] = $(this).val()
     updatePreview(obj)
   $form_tags_input.on 'keyup', (e)->
-    if e.which == 188
+    if e.which == 188 && ($(this).val().substring(0, $(this).val().length - 1) != '')
       makeTag($(this).val().substring(0, $(this).val().length - 1))
+      $(this).val('')
+      e.preventDefault()
+    if e.which == 13 && ($.trim($(this).val()) != '')
+      makeTag($(this).val())
+      $(this).val('')
+      e.preventDefault()
+  $form_tags_input.on 'blur', (e)->
+    if $.trim($(this).val()) != ''
+      makeTag($(this).val())
       $(this).val('')
   $form_tags_input.on 'keydown', (e)-> 
     if $(this).val() == '' && (e.which == 8 || e.which == 46)
@@ -344,6 +441,7 @@ init_form_publish = ->
             generateImg(SITE_URL + url) for url in result['url_arr']
             updateBg(SITE_URL + '/' + result['url_arr'][0])
           $('.url-img').first().find('img').addClass('main-img')
+          getImgLength()
           updatePreview(result)
           setImgEditor()
           $(".form-urlwarning").html('')
@@ -355,6 +453,13 @@ init_form_publish = ->
           $(".form-urlwarning").html('链接输入有误 请重新输入')
     })
     e.preventDefault()
+
+  $form_cancel_btn.on 'click', (e)->
+    refreshForm()
+    $popup.show()
+    $popup_loading.hide()
+    toggleGoods(true)
+
     
   $form_submit_btn.on 'click', (e)->
     link = $form_url_input.val()
@@ -406,36 +511,87 @@ init_form_publish = ->
     img_info.y = ratioY * $draggable_bg.find('img')[0].naturalHeight
 
     obj = {
-      'goods_link' :  link,
-      'goods_name' :  title,
-      'goods_price':  price,
-      'catid'      :  catid,
-      'pinpai'     :  brand,
-      'fengge'     :  style,
-      'img_arr'    :  img_arr,
-      'expire'     :  g_expire,
-      'content'    :  recommendation,
-      'tags'       :  tags,
-      'img_info'   :  img_info
+        'goods_link' :  link,
+        'goods_name' :  title,
+        'goods_price':  price,
+        'catid'      :  catid,
+        'pinpai'     :  brand,
+        'fengge'     :  style,
+        'img_arr'    :  img_arr,
+        'expire'     :  g_expire,
+        'content'    :  recommendation,
+        'tags'       :  tags,
+        'img_info'   :  img_info
     }
-    $blackbox.fadeIn(500)
-    $.ajax({
-      url :  SITE_URL + 'services/service.php?m=share&a=share_save',
-      type: 'post',
-      data: obj,
-      dataType: 'json',
-      cache: false,
-      success: (result)-> 
-        if result.status == 1
-          $('.emoji-hint').show()
-          $('.empty-message').find('a').attr('href', result.url)
-          $('.separator').show()
-          $('.goods-link').find('label').show()
-          $('.urlwarning').html('')
-          $popup_loading.hide()
-          $popup.fadeIn(500)
-          $form_url_input.val('')
-          $('.urlwarining').html('')
-          refreshForm()
-    })
+
+    if $(this).attr('data-target') == 'new'
+      $blackbox.fadeIn(500)
+      $.ajax({
+        url :  SITE_URL + 'services/service.php?m=share&a=share_save',
+        type: 'post',
+        data: obj,
+        dataType: 'json',
+        cache: false,
+        success: (result)-> 
+          if result.status == 1
+            $('.emoji-hint').show()
+            $('.empty-message').find('a').attr('href', result.url)
+            $('.separator').show()
+            $('.goods-link').find('label').show()
+            $('.urlwarning').html('')
+            $popup_loading.hide()
+            $popup.fadeIn(500)
+            $form_url_input.val('')
+            $('.urlwarining').html('')
+            g_hasChangedImg = 0
+            init_dashboard_data()
+            refreshForm()
+            toggleGoods(true)
+      })
+    else if $(this).attr('data-target') == 'update'
+      obj.share_id = g_shareid
+      obj.image_change = g_hasChangedImg
+      $blackbox.fadeIn(500)
+      $popup.hide()
+      $popup_loading.show()
+      $.ajax({
+        url :  SITE_URL + 'services/service.php?m=share&a=update_share',
+        type: 'post',
+        data: obj,
+        dataType: 'json',
+        cache: false,
+        success: (result)-> 
+          if result.status == 1
+            $('.emoji-hint').show()
+            # $('.empty-message').find('a').attr('href', result.url)
+            $('.separator').show()
+            $('.goods-link').find('label').show()
+            $('.urlwarning').html('')
+            $popup_loading.hide()
+            $popup.show()
+            $popup.fadeIn(500)
+            $form_url_input.val('')
+            $('.urlwarining').html('')
+            init_dashboard_data()
+            refreshForm()
+            g_hasChangedImg = 0
+            toggleGoods(true)
+      })
     e.preventDefault()
+
+  ajaxEditAndDelete()
+
+  $(document).on 'click','.show-new_list', ->
+    ajaxEditAndDelete()
+
+  $(document).on 'click','.show-hot_list', ->
+    ajaxEditAndDelete()
+
+  $(document).on 'click','.show-big_list', ->
+    ajaxEditAndDelete()
+
+  $(document).on 'click','.show-small_list', ->
+    ajaxEditAndDelete()
+
+  $(document).on 'click','#dashboard-show-more', ->
+    ajaxEditAndDelete()
