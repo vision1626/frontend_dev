@@ -234,7 +234,7 @@ init_form_publish = ->
     # $('.urlwarning').html('')
 
   ajaxEditAndDelete = ->
-    $('.item-list-container').find('.icon-edit').parent().on 'click', ->
+    $('.item-list-container').find('.icon-edit').parent().on 'click', (e)->
       refreshForm()
       id = Number($(this)
                     .parents('dd')
@@ -284,8 +284,9 @@ init_form_publish = ->
             # $(".urlwarning").html('该单品已经发布过啦<a href="' +
             #   result.url + '">去看看</a>')
       })
+      e.stopPropagation()
 
-    $('.item-list-container').find('.icon-garbage').parent().on 'click', ->
+    $('.item-list-container').find('.icon-garbage').parent().on 'click', (e)->
       id = Number($(this)
                     .parents('dd')
                     .attr('class')
@@ -303,6 +304,8 @@ init_form_publish = ->
               init_dashboard_data()
               ajaxEditAndDelete()
         })
+
+      e.stopPropagation()
 
 
   ### popup ###
@@ -468,27 +471,27 @@ init_form_publish = ->
       link = 'http://'+ link;
     urlreg=/^((https|http|ftp|rtsp|mms)?:\/\/)+[A-Za-z0-9\_\-]+\.[A-Za-z0-9\_\-]+[\/=\?%\-&_~`@[\]\':+!]*([^<>\"\"])*$/
     if (!urlreg.test(link))
-      $(".warning").html('请输入完整的链接地址')
+      $(".form-urlwarning").html('请输入完整的链接地址')
       return false
         
     title = $form_title_input.val()
     if(title == '')
-      $(".warning").html('<span style="color:#F00;">请填写分享名称</span>')
+      $(".form-detailwarning").html('<span style="color:#F00;">请填写分享名称</span>')
       return false
 
     price = $form_price_input.val()
     if((price == '') || (price == 0) || isNaN(price))
-      $(".warning").html('<span style="color:#F00;">请输入价格，填写数字</span>')
+      $(".form-detailwarning").html('<span style="color:#F00;">请输入价格，填写数字</span>')
       return false
 
     catid   = $form_cate_select2.val()
     if catid == 0 || catid == ""
-      $(".warning").html('<span style="color:#F00;">请选择分类</span>');
+      $(".form-detailwarning").html('<span style="color:#F00;">请选择分类</span>');
       return false;
 
     recommendation = $form_recommendation.val()
     if recommendation == ''
-      $(".warning").html("请填写描述内容！")
+      $(".form-recwarning").html("请填写描述内容！")
       return false
 
     brand = $form_brand_input.val()
@@ -579,19 +582,19 @@ init_form_publish = ->
       })
     e.preventDefault()
 
-  ajaxEditAndDelete()
+  return {ajaxEditAndDelete: ajaxEditAndDelete()}
 
-  $(document).on 'click','.show-new_list', ->
-    ajaxEditAndDelete()
+  # $(document).on 'click','.show-new_list', ->
+  #   ajaxEditAndDelete()
 
-  $(document).on 'click','.show-hot_list', ->
-    ajaxEditAndDelete()
+  # $(document).on 'click','.show-hot_list', ->
+  #   ajaxEditAndDelete()
 
-  $(document).on 'click','.show-big_list', ->
-    ajaxEditAndDelete()
+  # $(document).on 'click','.show-big_list', ->
+  #   ajaxEditAndDelete()
 
-  $(document).on 'click','.show-small_list', ->
-    ajaxEditAndDelete()
+  # $(document).on 'click','.show-small_list', ->
+  #   ajaxEditAndDelete()
 
-  $(document).on 'click','#dashboard-show-more', ->
-    ajaxEditAndDelete()
+  # $(document).on 'click','#dashboard-show-more', ->
+  #   ajaxEditAndDelete()

@@ -86,6 +86,9 @@ init_global_header = ->
     if e.which == 13
      check_search2()
 
+  $('.main-nav__publish').on 'click', ->
+    $('.popup__blackbox').fadeIn(500)
+
 $(document).on 'mouseover','li.fixed-nav__flash-buy', ->
   $(this).find('.cart-link').addClass('cart-link_show')
   $(this).find('.order-link').addClass('order-link_show')

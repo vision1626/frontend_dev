@@ -104,7 +104,6 @@ init_u_header = ->
     if giveupEditing()
       slideToCurrent.apply(this)
       user_action_async('talk')
-      init_form_publish()
   $fans.on 'click', ->
     if giveupEditing()
       slideToCurrent.apply(this,[36])

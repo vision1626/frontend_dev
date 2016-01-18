@@ -43,7 +43,7 @@ else
           i.icon.icon-link
           input(type="text" name="url")
         a.reload 重新读取
-        .form-urlwarning
+        .form-urlwarning.fwarning
       .url-img-processor
         .imgs-wrapper
           //- .url-img
@@ -62,12 +62,14 @@ else
         input.item-details__title(type="text" placeholder="标题" name="title")
         input.item-details__price(type="text" placeholder="价格" name="price")
         input.item-details__brand(type="text" placeholder="品牌（选填）" name="brand")
-        select.item-details__category(type="text" placeholder="品类" name="category")
-          | 类别
-        select.item-details__category2(type="text" placeholder="颜色（选填）" name="category2") 
-          | 颜色
-        select.item-details__style(type="text" placeholder="风格（选填）" name="style") 
-          option 风格（选填）
+        ul.cate-and-style
+          li
+            select.item-details__category(type="text" placeholder="品类" name="category")
+          li
+            select.item-details__category2(type="text" placeholder="颜色（选填）" name="category2") 
+          li
+            select.item-details__style(type="text" placeholder="风格（选填）" name="style") 
+        .form-detailwarning.fwarning
       .item-tags
         h3 标签
         .tag-input
@@ -85,10 +87,10 @@ else
         .item-recommendation-container
           textarea(rows="4" placeholder="说吧，说了我也不会买")
           p 0/300
+        .form-recwarning.fwarning
       .buttons
         button.publish(type="submit" data-target="new") 发布
         button.cancel(type="reset") 取消
-      .warning
     .form__share
       div
         a.publish-tool(href='javascript:void((function(){var e= document.createElement("script");e.setAttribute("type","text/javascript");e.setAttribute("charset","UTF-8");e.setAttribute("src","{$_FANWE[site_url]}public/js/im.ping.js?v="+Math.random()*99999999);document.body.appendChild(e)})());')
