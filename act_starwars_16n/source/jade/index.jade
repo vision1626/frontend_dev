@@ -15,7 +15,7 @@ html
     meta(name="description" content="{$seo_description")
     meta(name='apple-mobile-web-app-status-bar-style', content='black')
     meta(name='apple-mobile-web-app-capable', content='yes')
-    -title = "16eme NORD"
+    -title = "16EME NORD&星球大战"
     title= title
 
     if production
@@ -160,11 +160,11 @@ html
               span 确认提交
         .all_completion
           .receive_description
-            span 亲,你已经领过
+            span 亲，你已经领过
             include ./source/jade/16eme_name.jade
-            span 优惠券了,
+            span 优惠券了，
             br
-            span 按照下面提示,赶快进入
+            span 按照下面提示，赶快进入
             include ./source/jade/16eme_name.jade
             br
             span 天猫旗舰店瞧瞧呗!
@@ -209,10 +209,10 @@ html
         img#share_img(src=image_path + 'share.png',alt='')
 
 
-    //<!--{if $is_wx}-->
-    //<!--{template inc/weixin_share}-->
-    //<!--{/if}-->
-    //<!--{template inc/count}-->
+    <!--{if $is_wx}-->
+    <!--{template inc/weixin_share}-->
+    <!--{/if}-->
+    <!--{template inc/count}-->
     if production
       script(src="{script $current_js}")
     script.

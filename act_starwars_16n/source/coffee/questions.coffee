@@ -56,7 +56,7 @@ question_list = [
     "content": "最后杀死希夫·帕尔帕廷的人是？",
     "options": {
       "1": "达斯·维德",
-      "2": "卢克.天行者"
+      "2": "卢克·天行者"
     },
     "answer": 1,
     "selected":""

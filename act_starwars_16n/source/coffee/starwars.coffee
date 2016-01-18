@@ -5,7 +5,7 @@ _score = 0
 _not_answer = false
 _image_path  = './tpl/hi1626/images/starwars/'
 _virgin = true
-_waittime = 1000
+_waittime = 1001
 
 _mobile_empty_msg = '请输入电话号码'
 _mobile_error_msg = '请输入正确的电话号码'
@@ -290,7 +290,7 @@ set_result = (score) ->
 
   if score >= 3 and score <= 5
     rank = 1
-  else if score >= 6 and score <= 7
+  else if score is 6 or score is 7
     rank = 2
 
   desc1.html(reward_list[rank].description1)
