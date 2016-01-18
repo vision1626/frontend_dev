@@ -15,6 +15,8 @@ _user_mail_vrification = true
 _dashboard_show_me = false
 _dashboard_doing_like = false
 _dashboard_ajax_process = null
+_dashboard_publish_first_gen_b = false
+_dashboard_publish_first_gen_s = false
 
 #SITE_URL = 'http://192.168.0.230/'
 
@@ -31,6 +33,10 @@ init_dashboard = ->
     _dashboard_show_me = true
   else
     _dashboard_show_me = false
+
+  if _dashboard_show_me and state is 'talk'
+    _dashboard_publish_first_gen_b = true
+    _dashboard_publish_first_gen_s = true
 
   if window.dashboard_list_string isnt ''
     window.dashboard_list_data = $.parseJSON(window.dashboard_list_string)
@@ -136,11 +142,11 @@ query_dashboard_data = () ->
       if window.dashboard_list_data isnt null
         if window.dashboard_list_data.length > 0
           if _dashboard_end_b > _dashboard_end_s
-            page = (_dashboard_end_b/_dashboard_limit)+1
+            page = Math.round((_dashboard_end_b/_dashboard_limit))+1
           else if _dashboard_end_s > _dashboard_end_b
-            page = (_dashboard_end_s/_dashboard_limit)+1
+            page = Math.round((_dashboard_end_s/_dashboard_limit))+1
           else
-            page = (_dashboard_end_b/_dashboard_limit)+1
+            page = Math.round((_dashboard_end_b/_dashboard_limit))+1
         else
           page = 1
       else
@@ -218,30 +224,37 @@ gen_dashboard_item = () ->
   recommandList = $('#recommand')
   pagiation = $('#item-pagiation')
   filter = $('#list-filter')
+  step = 0
 
   if window.dashboard_list_data
     if window.dashboard_list_data.length > 0
       if _dashboard_show_big
-        if window.location.pathname.indexOf('talk') > 0
-          if _dashboard_show_me
-            if !_dashboard_has_publish_btn_b
-              biglist.append(publishItem_Generater(myid))
-              _dashboard_has_publish_btn_b = true
+        step = _dashboard_step_b
+        if state is 'talk' and _dashboard_show_me
+          if !_dashboard_has_publish_btn_b
+            biglist.append(publishItem_Generater(myid))
+            _dashboard_has_publish_btn_b = true
+          if _dashboard_publish_first_gen_b
+            step -= 1
+            _dashboard_publish_first_gen_b = false
         if _dashboard_end_b < window.dashboard_list_data.length
-          _dashboard_end_b += _dashboard_step_b
+          _dashboard_end_b += step
           for ld,i in window.dashboard_list_data
             if _dashboard_start_b < _dashboard_end_b and i >= _dashboard_start_b
               biglist.append(big_DashboardItem_Generater(ld,i))
               _dashboard_start_b++
         biglist.show()
       else
-        if window.location.pathname.indexOf('talk') > 0
-          if _dashboard_show_me
-            if !_dashboard_has_publish_btn_s
-              smalllist.append(publishItem_Generater(myid))
-              _dashboard_has_publish_btn_s = true
+        step = _dashboard_step_s
+        if state is 'talk' and _dashboard_show_me
+          if !_dashboard_has_publish_btn_s
+            smalllist.append(publishItem_Generater(myid))
+            _dashboard_has_publish_btn_s = true
+          if _dashboard_publish_first_gen_s
+            step -= 1
+            _dashboard_publish_first_gen_s = false
         if _dashboard_end_s < window.dashboard_list_data.length
-          _dashboard_end_s += _dashboard_step_s
+          _dashboard_end_s += step
           for ld,j in window.dashboard_list_data
             if _dashboard_start_s < _dashboard_end_s and j >= _dashboard_start_s
               smalllist.append(small_DashboardItem_Generater(ld,j))
@@ -273,6 +286,7 @@ gen_dashboard_item = () ->
 
   listloading.hide()
   _dashboard_is_loading = false
+  init_form_publish()
 
 gen_dashboard_recommand_item = (data) ->
   recommandTitle = $('#recommandTitle')
@@ -313,6 +327,8 @@ init_dashboard_data = () ->
   window.dashboard_count = ''
   _dashboard_has_publish_btn_b = false
   _dashboard_has_publish_btn_s = false
+  _dashboard_publish_first_gen_b = false
+  _dashboard_publish_first_gen_s = false
   listloading.show()
   biglist.html('')
   biglist.hide()
@@ -424,21 +440,28 @@ do_like = (obj) ->
   }
 
 after_like = (me,dtype,result,job,liststyle) ->
+  count = 0
   ed = 0
   if dtype is 'd'
     if result.status is 1
       ed = 1
+      count = 1
+    else
+      ed = 0
+      cpunt = -1
   else if dtype is 's'
     if job is 1
       if result.status is 1
         ed = 1
+        count = 1
     else if job is 2
       if result.status is 1
         ed = 0
+        count = -1
   if liststyle is 'b'
-    refresh_like_big(me,ed,result.count)
+    refresh_like_big(me,ed,count)
   else if liststyle is 's'
-    refresh_like_small(me,ed,result.count)
+    refresh_like_small(me,ed,count)
 
 refresh_like_big = (me,ed,count) ->
   smalllist = $('#small_img')
@@ -456,7 +479,7 @@ refresh_like_big = (me,ed,count) ->
     , 1500
   else
     my_icon.removeClass('icon-hearted').addClass('icon-heart')
-  my_count.html(count)
+  my_count.html(parseInt(my_count.html) + count)
   me.attr('ed',ed)
   _dashboard_doing_like = false
 
