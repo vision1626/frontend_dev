@@ -187,7 +187,7 @@ init_form_publish = ->
   regenerateFileInput = ->
     $('#file1').remove()
     new_input = $('<input data="test" type="file" id="file1" name="image[]">')
-    new_input.on 'change', ->
+    new_input.one 'change', ->
       imageUpload()
     $('.img-adder').append(new_input)
 
@@ -231,7 +231,8 @@ init_form_publish = ->
     $draggable_bg.find('img').remove()
 
     $popup_url.val('')
-    # $('.urlwarning').html('')
+    $('.urlwarning').html('')
+    $('.fwarning').html('')
 
   form_publish_binding = ->
     $('.item-list-container').find('.icon-edit').parent().on 'click', (e)->
@@ -332,7 +333,7 @@ init_form_publish = ->
           $('.urlwarning').html('')
       })
 
-    $popup_btn.on 'click', (e)->
+    $popup_btn.one 'click', (e)->
       link = $popup_url.val()
       urlreg=/^((https|http|ftp|rtsp|mms)?:\/\/)+[A-Za-z0-9\_\-]+\.[A-Za-z0-9\_\-]+[\/=\?%\-&_~`@[\]\':+!]*([^<>\"\"])*$/
       if (!urlreg.test(link))
@@ -362,6 +363,8 @@ init_form_publish = ->
               generateImg(SITE_URL + url) for url in result['url_arr']
               updateBg(SITE_URL + '/' + result['url_arr'][0])
             $('.url-img').first().find('img').addClass('main-img')
+            setImgEditor()
+            getImgLength()
             generateStyle style for style in result['fengge_list']
             generateCategory cate for cate in result['category_list']
             getMyTagName tag for tag in result['tags']
@@ -408,13 +411,13 @@ init_form_publish = ->
       if $(this).val() == '' && (e.which == 8 || e.which == 46)
         if $(this).prev().is('span')
           $(this).prev().remove() 
-    $('#file1').on 'change', ->
+    $('#file1').one 'change', ->
       imageUpload()
     $preview.find('.icon').on 'click', (e)->
       e.stopPropagation()
       return false 
 
-    $form_publish.find('.reload').on 'click', (e)->
+    $form_publish.find('.reload').one 'click', (e)->
       link = $form_url_input.val()
       urlreg=/^((https|http|ftp|rtsp|mms)?:\/\/)+[A-Za-z0-9\_\-]+\.[A-Za-z0-9\_\-]+[\/=\?%\-&_~`@[\]\':+!]*([^<>\"\"])*$/
       if (!urlreg.test(link))
@@ -584,7 +587,17 @@ init_form_publish = ->
         })
       e.preventDefault()
 
-  return { form_publish_binding: form_publish_binding }
+  clean = ->
+    arr = [$popup_close, $popup_manually_upload, $popup_btn, $form_title_input, 
+      $form_price_input, $form_tags_input, $('#file1'), $preview, $form_publish.find('.reload'),
+      $form_cancel_btn, $form_submit_btn]
+    for jqDom in arr
+      jqDom.off()
+
+  return { 
+           form_publish_binding: form_publish_binding,
+           clean: clean 
+         }
 
   # $(document).on 'click','.show-new_list', ->
   #   ajaxEditAndDelete()
