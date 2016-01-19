@@ -1,6 +1,9 @@
 @import "../../../public_inc/source/less/imports";
 
 .form__container {
+  input:-webkit-autofill {
+    background-color: white;
+  }
   .fwarning {
     margin: 0;
     font-size: @font-size-xs;
@@ -493,6 +496,9 @@
             outline: none;
             width: 90%;
             font-size: 14px;
+            &:-webkit-autofill {
+              background-color: white !important;
+            }
           }
         }
         button {

@@ -285,7 +285,7 @@ gen_dashboard_item = () ->
         query_dashboard_recommand_data()
 
   if state is 'talk' and _dashboard_show_me
-    init_form_publish().ajaxEditAndDelete()
+    init_form_publish().form_publish_binding()
   listloading.hide()
   _dashboard_is_loading = false
 

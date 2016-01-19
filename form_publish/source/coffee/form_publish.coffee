@@ -233,7 +233,7 @@ init_form_publish = ->
     $popup_url.val('')
     # $('.urlwarning').html('')
 
-  ajaxEditAndDelete = ->
+  form_publish_binding = ->
     $('.item-list-container').find('.icon-edit').parent().on 'click', (e)->
       refreshForm()
       id = Number($(this)
@@ -302,287 +302,289 @@ init_form_publish = ->
           success: (result)->
             if result.status = 1
               init_dashboard_data()
-              ajaxEditAndDelete()
         })
 
       e.stopPropagation()
 
-
-  ### popup ###
-  $popup_close.on 'click', ->
-    $blackbox.fadeOut(500)
-    $('.emoji-hint').hide()
-    $('.separator').hide()
-    $('.goods-link').find('label').hide()
-    toggleGoods(true)
-  $popup_manually_upload.on 'click', ->
-    $('.urlwarning').html('正在获取信息...')
-    $.ajax({
-      url: SITE_URL + "services/service.php?m=share&a=get_category_and_tags",
-      type: 'get',
-      dataType: 'json',
-      success: (result)->
-        $form_submit_btn.attr('data-target', 'new')
-        $form_submit_btn.text('发布')
-        generateCategory cate for cate in result['category']
-        get2ndCate($form_cate_select.val())
-        getMyTagName tag for tag in result['tags']
-        generateStyle style for style in result['style'][0]['content'].split(',')
-        $blackbox.fadeOut(500)
-        toggleGoods(false)
-        $('.urlwarning').html('')
-    })
-
-  $popup_btn.on 'click', (e)->
-    link = $popup_url.val()
-    urlreg=/^((https|http|ftp|rtsp|mms)?:\/\/)+[A-Za-z0-9\_\-]+\.[A-Za-z0-9\_\-]+[\/=\?%\-&_~`@[\]\':+!]*([^<>\"\"])*$/
-    if (!urlreg.test(link))
-      $(".urlwarning").html('请输入完整的链接地址')
-      return false
-
-    obj = {
-      url: encodeURIComponent(link),
-      type: 'local'
-    }
-    $popup.hide()
-    $popup_loading.show()
-    $.ajax({
-      url: SITE_URL + "services/service.php?m=u&a=add_share",
-      type: "get",
-      data: obj,
-      dataType: "json",
-      success: (result)->
-        if result.status == 1
+    $popup_close.on 'click', ->
+      $blackbox.fadeOut(500)
+      $popup.show()
+      $popup_loading.hide()
+      $('.emoji-hint').hide()
+      $('.separator').hide()
+      $('.goods-link').find('label').hide()
+      # toggleGoods(true)
+    $popup_manually_upload.on 'click', ->
+      $('.urlwarning').html('正在获取信息...')
+      $.ajax({
+        url: SITE_URL + "services/service.php?m=share&a=get_category_and_tags",
+        type: 'get',
+        dataType: 'json',
+        success: (result)->
           $form_submit_btn.attr('data-target', 'new')
           $form_submit_btn.text('发布')
-          $form_url_input.val(result['url'])
-          $form_title_input.val(result['goods_name'])
-          $form_price_input.val(result['goods_price'])
-          g_expire = result['expire_time']
-          if result['url_arr'] && result['url_arr'].length > 0
-            generateImg(SITE_URL + url) for url in result['url_arr']
-            updateBg(SITE_URL + '/' + result['url_arr'][0])
-          $('.url-img').first().find('img').addClass('main-img')
-          generateStyle style for style in result['fengge_list']
-          generateCategory cate for cate in result['category_list']
+          generateCategory cate for cate in result['category']
+          get2ndCate($form_cate_select.val())
           getMyTagName tag for tag in result['tags']
-          get2ndCate($form_cate_select.val()) 
-          updatePreview(result)
-          setImgEditor()
+          generateStyle style for style in result['style'][0]['content'].split(',')
           $blackbox.fadeOut(500)
           toggleGoods(false)
-        else if result.status == 2
-          $popup_loading.hide()
-          $popup.show()
-          $(".urlwarning").html('该单品已经发布过啦<a href="' +
-            result.url + '">去看看</a>')
-        else
-          $popup_loading.hide()
-          $popup.show()
-          $(".urlwarning").html('数据读取失败，请输入正确商品链接！')
-    })
-    e.preventDefault()
-
-  ### form publish ###
-  $form_title_input.on 'keyup', ->
-    obj = {}
-    obj['goods_name'] = $(this).val()
-    updatePreview(obj)
-  $form_price_input.on 'keyup', ->
-    obj = {}
-    obj['goods_price'] = $(this).val()
-    updatePreview(obj)
-  $form_tags_input.on 'keyup', (e)->
-    if e.which == 188 && ($(this).val().substring(0, $(this).val().length - 1) != '')
-      makeTag($(this).val().substring(0, $(this).val().length - 1))
-      $(this).val('')
-      e.preventDefault()
-    if e.which == 13 && ($.trim($(this).val()) != '')
-      makeTag($(this).val())
-      $(this).val('')
-      e.preventDefault()
-  $form_tags_input.on 'blur', (e)->
-    if $.trim($(this).val()) != ''
-      makeTag($(this).val())
-      $(this).val('')
-  $form_tags_input.on 'keydown', (e)-> 
-    if $(this).val() == '' && (e.which == 8 || e.which == 46)
-      if $(this).prev().is('span')
-        $(this).prev().remove() 
-  $('#file1').on 'change', ->
-    imageUpload()
-  $preview.find('.icon').on 'click', (e)->
-    e.stopPropagation()
-    return false 
-
-  $form_publish.find('.reload').on 'click', (e)->
-    link = $form_url_input.val()
-    urlreg=/^((https|http|ftp|rtsp|mms)?:\/\/)+[A-Za-z0-9\_\-]+\.[A-Za-z0-9\_\-]+[\/=\?%\-&_~`@[\]\':+!]*([^<>\"\"])*$/
-    if (!urlreg.test(link))
-      $(".form-urlwarning").html('请输入完整的链接地址')
-      return false
-    else
-      $(".form-urlwarning").html('读取链接信息中...')
-      $form_imgs_wrapper.find('.url-img').remove()
-    
-    obj = {
-      url: encodeURIComponent(link),
-      type: 'local'
-    }
-    $.ajax({
-      url: SITE_URL + "services/service.php?m=u&a=add_share",
-      type: "get",
-      data: obj,
-      dataType: "json",
-      success: (result)->
-        if result.status == 1
-          $form_url_input.val(result['url'])
-          $form_title_input.val(result['goods_name'])
-          $form_price_input.val(result['goods_price'])
-          g_expire = result['expire_time']
-          if result['url_arr'] && result['url_arr'].length > 0
-            generateImg(SITE_URL + url) for url in result['url_arr']
-            updateBg(SITE_URL + '/' + result['url_arr'][0])
-          $('.url-img').first().find('img').addClass('main-img')
-          getImgLength()
-          updatePreview(result)
-          setImgEditor()
-          $(".form-urlwarning").html('')
-        else if result.status == 2
-          $(".form-urlwarning").html('该单品已经发布过啦')
-        else if result.status == (-1)
-          $(".form-urlwarning").html('暂不支持该平台')
-        else
-          $(".form-urlwarning").html('链接输入有误 请重新输入')
-    })
-    e.preventDefault()
-
-  $form_cancel_btn.on 'click', (e)->
-    refreshForm()
-    $popup.show()
-    $popup_loading.hide()
-    toggleGoods(true)
-
-    
-  $form_submit_btn.on 'click', (e)->
-    link = $form_url_input.val()
-    str = link.match(/http:\/\/.+/)
-    if str == null
-      link = 'http://'+ link;
-    urlreg=/^((https|http|ftp|rtsp|mms)?:\/\/)+[A-Za-z0-9\_\-]+\.[A-Za-z0-9\_\-]+[\/=\?%\-&_~`@[\]\':+!]*([^<>\"\"])*$/
-    if (!urlreg.test(link))
-      $(".form-urlwarning").html('请输入完整的链接地址')
-      return false
-        
-    title = $form_title_input.val()
-    if(title == '')
-      $(".form-detailwarning").html('<span style="color:#F00;">请填写分享名称</span>')
-      return false
-
-    price = $form_price_input.val()
-    if((price == '') || (price == 0) || isNaN(price))
-      $(".form-detailwarning").html('<span style="color:#F00;">请输入价格，填写数字</span>')
-      return false
-
-    catid   = $form_cate_select2.val()
-    if catid == 0 || catid == ""
-      $(".form-detailwarning").html('<span style="color:#F00;">请选择分类</span>');
-      return false;
-
-    recommendation = $form_recommendation.val()
-    if recommendation == ''
-      $(".form-recwarning").html("请填写描述内容！")
-      return false
-
-    brand = $form_brand_input.val()
-    style = $form_style_select.val()
-    
-    img_arr = []
-    img_arr[0] = $('.main-img').attr('src')
-    img_arr.push $(img).attr('src') for img in $('.url-img-processor').find('img').not('.main-img')
-    tags = []
-    tags.push $(tag).text() for tag in $('.pub-tag')
-
-    img_info = {}
-    deltaX = $draggable_bg.offset().left - 
-        $draggable_bg.find('img').offset().left + 2 # 2px for border width
-    deltaY = $draggable_bg.offset().top - 
-        $draggable_bg.find('img').offset().top + 2
-    ratioX = deltaX / $draggable_bg.find('img').width()
-    ratioY = deltaY / $draggable_bg.find('img').height()
-    img_info.x = ratioX * $draggable_bg.find('img')[0].naturalWidth
-    img_info.y = ratioY * $draggable_bg.find('img')[0].naturalHeight
-
-    obj = {
-        'goods_link' :  link,
-        'goods_name' :  title,
-        'goods_price':  price,
-        'catid'      :  catid,
-        'pinpai'     :  brand,
-        'fengge'     :  style,
-        'img_arr'    :  img_arr,
-        'expire'     :  g_expire,
-        'content'    :  recommendation,
-        'tags'       :  tags,
-        'img_info'   :  img_info
-    }
-
-    if $(this).attr('data-target') == 'new'
-      $blackbox.fadeIn(500)
-      $.ajax({
-        url :  SITE_URL + 'services/service.php?m=share&a=share_save',
-        type: 'post',
-        data: obj,
-        dataType: 'json',
-        cache: false,
-        success: (result)-> 
-          if result.status == 1
-            $('.emoji-hint').show()
-            $('.empty-message').find('a').attr('href', result.url)
-            $('.separator').show()
-            $('.goods-link').find('label').show()
-            $('.urlwarning').html('')
-            $popup_loading.hide()
-            $popup.fadeIn(500)
-            $form_url_input.val('')
-            $('.urlwarining').html('')
-            g_hasChangedImg = 0
-            init_dashboard_data()
-            refreshForm()
-            toggleGoods(true)
+          $('.urlwarning').html('')
       })
-    else if $(this).attr('data-target') == 'update'
-      obj.share_id = g_shareid
-      obj.image_change = g_hasChangedImg
-      $blackbox.fadeIn(500)
+
+    $popup_btn.on 'click', (e)->
+      link = $popup_url.val()
+      urlreg=/^((https|http|ftp|rtsp|mms)?:\/\/)+[A-Za-z0-9\_\-]+\.[A-Za-z0-9\_\-]+[\/=\?%\-&_~`@[\]\':+!]*([^<>\"\"])*$/
+      if (!urlreg.test(link))
+        $(".urlwarning").html('请输入完整的链接地址')
+        return false
+
+      obj = {
+        url: encodeURIComponent(link),
+        type: 'local'
+      }
       $popup.hide()
       $popup_loading.show()
       $.ajax({
-        url :  SITE_URL + 'services/service.php?m=share&a=update_share',
-        type: 'post',
+        url: SITE_URL + "services/service.php?m=u&a=add_share",
+        type: "get",
         data: obj,
-        dataType: 'json',
-        cache: false,
-        success: (result)-> 
+        dataType: "json",
+        success: (result)->
           if result.status == 1
-            $('.emoji-hint').show()
-            # $('.empty-message').find('a').attr('href', result.url)
-            $('.separator').show()
-            $('.goods-link').find('label').show()
-            $('.urlwarning').html('')
+            $form_submit_btn.attr('data-target', 'new')
+            $form_submit_btn.text('发布')
+            $form_url_input.val(result['url'])
+            $form_title_input.val(result['goods_name'])
+            $form_price_input.val(result['goods_price'])
+            g_expire = result['expire_time']
+            if result['url_arr'] && result['url_arr'].length > 0
+              generateImg(SITE_URL + url) for url in result['url_arr']
+              updateBg(SITE_URL + '/' + result['url_arr'][0])
+            $('.url-img').first().find('img').addClass('main-img')
+            generateStyle style for style in result['fengge_list']
+            generateCategory cate for cate in result['category_list']
+            getMyTagName tag for tag in result['tags']
+            get2ndCate($form_cate_select.val()) 
+            updatePreview(result)
+            setImgEditor()
+            $blackbox.fadeOut(500)
+            toggleGoods(false)
+          else if result.status == 2
             $popup_loading.hide()
             $popup.show()
-            $popup.fadeIn(500)
-            $form_url_input.val('')
-            $('.urlwarining').html('')
-            init_dashboard_data()
-            refreshForm()
-            g_hasChangedImg = 0
-            toggleGoods(true)
+            $(".urlwarning").html('该单品已经发布过啦<a href="' +
+              result.url + '">去看看</a>')
+          else
+            $popup_loading.hide()
+            $popup.show()
+            $(".urlwarning").html('数据读取失败，请输入正确商品链接！')
       })
-    e.preventDefault()
+      e.preventDefault()
 
-  return {ajaxEditAndDelete: ajaxEditAndDelete()}
+    ### form publish ###
+    $form_title_input.on 'keyup', ->
+      obj = {}
+      obj['goods_name'] = $(this).val()
+      updatePreview(obj)
+    $form_price_input.on 'keyup', ->
+      obj = {}
+      obj['goods_price'] = $(this).val()
+      updatePreview(obj)
+    $form_tags_input.on 'keyup', (e)->
+      if e.which == 188 && ($(this).val().substring(0, $(this).val().length - 1) != '')
+        makeTag($(this).val().substring(0, $(this).val().length - 1))
+        $(this).val('')
+        e.preventDefault()
+      if e.which == 13 && ($.trim($(this).val()) != '')
+        makeTag($(this).val())
+        $(this).val('')
+        e.preventDefault()
+    $form_tags_input.on 'blur', (e)->
+      if $.trim($(this).val()) != ''
+        makeTag($(this).val())
+        $(this).val('')
+    $form_tags_input.on 'keydown', (e)-> 
+      if $(this).val() == '' && (e.which == 8 || e.which == 46)
+        if $(this).prev().is('span')
+          $(this).prev().remove() 
+    $('#file1').on 'change', ->
+      imageUpload()
+    $preview.find('.icon').on 'click', (e)->
+      e.stopPropagation()
+      return false 
+
+    $form_publish.find('.reload').on 'click', (e)->
+      link = $form_url_input.val()
+      urlreg=/^((https|http|ftp|rtsp|mms)?:\/\/)+[A-Za-z0-9\_\-]+\.[A-Za-z0-9\_\-]+[\/=\?%\-&_~`@[\]\':+!]*([^<>\"\"])*$/
+      if (!urlreg.test(link))
+        $(".form-urlwarning").html('请输入完整的链接地址')
+        return false
+      else
+        $(".form-urlwarning").html('读取链接信息中...')
+        $form_imgs_wrapper.find('.url-img').remove()
+      
+      obj = {
+        url: encodeURIComponent(link),
+        type: 'local'
+      }
+      $.ajax({
+        url: SITE_URL + "services/service.php?m=u&a=add_share",
+        type: "get",
+        data: obj,
+        dataType: "json",
+        success: (result)->
+          if result.status == 1
+            $form_url_input.val(result['url'])
+            $form_title_input.val(result['goods_name'])
+            $form_price_input.val(result['goods_price'])
+            g_expire = result['expire_time']
+            if result['url_arr'] && result['url_arr'].length > 0
+              generateImg(SITE_URL + url) for url in result['url_arr']
+              updateBg(SITE_URL + '/' + result['url_arr'][0])
+            $('.url-img').first().find('img').addClass('main-img')
+            getImgLength()
+            updatePreview(result)
+            setImgEditor()
+            $(".form-urlwarning").html('')
+          else if result.status == 2
+            $(".form-urlwarning").html('该单品已经发布过啦')
+          else if result.status == (-1)
+            $(".form-urlwarning").html('暂不支持该平台')
+          else
+            $(".form-urlwarning").html('链接输入有误 请重新输入')
+      })
+      e.preventDefault()
+
+    $form_cancel_btn.on 'click', (e)->
+      if giveupEditing()
+        refreshForm()
+        $popup.show()
+        $popup_loading.hide()
+        toggleGoods(true)
+      else
+        return false
+
+      
+    $form_submit_btn.on 'click', (e)->
+      link = $form_url_input.val()
+      str = link.match(/http:\/\/.+/)
+      if str == null
+        link = 'http://'+ link;
+      urlreg=/^((https|http|ftp|rtsp|mms)?:\/\/)+[A-Za-z0-9\_\-]+\.[A-Za-z0-9\_\-]+[\/=\?%\-&_~`@[\]\':+!]*([^<>\"\"])*$/
+      if (!urlreg.test(link))
+        $(".form-urlwarning").html('请输入完整的链接地址')
+        return false
+          
+      title = $form_title_input.val()
+      if(title == '')
+        $(".form-detailwarning").html('<span style="color:#F00;">请填写分享名称</span>')
+        return false
+
+      price = $form_price_input.val()
+      if((price == '') || (price == 0) || isNaN(price))
+        $(".form-detailwarning").html('<span style="color:#F00;">请输入价格，填写数字</span>')
+        return false
+
+      catid   = $form_cate_select2.val()
+      if catid == 0 || catid == ""
+        $(".form-detailwarning").html('<span style="color:#F00;">请选择分类</span>');
+        return false;
+
+      recommendation = $form_recommendation.val()
+      if recommendation == ''
+        $(".form-recwarning").html("请填写描述内容！")
+        return false
+
+      brand = $form_brand_input.val()
+      style = $form_style_select.val()
+      
+      img_arr = []
+      img_arr[0] = $('.main-img').attr('src')
+      img_arr.push $(img).attr('src') for img in $('.url-img-processor').find('img').not('.main-img')
+      tags = []
+      tags.push $(tag).text() for tag in $('.pub-tag')
+
+      img_info = {}
+      deltaX = $draggable_bg.offset().left - 
+          $draggable_bg.find('img').offset().left + 2 # 2px for border width
+      deltaY = $draggable_bg.offset().top - 
+          $draggable_bg.find('img').offset().top + 2
+      ratioX = deltaX / $draggable_bg.find('img').width()
+      ratioY = deltaY / $draggable_bg.find('img').height()
+      img_info.x = ratioX * $draggable_bg.find('img')[0].naturalWidth
+      img_info.y = ratioY * $draggable_bg.find('img')[0].naturalHeight
+
+      obj = {
+          'goods_link' :  link,
+          'goods_name' :  title,
+          'goods_price':  price,
+          'catid'      :  catid,
+          'pinpai'     :  brand,
+          'fengge'     :  style,
+          'img_arr'    :  img_arr,
+          'expire'     :  g_expire,
+          'content'    :  recommendation,
+          'tags'       :  tags,
+          'img_info'   :  img_info
+      }
+
+      if $(this).attr('data-target') == 'new'
+        $blackbox.fadeIn(500)
+        $.ajax({
+          url :  SITE_URL + 'services/service.php?m=share&a=share_save',
+          type: 'post',
+          data: obj,
+          dataType: 'json',
+          cache: false,
+          success: (result)-> 
+            if result.status == 1
+              $('.emoji-hint').show()
+              $('.empty-message').find('a').attr('href', result.url)
+              $('.separator').show()
+              $('.goods-link').find('label').show()
+              $('.urlwarning').html('')
+              $popup_loading.hide()
+              $popup.fadeIn(500)
+              $form_url_input.val('')
+              $('.urlwarining').html('')
+              g_hasChangedImg = 0
+              init_dashboard_data()
+              refreshForm()
+              toggleGoods(true)
+        })
+      else if $(this).attr('data-target') == 'update'
+        obj.share_id = g_shareid
+        obj.image_change = g_hasChangedImg
+        $blackbox.fadeIn(500)
+        $popup.hide()
+        $popup_loading.show()
+        $.ajax({
+          url :  SITE_URL + 'services/service.php?m=share&a=update_share',
+          type: 'post',
+          data: obj,
+          dataType: 'json',
+          cache: false,
+          success: (result)-> 
+            if result.status == 1
+              $('.emoji-hint').show()
+              # $('.empty-message').find('a').attr('href', result.url)
+              $('.separator').show()
+              $('.goods-link').find('label').show()
+              $('.urlwarning').html('')
+              $popup_loading.hide()
+              $popup.show()
+              $popup.fadeIn(500)
+              $form_url_input.val('')
+              $('.urlwarining').html('')
+              init_dashboard_data()
+              refreshForm()
+              g_hasChangedImg = 0
+              toggleGoods(true)
+        })
+      e.preventDefault()
+
+  return { form_publish_binding: form_publish_binding }
 
   # $(document).on 'click','.show-new_list', ->
   #   ajaxEditAndDelete()
