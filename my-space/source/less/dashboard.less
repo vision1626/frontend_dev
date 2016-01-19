@@ -71,24 +71,34 @@
       margin: 0 10px 0 0;
       color: @grey;
       cursor: pointer;
+      i {
+        font-size: @font-size-m;
+        margin-right: 5px;
+        transition: all 0.3s;
+      }
+      span {
+        font-size: @font-size-xs;
+        transition: all 0.3s;
+      }
+      &:hover {
+        i,span {
+          color: @dark-grey;
+        }
+      }
       &.current {
         i {
           color: @blue;
         }
         span {
-          color: black;
+          color: @black;
         }
-      }
-      i {
-        font-size: @font-size-m;
-        margin-right: 5px;
-      }
-      span {
-        font-size: @font-size-xs;
-      }
-      &:hover {
-        i,span {
-          color: @dark-grey;
+        &:hover{
+          i {
+            color: @blue;
+          }
+          span {
+            color: @black;
+          }
         }
       }
     }
