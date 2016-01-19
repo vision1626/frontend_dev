@@ -331,7 +331,8 @@ small_DashboardItem_Generater = (data,current_index) ->
           else
             '<div class="item-s_isnew">' +
               (
-                if data.is_share_fav is 1 or data.like_user_list
+#                if data.is_share_fav is 1 or data.like_user_list
+                if data.like_user_list
                   (
                     likeusers = []
                     for lu in data.like_user_list

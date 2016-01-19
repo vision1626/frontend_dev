@@ -386,18 +386,32 @@
     //关于发布那一块
     .publish_entrance{
       text-align: center;
-      display: box;
-      box-orient: horizontal;
-      box-pack: center;
-      box-align: center;
+      //display: box;
+      //box-orient: horizontal;
+      //box-pack: center;
+      //box-align: center;
       cursor: pointer;
-      i{
-        color:@blue;
-        font-size: 70px;
+      div{
+        position: absolute;
+        top:0;
+        bottom:0;
+        right:0;
+        left:0;
+        margin: auto;
+        width:auto;
+        height:100px;
+        i{
+          color:@blue;
+          font-size: 70px;
+        }
+        br{
+          display:none;
+        }
+        span{
+          padding:10px;
+        }
       }
-      span{
-        padding:10px;
-      }
+
     }
   }
   //====================================大图列表 End====================================================
@@ -594,22 +608,32 @@
     //关于发布那一块
     .publish_entrance{
       text-align: center;
-      display: box;
-      box-orient: horizontal;
-      box-pack: center;
-      box-align: center;
+      //display: box;
+      //box-orient: horizontal;
+      //box-pack: center;
+      //box-align: center;
       cursor: pointer;
       //width: @small-goods__width - 2;
       //height: @small-goods__width - 2;
       //border: 1px solid @blue;
       box-shadow: inset 0 0 1px @blue;
-      i{
-        color:@blue;
-        font-size: 40px;
-        font-weight: lighter;
-      }
-      span,br{
-        display: none;
+      div{
+        position: absolute;
+        top:0;
+        bottom:0;
+        right:0;
+        left:0;
+        margin: auto;
+        width:auto;
+        height:40px;
+        i{
+          color:@blue;
+          font-size: 40px;
+          font-weight: lighter;
+        }
+        span,br{
+          display: none;
+        }
       }
     }
   }

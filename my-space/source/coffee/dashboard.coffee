@@ -284,9 +284,10 @@ gen_dashboard_item = () ->
       if state is 'fav' or state is 'dashboard'
         query_dashboard_recommand_data()
 
+  if state is 'talk' and _dashboard_show_me
+    init_form_publish().ajaxEditAndDelete()
   listloading.hide()
   _dashboard_is_loading = false
-  init_form_publish()
 
 gen_dashboard_recommand_item = (data) ->
   recommandTitle = $('#recommandTitle')
@@ -448,7 +449,7 @@ after_like = (me,dtype,result,job,liststyle) ->
       count = 1
     else
       ed = 0
-      cpunt = -1
+      count = -1
   else if dtype is 's'
     if job is 1
       if result.status is 1
@@ -479,9 +480,11 @@ refresh_like_big = (me,ed,count) ->
     , 1500
   else
     my_icon.removeClass('icon-hearted').addClass('icon-heart')
-  my_count.html(parseInt(my_count.html) + count)
+  my_count.html(parseInt(my_count.html()) + count)
   me.attr('ed',ed)
-  _dashboard_doing_like = false
+  setTimeout ->
+    _dashboard_doing_like = false
+  , 2500
 
 refresh_like_small = (me,ed,count) ->
   biglist = $('#big_img')
@@ -499,6 +502,8 @@ refresh_like_small = (me,ed,count) ->
     , 1500
   else
     my_icon.removeClass('icon-hearted').addClass('icon-heart')
-  my_count.html(count)
+  my_count.html(parseInt(my_count.html()) + count)
   me.attr('ed',ed)
-  _dashboard_doing_like = false
+  setTimeout ->
+    _dashboard_doing_like = false
+  , 2500
