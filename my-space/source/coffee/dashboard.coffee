@@ -469,7 +469,14 @@ refresh_like_big = (me,ed,count) ->
   my_icon = me.find('.icon')
   my_count = me.find('.like_count')
   harting = me.find('.harting')
+  top_count = $('.content__actions').find('.actions-fav b')
   harting_img_url = SITE_URL + window.image_path + 'icon-heart-ing.gif'
+
+  my_count.html(parseInt(my_count.html()) + count)
+  me.attr('ed',ed)
+  if _dashboard_show_me
+    top_count.html(parseInt(top_count.html()) + count)
+
   if ed is 1
     harting.attr('src',harting_img_url)
     harting.show()
@@ -477,14 +484,12 @@ refresh_like_big = (me,ed,count) ->
       my_icon.removeClass('icon-heart').addClass('icon-hearted')
       harting.attr('src','')
       harting.hide()
+      _dashboard_doing_like = false
     , 1500
   else
     my_icon.removeClass('icon-hearted').addClass('icon-heart')
-  my_count.html(parseInt(my_count.html()) + count)
-  me.attr('ed',ed)
-  setTimeout ->
     _dashboard_doing_like = false
-  , 2500
+
 
 refresh_like_small = (me,ed,count) ->
   biglist = $('#big_img')
