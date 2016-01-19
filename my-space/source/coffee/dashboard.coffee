@@ -225,6 +225,7 @@ gen_dashboard_item = () ->
   pagiation = $('#item-pagiation')
   filter = $('#list-filter')
   step = 0
+  breakpoint = 'breakpointbreakpoint'
 
   if window.dashboard_list_data
     if window.dashboard_list_data.length > 0
@@ -238,7 +239,10 @@ gen_dashboard_item = () ->
             step -= 1
             _dashboard_publish_first_gen_b = false
         if _dashboard_end_b < window.dashboard_list_data.length
-          _dashboard_end_b += step
+          if _dashboard_end_b is 0
+            _dashboard_end_b = window.dashboard_list_data.length
+          else
+            _dashboard_end_b += step
           for ld,i in window.dashboard_list_data
             if _dashboard_start_b < _dashboard_end_b and i >= _dashboard_start_b
               biglist.append(big_DashboardItem_Generater(ld,i))
@@ -254,7 +258,10 @@ gen_dashboard_item = () ->
             step -= 1
             _dashboard_publish_first_gen_s = false
         if _dashboard_end_s < window.dashboard_list_data.length
-          _dashboard_end_s += step
+          if _dashboard_end_s is 0
+            _dashboard_end_s = window.dashboard_list_data.length
+          else
+            _dashboard_end_s += step
           for ld,j in window.dashboard_list_data
             if _dashboard_start_s < _dashboard_end_s and j >= _dashboard_start_s
               smalllist.append(small_DashboardItem_Generater(ld,j))
