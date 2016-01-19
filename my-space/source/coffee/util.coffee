@@ -197,7 +197,8 @@ big_DashboardItem_Generater = (data,current_index) ->
             if state is 'dashboard' and _dashboard_show_me
               '<div class="item-b_isnew">' +
               (
-                if data.is_share_fav is 1 or data.like_user_list
+#                if data.is_share_fav is 1 or data.like_user_list
+                if data.like_user_list
                   (
                     likeusers = []
                     for lu in data.like_user_list
