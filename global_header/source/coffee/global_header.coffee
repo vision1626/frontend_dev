@@ -98,3 +98,6 @@ $(document).on 'mouseleave','div.fixed-nav-container', ->
   $(this).find('.cart-link').removeClass('cart-link_show')
   $(this).find('.order-link').removeClass('order-link_show')
   $(document).find('li.fixed-nav__msg').find('ul.drop-down-list').removeClass('left').addClass('right')
+
+$(document).on 'click','div.scroll-to-top', ->
+  $('html, body').animate({scrollTop:0}, 500);

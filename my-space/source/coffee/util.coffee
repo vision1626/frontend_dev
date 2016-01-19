@@ -403,8 +403,19 @@ fixMainnav = ->
 
   if $('body').scrollTop() >= 400
     $('.main-nav-container').addClass('fixed')
-  else 
+    $('.scroll-to-top').addClass('fixed')
+  else
     $('.main-nav-container').removeClass('fixed')
+    $('.scroll-to-top').removeClass('fixed')
+
+  footer_height = 388 - 100
+  bottom_distance = $(document).height() - ($(this).scrollTop() + $(window).height())
+  bottom_distance_out_range = footer_height - bottom_distance
+  if bottom_distance <= footer_height
+    $('.scroll-to-top').css('bottom',(bottom_distance_out_range + 100) + 'px')
+  else
+    $('.scroll-to-top').css('bottom','100px')
+
   set_search_w()
 
 excite_Anim = (obj,animName) ->

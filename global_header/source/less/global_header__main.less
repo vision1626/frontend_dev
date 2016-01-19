@@ -251,3 +251,26 @@
     }
   }
 }
+
+.scroll-to-top{
+  position: fixed;
+  bottom:100px;
+  right:-120px;
+  width:80px;
+  height:80px;
+  background-color: rgba(0,0,0,0.5);
+  text-align: center;
+  z-index: 2000;
+  transition: right .4s ease-out;
+  cursor: pointer;
+  i{
+    color:@white;
+    font-size: 50px;
+    line-height: 80px;
+  }
+  &.fixed{
+    right:20px;
+    z-index: 2000;
+    transition: right .4s ease-out;
+  }
+}
