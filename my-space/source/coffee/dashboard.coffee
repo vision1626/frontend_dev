@@ -284,9 +284,10 @@ gen_dashboard_item = () ->
       if state is 'fav' or state is 'dashboard'
         query_dashboard_recommand_data()
 
+  if state is 'talk' and _dashboard_show_me
+    init_form_publish().ajaxEditAndDelete()
   listloading.hide()
   _dashboard_is_loading = false
-  init_form_publish()
 
 gen_dashboard_recommand_item = (data) ->
   recommandTitle = $('#recommandTitle')
@@ -448,7 +449,7 @@ after_like = (me,dtype,result,job,liststyle) ->
       count = 1
     else
       ed = 0
-      cpunt = -1
+      count = -1
   else if dtype is 's'
     if job is 1
       if result.status is 1
@@ -468,7 +469,14 @@ refresh_like_big = (me,ed,count) ->
   my_icon = me.find('.icon')
   my_count = me.find('.like_count')
   harting = me.find('.harting')
+  top_count = $('.content__actions').find('.actions-fav b')
   harting_img_url = SITE_URL + window.image_path + 'icon-heart-ing.gif'
+
+  my_count.html(parseInt(my_count.html()) + count)
+  me.attr('ed',ed)
+  if _dashboard_show_me
+    top_count.html(parseInt(top_count.html()) + count)
+
   if ed is 1
     harting.attr('src',harting_img_url)
     harting.show()
@@ -476,12 +484,12 @@ refresh_like_big = (me,ed,count) ->
       my_icon.removeClass('icon-heart').addClass('icon-hearted')
       harting.attr('src','')
       harting.hide()
+      _dashboard_doing_like = false
     , 1500
   else
     my_icon.removeClass('icon-hearted').addClass('icon-heart')
-  my_count.html(parseInt(my_count.html) + count)
-  me.attr('ed',ed)
-  _dashboard_doing_like = false
+    _dashboard_doing_like = false
+
 
 refresh_like_small = (me,ed,count) ->
   biglist = $('#big_img')
@@ -499,6 +507,8 @@ refresh_like_small = (me,ed,count) ->
     , 1500
   else
     my_icon.removeClass('icon-hearted').addClass('icon-heart')
-  my_count.html(count)
+  my_count.html(parseInt(my_count.html()) + count)
   me.attr('ed',ed)
-  _dashboard_doing_like = false
+  setTimeout ->
+    _dashboard_doing_like = false
+  , 2500
