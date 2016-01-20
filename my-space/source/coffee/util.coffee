@@ -370,6 +370,13 @@ small_DashboardItem_Generater = (data,current_index) ->
     '</dd>')
 
 filter_generater = () ->
+  if state is 'fav'
+    search_type = '喜欢'
+  else if state is 'talk'
+    search_type = '发布'
+  else if state is 'follow'
+    search_type = '关注'
+
   content = $(
     '<div class="item-nav-container">' +
       (if state is 'dashboard'
@@ -377,7 +384,7 @@ filter_generater = () ->
           '<a>热门单品</a>' +
           '<span></span>' +
         '</div>'
-      else
+      else if state is 'fav' or state is 'talk'
         '<div class="item-nav nav-type nav-produce first' + (if _dashboard_show_product_collocation is 1 then ' current' else '') + '" t="1">' +
           '<a>潮品</a>' +
           '<span></span>' +
@@ -386,14 +393,16 @@ filter_generater = () ->
           '<a>搭配</a>' +
           '<span></span>' +
         '</div>'
+      else
+        ''
       ) +
     '</div>' +
     '<div class="item-filter-container">' +
-      (if state isnt 'dashboard'
+      (if state is 'follow' or state is 'fav' or state is 'talk'
         '<div class="item-filter search">' +
           '<form>' +
             '<i class="icon icon-search"></i>' +
-            '<input type="text" placeholder="搜索喜欢"/>' +
+            '<input type="text" placeholder="搜索' + search_type + '"/>' +
           '</form>' +
         '</div>'
       else
@@ -413,14 +422,18 @@ filter_generater = () ->
       else
         ''
       ) +
-      '<div class="item-filter mode">'+
-        '<a class="show-big_list' + (if _dashboard_show_big then ' current' else '') + '">' +
-          '<i class="icon icon-list_view"></i>' +
-        '</a>' +
-        '<a class="show-small_list' + (if _dashboard_show_big then '' else ' current') + '">' +
-          '<i class="icon icon-grid_view"></i>' +
-        '</a>' +
-      '</div>' +
+      (if state is 'dashboard' or state is 'fav' or state is 'talk'
+        '<div class="item-filter mode">'+
+          '<a class="show-big_list' + (if _dashboard_show_big then ' current' else '') + '">' +
+            '<i class="icon icon-list_view"></i>' +
+          '</a>' +
+          '<a class="show-small_list' + (if _dashboard_show_big then '' else ' current') + '">' +
+            '<i class="icon icon-grid_view"></i>' +
+          '</a>' +
+        '</div>'
+      else
+        ''
+      ) +
     '</div>'
   )
 
