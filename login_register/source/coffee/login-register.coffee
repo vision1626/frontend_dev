@@ -353,6 +353,7 @@ init = ->
           $('.form-error').hide()
           form_nickname.find('input.input-nickname').focus()
           at_page = 2 # nickname
+          initPickInterest(result.category)
         else
           if result.msg is ''
             showSmallErrorTip '系统异常，请稍后重试'
@@ -584,4 +585,3 @@ init = ->
         validateRegisterForm(true)
       else if at_page is 2
         validateNicknameForm(true)
-

@@ -140,6 +140,11 @@ a.text {
     content: "\e80e";
   }
 }
+.icon-taobao {
+  &:before {
+    content: "\e906";
+  }
+}
 .icon-hand {
   &:before {
     content: "\e811";
@@ -187,12 +192,22 @@ a.text {
 }
 .icon-tick {
   &:before {
-    content: "\e80c";
+    content: "\e904";
   }
 }
 .icon-user {
   &:before {
     content: "\e902";
+  }
+}
+.icon-follow {
+  &:before {
+    content: "\e905";
+  }
+}
+.icon-followed {
+  &:before {
+    content: "\e903";
   }
 }
 .full-width {
@@ -228,7 +243,7 @@ a.text {
 [type="checkbox"]:not(:checked) + label:after,
 [type="checkbox"]:checked + label:after {
   ._useIconFont;
-  content: '\e80c';
+  content: '\e904';
   position: absolute;
   top: 3px; left: 0px;
   font-size: 18px;

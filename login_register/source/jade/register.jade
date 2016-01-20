@@ -70,11 +70,15 @@ section.login-panel
 
     input(name='rhash', value='{FORM_HASH}', type='hidden')
 
+include source/jade/pick-interest.jade
+
 .popup-wrap.full-screen(style='display: none')
   .popup-content(style='width: 70%;height:70%;')
     h3 服务条款
     article
     button.close-popup
       i.icon.icon-sml.icon-close-popup
+
+
 
 <!--{template page/user/footer}-->

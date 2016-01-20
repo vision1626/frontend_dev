@@ -1,4 +1,9 @@
 init = ->
+  $form_login = $('#form-login')
+  $form_register = $('#form-register')
+  $form_nickname = $('#form-nickname')
+  $switch_header = $('.switch-header-social')
+
   $('input[type=text],input[type=password]').focus ->
     $(this).parent().addClass 'focus'
   .blur ->
@@ -7,7 +12,7 @@ init = ->
   #  Responsive 自適應
   resizeEle = ->
     form_w = $('.form-container').width()
-    $('.switch-header-social').width form_w
+    $switch_header.width form_w
     $('.form-header').width form_w
     $('.switch-container-social').width form_w * 3 + 30
 
@@ -32,14 +37,14 @@ init = ->
   #  Switch login and register 註冊登錄切換
   btn_goto_login = $('.goto-login')
   btn_goto_register = $('.goto-register')
-  $('#form-login').hide()
-  $('#form-register').show()
-  $('#form-nickname').hide()
+  $form_login.hide()
+  $form_register.show()
+  $form_nickname.hide()
   btn_goto_login.click ->
     $('.form-container').addClass 'at-login'
-    $('#form-login').show()
-    $('#form-register').hide()
-    $('#form-nickname').hide()
+    $form_login.show()
+    $form_register.hide()
+    $form_nickname.hide()
     form_w = $('.form-container').width()
     $('.switch-container-social').css 'left', -(form_w + 30)
     $('.form-error').hide()
@@ -47,12 +52,12 @@ init = ->
     at_page = 0 # login
   btn_goto_register.click ->
     $('.form-container').removeClass 'at-login'
-    $('#form-register').show()
-    $('#form-nickname').hide()
-    $('#form-register').find('input#captchaInput').val('')
-#    $('#form-register').find('a.captcha').renew_captcha()
+    $form_register.show()
+    $form_nickname.hide()
+    $form_register.find('input#captchaInput').val('')
+#    $form_register.find('a.captcha').renew_captcha()
     renew_captcha()
-    $('#form-login').hide()
+    $form_login.hide()
     $('.switch-container-social').css 'left', 0
     $('.form-error').hide()
     $('.input-password').val('')
@@ -119,21 +124,26 @@ init = ->
 
   # -------------------------- 绑定成功提示页 - START - 2016.01.15新增 @中 -------------------------
 
+  $('.nickname-skip').attr 'href', SITE_URL
+  $('.skip-all').attr 'href', SITE_URL
   $('#showRegForm').click ->
     $('.after-bind').hide()
-    $('.switch-header-social').show()
+    $switch_header.show()
     $('.form-wrap').show()
   $('.skip-reg').click ->
-    $('#form-login').hide()
-    $('#form-register').hide()
-    $('#form-nickname').show()
+    $('.after-bind').hide()
+    $('.form-wrap').show()
+    $form_login.hide()
+    $form_register.hide()
+    $form_nickname.show()
+    $switch_header.find('a.switch').hide()
+    $switch_header.find('label.form-title').html('<span>修改昵称</span>')
 
   # -------------------------- 登錄 - START -------------------------
 
   log_input_phone = $('#form-login input.input-phone')
   log_input_pass = $('#form-login input.input-password')
-  form_login = $('#form-login')
-  btn_login_submit = form_login.find 'button#submitLogin'
+  btn_login_submit = $form_login.find 'button#submitLogin'
 
   # 函數：激活/禁止提交按鈕
   disableBtnLogSubmit = ->
@@ -150,7 +160,7 @@ init = ->
     query.remember = $('#remember').is(':checked') ? 1: 0
     query.rhash = $.trim($("input[name=rhash]").val());
     $.ajax {
-      url: form_login.attr('data-action'),
+      url: $form_login.attr('data-action'),
       type: "POST",
       data: query,
       cache: false,
@@ -206,7 +216,7 @@ init = ->
 
   # -------------------------- 註冊 - START -------------------------
 
-  form_register = $('#form-register')
+  form_register = $form_register
   reg_input_phone = form_register.find('input.input-phone')
   reg_input_pass = form_register.find('input.input-password')
   reg_input_captcha = form_register.find('input#captchaInput')
@@ -309,8 +319,9 @@ init = ->
     query.code = v_code
     query.rcode = m_code or ''
     query.rhash = $("input[name=rhash]").val()
+    query.agreement = 1
     $.ajax {
-      url: SITE_URL + "user/ajax_register.html"
+      url: $form_register.attr('data-action'),
       type: "POST"
       data: query
       cache: false
@@ -323,12 +334,12 @@ init = ->
 #            window.location.href = SITE_URL
 #          , 2000)
 #         替换成注册成功后修改昵称
-          $('.form-container').removeClass('at-register')
-          $('.form-container').addClass 'at-nickname'
-          $('#form-nickname').show()
-          $('#form-register').hide()
-          $('.social-login').hide()
-          $('span.old-nickname').text(' ' + result.user_name)
+#          $('.form-container').removeClass('at-register')
+#          $('.form-container').addClass 'at-nickname'
+          $form_nickname.show()
+          $form_register.hide()
+#          $('.social-login').hide()
+#          $('span.old-nickname').text(' ' + result.user_name)
           $('a.nickname-skip').attr('data-href',result.success_url)
           form_w = $('.form-container').width() * 2
           $('.switch-container-social').css 'left', -(form_w + 30)
@@ -454,9 +465,8 @@ init = ->
   # -------------------------- 註冊 - END -------------------------
 
   # -------------------------- 修改昵称 - START -------------------------
-  form_nickname = $('#form-nickname')
-  nic_input_name = form_nickname.find('input.input-nickname')
-  btn_nic_info_submit = form_nickname.find('button#submitNickname')
+  nic_input_name = $form_nickname.find('input.input-nickname')
+  btn_nic_info_submit = $form_nickname.find('button#submitNickname')
 
   # 函数: 激活/禁止提交按钮
   disableBtnNicknameSubmit = ->
@@ -564,7 +574,7 @@ init = ->
 
 
   # 偵測回車鍵
-  form_nickname.find('input.input-nickname').keypress (e)->
+  $form_nickname.find('input.input-nickname').keypress (e)->
   # 此function为了解决在此输入框中按回车键时直接页面跳转的问题
     if(e.which == 13)
       validateNicknameForm(true)

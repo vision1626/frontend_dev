@@ -7,7 +7,7 @@ section.login-panel
     .hand-logo.below-tablet
       i.icon.icon-hand
 
-    .after-bind.temp-to-show
+    .after-bind
       .switch-header-social
         .switch-container-social
           .form-header.congrats
@@ -19,9 +19,9 @@ section.login-panel
       .form-actions
         button#showRegForm.button.large.always-blue.full-width(type="button") 绑定帐号
         h5
-          a.text(data-href='') 跳过
+          a.text.skip-reg(data-href='') 跳过
 
-    .switch-header-social.temp-to-hide(style='display:none;')
+    .switch-header-social(style='display:none')
       .switch-container-social
         .form-header.register
           label.form-title
@@ -31,15 +31,14 @@ section.login-panel
             i.icon.icon-sml.icon-switch
         .form-header.login
           label.form-title
-            span 登录
-            img.logo(src="/tpl/hi1626/images/login/logo-1626-black.svg")
-          a.switch.goto-register 注册新账户
+            span 已有帐号绑定
+          a.switch.goto-register 注册绑定
             i.icon.icon-sml.icon-switch
         .form-header.nickname
           label.form-title
             span 注册成功
 
-    .form-wrap.temp-to-hide(style='display:none;')
+    .form-wrap(style='display:none')
       form#form-login(data-action='{u user/ajax_login}')
         ul
           li.input-row
@@ -56,9 +55,9 @@ section.login-panel
             a.forget.text(href='{u user/forgetpassword}', title='忘记密码?', rel='nofollow') 忘记密码?
           button#submitLogin.button.large.disabled.full-width(type="button") 登    录
           h5
-            a.text.skip-reg.temp-to-show(data-href='') 跳过
+            a.text.skip-reg(data-href='') 跳过
 
-      form#form-register(data-action='{u user/ajax_register}', autocomplete='off')
+      form#form-register(data-action='{u user/savebind}', autocomplete='off')
         ul
           li.input-row
             i.icon.icon-sml.icon-phone
@@ -82,13 +81,13 @@ section.login-panel
             a.text.show-terms(data-href='http://www.1626.com/about/privacy.html', style='float:none') 1626服务条款
           button#submitInfo.button.large.disabled.full-width(type="button") 立即注册
           h5
-            a.text.skip-reg.temp-to-show(data-href='') 跳过
+            a.text.skip-reg(data-href='') 跳过
 
       form#form-nickname(data-action='{u user/update_nickname}',autocomplete='off')
         .above-input
           p
             | 你现在的昵称是
-            span.text.old-nickname
+            span.text.old-nickname {$bind_info['user_name']}
             br
             | 要做个性超人,怎么也得起个酷炫的名号吧!
         ul
