@@ -93,25 +93,25 @@ init_u_header = ->
   #  ----------------------------------------
 
   $fav.on 'click', ->
-    slideToCurrent.apply(this)
-    user_action_async('fav')
-    toggleGoods(true)
+    if giveupEditing()
+      slideToCurrent.apply(this)
+      user_action_async('fav')
   $db.on 'click', ->
-    slideToCurrent.apply(this)
-    user_action_async('dashboard')
-    toggleGoods(true)
+    if giveupEditing()
+      slideToCurrent.apply(this)
+      user_action_async('dashboard')
   $pub.on 'click', ->
-    slideToCurrent.apply(this)
-    user_action_async('talk')
-    toggleGoods(true)
+    if giveupEditing()
+      slideToCurrent.apply(this)
+      user_action_async('talk')
   $fans.on 'click', ->
-    slideToCurrent.apply(this,[36])
-    user_relation_async('fans')
-    toggleGoods(true)
+    if giveupEditing()
+      slideToCurrent.apply(this,[36])
+      user_relation_async('fans')
   $follow.on 'click', ->
-    slideToCurrent.apply(this,[36])
-    user_relation_async('follow')
-    toggleGoods(true)
+    if giveupEditing()
+      slideToCurrent.apply(this,[36])
+      user_relation_async('follow')
 
 
   $(window).on 'resize', ->

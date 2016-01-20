@@ -16,10 +16,10 @@ else
           img(src="#{image_path}/qr-app.jpg", alt="app")
           p 扫码下载
         .os-choice
-          a(href='https://itunes.apple.com/cn/app/1626-ke-jian-ji-ke-mai-chao/id668631637?mt=8&utm_source=iosapp_1626&utm_medium=app_1626&utm_campaign=app_1626').iTunes
+          a(href='https://itunes.apple.com/cn/app/1626-ke-jian-ji-ke-mai-chao/id668631637?mt=8&utm_source=iosapp_1626&utm_medium=app_1626&utm_campaign=app_1626' target='_blank').iTunes
             i.icon.icon-apple
             b iTunes
-          a(href='http://www.1626.com/downloads/andriod').Android
+          a(href='http://www.1626.com/downloads/andriod' target='_blank').Android
             i.icon.icon-android
             b Android
           p 直接下载
@@ -32,12 +32,12 @@ else
           img(src="#{image_path}/qr-weibo.jpg", alt="weibo")
           p 潮人养成记
     li.fixed-nav__help
-      a(href="/about/help.html") 帮助中心
+      a(href="/about/help.html" target="_blank") 帮助中心
       ul.drop-down-list
         li
-          a(href="/about/help.html") 订单帮助
+          a(href="/about/help.html" target="_blank") 订单帮助
         li
-          a(href="/about/help.html") 发布指引
+          a(href="/about/help.html" target="_blank") 发布指引
     li.fixed-nav__avatar
       if production
         {if $_FANWE['uid'] > 0}
@@ -47,11 +47,11 @@ else
             img(src="{avatar $_FANWE['uid'] s 1 $_FANWE['user']['img_thumb']}")
             |$_FANWE['user']['user_name']
           |&nbsp;|&nbsp;
-          a(href="{u user/logout}") 退出
+          a(href="{u user/logout}" target="_blank") 退出
         {else}
-        a(href="{u user/login}") 登录
+        a(href="{u user/login}" target="_blank") 登录
         span |
-        a(href="{u user/register}") 注册
+        a(href="{u user/register}" target="_blank") 注册
         {/if}
       else
         span.quit-span
@@ -109,7 +109,7 @@ else
         i.icon.icon-hand
         | 我的潮品
     li.main-nav__publish
-      a(href="u/talk.html")
+      a
         i.icon.icon-publish_solid
         | 发布
     li.main-nav__msg
@@ -119,18 +119,20 @@ else
           a(href='/settings/psersonal.html')
             img(src="{avatar $_FANWE['uid'] s 1 $_FANWE['user']['img_thumb']}")
         {else}
-        a(href="{u user/login}") 登录
-        span |
-        a(href="{u user/register}") 注册
+        //- a(href="{u user/login}") 登录
+        //- span |
+        //- a(href="{u user/register}") 注册
         {/if}
       span.fixed-nav__number.fixed-nav__number--blue 0
-      ul.drop-down-list.right
+      ul.drop-down-list
         li.get-likes
         li.get-fans
         li.get-comments
         li.get-recomendded
         li.check-all
           a
+.scroll-to-top
+  i.icon.icon-hand
 script(type='text/javascript').
   $(document).ready(function () {
     init_global_header();

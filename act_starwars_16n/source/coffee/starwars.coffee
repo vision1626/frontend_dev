@@ -5,7 +5,7 @@ _score = 0
 _not_answer = false
 _image_path  = './tpl/hi1626/images/starwars/'
 _virgin = true
-_waittime = 1000
+_waittime = 1001
 
 _mobile_empty_msg = '请输入电话号码'
 _mobile_error_msg = '请输入正确的电话号码'
@@ -229,10 +229,10 @@ set_step = (step) ->
       help_img = help.find('.help_img').find('img')
       help_title = help.find('.help_title').find('span')
       if _q_n is 3
-        help_img.attr('src',_image_path + 'help1.png')
+        help_img.attr('src',_image_path + 'help1a.png')
         help_title.html('有时候,你需要一些协助')
       else
-        help_img.attr('src',_image_path + 'help2.png')
+        help_img.attr('src',_image_path + 'help2a.png')
         help_title.html('接下来的一题目，超难！')
       help.fadeIn 0
     when 3
@@ -282,21 +282,33 @@ set_step = (step) ->
       , 300
 
 set_result = (score) ->
+  split_time = new Date('2016/1/20 14:00:00')
+  if window.tear_time_string isnt ''
+    tear_time = new Date(tear_time_string)
+  else
+    tear_time = new Date()
   result = $('#result')
   desc1 = result.find('.first_complete').find('span.d1')
   desc2 = result.find('.first_complete').find('span.d2')
   tb_key = result.find('.key_text').find('span')
   rank = 0
 
-  if score >= 3 and score <= 5
-    rank = 1
-  else if score >= 6 and score <= 7
-    rank = 2
-
-  desc1.html(reward_list[rank].description1)
-  desc2.html(reward_list[rank].description2)
-  tb_key.html(decodeURIComponent(reward_list[rank].tb_key))
-#  tb_key.contents().find('body').append(reward_list[rank].tb_key)
+  if tear_time < split_time
+    if score is 3 or score is 4 or score is 5
+      rank = 1
+    else if score is 6 or score is 7
+      rank = 2
+    desc1.html(reward_list_old[rank].description1)
+    desc2.html(reward_list_old[rank].description2)
+    tb_key.html(decodeURIComponent(reward_list_old[rank].tb_key))
+  else
+    if score is 5 or score is 6
+      rank = 1
+    else if score is 7
+      rank = 2
+    desc1.html(reward_list[rank].description1)
+    desc2.html(reward_list[rank].description2)
+    tb_key.html(decodeURIComponent(reward_list[rank].tb_key))
 
 after_submit = () ->
   if _virgin

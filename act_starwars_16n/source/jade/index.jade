@@ -15,7 +15,7 @@ html
     meta(name="description" content="{$seo_description")
     meta(name='apple-mobile-web-app-status-bar-style', content='black')
     meta(name='apple-mobile-web-app-capable', content='yes')
-    -title = "16eme NORD"
+    -title = "STAR WARS X 16N"
     title= title
 
     if production
@@ -55,8 +55,8 @@ html
 
       .entrance.view.nexstep#entrance(s='0')
         include ./source/jade/top_logo.jade
-        span.copyright © & ™ Lucasfilm Ltd.
         .enter
+          span.copyright © & ™ Lucasfilm Ltd.
           img(src=image_path + 'entrance.gif',alt='')
         include ./source/jade/16eme.jade
 
@@ -146,22 +146,25 @@ html
           .text.user_information
             span 别忘了留下你的信息
             br
+            span 即可获得
             include ./source/jade/16eme_name.jade
-            span 将抽出幸运者
+            span 天猫优惠券
+            br
+            span 以及参与星战特别版卫衣抽奖！
           .user_form
             .input_container.mobile_box
-              input.mobile.empty#mobile(value='电话号码',ev='电话号码',maxlength='11')
+              input.mobile.empty#mobile(value='填写正确电话以便核实获奖',ev='填写正确电话以便核实获奖',maxlength='11')
             .input_container.name_box
-              input.name.empty#name(value='姓名',ev='姓名',maxlength='6')
+              input.name.empty#name(value='姓名',ev='姓名',maxlength='15')
             .submit_button#submit_button
               span 确认提交
         .all_completion
           .receive_description
-            span 亲,你已经领过
+            span 亲，你已经领过
             include ./source/jade/16eme_name.jade
-            span 优惠券了,
+            span 优惠券了，
             br
-            span 按照下面提示,赶快进入
+            span 按照下面提示，赶快进入
             include ./source/jade/16eme_name.jade
             br
             span 天猫旗舰店瞧瞧呗!
@@ -206,14 +209,15 @@ html
         img#share_img(src=image_path + 'share.png',alt='')
 
 
-    //<!--{if $is_wx}-->
-    //<!--{template inc/weixin_share}-->
-    //<!--{/if}-->
-    //<!--{template inc/count}-->
+    <!--{if $is_wx}-->
+    <!--{template inc/weixin_share}-->
+    <!--{/if}-->
+    <!--{template inc/count}-->
     if production
       script(src="{script $current_js}")
     script.
       $(document).ready(function () {
+        window.tear_time_string = '{$create_time}';
         window.virgin_score = '{$votes}';
         init();
       });

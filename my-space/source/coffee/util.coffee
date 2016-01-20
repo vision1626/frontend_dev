@@ -12,6 +12,19 @@ toggleGoods = (show)->
     $('.show-more').fadeOut(500)
     $('.form__container').fadeIn(500)
 
+isEditingGood = ->
+  return $('.form__container').is(':visible')
+
+giveupEditing = ->
+  if isEditingGood()
+    if confirm('是否放弃编辑单品？')
+      toggleGoods(true)
+      return true
+    else
+      return false
+  else
+    return true
+
 followItem_Generater = (data,current_index) ->
   dd = $('<dd class="follow-list_item" i="' + current_index + '" t-uid=' + data.uid + '>'+
     '<div class="fans-container">' +
@@ -184,7 +197,8 @@ big_DashboardItem_Generater = (data,current_index) ->
             if state is 'dashboard' and _dashboard_show_me
               '<div class="item-b_isnew">' +
               (
-                if data.is_share_fav is 1 or data.like_user_list
+#                if data.is_share_fav is 1 or data.like_user_list
+                if data.like_user_list
                   (
                     likeusers = []
                     for lu in data.like_user_list
@@ -318,7 +332,8 @@ small_DashboardItem_Generater = (data,current_index) ->
           else
             '<div class="item-s_isnew">' +
               (
-                if data.is_share_fav is 1 or data.like_user_list
+#                if data.is_share_fav is 1 or data.like_user_list
+                if data.like_user_list
                   (
                     likeusers = []
                     for lu in data.like_user_list
@@ -388,8 +403,19 @@ fixMainnav = ->
 
   if $('body').scrollTop() >= 400
     $('.main-nav-container').addClass('fixed')
-  else 
+    $('.scroll-to-top').addClass('fixed')
+  else
     $('.main-nav-container').removeClass('fixed')
+    $('.scroll-to-top').removeClass('fixed')
+
+  footer_height = 388 - 100
+  bottom_distance = $(document).height() - ($(this).scrollTop() + $(window).height())
+  bottom_distance_out_range = footer_height - bottom_distance
+  if bottom_distance <= footer_height
+    $('.scroll-to-top').css('bottom',(bottom_distance_out_range + 100) + 'px')
+  else
+    $('.scroll-to-top').css('bottom','100px')
+
   set_search_w()
 
 excite_Anim = (obj,animName) ->

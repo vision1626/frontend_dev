@@ -7,6 +7,10 @@ init_global_header = ->
   $nav_right_w = $nav_right.width()
   $nav_left_w = $nav_left.width()
 
+  set_search_w = ->   
+    win_w = $(window).width()   
+    $search_wrap.width win_w - $nav_right_w - $nav_left_w - 40
+
   set_search_w()
   $(window).on "resize", ->
     set_search_w()
@@ -86,6 +90,9 @@ init_global_header = ->
     if e.which == 13
      check_search2()
 
+  $('.main-nav__publish').on 'click', ->
+    $('.popup__blackbox').fadeIn(500)
+
 $(document).on 'mouseover','li.fixed-nav__flash-buy', ->
   $(this).find('.cart-link').addClass('cart-link_show')
   $(this).find('.order-link').addClass('order-link_show')
@@ -95,3 +102,6 @@ $(document).on 'mouseleave','div.fixed-nav-container', ->
   $(this).find('.cart-link').removeClass('cart-link_show')
   $(this).find('.order-link').removeClass('order-link_show')
   $(document).find('li.fixed-nav__msg').find('ul.drop-down-list').removeClass('left').addClass('right')
+
+$(document).on 'click','div.scroll-to-top', ->
+  $('html, body').animate({scrollTop:0}, 500);
