@@ -501,23 +501,26 @@ after_like = (me,dtype,result,job) ->
   count = 0
   ed = 0
   my_id = me.attr('sid')
-  if dtype is 'd'
-    if result.status is 1
-      ed = 1
-      count = 1
-    else
-      ed = 0
-      count = -1
-  else if dtype is 's'
-    if job is 1
+  if result.status isnt 3
+    if dtype is 'd'
       if result.status is 1
         ed = 1
         count = 1
-    else if job is 2
-      if result.status is 1
+      else
         ed = 0
         count = -1
-  refresh_like(my_id,ed,count)
+    else if dtype is 's'
+      if job is 1
+        if result.status is 1
+          ed = 1
+          count = 1
+      else if job is 2
+        if result.status is 1
+          ed = 0
+          count = -1
+    refresh_like(my_id,ed,count)
+  else
+    alert('自恋是不对滴,不可以哟! 凸（≧∇≦）凸')
 
 refresh_like = (sid,ed,count) ->
   for ld in window.dashboard_list_data
