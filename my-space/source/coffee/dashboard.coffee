@@ -469,7 +469,6 @@ do_like = (obj) ->
   sid = me.attr('sid')
   dtype = me.attr('dtype')
   ed = me.attr('ed')
-  liststyle = me.attr('l')
   method = "GET"
 
   job = 0
@@ -492,13 +491,13 @@ do_like = (obj) ->
     cache: false
     dataType: "json"
     success: (result)->
-      after_like(me,dtype,result,job,liststyle)
+      after_like(me,dtype,result,job)
     error: (result)->
       if result.status isnt 0
         alert('服务器君跑到外太空去了,刷新试试看!')
   }
 
-after_like = (me,dtype,result,job,liststyle) ->
+after_like = (me,dtype,result,job) ->
   count = 0
   ed = 0
   my_id = me.attr('sid')
@@ -518,12 +517,14 @@ after_like = (me,dtype,result,job,liststyle) ->
       if result.status is 1
         ed = 0
         count = -1
-  if liststyle is 'b'
-    refresh_like('big',my_id,ed,count)
-  else if liststyle is 's'
-    refresh_like('small',my_id,ed,count)
+  refresh_like(my_id,ed,count)
 
-refresh_like = (showing,sid,ed,count) ->
+refresh_like = (sid,ed,count) ->
+  for ld in window.dashboard_list_data
+    if parseInt(ld.did) is parseInt(sid)
+      ld.is_fav = ed
+      ld.like_count += count
+
   top_count = $('.content__actions').find('.actions-fav b')
   harting_img_url = SITE_URL + window.image_path + 'icon-heart-ing.gif'
 
@@ -544,13 +545,14 @@ refresh_like = (showing,sid,ed,count) ->
 
   big_count.html(parseInt(big_count.html()) + count)
   small_count.html(parseInt(small_count.html()) + count)
+
   big_button.attr('ed',ed)
   small_button.attr('ed',ed)
 
   if _dashboard_show_me
     top_count.html(parseInt(top_count.html()) + count)
   if ed is 1
-    if showing is 'big'
+    if _dashboard_show_big
       big_harting.attr('src',harting_img_url)
       big_harting.show()
     else
@@ -558,12 +560,10 @@ refresh_like = (showing,sid,ed,count) ->
       small_harting.show()
 
     setTimeout ->
-      if showing is 'big'
-        big_harting.attr('src','')
-        big_harting.hide()
-      else
-        small_harting.attr('src','')
-        small_harting.hide()
+      big_harting.attr('src','')
+      big_harting.hide()
+      small_harting.attr('src','')
+      small_harting.hide()
       big_icon.removeClass('icon-heart').addClass('icon-hearted')
       small_icon.removeClass('icon-heart').addClass('icon-hearted')
       _dashboard_doing_like = false
