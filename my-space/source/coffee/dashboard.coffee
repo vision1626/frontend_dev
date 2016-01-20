@@ -452,6 +452,7 @@ do_like = (obj) ->
 after_like = (me,dtype,result,job,liststyle) ->
   count = 0
   ed = 0
+  my_id = me.attr('sid')
   if dtype is 'd'
     if result.status is 1
       ed = 1
@@ -469,55 +470,79 @@ after_like = (me,dtype,result,job,liststyle) ->
         ed = 0
         count = -1
   if liststyle is 'b'
-    refresh_like_big(me,ed,count)
+    refresh_like('big',my_id,ed,count)
   else if liststyle is 's'
-    refresh_like_small(me,ed,count)
+    refresh_like('small',my_id,ed,count)
 
-refresh_like_big = (me,ed,count) ->
-  smalllist = $('#small_img')
-  my_icon = me.find('.icon')
-  my_count = me.find('.like_count')
-  harting = me.find('.harting')
+refresh_like = (showing,sid,ed,count) ->
   top_count = $('.content__actions').find('.actions-fav b')
   harting_img_url = SITE_URL + window.image_path + 'icon-heart-ing.gif'
 
-  my_count.html(parseInt(my_count.html()) + count)
-  me.attr('ed',ed)
+  big_list = $('#big_img')
+  small_list = $('#small_img')
+
+  big_button = big_list.find('div.btn_like[sid=' + sid + ']')
+  small_button = small_list.find('div.btn_like[sid=' + sid + ']')
+
+  big_icon = big_button.find('.icon')
+  small_icon = small_button.find('.icon')
+
+  big_count = big_button.find('.like_count')
+  small_count = small_button.parent().parent().find('.like_count')
+
+  big_harting = big_button.find('.harting')
+  small_harting = small_button.find('.harting')
+
+  big_count.html(parseInt(big_count.html()) + count)
+  small_count.html(parseInt(small_count.html()) + count)
+  big_button.attr('ed',ed)
+  small_button.attr('ed',ed)
+
   if _dashboard_show_me
     top_count.html(parseInt(top_count.html()) + count)
-
   if ed is 1
-    harting.attr('src',harting_img_url)
-    harting.show()
+    if showing is 'big'
+      big_harting.attr('src',harting_img_url)
+      big_harting.show()
+    else
+      small_harting.attr('src',harting_img_url)
+      small_harting.show()
+
     setTimeout ->
-      my_icon.removeClass('icon-heart').addClass('icon-hearted')
-      harting.attr('src','')
-      harting.hide()
+      if showing is 'big'
+        big_harting.attr('src','')
+        big_harting.hide()
+      else
+        small_harting.attr('src','')
+        small_harting.hide()
+      big_icon.removeClass('icon-heart').addClass('icon-hearted')
+      small_icon.removeClass('icon-heart').addClass('icon-hearted')
       _dashboard_doing_like = false
     , 1500
   else
-    my_icon.removeClass('icon-hearted').addClass('icon-heart')
+    big_icon.removeClass('icon-hearted').addClass('icon-heart')
+    small_icon.removeClass('icon-hearted').addClass('icon-heart')
     _dashboard_doing_like = false
 
 
-refresh_like_small = (me,ed,count) ->
-  biglist = $('#big_img')
-  my_icon = me.find('.icon')
-  my_count = me.parent().parent().find('.like_count')
-  harting = me.find('.harting')
-  harting_img_url = SITE_URL + window.image_path + 'icon-heart-ing.gif'
-  if ed is 1
-    harting.attr('src',harting_img_url)
-    harting.show()
-    setTimeout ->
-      my_icon.removeClass('icon-heart').addClass('icon-hearted')
-      harting.attr('src','')
-      harting.hide()
-    , 1500
-  else
-    my_icon.removeClass('icon-hearted').addClass('icon-heart')
-  my_count.html(parseInt(my_count.html()) + count)
-  me.attr('ed',ed)
-  setTimeout ->
-    _dashboard_doing_like = false
-  , 2500
+#refresh_like_small = (me,ed,count) ->
+#  biglist = $('#big_img')
+#  my_icon = me.find('.icon')
+#  my_count = me.parent().parent().find('.like_count')
+#  harting = me.find('.harting')
+#  harting_img_url = SITE_URL + window.image_path + 'icon-heart-ing.gif'
+#  if ed is 1
+#    harting.attr('src',harting_img_url)
+#    harting.show()
+#    setTimeout ->
+#      my_icon.removeClass('icon-heart').addClass('icon-hearted')
+#      harting.attr('src','')
+#      harting.hide()
+#    , 1500
+#  else
+#    my_icon.removeClass('icon-hearted').addClass('icon-heart')
+#  my_count.html(parseInt(my_count.html()) + count)
+#  me.attr('ed',ed)
+#  setTimeout ->
+#    _dashboard_doing_like = false
+#  , 2500
