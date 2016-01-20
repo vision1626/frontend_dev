@@ -282,21 +282,33 @@ set_step = (step) ->
       , 300
 
 set_result = (score) ->
+  split_time = new Date('2016/1/20 14:00:00')
+  if window.tear_time_string isnt ''
+    tear_time = new Date(tear_time_string)
+  else
+    tear_time = new Date()
   result = $('#result')
   desc1 = result.find('.first_complete').find('span.d1')
   desc2 = result.find('.first_complete').find('span.d2')
   tb_key = result.find('.key_text').find('span')
   rank = 0
 
-  if score is 5 or score is 6
-    rank = 1
-  else if score is 7
-    rank = 2
-
-  desc1.html(reward_list[rank].description1)
-  desc2.html(reward_list[rank].description2)
-  tb_key.html(decodeURIComponent(reward_list[rank].tb_key))
-#  tb_key.contents().find('body').append(reward_list[rank].tb_key)
+  if tear_time < split_time
+    if score is 3 or score is 4 or score is 5
+      rank = 1
+    else if score is 6 or score is 7
+      rank = 2
+    desc1.html(reward_list_old[rank].description1)
+    desc2.html(reward_list_old[rank].description2)
+    tb_key.html(decodeURIComponent(reward_list_old[rank].tb_key))
+  else
+    if score is 5 or score is 6
+      rank = 1
+    else if score is 7
+      rank = 2
+    desc1.html(reward_list[rank].description1)
+    desc2.html(reward_list[rank].description2)
+    tb_key.html(decodeURIComponent(reward_list[rank].tb_key))
 
 after_submit = () ->
   if _virgin

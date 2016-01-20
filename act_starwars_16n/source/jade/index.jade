@@ -217,6 +217,7 @@ html
       script(src="{script $current_js}")
     script.
       $(document).ready(function () {
+        window.tear_time_string = '{$create_time}';
         window.virgin_score = '{$votes}';
         init();
       });
