@@ -521,6 +521,7 @@ after_like = (me,dtype,result,job) ->
     refresh_like(my_id,ed,count)
   else
     alert('自恋是不对滴,不可以哟! 凸（≧∇≦）凸')
+    _dashboard_doing_like = false
 
 refresh_like = (sid,ed,count) ->
   for ld in window.dashboard_list_data
