@@ -8,6 +8,7 @@ _dashboard_end_s = 0
 _dashboard_step_s = _dashboard_limit
 _dashboard_show_big = true
 _dashboard_show_new_hot = 'new'
+_dashboard_show_product_collocation = 1
 _dashboard_has_more = true
 _dashboard_has_publish_btn_b = false
 _dashboard_has_publish_btn_s = false
@@ -25,7 +26,7 @@ init_dashboard = ->
 #  listempty = $('#list-empty')
 #  listloading = $('#list-loading')
 #  pagiation = $('#item-pagiation')
-#  filter = $('#list-filter')
+  filter = $('#list-filter')
 
 #  if window.dashboard_count is ''
 #    window.dashboard_count = 0
@@ -42,6 +43,7 @@ init_dashboard = ->
     window.dashboard_list_data = $.parseJSON(window.dashboard_list_string)
 
   init_dashboard_empty_message()
+  filter.html(filter_generater())
   gen_dashboard_item()
 #  listloading.show()
 #  if window.dashboard_list_data
@@ -76,6 +78,20 @@ $(window).bind 'scroll', (e)->
 
 #  if ($(this).scrollTop() + $(window).height() + 200 >= $(document).height() && $(this).scrollTop() > 200)
 #    gen_dashboard_item()
+
+$(document).on 'click','.item-nav', ->
+  me = $(this)
+  biglist = $('#big_img')
+  smalllist = $('#small_img')
+  if me.hasClass('nav-type')
+    if !me.hasClass('current')
+      $('.nav-type').removeClass('current')
+      me.addClass('current')
+      _dashboard_show_product_collocation = parseInt(me.attr('t'))
+#      biglist.html('')
+#      smalllist.html('')
+#      query_dashboard_data()
+      init_dashboard_data()
 
 $(document).on 'click','.show-new_list', ->
   if !$(this).hasClass('current')
@@ -135,7 +151,6 @@ query_dashboard_data = () ->
   btn_ShowMore = $(document).find('#dashboard-show-more')
 
   if !_dashboard_is_loading and _dashboard_has_more
-
     _dashboard_is_loading = true
 
     if window.dashboard_list_data
@@ -156,20 +171,34 @@ query_dashboard_data = () ->
 
     if state is 'fav' #喜欢
       action = 'get_fav_ajax'
+      sort = 'new'
+      if _dashboard_show_product_collocation is 1
+        count = window.product_count
+      else
+        count = window.collocation_count
     else if state is 'talk' #发布页
       action = 'get_publish_ajax'
+      sort = _dashboard_show_new_hot
+      if _dashboard_show_product_collocation is 1
+        count = window.product_count
+      else
+        count = window.collocation_count
     else #动态
       action = 'get_dashboard_ajax'
+      sort = 'new'
+      count = window.dashboard_count
 
     btn_ShowMore.html('正在努力加载中...').addClass('loading')
     _dashboard_ajax_process = $.ajax {
       url: SITE_URL + 'services/service.php'
       type: "GET"
-      data: {'m': 'u', 'a': action, ajax: 1, 'page': page, 'count': window.dashboard_count, 'sort': _dashboard_show_new_hot,'limit': _dashboard_limit, 'hid': window.uid}
+      data: {'m': 'u', 'a': action, ajax: 1, 'page': page, 'count': count,'type': _dashboard_show_product_collocation, 'sort': sort,'limit': _dashboard_limit, 'hid': window.uid}
       cache: false
       dataType: "json"
       success: (result,status,response)->
         window.dashboard_count = result.count
+        window.product_count = result.share_count
+        window.collocation_count = result.dapei_count
         if result.data
           if window.dashboard_list_data and window.dashboard_list_data.length > 0
             for d in result.data
@@ -225,7 +254,19 @@ gen_dashboard_item = () ->
   pagiation = $('#item-pagiation')
   filter = $('#list-filter')
   step = 0
-  breakpoint = 'breakpointbreakpoint'
+  if state is 'dashboard'
+    list_count = parseInt(window.dashboard_count)
+  else
+    if _dashboard_show_product_collocation is 1
+      list_count = parseInt(window.product_count)
+    else
+      list_count = parseInt(window.collocation_count)
+
+  if state is 'dashboard'
+    filter.find('.nav-dashboard').find('span').html(window.dashboard_count)
+  else
+    filter.find('.nav-produce').find('span').html(window.product_count)
+    filter.find('.nav-collocation').find('span').html(window.collocation_count)
 
   if window.dashboard_list_data
     if window.dashboard_list_data.length > 0
@@ -267,26 +308,25 @@ gen_dashboard_item = () ->
               smalllist.append(small_DashboardItem_Generater(ld,j))
               _dashboard_start_s++
         smalllist.show()
-      if parseInt(window.dashboard_count) > _dashboard_limit
+      if list_count > _dashboard_limit
         pagiation.show()
       else
         pagiation.hide()
 
-      filter.show()
       listempty.hide()
       recommandTitle.hide()
       recommandList.hide()
     else
       pagiation.hide()
       listempty.show()
-      filter.hide()
+#      filter.hide()
       if _dashboard_show_me
         if state is 'fav' or state is 'dashboard'
           query_dashboard_recommand_data()
   else
     pagiation.hide()
     listempty.show()
-    filter.hide()
+#    filter.hide()
     if _dashboard_show_me
       if state is 'fav' or state is 'dashboard'
         query_dashboard_recommand_data()
@@ -296,6 +336,7 @@ gen_dashboard_item = () ->
     publish.clean()
     publish.form_publish_binding()
   listloading.hide()
+  filter.show()
   _dashboard_is_loading = false
 
 gen_dashboard_recommand_item = (data) ->
@@ -335,6 +376,8 @@ init_dashboard_data = () ->
     window.dashboard_list_data.length = 0
 
   window.dashboard_count = ''
+  window.product_count = ''
+  window.collocation_count = ''
   _dashboard_has_publish_btn_b = false
   _dashboard_has_publish_btn_s = false
   _dashboard_publish_first_gen_b = false
@@ -359,6 +402,7 @@ init_dashboard_data = () ->
     _dashboard_show_me = false
 
   init_dashboard_empty_message()
+  filter.html(filter_generater())
   query_dashboard_data()
 
 init_dashboard_empty_message = () ->
@@ -381,6 +425,11 @@ init_dashboard_empty_message = () ->
         content_text = '不如从下面这堆潮流达人开始吧!'
   else
     who = 'Ta'
+
+  if _dashboard_show_product_collocation is 1
+    type = '单品'
+  else
+    type = '搭配'
 #    if state is 'fav'
 #      content_text = ''
 #    else if state is 'talk'
@@ -389,12 +438,12 @@ init_dashboard_empty_message = () ->
     content_text = '你可以先去别的地方逛逛！'
 
   if state is 'fav'
-    txtEmptytitle.html([who,'还没有喜欢任何单品'].join(''))
+    txtEmptytitle.html([who,'还没有喜欢任何',type].join(''))
     txtEmptycontent.html(content_text)
     btnReturnhome.show()
     btnPublish.hide()
   else if state is 'talk'
-    txtEmptytitle.html([who,'还没有发布任何单品'].join(''))
+    txtEmptytitle.html([who,'还没有发布任何',type].join(''))
     txtEmptycontent.html(content_text)
     if _dashboard_show_me
       btnReturnhome.hide()

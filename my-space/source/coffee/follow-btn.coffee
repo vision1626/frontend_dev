@@ -109,7 +109,7 @@ initFollowBtn = ()->
               sliderToLeft($button)
               changeFollowCount('down',btn_type, $button)
           error: (result)->
-            alert('errr: ' + result)
+            alert('fb-errr: ' + result)
         })
     else
       location.href = SITE_URL + 'user/login.html'
