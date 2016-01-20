@@ -288,9 +288,9 @@ set_result = (score) ->
   tb_key = result.find('.key_text').find('span')
   rank = 0
 
-  if score >= 3 and score <= 5
+  if score is 5 or score is 6
     rank = 1
-  else if score is 6 or score is 7
+  else if score is 7
     rank = 2
 
   desc1.html(reward_list[rank].description1)
