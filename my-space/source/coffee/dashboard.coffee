@@ -331,7 +331,7 @@ gen_dashboard_item = () ->
       if state is 'fav' or state is 'dashboard'
         query_dashboard_recommand_data()
 
-  if state is 'talk' and _dashboard_show_me
+  if _dashboard_show_me
     publish = init_form_publish()
     publish.clean()
     publish.form_publish_binding()

@@ -1,3 +1,19 @@
+changeState = (action)->
+  if window.history.pushState
+    history.pushState(null, null, action + '-' + uid + '.html')
+  window.state = action
+
+slideToCurrent = (padding)->
+  padding = padding or 60
+  tab_width = Math.ceil($(this).width()) + padding
+  cnt_wrap_w = $('.content .center-wrap').width()
+  win_w = $(window).width()
+  wrap_offset = (win_w - cnt_wrap_w) / 2
+  $('.js-slide-bg').width tab_width
+  $('.js-slide-bg').css({'left': $(this).offset().left - wrap_offset})
+  $(this).parent().parent().find('li').removeClass('current')
+  $(this).addClass('current')
+
 toggleGoods = (show)->
   if show
     $('.item-list-filter').fadeIn(500)
@@ -6,6 +22,8 @@ toggleGoods = (show)->
     $('.show-more').fadeIn(500)
     $('.form__container').hide()
   else
+    changeState('talk')
+    slideToCurrent.apply($('.actions-pub'))
     $('.item-list-filter').fadeOut(500)
     $('.item-list-container').fadeOut(500)
     $('.item-pagiation').fadeOut(500)

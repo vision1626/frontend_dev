@@ -187,7 +187,7 @@ init_form_publish = ->
   regenerateFileInput = ->
     $('#file1').remove()
     new_input = $('<input data="test" type="file" id="file1" name="image[]">')
-    new_input.one 'change', ->
+    new_input.on 'change', ->
       imageUpload()
     $('.img-adder').append(new_input)
 
@@ -333,7 +333,7 @@ init_form_publish = ->
           $('.urlwarning').html('')
       })
 
-    $popup_btn.one 'click', (e)->
+    $popup_btn.on 'click', (e)->
       link = $popup_url.val()
       urlreg=/^((https|http|ftp|rtsp|mms)?:\/\/)+[A-Za-z0-9\_\-]+\.[A-Za-z0-9\_\-]+[\/=\?%\-&_~`@[\]\':+!]*([^<>\"\"])*$/
       if (!urlreg.test(link))
@@ -411,13 +411,13 @@ init_form_publish = ->
       if $(this).val() == '' && (e.which == 8 || e.which == 46)
         if $(this).prev().is('span')
           $(this).prev().remove() 
-    $('#file1').one 'change', ->
+    $('#file1').on 'change', ->
       imageUpload()
     $preview.find('.icon').on 'click', (e)->
       e.stopPropagation()
       return false 
 
-    $form_publish.find('.reload').one 'click', (e)->
+    $form_publish.find('.reload').on 'click', (e)->
       link = $form_url_input.val()
       urlreg=/^((https|http|ftp|rtsp|mms)?:\/\/)+[A-Za-z0-9\_\-]+\.[A-Za-z0-9\_\-]+[\/=\?%\-&_~`@[\]\':+!]*([^<>\"\"])*$/
       if (!urlreg.test(link))
