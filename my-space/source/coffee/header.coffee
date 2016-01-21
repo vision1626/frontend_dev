@@ -21,11 +21,6 @@ init_u_header = ->
   isInCurrentAction = (action) ->
     window.location.pathname.indexOf(action) > 0 or window.state == action
 
-  changeState = (action)->
-    if window.history.pushState
-      history.pushState(null, null, action + '-' + uid + '.html')
-    window.state = action
-
 #  if (window.myid != window.uid)
 #    $('.content__actions').find('li').css({'width': '50%'})
 
@@ -60,17 +55,6 @@ init_u_header = ->
         init_follow_data()
     else
       window.location.pathname = '/u/' + action + '-' + uid + '.html'
-
-  slideToCurrent = (padding)->
-    padding = padding or 60
-    tab_width = Math.ceil($(this).width()) + padding
-    cnt_wrap_w = $('.content .center-wrap').width()
-    win_w = $(window).width()
-    wrap_offset = (win_w - cnt_wrap_w) / 2
-    $slide_tab_bg.width tab_width
-    $slide_tab_bg.css({'left': $(this).offset().left - wrap_offset})
-    $(this).parent().parent().find('li').removeClass('current')
-    $(this).addClass('current')
 
   if isInCurrentAction('fav')
     changeState('fav')

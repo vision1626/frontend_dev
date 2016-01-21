@@ -1,3 +1,19 @@
+changeState = (action)->
+  if window.history.pushState
+    history.pushState(null, null, action + '-' + uid + '.html')
+  window.state = action
+
+slideToCurrent = (padding)->
+  padding = padding or 60
+  tab_width = Math.ceil($(this).width()) + padding
+  cnt_wrap_w = $('.content .center-wrap').width()
+  win_w = $(window).width()
+  wrap_offset = (win_w - cnt_wrap_w) / 2
+  $('.js-slide-bg').width tab_width
+  $('.js-slide-bg').css({'left': $(this).offset().left - wrap_offset})
+  $(this).parent().parent().find('li').removeClass('current')
+  $(this).addClass('current')
+
 toggleGoods = (show)->
   if show
     $('.item-list-filter').fadeIn(500)
@@ -6,6 +22,8 @@ toggleGoods = (show)->
     $('.show-more').fadeIn(500)
     $('.form__container').hide()
   else
+    changeState('talk')
+    slideToCurrent.apply($('.actions-pub'))
     $('.item-list-filter').fadeOut(500)
     $('.item-list-container').fadeOut(500)
     $('.item-pagiation').fadeOut(500)
@@ -377,6 +395,11 @@ filter_generater = () ->
   else if state is 'follow'
     search_type = '关注'
 
+  if state is 'follow'
+    search_input_class = 'follow'
+  else
+    search_input_class = 'dashboard'
+
   content = $(
     '<div class="item-nav-container">' +
       (if state is 'dashboard'
@@ -400,10 +423,11 @@ filter_generater = () ->
     '<div class="item-filter-container">' +
       (if state is 'follow' or state is 'fav' or state is 'talk'
         '<div class="item-filter search">' +
-          '<form>' +
+          '<div class="search_form">' +
             '<i class="icon icon-search"></i>' +
-            '<input type="text" placeholder="搜索' + search_type + '"/>' +
-          '</form>' +
+            '<input type="text" class="list-search-' + search_input_class + '" placeholder="搜索' + search_type + '" value="' + _dashboard_search_keyword + '"/>' +
+            '<i class="icon icon-closepop clear-' + search_input_class + '-search"></i>' +
+          '</div>' +
         '</div>'
       else
         ''
@@ -434,8 +458,24 @@ filter_generater = () ->
       else
         ''
       ) +
+    '</div>' +
+    '<div class="item-search-result">' +
+      '<span></span>' +
     '</div>'
   )
+
+show_search_result = (keyword,count) ->
+  search_result = $('.item-search-result')
+  if state is 'follow'
+    type = '用户'
+  else
+    type = '结果'
+  result_text = ['找到',count,'个 ',keyword,' 相关',type].join ''
+  search_result.find('span').html(result_text)
+  search_result.addClass('show')
+
+hide_search_result = () ->
+  $('.item-search-result').removeClass('show')
 
 publishItem_Generater = () ->
   dd = $(

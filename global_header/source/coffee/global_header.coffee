@@ -91,7 +91,12 @@ init_global_header = ->
      check_search2()
 
   $('.main-nav__publish').on 'click', ->
-    $('.popup__blackbox').fadeIn(500)
+    if giveupEditing()
+      $('.popup__blackbox').fadeIn(500)
+      $('.popup').show()
+      $('.popup__loading').hide()
+    else
+      return false
 
 $(document).on 'mouseover','li.fixed-nav__flash-buy', ->
   $(this).find('.cart-link').addClass('cart-link_show')

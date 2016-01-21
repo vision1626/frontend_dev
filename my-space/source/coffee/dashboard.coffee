@@ -18,6 +18,8 @@ _dashboard_doing_like = false
 _dashboard_ajax_process = null
 _dashboard_publish_first_gen_b = false
 _dashboard_publish_first_gen_s = false
+_dashboard_list_by_search = false
+_dashboard_search_keyword = ''
 
 #SITE_URL = 'http://192.168.0.230/'
 
@@ -42,9 +44,14 @@ init_dashboard = ->
   if window.dashboard_list_string isnt ''
     window.dashboard_list_data = $.parseJSON(window.dashboard_list_string)
 
-  init_dashboard_empty_message()
+  if window.product_count is ''
+    window.product_count = '0'
+  if window.collocation_count is ''
+    window.collocation_count = '0'
+
   filter.html(filter_generater())
   gen_dashboard_item()
+  init_dashboard_empty_message()
 #  listloading.show()
 #  if window.dashboard_list_data
 ##    _dashboard_end_b = _dashboard_step_b
@@ -91,7 +98,7 @@ $(document).on 'click','.item-nav', ->
 #      biglist.html('')
 #      smalllist.html('')
 #      query_dashboard_data()
-      init_dashboard_data()
+      init_dashboard_data(true)
 
 $(document).on 'click','.show-new_list', ->
   if !$(this).hasClass('current')
@@ -125,6 +132,41 @@ $(document).on 'click','.show-small_list', ->
     $('dl#big_img').hide()
     $('dl#small_img').show()
 
+$(document).on 'blur','.list-search-dashboard', ->
+  set_clean_dashboard_search($(this))
+$(document).on 'keyup','.list-search-dashboard', ->
+  set_clean_dashboard_search($(this))
+
+set_clean_dashboard_search = (me) ->
+  clear_icon = me.parent().find('i.icon-closepop')
+  if me.val() isnt '' or _dashboard_list_by_search
+    clear_icon.addClass('show')
+  else
+    clear_icon.removeClass('show')
+
+$(document).on 'keypress','.list-search-dashboard', (e)->
+  me = $(this)
+  if(e.which == 13)
+    if me.val() isnt ''
+      _dashboard_search_keyword = me.val()
+      _dashboard_list_by_search = true
+      init_dashboard_data(true)
+
+$(document).on 'click','#btnInitDashboardList', ->
+  clean_dashboard_search()
+
+$(document).on 'click','.clear-dashboard-search', ->
+  clean_dashboard_search()
+
+clean_dashboard_search = () ->
+  search_text = $('.list-search-dashboard')
+  if search_text isnt ''
+    search_text.val('')
+    _dashboard_search_keyword = ''
+    $('.clear-dashboard-search').removeClass('show')
+    if _dashboard_list_by_search
+      init_dashboard_data()
+
 $(document).on 'click','#dashboard-show-more', ->
   query_dashboard_data()
 
@@ -142,7 +184,6 @@ $(document).on 'click','.publish_entrance', ->
     $('.popup__loading').hide()
   else
     alert('老板,您还未验证E-Mail')
-
 
 $(document).on 'click','div.return_home', ->
   location.href = SITE_URL
@@ -171,6 +212,7 @@ query_dashboard_data = () ->
 
     if state is 'fav' #喜欢
       action = 'get_fav_ajax'
+      keyword = _dashboard_search_keyword
       sort = 'new'
       if _dashboard_show_product_collocation is 1
         count = window.product_count
@@ -178,6 +220,7 @@ query_dashboard_data = () ->
         count = window.collocation_count
     else if state is 'talk' #发布页
       action = 'get_publish_ajax'
+      keyword = _dashboard_search_keyword
       sort = _dashboard_show_new_hot
       if _dashboard_show_product_collocation is 1
         count = window.product_count
@@ -185,6 +228,7 @@ query_dashboard_data = () ->
         count = window.collocation_count
     else #动态
       action = 'get_dashboard_ajax'
+      keyword = ''
       sort = 'new'
       count = window.dashboard_count
 
@@ -192,7 +236,7 @@ query_dashboard_data = () ->
     _dashboard_ajax_process = $.ajax {
       url: SITE_URL + 'services/service.php'
       type: "GET"
-      data: {'m': 'u', 'a': action, ajax: 1, 'page': page, 'count': count,'type': _dashboard_show_product_collocation, 'sort': sort,'limit': _dashboard_limit, 'hid': window.uid}
+      data: {'m': 'u', 'a': action, ajax: 1, 'page': page, 'count': count, 'name': encodeURIComponent(keyword), 'type': _dashboard_show_product_collocation, 'sort': sort,'limit': _dashboard_limit, 'hid': window.uid}
       cache: false
       dataType: "json"
       success: (result,status,response)->
@@ -216,6 +260,7 @@ query_dashboard_data = () ->
           _dashboard_has_more = false
       error: (result)->
         if result.status isnt 0
+#          $('#list-loading').html(result.responseText)
           alert('服务器君跑到外太空去了,刷新试试看!')
         _dashboard_is_loading = false
         btn_ShowMore.html('我要看更多').removeClass('loading')
@@ -254,19 +299,30 @@ gen_dashboard_item = () ->
   pagiation = $('#item-pagiation')
   filter = $('#list-filter')
   step = 0
-  if state is 'dashboard'
+  if _dashboard_list_by_search
     list_count = parseInt(window.dashboard_count)
+    if list_count > 0
+      setTimeout ->
+        show_search_result(_dashboard_search_keyword,list_count)
+      , 300
   else
-    if _dashboard_show_product_collocation is 1
-      list_count = parseInt(window.product_count)
+    hide_search_result()
+    if state is 'dashboard'
+      list_count = parseInt(window.dashboard_count)
     else
-      list_count = parseInt(window.collocation_count)
+      if _dashboard_show_product_collocation is 1
+        list_count = parseInt(window.product_count)
+      else
+        list_count = parseInt(window.collocation_count)
 
   if state is 'dashboard'
     filter.find('.nav-dashboard').find('span').html(window.dashboard_count)
   else
     filter.find('.nav-produce').find('span').html(window.product_count)
     filter.find('.nav-collocation').find('span').html(window.collocation_count)
+    if _dashboard_search_keyword isnt ''
+      $('.list-search-dashboard').val(_dashboard_search_keyword)
+      $('.clear-dashboard-search').addClass('show')
 
   if window.dashboard_list_data
     if window.dashboard_list_data.length > 0
@@ -320,18 +376,18 @@ gen_dashboard_item = () ->
       pagiation.hide()
       listempty.show()
 #      filter.hide()
-      if _dashboard_show_me
+      if _dashboard_show_me and !_dashboard_list_by_search
         if state is 'fav' or state is 'dashboard'
           query_dashboard_recommand_data()
   else
     pagiation.hide()
     listempty.show()
 #    filter.hide()
-    if _dashboard_show_me
+    if _dashboard_show_me and !_dashboard_list_by_search
       if state is 'fav' or state is 'dashboard'
         query_dashboard_recommand_data()
 
-  if state is 'talk' and _dashboard_show_me
+  if _dashboard_show_me
     publish = init_form_publish()
     publish.clean()
     publish.form_publish_binding()
@@ -356,7 +412,7 @@ gen_dashboard_recommand_item = (data) ->
   recommandTitle.show()
   recommandList.show()
 
-init_dashboard_data = () ->
+init_dashboard_data = (soft) ->
   _dashboard_is_loading = false
   biglist = $('#big_img')
   smalllist = $('#small_img')
@@ -395,20 +451,27 @@ init_dashboard_data = () ->
   recommandList.hide()
   btn_ShowMore.html('我要看更多').removeClass('loading')
   _dashboard_has_more = true
+  if soft
+
+  else
+    _dashboard_search_keyword = ''
+    _dashboard_list_by_search = false
+    _dashboard_show_product_collocation = 1
 
   if myid is uid
     _dashboard_show_me = true
   else
     _dashboard_show_me = false
 
-  init_dashboard_empty_message()
   filter.html(filter_generater())
   query_dashboard_data()
+  init_dashboard_empty_message()
 
 init_dashboard_empty_message = () ->
   txtEmptytitle = $(document).find('span.empty-title')
   txtEmptycontent = $(document).find('label.empty-content')
   btnReturnhome = $(document).find('div.return_home')
+  btnClearsearch = $(document).find('div.clear_search')
   btnPublish = $(document).find('div#btnPublish')
   totalFollow = parseInt(window.user_follow_count)
 
@@ -435,31 +498,42 @@ init_dashboard_empty_message = () ->
 #    else if state is 'talk'
 #      content_text = ''
 #    else
-    content_text = '你可以先去别的地方逛逛！'
+  content_text = '你可以先去别的地方逛逛！'
 
-  if state is 'fav'
-    txtEmptytitle.html([who,'还没有喜欢任何',type].join(''))
+  if _dashboard_list_by_search
+    txtEmptytitle.html(['没有找到任何',type].join(''))
     txtEmptycontent.html(content_text)
-    btnReturnhome.show()
+    btnReturnhome.hide()
     btnPublish.hide()
-  else if state is 'talk'
-    txtEmptytitle.html([who,'还没有发布任何',type].join(''))
-    txtEmptycontent.html(content_text)
-    if _dashboard_show_me
-      btnReturnhome.hide()
-      btnPublish.show()
-    else
+    btnClearsearch.show()
+  else
+    if state is 'fav'
+      txtEmptytitle.html([who,'还没有喜欢任何',type].join(''))
+      txtEmptycontent.html(content_text)
       btnReturnhome.show()
       btnPublish.hide()
-  else
-    if parseInt(window.user_follow_count) > 0
-      txtEmptytitle.html([who,'关注的人去外太空了'].join(''))
+      btnClearsearch.hide()
+    else if state is 'talk'
+      txtEmptytitle.html([who,'还没有发布任何',type].join(''))
       txtEmptycontent.html(content_text)
+      if _dashboard_show_me
+        btnReturnhome.hide()
+        btnPublish.show()
+        btnClearsearch.hide()
+      else
+        btnReturnhome.show()
+        btnPublish.hide()
+        btnClearsearch.hide()
     else
-      txtEmptytitle.html([who,'还没有关注任何人'].join(''))
-      txtEmptycontent.html(content_text)
-    btnReturnhome.show()
-    btnPublish.hide()
+      if parseInt(window.user_follow_count) > 0
+        txtEmptytitle.html([who,'关注的人去外太空了'].join(''))
+        txtEmptycontent.html(content_text)
+      else
+        txtEmptytitle.html([who,'还没有关注任何人'].join(''))
+        txtEmptycontent.html(content_text)
+      btnReturnhome.show()
+      btnPublish.hide()
+      btnClearsearch.hide()
 
   if parseInt(window.user_photos_count) is 0 and parseInt(window.user_mail_status) is 0 and window.user_mobile is ''
     _user_mail_vrification = false
