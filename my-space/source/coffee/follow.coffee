@@ -13,6 +13,7 @@ init_follow = ->
 #  listempty = $('#list-empty')
 #  listloading = $('#list-loading')
 #  pagiation = $('#pagiation')
+  filter = $('#list-filter')
 
   if myid is uid
     _follow_show_me = true
@@ -26,6 +27,10 @@ init_follow = ->
     window.follow_recommand_data = $.parseJSON(window.follow_recommand_string)
 
   init_follow_empty_message()
+  if state is 'follow'
+    filter.html(filter_generater())
+  else
+    filter.hide()
   gen_follow_Item()
 
 #  listloading.show()
@@ -173,6 +178,7 @@ gen_follow_Item = () ->
   listloading = $('#list-loading')
   listempty = $('#list-empty')
   pagiation = $('#pagiation')
+  filter = $('#list-filter')
 
   if window.follow_list_data
     if window.follow_list_data.length > 0
@@ -201,6 +207,10 @@ gen_follow_Item = () ->
         query_follow_recommand_data()
 
   listloading.hide()
+  if state is 'follow'
+    filter.show()
+  else
+    filter.hide()
   _follow_is_loading = false
 
 init_follow_data = () ->
@@ -212,6 +222,7 @@ init_follow_data = () ->
   recommandTitle = $('#recommandTitle')
   recommandList = $('#recommand')
   btn_ShowMore = $(document).find('#folloe-show-more')
+  filter = $('#list-filter')
   _follow_is_loading = false
   _follow_start = 0
   _follow_end = 0
@@ -229,9 +240,14 @@ init_follow_data = () ->
   recommandList.html('')
   recommandTitle.hide()
   recommandList.hide()
+  filter.hide()
   btn_ShowMore.html('我要看更多').removeClass('loading')
 
   init_follow_empty_message()
+  if state is 'follow'
+    filter.html(filter_generater())
+  else
+    filter.hide()
   query_follow_Data()
 
 init_follow_empty_message = () ->

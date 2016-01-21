@@ -369,6 +369,74 @@ small_DashboardItem_Generater = (data,current_index) ->
       '</div>' +
     '</dd>')
 
+filter_generater = () ->
+  if state is 'fav'
+    search_type = '喜欢'
+  else if state is 'talk'
+    search_type = '发布'
+  else if state is 'follow'
+    search_type = '关注'
+
+  content = $(
+    '<div class="item-nav-container">' +
+      (if state is 'dashboard'
+        '<div class="item-nav nav-dashboard first current">' +
+          '<a>热门单品</a>' +
+          '<span></span>' +
+        '</div>'
+      else if state is 'fav' or state is 'talk'
+        '<div class="item-nav nav-type nav-produce first' + (if _dashboard_show_product_collocation is 1 then ' current' else '') + '" t="1">' +
+          '<a>潮品</a>' +
+          '<span></span>' +
+        '</div>' +
+        '<div class="item-nav nav-type nav-collocation' + (if _dashboard_show_product_collocation is 1 then '' else ' current') + '" t="2">' +
+          '<a>搭配</a>' +
+          '<span></span>' +
+        '</div>'
+      else
+        ''
+      ) +
+    '</div>' +
+    '<div class="item-filter-container">' +
+      (if state is 'follow' or state is 'fav' or state is 'talk'
+        '<div class="item-filter search">' +
+          '<form>' +
+            '<i class="icon icon-search"></i>' +
+            '<input type="text" placeholder="搜索' + search_type + '"/>' +
+          '</form>' +
+        '</div>'
+      else
+        ''
+      ) +
+      (if state is 'talk'
+        '<div class="item-filter sort">'+
+          '<a class="show-new_list' + (if _dashboard_show_new_hot is 'new' then ' current' else '') + '">' +
+            '<i class="icon icon-decendent"></i>' +
+            '<span>综合</span>' +
+          '</a>' +
+          '<a class="show-hot_list' + (if _dashboard_show_new_hot is 'new' then '' else ' current') + '">' +
+            '<i class="icon icon-decendent"></i>' +
+            '<span>人气</span>' +
+          '</a>' +
+        '</div>'
+      else
+        ''
+      ) +
+      (if state is 'dashboard' or state is 'fav' or state is 'talk'
+        '<div class="item-filter mode">'+
+          '<a class="show-big_list' + (if _dashboard_show_big then ' current' else '') + '">' +
+            '<i class="icon icon-list_view"></i>' +
+          '</a>' +
+          '<a class="show-small_list' + (if _dashboard_show_big then '' else ' current') + '">' +
+            '<i class="icon icon-grid_view"></i>' +
+          '</a>' +
+        '</div>'
+      else
+        ''
+      ) +
+    '</div>'
+  )
+
 publishItem_Generater = () ->
   dd = $(
     '<dd class="item publish_entrance">' +
