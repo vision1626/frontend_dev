@@ -1,4 +1,16 @@
+// Breakpoints --------------------------------------------------
+._1626-breakpoints__pick-interest() {
+  min-width: 900px;
+  @media only screen and (min-width: 1200px) {
+    width: 1190px;
+  }
+  @media only screen and (max-width: 1199px) {
+    width: 900px;
+  }
+}
 .pick-interest {
+  ._1626-breakpoints__pick-interest();
+  margin: 70px auto;
   .form-title {
     margin-bottom: 20px;
   }
@@ -149,43 +161,50 @@
         float: right;
       }
     }
-  }
-  .tab-control {
-    height: 548px;
-    clear: left;
-    margin:20px 0;
-    background: @light-grey;
-    box-shadow: 0 0 3px rgba(0,0,0,0.4);
-    position: relative;
-    ._clearfix;
-  }
-  .tabbar {
-    float: right;
-    width: 22%;
-  }
-  .tab__panel {
-    float: left;
-    height: 100%;
-    background: white;
-    width: 78%;
-  }
-  .tab__content {
-    padding: 16px 20px 0 20px;
-  }
-  .tab {
-    text-align: center;
-    padding: 16px 0;
-    border-right: 2px solid @light-grey;
-    cursor: pointer;
-    span {
-      font-size: 14px;
+    .tab-control {
+      height: 548px;
+      clear: left;
+      margin:20px 0;
+      background: @light-grey;
+      box-shadow: 0 0 3px rgba(0,0,0,0.4);
+      position: relative;
+      ._clearfix;
     }
-    &.current {
+    .tabbar {
+      float: right;
+      width: 22%;
+    }
+    .tab__panel {
+      float: left;
+      height: 100%;
       background: white;
-      border-right: 2px solid white;
+      width: 78%;
     }
-    &:hover {
-      border-right: 2px solid @blue;
+    .tab__content {
+      padding: 16px 20px 0 20px;
+    }
+    .tab {
+      text-align: center;
+      padding: 16px 0;
+      border-right: 2px solid @light-grey;
+      cursor: pointer;
+      span {
+        font-size: 14px;
+      }
+      &.current {
+        background: white;
+        border-right: 2px solid white;
+      }
+      &:hover {
+        border-right: 2px solid @blue;
+      }
     }
   }
+  .submit-interest {
+    text-align: center;
+    width: 100%;
+  }
+}
+@media only screen and (max-width: 1199px) {
+
 }

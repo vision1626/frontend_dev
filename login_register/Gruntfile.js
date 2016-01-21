@@ -82,6 +82,7 @@ module.exports = function (grunt) {
                     '<%= globalConfig.jsDebugPath %>/login-register.js':[
                         '<%= globalConfig.jsSrcPath %>/util.coffee',
                         '<%= globalConfig.jsSrcPath %>/pick-interest.coffee',
+                        '<%= globalConfig.jsSrcPath %>/follow-btn.coffee',
                         '<%= globalConfig.jsSrcPath %>/login-register.coffee'
                     ],
                     '<%= globalConfig.jsDebugPath %>/forget-password.js':[

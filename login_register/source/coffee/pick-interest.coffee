@@ -1,6 +1,7 @@
 initPickInterest = (category)->
   $pick_interest = $('.pick-interest')
   $bulk_action = $pick_interest.find('.bulk-actions')
+  $pick_category = $pick_interest.find('.pick-category')
   $pick_users = $('.pick-users')
   $tab_bar = $pick_users.find('.tabbar')
   $tab_panel = $pick_users.find('.tab__panel')
@@ -38,6 +39,7 @@ initPickInterest = (category)->
 
   #------------- 事件: 点击兴趣格仔 -----------------
   $pick_interest.on 'click','ul.categories li', ->
+    $('.slider-btn').hide()
     $item     = $(this)
     cat_id    = $item.attr 'data-id'
     cat_title = $item.attr 'data-title'
@@ -46,35 +48,37 @@ initPickInterest = (category)->
         if !$item.hasClass('selected')
           $item.addClass('selected')
           total_pick++
-          $tab_panel.find("ul.push-users").hide()
+          $tab_panel.find("ul.push-users").hide().removeClass('current')
           if $tab_panel.find("ul.push-users[cat-id='#{cat_id}']").length > 0
-            $tab_panel.find("ul.push-users[cat-id='#{cat_id}']").show()
+            $tab_panel.find("ul.push-users[cat-id='#{cat_id}']").show().addClass('current')
           else
             getUserData(cat_id,1)
           appendCatTab(cat_id,cat_title)
         else
           $item.removeClass('selected')
           $remove_tab = $tab_bar.find(".tab[cat-id='#{cat_id}']")
-          $prev_tab = $remove_tab.prev()
-          $tab_bar.find('.tab').removeClass('current')
-          $prev_tab.addClass('current')
-          $tab_panel.find("ul.push-users").hide()
-          $tab_panel.find("ul.push-users[cat-id='#{$prev_tab.attr('cat-id')}']").show()
+          current_tab_id = $tab_bar.find('.tab.current').attr('cat-id')
+          if cat_id is current_tab_id
+            $prev_tab = $remove_tab.prev()
+            $tab_bar.find('.tab').removeClass('current')
+            $prev_tab.addClass('current')
+            $tab_panel.find("ul.push-users").hide().removeClass('current')
+            $tab_panel.find("ul.push-users[cat-id='#{$prev_tab.attr('cat-id')}']").show().addClass('current')
           $tab_bar.find(".tab[cat-id='#{cat_id}']").remove()
-          $tab_panel.find("ul.push-users[cat-id='#{cat_id}']").hide()
+          $tab_panel.find("ul.push-users[cat-id='#{cat_id}']").hide().removeClass('current')
           total_pick--
         checkTotalPick()
 
   #-------------- 函数: 画用戶格仔 -----------------
   drawPushUser = (user_data,cat_id)->
     $user =
-      "<li>" +
+      "<li uid='#{user_data.uid}'>" +
         "<div class='avatar'><img src='#{user_data.img_thumb}' alt='#{user_data.user_name}'/></div>" +
         "<div class='nickname'>#{user_data.user_name}</div>" +
         "<div class='relations'>" +
           "<span class='fans'><b>#{user_data.fans}</b>粉丝</span><span class='follows'><b>#{user_data.follows}</b>关注</span>" +
         "</div>" +
-        "<div class='follow-btn'>" +
+        "<div class='follow-btn fans__follow-btn'>" +
           "<div class='slider'><i class='icon icon-follow'></i><a class='status_text'>关注Ta</a></div>" +
           "<div class='slider-btn'></div>" +
         "</div>" +
@@ -84,11 +88,6 @@ initPickInterest = (category)->
 
   getUserData = (cat_id,page)->
     id = parseInt(cat_id)
-#    result = '{"data":[{"uid":"237004","img_thumb":"http:\/\/192.168.0.230\/public\/upload\/avatar\/noavatar_big.jpg","user_name":"laoxu@laoxu.com","introduce":"","follows":"0","fans":"0","user_href":"http:\/\/192.168.0.230\/u\/talk-237004.html","newest_publish":[]},{"uid":"237005","img_thumb":"http:\/\/192.168.0.230\/public\/upload\/avatar\/noavatar_big.jpg","user_name":"2@qq.com","introduce":"","follows":"0","fans":"0","user_href":"http:\/\/192.168.0.230\/u\/talk-237005.html","newest_publish":[]},{"uid":"237059","img_thumb":"http:\/\/192.168.0.230\/public\/upload\/avatar\/noavatar_big.jpg","user_name":"a_9789686","introduce":"","follows":"0","fans":"0","user_href":"http:\/\/192.168.0.230\/u\/talk-237059.html","newest_publish":[]},{"uid":"237062","img_thumb":"http:\/\/192.168.0.230\/public\/upload\/avatar\/noavatar_big.jpg","user_name":"a_0108918","introduce":"","follows":"0","fans":"0","user_href":"http:\/\/192.168.0.230\/u\/talk-237062.html","newest_publish":[]},{"uid":"237088","img_thumb":"http:\/\/192.168.0.230\/public\/upload\/avatar\/noavatar_big.jpg","user_name":"1626_8936204","introduce":"","follows":"0","fans":"0","user_href":"http:\/\/192.168.0.230\/u\/talk-237088.html","newest_publish":[]}]}'
-#    $user_list = "<ul class='push-users' cat-id='#{cat_id}'></ul>"
-#    $pick_interest.find('.tab__content').append $user_list
-#    for user in $.parseJSON(result).data
-#      drawPushUser(user,cat_id)
     $.ajax {
       url: SITE_URL + 'services/service.php?m=u&a=get_approve_user_ajax'
       type: "GET"
@@ -96,7 +95,7 @@ initPickInterest = (category)->
       cache: false
       dataType: "json"
       success: (result)->
-        $user_list = "<ul class='push-users' cat-id='#{cat_id}'></ul>"
+        $user_list = "<ul class='push-users current' cat-id='#{cat_id}' page='#{page}'></ul>"
         $pick_interest.find('.tab__content').append $user_list
         for user in result.data
           drawPushUser(user,cat_id)
@@ -107,9 +106,57 @@ initPickInterest = (category)->
 
   #------------- 事件: 点击侧栏标签 -----------------
   $pick_users.on 'click','.tabbar .tab', ->
+    $('.slider-btn').hide()
     $tab = $(this)
     cat_id = $tab.attr 'cat-id'
     $tab_panel.find("ul.push-users").hide()
     $tab_panel.find("ul.push-users[cat-id='#{cat_id}']").show()
     $tab_bar.find('.tab').removeClass('current')
     $tab.addClass('current')
+
+  #------------- 初始化关注按钮 -----------------
+  initFollowBtn()
+
+  #------------- 换一批 -----------------
+  $pick_users.find('.refresh').click ->
+    $current_list = $('.push-users.current')
+    cat_id = parseInt($current_list.attr('cat-id'))
+    page = parseInt($current_list.attr('page')) + 1
+    $current_list.remove()
+    getUserData(cat_id,page)
+
+  #---------------
+  #  Form input error tip 彈出錯誤提示
+  showSmallErrorTip = (text,mood)->
+    mood = mood or 0 # 1是成功的笑臉，0是失敗的哭臉
+    $('.form-error-mob').find('label').html(text)
+    if mood is 1
+      $('.form-error-mob').find('i.icon').addClass('icon-happy')
+    $('.form-error-mob').fadeIn(200)
+    setTimeout(->
+      $(".form-error-mob").fadeOut(100, ->
+        $('.form-error-mob').find('i.icon').removeClass('icon-happy')
+      )
+    , 1500)
+  $('.submit-interest').click ->
+    interests = []
+    $pick_category.find('li.selected').each ->
+      $item = $(this)
+      interests.push(parseInt($item.attr('data-id')))
+    $.ajax {
+      url: SITE_URL + '/services/service.php?m=user&a=set_user_label'
+      type: "GET"
+      data: {tag_ids:interests}
+      cache: false
+      dataType: "json"
+      success: (result)->
+        if result.status is 1
+          showSmallErrorTip('提交成功！<br/>即将跳转到首页',1)
+          setTimeout(->
+            window.location.href = SITE_URL
+          , 2000)
+        else
+          showSmallErrorTip result.msg
+      error: (result)->
+        showSmallErrorTip result.msg
+    }

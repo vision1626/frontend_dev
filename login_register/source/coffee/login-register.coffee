@@ -175,7 +175,19 @@ init = ->
       dataType: "json",
       success: (result)->
         if result.status is 1
-          window.location.href = result.success_url
+          $('.hand-loading').fadeOut(100)
+          if result.is_no_follow_category is 0
+            showSmallErrorTip('登录成功！<br/>即将跳转到登录前的页面',1)
+            setTimeout(->
+              window.location.href = result.success_url
+            , 2000)
+          else
+            initPickInterest(result.category)
+            showSmallErrorTip('登录成功！<br/>你还没选择兴趣哦',1)
+            setTimeout(->
+              $('.login-panel').hide()
+              $('.pick-interest').fadeIn(100)
+            , 2000)
           false
         else if result.status is 2
           $('.hand-loading').fadeOut(200)
@@ -543,9 +555,10 @@ init = ->
       success: (result)->
         $('.hand-loading').fadeOut(200)
         if result.status > 0
-          showSmallErrorTip('用户名修改成功！<br/>即将跳转到首页',1)
+          showSmallErrorTip('用户名修改成功！',1)
           setTimeout(->
-            window.location.href = SITE_URL
+            $('.login-panel').hide()
+            $('.pick-interest').fadeIn(100)
           , 2000)
         else
           if result.msg is ''
@@ -565,8 +578,10 @@ init = ->
     validateNicknameForm(true)
 
   $('a.nickname-skip').click ->
-    url = $(this).attr 'data-href'
-    location.href = url
+#    url = $(this).attr 'data-href'
+#    location.href = url
+    $('.login-panel').hide()
+    $('.pick-interest').show()
 
   # -------------------------- 修改昵称 - END -------------------------
 
