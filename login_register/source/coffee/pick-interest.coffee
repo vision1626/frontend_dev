@@ -138,11 +138,12 @@ initPickInterest = (category)->
         $('.form-error-mob').find('i.icon').removeClass('icon-happy')
       )
     , 1500)
-  $('.submit-interest').click ->
-    interests = []
-    $pick_category.find('li.selected').each ->
+  $('.submit-interest button').click ->
+    interests = ''
+    $selected = $pick_category.find('li.selected')
+    $selected.each ->
       $item = $(this)
-      interests.push(parseInt($item.attr('data-id')))
+      interests = interests + $item.attr('data-id') + ','
     $.ajax {
       url: SITE_URL + '/services/service.php?m=user&a=set_user_label'
       type: "GET"
@@ -156,7 +157,7 @@ initPickInterest = (category)->
             window.location.href = SITE_URL
           , 2000)
         else
-          showSmallErrorTip result.msg
+          showSmallErrorTip('请先选择兴趣',0)
       error: (result)->
         showSmallErrorTip result.msg
     }
