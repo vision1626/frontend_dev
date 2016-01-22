@@ -57,7 +57,6 @@ init_global_header = ->
   , 300000
 
   $('.check-all').on 'click', (e)->
-    alert($(this).find('a').html() == "知道了")
     self = $(this)
     if $(this).find('a').html() == "知道了"
       $.ajax({
@@ -67,12 +66,9 @@ init_global_header = ->
         success: (result)->
           if result.status == 1
             $('.check-all').prevAll().remove()
-          else
-            # alert('fuck')
+            $('.fixed-nav__number.').text('0')
+            $('.check-all').find('a').html("没有新消息")
       })
-    else
-      # self.parent().css({'left': '-999em'})
-
 
   if /dashboard/i.test(window.location.pathname)
     $('.main-nav__me').find('a').addClass('current-page')
