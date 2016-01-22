@@ -1,4 +1,10 @@
 init = ->
+  $form_login = $('#form-login')
+  $form_register = $('#form-register')
+
+  # 230 流程与正式环境不一样！！！！！
+  is_230 = false
+
   $('input[type=text],input[type=password]').focus ->
     $(this).parent().addClass 'focus'
   .blur ->
@@ -16,6 +22,8 @@ init = ->
     resizeEle()
 
   at_page = 0
+  if $form_register.length > 0
+    at_page = 1
 
   btn_reveal_pw = $('.icon-unseen')
   btn_reveal_pw.click ->
@@ -150,8 +158,7 @@ init = ->
 
   log_input_phone = $('#form-login input.input-phone')
   log_input_pass = $('#form-login input.input-password')
-  form_login = $('#form-login')
-  btn_login_submit = form_login.find 'button#submitLogin'
+  btn_login_submit = $form_login.find 'button#submitLogin'
 
   # 函數：激活/禁止提交按鈕
   disableBtnLogSubmit = ->
@@ -168,7 +175,7 @@ init = ->
     query.remember = $('#remember').is(':checked') ? 1: 0
     query.rhash = $.trim($("input[name=rhash]").val());
     $.ajax {
-      url: form_login.attr('data-action'),
+      url: $form_login.attr('data-action'),
       type: "POST",
       data: query,
       cache: false,
@@ -176,18 +183,24 @@ init = ->
       success: (result)->
         if result.status is 1
           $('.hand-loading').fadeOut(100)
-          if result.is_no_follow_category is 0
+          if is_230
+            if result.is_no_follow_category is 0
+              showSmallErrorTip('登录成功！<br/>即将跳转到登录前的页面',1)
+              setTimeout(->
+                window.location.href = result.success_url
+              , 1500)
+            else
+              initPickInterest(result.category)
+              showSmallErrorTip('登录成功！<br/>你还没选择兴趣哦',1)
+              setTimeout(->
+                $('.login-panel').hide()
+                $('.pick-interest').fadeIn(100)
+              , 1500)
+          else #正式环境
             showSmallErrorTip('登录成功！<br/>即将跳转到登录前的页面',1)
             setTimeout(->
               window.location.href = result.success_url
-            , 2000)
-          else
-            initPickInterest(result.category)
-            showSmallErrorTip('登录成功！<br/>你还没选择兴趣哦',1)
-            setTimeout(->
-              $('.login-panel').hide()
-              $('.pick-interest').fadeIn(100)
-            , 2000)
+            , 1500)
           false
         else if result.status is 2
           $('.hand-loading').fadeOut(200)
@@ -236,15 +249,14 @@ init = ->
 
   # -------------------------- 註冊 - START -------------------------
 
-  form_register = $('#form-register')
-  reg_input_phone = form_register.find('input.input-phone')
-  reg_input_pass = form_register.find('input.input-password')
-  reg_input_captcha = form_register.find('input#captchaInput')
-  reg_input_agree = form_register.find('#agreed')
-  reg_input_code_row = form_register.find('li#code_input')
-  reg_input_code = form_register.find('#mobCodeInput')
-  reg_resend_code = form_register.find('#resend_code')
-  btn_reg_info_submit = form_register.find('button#submitInfo')
+  reg_input_phone = $form_register.find('input.input-phone')
+  reg_input_pass = $form_register.find('input.input-password')
+  reg_input_captcha = $form_register.find('input#captchaInput')
+  reg_input_agree = $form_register.find('#agreed')
+  reg_input_code_row = $form_register.find('li#code_input')
+  reg_input_code = $form_register.find('#mobCodeInput')
+  reg_resend_code = $form_register.find('#resend_code')
+  btn_reg_info_submit = $form_register.find('button#submitInfo')
   configMap = {
     isAccountExisted: false
   }
@@ -356,7 +368,7 @@ init = ->
           $('.form-container').removeClass('at-register')
           $('.form-container').addClass 'at-nickname'
           $('#form-nickname').show()
-          $('#form-register').hide()
+          $form_register.hide()
           $('.social-login').hide()
           $('span.old-nickname').text(' ' + result.user_name)
           $('a.nickname-skip').attr('data-href',result.success_url)
@@ -365,7 +377,8 @@ init = ->
           $('.form-error').hide()
           form_nickname.find('input.input-nickname').focus()
           at_page = 2 # nickname
-          initPickInterest(result.category)
+          if is_230
+            initPickInterest(result.category)
         else
           if result.msg is ''
             showSmallErrorTip '系统异常，请稍后重试'
@@ -542,7 +555,7 @@ init = ->
 #  nic_input_name.blur ->
 #    validateNicknameForm(false)
 
-  # 函数: 提交匿名
+  # 函数: 提交用户名
   submitNickname = (user_nickname)->
     $('.hand-loading').show()
 
@@ -555,11 +568,17 @@ init = ->
       success: (result)->
         $('.hand-loading').fadeOut(200)
         if result.status > 0
-          showSmallErrorTip('用户名修改成功！',1)
-          setTimeout(->
-            $('.login-panel').hide()
-            $('.pick-interest').fadeIn(100)
-          , 2000)
+          if is_230
+            showSmallErrorTip('用户名修改成功！',1)
+            setTimeout(->
+              $('.login-panel').hide()
+              $('.pick-interest').fadeIn(100)
+            , 1500)
+          else
+            showSmallErrorTip('用户名修改成功！即将跳转到首页',1)
+            setTimeout(->
+              window.location.href = SITE_URL
+            , 1500)
         else
           if result.msg is ''
             showSmallErrorTip '系统异常，请稍后重试'
@@ -580,8 +599,14 @@ init = ->
   $('a.nickname-skip').click ->
 #    url = $(this).attr 'data-href'
 #    location.href = url
-    $('.login-panel').hide()
-    $('.pick-interest').show()
+    if is_230
+      $('.login-panel').hide()
+      $('.pick-interest').fadeIn(100)
+    else
+      showSmallErrorTip('即将跳转到首页<br>记得修改用户名哦',1)
+      setTimeout(->
+        window.location.href = SITE_URL
+      , 1500)
 
   # -------------------------- 修改昵称 - END -------------------------
 

@@ -584,8 +584,8 @@ init = ->
   $(document).keypress (e)->
     if(e.which == 13)
       if at_page is 0
-        validateRegisterForm(true)
-      else if at_page is 1
         validateLoginForm(true)
+      else if at_page is 1
+        validateRegisterForm(true)
       else if at_page is 2
         validateNicknameForm(true)
