@@ -126,11 +126,12 @@
           }
           a {
             color: black;
+            font-weight: normal;
             font-size: 13px;
-            border-bottom: 2px solid @grey;
+            padding: 0 2px;
+            display: inline-block;
             &:hover {
               color: black;
-              border-bottom: 2px solid @blue;
               cursor: pointer;
             }
           }
@@ -234,6 +235,9 @@
     display: list-item;
   }
   .main-nav__logo {
+    a {
+      line-height: 60px !important;
+    }
     img {
       width: 56px !important;
     }
