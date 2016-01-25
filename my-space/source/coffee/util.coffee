@@ -421,28 +421,34 @@ filter_generater = () ->
       ) +
     '</div>' +
     '<div class="item-filter-container">' +
-      (if state is 'follow' or state is 'fav' or state is 'talk'
-        '<div class="item-filter search">' +
-          '<div class="search_form">' +
-            '<i class="icon icon-search"></i>' +
-            '<input type="text" class="list-search-' + search_input_class + '" placeholder="搜索' + search_type + '" value="' + _dashboard_search_keyword + '"/>' +
-            '<i class="icon icon-closepop clear-' + search_input_class + '-search"></i>' +
-          '</div>' +
-        '</div>'
+      (if _dashboard_show_me
+        if state is 'follow' or state is 'fav' or state is 'talk'
+          '<div class="item-filter search">' +
+            '<div class="search_form">' +
+              '<i class="icon icon-search"></i>' +
+              '<input type="text" class="list-search-' + search_input_class + '" placeholder="搜索' + search_type + '" value="' + _dashboard_search_keyword + '"/>' +
+              '<i class="icon icon-closepop clear-' + search_input_class + '-search"></i>' +
+            '</div>' +
+          '</div>'
+        else
+          ''
       else
         ''
       ) +
-      (if state is 'talk'
-        '<div class="item-filter sort">'+
-          '<a class="show-new_list' + (if _dashboard_show_new_hot is 'new' then ' current' else '') + '">' +
-            '<i class="icon icon-decendent"></i>' +
-            '<span>综合</span>' +
-          '</a>' +
-          '<a class="show-hot_list' + (if _dashboard_show_new_hot is 'new' then '' else ' current') + '">' +
-            '<i class="icon icon-decendent"></i>' +
-            '<span>人气</span>' +
-          '</a>' +
-        '</div>'
+      (if _dashboard_show_me
+        if state is 'talk'
+          '<div class="item-filter sort">'+
+            '<a class="show-new_list' + (if _dashboard_show_new_hot is 'new' then ' current' else '') + '">' +
+              '<i class="icon icon-decendent"></i>' +
+              '<span>综合</span>' +
+            '</a>' +
+            '<a class="show-hot_list' + (if _dashboard_show_new_hot is 'new' then '' else ' current') + '">' +
+              '<i class="icon icon-decendent"></i>' +
+              '<span>人气</span>' +
+            '</a>' +
+          '</div>'
+        else
+          ''
       else
         ''
       ) +
