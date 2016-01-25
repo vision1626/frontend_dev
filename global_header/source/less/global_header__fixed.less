@@ -2,10 +2,62 @@
 .fixed-nav-container {
   background-color: @black;
   margin-top: 0;
-  height: 35px;
+  @media @pc {
+    height: 35px;
+    .fixed-nav-mobile{
+      display:none;
+    }
+  }
+  @media @mobile {
+    height: 60px;
+    .fixed-nav-mobile{
+      width:100%;
+      position: relative;
+      line-height: 60px;
+      i{
+        font-size: 30px;
+        color: @white;
+        position: absolute;
+        top:0;
+        bottom:0;
+        margin: auto;
+        line-height: 60px;
+        &.icon-user{
+          left:15px;
+          right:auto;
+        }
+        &.icon-search{
+          right:15px;
+          left:auto;
+        }
+      }
+      
+      a{
+        position: absolute;
+        top:0;
+        bottom:0;
+        left:0;
+        right:0;
+        margin: auto;
+        text-align: center;
+        i{
+          color: @white;
+          font-size: 30px;
+          left:0;
+          right:0;
+        }
+        img{
+          height:30px;
+        }
+      }
+    }
+  }
   // black magic!!
   overflow: hidden;
   .fixed-nav {
+    @media @mobile {
+      display: none;
+    }
     color: @grey;
     font-size: 13px;
     list-style: none;
@@ -269,6 +321,7 @@
       }
     }
   }
+
 }
 
 .fixed-nav-container.ucantseeme {
