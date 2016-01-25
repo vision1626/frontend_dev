@@ -132,41 +132,6 @@ $(document).on 'click','.show-small_list', ->
     $('dl#big_img').hide()
     $('dl#small_img').show()
 
-$(document).on 'blur','.list-search-dashboard', ->
-  set_clean_dashboard_search($(this))
-$(document).on 'keyup','.list-search-dashboard', ->
-  set_clean_dashboard_search($(this))
-
-set_clean_dashboard_search = (me) ->
-  clear_icon = me.parent().find('i.icon-closepop')
-  if me.val() isnt '' or _dashboard_list_by_search
-    clear_icon.addClass('show')
-  else
-    clear_icon.removeClass('show')
-
-$(document).on 'keypress','.list-search-dashboard', (e)->
-  me = $(this)
-  if(e.which == 13)
-    if me.val() isnt ''
-      _dashboard_search_keyword = me.val()
-      _dashboard_list_by_search = true
-      init_dashboard_data(true)
-
-$(document).on 'click','#btnInitDashboardList', ->
-  clean_dashboard_search()
-
-$(document).on 'click','.clear-dashboard-search', ->
-  clean_dashboard_search()
-
-clean_dashboard_search = () ->
-  search_text = $('.list-search-dashboard')
-  if search_text isnt ''
-    search_text.val('')
-    _dashboard_search_keyword = ''
-    $('.clear-dashboard-search').removeClass('show')
-    if _dashboard_list_by_search
-      init_dashboard_data()
-
 $(document).on 'click','#dashboard-show-more', ->
   query_dashboard_data()
 
@@ -501,11 +466,14 @@ init_dashboard_empty_message = () ->
   content_text = '你可以先去别的地方逛逛！'
 
   if _dashboard_list_by_search
-    txtEmptytitle.html(['没有找到任何',type].join(''))
+#    txtEmptytitle.html(['没有找到任何',type].join(''))
+#    txtEmptytitle.html(['找到0个 ',_dashboard_search_keyword,' 相关',type].join(''))
+    txtEmptytitle.html(['没有找到 ',_dashboard_search_keyword,' 相关',type].join(''))
     txtEmptycontent.html(content_text)
     btnReturnhome.hide()
     btnPublish.hide()
     btnClearsearch.show()
+#找到0个 秋冬 相关单品
   else
     if state is 'fav'
       txtEmptytitle.html([who,'还没有喜欢任何',type].join(''))

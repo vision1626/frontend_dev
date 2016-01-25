@@ -81,41 +81,6 @@ $(document).on 'click','.fans-concemed_follow', ->
   url = ['u/follow-',uid,'.html'].join('')
   window.open(SITE_URL + url)
 
-$(document).on 'blur','.list-search-follow', ->
-  set_clean_follow_search($(this))
-$(document).on 'keyup','.list-search-follow', ->
-  set_clean_follow_search($(this))
-
-set_clean_follow_search = (me) ->
-  clear_icon = me.parent().find('i.icon-closepop')
-  if me.val() isnt '' or _follow_list_by_search
-    clear_icon.addClass('show')
-  else
-    clear_icon.removeClass('show')
-
-$(document).on 'keypress','.list-search-follow', (e)->
-  me = $(this)
-  if(e.which == 13)
-    if me.val() isnt ''
-      _follow_search_keyword = me.val()
-      _follow_list_by_search = true
-      init_follow_data(true)
-
-$(document).on 'click','#btnInitDashboardList', ->
-  clean_follow_search()
-
-$(document).on 'click','.clear-follow-search', ->
-  clean_follow_search()
-
-clean_follow_search = () ->
-  search_text = $('.list-search-follow')
-  if search_text isnt ''
-    search_text.val('')
-    _follow_search_keyword = ''
-    $('.clear-follow-search').removeClass('show')
-    if _follow_list_by_search
-      init_follow_data()
-
 query_follow_Data = () ->
   btn_ShowMore = $(document).find('#folloe-show-more')
 
@@ -162,7 +127,8 @@ query_follow_Data = () ->
             else
               window.follow_list_data = result.data
         else
-          window.follow_recommand_data = result.data
+          if !_follow_list_by_search
+            window.follow_recommand_data = result.data
         gen_follow_Item()
 
         _follow_is_loading = false
@@ -181,23 +147,6 @@ query_follow_Data = () ->
 
 query_follow_recommand_data = () ->
   gen_follow_recommand_item(window.follow_recommand_data)
-#  if state is 'follow'
-#    action = 'get_approve_user_ajax'
-#    recommand_limit = 7
-#
-#  $.ajax {
-#    url: SITE_URL + 'services/service.php'
-#    type: "GET"
-#    data: {'m': 'u', 'a': action, ajax: 1, 'page': 1, 'count': '', 'limit': recommand_limit, 'follow',0}
-#    cache: false
-#    dataType: "json"
-#    success: (result)->
-#      if result.data
-#        gen_follow_recommand_item(result.data)
-#    error: (result)->
-#      if result.status isnt 0
-#        alert('服务器君跑到外太空去了,刷新试试看!')
-#  }
 
 gen_follow_recommand_item = (data) ->
   recommandTitle = $('#recommandTitle')
@@ -218,14 +167,16 @@ gen_follow_Item = () ->
   pagiation = $('#pagiation')
   filter = $('#list-filter')
 
-  if state is 'follow'
+  if state is 'follow' and _follow_list_by_search
     if _follow_search_keyword isnt ''
       $('.list-search-follow').val(_follow_search_keyword)
       $('.clear-follow-search').addClass('show')
+    if window.follow_count > 0
+      show_search_result(_follow_search_keyword,window.follow_count)
 
   if window.follow_list_data
-    if window.follow_list_data.length > 0
-      if _follow_end < window.follow_list_data.length
+    if window.follow_count > 0
+      if _follow_end < window.follow_count
         _follow_end += _follow_step
         for ld,i in window.follow_list_data
           if _follow_start < _follow_end and i >= _follow_start
@@ -239,12 +190,12 @@ gen_follow_Item = () ->
     else
       pagiation.hide()
       listempty.show()
-      if _follow_show_me
+      if _follow_show_me and !_follow_list_by_search
         if state is 'follow'
           query_follow_recommand_data()
   else
     pagiation.hide()
-    listempty.show()
+    listempty.show() and !_follow_list_by_search
     if _follow_show_me
       if state is 'follow'
         query_follow_recommand_data()
@@ -321,7 +272,9 @@ init_follow_empty_message = () ->
       content_text = "你可以先去别的地方逛逛！"
 
   if _follow_list_by_search
-    txtEmptytitle.html(['没有找到任何用户'].join(''))
+#    txtEmptytitle.html(['没有找到任何用户'].join(''))
+#    txtEmptytitle.html(['找到0个 ', _follow_search_keyword,' 相关用户'].join(''))
+    txtEmptytitle.html(['没有找到 ', _follow_search_keyword,' 相关用户'].join(''))
     txtEmptycontent.html(content_text)
     btnReturnhome.hide()
     btnPublish.hide()

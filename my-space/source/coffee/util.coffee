@@ -397,8 +397,10 @@ filter_generater = () ->
 
   if state is 'follow'
     search_input_class = 'follow'
+    search_keyword = _follow_search_keyword
   else
     search_input_class = 'dashboard'
+    search_keyword = _dashboard_search_keyword
 
   content = $(
     '<div class="item-nav-container">' +
@@ -421,13 +423,13 @@ filter_generater = () ->
       ) +
     '</div>' +
     '<div class="item-filter-container">' +
-      (if _dashboard_show_me
+      (if _dashboard_show_me or _follow_show_me
         if state is 'follow' or state is 'fav' or state is 'talk'
           '<div class="item-filter search">' +
             '<div class="search_form">' +
               '<i class="icon icon-search"></i>' +
-              '<input type="text" class="list-search-' + search_input_class + '" placeholder="搜索' + search_type + '" value="' + _dashboard_search_keyword + '"/>' +
-              '<i class="icon icon-closepop clear-' + search_input_class + '-search"></i>' +
+              '<input type="text" class="list-search" placeholder="搜索' + search_type + '" value="' + search_keyword + '"/>' +
+              '<i class="icon icon-closepop clear-list-search' + (if search_keyword isnt '' then ' show' else '') + '"></i>' +
             '</div>' +
           '</div>'
         else
@@ -474,11 +476,13 @@ show_search_result = (keyword,count) ->
   search_result = $('.item-search-result')
   if state is 'follow'
     type = '用户'
+    show_class = 'show_follow'
   else
     type = '结果'
+    show_class = 'show'
   result_text = ['找到',count,'个 ',keyword,' 相关',type].join ''
   search_result.find('span').html(result_text)
-  search_result.addClass('show')
+  search_result.addClass(show_class)
 
 hide_search_result = () ->
   $('.item-search-result').removeClass('show')
@@ -538,3 +542,63 @@ excite_Anim = (obj,animName) ->
   );
 
 
+$(document).on 'blur','.list-search', ->
+  set_clean_list_search($(this))
+$(document).on 'keyup','.list-search', ->
+  set_clean_list_search($(this))
+
+set_clean_list_search = (me) ->
+  clear_icon = me.parent().find('i.icon-closepop')
+  if state is 'fav' or state is 'talk'
+    list_by_search = _dashboard_list_by_search
+  else if state is 'follow'
+    list_by_search = _follow_list_by_search
+  else
+    list_by_search = false
+
+  if me.val() isnt '' or list_by_search
+    clear_icon.addClass('show')
+  else
+    clear_icon.removeClass('show')
+
+$(document).on 'click','.search_form .icon-search', ->
+  me = $(this)
+  keyword =  me.parent().find('.list-search').val()
+  do_list_search(keyword)
+
+$(document).on 'keypress','.list-search', (e)->
+  me = $(this)
+  if(e.which == 13)
+    if me.val() isnt ''
+      do_list_search(me.val())
+
+do_list_search = (keyword) ->
+  if keyword isnt ''
+    if state is 'fav' or state is 'talk'
+      _dashboard_search_keyword = keyword
+      _dashboard_list_by_search = true
+      init_dashboard_data(true)
+    else if state is 'follow'
+      _follow_search_keyword = keyword
+      _follow_list_by_search = true
+      init_follow_data(true)
+
+$(document).on 'click','#btnInitList', ->
+  clean_list_search()
+
+$(document).on 'click','.clear-list-search', ->
+  clean_list_search()
+
+clean_list_search = () ->
+  search_text = $('.list-search')
+  if search_text isnt ''
+    search_text.val('')
+    $('.clear-list-search').removeClass('show')
+    if state is 'fav' or state is 'talk'
+      _dashboard_search_keyword = ''
+      if _dashboard_list_by_search
+        init_dashboard_data()
+    else if state is 'follow'
+      _follow_search_keyword = ''
+      if _follow_list_by_search
+        init_follow_data()
