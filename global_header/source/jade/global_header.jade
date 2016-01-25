@@ -32,12 +32,12 @@ else
           img(src="#{image_path}/qr-weibo.jpg", alt="weibo")
           p 潮人养成记
     li.fixed-nav__help
-      a(href="/about/help.html" target="_blank") 帮助中心
+      a(href="/about/help.html", target="_blank") 帮助中心
       ul.drop-down-list
         li
-          a(href="/about/help.html" target="_blank") 订单帮助
+          a(href="/about/help.html", target="_blank") 订单帮助
         li
-          a(href="/about/help.html" target="_blank") 发布指引
+          a(href="/about/help.html", target="_blank") 发布指引
     li.fixed-nav__avatar
       if production
         {if $_FANWE['uid'] > 0}
@@ -132,7 +132,7 @@ else
         li.check-all
           a
 .scroll-to-top
-  i.icon.icon-hand
+  i.icon.icon-rocket
 script(type='text/javascript').
   $(document).ready(function () {
     init_global_header();

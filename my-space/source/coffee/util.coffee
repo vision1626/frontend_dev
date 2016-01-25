@@ -526,13 +526,13 @@ fixMainnav = ->
     $('.main-nav-container').removeClass('fixed')
     $('.scroll-to-top').removeClass('fixed')
 
-  footer_height = 388 - 100
+  footer_height = 388 - 70
   bottom_distance = $(document).height() - ($(this).scrollTop() + $(window).height())
   bottom_distance_out_range = footer_height - bottom_distance
   if bottom_distance <= footer_height
-    $('.scroll-to-top').css('bottom',(bottom_distance_out_range + 100) + 'px')
+    $('.scroll-to-top').css('bottom',(bottom_distance_out_range + 70) + 'px')
   else
-    $('.scroll-to-top').css('bottom','100px')
+    $('.scroll-to-top').css('bottom','70px')
 
   set_search_w()
 

@@ -268,23 +268,59 @@
 
 .scroll-to-top{
   position: fixed;
-  bottom:100px;
+  bottom:70px;
   right:-120px;
-  width:80px;
-  height:80px;
-  background-color: rgba(0,0,0,0.5);
+  //width:80px;
+  //height:80px;
+  background-color: white;
   text-align: center;
   z-index: 2000;
   transition: right .4s ease-out;
   cursor: pointer;
+  //border: 1px solid grey;
+  border-right: none;
+  border-radius: 10px 0 0 10px;
+  box-shadow: -2px 0 3px rgba(0,0,0,0.4);
+  width: 54px;
+  height: 66px;
+  overflow: hidden;
   i{
-    color:@white;
-    font-size: 50px;
-    line-height: 80px;
+    color:@dark-grey;
+    font-size: 32px;
+    top: 16px;
+    left: 11px;
+    position: absolute;
   }
   &.fixed{
-    right:20px;
+    right:0px;
     z-index: 2000;
     transition: right .4s ease-out;
+  }
+  &:hover {
+    //background: @blue;
+    i {
+      animation: rocket-launch 1.5s forwards linear;
+      color: @blue;
+    }
+    @keyframes rocket-launch {
+      0% {
+        top: 16px;
+      }
+      30% {
+        top: 22px;
+      }
+      50% {
+        top: -40px;
+      }
+      50.0001% {
+        top: 72px;
+      }
+      60% {
+        top: 72px;
+      }
+      100% {
+        top: 16px;
+      }
+    }
   }
 }
