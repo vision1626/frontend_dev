@@ -106,3 +106,10 @@ $(document).on 'mouseleave','div.fixed-nav-container', ->
 
 $(document).on 'click','div.scroll-to-top', ->
   $('html, body').animate({scrollTop:0}, 500);
+
+$(document).click (e)->
+#  if e.target isnt $('.main-nav__search') and e.target isnt $('.tips-menu')
+    $('.tips-menu').hide()
+    $('.main-nav__search').find('input').val('')
+$('.main-nav__search').click (e)->
+  e.stopPropagation()

@@ -1,24 +1,73 @@
 @import "../../../public_inc/source/less/imports";
+
 .main-nav-container {
- .main-nav__search{
-   .tips-menu {
-     background: @light-grey;
-     left: -20px;
-     height: auto;
-     border-left: 1px solid @grey;
-     padding-right: 39px;
-     .search-tips {
-
-     }
-     .tips-menuitem {
-
-     }
-     a.key-work {
-       cursor: pointer;
-       &:hover {
-         background: white;
-       }
-     }
-   }
- }
+  .main-nav__search {
+    .tips-menu {
+      display: none;
+      background: white;
+      left: 10px;
+      top: -8px;
+      width: 150px;
+      height: auto;
+      border: 1px solid @grey;
+      padding-right: 26px;
+      &:before,&:after {
+        content: '';
+        display: block;
+        position: absolute;
+        width: 0;
+        height: 0;
+        border-style: solid;
+        border-color: transparent;
+        left: 15px;
+      }
+      &:before {
+        top: -12px;
+        border-bottom-color: @grey;
+        border-width: 6px;
+      }
+      &:after {
+        top: -11px;
+        border-bottom-color: #ffffff;
+        border-width: 6px;
+      }
+      .search-tips {
+        height: auto;
+        display: block;
+      }
+      .tips-menuitem {
+        height: auto;
+        display: block;
+      }
+      a.key-work {
+        cursor: pointer;
+        display: block;
+        padding: 12px 0 12px 15px;
+        font-size: @font-size-s;
+        line-height: 1;
+        &:hover {
+          color:@blue;
+        }
+      }
+    }
+  }
+  &.ucantseeme {
+    .main-nav__search {
+      .tips-menu {
+        height: auto;
+        .search-tips {
+          height: auto;
+          display: block;
+        }
+        .tips-menuitem {
+          height: auto;
+          display: block;
+        }
+        a.key-work {
+          &:hover {
+          }
+        }
+      }
+    }
+  }
 }
