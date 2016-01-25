@@ -28,11 +28,18 @@ init_u_header = ->
   setTabWidth = ()->
     $cnt_tab_ul = $('.content__actions')
     $cnt_tab = $cnt_tab_ul.find('li')
-    $cnt_tab_ul_w = 0
-    $cnt_tab.each ->
-      this_w = Math.ceil($(this).width()) + 65
-      $cnt_tab_ul_w += this_w
-    $cnt_tab_ul.width $cnt_tab_ul_w
+    if $(window).width() > 680
+      $cnt_tab_ul_w = 0
+      $cnt_tab.each ->
+        this_w = Math.ceil($(this).width()) + 65
+        $cnt_tab_ul_w += this_w
+      $cnt_tab_ul.width $cnt_tab_ul_w
+    else
+      if $cnt_tab.length is 2
+        $cnt_tab_ul.addClass('col2')
+      else
+        $cnt_tab_ul.addClass('col3')
+      $cnt_tab_ul.width '100%'
 
   setTabWidth()
 
@@ -114,3 +121,5 @@ init_u_header = ->
     else if isInCurrentAction('follow')
       changeState('follow')
       slideToCurrent.apply($follow,[36])
+
+    setTabWidth()

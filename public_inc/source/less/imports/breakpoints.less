@@ -4,11 +4,13 @@
 @mq-col-3: ~"only screen and (min-width: 1020px) and (max-width:1329px)";
 @mq-col-2: ~"only screen and (min-width: 680px) and (max-width:1019px)";
 @mq-col-min: ~"only screen and (max-width:670px)";
+@mobile: ~"only screen and (max-width: 680px)";
+@pc: ~"only screen and (min-width: 681px)";
 
 ._1626-breakpoints(@content-type) when (@content-type = "big-goods") {
   @min-width: (@big-goods__width + @big-goods__margin) * 2;
   @max-width: (@big-goods__width + @big-goods__margin) * 5;
-  min-width: @min-width;
+  //min-width: @min-width;
   max-width: @max-width;
   @media @mq-col-5 {
     width: @max-width;
@@ -27,7 +29,7 @@
 ._1626-breakpoints(@content-type) when (@content-type = "small-goods") {
   @min-width: (@big-goods__width + @big-goods__margin) * 2;
   @max-width: (@big-goods__width + @big-goods__margin) * 5;
-  min-width: @min-width;
+  //min-width: @min-width;
   max-width: @max-width;
   @media @mq-col-5 {
     width: @max-width;
@@ -79,7 +81,7 @@
 ._1626-breakpoints(@content-type) when (@content-type = "others") {
   @min-width: (@big-goods__width + @big-goods__margin) * 2 - 30px;
   @max-width: (@big-goods__width + @big-goods__margin) * 5 - 30px;
-  min-width: @min-width;
+  //min-width: @min-width;
   max-width: @max-width;
   @media @mq-col-5 {
     width: @max-width;

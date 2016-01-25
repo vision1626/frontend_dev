@@ -5,7 +5,9 @@
   height: 360px;
   background: url("/tpl/hi1626/v2/images/lego_bg.jpg") no-repeat center center rgba(0, 0, 0, .5);
   background-size: cover;
-  position: relative;
+  @media @pc {
+    position: relative;
+  }
   .profile {
     position: relative;
     margin-left: auto;
@@ -84,80 +86,112 @@
     position: absolute;
     bottom: 0;
     width: 100%;
-    .js-slide-bg {
-      position: absolute;
-      height: 60px;
-      background-color: white;
-      border-radius: 5px 5px 0 0;
-      transition: all .3s ease-out;
-    }
-   li.current {
-      .icon {
-        color: @blue;
-      }
-      color: black;
-    }
-    .content__actions {
-      margin-left: auto;
-      margin-right: auto;
-      left: 0;
-      right: 0;
-      position: absolute;
-      z-index: 1626;
-      //width: 357px;
-      color: white;
-      font-size: 12px;
-      ._clearfix;
-      li {
-        float: left;
-        line-height: 5;
-        //width: 33%;
-        text-align: center;
-        cursor: pointer;
-        //background: rgba(33,20,33,0.7);
-        padding: 0 30px;
-        min-width: 40px;
-        span {
-          b {
-            font-weight: normal;
-          }
-        }
-        &:hover {
-          .icon {
-            color: @blue;
-          }
-        }
-      }
-    }
-    .content__relationship {
-      color: white;
-      font-size: 12px;
-      position: absolute;
-      z-index: 1626;
-      right: 0;
-      top: 0;
-      li {
-        line-height: 5;
-        display: inline-block;
-        text-align: center;
-        cursor: pointer;
-        padding: 0 18px;
-        span {
-          b {
-            font-weight: normal;
-          }
-        }
-      }
-    }
-    .icon {
-      display: block;
-      font-size: 20px;
-      margin-bottom: -18px;
-      margin-top: 12px;
+    @media @mobile {
+      position: fixed;
+      z-index: 9999;
     }
     .center-wrap {
       position: relative;
       height: 100%;
+      @media @mobile {
+        min-width: 100%;
+      }
+      .js-slide-bg {
+        position: absolute;
+        height: 60px;
+        background-color: white;
+        border-radius: 5px 5px 0 0;
+        transition: all .3s ease-out;
+        @media @mobile {
+          display: none;
+        }
+      }
+      .content__actions {
+        margin-left: auto;
+        margin-right: auto;
+        left: 0;
+        right: 0;
+        position: absolute;
+        z-index: 1626;
+        //width: 357px;
+        color: white;
+        font-size: 12px;
+        ._clearfix;
+        li {
+          float: left;
+          line-height: 5;
+          //width: 33%;
+          text-align: center;
+          cursor: pointer;
+          //background: rgba(33,20,33,0.7);
+          @media @pc {
+            min-width: 40px;
+            padding: 0 30px;
+          }
+          @media @mobile {
+            width:100%
+          }
+          span {
+            b {
+              font-weight: normal;
+            }
+          }
+          &:hover {
+            .icon {
+              color: @blue;
+            }
+          }
+        }
+        @media @mobile {
+          box-shadow: 0 0 10px rgba(0,0,0,0.5);
+          &.col2{
+            column-count: 2;
+          }
+          &.col3 {
+            column-count: 3;
+          }
+        }
+      }
+      .content__relationship {
+        color: white;
+        font-size: 12px;
+        position: absolute;
+        z-index: 1626;
+        right: 0;
+        top: 0;
+        @media @mobile {
+          display: none;
+        }
+        li {
+          line-height: 5;
+          display: inline-block;
+          text-align: center;
+          cursor: pointer;
+          padding: 0 18px;
+          span {
+            b {
+              font-weight: normal;
+            }
+          }
+        }
+      }
+      .icon {
+        display: block;
+        font-size: 20px;
+        margin-bottom: -18px;
+        margin-top: 12px;
+        transition: all 0.3s;
+      }
+      li.current {
+        .icon {
+          color: @blue;
+        }
+        color: black;
+        @media @mobile {
+          background-color: @white;
+          border-radius: 5px 5px 0 0;
+        }
+      }
     }
   }
 }
