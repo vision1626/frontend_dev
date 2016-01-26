@@ -215,25 +215,6 @@ init_form_publish = ->
       else
         return false
 
-  refreshForm = ->
-    # refresh everything
-    $form_publish.find('input').each ->
-      $(this).val('')
-    $form_publish.find('select').each ->
-      $(this).find('option').remove()
-    $form_imgs_wrapper.find('.url-img').remove()
-    $('.item-tags').find('span').remove()
-    $form_tags.find('li').not('.tag-title').remove()
-    $form_recommendation.val('')
-
-    $preview_title.html('商品标题')
-    $preview_price.html('¥0.00')
-    $draggable_bg.find('img').remove()
-
-    $popup_url.val('')
-    $('.urlwarning').html('')
-    $('.fwarning').html('')
-
   form_publish_binding = ->
     $('.item-list-container').find('.icon-edit').parent().on 'click', (e)->
       refreshForm()

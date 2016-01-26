@@ -1,3 +1,32 @@
+refreshForm = ->
+    # refresh everything
+    $form_publish = $('form.form__body')
+    $form_imgs_wrapper = $form_publish.find('.imgs-wrapper')
+    $form_tags = $form_publish.find('.mytags')
+    $form_recommendation = $form_publish.find('textarea')
+    $preview = $form_publish.find('dl.big_img.static')
+    $preview_title = $preview.find('.item-b_title')
+    $preview_price = $preview.find('.item-b_price')
+    $draggable_bg = $preview.find('.item-b_image.preview')
+    $blackbox = $('.popup__blackbox')
+    $popup_url = $blackbox.find('input[name=url]')
+    $form_publish.find('input').each ->
+      $(this).val('')
+    $form_publish.find('select').each ->
+      $(this).find('option').remove()
+    $form_imgs_wrapper.find('.url-img').remove()
+    $('.item-tags').find('span').remove()
+    $form_tags.find('li').not('.tag-title').remove()
+    $form_recommendation.val('')
+
+    $preview_title.html('商品标题')
+    $preview_price.html('¥0.00')
+    $draggable_bg.find('img').remove()
+
+    $popup_url.val('')
+    $('.urlwarning').html('')
+    $('.fwarning').html('')
+
 changeState = (action)->
   if window.history.pushState
     history.pushState(null, null, action + '-' + uid + '.html')
@@ -36,6 +65,7 @@ isEditingGood = ->
 giveupEditing = ->
   if isEditingGood()
     if confirm('是否放弃编辑单品？')
+      refreshForm()
       toggleGoods(true)
       return true
     else
