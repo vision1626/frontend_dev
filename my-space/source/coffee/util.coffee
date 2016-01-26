@@ -214,8 +214,8 @@ big_DashboardItem_Generater = (data,current_index) ->
                     likeusers.join(',')
                   )+
                   (
-                    if data.like_count > 2
-                      '<span> 等' + data.like_count + '人喜欢此搭配</span>'
+                    if data.like_total > 2
+                      '<span> 等' + data.like_total + '人喜欢此搭配</span>'
                     else
                       '<span> 喜欢此搭配</span>'
                   )
@@ -258,8 +258,8 @@ big_DashboardItem_Generater = (data,current_index) ->
                     likeusers.join(',')
                   )+
                     (
-                      if data.like_count > 2
-                        '<span> 等' + data.like_count + '人喜欢此单品</span>'
+                      if data.like_total > 2
+                        '<span> 等' + data.like_total + '人喜欢此单品</span>'
                       else
                         '<span> 喜欢此单品</span>'
                     )
