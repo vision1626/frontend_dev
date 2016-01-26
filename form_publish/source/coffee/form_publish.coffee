@@ -192,11 +192,17 @@ init_form_publish = ->
     $('.img-adder').append(new_input)
 
   makeTag = (text, id)->
+    if text.length > 20
+      text = text.substring(0, 20)
     span = $('<span class="pub-tag" data-id="' + id +  '">' + 
                 text +
                 '<i class="icon icon-closepop"></icon>' 
              '</span>')
     $form_tags_input.before(span)
+    span.find('.icon').each ->
+      $form_tags.find('li[data-id="' + $(this).parent().attr('data-id') + '"]')
+                .removeClass('unselected')
+                .addClass('selected')
     span.find('.icon').on 'click', ->
       $form_tags.find('li[data-id="' + $(this).parent().attr('data-id') + '"]')
                 .removeClass('selected')
