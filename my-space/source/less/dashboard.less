@@ -15,8 +15,11 @@
   //height: @list-filter-height;
   margin: 30px auto 0 ;
   //padding: 0 15px;
-
   ._1626-breakpoints("others");
+  @media @mobile {
+    height:0;
+    overflow: hidden;
+  }
   .item-nav-container {
     float: left;
     margin-left: -20px;
@@ -58,6 +61,7 @@
     line-height: 13px;
     margin-right: -10px;
     margin-top: 3px;
+
     .mode {
       i {
         margin-right: 0;
@@ -168,35 +172,67 @@
 
 //列表部分
 .item-list-container {
-  padding: 0 @big-goods__margin;
   //clear: both;
+  @media @pc {
+    padding: 0 @big-goods__margin;
+  }
+  @media @mobile {
+    padding: 0;
+  }
   margin: auto;
   ._1626-breakpoints("big-goods");
 
   //====================================大图列表 Start==================================================
   dl.big_img {
     display: none;
-    margin-bottom: 40px;
+    @media @pc {
+      margin-bottom: 40px;
+    }
+    @media @mobile {
+      margin-bottom: 20px;
+    }
     ._clearfix;
-
     dd.item {
       float: left;
       background-color: @white;
-      margin: 20px 15px 10px 15px;
-      //border-bottom: 2px solid @white;
-      width: @big-goods__width;
-      height: 425px;
       box-shadow: 0 0 5px rgba(0, 0, 0, .3);
       transition: all 0.2s ease-out;
       position: relative;
-      //cursor: pointer;
-
-      &.longer{
-        height: 456px;
+      @media @pc {
+        width: @big-goods__width;
+        margin: 20px 15px 10px 15px;
+        height: 425px;
+        &.longer{
+          height: 456px;
+        }
+        &:hover {
+          box-shadow: 0 1px 8px rgba(0, 0, 0, .7);
+          .item-b_image .actions {
+            //display: block;
+            opacity:1;
+          }
+          .item-b_additional {
+            border-bottom-color: @blue;
+          }
+        }
       }
-
+      @media @mobile {
+        width:100%;
+        margin: 0 0 30px 0;
+        overflow: hidden;
+        &.longer{
+          .item-b_description{
+            height:130px;
+          }
+        }
+      }
       .item-b_image {
-        height: @big-goods__width;
+        @media @pc {
+          height: @big-goods__width;
+        }
+        @media @mobile {
+          height: 100vw;
+        }
         overflow: hidden;
         position: relative;
         text-align: center;
@@ -205,7 +241,7 @@
           height: 100%;
         }
         img {
-          width: @big-goods__width;
+          width: 100%;
         }
         .actions {
           //display: none;
@@ -248,7 +284,11 @@
         }
       }
       .item-b_description {
+        position: relative;
         padding: @item-content-padding;
+        @media @mobile {
+          height: 100px;
+        }
         .item-b_isnew {
           height: 22px;
           margin-bottom: 4px;
@@ -279,6 +319,9 @@
         .item-b_title {
           height: 42px;
           overflow: hidden;
+          @media @mobile {
+            width: 70%;
+          }
           a {
             display: block;
             color: black;
@@ -288,47 +331,95 @@
         span {
         }
         .item-b_price {
-          margin-top: 4px;
+          @media @pc {
+            margin-top: 4px;
+            &.longer{
+              margin-top: 8px;
+            }
+          }
+          @media @mobile {
+            width: 30%;
+            text-align: center;
+            position: absolute;
+            right:0;
+            bottom:80px;
+            &.longer{
+              margin-top: 8px;
+              bottom:90px;
+            }
+          }
           span {
-            font-size: @font-size-s;
             font-weight: bold;
-            color: @dark-grey;
+            @media @pc {
+              font-size: @font-size-s;
+              color: @dark-grey;
+            }
+            @media @mobile {
+              font-size: 20px;
+              color: @black;
+            }
           }
-          &.longer{
-            margin-top: 8px;
-          }
+
         }
       }
       .item-b_additional {
-        padding: @item-content-padding;
-        height: 26px;
         position: absolute;
         bottom: 0;
         background-color: @light-grey;
         border-bottom: 3px solid @light-grey;
         transition: all 0.2s ease-out;
-        width: (@big-goods__width - 90);
+        width:100%;
+        @media @pc {
+          height: 50px;
+        }
+        @media @mobile {
+          height: 60px;
+        }
         img {
           width: @item-owner-img-wh;
           height: @item-owner-img-wh;
           border-radius: 50%;
           float: left;
-          margin-right: 10px;
+          margin: 12px 10px 12px 12px;
+          @media @pc {
+            width: @item-owner-img-wh;
+            height: @item-owner-img-wh;
+          }
+          @media @mobile {
+            width: @item-owner-img-wh + 10;
+            height: @item-owner-img-wh + 10;
+          }
         }
         .item-value {
           float: left;
           margin-top: 1px;
-
-          span {
-            color: @dark-grey;
-            font-size: @font-size-xs;
-            margin-right: 3px;
+          @media @pc {
+            line-height: 50px;
+            span {
+              color: @dark-grey;
+              font-size: @font-size-s;
+              margin-right: 3px;
+            }
+            .icon {
+              margin-left: 10px;
+            }
+            i {
+              margin-left: 10px;
+            }
           }
-          .icon {
-            margin-left: 10px;
-          }
-          i {
-            margin-left: 10px;
+          @media @mobile {
+            line-height: 60px;
+            span {
+              color: @dark-grey;
+              font-size: @font-size-m;
+              margin-right: 5px;
+            }
+            .icon {
+              margin-left: 13px;
+            }
+            i {
+              margin-left: 13px;
+            }
           }
         }
       }
@@ -336,29 +427,53 @@
         position: absolute;
         right: 0;
         bottom: 0;
-        width: 90px;
-        height: (@item-content-padding * 2) + @item-owner-img-wh + 3;
+
         background-color: @white;
         text-align: center;
         cursor: pointer;
-
+        @media @pc {
+          width: 90px;
+          height: (@item-content-padding * 2) + @item-owner-img-wh + 3;
+        }
+        @media @mobile {
+          width: 120px;
+          height: (@item-content-padding * 2) + @item-owner-img-wh + 13;
+        }
         img.harting{
           position: absolute;
-          width: 39px;
-          top: -1px;
-          left: 25px;
+          left: 0;
+          right: 0;
+          margin: auto;
           z-index: 999;
           display: none;
+          @media @pc {
+            width: 39px;
+            top: -1px;
+            left: -1px;
+          }
+          @media @mobile {
+            width: 45px;
+            top: 3px;
+            left: -1px;
+          }
         }
         .icon {
           color: @dark-grey;
           transition: all 0.2s ease-out;
           position: absolute;
-          top: 9px;
-          left: 35px;
-          font-size: @font-size-xl;
+          left: 0;
+          right: 0;
+          margin: auto;
           &.icon-hearted {
             color: @red;
+          }
+          @media @pc {
+            top: 9px;
+            font-size: @font-size-xl;
+          }
+          @media @mobile {
+            top: 15px;
+            font-size: 24px;
           }
         }
         .like_count {
@@ -367,9 +482,15 @@
           position: absolute;
           width: 100%;
           text-align: center;
-          top: 30px;
           left: 0;
-          font-size: @font-size-xs;
+          @media @pc {
+            top: 30px;
+            font-size: @font-size-xs;
+          }
+          @media @mobile {
+            top: 40px;
+            font-size: @font-size-s;
+          }
         }
         &:hover {
           .icon {
@@ -414,18 +535,6 @@
           }
         }
       }
-
-      &:hover {
-        box-shadow: 0 1px 8px rgba(0, 0, 0, .7);
-        .item-b_image .actions {
-          //display: block;
-          opacity:1;
-        }
-        .item-b_additional {
-          //box-shadow: 0 1px 5px @dark-grey;
-          border-bottom-color: @blue;
-        }
-      }
     }
 
     //关于发布那一块
@@ -465,50 +574,82 @@
   dl.small_img {
     ._clearfix;
     display: none;
-    margin-bottom: 40px;
-    margin-top: 9px;
+    @media @pc {
+      margin-top: 9px;
+      margin-bottom: 40px;
+    }
+    @media @mobile {
+      column-count: 2;
+      column-gap: 5px;
+      column-fill: balance;
+      margin: 0 5px 20px 5px ;
+    }
     dd.item {
-      float: left;
       background-color: @white;
-      //margin: 20px 10px 10px 10px;
-      //border-bottom: 2px solid @white;
-      width: @small-goods__width;
-      height: @small-goods__width;
       transition: all 0.2s ease-out;
       position: relative;
       ._1626-breakpoints("small-goods-margin");
+      @media @pc {
+        float: left;
+        width: @small-goods__width;
+        height: @small-goods__width;
+      }
+      @media @mobile {
+        box-shadow: 0 0 5px rgba(0, 0, 0, .3);
+        width: 45vw;
+        margin: auto auto 15px auto;
+      }
 
     }
     .item-s_image {
       overflow: hidden;
       position: relative;
-      height: @small-goods__width;
+      overflow: hidden;
+      @media @pc {
+        height: @small-goods__width;
+      }
+      @media @mobile {
+        height: 45vw;
+      }
       img {
-        width: @small-goods__width;
+        width: 100%;
       }
     }
     .item-s_description {
-      position: absolute;
-      top: 0;
-      left: 0;
-      background-color: rgba(0, 0, 0, 0.8);
       width: 100%;
-      height: 100%;
-      //display: none;
-      opacity: 0;
       transition: all 0.2s;
+      @media @pc {
+        position: absolute;
+        top: 0;
+        left: 0;
+        background-color: rgba(0, 0, 0, 0.8);
+        opacity: 0;
+        height: 100%;
+      }
+      @media @mobile {
+        height: 120px;
+        position: relative;
+      }
       .item-s_action {
         position: absolute;
-        right:12px;
-        top:8px;
-        >div {
-          position: relative;
+        div {
           display: inline-block;
           font-size: @font-size-l;
           color: @white;
           cursor: pointer;
           transition: all 0.2s;
-          margin-left: 8px;
+          @media @pc {
+            position: relative;
+            margin-left: 8px;
+          }
+          @media @mobile {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            margin: auto;
+          }
           &:hover {
             .icon {
               color: @blue;
@@ -523,26 +664,68 @@
 
         }
         div.action-add_like {
-          //right:12px;
           img{
             position: absolute;
-            width: 33px;
-            right: -7px;
-            top: -3px;
             z-index: 999;
             display: none;
+            @media @pc {
+              width: 33px;
+              right: -7px;
+              top: -3px;
+            }
+            @media @mobile {
+              width: 30px;
+              right: 17px;
+              left: 0;
+              top: 0;
+              bottom: 0;
+              margin: auto;
+            }
           }
           i{
             transition: all 0.2s;
-            color: @white;
             z-index: 99999;
             &.icon-hearted {
               color: @red;
+            }
+            @media @pc {
+              color: @white;
+            }
+            @media @mobile {
+              color: @grey;
             }
           }
           &:hover i{
             color: @red;
           }
+          .like_count{
+            @media @pc {
+              display:none;
+            }
+            @media @mobile {
+              color: @grey;
+              position: relative;
+              top: 2px;
+              margin-left: 5px;
+              line-height: 50px;
+            }
+          }
+          @media @mobile {
+            text-align: center;
+          }
+        }
+
+        @media @pc {
+          right:12px;
+          top:8px;
+        }
+        @media @mobile {
+          right: 0;
+          bottom: 0;
+          z-index: 99;
+          background: white;
+          height: 50px;
+          width: 50%;
         }
       }
       .item-s_owner {
@@ -552,83 +735,136 @@
           width: 24px;
           border-radius: 20px;
         }
+        @media @mobile {
+          display:none;
+        }
       }
       .item-s_info {
         position: absolute;
-        bottom: 28px;
-        width: 161px;
-        padding: 0 12px;
-      }
-      .item-s_isnew {
-        //float: left;
-        width: @small-goods__width - (@item-content-padding*2);
-        margin: 0;
-        color: @grey;
-        line-height: 16px;
-        //height:20px;
-        //overflow: hidden;
-        a {
+        @media @pc {
+          bottom: 28px;
+          width: 161px;
+          padding: 0 12px;
+        }
+        @media @mobile {
+          top: 0;
+          bottom: 0;
+          left: 0;
+          right: 0;
+          margin: auto;
+          padding: 0 8px;
+        }
+        .item-s_isnew {
+          //float: left;
+          width: @small-goods__width - (@item-content-padding*2);
+          margin: 0;
           color: @grey;
-          font-size: @font-size-xs;
-          border-bottom: 2px solid @grey;
-          &:hover {
-            color: white;
-            border-bottom: 2px solid @blue;
+          line-height: 16px;
+          //height:20px;
+          //overflow: hidden;
+          a {
+            color: @grey;
+            font-size: @font-size-xs;
+            border-bottom: 2px solid @grey;
+            &:hover {
+              color: white;
+              border-bottom: 2px solid @blue;
+            }
+          }
+          span {
+            color: @grey;
+            font-size: @font-size-xs;
+            margin-right: 3px;
+          }
+          @media @mobile {
+            display:none;
           }
         }
-        span {
-          color: @grey;
-          font-size: @font-size-xs;
-          margin-right: 3px;
+        .item-s_title {
+          margin-top: @item-content-padding/2;
+          a {
+            line-height: 18px;
+            display: block;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            @media @pc {
+              color: @white;
+              font-size: @font-size-s;
+              max-height: 36px;
+            }
+            @media @mobile {
+              color: @black;
+              font-size: @font-size-m;
+              max-height: 55px;
+            }
+          }
+          span {
+          }
         }
-      }
-      .item-s_title {
-        //width: @small-goods__width - (@item-content-padding*2);
-        margin-top: @item-content-padding/2;
-        //float: left;
-        //height: 35px;
-        //overflow: hidden;
-        //padding: 0 @item-content-padding;
-        a {
-          color: @white;
-          font-size: @font-size-s;
-          line-height: 18px;
-          display: block;
-          max-height: 36px;
-          //-webkit-line-clamp: $lines-to-show;
-          -webkit-box-orient: vertical;
-          overflow: hidden;
-          text-overflow: ellipsis;
-        }
-        span {
-        }
-      }
-      .item-s_price {
-        //width: @small-goods__width - (@item-content-padding*2);
-        margin: 6px 0;
-        //float: left;
-        span {
-          font-size: @font-size-m;
-          //font-weight: bold;
-          color: @grey;
+        .item-s_price {
+          //width: @small-goods__width - (@item-content-padding*2);
+          margin: 6px 0;
+          //float: left;
+          span {
+            font-size: @font-size-m;
+            //font-weight: bold;
+            color: @grey;
+          }
+          @media @mobile {
+            display:none;
+          }
         }
       }
       .item-s_additional {
         position: absolute;
-        bottom: @item-content-padding - 4;
-        left: @item-content-padding;
+        @media @pc {
+          bottom: @item-content-padding - 4;
+          left: @item-content-padding;
+        }
+        @media @mobile {
+          bottom:0;
+          left: 0;
+          height: 50px;
+          width: 100%;
+          background-color: @light-grey;
+        }
         span {
           color: @grey;
-          font-size: @font-size-xs;
-          margin-right: 2px;
+          @media @pc {
+            font-size: @font-size-xs;
+            margin-right: 2px;
+          }
+          @media @mobile {
+            line-height: 50px;
+            font-size: @font-size-l;
+            margin-left: 20px;
+          }
         }
         .count {
-          margin-right: 8px;
+          @media @pc {
+            margin-right: 8px;
+          }
+          @media @mobile {
+            position: relative;
+            top: 3px;
+            margin-left: 5px;
+          }
+        }
+        .icon_like,.like_count,.icon-comment,.comment_count{
+          @media @pc {
+
+          }
+          @media @mobile {
+            display:none;
+          }
         }
       }
     }
     dd:hover .item-s_description {
-      opacity: 1;
+      @media @pc {
+        opacity: 1;
+      }
     }
     dl.collocation {
       position: absolute;
@@ -871,16 +1107,25 @@
   .show-more{
     margin: 0 auto;
     color: @grey;
-    height:60px;
-    width: @big-goods__width*2+30;
+
     border-radius: 30px;
-    line-height: 60px;
+
     font-size: @font-size-m;
     cursor: pointer;
     box-shadow: 0 1px 3px @grey;
     transition: all 0.2s ease-out;
     &:hover {
       box-shadow: 0 1px 5px @dark-grey;
+    }
+    @media @pc {
+      width: @big-goods__width*2+30;
+      height:60px;
+      line-height: 60px;
+    }
+    @media @mobile {
+      width:90%;
+      height:40px;
+      line-height: 40px;
     }
   }
 }

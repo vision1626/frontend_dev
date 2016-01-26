@@ -2,11 +2,14 @@
 //@keyframes rotate {from {transform: rotate(0);} to {transform: rotate(360deg);}};
 //@keyframes slideright {from {margin-left: 6px;} to {margin-left: 60px;}};
 .profile-container {
-  height: 360px;
   background: url("/tpl/hi1626/v2/images/lego_bg.jpg") no-repeat center center rgba(0, 0, 0, .5);
   background-size: cover;
   @media @pc {
     position: relative;
+    height: 360px;
+  }
+  @media @mobile {
+    height: 270px;
   }
   .profile {
     position: relative;
@@ -14,26 +17,32 @@
     margin-right: auto;
     text-align: center;
     //width: 507px;
-    padding-top: 50px;
+    //padding-top: 50px;
     color: white;
+    @media @mobile {
+      height: 100%;
+      overflow: hidden;
+    }
     img {
       height: 100px;
       width: 100px;
       border-radius: 100px;
       margin: auto;
+      margin-top: 50px;
       //display: block;
       //background-color: @black;
       display: inline-block;
       //background-color: #000;
       position: relative;
       left: 50px;
+      box-shadow: 0 0 15px @black;
     }
     .name_container{
       //height: 85px;
       //overflow: hidden;
       //display: table;
       margin: auto;
-
+      position: relative;
 
       h3 {
         font-size: @font-size-xl;
@@ -41,7 +50,14 @@
         line-height: 1;
         display: table;
         margin: 10px auto 15px;
-        text-shadow: 0 0 4px #000;
+        @media @pc {
+          text-shadow: 0 0 4px #000;
+          margin: 10px auto 15px;
+        }
+        @media @mobile {
+          color:@black;
+          margin: 7px auto 10px;
+        }
       }
       .profile__total-like{
         clear: both;
@@ -49,18 +65,26 @@
         margin: 5px auto;
         position: relative;
         background-color: white;
-        background-color: rgba(255,255,255,0.8);
+
         padding: 2px 8px 2px 10px;
         color: @black;
         border-radius: 15px;
         font-size: @font-size-xs;
+        @media @pc {
+          background-color: rgba(255,255,255,0.8);
+        }
+        @media @mobile {
+          background-color: rgba(0,0,0,0.8);
+          span{
+            color:@white;
+          }
+        }
         b {
           color: @red;
         }
       }
 
     }
-
     .profile__level {
       position: absolute;
       top: 153px;
@@ -69,15 +93,62 @@
       background-color: @black;
       width: 37px;
       border-radius: 11px;
+      position: relative;
     }
     p {
       font-size: 12px;
+      position: relative;
       margin: 10px auto;
-      color: @light-grey;
-      text-shadow: 0 0 3px #000;
-      width: 360px;
+      @media @pc {
+        color: @light-grey;
+        text-shadow: 0 0 3px #000;
+        width: 360px;
+      }
+      @media @mobile {
+        color:@black;
+        text-align: center;
+        margin: auto;
+      }
     }
-
+    .profile_mobile_bg{
+      position: absolute;
+      top: auto;
+      bottom: 0;
+      box-shadow: 0 0 50px #000;
+      height: 145px;
+      background-color: @white;
+      left: -100px;
+      right: -100px;
+      @media @pc {
+        display: none;
+      }
+    }
+    .profile__relationship{
+      position: relative;
+      column-count: 2;
+      column-gap: 0;
+      width: 250px;
+      height: 30px;
+      margin:10px auto auto;
+      @media @pc {
+        display: none;
+      }
+      .profile__relation-fans,.profile__relation-follow{
+        color:@black;
+        text-align: center;
+        i{
+          color:@black;
+          font-size: @font-size-l;
+        }
+        span{
+          color:@black;
+          font-size: @font-size-m;
+          position: relative;
+          top: 3px;
+          margin-left: 5px;
+        }
+      }
+    }
   }
   .content {
     background-color: rgba(0, 0, 0, 0.5);

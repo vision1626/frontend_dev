@@ -20,6 +20,7 @@ _dashboard_publish_first_gen_b = false
 _dashboard_publish_first_gen_s = false
 _dashboard_list_by_search = false
 _dashboard_search_keyword = ''
+_is_mobile = false
 
 #SITE_URL = 'http://192.168.0.230/'
 
@@ -28,6 +29,9 @@ init_dashboard = ->
 #  listempty = $('#list-empty')
 #  listloading = $('#list-loading')
 #  pagiation = $('#item-pagiation')
+  if $(window).width() <= 680
+    _is_mobile = true
+
   filter = $('#list-filter')
 
 #  if window.dashboard_count is ''
@@ -535,8 +539,10 @@ do_like = (obj) ->
     success: (result)->
       after_like(me,dtype,result,job)
     error: (result)->
+      _dashboard_doing_like = false
       if result.status isnt 0
         alert('服务器君跑到外太空去了,刷新试试看!')
+
   }
 
 after_like = (me,dtype,result,job) ->
@@ -598,12 +604,18 @@ refresh_like = (sid,ed,count) ->
   if _dashboard_show_me
     top_count.html(parseInt(top_count.html()) + count)
   if ed is 1
+    if _is_mobile
+      timer = 10
+    else
+      timer = 1500
+
     if _dashboard_show_big
       big_harting.attr('src',harting_img_url)
       big_harting.show()
     else
-      small_harting.attr('src',harting_img_url)
-      small_harting.show()
+      if !_is_mobile
+        small_harting.attr('src',harting_img_url)
+        small_harting.show()
 
     setTimeout ->
       big_harting.attr('src','')
@@ -613,7 +625,7 @@ refresh_like = (sid,ed,count) ->
       big_icon.removeClass('icon-heart').addClass('icon-hearted')
       small_icon.removeClass('icon-heart').addClass('icon-hearted')
       _dashboard_doing_like = false
-    , 1500
+    , timer
   else
     big_icon.removeClass('icon-hearted').addClass('icon-heart')
     small_icon.removeClass('icon-hearted').addClass('icon-heart')

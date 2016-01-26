@@ -7,7 +7,9 @@ init_u_header = ->
   $db = $('.actions-db')
   $pub = $('.actions-pub')
   $follow = $('.relation-follow')
+  $follow_m = $('.profile__relation-follow')
   $fans = $('.relation-fans')
+  $fans_m = $('.profile__relation-fans')
   $slide_tab_bg = $('.js-slide-bg')
 
   isInActions = ->
@@ -102,6 +104,12 @@ init_u_header = ->
   $follow.on 'click', ->
     if giveupEditing()
       slideToCurrent.apply(this,[36])
+      user_relation_async('follow')
+  $fans_m.on 'click', ->
+    if giveupEditing()
+      user_relation_async('fans')
+  $follow_m.on 'click', ->
+    if giveupEditing()
       user_relation_async('follow')
 
 

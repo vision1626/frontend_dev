@@ -340,6 +340,7 @@ small_DashboardItem_Generater = (data,current_index) ->
           '<div class="action-add_like btn_like" l="s" sid="' + sid + '" dtype="' + dtype + '" ed="' + data.is_fav + '">' +
             '<img src="" alt="" class="harting"/>' +
             '<i class="icon ' + isfav + '"></i>' +
+            '<span class="like_count">' + data.like_count + '</span>' +
           '</div>' +
         '</div>' + '<div class="item-s_info">' +
         (
@@ -409,10 +410,10 @@ small_DashboardItem_Generater = (data,current_index) ->
         '<div class="item-s_additional">' +
           '<span class="icon icon-viewed"></span>' +
           '<span class="count">' + data.view_count + '</span>' +
-          '<span class="icon icon-hearted"></span>' +
+          '<span class="icon icon_like icon-hearted"></span>' +
           '<span class="count like_count">' + data.like_count + '</span>' +
           '<span class="icon icon-comment"></span>' +
-          '<span class="count">' + data.comment_count + '</span>' +
+          '<span class="count comment_count">' + data.comment_count + '</span>' +
         '</div>' +
       '</div>' +
     '</dd>')
