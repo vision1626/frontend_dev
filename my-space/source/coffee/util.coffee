@@ -553,17 +553,21 @@ fixMainnav = ->
   if $('body').scrollTop() >= 400
     $('.main-nav-container').addClass('fixed')
     $('.scroll-to-top').addClass('fixed')
+    $('.mobile-view-change').addClass('fixed')
   else
     $('.main-nav-container').removeClass('fixed')
     $('.scroll-to-top').removeClass('fixed')
+    $('.mobile-view-change').removeClass('fixed')
 
   footer_height = 388 - 70
   bottom_distance = $(document).height() - ($(this).scrollTop() + $(window).height())
   bottom_distance_out_range = footer_height - bottom_distance
   if bottom_distance <= footer_height
     $('.scroll-to-top').css('bottom',(bottom_distance_out_range + 70) + 'px')
+    $('.mobile-view-change').css('bottom',(bottom_distance_out_range + 145) + 'px')
   else
     $('.scroll-to-top').css('bottom','70px')
+    $('.mobile-view-change').css('bottom','145px')
 
   set_search_w()
 

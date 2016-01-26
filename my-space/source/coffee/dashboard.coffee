@@ -118,6 +118,23 @@ $(document).on 'click','.show-hot_list', ->
     _dashboard_show_new_hot = 'hot'
     init_dashboard_data()
 
+$(document).on 'click','.mobile-view-change', ->
+  me = $(this)
+  if _dashboard_show_big
+    me.find('i').removeClass('icon-grid_view')
+    me.find('i').addClass('icon-list_view')
+    _dashboard_show_big = false
+    gen_dashboard_item()
+    $('dl#big_img').hide()
+    $('dl#small_img').show()
+  else
+    me.find('i').addClass('icon-grid_view')
+    me.find('i').removeClass('icon-list_view')
+    _dashboard_show_big = true
+    gen_dashboard_item()
+    $('dl#big_img').show()
+    $('dl#small_img').hide()
+
 $(document).on 'click','.show-big_list', ->
   if !$(this).hasClass('current')
     $(this).addClass('current')
