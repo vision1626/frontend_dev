@@ -285,6 +285,7 @@ gen_dashboard_item = () ->
   pagiation = $('#item-pagiation')
   filter = $('#list-filter')
   rocket = $('.scroll-to-top')
+  mobile_vc = $('.mobile-view-change')
 
   step = 0
   if _dashboard_list_by_search
@@ -359,12 +360,14 @@ gen_dashboard_item = () ->
 
       listempty.hide()
       rocket.show()
+      mobile_vc.show()
       recommandTitle.hide()
       recommandList.hide()
     else
       pagiation.hide()
       listempty.show()
       rocket.hide()
+      mobile_vc.hide()
 #      filter.hide()
       if _dashboard_show_me and !_dashboard_list_by_search
         if state is 'fav' or state is 'dashboard'
@@ -373,6 +376,7 @@ gen_dashboard_item = () ->
     pagiation.hide()
     listempty.show()
     rocket.hide()
+    mobile_vc.hide()
 #    filter.hide()
     if _dashboard_show_me and !_dashboard_list_by_search
       if state is 'fav' or state is 'dashboard'
@@ -415,6 +419,7 @@ init_dashboard_data = (soft) ->
   recommandTitle = $('#recommandTitle')
   recommandList = $('#recommand')
   rocket = $('.scroll-to-top')
+  mobile_vc = $('.mobile-view-change')
 
   _dashboard_start_b = 0
   _dashboard_end_b = 0
@@ -439,6 +444,7 @@ init_dashboard_data = (soft) ->
   pagiation.hide()
   listempty.hide()
   rocket.show()
+  mobile_vc.show()
   recommandList.html('')
   recommandTitle.hide()
   recommandList.hide()

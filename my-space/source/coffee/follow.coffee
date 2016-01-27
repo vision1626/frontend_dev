@@ -170,6 +170,7 @@ gen_follow_Item = () ->
   pagiation = $('#pagiation')
   filter = $('#list-filter')
   rocket = $('.scroll-to-top')
+  mobile_vc = $('.mobile-view-change')
 
   if state is 'follow' and _follow_list_by_search
     if _follow_search_keyword isnt ''
@@ -226,6 +227,7 @@ init_follow_data = (soft) ->
   btn_ShowMore = $(document).find('#folloe-show-more')
   filter = $('#list-filter')
   rocket = $('.scroll-to-top')
+
   _follow_is_loading = false
   _follow_start = 0
   _follow_end = 0

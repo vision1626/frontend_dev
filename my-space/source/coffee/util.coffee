@@ -321,6 +321,15 @@ small_DashboardItem_Generater = (data,current_index) ->
   else
     isfav = 'icon-hearted'
 
+  if _is_mobile
+    view_count = format_count(data.view_count)
+    like_count = format_count(data.like_count)
+    comment_count = format_count(data.comment_count)
+  else
+    view_count = data.view_count
+    like_count = data.like_count
+    comment_count = data.comment_count
+
   dd = $('<dd class="item ' + sid + '" i="' + current_index + '" dtype="' + dtype + '">' +
       '<div>' +
         '<div class="item-s_image">' +
@@ -415,11 +424,11 @@ small_DashboardItem_Generater = (data,current_index) ->
         ) + '</div>' +
         '<div class="item-s_additional">' +
           '<span class="icon icon-viewed"></span>' +
-          '<span class="count">' + data.view_count + '</span>' +
+          '<span class="count">' + view_count + '</span>' +
           '<span class="icon icon_like icon-hearted"></span>' +
-          '<span class="count like_count">' + data.like_count + '</span>' +
+          '<span class="count like_count">' + like_count + '</span>' +
           '<span class="icon icon-comment"></span>' +
-          '<span class="count comment_count">' + data.comment_count + '</span>' +
+          '<span class="count comment_count">' + comment_count + '</span>' +
         '</div>' +
       '</div>' +
     '</dd>')
