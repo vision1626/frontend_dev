@@ -1,12 +1,18 @@
 @import "../../../public_inc/source/less/imports";
 @fans-face_wh:100px;
 @list-containter-padding: 30px;
+@mobile-fans-face_wh: 15vw;
 
 .follow-list-container{
-  padding: 0 @list-containter-padding;
   clear:both;
   margin: auto;
   ._1626-breakpoints("big-goods");
+  @media @pc {
+    padding: 0 @list-containter-padding;
+  }
+  @media @mobile {
+    padding: 0;
+  }
 }
 dl.follow-list {
   //margin: 0 @margin-lr;
@@ -15,75 +21,149 @@ dl.follow-list {
   margin-bottom: 40px;
   margin-top: 30px;
   dd.follow-list_item {
-    float: left;
-    //margin: 20px 10px 10px 10px;
-    //border-bottom: 2px solid @white;
-    width: @small-goods__width;
     position: relative;
     ._1626-breakpoints("small-goods-margin");
-
+    @media @pc {
+      float: left;
+      width: @small-goods__width;
+      &:hover {
+        .fans-content{
+          box-shadow: 0 1px 5px @dark-grey;
+          .fans-action {
+            border-bottom: 2px solid @blue;
+          }
+        }
+      }
+    }
+    @media @mobile {
+      width:100%;
+      padding: 0;
+      margin: 0 0 20px 0;
+    }
     .fans-face {
       position: absolute;
-      width: 100%;
       top: 0;
-      left: 0;
       z-index: 999;
-      text-align: center;
-
+      @media @pc {
+        width: 100%;
+        left: 0;
+        text-align: center;
+      }
+      @media @mobile {
+        left: 10px;
+      }
       img {
-        width: @fans-face_wh;
-        height: @fans-face_wh;
-        border-radius: @fans-face_wh/2;
+        @media @pc {
+          width: @fans-face_wh;
+          height: @fans-face_wh;
+          border-radius: @fans-face_wh/2;
+        }
+        @media @mobile {
+          width: @mobile-fans-face_wh;
+          height: @mobile-fans-face_wh;
+          max-width: 60px;
+          max-height: 60px;
+          border-radius: @mobile-fans-face_wh/2;
+        }
       }
     }
 
     .fans-content{
-      margin-top: @fans-face_wh/2;
       width:100%;
-      box-shadow: 0 1px 3px @grey;
-      transition: all 0.2s ease-out;
-
+      @media @pc {
+        margin-top: @fans-face_wh/2;
+        box-shadow: 0 1px 3px @grey;
+        transition: all 0.2s ease-out;
+      }
+      @media @mobile {
+        //height: 75px;
+        height: 60px;
+      }
       .fans-text{
-        background-color: @light-grey;
-        height: 136px;
         width:100%;
         position: relative;
-
+        @media @pc {
+          background-color: @light-grey;
+          height: 136px;
+        }
+        @media @mobile {
+          //height: 50px;
+        }
         .fans-name{
-          margin: 0 12px;
-          padding: 60px 0 5px 0;
-          text-align: center;
-
-          span{
-            font-size: @font-size-m;
+          @media @pc {
+            margin: 0 12px;
+            padding: 60px 0 5px 0;
+            text-align: center;
+            span{
+              font-size: @font-size-m;
+            }
+          }
+          @media @mobile {
+            position: absolute;
+            top: 0;
+            left:@mobile-fans-face_wh;
+            padding-left: 20px;
+            span{
+              font-size: 20px;
+            }
           }
         }
 
         .fans-intro{
-          margin:5px 12px;
-          line-height: @font-size-s;
-          word-break: break-all;
           overflow: hidden;
-          height: 30px;
-
-          span{
-            font-size: @font-size-xs;
-            color:@dark-grey;
+          @media @pc {
+            word-break: break-all;
+            margin:5px 12px;
+            line-height: @font-size-s;
+            height: 30px;
+            span{
+              font-size: @font-size-xs;
+              color:@dark-grey;
+            }
+          }
+          @media @mobile {
+            display: none;
+            //position: absolute;
+            //top: 25px;
+            //left:@mobile-fans-face_wh;
+            //padding-left: 20px;
+            //text-overflow:ellipsis;
+            //white-space:nowrap;
+            //width: 40vw;
+            //span{
+            //  font-size: @font-size-s;
+            //  color:@dark-grey;
+            //}
           }
         }
       }
 
       .fans-action{
-        background-color: @white;
-        height:150px;
         width:100%;
-        border-bottom: 2px solid @white;
+        @media @pc {
+          background-color: @white;
+          height:150px;
+          border-bottom: 2px solid @white;
+        }
+        @media @mobile {
+          height: 40px;
+        }
         .fans-published{
-          //width:100%;
-          height:50px;
-          margin-top: 12px;
-          margin-left: 12px;
-
+          @media @pc {
+            height:50px;
+            margin-top: 12px;
+            margin-left: 12px;
+          }
+          @media @mobile {
+            display: none;
+            //position: absolute;
+            //bottom: 0;
+            //left:@mobile-fans-face_wh;
+            //padding-left: 20px;
+            //width: 130px;
+            //overflow: hidden;
+            //height: 32px;
+          }
           dd{
             float: left;
             margin-right: 10px;
@@ -101,121 +181,142 @@ dl.follow-list {
         .fans-concemed{
           column-count:2;
           column-gap:10px;
-          text-align: center;
-          font-size: @font-size-xs;
-          margin: 0 20px;
-
-          .fans-concemed_fans,.fans-concemed_follow{
-            cursor: pointer;
-
-            span {
-              line-height: 24px;
-              color: @dark-grey;
-              cursor: pointer;
-              b {
-                font-weight: normal;
-              }
-            }
+          @media @pc {
+            text-align: center;
+            font-size: @font-size-xs;
+            margin: 0 20px;
           }
-          .icon{
-            font-size: 20px;
-            color: @dark-grey;
-            display: block;
-          }
-        }
-
-        .fans-follow{
-          text-align: center;
-          font-size: @font-size-m;
-          margin-top: 10px;
-          position: relative;
-          cursor: pointer;
-
-          div.action{
-            height: 30px;
-            line-height: 28px;
-            width: 100px;
-            margin: 0 auto;
-            border: solid 1px @dark-grey;
-            border-radius: 15px;
-            //padding: 0 5px;
-            background-color: @white;
-            color:@black;
-            font-size: @font-size-s;
+          @media @mobile {
+            width: 45vw;
+            position: absolute;
+            //bottom: 0;
+            top: 30px;
+            left:@mobile-fans-face_wh;
+            padding-left: 20px;
             text-align: left;
-            position: relative;
-
-            .icon{
-              font-size: 25px;
-              transition: all 0.1s ease-out;
-              position: absolute;
-            }
-
-            label{
-              position: absolute;
+            white-space: nowrap;
+          }
+          .fans-concemed_fans,.fans-concemed_follow{
+            @media @pc {
               cursor: pointer;
-            }
-
-            label.sl2{
-              display: none;
-            }
-
-            &.follow_ed:hover{
-              label.sl1{
-                display: none;
-              }
-              label.sl2{
+              i {
+                font-size: 20px;
+                color: @dark-grey;
                 display: block;
               }
+              span {
+                line-height: 24px;
+                color: @dark-grey;
+                cursor: pointer;
+                b {
+                  font-weight: normal;
+                }
+              }
             }
-          }
-
-          div.action.follow_nt{
-            .icon{
-              top:3px;
-              left: 3px;
-            }
-            label{
-              top:1px;
-              left: 33px;
-            }
-            &:hover{
-              .icon{
-                font-size: 28px;
-                top:1px;
-                left: 1px;
+            @media @mobile {
+              i {
+                font-size: @font-size-s;
+                color: @grey;
+              }
+              span {
+                line-height: 24px;
+                font-size: @font-size-s;
+                position: relative;
+                top:2px;
+                margin-left: 3px;
+                cursor: pointer;
+                b {
+                  font-weight: normal;
+                }
               }
             }
           }
 
-          div.action.follow_ed{
-            .icon{
-              top:3px;
-              right: 3px;
-            }
-            label{
-              top:1px;
-              right: 33px;
-              text-align: right;
-            }
-            &:hover{
-              .icon{
-                font-size: 28px;
-                top:1px;
-                right: 1px;
-              }
-            }
-          }
         }
-      }
-    }
 
-    &:hover {
-      .fans-content{
-        box-shadow: 0 1px 5px @dark-grey;
-        .fans-action {
-          border-bottom: 2px solid @blue;
-        }
+        //.fans-follow{
+        //  text-align: center;
+        //  font-size: @font-size-m;
+        //  margin-top: 10px;
+        //  position: relative;
+        //  cursor: pointer;
+        //
+        //  div.action{
+        //    height: 30px;
+        //    line-height: 28px;
+        //    width: 100px;
+        //    margin: 0 auto;
+        //    border: solid 1px @dark-grey;
+        //    border-radius: 15px;
+        //    //padding: 0 5px;
+        //    background-color: @white;
+        //    color:@black;
+        //    font-size: @font-size-s;
+        //    text-align: left;
+        //    position: relative;
+        //
+        //    .icon{
+        //      font-size: 25px;
+        //      transition: all 0.1s ease-out;
+        //      position: absolute;
+        //    }
+        //
+        //    label{
+        //      position: absolute;
+        //      cursor: pointer;
+        //    }
+        //
+        //    label.sl2{
+        //      display: none;
+        //    }
+        //
+        //    &.follow_ed:hover{
+        //      label.sl1{
+        //        display: none;
+        //      }
+        //      label.sl2{
+        //        display: block;
+        //      }
+        //    }
+        //  }
+        //
+        //  div.action.follow_nt{
+        //    .icon{
+        //      top:3px;
+        //      left: 3px;
+        //    }
+        //    label{
+        //      top:1px;
+        //      left: 33px;
+        //    }
+        //    &:hover{
+        //      .icon{
+        //        font-size: 28px;
+        //        top:1px;
+        //        left: 1px;
+        //      }
+        //    }
+        //  }
+        //
+        //  div.action.follow_ed{
+        //    .icon{
+        //      top:3px;
+        //      right: 3px;
+        //    }
+        //    label{
+        //      top:1px;
+        //      right: 33px;
+        //      text-align: right;
+        //    }
+        //    &:hover{
+        //      .icon{
+        //        font-size: 28px;
+        //        top:1px;
+        //        right: 1px;
+        //      }
+        //    }
+        //  }
+        //}
       }
     }
   }

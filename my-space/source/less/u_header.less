@@ -9,7 +9,8 @@
     height: 360px;
   }
   @media @mobile {
-    height: 270px;
+    height: 280px;
+    margin-bottom: 20px;
   }
   .profile {
     position: relative;
@@ -115,7 +116,7 @@
       top: auto;
       bottom: 0;
       box-shadow: 0 0 50px #000;
-      height: 145px;
+      height: 155px;
       background-color: @white;
       left: -100px;
       right: -100px;
@@ -126,16 +127,22 @@
     .profile__relationship{
       position: relative;
       column-count: 2;
-      column-gap: 0;
+      column-gap: 20px;
       width: 250px;
-      height: 30px;
       margin:10px auto auto;
       @media @pc {
         display: none;
       }
       .profile__relation-fans,.profile__relation-follow{
+        display: table;
+        margin: auto;
         color:@black;
         text-align: center;
+        border-bottom: 3px solid @white;
+        padding-bottom: 5px;
+        &.current{
+          border-bottom: 3px solid @blue;
+        }
         i{
           color:@black;
           font-size: @font-size-l;

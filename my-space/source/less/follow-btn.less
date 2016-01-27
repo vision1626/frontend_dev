@@ -36,8 +36,6 @@
 .fans__follow-btn,.profile__follow-btn,.edit-profile-btn{
   position: relative;
   //position: absolute;
-
-
   font-size: 13px;
   border-radius: 38px;
   line-height: 1;
@@ -47,6 +45,15 @@
   width: 88px;
   height: 29px;
   transition: background-color .4s linear;
+  @media @mobile {
+    &.fans__follow-btn{
+      position: absolute;
+      top:0;
+      bottom:0;
+      right:10px;
+      margin: auto;
+    }
+  }
   &:hover {
     .icon-follow {
       transition: all 0.1s linear;

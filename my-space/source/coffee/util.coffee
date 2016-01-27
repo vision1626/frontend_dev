@@ -74,6 +74,12 @@ giveupEditing = ->
     return true
 
 followItem_Generater = (data,current_index) ->
+  if _is_mobile
+    fans_count = format_count(data.fans)
+    follow_count = format_count(data.follows)
+  else
+    fans_count = data.fans
+    follow_count = data.follows
   dd = $('<dd class="follow-list_item" i="' + current_index + '" t-uid=' + data.uid + '>'+
     '<div class="fans-container">' +
       '<div class="fans-face">' +
@@ -109,11 +115,11 @@ followItem_Generater = (data,current_index) ->
           '<div class="fans-concemed">' +
             '<div class="fans-concemed_fans" uid="' + data.uid + '">' +
                 '<i class="icon icon-fans"></i>' +
-                '<span><b>' + data.fans + '</b>粉丝</span>' +
+                '<span><b>' + fans_count + '</b>粉丝</span>' +
             '</div>' +
             '<div class="fans-concemed_follow" uid="' + data.uid + '">' +
                 '<i class="icon icon-following"></i>' +
-                '<span><b>' + data.follows + '</b>关注</span>' +
+                '<span><b>' + follow_count + '</b>关注</span>' +
             '</div>' +
           '</div>' +
             (
@@ -540,6 +546,12 @@ set_search_w = ->
     $('.main-nav').width() - 40
 
 fixMainnav = ->
+  if _is_mobile
+    fixed_point = 10
+    footer_height = 100
+  else
+    fixed_point = 400
+    footer_height = 388
   $icon_hand = $('.main-nav__me').find('.icon')
   if $('body').scrollTop() >= 250
     $('.main-nav-container').addClass('ucantseeme')
@@ -550,16 +562,18 @@ fixMainnav = ->
     $('.fixed-nav-container').removeClass('ucantseeme')
     $icon_hand.show()
 
-  if $('body').scrollTop() >= 400
+  if $('body').scrollTop() >= fixed_point
     $('.main-nav-container').addClass('fixed')
     $('.scroll-to-top').addClass('fixed')
-    $('.mobile-view-change').addClass('fixed')
+    if state is 'dashboard' or state is 'fav' or state is 'talk'
+      $('.mobile-view-change').addClass('fixed')
   else
     $('.main-nav-container').removeClass('fixed')
     $('.scroll-to-top').removeClass('fixed')
-    $('.mobile-view-change').removeClass('fixed')
+    if state is 'dashboard' or state is 'fav' or state is 'talk'
+      $('.mobile-view-change').removeClass('fixed')
 
-  footer_height = 388 - 70
+  footer_height = footer_height - 70
   bottom_distance = $(document).height() - ($(this).scrollTop() + $(window).height())
   bottom_distance_out_range = footer_height - bottom_distance
   if bottom_distance <= footer_height
@@ -637,3 +651,11 @@ clean_list_search = () ->
       _follow_search_keyword = ''
       if _follow_list_by_search
         init_follow_data()
+
+format_count = (count) ->
+  if count >= 10000
+    [Math.round(count/1000),'k'].join ''
+  else if count >= 1000
+    [(count/1000).toFixed(1),'k'].join ''
+  else
+    count

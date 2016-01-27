@@ -19,6 +19,7 @@
   @media @mobile {
     height:0;
     overflow: hidden;
+    margin: 0 ;
   }
   .item-nav-container {
     float: left;
@@ -319,12 +320,15 @@
         .item-b_title {
           height: 42px;
           overflow: hidden;
+          word-break:break-all;
+          display:-webkit-box;
+          -webkit-line-clamp:2;
+          -webkit-box-orient:vertical;
           @media @mobile {
             width: 70%;
           }
           a {
-            display: block;
-            color: black;
+            color: @black;
             font-size: @font-size-s;
           }
         }
@@ -545,6 +549,9 @@
       //box-pack: center;
       //box-align: center;
       cursor: pointer;
+      @media @mobile {
+        display:none;
+      }
       div{
         position: absolute;
         top:0;
@@ -783,6 +790,10 @@
         }
         .item-s_title {
           margin-top: @item-content-padding/2;
+          word-break:break-all;
+          display:-webkit-box;
+          -webkit-line-clamp:3;
+          -webkit-box-orient:vertical;
           a {
             line-height: 18px;
             display: block;
@@ -899,6 +910,9 @@
       //height: @small-goods__width - 2;
       //border: 1px solid @blue;
       box-shadow: inset 0 0 1px @blue;
+      @media @mobile {
+        display:none;
+      }
       div{
         position: absolute;
         top:0;
@@ -926,28 +940,41 @@
   .list-empty{
     margin: 40px auto 50px;
     background-color: @light-grey;
-    height: 60px;
     position: relative;
-    padding: 50px;
     display:none;
+    @media @pc {
+      height: 60px;
+      padding: 50px;
+    }
+    @media @mobile {
+      height: 100px;
+      padding: 30px;
 
+    }
     .empty-content{
       //width:630px;
       margin: auto;
-      display: table;
+      @media @pc {
+        display: table;
+      }
       .empty-icon{
         float: left;
         margin-right: 20px;
+        @media @mobile {
+          height: 180px;
+        }
         span{
           font-size: 60px;
           line-height: 60px;
         }
       }
       .empty-message{
-        float: left;
         font-size: @font-size-m;
-        margin-right: 40px;
-        padding-top: 8px;
+        @media @pc {
+          float: left;
+          padding-top: 8px;
+          margin-right: 40px;
+        }
         span{
           font-weight: bold;
         }
@@ -955,6 +982,9 @@
       .empty-action{
         float: left;
         cursor: pointer;
+        @media @mobile {
+          position: relative;
+        }
         a{
           line-height: 60px;
           border: 2px solid @blue;

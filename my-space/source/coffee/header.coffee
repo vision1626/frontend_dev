@@ -77,9 +77,11 @@ init_u_header = ->
   else if isInCurrentAction('fans')
     changeState('fans')
     slideToCurrent.apply($fans,[36])
+    $fans_m.addClass('current')
   else if isInCurrentAction('follow')
     changeState('follow')
     slideToCurrent.apply($follow,[36])
+    $follow_m.addClass('current')
 
   parallax($profile)
 
@@ -107,9 +109,13 @@ init_u_header = ->
       user_relation_async('follow')
   $fans_m.on 'click', ->
     if giveupEditing()
+      $('.profile__relationship').find('div').removeClass('current')
+      $(this).addClass('current')
       user_relation_async('fans')
   $follow_m.on 'click', ->
     if giveupEditing()
+      $('.profile__relationship').find('div').removeClass('current')
+      $(this).addClass('current')
       user_relation_async('follow')
 
 

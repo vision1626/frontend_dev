@@ -15,6 +15,9 @@ init_follow = ->
 #  listempty = $('#list-empty')
 #  listloading = $('#list-loading')
 #  pagiation = $('#pagiation')
+  if $(window).width() <= 680
+    _is_mobile = true
+
   filter = $('#list-filter')
 
   if myid is uid
@@ -166,6 +169,7 @@ gen_follow_Item = () ->
   listempty = $('#list-empty')
   pagiation = $('#pagiation')
   filter = $('#list-filter')
+  rocket = $('.scroll-to-top')
 
   if state is 'follow' and _follow_list_by_search
     if _follow_search_keyword isnt ''
@@ -187,16 +191,20 @@ gen_follow_Item = () ->
         pagiation.show()
       else
         pagiation.hide()
+      listempty.hide()
+      rocket.show()
     else
       pagiation.hide()
       listempty.show()
+      rocket.hide()
       if _follow_show_me and !_follow_list_by_search
         if state is 'follow'
           query_follow_recommand_data()
   else
     pagiation.hide()
-    listempty.show() and !_follow_list_by_search
-    if _follow_show_me
+    listempty.show()
+    rocket.hide()
+    if _follow_show_me and !_follow_list_by_search
       if state is 'follow'
         query_follow_recommand_data()
 
@@ -217,6 +225,7 @@ init_follow_data = (soft) ->
   recommandList = $('#recommand')
   btn_ShowMore = $(document).find('#folloe-show-more')
   filter = $('#list-filter')
+  rocket = $('.scroll-to-top')
   _follow_is_loading = false
   _follow_start = 0
   _follow_end = 0
@@ -237,6 +246,7 @@ init_follow_data = (soft) ->
   followlist.hide()
   pagiation.hide()
   listempty.hide()
+  rocket.show()
   recommandList.html('')
   recommandTitle.hide()
   recommandList.hide()

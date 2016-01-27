@@ -284,6 +284,8 @@ gen_dashboard_item = () ->
   recommandList = $('#recommand')
   pagiation = $('#item-pagiation')
   filter = $('#list-filter')
+  rocket = $('.scroll-to-top')
+
   step = 0
   if _dashboard_list_by_search
     list_count = parseInt(window.dashboard_count)
@@ -314,7 +316,7 @@ gen_dashboard_item = () ->
     if window.dashboard_list_data.length > 0
       if _dashboard_show_big
         step = _dashboard_step_b
-        if state is 'talk' and _dashboard_show_me
+        if state is 'talk' and _dashboard_show_me and !_is_mobile
           if !_dashboard_has_publish_btn_b
             biglist.append(publishItem_Generater(myid))
             _dashboard_has_publish_btn_b = true
@@ -333,7 +335,7 @@ gen_dashboard_item = () ->
         biglist.show()
       else
         step = _dashboard_step_s
-        if state is 'talk' and _dashboard_show_me
+        if state is 'talk' and _dashboard_show_me and !_is_mobile
           if !_dashboard_has_publish_btn_s
             smalllist.append(publishItem_Generater(myid))
             _dashboard_has_publish_btn_s = true
@@ -356,11 +358,13 @@ gen_dashboard_item = () ->
         pagiation.hide()
 
       listempty.hide()
+      rocket.show()
       recommandTitle.hide()
       recommandList.hide()
     else
       pagiation.hide()
       listempty.show()
+      rocket.hide()
 #      filter.hide()
       if _dashboard_show_me and !_dashboard_list_by_search
         if state is 'fav' or state is 'dashboard'
@@ -368,6 +372,7 @@ gen_dashboard_item = () ->
   else
     pagiation.hide()
     listempty.show()
+    rocket.hide()
 #    filter.hide()
     if _dashboard_show_me and !_dashboard_list_by_search
       if state is 'fav' or state is 'dashboard'
@@ -409,6 +414,7 @@ init_dashboard_data = (soft) ->
   filter = $('#list-filter')
   recommandTitle = $('#recommandTitle')
   recommandList = $('#recommand')
+  rocket = $('.scroll-to-top')
 
   _dashboard_start_b = 0
   _dashboard_end_b = 0
@@ -432,6 +438,7 @@ init_dashboard_data = (soft) ->
   smalllist.hide()
   pagiation.hide()
   listempty.hide()
+  rocket.show()
   recommandList.html('')
   recommandTitle.hide()
   recommandList.hide()
