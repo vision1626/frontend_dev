@@ -5,6 +5,7 @@ initPickInterest = (category)->
   $pick_users = $('.pick-users')
   $tab_bar = $pick_users.find('.tabbar')
   $tab_panel = $pick_users.find('.tab__panel')
+#  is_new_user = is_new_user or true
 
   #-------------- 函数: 画兴趣格仔 -----------------
   drawInterest = (item_data)->
@@ -71,6 +72,20 @@ initPickInterest = (category)->
 
   #-------------- 函数: 画用戶格仔 -----------------
   drawPushUser = (user_data,cat_id)->
+    status_text = ''
+    status_icon = ''
+    status_btn = ''
+    if user_data.is_follow is 1
+      status_btn = 'slider--on'
+      status_icon = 'icon-followed'
+      status_text = '已关注'
+    else if user_data.is_follow is 2
+      status_btn = 'slider--on'
+      status_icon = 'icon-friends'
+      status_text = '互相关注'
+    else
+      status_text = '关注Ta'
+      status_icon = 'icon-follow'
     $user =
       "<li uid='#{user_data.uid}'>" +
         "<div class='avatar'><img src='#{user_data.img_thumb}' alt='#{user_data.user_name}'/></div>" +
@@ -78,8 +93,15 @@ initPickInterest = (category)->
         "<div class='relations'>" +
           "<span class='fans'><b>#{user_data.fans}</b>粉丝</span><span class='follows'><b>#{user_data.follows}</b>关注</span>" +
         "</div>" +
-        "<div class='follow-btn fans__follow-btn'>" +
-          "<div class='slider'><i class='icon icon-follow'></i><a class='status_text'>关注Ta</a></div>" +
+#        "<div class='follow-btn fans__follow-btn'>" +
+#          "<div class='slider'><i class='icon icon-follow'></i><a class='status_text'>关注Ta</a></div>" +
+#          "<div class='slider-btn'></div>" +
+#        "</div>" +
+        "<div class='fans__follow-btn follow-btn #{status_btn}' follow-status='#{user_data.is_follow}'>" +
+          "<div class='slider'>" +
+          "<i class='icon #{status_icon}'></i>" +
+          "<a class='status_text'>#{status_text}</a>" +
+          "</div>" +
           "<div class='slider-btn'></div>" +
         "</div>" +
       "</li></ul>"
@@ -88,10 +110,14 @@ initPickInterest = (category)->
 
   getUserData = (cat_id,page)->
     id = parseInt(cat_id)
+#    if is_new_user
+#      follow = 0
+#    else
+#      follow = 1
     $.ajax {
       url: SITE_URL + 'services/service.php?m=u&a=get_approve_user_ajax'
       type: "GET"
-      data: {tag:id,page:page,limit:5,follow:0}
+      data: {tag:id,page:page,limit:5,follow:1}
       cache: false
       dataType: "json"
       success: (result)->

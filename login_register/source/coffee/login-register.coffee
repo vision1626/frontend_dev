@@ -3,7 +3,7 @@ init = ->
   $form_register = $('#form-register')
 
   # 230 流程与正式环境不一样！！！！！
-  is_230 = false
+  is_230 = true
 
   $('input[type=text],input[type=password]').focus ->
     $(this).parent().addClass 'focus'

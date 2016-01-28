@@ -6,7 +6,7 @@ initFollowBtn = ()->
   # ---------------------------------------------
   # 初始化 u_header 的关注按钮
   setFollowStatus = (status, $this_follow_btn)->
-    $this_follow_btn.attr {"follow-status": status, 'uid':window.uid}
+    $this_follow_btn.attr {"follow-status": status}
     $slider = $this_follow_btn.find '.slider'
     $slider_icon = $slider.find '.icon'
     $slider_text = $slider.find '.status_text'
@@ -32,11 +32,6 @@ initFollowBtn = ()->
         $slider_icon.addClass 'icon-friends'
         $slider_text.html '互相关注'
 
-  initProfileFollowStatus = ()->
-    is_follow = window.isfollow
-    setFollowStatus(is_follow, $('.profile__follow-btn'))
-
-  initProfileFollowStatus()
   # ---------------------------------------------
 
 
@@ -114,30 +109,30 @@ initFollowBtn = ()->
     uid = $button.parent().attr 'uid'
     submitFollow(uid,$button)
 
-#  changeFollowCount = (change, btn_type, $obj)->
-#    $following_count_text = $('')
-#    following_count = 0
-#
-#    changeCount = ->
-#      following_count = parseInt($following_count_text.text())
-#      if change is 'up'
-#        following_count++
-#      else
-#        following_count--
-#      $following_count_text.text following_count
-#
-#    if btn_type is 'u_header' #点击u_header的关注按钮
-#
-#      if _follow_show_me #在我自己的关注/粉丝列表,改变「关注」数
-#        $following_count_text = $('.content__relationship').find('.relation-follow b')
-#      else #在別人的关注/粉丝列表,改变「粉丝」数
-#        $following_count_text = $('.content__relationship').find('.relation-fans b')
-#      changeCount()
-#
-#    else if btn_type is 'follow_list'
-#      $following_count_text = $obj.parent().find('.fans-concemed_fans b') #改变点击那个人的「粉丝」数
-#      changeCount()
-#      if _follow_show_me #在我自己的关注/粉丝列表,改变「关注」数
-#        $following_count_text = $('.content__relationship').find('.relation-follow b')
-#        changeCount()
+  changeFollowCount = (change, btn_type, $obj)->
+    $following_count_text = $('')
+    following_count = 0
+
+    changeCount = ->
+      following_count = parseInt($following_count_text.text())
+      if change is 'up'
+        following_count++
+      else
+        following_count--
+      $following_count_text.text following_count
+
+    if btn_type is 'u_header' #点击u_header的关注按钮
+
+      if _follow_show_me #在我自己的关注/粉丝列表,改变「关注」数
+        $following_count_text = $('.content__relationship').find('.relation-follow b')
+      else #在別人的关注/粉丝列表,改变「粉丝」数
+        $following_count_text = $('.content__relationship').find('.relation-fans b')
+      changeCount()
+
+    else if btn_type is 'follow_list'
+      $following_count_text = $obj.parent().find('.fans-concemed_fans b') #改变点击那个人的「粉丝」数
+      changeCount()
+      if _follow_show_me #在我自己的关注/粉丝列表,改变「关注」数
+        $following_count_text = $('.content__relationship').find('.relation-follow b')
+        changeCount()
 
