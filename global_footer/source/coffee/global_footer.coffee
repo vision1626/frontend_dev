@@ -33,7 +33,7 @@ init_global_footer = (friend_links)->
           $('.global-footer').find('.mag-buy strong').text number
           footer_mag.attr 'data-link', buy_link
       error: (result)->
-        alert('errr: ' + result)
+        alert('ft-errr: ' + result)
     })
 
   getMagCover()

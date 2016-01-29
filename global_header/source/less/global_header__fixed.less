@@ -16,7 +16,7 @@
       height: 60px;
       width:100%;
       line-height: 60px;
-      .top_menu_button,.top_search_button {
+      .top_hamburger,.top_search_button {
         position: absolute;
         top: 0;
         line-height: 60px;
@@ -25,10 +25,11 @@
         text-align: center;
         z-index:99999;
         i {
+          transition: all 0.2s;
           font-size: 30px;
           color: @white;
         }
-        &.top_menu_button {
+        &.top_hamburger {
           left: 0;
           right: auto;
         }

@@ -6,7 +6,7 @@ else
   - var image_path  = local_file_path+'/images/'
 .fixed-nav-container
   .fixed-nav-mobile
-    .top_menu_button
+    .top_hamburger
       i.icon.icon-user.mobile_top_icon
     .top_title
       img(src='#{image_path}/logo-1626-white.svg')
@@ -92,16 +92,22 @@ else
     li.main-nav__logo
       a(href='http://www.1626.com',target='_blank')
         img(src='#{image_path}/logo-1626-black.svg')
-    li
+    li.main-nav__hamburger
+      i.icon.icon-user.mobile_top_icon
+    li.main-nav__home
       a(href='http://www.1626.com',target='_blank') 首页
-    li
+    li.main-nav__zixun
       a(href='http://www.1626.com/zixun/',target='_blank') 资讯
     li.main-nav__flashbuy
       a(href='http://www.1626buy.cn/flashbuy/',target='_blank') 潮闪购
-    li
+    li.main-nav__c1
       a(href='http://www.1626.com/dapei/c1.html',target='_blank') 搭配
-    li
+    li.main-nav__master
       a(href='http://www.1626.com/master',target='_blank') 达人
+    li.main-nav__action
+      i.icon.icon-search
+      i.icon.icon-grid_view
+
   .main-nav__search
     div
       i.icon.icon-search
