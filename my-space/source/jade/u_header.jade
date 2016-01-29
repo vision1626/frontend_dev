@@ -38,10 +38,10 @@ else
       //{/if}
     .profile__relationship
       .profile__relation-fans
-        i.icon.icon-fans-16
+        //i.icon.icon-fans-16
         span $home_user['fans']粉丝
       .profile__relation-follow
-        i.icon.icon-fans-16
+        //i.icon.icon-fans-16
         span $home_user['follows']关注
   .content
     .center-wrap
@@ -64,6 +64,16 @@ else
           span
             b $home_user['publish_count']
             |发布
+        li.relation-fans
+          i.icon.icon-fans-16
+          span
+            b $home_user['fans']
+            | 粉丝
+        li.relation-follow
+          i.icon.icon-following
+          span
+            b $home_user['follows']
+            | 关注
       ul.content__relationship
         li.relation-fans
           i.icon.icon-fans-16

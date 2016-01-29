@@ -128,7 +128,7 @@
       position: relative;
       column-count: 2;
       column-gap: 20px;
-      width: 250px;
+      width: 50vw;
       margin:10px auto auto;
       @media @pc {
         display: none;
@@ -138,16 +138,17 @@
         margin: auto;
         color:@black;
         text-align: center;
-        border-bottom: 3px solid @white;
+        //border-bottom: 3px solid @white;
         padding-bottom: 5px;
         &.current{
-          border-bottom: 3px solid @blue;
+          //border-bottom: 3px solid @blue;
         }
         i{
           color:@black;
           font-size: @font-size-l;
         }
         span{
+          white-space: nowrap;
           color:@black;
           font-size: @font-size-m;
           position: relative;
@@ -220,13 +221,21 @@
             }
           }
         }
+        @media @pc {
+          li.relation-fans,li.relation-follow{
+            display: none;
+          }
+        }
         @media @mobile {
           box-shadow: 0 0 10px rgba(0,0,0,0.5);
           &.col2{
-            column-count: 2;
+            column-count: 4;
           }
           &.col3 {
-            column-count: 3;
+            column-count: 5;
+          }
+          b{
+            display: none;
           }
           column-gap:0;
         }

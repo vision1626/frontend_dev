@@ -278,6 +278,8 @@
             top:0;
             right:0;
             width:80px;
+            text-align: right;
+            padding-right: 10px;
             i{
               display: initial;
             }
@@ -345,7 +347,7 @@
   }
 }
 
-.scroll-to-top,.mobile-view-change {
+.scroll-to-top {
   &.scroll-to-top {
     bottom: 70px;
     @media @mobile {
@@ -359,18 +361,7 @@
       }
     }
   }
-  &.mobile-view-change{
-    @media @pc {
-      display: none;
-    }
-    bottom: 145px;
-    &.mobile-view-change:hover {
-      //background: @blue;
-      i {
-        //color: @blue;
-      }
-    }
-  }
+
   position: fixed;
   right:-120px;
   //width:80px;

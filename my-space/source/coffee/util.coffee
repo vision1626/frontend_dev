@@ -556,14 +556,16 @@ set_search_w = ->
 
 fixMainnav = ->
   if _is_mobile
-    fixed_point = 10
+    ucantseeme_point = 100
+    fixed_point = 120
     footer_height = 100
   else
+    ucantseeme_point = 250
     fixed_point = 400
     footer_height = 388
   $icon_hand = $('.main-nav__me').find('.icon')
 
-  if $('body').scrollTop() >= 250  and !_menu_showed
+  if $('body').scrollTop() >= ucantseeme_point
     $('.main-nav-container').addClass('ucantseeme')
     $('.fixed-nav-container').addClass('ucantseeme')
     $icon_hand.hide()
@@ -572,14 +574,20 @@ fixMainnav = ->
     $('.fixed-nav-container').removeClass('ucantseeme')
     $icon_hand.show()
 
-  if $('body').scrollTop() >= fixed_point and !_menu_showed
-    $('.main-nav-container').addClass('fixed')
+  if $('body').scrollTop() >= fixed_point
+    $('.main-nav-container,.main-nav').addClass('fixed')
     if !_is_mobile
       $('.scroll-to-top').addClass('fixed')
+
   else
-    $('.main-nav-container').removeClass('fixed')
+    $('.main-nav-container,.main-nav').removeClass('fixed')
     if !_is_mobile
       $('.scroll-to-top').removeClass('fixed')
+
+  if state is 'fans' or state is 'follow'
+    $('.main-nav').find('.icon-grid_view').hide()
+  else
+    $('.main-nav').find('.icon-grid_view').show()
 
   footer_height = footer_height - 70
   bottom_distance = $(document).height() - ($(this).scrollTop() + $(window).height())

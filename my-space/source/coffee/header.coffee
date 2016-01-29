@@ -33,11 +33,12 @@ init_u_header = ->
     if $(window).width() > 680
       $cnt_tab_ul_w = 0
       $cnt_tab.each ->
-        this_w = Math.ceil($(this).width()) + 65
-        $cnt_tab_ul_w += this_w
+        if !$(this).is(':hidden')
+          this_w = Math.ceil($(this).width()) + 65
+          $cnt_tab_ul_w += this_w
       $cnt_tab_ul.width $cnt_tab_ul_w
     else
-      if $cnt_tab.length is 2
+      if $cnt_tab.length is 4
         $cnt_tab_ul.addClass('col2')
       else
         $cnt_tab_ul.addClass('col3')

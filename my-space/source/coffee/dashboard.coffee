@@ -118,18 +118,19 @@ $(document).on 'click','.show-hot_list', ->
     _dashboard_show_new_hot = 'hot'
     init_dashboard_data()
 
-$(document).on 'click','.mobile-view-change', ->
+$(document).on 'touchend','.mobile-view-change', (e) ->
+  e.preventDefault()
   me = $(this)
   if _dashboard_show_big
-    me.find('i').removeClass('icon-grid_view')
-    me.find('i').addClass('icon-list_view')
+    me.removeClass('icon-grid_view')
+    me.addClass('icon-list_view')
     _dashboard_show_big = false
     gen_dashboard_item()
     $('dl#big_img').hide()
     $('dl#small_img').show()
   else
-    me.find('i').addClass('icon-grid_view')
-    me.find('i').removeClass('icon-list_view')
+    me.addClass('icon-grid_view')
+    me.removeClass('icon-list_view')
     _dashboard_show_big = true
     gen_dashboard_item()
     $('dl#big_img').show()
@@ -661,25 +662,3 @@ refresh_like = (sid,ed,count) ->
     small_icon.removeClass('icon-hearted').addClass('icon-heart')
     _dashboard_doing_like = false
 
-
-#refresh_like_small = (me,ed,count) ->
-#  biglist = $('#big_img')
-#  my_icon = me.find('.icon')
-#  my_count = me.parent().parent().find('.like_count')
-#  harting = me.find('.harting')
-#  harting_img_url = SITE_URL + window.image_path + 'icon-heart-ing.gif'
-#  if ed is 1
-#    harting.attr('src',harting_img_url)
-#    harting.show()
-#    setTimeout ->
-#      my_icon.removeClass('icon-heart').addClass('icon-hearted')
-#      harting.attr('src','')
-#      harting.hide()
-#    , 1500
-#  else
-#    my_icon.removeClass('icon-hearted').addClass('icon-heart')
-#  my_count.html(parseInt(my_count.html()) + count)
-#  me.attr('ed',ed)
-#  setTimeout ->
-#    _dashboard_doing_like = false
-#  , 2500
