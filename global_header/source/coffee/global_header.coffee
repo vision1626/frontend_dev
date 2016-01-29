@@ -1,3 +1,5 @@
+_menu_showed = false
+
 init_global_header = ->
   $search_wrap = $('.main-nav__search')
   $search = $search_wrap.find('input')
@@ -106,6 +108,27 @@ $(document).on 'mouseleave','div.fixed-nav-container', ->
 
 $(document).on 'click','div.scroll-to-top', ->
   $('html, body').animate({scrollTop:0}, 500);
+
+$(document).on 'touchstart','div.top_menu_button', ->
+  $('.profile-container').find('.content').hide()
+  $('.fixed_menu').show()
+  $('body, .wapper, .content_container, .fixed_menu').addClass('show-menu')
+  _menu_showed = true
+  afterMenuOpen()
+
+afterMenuOpen = () ->
+  $(document).on 'touchstart','div.content_container', ->
+    closeMenu()
+
+closeMenu = () ->
+  if _menu_showed
+    $('.profile-container').find('.content').show()
+    $('body, .wapper, .content_container, .fixed_menu').removeClass('show-menu')
+    setTimeout ->
+      $('.fixed_menu').hide()
+      $(document).off 'touchstart','div.content_container'
+      _menu_showed = false
+    , 300
 
 $(document).click (e)->
 #  if e.target isnt $('.main-nav__search') and e.target isnt $('.tips-menu')

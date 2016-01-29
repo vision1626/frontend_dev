@@ -4,14 +4,14 @@ if production
 else
   include ../public_inc/source/jade/head.jade
   - var image_path  = local_file_path+'/images/'
-
 .fixed-nav-container
   .fixed-nav-mobile
-    i.icon.icon-user.mobile_top_icon
-    a(href='http://www.1626.com',target='_blank')
-      //i.icon.icon-question
+    .top_menu_button
+      i.icon.icon-user.mobile_top_icon
+    .top_title
       img(src='#{image_path}/logo-1626-white.svg')
-    i.icon.icon-search.mobile_top_icon
+    .top_search_button
+      i.icon.icon-search.mobile_top_icon
   ul.fixed-nav
     li.fixed-nav__phone
       a
@@ -137,11 +137,12 @@ else
         li.get-recomendded
         li.check-all
           a
-.mobile-view-change
-  i.icon.icon-grid_view
+//.mobile-view-change
+//  i.icon.icon-grid_view
 
 .scroll-to-top
   i.icon.icon-rocket
+
 script(type='text/javascript').
   $(document).ready(function () {
     init_global_header();

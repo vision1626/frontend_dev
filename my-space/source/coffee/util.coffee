@@ -562,7 +562,8 @@ fixMainnav = ->
     fixed_point = 400
     footer_height = 388
   $icon_hand = $('.main-nav__me').find('.icon')
-  if $('body').scrollTop() >= 250
+
+  if $('body').scrollTop() >= 250  and !_menu_showed
     $('.main-nav-container').addClass('ucantseeme')
     $('.fixed-nav-container').addClass('ucantseeme')
     $icon_hand.hide()
@@ -571,26 +572,22 @@ fixMainnav = ->
     $('.fixed-nav-container').removeClass('ucantseeme')
     $icon_hand.show()
 
-  if $('body').scrollTop() >= fixed_point
+  if $('body').scrollTop() >= fixed_point and !_menu_showed
     $('.main-nav-container').addClass('fixed')
-    $('.scroll-to-top').addClass('fixed')
-    if state is 'dashboard' or state is 'fav' or state is 'talk'
-      $('.mobile-view-change').addClass('fixed')
+    if !_is_mobile
+      $('.scroll-to-top').addClass('fixed')
   else
     $('.main-nav-container').removeClass('fixed')
-    $('.scroll-to-top').removeClass('fixed')
-    if state is 'dashboard' or state is 'fav' or state is 'talk'
-      $('.mobile-view-change').removeClass('fixed')
+    if !_is_mobile
+      $('.scroll-to-top').removeClass('fixed')
 
   footer_height = footer_height - 70
   bottom_distance = $(document).height() - ($(this).scrollTop() + $(window).height())
   bottom_distance_out_range = footer_height - bottom_distance
   if bottom_distance <= footer_height
     $('.scroll-to-top').css('bottom',(bottom_distance_out_range + 70) + 'px')
-    $('.mobile-view-change').css('bottom',(bottom_distance_out_range + 145) + 'px')
   else
     $('.scroll-to-top').css('bottom','70px')
-    $('.mobile-view-change').css('bottom','145px')
 
   set_search_w()
 
@@ -668,3 +665,5 @@ format_count = (count) ->
     [(count/1000).toFixed(1),'k'].join ''
   else
     count
+
+

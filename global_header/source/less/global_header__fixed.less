@@ -2,6 +2,8 @@
 .fixed-nav-container {
   background-color: @black;
   margin-top: 0;
+  position: relative;
+  z-index: 2000;
   @media @pc {
     height: 35px;
     .fixed-nav-mobile{
@@ -11,44 +13,49 @@
   @media @mobile {
     height: 60px;
     .fixed-nav-mobile{
+      height: 60px;
       width:100%;
-      position: relative;
       line-height: 60px;
-      i{
-        font-size: 30px;
-        color: @white;
+      .top_menu_button,.top_search_button {
         position: absolute;
-        top:0;
-        bottom:0;
-        margin: auto;
+        top: 0;
         line-height: 60px;
-        &.icon-user{
-          left:15px;
-          right:auto;
+        height: 60px;
+        width:60px;
+        text-align: center;
+        z-index:99999;
+        i {
+          font-size: 30px;
+          color: @white;
         }
-        &.icon-search{
-          right:15px;
-          left:auto;
+        &.top_menu_button {
+          left: 0;
+          right: auto;
+        }
+        &.top_search_button {
+          right: 0;
+          left: auto;
         }
       }
-      
-      a{
+      .top_title {
         position: absolute;
-        top:0;
-        bottom:0;
-        left:0;
-        right:0;
-        margin: auto;
+        top: 0;
+        left: 60px;
+        right: 60px;
         text-align: center;
         line-height: 78px;
-        i{
-          color: @white;
-          font-size: 30px;
-          left:0;
-          right:0;
+        span {
+
+          i {
+            color: @white;
+            font-size: 30px;
+            left: 0;
+            right: 0;
+          }
+
         }
-        img{
-          height:30px;
+        img {
+          height: 30px;
         }
       }
     }

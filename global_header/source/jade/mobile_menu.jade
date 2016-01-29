@@ -1,0 +1,10 @@
+-var production = true
+if production
+  - var image_path = '{$_FANWE[site_url]}/tpl/hi1626/v2/images'
+else
+  include ../public_inc/source/jade/head.jade
+  - var image_path  = local_file_path+'/images/'
+
+.menu-top-bar
+  i.icon.icon-cross
+.menu-bottom-bar
