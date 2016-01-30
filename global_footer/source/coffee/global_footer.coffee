@@ -1,3 +1,5 @@
+_footer_qrchde_showout = false
+
 init_global_footer = (friend_links)->
   footer_mag = $('.global-footer').find('.footer__mag')
   footer_mag.click ->
@@ -37,3 +39,13 @@ init_global_footer = (friend_links)->
     })
 
   getMagCover()
+
+$(document).on 'click','.footer_qrcode', (e) ->
+#  e.preventDefault()
+  me = $(this)
+  if !_footer_qrchde_showout
+    me.addClass('show_out')
+    _footer_qrchde_showout = true
+  else
+    me.removeClass('show_out')
+    _footer_qrchde_showout = false

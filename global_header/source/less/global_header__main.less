@@ -413,6 +413,12 @@
   }
 }
 
+body{
+  @media @mobile{
+    background-color: @x-dark-grey;
+  }
+}
+
 .wapper{
   @media @mobile{
     width: 100vw;
@@ -446,10 +452,11 @@
     position: fixed;
     top: 0;
     left: -80%;
+    //left: 0;
     right: auto;
     margin: auto;
     width: 80%;
-    height: 100vh;
+    height: 100%;
     background-color: @x-dark-grey;
     transition: transform 0.3s;
     &.show-menu {
@@ -465,10 +472,12 @@
       height:60px;
       line-height: 60px;
       width:100%;
-      //background-color: @xx-dark-grey;
+      //background-color: @x-dark-grey;
+      background-color: rgba(53,54,55,0.9);
+      z-index: 2000;
       &.menu-top-bar{
         top:0;
-        .icon-cross{
+        i{
           color: @white;
           font-size: 30px;
           margin-left: 10px;
@@ -476,6 +485,120 @@
       }
       &.menu-bottom-bar{
         bottom:0;
+        a{
+          color: @white;
+          font-size: 20px;
+          margin-left: 10px;
+        }
+      }
+    }
+    .menu-content-container {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      //width:100%;
+      margin: auto;
+      overflow-y: auto;
+      overflow-x: hidden;
+      //overflow: auto;
+      background-color: @x-dark-grey;
+      .menu-content {
+        div {
+          padding-left: 10px;
+          height: 60px;
+          //line-height: 60px;
+          border-bottom: solid 1px @xx-dark-grey;
+        }
+        .empty{
+          border-bottom: none;
+        }
+        a, span {
+          color: @white;
+          font-size: 20px;
+          height: 60px;
+          line-height: 60px;
+          padding: 10px 0;
+        }
+        i {
+          color: @grey;
+          font-size: 22px;
+          line-height: 60px;
+          position: relative;
+          top: -4px;
+          margin-right: 10px;
+        }
+        .menu-avatar, .menu-message, .menu-flashbuy, .menu-myspage {
+          position: relative;
+          background-color: @xx-dark-grey;
+          border-bottom: solid 1px @black;
+          &.menu-avatar {
+            img {
+              width: 40px;
+              height: 40px;
+              border-radius: 20px;
+              position: absolute;
+              top: 0;
+              bottom: 0;
+              left: 10px;
+              margin: auto;
+            }
+            span {
+              margin: 0 10px;
+            }
+            .nickname {
+              position: absolute;
+              left: 60px;
+              right: 55px;
+              top: 0;
+              bottom: 0;
+              margin: auto;
+              overflow: hidden;
+              text-overflow: ellipsis;
+              padding:0;
+            }
+            .menu-logout {
+              position: absolute;
+              right:10px;
+              top:0;
+              bottom:0;
+              margin: auto;
+              color: @grey;
+            }
+          }
+          &.menu-message {
+            span {
+              margin: 0 40px;
+              background-color: @blue;
+              color: @xx-dark-grey;
+              padding: 0 6px;
+              border-radius: 14px;
+              position: relative;
+              top: 0;
+              //left: 5px;
+            }
+          }
+          &.menu-flashbuy {
+            iframe {
+              border: 0;
+              margin: 0 5px;
+              background-color: #00d0dc;
+              color: #222226;
+              /* padding: 0 6px; */
+              border-radius: 14px;
+              position: relative;
+              top: 6px;
+              line-height: 22px;
+              width: 27px;
+              height: 27px;
+              body {
+                color: @xx-dark-grey;
+              }
+            }
+          }
+        }
+
       }
     }
   }

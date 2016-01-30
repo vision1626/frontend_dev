@@ -109,6 +109,10 @@ $(document).on 'mouseleave','div.fixed-nav-container', ->
 $(document).on 'click','div.scroll-to-top', ->
   $('html, body').animate({scrollTop:0}, 500);
 
+#$(document).on 'touchstart','a.menu-logout', (e) ->
+#  e.preventDefault()
+#  location.href = _logout_link
+
 $(document).on 'touchend','.close-mobile-menu', (e) ->
   e.preventDefault()
   closeMenu()
@@ -121,22 +125,29 @@ $(document).on 'touchstart','.main-nav__hamburger', (e) ->
   openMenu()
 
 openMenu = () ->
-#  $('.profile-container').find('.content').hide()
-  $('body, .wapper, .content_container, .fixed_menu').addClass('show-menu')
-  _menu_showed = true
-  afterMenuOpen()
+  if !_menu_showed
+    $('.main-nav').hide()
+    $('.profile-container').find('.content').hide()
+    $('body, .wapper, .content_container, .fixed_menu').addClass('show-menu')
+    afterMenuOpen()
 
 afterMenuOpen = () ->
   $(document).on 'touchstart','div.content_container', (e) ->
     e.preventDefault()
     closeMenu()
+  setTimeout ->
+    _menu_showed = true
+  , 200
 
 closeMenu = () ->
   if _menu_showed
-#    $('.profile-container').find('.content').show()
+    $('.main-nav').show()
+    $('.profile-container').find('.content').show()
     $('body, .wapper, .content_container, .fixed_menu').removeClass('show-menu')
     $(document).off 'touchstart','div.content_container'
-    _menu_showed = false
+    setTimeout ->
+      _menu_showed = false
+    , 200
 
 $(document).click (e)->
 #  if e.target isnt $('.main-nav__search') and e.target isnt $('.tips-menu')

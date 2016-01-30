@@ -17,6 +17,7 @@ init_follow = ->
 #  pagiation = $('#pagiation')
   if $(window).width() <= 680
     _is_mobile = true
+    $('a').attr('target','')
 
   filter = $('#list-filter')
 
@@ -179,6 +180,8 @@ gen_follow_Item = () ->
     if window.follow_count > 0
       show_search_result(_follow_search_keyword,window.follow_count)
 
+  $('.main-nav').find('.icon-grid_view').hide()
+
   if window.follow_list_data
     if window.follow_count > 0
       if _follow_end < window.follow_count
@@ -210,7 +213,7 @@ gen_follow_Item = () ->
         query_follow_recommand_data()
 
   listloading.hide()
-  if state is 'follow'
+  if state is 'follow' and !_is_mobile
     filter.show()
   else
     filter.hide()

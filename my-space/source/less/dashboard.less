@@ -12,14 +12,12 @@
 .item-list-filter {
   ._clearfix;
   position: relative;
-  //height: @list-filter-height;
-  margin: 30px auto 0 ;
-  //padding: 0 15px;
   ._1626-breakpoints("others");
+  @media @pc {
+    margin: 30px auto 0 ;
+  }
   @media @mobile {
-    height:0;
-    overflow: hidden;
-    margin: 0 ;
+    margin: 20px;
   }
   .item-nav-container {
     float: left;
@@ -34,8 +32,14 @@
         border-right: none;
       }
       a {
-        font-size: @font-size-s;
+
         cursor: pointer;
+        @media @pc {
+          font-size: @font-size-s;
+        }
+        @media @mobile {
+          font-size: @font-size-m;
+        }
       }
       &.current {
         font-weight: bold;
@@ -44,7 +48,7 @@
         }
       }
       span {
-        font-size: @font-size-xs;
+
         background-color: @blue;
         color: @white;
         padding: 0 6px;
@@ -53,6 +57,12 @@
         position: relative;
         top: -1px;
         left: 5px;
+        @media @pc {
+          font-size: @font-size-xs;
+        }
+        @media @mobile {
+          font-size: @font-size-s;
+        }
       }
     }
 
@@ -62,7 +72,9 @@
     line-height: 13px;
     margin-right: -10px;
     margin-top: 3px;
-
+    @media @mobile {
+      display: none;
+    }
     .mode {
       i {
         margin-right: 0;
@@ -100,12 +112,62 @@
         }
       }
     }
+    .item-filter {
+      float: left;
+      border-left: solid 1px @grey;
+      padding-left: 10px;
+      &:nth-child(1){
+        border:none;
+      }
+      @media @mobile {
+        display: none;
+      }
+      a {
+        margin: 0 10px 0 0;
+        color: @grey;
+        cursor: pointer;
+        i {
+          font-size: @font-size-m;
+          margin-right: 5px;
+          transition: all 0.3s;
+        }
+        span {
+          font-size: @font-size-xs;
+          transition: all 0.3s;
+        }
+        &:hover {
+          i,span {
+            color: @dark-grey;
+          }
+        }
+        &.current {
+          i {
+            color: @blue;
+          }
+          span {
+            color: @black;
+          }
+          &:hover{
+            i {
+              color: @blue;
+            }
+            span {
+              color: @black;
+            }
+          }
+        }
+      }
+
+    }
   }
   .item-search-result{
     clear: both;
     height: 0;
     overflow: hidden;
     transition: height 0.2s;
+    @media @mobile {
+      display: none;
+    }
     span{
       font-size: @font-size-s;
       color:@dark-grey;
@@ -124,51 +186,7 @@
     }
   }
 
-  .item-filter {
-    float: left;
-    border-left: solid 1px @grey;
-    padding-left: 10px;
-    &:nth-child(1){
-      border:none;
-    }
 
-    a {
-      margin: 0 10px 0 0;
-      color: @grey;
-      cursor: pointer;
-      i {
-        font-size: @font-size-m;
-        margin-right: 5px;
-        transition: all 0.3s;
-      }
-      span {
-        font-size: @font-size-xs;
-        transition: all 0.3s;
-      }
-      &:hover {
-        i,span {
-          color: @dark-grey;
-        }
-      }
-      &.current {
-        i {
-          color: @blue;
-        }
-        span {
-          color: @black;
-        }
-        &:hover{
-          i {
-            color: @blue;
-          }
-          span {
-            color: @black;
-          }
-        }
-      }
-    }
-
-  }
 }
 
 //列表部分
@@ -232,7 +250,7 @@
           height: @big-goods__width;
         }
         @media @mobile {
-          height: 100vw;
+          height: 100%;
         }
         overflow: hidden;
         position: relative;
@@ -590,6 +608,9 @@
       //column-gap: 5px;
       //column-fill: balance;
       margin: 0 5px 20px 5px ;
+      //text-align: center;
+      text-align:justify;
+      width: 101%;
     }
     dd.item {
       background-color: @white;
@@ -603,21 +624,24 @@
       }
       @media @mobile {
         box-shadow: 0 0 3px rgba(0, 0, 0, .3);
-        width: 45vw;
+        width: 45%;
         margin: auto 5px 15px 5px;
-        float: left;
+        display: inline-block;
+        text-align:center;
+        vertical-align:top;
       }
 
     }
     .item-s_image {
-      overflow: hidden;
       position: relative;
       overflow: hidden;
       @media @pc {
         height: @small-goods__width;
       }
       @media @mobile {
-        height: 45vw;
+        //height: 45%;
+        padding-bottom: 100%;
+        height: 0;
       }
       img {
         width: 100%;
@@ -938,18 +962,19 @@
 
 //====================================列表为吉 Start==================================================
   .list-empty{
-    margin: 40px auto 50px;
+
     background-color: @light-grey;
     position: relative;
     display:none;
     @media @pc {
       height: 60px;
       padding: 50px;
+      margin: 40px auto 50px;
     }
     @media @mobile {
       height: 100px;
       padding: 30px;
-
+      margin: 20px auto 40px;
     }
     .empty-content{
       //width:630px;

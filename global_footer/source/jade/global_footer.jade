@@ -21,25 +21,38 @@ footer.global-footer
     .center-wrap.clear
       a.footer__logo(href='http://www.1626.com',target='_blank')
         img(src='#{image_path}/logo-1626-white.svg')
+      .footer_contact
+        img.footer_lookout(src="#{image_path}/text-nav-mobile-popup-white.png", alt="wechat")
+        label (点击或扫一扫)
+        .footer_qrcodes
+          .qrcode_app
+            span APP下载
+            img.footer_qrcode(src='#{image_path}/qr-app.jpg')
+          .qrcode_wechat
+            span 微信公众号
+            img.footer_qrcode(src='#{image_path}/qr-wechat.jpg')
+          .qrcode_weibo
+            span 新浪微博
+            img.footer_qrcode(src='#{image_path}/qr-weibo.jpg')
       ul.site-links
-        li
+        li.links_help
           h4 帮助中心
           .links
             a(href="/about/help.html", target="_blank") 发布指引
             a(href="/about/help.html", target="_blank") 订单帮助
             a(href="/about/help.html", target="_blank") 帮助中心
-        li
+        li.links_about
           h4 关于我们
           .links
             a(href="/about/introduce.html", target="_blank") 关于我们
             a(href="/about/contact.html", target="_blank") 联系我们
             a(href="http://www.lagou.com/gongsi/12417.html", target="_blank") 加入1626
-        li
+        li.links_weibo
           h4 关注1626
           .links
             a(href='http://weibo.com/city1626',target='_blank') 官方微博
             a APP下载
-        li
+        li.links_wechat
           h4 微信公众号
           img(src='#{image_path}/footer-wechat-qr.jpg')
       .footer__sml-text-wrap
@@ -52,7 +65,7 @@ footer.global-footer
           span
             |备案号：
             a(target="_blank" href="http://www.miibeian.gov.cn/") 粤ICP备11022094号-1
-          span(style='float:right')
+          span.footer_copyright
             |© 2014 广东亿启数码科技有限公司 1626.com 版权所有
 
 div(style='display:none')

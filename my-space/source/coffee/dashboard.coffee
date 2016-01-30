@@ -31,6 +31,7 @@ init_dashboard = ->
 #  pagiation = $('#item-pagiation')
   if $(window).width() <= 680
     _is_mobile = true
+    $('a').attr('target','')
 
   filter = $('#list-filter')
 
@@ -313,6 +314,8 @@ gen_dashboard_item = () ->
     if _dashboard_search_keyword isnt ''
       $('.list-search-dashboard').val(_dashboard_search_keyword)
       $('.clear-dashboard-search').addClass('show')
+
+  $('.main-nav').find('.icon-grid_view').show().css('display','')
 
   if window.dashboard_list_data
     if window.dashboard_list_data.length > 0

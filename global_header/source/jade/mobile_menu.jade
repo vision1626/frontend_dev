@@ -4,7 +4,49 @@ if production
 else
   include ../public_inc/source/jade/head.jade
   - var image_path  = local_file_path+'/images/'
-
 .menu-top-bar
   i.icon.icon-cross.close-mobile-menu
-.menu-bottom-bar
+.menu-content-container
+  .menu-content
+    .empty
+    .menu-avatar
+      if production
+        //{if $_FANWE['uid'] > 0}
+        a(href='/settings/psersonal.html')
+          img(src="{avatar $_FANWE['uid'] s 1 $_FANWE['user']['img_thumb']}")
+        a.nickname(href='/settings/psersonal.html')
+          | $_FANWE['user']['user_name']
+        a.menu-logout(href="{u user/logout}") 退出
+        //{else}
+        i.icon.icon-user
+        a(href="{u user/login}" target="_blank") 登录1626
+        //span |
+        //a(href="{u user/register}" target="_blank") 注册
+        //{/if}
+    //{if $_FANWE['uid'] > 0}
+    .menu-myspage
+      i.icon.icon-hand
+      a(href="/u/dashboard.html") 我的潮品
+    .menu-flashbuy
+      i.icon.icon-flashbuy
+      a(href="/messagetip/") 购物车
+      iframe(src="http://192.168.0.231/api/get_cart.php?token=1626-cart-number" scrolling="no")
+    .menu-message
+      i.icon.icon-news
+      a(href="/messagetip/") 消息
+      span.fixed-nav__number.fixed-nav__number--blue 0
+    //{/if}
+    .menu-nav
+      a(href='http://www.1626.com',target='_blank') 首页
+    .menu-nav
+      a(href='http://www.1626.com/zixun/',target='_blank') 资讯
+    .menu-nav
+      a(href='http://www.1626buy.cn/flashbuy/',target='_blank') 潮闪购
+    .menu-nav
+      a(href='http://www.1626.com/dapei/c1.html',target='_blank') 搭配
+    .menu-nav
+      a(href='http://www.1626.com/master',target='_blank') 达人
+    .empty
+
+//.menu-bottom-bar
+

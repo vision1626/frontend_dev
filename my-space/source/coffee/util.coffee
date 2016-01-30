@@ -584,11 +584,6 @@ fixMainnav = ->
     if !_is_mobile
       $('.scroll-to-top').removeClass('fixed')
 
-  if state is 'fans' or state is 'follow'
-    $('.main-nav').find('.icon-grid_view').hide()
-  else
-    $('.main-nav').find('.icon-grid_view').show()
-
   footer_height = footer_height - 70
   bottom_distance = $(document).height() - ($(this).scrollTop() + $(window).height())
   bottom_distance_out_range = footer_height - bottom_distance
