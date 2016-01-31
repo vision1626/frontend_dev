@@ -1,4 +1,5 @@
 _menu_showed = false
+_top_search_showed = false
 
 init_global_header = ->
   $search_wrap = $('.main-nav__search')
@@ -9,9 +10,10 @@ init_global_header = ->
   $nav_right_w = $nav_right.width()
   $nav_left_w = $nav_left.width()
 
-  set_search_w = ->   
-    win_w = $(window).width()   
-    $search_wrap.width win_w - $nav_right_w - $nav_left_w - 40
+  set_search_w = ->
+    if $(window).width() > 680
+      win_w = $(window).width()
+      $search_wrap.width win_w - $nav_right_w - $nav_left_w - 40
 
   set_search_w()
   $(window).on "resize", ->
@@ -77,11 +79,14 @@ init_global_header = ->
 
   # Event registers
   $search.on 'focus', ->
-    $search_icon_font.css({'color': 'black'})
+    if !_is_mobile
+      $search_icon_font.css({'color': 'black'})
   $search.on 'blur', ->
-    $search_icon_font.css({'color': '#b4b4b4'})
+    if !_is_mobile
+      $search_icon_font.css({'color': '#b4b4b4'})
   $search.on 'click', ->
-    get_search_kws(0, 'user')
+    if !_is_mobile
+      get_search_kws(0, 'user')
   $search.on 'keyup', ->
     get_search_kws(0, 'user')
   $search.on 'keydown', (e)->
@@ -136,6 +141,7 @@ afterMenuOpen = () ->
     e.preventDefault()
     closeMenu()
   setTimeout ->
+#    alert($(".menu-flashbuy-value").contents().find("body").html())
     _menu_showed = true
   , 200
 
@@ -150,8 +156,34 @@ closeMenu = () ->
     , 200
 
 $(document).click (e)->
+  if !_menu_showed
 #  if e.target isnt $('.main-nav__search') and e.target isnt $('.tips-menu')
     $('.tips-menu').hide()
     $('.main-nav__search').find('input').val('')
+  else
+    e.stopPropagation()
 $('.main-nav__search').click (e)->
-  e.stopPropagation()
+  if !_menu_showed
+    e.stopPropagation()
+
+$(document).on 'touchend','.top_search_button', (e) ->
+  e.preventDefault()
+  top_search = $('.main-nav__search')
+  if _is_mobile
+    if !_top_search_showed
+      top_search.addClass('shout_out')
+      $(this).removeClass('icon-search').addClass('icon-cross')
+      $('#jquery-search2').focus()
+      _top_search_showed = true
+    else
+      top_search.removeClass('shout_out')
+      $(this).removeClass('icon-cross').addClass('icon-search')
+#      $('#jquery-search2').val('')
+      $('.tips-menu').hide()
+      _top_search_showed = false
+
+$(document).on 'touchend','.top_search_submit', (e) ->
+  e.preventDefault()
+  if _is_mobile
+    if $('#jquery-search2').val() isnt ''
+      check_search2()

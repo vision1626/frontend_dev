@@ -5,12 +5,22 @@
     .tips-menu {
       display: none;
       background: white;
-      left: 10px;
-      top: -8px;
-      width: 150px;
       height: auto;
       border: 1px solid @grey;
-      padding-right: 26px;
+      @media @pc {
+        left: 10px;
+        top: -8px;
+        width: 150px;
+        padding-right: 26px;
+      }
+      @media @mobile {
+        top: -8px;
+        left: 0;
+        right: 0;
+        width: 90%;
+        margin: auto;
+        box-shadow: 0 0 5px rgba(0,0,0,.3);
+      }
       &:before,&:after {
         content: '';
         display: block;
@@ -19,7 +29,12 @@
         height: 0;
         border-style: solid;
         border-color: transparent;
-        left: 15px;
+        @media @pc {
+          left: 15px;
+        }
+        @media @mobile {
+          left: 15%;
+        }
       }
       &:before {
         top: -12px;

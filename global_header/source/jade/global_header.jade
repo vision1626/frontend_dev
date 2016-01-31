@@ -10,8 +10,8 @@ else
       i.icon.icon-user.mobile_top_icon
     .top_title
       img(src='#{image_path}/logo-1626-white.svg')
-    .top_search_button
-      i.icon.icon-search.mobile_top_icon
+    //.top_search_button
+    //  i.icon.icon-search.mobile_top_icon
   ul.fixed-nav
     li.fixed-nav__phone
       a
@@ -105,16 +105,16 @@ else
     li.main-nav__master
       a(href='http://www.1626.com/master',target='_blank') 达人
     li.main-nav__action
-      i.icon.icon-search
       i.icon.icon-grid_view.mobile-view-change
+      //i.icon.icon-search
 
   .main-nav__search
     div
-      i.icon.icon-search
-      input(type='text' id="jquery-search2" placeholder='搜一下变交街架' name="kw")
-      i.icon.icon-return
-      .tips-menu.indshare-tips
-        .search-tips
+      i.icon.icon-search.top_search_button
+      input(type='text' id="jquery-search2" placeholder='搜一下变交街架' name="kw" maxlength='20')
+      i.icon.icon-return.top_search_submit
+    .tips-menu.indshare-tips
+      .search-tips
   ul.main-nav--right
     li.main-nav__me
       a(href="/u/dashboard.html")

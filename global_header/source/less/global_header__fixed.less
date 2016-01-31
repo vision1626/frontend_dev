@@ -12,6 +12,7 @@
   }
   @media @mobile {
     height: 60px;
+    overflow: hidden;
     .fixed-nav-mobile{
       height: 60px;
       width:100%;
@@ -28,6 +29,7 @@
           transition: all 0.2s;
           font-size: 30px;
           color: @white;
+          padding: 15px;
         }
         &.top_hamburger {
           left: 0;
@@ -62,7 +64,7 @@
     }
   }
   // black magic!!
-  overflow: hidden;
+
   .fixed-nav {
     @media @mobile {
       display: none;

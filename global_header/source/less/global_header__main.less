@@ -4,7 +4,69 @@
   position: relative;
   border-bottom: 1px solid #000;
   box-shadow: 0 3px rgba(0,0,0,0.3);
-  z-index: 1626 + 1;
+  @media @pc {
+    z-index: 1626 + 1;
+  }
+  @media @mobile {
+    z-index: 2000 + 1;
+    &.fixed{
+      .main-nav__search {
+        position: absolute;
+        top: 0;
+        right: 0;
+        background-color: rgba(255,255,255,0);
+        transition: all 0.3s;
+        text-align: center;
+        width: 50px;
+        white-space: nowrap;
+        .icon {
+          color: @black;
+          font-size: 20px;
+          margin: auto;
+          //line-height: 60px;
+          &.icon-search{
+            line-height: 50px;
+            padding: 15px 15px 15px 5px;
+            margin-left: 10px;
+          }
+          &.icon-cross{
+            line-height: 50px;
+            padding: 15px;
+          }
+          &.icon-return{
+            display: none;
+          }
+        }
+        input{
+          display: none;
+          color:@black;
+          font-size: @font-size-m;
+          position: relative;
+          top: 2px;
+          width: 60%;
+        }
+        &.shout_out{
+          width:100%;
+          background-color: rgba(255,255,255,1);
+          text-align: left;
+          .icon {
+            &.icon-return {
+              display: inherit;
+              position: absolute;
+              right: 0;
+              top: 0;
+              bottom: 0;
+              padding: 15px;
+              margin: auto;
+            }
+          }
+          input{
+            display: inherit;
+          }
+        }
+      }
+    }
+  }
   .main-nav {
     @media @pc {
       float: left;
@@ -39,41 +101,95 @@
     }
   }
   .main-nav__search {
-    float: left;
-    display: block;
-    line-height: 3.4em;
-    padding: 0 20px;
     height: 60px;
-    border-left: 1px solid @grey;
-    background-color: @light-grey;
-    @media @mobile {
-      display: none;
-    }
-    .icon {
-      color: @grey;
-      font-size: 21px;
-    }
     div {
       display: inline-block;
       height: 60px;
       position: relative;
       width: 100%;
+      @media @mobile {
+        overflow: hidden;
+      }
       .icon-return {
         position: absolute;
         right: 0;
         top: 19px;
       }
       input {
-        font-size: 14px;
-        font-weight: bold;
-        //width: 32em;
         border: none;
         outline: none;
         background: none;
         height: 100%;
         margin: 0;
         padding: 0;
+
+      }
+    }
+    @media @pc {
+      float: left;
+      display: block;
+      line-height: 3.4em;
+      padding: 0 20px;
+      border-left: 1px solid @grey;
+      background-color: @light-grey;
+      .icon {
+        color: @grey;
+        font-size: 21px;
+      }
+      input {
+        font-size: 14px;
+        font-weight: bold;
         width: 80%;
+      }
+    }
+    @media @mobile {
+      position: absolute;
+      top: -60px;
+      right: 0;
+      background-color: rgba(0,0,0,0);
+      transition: all 0.3s;
+      text-align: center;
+      width: 60px;
+      white-space: nowrap;
+      .icon {
+        color: @white;
+        font-size: 30px;
+        margin: auto;
+        //line-height: 60px;
+        &.icon-search,&.icon-cross{
+          line-height: 64px;
+          padding: 14px;
+        }
+        &.icon-return{
+          display: none;
+        }
+      }
+      input{
+        display: none;
+        color:@white;
+        font-size: @font-size-l;
+        position: relative;
+        top: 2px;
+        width: 60%;
+      }
+      &.shout_out{
+        width:100%;
+        background-color: rgba(0,0,0,1);
+        text-align: left;
+        .icon {
+          &.icon-return {
+            display: inherit;
+            position: absolute;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            padding: 15px;
+            margin: auto;
+          }
+        }
+        input{
+          display: inherit;
+        }
       }
     }
   }
@@ -253,12 +369,13 @@
         border-left: none;
         i{
           display: block;
-          height: 50px;
-          line-height: 50px;
+          //height: 50px;
+          line-height: 1;
           color: black;
-          font-weight: bold;
-          margin: 0 5px;
+          //font-weight: bold;
+          //margin: 0 5px;
           font-size: 20px;
+          padding: 15px;
         }
       }
       &.fixed{
@@ -277,11 +394,18 @@
             position: absolute;
             top:0;
             right:0;
-            width:80px;
+            width:90px;
             text-align: right;
-            padding-right: 10px;
+            //padding-right: 10px;
             i{
               display: initial;
+              padding: 15px;
+              //line-height: 50px;
+              //margin-right: 35px;
+              position: absolute;
+              top: 0;
+              bottom: 0;
+              right: 35px;
             }
           }
           a{
@@ -290,6 +414,10 @@
         }
         .main-nav__hamburger,.main-nav__action {
           display: block;
+          line-height: 50px;
+          i{
+            padding: 15px 10px;
+          }
         }
         .main-nav__c1,.main-nav__master{
           display: none;
@@ -416,6 +544,9 @@
 body{
   @media @mobile{
     background-color: @x-dark-grey;
+    &.show-menu {
+      overflow: hidden;
+    }
   }
 }
 
@@ -434,6 +565,7 @@ body{
   background-color: @white;
   @media @mobile{
     transition: transform 0.3s;
+    //overflow: hidden;
     &.show-menu {
       //position: absolute;
       transform: translateX(80%);
@@ -480,7 +612,7 @@ body{
         i{
           color: @white;
           font-size: 30px;
-          margin-left: 10px;
+          padding: 15px 15px 15px 10px;
         }
       }
       &.menu-bottom-bar{
@@ -592,7 +724,7 @@ body{
               line-height: 22px;
               width: 27px;
               height: 27px;
-              body {
+              &body {
                 color: @xx-dark-grey;
               }
             }

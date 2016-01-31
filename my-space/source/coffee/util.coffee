@@ -549,10 +549,11 @@ parallax = (obj)->
   obj.css({'background-position-y': -(y / 5) + 'px'})
 
 set_search_w = ->
-  win_w = $(window).width()
-  $('.main-nav__search').width win_w - 
-    $('.main-nav--right').width() - 
-    $('.main-nav').width() - 40
+  if !_is_mobile
+    win_w = $(window).width()
+    $('.main-nav__search').width win_w -
+      $('.main-nav--right').width() -
+      $('.main-nav').width() - 40
 
 fixMainnav = ->
   if _is_mobile
