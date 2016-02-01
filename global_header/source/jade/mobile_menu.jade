@@ -31,7 +31,11 @@ else
     .menu-flashbuy
       i.icon.icon-flashbuy
       a(href="http://www.1626buy.cn/flow/") 购物车
+      //{if $_FANWE['uid'] > 0}
+      span.fixed-nav__number.fixed-nav__number--blue $_FANWE['cart_number']
+      //{else}
       iframe.menu-flashbuy-value(src="http://192.168.0.231/api/get_cart.php?token=1626-cart-number&color=222226&size=20px" scrolling="no" name="cartCount")
+      //{/if}
     //{if $_FANWE['uid'] > 0}
     .menu-message
       i.icon.icon-news

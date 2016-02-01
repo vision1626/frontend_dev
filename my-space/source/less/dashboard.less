@@ -1122,6 +1122,15 @@
 
   .empty_recommand_title{
     display: none;
+    @media @mobile {
+      position: relative;
+      height: 10px;
+      a{
+        position: absolute;
+        left:20px;
+        color: @grey;
+      }
+    }
   }
 
   .empty_recommand{

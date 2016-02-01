@@ -17,7 +17,7 @@
         top: -8px;
         left: 0;
         right: 0;
-        width: 90%;
+        width: 100%;
         margin: auto;
         box-shadow: 0 0 5px rgba(0,0,0,.3);
       }
@@ -46,24 +46,66 @@
         border-bottom-color: #ffffff;
         border-width: 6px;
       }
+      .tips-title{
+        @media @pc {
+          display: none;
+        }
+        @media @mobile {
+          position: absolute;
+          top:15px ;
+          left: 15px;
+          color: @grey;
+          font-size: @font-size-l;
+        }
+      }
       .search-tips {
         height: auto;
         display: block;
-      }
-      .tips-menuitem {
-        height: auto;
-        display: block;
-      }
-      a.key-work {
-        cursor: pointer;
-        display: block;
-        padding: 12px 0 12px 15px;
-        font-size: @font-size-s;
-        line-height: 1;
-        &:hover {
-          color:@blue;
+        @media @mobile {
+          width: auto;
+          padding: 15px;
+          margin: 30px 0 10px;
+        }
+        .tips-menuitem {
+          height: auto;
+          a.key-work {
+            cursor: pointer;
+            display: block;
+            line-height: 1;
+            &:hover {
+              color:@blue;
+            }
+          }
+          @media @pc {
+            display: block;
+            a.key-work {
+              padding: 12px 0 12px 15px;
+              font-size: @font-size-s;
+            }
+          }
+          @media @mobile {
+            float: left;
+            border: solid 1px @grey;
+            border-radius: 50px;
+            margin: 5px;
+            width: auto;
+            max-width: 100%;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            a.key-work {
+              padding: 8px 15px;
+              font-size: @font-size-m;
+              max-width: 100%;
+              white-space: nowrap;
+              overflow: hidden;
+              text-overflow: ellipsis;
+            }
+          }
         }
       }
+
+
     }
   }
   &.ucantseeme {

@@ -84,6 +84,8 @@ init_global_header = ->
   $search.on 'blur', ->
     if !_is_mobile
       $search_icon_font.css({'color': '#b4b4b4'})
+    else
+      closeNavSearch()
   $search.on 'click', ->
     if !_is_mobile
       get_search_kws(0, 'user')
@@ -168,19 +170,26 @@ $('.main-nav__search').click (e)->
 
 $(document).on 'touchend','.top_search_button', (e) ->
   e.preventDefault()
-  top_search = $('.main-nav__search')
   if _is_mobile
     if !_top_search_showed
-      top_search.addClass('shout_out')
-      $(this).removeClass('icon-search').addClass('icon-cross')
-      $('#jquery-search2').focus()
-      _top_search_showed = true
+      openNavSearch()
     else
-      top_search.removeClass('shout_out')
-      $(this).removeClass('icon-cross').addClass('icon-search')
-#      $('#jquery-search2').val('')
-      $('.tips-menu').hide()
-      _top_search_showed = false
+      closeNavSearch()
+
+openNavSearch = () ->
+  top_search = $('.main-nav__search')
+  top_search.addClass('shout_out')
+  $('.top_search_button').removeClass('icon-search').addClass('icon-cross')
+  $('#jquery-search2').focus()
+  _top_search_showed = true
+
+closeNavSearch = () ->
+  top_search = $('.main-nav__search')
+  top_search.removeClass('shout_out')
+  $('.top_search_button').removeClass('icon-cross').addClass('icon-search')
+#  $('#jquery-search2').val('')
+  $('.tips-menu').hide()
+  _top_search_showed = false
 
 $(document).on 'touchend','.top_search_submit', (e) ->
   e.preventDefault()
