@@ -414,7 +414,8 @@ gen_dashboard_item = () ->
   if _dashboard_show_me
     publish = init_form_publish()
     publish.clean()
-    publish.form_publish_binding()
+    publish.ajaxEditAndDelete()
+    publish.formEventsBinding()
   listloading.hide()
   filter.show()
   _dashboard_is_loading = false

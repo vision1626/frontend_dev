@@ -31,13 +31,11 @@ else
             button.button.large.blue 获取信息
           .urlwarning
           p 图片已经保存到电脑？点这里
-            a.manually-upload 上传分享
+            a.manually-upload(src="/u/addshare") 上传分享
       .popup__close
         i.icon.icon-closepop
 
 script(type='text/javascript').
-  $(document).ready(function () {
-    //- init_form_publish();
-  });
+  init_form_publish().popupBinding()
 if !production
   </body>

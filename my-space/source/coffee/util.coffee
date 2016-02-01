@@ -66,7 +66,7 @@ giveupEditing = ->
   if isEditingGood()
     if confirm('是否放弃编辑单品？')
       refreshForm()
-      toggleGoods(true)
+      # toggleGoods(true)
       return true
     else
       return false

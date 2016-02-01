@@ -1,6 +1,7 @@
 init_form_publish = ->
   g_expire = ''
   g_shareid = ''
+  g_addition = ''
   g_hasChangedImg = 0
 
   $popup_close = $('.popup__close')
@@ -68,9 +69,6 @@ init_form_publish = ->
     option = $('<option value="' + category['id'] + 
       '">' + category['name'] + '</option>')
     $form_cate_select.append(option)
-    $form_cate_select.on 'change', ->
-      id = Number($(this).val())
-      get2ndCate(id)
 
   generate2ndCategory = (category)->
     option = $('<option value="' + category['id'] + 
@@ -168,6 +166,7 @@ init_form_publish = ->
       alert '已经不能再上传了'
       regenerateFileInput()
     else 
+      alert('hi')
       $.ajaxFileUpload({
         url: SITE_URL + "services/service.php?m=share&a=uploadsharefile&num=1",
         secureuri: false,
@@ -221,7 +220,7 @@ init_form_publish = ->
       else
         return false
 
-  form_publish_binding = ->
+  ajaxEditAndDelete = ->
     $('.item-list-container').find('.icon-edit').parent().on 'click', (e)->
       refreshForm()
       id = Number($(this)
@@ -296,6 +295,7 @@ init_form_publish = ->
 
       e.stopPropagation()
 
+  popupBinding = ->
     $popup_close.on 'click', ->
       $blackbox.fadeOut(500)
       $popup.show()
@@ -306,22 +306,6 @@ init_form_publish = ->
       # toggleGoods(true)
     $popup_manually_upload.on 'click', ->
       $('.urlwarning').html('正在获取信息...')
-      $.ajax({
-        url: SITE_URL + "services/service.php?m=share&a=get_category_and_tags",
-        type: 'get',
-        dataType: 'json',
-        success: (result)->
-          $form_submit_btn.attr('data-target', 'new')
-          $form_submit_btn.text('发布')
-          $form_cate_select.append('<option value=0>分类</option>')
-          generateCategory cate for cate in result['category']
-          getMyTagName tag for tag in result['tags']
-          $form_style_select.append('<option value=0>风格（选填）</option>')
-          generateStyle style for style in result['style'][0]['content'].split(',')
-          $blackbox.fadeOut(500)
-          toggleGoods(false)
-          $('.urlwarning').html('')
-      })
 
     $popup_btn.on 'click', (e)->
       link = $popup_url.val()
@@ -330,56 +314,9 @@ init_form_publish = ->
         $(".urlwarning").html('请输入完整的链接地址')
         e.preventDefault()
         return false
-
-      obj = {
-        url: encodeURIComponent(link),
-        type: 'local'
-      }
-      if (window.state == 'talk' or window.state == 'dashboard' or
-          window.state == 'fav')
-        $popup.hide()
-        $popup_loading.show()
-        $.ajax({
-          url: SITE_URL + "services/service.php?m=u&a=add_share",
-          type: "get",
-          data: obj,
-          dataType: "json",
-          success: (result)->
-            if result.status == 1
-              $form_submit_btn.attr('data-target', 'new')
-              $form_submit_btn.text('发布')
-              $form_url_input.val(result['url'])
-              $form_title_input.val(result['goods_name'])
-              $form_price_input.val(result['goods_price'])
-              g_expire = result['expire_time']
-              if result['url_arr'] && result['url_arr'].length > 0
-                generateImg(SITE_URL + url) for url in result['url_arr']
-                updateBg(SITE_URL + '/' + result['url_arr'][0])
-              $('.url-img').first().find('img').addClass('main-img')
-              setImgEditor()
-              getImgLength()
-              $form_style_select.append('<option value=0>风格（选填）</option>')
-              generateStyle style for style in result['fengge_list']
-              $form_cate_select.append('<option value=0>分类</option>')
-              generateCategory cate for cate in result['category_list']
-              getMyTagName tag for tag in result['tags']
-              updatePreview(result)
-              setImgEditor()
-              $blackbox.fadeOut(500)
-              toggleGoods(false)
-            else if result.status == 2
-              $popup_loading.hide()
-              $popup.show()
-              $(".urlwarning").html('该单品已经发布过啦<a href="' +
-                result.url + '">去看看</a>')
-            else
-              $popup_loading.hide()
-              $popup.show()
-              $(".urlwarning").html('数据读取失败，请输入正确商品链接！')
-        })
-        e.preventDefault()
-
-    ### form publish ###
+   
+  ### form publish ###
+  formEventsBinding = ->
     $form_title_input.on 'keyup', ->
       obj = {}
       obj['goods_name'] = $(this).val()
@@ -464,6 +401,7 @@ init_form_publish = ->
 
       
     $form_submit_btn.on 'click', (e)->
+      alert 'yes'
       link = $form_url_input.val()
       str = link.match(/http:\/\/.+/)
       if str == null
@@ -520,13 +458,15 @@ init_form_publish = ->
           'pinpai'     :  brand,
           'fengge'     :  style,
           'img_arr'    :  img_arr,
-          'expire'     :  g_expire,
           'content'    :  recommendation,
           'tags'       :  tags,
           'img_info'   :  img_info
+          'expire'     :  g_expire,
+          'addition'   :  g_addition  
       }
 
       if $(this).attr('data-target') == 'new'
+        alert 'yes2'
         $blackbox.fadeIn(500)
         $.ajax({
           url :  SITE_URL + 'services/service.php?m=share&a=share_save',
@@ -536,21 +476,10 @@ init_form_publish = ->
           cache: false,
           success: (result)-> 
             if result.status == 1
-              $('.emoji-hint').show()
-              $('.empty-message').find('a').attr('href', result.url)
-              $('.separator').show()
-              $('.goods-link').find('label').show()
-              $('.urlwarning').html('')
-              $popup_loading.hide()
-              $popup.fadeIn(500)
-              $form_url_input.val('')
-              $('.urlwarining').html('')
-              g_hasChangedImg = 0
-              init_dashboard_data()
-              refreshForm()
-              toggleGoods(true)
+              alert('fuck')
         })
       else if $(this).attr('data-target') == 'update'
+        alert 'no'
         obj.share_id = g_shareid
         obj.image_change = g_hasChangedImg
         $blackbox.fadeIn(500)
@@ -582,15 +511,35 @@ init_form_publish = ->
       e.preventDefault()
 
   clean = ->
-    arr = [$popup_close, $popup_manually_upload, $popup_btn, $form_title_input, 
+    arr = [$popup_manually_upload, $form_title_input, 
       $form_price_input, $form_tags_input, $('#file1'), $preview, $form_publish.find('.reload'),
       $form_cancel_btn, $form_submit_btn]
     for jqDom in arr
       jqDom.off()
 
+  init = (result)->
+    updateBg(SITE_URL + result['url_arr'][0])
+    updatePreview(result)
+    generateImg SITE_URL + url for url in result['url_arr']
+    setImgEditor()
+    $form_style_select.append('<option value=0>风格（选填）</option>')
+    generateStyle style for style in result['fengge_list']
+    $form_cate_select.append('<option value=0>分类</option>')
+    generateCategory cate for cate in result['category_list']
+    $form_cate_select.one 'change', ->
+      id = Number($(this).val())
+      get2ndCate(id)
+    getMyTagName tag for tag in result['tags']
+    g_addition = result['addition']
+    g_expire = result['expire_time']
+    formEventsBinding()
+
+
   return { 
-           form_publish_binding: form_publish_binding,
            popupBinding: popupBinding,
+           formEventsBinding: formEventsBinding,
+           ajaxEditAndDelete: ajaxEditAndDelete,
+           init: init,
            clean: clean 
          }
 
