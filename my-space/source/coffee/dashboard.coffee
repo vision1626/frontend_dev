@@ -21,7 +21,7 @@ _dashboard_publish_first_gen_s = false
 _dashboard_list_by_search = false
 _dashboard_search_keyword = ''
 _is_mobile = false
-_dashboard_publish_alert_showed = false
+_dashboard_publish_alert_showed = 0
 
 #SITE_URL = 'http://192.168.0.230/'
 
@@ -55,8 +55,8 @@ init_dashboard = ->
   if window.collocation_count is ''
     window.collocation_count = '0'
 
-  if !$.cookie('publistAlertShow')
-    $.cookie('publistAlertShow',false,{expires:7})
+  if !parseInt($.cookie('publistAlertShow'))
+    $.cookie('publistAlertShow',0,{expires:7})
 
   filter.html(filter_generater())
   gen_dashboard_item()
@@ -180,7 +180,9 @@ $(document).on 'click','.publish_entrance', ->
 $(document).on 'click','div.return_home', ->
   location.href = SITE_URL
 
-$(document).on 'click','div.close_alert', ->
+$(document).on 'touchend','div.close_alert', (e) ->
+  e.preventDefault()
+  $.cookie('publistAlertShow',1,{expires:7})
   $('.publish_alert').fadeOut(300)
 
 query_dashboard_data = () ->
@@ -335,7 +337,7 @@ gen_dashboard_item = () ->
       $('.list-search-dashboard').val(_dashboard_search_keyword)
       $('.clear-dashboard-search').addClass('show')
 
-  if _is_mobile and state is 'talk' and _dashboard_show_me
+  if _is_mobile and state is 'talk' and _dashboard_show_me and parseInt($.cookie('publistAlertShow')) is 0
     publish_alert.fadeIn(300)
 
   $('.main-nav').find('.icon-grid_view').show().css('display','')
