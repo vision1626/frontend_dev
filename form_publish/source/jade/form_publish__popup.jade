@@ -23,10 +23,11 @@ else
           span 或者
         .goods-link
           label 再发布一个:
-          form.form__goods-link.gray-background
+          form.form__goods-link.gray-background(action="/u/addshare")
             .input-row
               i.icon.icon-link
               input.input__link(placeholder="请输入商品购买地址（淘宝/天猫）" name="url" autofocus="true")
+              input(type='hidden', name='type', value='local')
             button.button.large.blue 获取信息
           .urlwarning
           p 图片已经保存到电脑？点这里

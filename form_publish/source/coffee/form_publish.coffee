@@ -246,14 +246,16 @@ init_form_publish = ->
             $form_brand_input.val(result['data']['brand'])
             g_expire = result['data']['expire_time']
             g_shareid = result['data']['share_id']
-            generateImg(result['data']['main_img'])
+            # generateImg(result['data']['main_img'])
             if result['data']['gallery'] && result['data']['gallery'].length > 0
               generateImg(url['img']) for url in result['data']['gallery']
             updateBg(result['data']['main_img'])
             $('.url-img').first().find('img').addClass('main-img')
             setImgEditor()
             getImgLength()
+            $form_style_select.append('<option value=0>风格（选填）</option>')
             generateStyle style for style in result['data']['style_list']
+            $form_cate_select.append('<option value=0>分类</option>')
             generateCategory cate for cate in result['data']['category_list']
             generate2ndCategory cate for cate in result['data']['sub_category_list']
             getMyTagName tag for tag in result['data']['all_my_tags']
@@ -311,9 +313,10 @@ init_form_publish = ->
         success: (result)->
           $form_submit_btn.attr('data-target', 'new')
           $form_submit_btn.text('发布')
+          $form_cate_select.append('<option value=0>分类</option>')
           generateCategory cate for cate in result['category']
-          get2ndCate($form_cate_select.val())
           getMyTagName tag for tag in result['tags']
+          $form_style_select.append('<option value=0>风格（选填）</option>')
           generateStyle style for style in result['style'][0]['content'].split(',')
           $blackbox.fadeOut(500)
           toggleGoods(false)
@@ -325,52 +328,56 @@ init_form_publish = ->
       urlreg=/^((https|http|ftp|rtsp|mms)?:\/\/)+[A-Za-z0-9\_\-]+\.[A-Za-z0-9\_\-]+[\/=\?%\-&_~`@[\]\':+!]*([^<>\"\"])*$/
       if (!urlreg.test(link))
         $(".urlwarning").html('请输入完整的链接地址')
+        e.preventDefault()
         return false
 
       obj = {
         url: encodeURIComponent(link),
         type: 'local'
       }
-      $popup.hide()
-      $popup_loading.show()
-      $.ajax({
-        url: SITE_URL + "services/service.php?m=u&a=add_share",
-        type: "get",
-        data: obj,
-        dataType: "json",
-        success: (result)->
-          if result.status == 1
-            $form_submit_btn.attr('data-target', 'new')
-            $form_submit_btn.text('发布')
-            $form_url_input.val(result['url'])
-            $form_title_input.val(result['goods_name'])
-            $form_price_input.val(result['goods_price'])
-            g_expire = result['expire_time']
-            if result['url_arr'] && result['url_arr'].length > 0
-              generateImg(SITE_URL + url) for url in result['url_arr']
-              updateBg(SITE_URL + '/' + result['url_arr'][0])
-            $('.url-img').first().find('img').addClass('main-img')
-            setImgEditor()
-            getImgLength()
-            generateStyle style for style in result['fengge_list']
-            generateCategory cate for cate in result['category_list']
-            getMyTagName tag for tag in result['tags']
-            get2ndCate($form_cate_select.val()) 
-            updatePreview(result)
-            setImgEditor()
-            $blackbox.fadeOut(500)
-            toggleGoods(false)
-          else if result.status == 2
-            $popup_loading.hide()
-            $popup.show()
-            $(".urlwarning").html('该单品已经发布过啦<a href="' +
-              result.url + '">去看看</a>')
-          else
-            $popup_loading.hide()
-            $popup.show()
-            $(".urlwarning").html('数据读取失败，请输入正确商品链接！')
-      })
-      e.preventDefault()
+      if (window.state == 'talk' or window.state == 'dashboard' or
+          window.state == 'fav')
+        $popup.hide()
+        $popup_loading.show()
+        $.ajax({
+          url: SITE_URL + "services/service.php?m=u&a=add_share",
+          type: "get",
+          data: obj,
+          dataType: "json",
+          success: (result)->
+            if result.status == 1
+              $form_submit_btn.attr('data-target', 'new')
+              $form_submit_btn.text('发布')
+              $form_url_input.val(result['url'])
+              $form_title_input.val(result['goods_name'])
+              $form_price_input.val(result['goods_price'])
+              g_expire = result['expire_time']
+              if result['url_arr'] && result['url_arr'].length > 0
+                generateImg(SITE_URL + url) for url in result['url_arr']
+                updateBg(SITE_URL + '/' + result['url_arr'][0])
+              $('.url-img').first().find('img').addClass('main-img')
+              setImgEditor()
+              getImgLength()
+              $form_style_select.append('<option value=0>风格（选填）</option>')
+              generateStyle style for style in result['fengge_list']
+              $form_cate_select.append('<option value=0>分类</option>')
+              generateCategory cate for cate in result['category_list']
+              getMyTagName tag for tag in result['tags']
+              updatePreview(result)
+              setImgEditor()
+              $blackbox.fadeOut(500)
+              toggleGoods(false)
+            else if result.status == 2
+              $popup_loading.hide()
+              $popup.show()
+              $(".urlwarning").html('该单品已经发布过啦<a href="' +
+                result.url + '">去看看</a>')
+            else
+              $popup_loading.hide()
+              $popup.show()
+              $(".urlwarning").html('数据读取失败，请输入正确商品链接！')
+        })
+        e.preventDefault()
 
     ### form publish ###
     $form_title_input.on 'keyup', ->
@@ -583,6 +590,7 @@ init_form_publish = ->
 
   return { 
            form_publish_binding: form_publish_binding,
+           popupBinding: popupBinding,
            clean: clean 
          }
 
