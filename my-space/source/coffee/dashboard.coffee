@@ -21,6 +21,7 @@ _dashboard_publish_first_gen_s = false
 _dashboard_list_by_search = false
 _dashboard_search_keyword = ''
 _is_mobile = false
+_dashboard_publish_alert_showed = false
 
 #SITE_URL = 'http://192.168.0.230/'
 
@@ -53,6 +54,9 @@ init_dashboard = ->
     window.product_count = '0'
   if window.collocation_count is ''
     window.collocation_count = '0'
+
+  if !$.cookie('publistAlertShow')
+    $.cookie('publistAlertShow',false,{expires:7})
 
   filter.html(filter_generater())
   gen_dashboard_item()
@@ -176,6 +180,9 @@ $(document).on 'click','.publish_entrance', ->
 $(document).on 'click','div.return_home', ->
   location.href = SITE_URL
 
+$(document).on 'click','div.close_alert', ->
+  $('.publish_alert').fadeOut(300)
+
 query_dashboard_data = () ->
   btn_ShowMore = $(document).find('#dashboard-show-more')
 
@@ -288,6 +295,7 @@ gen_dashboard_item = () ->
   filter = $('#list-filter')
   rocket = $('.scroll-to-top')
   mobile_vc = $('.mobile-view-change')
+  publish_alert = $('.publish_alert')
 
   step = 0
   if _dashboard_list_by_search
@@ -307,13 +315,28 @@ gen_dashboard_item = () ->
         list_count = parseInt(window.collocation_count)
 
   if state is 'dashboard'
-    filter.find('.nav-dashboard').find('span').html(window.dashboard_count)
+    if window.dashboard_count isnt ''
+      tmp_count = window.dashboard_count
+    else
+      tmp_count = '0'
+    filter.find('.nav-dashboard').find('span').html(tmp_count)
   else
-    filter.find('.nav-produce').find('span').html(window.product_count)
-    filter.find('.nav-collocation').find('span').html(window.collocation_count)
+    if window.dashboard_count isnt ''
+      tmp_count = window.product_count
+    else
+      tmp_count = '0'
+    filter.find('.nav-produce').find('span').html(tmp_count)
+    if window.dashboard_count isnt ''
+      tmp_count = window.collocation_count
+    else
+      tmp_count = '0'
+    filter.find('.nav-collocation').find('span').html(tmp_count)
     if _dashboard_search_keyword isnt ''
       $('.list-search-dashboard').val(_dashboard_search_keyword)
       $('.clear-dashboard-search').addClass('show')
+
+  if _is_mobile and state is 'talk' and _dashboard_show_me
+    publish_alert.fadeIn(300)
 
   $('.main-nav').find('.icon-grid_view').show().css('display','')
 
@@ -424,6 +447,7 @@ init_dashboard_data = (soft) ->
   recommandList = $('#recommand')
   rocket = $('.scroll-to-top')
   mobile_vc = $('.mobile-view-change')
+  publish_alert = $('.publish_alert')
 
   _dashboard_start_b = 0
   _dashboard_end_b = 0
@@ -453,6 +477,7 @@ init_dashboard_data = (soft) ->
   recommandTitle.hide()
   recommandList.hide()
   btn_ShowMore.html('我要看更多').removeClass('loading')
+  publish_alert.hide()
   _dashboard_has_more = true
   if soft
 
@@ -481,19 +506,23 @@ init_dashboard_empty_message = () ->
   if _dashboard_show_me
     who = '你'
     if state is 'fav'
-      content_text = '先看看其他人喜欢了什么吧!'
+#      content_text = '先看看其他人喜欢了什么吧!'
+      content_text = '你可以先去别的地方逛逛！'
     else if state is 'talk'
       content_text = '赶快发布一个,让别人膜拜你的品位吧!'
     else
       if parseInt(window.user_follow_count) > 0
-        content_text = '关注以下地球人，看看他们的动态吧！'
+#        content_text = '关注以下地球人，看看他们的动态吧！'
+        content_text = '你可以先去别的地方逛逛！'
       else
-        content_text = '不如从下面这堆潮流达人开始吧!'
+#        content_text = '不如从下面这堆潮流达人开始吧!'
+        content_text = '你可以先去别的地方逛逛！'
   else
     who = 'Ta'
+    content_text = '你可以先去别的地方逛逛！'
 
   if _dashboard_show_product_collocation is 1
-    type = '单品'
+    type = '潮品'
   else
     type = '搭配'
 #    if state is 'fav'
@@ -501,7 +530,7 @@ init_dashboard_empty_message = () ->
 #    else if state is 'talk'
 #      content_text = ''
 #    else
-  content_text = '你可以先去别的地方逛逛！'
+
 
   if _dashboard_list_by_search
 #    txtEmptytitle.html(['没有找到任何',type].join(''))
@@ -524,7 +553,10 @@ init_dashboard_empty_message = () ->
       txtEmptycontent.html(content_text)
       if _dashboard_show_me
         btnReturnhome.hide()
-        btnPublish.show()
+        if _is_mobile
+          btnPublish.hide()
+        else
+          btnPublish.show()
         btnClearsearch.hide()
       else
         btnReturnhome.show()
