@@ -27,10 +27,12 @@ else
     .menu-myspage
       i.icon.icon-hand
       a(href="/u/dashboard.html") 我的潮品
+    //{/if}
     .menu-flashbuy
       i.icon.icon-flashbuy
       a(href="http://www.1626buy.cn/flow/") 购物车
-      iframe.menu-flashbuy-value(src="http://192.168.0.231/api/get_cart.php?token=1626-cart-number" scrolling="no")
+      iframe.menu-flashbuy-value(src="http://192.168.0.231/api/get_cart.php?token=1626-cart-number&color=222226&size=20px" scrolling="no" name="cartCount")
+    //{if $_FANWE['uid'] > 0}
     .menu-message
       i.icon.icon-news
       a(href="/messagetip/") 消息
@@ -49,4 +51,3 @@ else
     .empty
 
 //.menu-bottom-bar
-

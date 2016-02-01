@@ -1,9 +1,11 @@
 @import "../../../public_inc/source/less/imports";
 
 .global-footer {
-  margin-top: 70px;
+  @media @pc {
+    margin-top: 70px;
+  }
   @media @mobile {
-
+    margin-top: 40px;
   }
 }
 .footer__mag {
@@ -28,15 +30,23 @@
       position: absolute;
       bottom: 0;
       left: 0;
+      @media @mobile {
+        overflow: hidden;
+        width: 105px;
+        height: 105px;
+        left: 10px;
+      }
       .center-wrap{
         @media @mobile {
           padding: 0 10px;
         }
       }
       img {
-        width: 100%;
+        @media @pc {
+          width: 100%;
+        }
         @media @mobile {
-          display: none;
+          height: 100%;
         }
       }
     }
@@ -63,11 +73,17 @@
       right: 10px;
     }
     span {
-      font-size: @font-size-l;
+      @media @pc {
+        font-size: @font-size-l;
+        margin-right: 10px;
+      }
+      @media @mobile {
+        font-size: @font-size-s;
+        margin-right: 5px;
+      }
       font-weight: bold;
       position: relative;
       top: 2px;
-      margin-right: 10px;
     }
     a {
 
