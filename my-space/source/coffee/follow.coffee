@@ -118,7 +118,7 @@ query_follow_Data = () ->
       url: SITE_URL + url
       type: method
       data: {'m': 'u', 'a': action, ajax: 1, 'count': follow_count, 'name': encodeURIComponent(keyword) ,'page': page ,'limit': _follow_limit , 'hid': window.uid}
-      cache: false
+      cache: true
       dataType: "json"
       success: (result)->
         window.follow_count = result.count
@@ -142,9 +142,11 @@ query_follow_Data = () ->
         else
           btn_ShowMore.html('已经全部看完了').removeClass('loading')
           _follow_has_more = false
-      error: (result)->
-        if result.status isnt 0
+      error: (xhr,status,error)->
+        if status isnt 0
           alert('服务器君跑到外太空去了,刷新试试看!')
+        else
+          alert(error)
         _follow_is_loading = false
         btn_ShowMore.html('我要看更多').removeClass('loading')
     }

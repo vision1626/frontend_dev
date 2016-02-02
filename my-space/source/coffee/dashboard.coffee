@@ -234,7 +234,7 @@ query_dashboard_data = () ->
       url: SITE_URL + 'services/service.php'
       type: "GET"
       data: {'m': 'u', 'a': action, ajax: 1, 'page': page, 'count': count, 'name': encodeURIComponent(keyword), 'type': _dashboard_show_product_collocation, 'sort': sort,'limit': _dashboard_limit, 'hid': window.uid}
-      cache: false
+      cache: true
       dataType: "json"
       success: (result,status,response)->
         window.dashboard_count = result.count
@@ -255,10 +255,11 @@ query_dashboard_data = () ->
         else
           btn_ShowMore.html('已经全部看完了').removeClass('loading')
           _dashboard_has_more = false
-      error: (result)->
-        if result.status isnt 0
-#          $('#list-loading').html(result.responseText)
+      error: (xhr,status,error)->
+        if status isnt 0
           alert('服务器君跑到外太空去了,刷新试试看!')
+        else
+          alert(error)
         _dashboard_is_loading = false
         btn_ShowMore.html('我要看更多').removeClass('loading')
     }
@@ -275,14 +276,16 @@ query_dashboard_recommand_data = () ->
     url: SITE_URL + 'services/service.php'
     type: "GET"
     data: {'m': 'u', 'a': action, ajax: 1, 'page': 1, 'count': '', 'limit': recommand_limit, 'follow',0}
-    cache: false
+    cache: true
     dataType: "json"
     success: (result)->
       if result.data
         gen_dashboard_recommand_item(result.data)
-    error: (result)->
-      if result.status isnt 0
+    error: (xhr,status,error)->
+      if status isnt 0
         alert('服务器君跑到外太空去了,刷新试试看!')
+      else
+        alert(error)
   }
 
 gen_dashboard_item = () ->
@@ -410,11 +413,11 @@ gen_dashboard_item = () ->
     if _dashboard_show_me and !_dashboard_list_by_search
       if state is 'fav' or state is 'dashboard'
         query_dashboard_recommand_data()
-
-  if _dashboard_show_me
-    publish = init_form_publish()
-    publish.clean()
-    publish.form_publish_binding()
+#todo: 更新后报错: 'form_publish_binding is not a function' ,By Kenny 20160202
+#  if _dashboard_show_me
+#    publish = init_form_publish()
+#    publish.clean()
+#    publish.form_publish_binding()
   listloading.hide()
   filter.show()
   _dashboard_is_loading = false
@@ -606,17 +609,16 @@ do_like = (obj) ->
     dataType: "json"
     success: (result)->
       after_like(me,dtype,result,job)
-    error: (result)->
+    error: (xhr,status,error)->
       _dashboard_doing_like = false
-      if result.status isnt 0
+      if status isnt 0
         alert('服务器君跑到外太空去了,刷新试试看!')
+      else
+        alert(error)
 
   }
 
 after_like = (me,dtype,result,job) ->
-  count = 0
-  ed = 0
-  my_id = me.attr('sid')
   if result.status isnt 3
     if dtype is 'd'
       if result.status is 1
@@ -634,40 +636,51 @@ after_like = (me,dtype,result,job) ->
         if result.status is 1
           ed = 0
           count = -1
-    refresh_like(my_id,ed,count)
+    refresh_like(me.attr('sid'),ed,count)
   else
     alert('自恋是不对滴,不可以哟! 凸（≧∇≦）凸')
     _dashboard_doing_like = false
 
 refresh_like = (sid,ed,count) ->
-  for ld in window.dashboard_list_data
-    if parseInt(ld.did) is parseInt(sid)
-      ld.is_fav = ed
-      ld.like_count += count
-
   top_count = $('.content__actions').find('.actions-fav b')
   harting_img_url = SITE_URL + window.image_path + 'icon-heart-ing.gif'
 
-  big_list = $('#big_img')
-  small_list = $('#small_img')
+  if window.dashboard_list_string isnt ''
+    lm = true
+    for ld in window.dashboard_list_data
+      if parseInt(ld.did) is parseInt(sid)
+        ld.is_fav = ed
+        ld.like_count += count
 
-  big_button = big_list.find('div.btn_like[sid=' + sid + ']')
-  small_button = small_list.find('div.btn_like[sid=' + sid + ']')
+    big_list = $('#big_img')
+    small_list = $('#small_img')
 
-  big_icon = big_button.find('.icon')
-  small_icon = small_button.find('.icon')
+    big_button = big_list.find('div.btn_like[sid=' + sid + ']')
+    small_button = small_list.find('div.btn_like[sid=' + sid + ']')
 
-  big_count = big_button.find('.like_count')
-  small_count = small_button.parent().parent().find('.like_count')
+    big_icon = big_button.find('.icon')
+    small_icon = small_button.find('.icon')
 
-  big_harting = big_button.find('.harting')
-  small_harting = small_button.find('.harting')
+    big_count = big_button.find('.like_count')
+    small_count = small_button.parent().parent().find('.like_count')
 
-  big_count.html(parseInt(big_count.html()) + count)
-  small_count.html(parseInt(small_count.html()) + count)
+    big_harting = big_button.find('.harting')
+    small_harting = small_button.find('.harting')
 
-  big_button.attr('ed',ed)
-  small_button.attr('ed',ed)
+    big_count.html(parseInt(big_count.html()) + count)
+    small_count.html(parseInt(small_count.html()) + count)
+
+    big_button.attr('ed',ed)
+    small_button.attr('ed',ed)
+  else
+    lm = false
+    recommand = $('#recommand')
+    big_button = recommand.find('div.btn_like[sid=' + sid + ']')
+    big_icon = big_button.find('.icon')
+    big_count = big_button.find('.like_count')
+    big_harting = big_button.find('.harting')
+    big_count.html(parseInt(big_count.html()) + count)
+    big_button.attr('ed',ed)
 
   if _dashboard_show_me
     top_count.html(parseInt(top_count.html()) + count)
@@ -677,23 +690,32 @@ refresh_like = (sid,ed,count) ->
     else
       timer = 1500
 
-    if _dashboard_show_big
-      big_harting.attr('src',harting_img_url)
-      big_harting.show()
-    else
-      if !_is_mobile
-        small_harting.attr('src',harting_img_url)
-        small_harting.show()
+    if lm
+      if _dashboard_show_big
+        big_harting.attr('src',harting_img_url)
+        big_harting.show()
+      else
+        if !_is_mobile
+          small_harting.attr('src',harting_img_url)
+          small_harting.show()
 
-    setTimeout ->
-      big_harting.attr('src','')
-      big_harting.hide()
-      small_harting.attr('src','')
-      small_harting.hide()
-      big_icon.removeClass('icon-heart').addClass('icon-hearted')
-      small_icon.removeClass('icon-heart').addClass('icon-hearted')
-      _dashboard_doing_like = false
-    , timer
+      setTimeout ->
+        big_harting.attr('src','')
+        big_harting.hide()
+        small_harting.attr('src','')
+        small_harting.hide()
+        big_icon.removeClass('icon-heart').addClass('icon-hearted')
+        small_icon.removeClass('icon-heart').addClass('icon-hearted')
+        _dashboard_doing_like = false
+      , timer
+    else
+      big_harting.attr('src',harting_img_url)
+      setTimeout ->
+        big_harting.attr('src','')
+        big_harting.hide()
+        big_icon.removeClass('icon-heart').addClass('icon-hearted')
+        _dashboard_doing_like = false
+      , timer
   else
     big_icon.removeClass('icon-hearted').addClass('icon-heart')
     small_icon.removeClass('icon-hearted').addClass('icon-heart')
