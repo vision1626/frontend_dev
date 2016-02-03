@@ -670,4 +670,5 @@ format_count = (count) ->
   else
     count
 
-
+calculateTimes = (in_time) ->
+  ((new Date) - in_time) / (1000 * 60)

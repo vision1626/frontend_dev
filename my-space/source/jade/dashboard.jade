@@ -48,21 +48,27 @@ if !production
       window.product_count = "{$share_count}";
       window.collocation_count = "{$dapei_count}";
       window.dashboard_list_data = $.parseJSON(MOCK_DATA);
+
+      window.recommand_p_data = {};
+      window.recommand_c_data = {};
+      window.recommand_u_data = {};
       init_dashboard();
     });
 else
   script.
     $(document).ready(function () {
+      window.image_path = '#{image_path}';
+
       window.user_photos_count = "{$_FANWE['user']['photos']}";
       window.user_mail_status = "{$_FANWE['user']['email_status']}";
       window.user_mobile = "{$_FANWE['user']['mobile']}";
       window.user_follow_count = "$home_user['follows']";
-      window.dashboard_count = "{$count}";
-      window.product_count = "{$share_count}";
-      window.collocation_count = "{$dapei_count}";
-      window.dashboard_list_string = '{$list_json}'
-      window.dashboard_list_data = {};
-      window.image_path = '#{image_path}'
+
+      window.pre_data_string = '{$list_json}';
+      window.pre_d_count = "{$count}";
+      window.pre_p_count = "{$share_count}";
+      window.pre_c_count = "{$dapei_count}";
+
       init_dashboard();
     });
 
