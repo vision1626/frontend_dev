@@ -308,8 +308,7 @@ query_dashboard_data = () ->
           else
             if state is 'fav'
               if _dashboard_show_product_collocation is 2
-#                _fav_c_data_count = parseInt(result.dapei_count)
-                _fav_c_data_count = parseInt(result.count)
+                _fav_c_data_count = parseInt(result.dapei_count)
                 if _fav_c_data and _fav_c_data.length > 0 and page > 1
                   for d in result.data
                     _fav_c_data.push(d)
@@ -321,8 +320,7 @@ query_dashboard_data = () ->
                   _fav_c_data_more = false
                 _fav_c_cache_time = new Date
               else
-#                _fav_p_data_count = parseInt(result.share_count)
-                _fav_p_data_count = parseInt(result.count)
+                _fav_p_data_count = parseInt(result.share_count)
                 if _fav_p_data and _fav_p_data.length > 0 and page > 1
                   for d in result.data
                     _fav_p_data.push(d)
@@ -335,10 +333,7 @@ query_dashboard_data = () ->
                 _fav_p_cache_time = new Date
             else if state is 'talk'
               if _dashboard_show_product_collocation is 2
-                if page is 1 #todo:权宜之计,count乱晒龙 by Kenny 20160203
-                  _publish_c_data_count = parseInt(result.dapei_count)
-                else
-                _publish_c_data_count = parseInt(result.count)
+                _publish_c_data_count = parseInt(result.dapei_count)
                 if _publish_c_data and _publish_c_data.length > 0 and page > 1
                   for d in result.data
                     _publish_c_data.push(d)
@@ -350,10 +345,7 @@ query_dashboard_data = () ->
                   _publish_c_data_more = false
                 _publish_c_cache_time = new Date
               else
-                if page is 1 #todo:权宜之计,count乱晒龙 by Kenny 20160203
-                  _publish_p_data_count = parseInt(result.share_count)
-                else
-                 _publish_p_data_count = parseInt(result.count)
+                _publish_p_data_count = parseInt(result.share_count)
                 if _publish_p_data and _publish_p_data.length > 0 and page > 1
                   for d in result.data
                     _publish_p_data.push(d)

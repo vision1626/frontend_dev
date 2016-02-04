@@ -1,4 +1,6 @@
 _footer_qrchde_showout = false
+#缓存时间,单位:分钟
+_adv_cache_days = 1
 
 init_global_footer = (friend_links)->
   footer_mag = $('.global-footer').find('.footer__mag')
@@ -17,28 +19,38 @@ init_global_footer = (friend_links)->
       friend_links_ele.append("<a href='#{url}'>#{name}</a>&nbsp;&nbsp;|&nbsp;&nbsp;")
 
   getMagCover = ->
-    cover_src = ''
-    number = ''
-    buy_link = ''
-    $.ajax({
-      url: '/services/service.php?m=adv&a=get&id=30&limit=1',
-      type: 'post',
-      dataType: 'json',
-      data: {},
-      success: (result)->
-        if result.status is 1
-          mag_data = result.data.list[0]
-          cover_src = mag_data.code
-          number = mag_data.title
-          buy_link = mag_data.url
-          $('.global-footer').find('.mag-cover img').attr 'src', cover_src
-          $('.global-footer').find('.mag-buy strong').text number
-          footer_mag.attr 'data-link', buy_link
-      error: (result)->
-        alert('ft-errr: ' + result)
-    })
+#    cover_src = ''
+#    number = ''
+#    buy_link = ''
+    if !($.cookie('1626MsgAdv'))
+      $.ajax({
+        url: '/services/service.php?m=adv&a=get&id=30&limit=1',
+        type: 'post',
+        dataType: 'json',
+        data: {},
+        success: (result,status,response)->
+          if result.status is 1
+            mag_all_data = result
+            $.cookie('1626MsgAdv', response.responseText ,{expires:_adv_cache_days})
+            afterGetMagCover(mag_all_data)
+        error: (result)->
+          alert('ft-errr: ' + result)
+      })
+    else
+      mag_data = $.parseJSON(decodeURIComponent($.cookie('1626MsgAdv')))
+      afterGetMagCover(mag_data)
 
   getMagCover()
+
+afterGetMagCover = (in_data) ->
+  mag_data = in_data.data.list[0]
+  footer_mag = $('.global-footer').find('.footer__mag')
+  cover_src = mag_data.code
+  number = mag_data.title
+  buy_link = mag_data.url
+  $('.global-footer').find('.mag-cover img').attr 'src', cover_src
+  $('.global-footer').find('.mag-buy strong').text number
+  footer_mag.attr 'data-link', buy_link
 
 $(document).on 'click','.footer_qrcode', (e) ->
 #  e.preventDefault()

@@ -11,10 +11,6 @@ _follow_list_by_search = false
 _follow_search_keyword = ''
 
 init_follow = ->
-#  followlist = $('#follow-list')
-#  listempty = $('#list-empty')
-#  listloading = $('#list-loading')
-#  pagiation = $('#pagiation')
   if $(window).width() <= 680
     _is_mobile = true
     $('a').attr('target','')
@@ -38,32 +34,6 @@ init_follow = ->
   else
     filter.hide()
   gen_follow_Item()
-
-#  listloading.show()
-#  if window.follow_list_data
-##    if window.follow_list_data.length > _follow_limit
-##      _follow_end = _follow_step
-##    else
-##      _follow_end = window.follow_list_data.length
-#    _follow_is_loading = true
-##    for ld,i in window.follow_list_data
-##      if _follow_start < _follow_end
-##        followlist.append(followItem_Generater(ld,i))
-##        _follow_start++
-#    gen_follow_Item()
-#    _follow_is_loading = false
-#    listloading.hide()
-#    followlist.show()
-#    if parseInt(window.follow_count) > _follow_limit
-#      pagiation.show()
-#      _follow_has_more = true
-#    else
-#      pagiation.hide()
-#      _follow_has_more = false
-#  else
-#    listloading.hide()
-#    listempty.show()
-#    pagiation.hide()
 
 $(document).on 'click','#folloe-show-more', ->
   query_follow_Data()
