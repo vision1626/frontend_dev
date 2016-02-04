@@ -7,9 +7,11 @@ init_u_header = ->
   $db = $('.actions-db')
   $pub = $('.actions-pub')
   $follow = $('.relation-follow')
-  $follow_m = $('.profile__relation-follow')
+  $follow_m = $('.relation-follow-m')
+  $follow_m_t = $('.profile__relation-follow')
   $fans = $('.relation-fans')
-  $fans_m = $('.profile__relation-fans')
+  $fans_m = $('.relation-fans-m')
+  $fans_m_t = $('.profile__relation-fans')
   $slide_tab_bg = $('.js-slide-bg')
 
   isInActions = ->
@@ -52,6 +54,8 @@ init_u_header = ->
         changeState(action)
         if _dashboard_is_loading
           _dashboard_ajax_process.abort()
+        if _dashboard_recommand_is_loading
+          _dashboard_recommand_ajax_process.abort()
         init_dashboard_data()
     else
       window.location.pathname = '/u/' + action + '-' + uid + '.html'
@@ -110,15 +114,24 @@ init_u_header = ->
       user_relation_async('follow')
   $fans_m.on 'click', ->
     if giveupEditing()
-      $('.profile__relationship').find('div').removeClass('current')
       $(this).addClass('current')
+      slideToCurrent.apply(this)
       user_relation_async('fans')
   $follow_m.on 'click', ->
     if giveupEditing()
-      $('.profile__relationship').find('div').removeClass('current')
       $(this).addClass('current')
+      slideToCurrent.apply(this)
       user_relation_async('follow')
-
+  $fans_m_t.on 'click', ->
+    if giveupEditing()
+      $fans_m.parent().parent().find('li').removeClass('current')
+      $fans_m.addClass('current')
+      user_relation_async('fans')
+  $follow_m_t.on 'click', ->
+    if giveupEditing()
+      $follow_m.parent().parent().find('li').removeClass('current')
+      $follow_m.addClass('current')
+      user_relation_async('follow')
 
   $(window).on 'resize', ->
     if isInCurrentAction('fav')

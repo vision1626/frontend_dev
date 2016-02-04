@@ -10,6 +10,20 @@ _follow_ajax_process = null
 _follow_list_by_search = false
 _follow_search_keyword = ''
 
+_follow_data = {}
+_fans_data = {}
+_follow_recommand_data = {}
+
+_follow_data_count = 0
+_fans_data_count = 0
+
+_follow_data_more = false
+_fans_data_more = false
+
+_follow_cache_time = null
+_fans_cache_time = null
+_follow_recommand_cache_time = null
+
 init_follow = ->
   if $(window).width() <= 680
     _is_mobile = true
@@ -113,10 +127,8 @@ query_follow_Data = () ->
           btn_ShowMore.html('已经全部看完了').removeClass('loading')
           _follow_has_more = false
       error: (xhr,status,error)->
-        if status isnt 0
+        if status is 502
           alert('服务器君跑到外太空去了,刷新试试看!')
-        else
-          alert(error)
         _follow_is_loading = false
         btn_ShowMore.html('我要看更多').removeClass('loading')
     }
