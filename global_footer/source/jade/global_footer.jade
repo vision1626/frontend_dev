@@ -26,14 +26,23 @@ footer.global-footer
         label (点击或扫一扫)
         .footer_qrcodes
           .qrcode_app
-            span APP下载
-            img.footer_qrcode(src='#{image_path}/qr-app.jpg')
+            a(href='http://www.1626.com/downloads/andriod')
+              //img.footer_qrcode(src='#{image_path}/qr-app.jpg')
+              .icon_app
+                i.icon.icon-1626app
+              span APP下载
           .qrcode_wechat
-            span 微信公众号
-            img.footer_qrcode(src='#{image_path}/qr-wechat.jpg')
+            a(href='http://weixin.qq.com/r/_nXM1GjENjVJrSy39yDo')
+              //img.footer_qrcode(src='#{image_path}/qr-wechat.jpg')
+              .icon_wechat
+                i.icon.icon-wechat
+              span 微信公众号
           .qrcode_weibo
-            span 新浪微博
-            img.footer_qrcode(src='#{image_path}/qr-weibo.jpg')
+            a(href='http://weibo.com/city1626?is_all=1')
+              //img.footer_qrcode(src='#{image_path}/qr-weibo.jpg')
+              .icon_weibo
+                i.icon.icon-weibo
+              span 新浪微博
       ul.site-links
         li.links_help
           h4 帮助中心
