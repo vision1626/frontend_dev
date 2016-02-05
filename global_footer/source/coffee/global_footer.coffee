@@ -22,7 +22,7 @@ init_global_footer = (friend_links)->
     buy_link = ''
     $.ajax({
       url: '/services/service.php?m=adv&a=get&id=30&limit=1',
-      type: 'post',
+      type: 'GET',
       dataType: 'json',
       data: {},
       success: (result)->
