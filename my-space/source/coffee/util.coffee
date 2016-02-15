@@ -579,6 +579,9 @@ fixMainnav = ->
     $('.main-nav-container,.main-nav').addClass('fixed')
     if !_is_mobile
       $('.scroll-to-top').addClass('fixed')
+    else
+      if state is 'fans' or state is 'follow'
+        $('.mobile-view-change').hide()
 
   else
     $('.main-nav-container,.main-nav').removeClass('fixed')
@@ -599,7 +602,6 @@ excite_Anim = (obj,animName) ->
   $(obj).addClass(animName + ' animated').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', () ->
     obj.removeClass(animName).removeClass('animated')
   );
-
 
 $(document).on 'blur','.list-search', ->
   set_clean_list_search($(this))
