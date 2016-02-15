@@ -181,5 +181,7 @@ init_u_header = ->
 
   if $(window).width() <= 680 and myid isnt uid
     $('.content__actions').find('label').show()
+    $('.content__relationship').find('label').show()
   else
     $('.content__actions').find('label').hide()
+    $('.content__relationship').find('label').hide()
