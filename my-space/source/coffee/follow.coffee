@@ -10,11 +10,21 @@ _follow_ajax_process = null
 _follow_list_by_search = false
 _follow_search_keyword = ''
 
+_follow_data = {}
+_fans_data = {}
+_follow_recommand_data = {}
+
+_follow_data_count = 0
+_fans_data_count = 0
+
+_follow_data_more = false
+_fans_data_more = false
+
+_follow_cache_time = null
+_fans_cache_time = null
+_follow_recommand_cache_time = null
+
 init_follow = ->
-#  followlist = $('#follow-list')
-#  listempty = $('#list-empty')
-#  listloading = $('#list-loading')
-#  pagiation = $('#pagiation')
   if $(window).width() <= 680
     _is_mobile = true
     $('a').attr('target','')
@@ -38,32 +48,6 @@ init_follow = ->
   else
     filter.hide()
   gen_follow_Item()
-
-#  listloading.show()
-#  if window.follow_list_data
-##    if window.follow_list_data.length > _follow_limit
-##      _follow_end = _follow_step
-##    else
-##      _follow_end = window.follow_list_data.length
-#    _follow_is_loading = true
-##    for ld,i in window.follow_list_data
-##      if _follow_start < _follow_end
-##        followlist.append(followItem_Generater(ld,i))
-##        _follow_start++
-#    gen_follow_Item()
-#    _follow_is_loading = false
-#    listloading.hide()
-#    followlist.show()
-#    if parseInt(window.follow_count) > _follow_limit
-#      pagiation.show()
-#      _follow_has_more = true
-#    else
-#      pagiation.hide()
-#      _follow_has_more = false
-#  else
-#    listloading.hide()
-#    listempty.show()
-#    pagiation.hide()
 
 $(document).on 'click','#folloe-show-more', ->
   query_follow_Data()
@@ -118,7 +102,7 @@ query_follow_Data = () ->
       url: SITE_URL + url
       type: method
       data: {'m': 'u', 'a': action, ajax: 1, 'count': follow_count, 'name': encodeURIComponent(keyword) ,'page': page ,'limit': _follow_limit , 'hid': window.uid}
-      cache: false
+      cache: true
       dataType: "json"
       success: (result)->
         window.follow_count = result.count
@@ -142,8 +126,8 @@ query_follow_Data = () ->
         else
           btn_ShowMore.html('已经全部看完了').removeClass('loading')
           _follow_has_more = false
-      error: (result)->
-        if result.status isnt 0
+      error: (xhr,status,error)->
+        if status is 502
           alert('服务器君跑到外太空去了,刷新试试看!')
         _follow_is_loading = false
         btn_ShowMore.html('我要看更多').removeClass('loading')

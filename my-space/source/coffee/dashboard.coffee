@@ -1,4 +1,5 @@
 _dashboard_is_loading = false
+_dashboard_recommand_is_loading = false
 _dashboard_limit = 28
 _dashboard_start_b = 0
 _dashboard_end_b = 0
@@ -16,28 +17,61 @@ _user_mail_vrification = true
 _dashboard_show_me = false
 _dashboard_doing_like = false
 _dashboard_ajax_process = null
+_dashboard_recommand_ajax_process = null
 _dashboard_publish_first_gen_b = false
 _dashboard_publish_first_gen_s = false
 _dashboard_list_by_search = false
+_dashboard_list_by_sort = false
 _dashboard_search_keyword = ''
 _is_mobile = false
 _dashboard_publish_alert_showed = 0
 
+_dashboard_data = {}
+_fav_p_data = {}
+_fav_c_data = {}
+_publish_p_data = {}
+_publish_c_data = {}
+_seaarch_data = {}
+
+_dashboard_data_count = 0
+_fav_p_data_count = 0
+_fav_c_data_count = 0
+_publish_p_data_count = 0
+_publish_c_data_count = 0
+_search_data_count = 0
+
+_dashboard_data_more = false
+_fav_p_data_more = false
+_fav_c_data_more = false
+_publish_p_data_more = false
+_publish_c_data_more = false
+_search_data_more = false
+
+_recommand_p_data = {}
+_recommand_c_data = {}
+_recommand_u_data = {}
+
+_dashboard_cache_time = null
+_fav_p_cache_time = null
+_fav_c_cache_time = null
+_publish_p_cache_time = null
+_publish_c_cache_time = null
+_dashboard_recommand_p_cache_time = null
+_dashboard_recommand_c_cache_time = null
+_dashboard_recommand_u_cache_time = null
+#缓存时间,单位:分钟
+_cache_times = 1
+_recommand_cache_times = 5
+
 #SITE_URL = 'http://192.168.0.230/'
 
 init_dashboard = ->
-#  biglist = $('#big_img')
-#  listempty = $('#list-empty')
-#  listloading = $('#list-loading')
-#  pagiation = $('#item-pagiation')
+  filter = $('#list-filter')
+
   if $(window).width() <= 680
     _is_mobile = true
     $('a').attr('target','')
 
-  filter = $('#list-filter')
-
-#  if window.dashboard_count is ''
-#    window.dashboard_count = 0
   if myid is uid
     _dashboard_show_me = true
   else
@@ -47,13 +81,35 @@ init_dashboard = ->
     _dashboard_publish_first_gen_b = true
     _dashboard_publish_first_gen_s = true
 
-  if window.dashboard_list_string isnt ''
-    window.dashboard_list_data = $.parseJSON(window.dashboard_list_string)
+  if window.pre_data_string isnt ''
+    if parseInt(window.pre_p_count) > 0 then _fav_p_data_count = parseInt(window.pre_p_count) else _fav_p_data_count = 0
+    if parseInt(window.pre_c_count) > 0 then _fav_c_data_count = parseInt(window.pre_c_count) else _fav_c_data_count = 0
+    if state is 'fav'
+      if _dashboard_show_product_collocation is 2
+        _fav_c_data = $.parseJSON(window.pre_data_string)
+        if _fav_c_data_count > _dashboard_limit then _fav_c_data_more = true
+        _fav_c_cache_time = new Date
+      else
+        _fav_p_data = $.parseJSON(window.pre_data_string)
+        if _fav_p_data_count > _dashboard_limit then _fav_p_data_more = true
+        _fav_p_cache_time = new Date
+    else if state is 'talk'
+      if parseInt(window.pre_p_count) > 0 then _publish_p_data_count = parseInt(window.pre_p_count) else _publish_p_data_count = 0
+      if parseInt(window.pre_c_count) > 0 then _publish_c_data_count = parseInt(window.pre_c_count) else _publish_c_data_count = 0
+      if _dashboard_show_product_collocation is 2
+        _publish_c_data = $.parseJSON(window.pre_data_string)
+        if _publish_c_data_count > _dashboard_limit then _publish_c_data_more = true
+        _publish_c_cache_time = new Date
+      else
+        _publish_p_data = $.parseJSON(window.pre_data_string)
+        if _publish_p_data_count > _dashboard_limit then _publish_p_data_more = true
+        _publish_p_cache_time = new Date
+    else
+      if parseInt(window.pre_d_count) > 0 then _dashboard_data_count = parseInt(window.pre_d_count) else _dashboard_data_count = 0
+      _dashboard_data = $.parseJSON(window.pre_data_string)
+      if _dashboard_data_count > _dashboard_limit then _dashboard_data_more = true
+      _dashboard_cache_time = new Date
 
-  if window.product_count is ''
-    window.product_count = '0'
-  if window.collocation_count is ''
-    window.collocation_count = '0'
 
   if !parseInt($.cookie('publistAlertShow'))
     $.cookie('publistAlertShow',0,{expires:7})
@@ -61,31 +117,6 @@ init_dashboard = ->
   filter.html(filter_generater())
   gen_dashboard_item()
   init_dashboard_empty_message()
-#  listloading.show()
-#  if window.dashboard_list_data
-##    _dashboard_end_b = _dashboard_step_b
-#    _dashboard_is_loading = true
-##    for ld,i in window.dashboard_list_data
-##      if _dashboard_start_b < _dashboard_end_b
-##        biglist.append(big_DashboardItem_Generater(ld,i))
-##        _dashboard_start_b++
-#    gen_dashboard_item()
-#    _dashboard_is_loading = false
-#    listloading.hide()
-#    biglist.show()
-#
-#    if parseInt(window.dashboard_count) > _dashboard_limit
-#      pagiation.show()
-#      _dashboard_has_more = true
-#    else
-#      pagiation.hide()
-#      _dashboard_has_more = false
-#  else
-#    listloading.hide()
-#    listempty.show()
-#    pagiation.hide()
-#    filter.hide()
-#    _dashboard_has_more = false
 
 $(window).bind 'scroll', (e)->
   parallax($('.profile-container'))
@@ -114,6 +145,7 @@ $(document).on 'click','.show-new_list', ->
     $(this).addClass('current')
     $('.show-hot_list').removeClass('current')
     _dashboard_show_new_hot = 'new'
+    _dashboard_list_by_sort = true
     init_dashboard_data()
 
 $(document).on 'click','.show-hot_list', ->
@@ -121,21 +153,22 @@ $(document).on 'click','.show-hot_list', ->
     $(this).addClass('current')
     $('.show-new_list').removeClass('current')
     _dashboard_show_new_hot = 'hot'
+    _dashboard_list_by_sort = true
     init_dashboard_data()
 
 $(document).on 'touchend','.mobile-view-change', (e) ->
   e.preventDefault()
   me = $(this)
   if _dashboard_show_big
-    me.removeClass('icon-grid_view')
-    me.addClass('icon-list_view')
+    me.removeClass('icon-list_view')
+    me.addClass('icon-one-col ')
     _dashboard_show_big = false
     gen_dashboard_item()
     $('dl#big_img').hide()
     $('dl#small_img').show()
   else
-    me.addClass('icon-grid_view')
-    me.removeClass('icon-list_view')
+    me.addClass('icon-list_view')
+    me.removeClass('icon-one-col ')
     _dashboard_show_big = true
     gen_dashboard_item()
     $('dl#big_img').show()
@@ -187,16 +220,91 @@ $(document).on 'touchend','div.close_alert', (e) ->
 
 query_dashboard_data = () ->
   btn_ShowMore = $(document).find('#dashboard-show-more')
-
+  if _dashboard_is_loading
+    _dashboard_ajax_process.abort()
+  if _dashboard_recommand_is_loading
+    _dashboard_recommand_ajax_process.abort()
   if !_dashboard_is_loading and _dashboard_has_more
-    _dashboard_is_loading = true
+    refresh_data = false
 
-    if window.dashboard_list_data
-      if window.dashboard_list_data isnt null
-        if window.dashboard_list_data.length > 0
-          if _dashboard_end_b > _dashboard_end_s
-            page = Math.round((_dashboard_end_b/_dashboard_limit))+1
-          else if _dashboard_end_s > _dashboard_end_b
+    if _dashboard_list_by_search
+      refresh_data = true
+
+    if _dashboard_list_by_sort
+      _dashboard_list_by_sort = false
+      refresh_data = true
+
+    if state is 'fav' #喜欢
+      action = 'get_fav_ajax'
+      keyword = _dashboard_search_keyword
+      sort = 'new'
+      if _dashboard_show_product_collocation is 1
+        count = _fav_p_data_count
+        list_data = _fav_p_data
+        if count > 0
+          if !list_data
+            refresh_data = true
+          else
+            if list_data.length > _dashboard_limit
+              refresh_data = true
+        if calculateTimes(_fav_p_cache_time) >= _cache_times
+          refresh_data = true
+      else
+        count = _fav_c_data_count
+        list_data = _fav_c_data
+        if count > 0
+          if !list_data
+            refresh_data = true
+          else
+            if list_data.length > _dashboard_limit
+              refresh_data = true
+        if calculateTimes(_fav_c_cache_time) >= _cache_times
+          refresh_data = true
+    else if state is 'talk' #发布页
+      action = 'get_publish_ajax'
+      keyword = _dashboard_search_keyword
+      sort = _dashboard_show_new_hot
+      if _dashboard_show_product_collocation is 1
+        count = _publish_p_data_count
+        list_data = _publish_p_data
+        if count > 0
+          if !list_data
+            refresh_data = true
+          else
+            if list_data.length > _dashboard_limit
+              refresh_data = true
+        if calculateTimes(_publish_p_cache_time) >= _cache_times
+          refresh_data = true
+      else
+        count = _publish_c_data_count
+        list_data = _publish_c_data
+        if count > 0
+          if !list_data
+            refresh_data = true
+          else
+            if list_data.length > _dashboard_limit
+              refresh_data = true
+        if calculateTimes(_publish_c_cache_time) >= _cache_times
+          refresh_data = true
+    else #动态
+      action = 'get_dashboard_ajax'
+      keyword = ''
+      sort = 'new'
+      count = _dashboard_data_count
+      list_data = _dashboard_data
+      if count > 0
+        if !list_data
+          refresh_data = true
+        else
+          if list_data.length > _dashboard_limit
+            refresh_data = true
+      if calculateTimes(_dashboard_cache_time) >= _cache_times
+        refresh_data = true
+
+    if list_data
+      if list_data isnt null
+        if list_data.length > 0
+          if _dashboard_end_s > _dashboard_end_b
             page = Math.round((_dashboard_end_s/_dashboard_limit))+1
           else
             page = Math.round((_dashboard_end_b/_dashboard_limit))+1
@@ -207,83 +315,162 @@ query_dashboard_data = () ->
     else
       page = 1
 
-    if state is 'fav' #喜欢
-      action = 'get_fav_ajax'
-      keyword = _dashboard_search_keyword
-      sort = 'new'
-      if _dashboard_show_product_collocation is 1
-        count = window.product_count
-      else
-        count = window.collocation_count
-    else if state is 'talk' #发布页
-      action = 'get_publish_ajax'
-      keyword = _dashboard_search_keyword
-      sort = _dashboard_show_new_hot
-      if _dashboard_show_product_collocation is 1
-        count = window.product_count
-      else
-        count = window.collocation_count
-    else #动态
-      action = 'get_dashboard_ajax'
-      keyword = ''
-      sort = 'new'
-      count = window.dashboard_count
-
-    btn_ShowMore.html('正在努力加载中...').addClass('loading')
-    _dashboard_ajax_process = $.ajax {
-      url: SITE_URL + 'services/service.php'
-      type: "GET"
-      data: {'m': 'u', 'a': action, ajax: 1, 'page': page, 'count': count, 'name': encodeURIComponent(keyword), 'type': _dashboard_show_product_collocation, 'sort': sort,'limit': _dashboard_limit, 'hid': window.uid}
-      cache: false
-      dataType: "json"
-      success: (result,status,response)->
-        window.dashboard_count = result.count
-        window.product_count = result.share_count
-        window.collocation_count = result.dapei_count
-        if result.data
-          if window.dashboard_list_data and window.dashboard_list_data.length > 0
-            for d in result.data
-              window.dashboard_list_data.push(d)
+    if refresh_data or page > 1
+      _dashboard_is_loading = true
+      btn_ShowMore.html('正在努力加载中...').addClass('loading')
+      _dashboard_ajax_process = $.ajax {
+        url: SITE_URL + 'services/service.php'
+        type: "GET"
+        data: {'m': 'u', 'a': action, ajax: 1, 'page': page, 'count': count, 'name': encodeURIComponent(keyword), 'type': _dashboard_show_product_collocation, 'sort': sort,'limit': _dashboard_limit, 'hid': window.uid}
+        cache: true
+        dataType: "json"
+        success: (result,status,response)->
+          if _dashboard_list_by_search
+            _search_data_count = parseInt(result.count)
+            if _seaarch_data and _seaarch_data.length > 0
+              for d in result.data
+                _seaarch_data.push(d)
+            else
+              _seaarch_data = result.data
+            if result.more is 1
+              _search_data_more = true
+            else
+              _search_data_more = false
           else
-            window.dashboard_list_data = result.data
-        gen_dashboard_item()
+            if state is 'fav'
+              _fav_c_data_count = parseInt(result.dapei_count)
+              _fav_p_data_count = parseInt(result.share_count)
+              if _dashboard_show_product_collocation is 2
+                if _fav_c_data and _fav_c_data.length > 0 and page > 1
+                  for d in result.data
+                    _fav_c_data.push(d)
+                else
+                  _fav_c_data = result.data
+                if result.more is 1
+                  _fav_c_data_more = true
+                else
+                  _fav_c_data_more = false
+                _fav_c_cache_time = new Date
+              else
+                if _fav_p_data and _fav_p_data.length > 0 and page > 1
+                  for d in result.data
+                    _fav_p_data.push(d)
+                else
+                  _fav_p_data = result.data
+                if result.more is 1
+                  _fav_p_data_more = true
+                else
+                  _fav_p_data_more = false
+                _fav_p_cache_time = new Date
+            else if state is 'talk'
+              _publish_c_data_count = parseInt(result.dapei_count)
+              _publish_p_data_count = parseInt(result.share_count)
+              if _dashboard_show_product_collocation is 2
+                if _publish_c_data and _publish_c_data.length > 0 and page > 1
+                  for d in result.data
+                    _publish_c_data.push(d)
+                else
+                  _publish_c_data = result.data
+                if result.more is 1
+                  _publish_c_data_more = true
+                else
+                  _publish_c_data_more = false
+                _publish_c_cache_time = new Date
+              else
+                if _publish_p_data and _publish_p_data.length > 0 and page > 1
+                  for d in result.data
+                    _publish_p_data.push(d)
+                else
+                  _publish_p_data = result.data
+                if result.more is 1
+                  _publish_p_data_more = true
+                else
+                  _publish_p_data_more = false
+                _publish_p_cache_time = new Date
+            else
+              _dashboard_data_count = parseInt(result.count)
+              if _dashboard_data and _dashboard_data.length > 0 and page > 1
+                for d in result.data
+                  _dashboard_data.push(d)
+              else
+                _dashboard_data = result.data
+              if result.more is 1
+                _dashboard_data_more = true
+              else
+                _dashboard_data_more = false
+              _dashboard_cache_time = new Date
 
-        _dashboard_is_loading = false
-        if result.more is 1
+          gen_dashboard_item()
+          _dashboard_is_loading = false
+        error: (xhr,status,error)->
+          if status is 502
+            alert('服务器君跑到外太空去了,刷新试试看!')
+          _dashboard_is_loading = false
           btn_ShowMore.html('我要看更多').removeClass('loading')
-          _dashboard_has_more = true
-        else
-          btn_ShowMore.html('已经全部看完了').removeClass('loading')
-          _dashboard_has_more = false
-      error: (result)->
-        if result.status isnt 0
-#          $('#list-loading').html(result.responseText)
-          alert('服务器君跑到外太空去了,刷新试试看!')
-        _dashboard_is_loading = false
-        btn_ShowMore.html('我要看更多').removeClass('loading')
-    }
+      }
+    else
+      gen_dashboard_item()
 
 query_dashboard_recommand_data = () ->
+  refresh_data = false
   if state is 'fav'
     action = 'get_approve_fav_ajax'
     recommand_limit = 5
+    if _dashboard_show_product_collocation is 2
+      type = 2
+      if _dashboard_recommand_c_cache_time is null
+        refresh_data = true
+      else
+        if calculateTimes(_dashboard_recommand_c_cache_time) >= _recommand_cache_times
+          refresh_data = true
+    else
+      type = 1
+      if _dashboard_recommand_p_cache_time is null
+        refresh_data = true
+      else
+        if calculateTimes(_dashboard_recommand_p_cache_time) >= _recommand_cache_times
+          refresh_data = true
+    data = {'m': 'u', 'a': action, ajax: 1, 'page': 1, 'count': '', 'limit': recommand_limit, 'type':type}
   else
     action = 'get_approve_user_ajax'
     recommand_limit = 7
+    if _dashboard_recommand_u_cache_time is null
+      refresh_data = true
+    else
+      if calculateTimes(_dashboard_recommand_u_cache_time) >= _recommand_cache_times
+        refresh_data = true
+    data = {'m': 'u', 'a': action, ajax: 1, 'page': 1, 'count': '', 'limit': recommand_limit, 'follow':0 }
 
-  $.ajax {
-    url: SITE_URL + 'services/service.php'
-    type: "GET"
-    data: {'m': 'u', 'a': action, ajax: 1, 'page': 1, 'count': '', 'limit': recommand_limit, 'follow',0}
-    cache: false
-    dataType: "json"
-    success: (result)->
-      if result.data
-        gen_dashboard_recommand_item(result.data)
-    error: (result)->
-      if result.status isnt 0
-        alert('服务器君跑到外太空去了,刷新试试看!')
-  }
+  if refresh_data
+    _dashboard_recommand_is_loading = true
+    _dashboard_recommand_ajax_process = $.ajax {
+      url: SITE_URL + 'services/service.php'
+      type: "GET"
+      data: data
+      cache: true
+      dataType: "json"
+      success: (result)->
+        if result.data
+          if state is 'fav'
+            if _dashboard_show_product_collocation is 2
+              _recommand_c_data = result.data
+              _dashboard_recommand_c_cache_time = new Date
+            else
+              _recommand_p_data = result.data
+              _dashboard_recommand_p_cache_time = new Date
+          else if state is 'dashboard'
+            _recommand_u_data = result.data
+            _dashboard_recommand_u_cache_time = new Date
+
+          _dashboard_recommand_is_loading = false
+          gen_dashboard_recommand_item()
+      error: (xhr,status,error)->
+        _dashboard_recommand_is_loading = false
+        if status is 502
+          alert('服务器君跑到外太空去了,刷新试试看!')
+    }
+  else
+    gen_dashboard_recommand_item()
 
 gen_dashboard_item = () ->
   _dashboard_is_loading = true
@@ -295,55 +482,64 @@ gen_dashboard_item = () ->
   recommandList = $('#recommand')
   pagiation = $('#item-pagiation')
   filter = $('#list-filter')
+  nav_d_count = filter.find('.nav-dashboard').find('span')
+  nav_p_count = filter.find('.nav-produce').find('span')
+  nav_c_count = filter.find('.nav-collocation').find('span')
   rocket = $('.scroll-to-top')
   mobile_vc = $('.mobile-view-change')
   publish_alert = $('.publish_alert')
+  btn_ShowMore = $(document).find('#dashboard-show-more')
 
   step = 0
   if _dashboard_list_by_search
-    list_count = parseInt(window.dashboard_count)
+    list_count = _search_data_count
+    list_data = _seaarch_data
+
+    if _dashboard_search_keyword isnt ''
+      $('.list-search-dashboard').val(_dashboard_search_keyword)
+      $('.clear-dashboard-search').addClass('show')
+
     if list_count > 0
       setTimeout ->
         show_search_result(_dashboard_search_keyword,list_count)
       , 300
   else
     hide_search_result()
-    if state is 'dashboard'
-      list_count = parseInt(window.dashboard_count)
-    else
-      if _dashboard_show_product_collocation is 1
-        list_count = parseInt(window.product_count)
+    if state is 'fav'
+      if _dashboard_show_product_collocation is 2
+        list_count = _fav_c_data_count
+        list_data = _fav_c_data
+        list_data_more = _fav_c_data_more
       else
-        list_count = parseInt(window.collocation_count)
-
-  if state is 'dashboard'
-    if window.dashboard_count isnt ''
-      tmp_count = window.dashboard_count
+        list_count = _fav_p_data_count
+        list_data = _fav_p_data
+        list_data_more = _fav_p_data_more
+      nav_c_count.html(_fav_c_data_count)
+      nav_p_count.html(_fav_p_data_count)
+    else if state is 'talk'
+      if _dashboard_show_product_collocation is 2
+        list_count = _publish_c_data_count
+        list_data = _publish_c_data
+        list_data_more = _publish_c_data_more
+      else
+        list_count = _publish_p_data_count
+        list_data = _publish_p_data
+        list_data_more = _publish_p_data_more
+      nav_c_count.html(_publish_c_data_count)
+      nav_p_count.html(_publish_p_data_count)
     else
-      tmp_count = '0'
-    filter.find('.nav-dashboard').find('span').html(tmp_count)
-  else
-    if window.dashboard_count isnt ''
-      tmp_count = window.product_count
-    else
-      tmp_count = '0'
-    filter.find('.nav-produce').find('span').html(tmp_count)
-    if window.dashboard_count isnt ''
-      tmp_count = window.collocation_count
-    else
-      tmp_count = '0'
-    filter.find('.nav-collocation').find('span').html(tmp_count)
-    if _dashboard_search_keyword isnt ''
-      $('.list-search-dashboard').val(_dashboard_search_keyword)
-      $('.clear-dashboard-search').addClass('show')
+      list_count = _dashboard_data_count
+      list_data = _dashboard_data
+      list_data_more = _dashboard_data_more
+      nav_d_count.html(_dashboard_data_count)
 
   if _is_mobile and state is 'talk' and _dashboard_show_me and parseInt($.cookie('publistAlertShow')) is 0
     publish_alert.fadeIn(300)
 
   $('.main-nav').find('.icon-grid_view').show().css('display','')
 
-  if window.dashboard_list_data
-    if window.dashboard_list_data.length > 0
+  if list_data
+    if list_data.length > 0
       if _dashboard_show_big
         step = _dashboard_step_b
         if state is 'talk' and _dashboard_show_me and !_is_mobile
@@ -353,12 +549,12 @@ gen_dashboard_item = () ->
           if _dashboard_publish_first_gen_b
             step -= 1
             _dashboard_publish_first_gen_b = false
-        if _dashboard_end_b < window.dashboard_list_data.length
+        if _dashboard_end_b < list_data.length
           if _dashboard_end_b is 0
-            _dashboard_end_b = window.dashboard_list_data.length
+            _dashboard_end_b = list_data.length
           else
             _dashboard_end_b += step
-          for ld,i in window.dashboard_list_data
+          for ld,i in list_data
             if _dashboard_start_b < _dashboard_end_b and i >= _dashboard_start_b
               biglist.append(big_DashboardItem_Generater(ld,i))
               _dashboard_start_b++
@@ -372,12 +568,12 @@ gen_dashboard_item = () ->
           if _dashboard_publish_first_gen_s
             step -= 1
             _dashboard_publish_first_gen_s = false
-        if _dashboard_end_s < window.dashboard_list_data.length
+        if _dashboard_end_s < list_data.length
           if _dashboard_end_s is 0
-            _dashboard_end_s = window.dashboard_list_data.length
+            _dashboard_end_s = list_data.length
           else
             _dashboard_end_s += step
-          for ld,j in window.dashboard_list_data
+          for ld,j in list_data
             if _dashboard_start_s < _dashboard_end_s and j >= _dashboard_start_s
               smalllist.append(small_DashboardItem_Generater(ld,j))
               _dashboard_start_s++
@@ -392,12 +588,17 @@ gen_dashboard_item = () ->
       mobile_vc.show()
       recommandTitle.hide()
       recommandList.hide()
+
+      if list_data_more
+        btn_ShowMore.html('我要看更多').removeClass('loading')
+      else
+        btn_ShowMore.html('已经全部看完了').removeClass('loading')
+
     else
       pagiation.hide()
       listempty.show()
       rocket.hide()
       mobile_vc.hide()
-#      filter.hide()
       if _dashboard_show_me and !_dashboard_list_by_search
         if state is 'fav' or state is 'dashboard'
           query_dashboard_recommand_data()
@@ -406,12 +607,11 @@ gen_dashboard_item = () ->
     listempty.show()
     rocket.hide()
     mobile_vc.hide()
-#    filter.hide()
     if _dashboard_show_me and !_dashboard_list_by_search
       if state is 'fav' or state is 'dashboard'
         query_dashboard_recommand_data()
-
   if _dashboard_show_me
+    alert 'hi!!'
     publish = init_form_publish()
     publish.clean()
     publish.ajaxEditAndDelete()
@@ -420,15 +620,26 @@ gen_dashboard_item = () ->
   filter.show()
   _dashboard_is_loading = false
 
-gen_dashboard_recommand_item = (data) ->
+gen_dashboard_recommand_item = () ->
+  if state is 'fav'
+    if _dashboard_show_product_collocation is 2
+      data = _recommand_c_data
+    else
+      data = _recommand_p_data
+  else if state is 'dashboard'
+    data = _recommand_u_data
+
   recommandTitle = $('#recommandTitle')
   recommandList = $('#recommand')
   if state is 'fav'
     for ld,i in data
       recommandList.append(big_DashboardItem_Generater(ld,i))
       recommandList.removeClass('follow-list').addClass('big_img')
+    if _dashboard_show_product_collocation is 2
+      recommandTitle.find('.item-nav.first').find('a').html('热门搭配')
+    else
       recommandTitle.find('.item-nav.first').find('a').html('热门单品')
-  else
+  else if state is 'dashboard'
     for ld,i in data
       recommandList.append(followItem_Generater(ld,i))
       recommandList.removeClass('big_img').addClass('follow-list')
@@ -456,12 +667,13 @@ init_dashboard_data = (soft) ->
   _dashboard_end_b = 0
   _dashboard_start_s = 0
   _dashboard_end_s = 0
-  if window.dashboard_list_data
-    window.dashboard_list_data.length = 0
+#  if window.dashboard_list_data
+#    window.dashboard_list_data.length = 0
+#
+#  window.dashboard_count = ''
+#  window.product_count = ''
+#  window.collocation_count = ''
 
-  window.dashboard_count = ''
-  window.product_count = ''
-  window.collocation_count = ''
   _dashboard_has_publish_btn_b = false
   _dashboard_has_publish_btn_s = false
   _dashboard_publish_first_gen_b = false
@@ -495,6 +707,7 @@ init_dashboard_data = (soft) ->
     _dashboard_show_me = false
 
   filter.html(filter_generater())
+
   query_dashboard_data()
   init_dashboard_empty_message()
 
@@ -607,17 +820,16 @@ do_like = (obj) ->
     dataType: "json"
     success: (result)->
       after_like(me,dtype,result,job)
-    error: (result)->
+    error: (xhr,status,error)->
       _dashboard_doing_like = false
-      if result.status isnt 0
+      if status isnt 0
         alert('服务器君跑到外太空去了,刷新试试看!')
+      else
+        alert(error)
 
   }
 
 after_like = (me,dtype,result,job) ->
-  count = 0
-  ed = 0
-  my_id = me.attr('sid')
   if result.status isnt 3
     if dtype is 'd'
       if result.status is 1
@@ -635,40 +847,96 @@ after_like = (me,dtype,result,job) ->
         if result.status is 1
           ed = 0
           count = -1
-    refresh_like(my_id,ed,count)
+    refresh_like(me.attr('sid'),ed,count)
   else
-    alert('自恋是不对滴,不可以哟! 凸（≧∇≦）凸')
+    alert('不可以喜欢自己发布的单品哦!')
     _dashboard_doing_like = false
 
 refresh_like = (sid,ed,count) ->
-  for ld in window.dashboard_list_data
-    if parseInt(ld.did) is parseInt(sid)
-      ld.is_fav = ed
-      ld.like_count += count
-
   top_count = $('.content__actions').find('.actions-fav b')
   harting_img_url = SITE_URL + window.image_path + 'icon-heart-ing.gif'
+  lm = false
 
-  big_list = $('#big_img')
-  small_list = $('#small_img')
+  if state is 'fav'
+    if _dashboard_show_product_collocation is 2
+      if _fav_c_data_count > 0
+        lm = true
+        for ld in _fav_c_data
+          if parseInt(ld.did) is parseInt(sid)
+            ld.is_fav = ed
+            ld.like_count += count
+    else
+      if _fav_p_data_count > 0
+        lm = true
+        for ld in _fav_p_data
+          if parseInt(ld.did) is parseInt(sid)
+            ld.is_fav = ed
+            ld.like_count += count
+  else if state is 'talk'
+    if _dashboard_show_product_collocation is 2
+      if _publish_c_data_count > 0
+        lm = true
+        for ld in _publish_c_data
+          if parseInt(ld.did) is parseInt(sid)
+            ld.is_fav = ed
+            ld.like_count += count
+    else
+      if _publish_p_data_count > 0
+        lm = true
+        for ld in _publish_p_data
+          if parseInt(ld.did) is parseInt(sid)
+            ld.is_fav = ed
+            ld.like_count += count
+  else
+    if _dashboard_data_count > 0
+      lm = true
+      for ld in _dashboard_data
+        if parseInt(ld.did) is parseInt(sid)
+          ld.is_fav = ed
+          ld.like_count += count
 
-  big_button = big_list.find('div.btn_like[sid=' + sid + ']')
-  small_button = small_list.find('div.btn_like[sid=' + sid + ']')
+  if _dashboard_list_by_search
+    if _search_data_count > 0
+      lm = true
+      for ld in _seaarch_data
+        if parseInt(ld.did) is parseInt(sid)
+          ld.is_fav = ed
+          ld.like_count += count
 
-  big_icon = big_button.find('.icon')
-  small_icon = small_button.find('.icon')
+  if lm
+    big_list = $('#big_img')
+    small_list = $('#small_img')
 
-  big_count = big_button.find('.like_count')
-  small_count = small_button.parent().parent().find('.like_count')
+    big_button = big_list.find('div.btn_like[sid=' + sid + ']')
+    small_button = small_list.find('div.btn_like[sid=' + sid + ']')
 
-  big_harting = big_button.find('.harting')
-  small_harting = small_button.find('.harting')
+    big_icon = big_button.find('.icon')
+    small_icon = small_button.find('.icon')
 
-  big_count.html(parseInt(big_count.html()) + count)
-  small_count.html(parseInt(small_count.html()) + count)
+    big_count = big_button.find('.like_count')
+    small_count = small_button.parent().parent().find('.like_count')
 
-  big_button.attr('ed',ed)
-  small_button.attr('ed',ed)
+    big_harting = big_button.find('.harting')
+    small_harting = small_button.find('.harting')
+
+    big_count.html(parseInt(big_count.html()) + count)
+    small_count.html(parseInt(small_count.html()) + count)
+
+    big_button.attr('ed',ed)
+    small_button.attr('ed',ed)
+  else
+    recommand = $('#recommand')
+    big_button = recommand.find('div.btn_like[sid=' + sid + ']')
+    big_icon = big_button.find('.icon')
+    big_count = big_button.find('.like_count')
+    big_harting = big_button.find('.harting')
+    big_count.html(parseInt(big_count.html()) + count)
+    big_button.attr('ed',ed)
+
+    if _dashboard_show_product_collocation is 2
+      _fav_c_data_count += 1
+    else
+      _fav_p_data_count += 1
 
   if _dashboard_show_me
     top_count.html(parseInt(top_count.html()) + count)
@@ -678,25 +946,36 @@ refresh_like = (sid,ed,count) ->
     else
       timer = 1500
 
-    if _dashboard_show_big
+    if lm
+      if _dashboard_show_big
+        big_harting.attr('src',harting_img_url)
+        big_harting.show()
+      else
+        if !_is_mobile
+          small_harting.attr('src',harting_img_url)
+          small_harting.show()
+
+      setTimeout ->
+        big_harting.attr('src','')
+        big_harting.hide()
+        small_harting.attr('src','')
+        small_harting.hide()
+        big_icon.removeClass('icon-heart').addClass('icon-hearted')
+        small_icon.removeClass('icon-heart').addClass('icon-hearted')
+        _dashboard_doing_like = false
+      , timer
+    else
       big_harting.attr('src',harting_img_url)
       big_harting.show()
-    else
-      if !_is_mobile
-        small_harting.attr('src',harting_img_url)
-        small_harting.show()
-
-    setTimeout ->
-      big_harting.attr('src','')
-      big_harting.hide()
-      small_harting.attr('src','')
-      small_harting.hide()
-      big_icon.removeClass('icon-heart').addClass('icon-hearted')
-      small_icon.removeClass('icon-heart').addClass('icon-hearted')
-      _dashboard_doing_like = false
-    , timer
+      setTimeout ->
+        big_harting.attr('src','')
+        big_harting.hide()
+        big_icon.removeClass('icon-heart').addClass('icon-hearted')
+        _dashboard_doing_like = false
+      , timer
   else
     big_icon.removeClass('icon-hearted').addClass('icon-heart')
-    small_icon.removeClass('icon-hearted').addClass('icon-heart')
+    if lm
+      small_icon.removeClass('icon-hearted').addClass('icon-heart')
     _dashboard_doing_like = false
 

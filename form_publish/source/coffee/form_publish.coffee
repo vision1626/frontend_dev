@@ -166,7 +166,6 @@ init_form_publish = ->
       alert '已经不能再上传了'
       regenerateFileInput()
     else 
-      alert('hi')
       $.ajaxFileUpload({
         url: SITE_URL + "services/service.php?m=share&a=uploadsharefile&num=1",
         secureuri: false,
@@ -260,8 +259,11 @@ init_form_publish = ->
             getMyTagName tag for tag in result['data']['all_my_tags']
             makeTag tag['tag_name'], tag['tag_id'] for tag in result['data']['share_tags']
             $form_cate_select.val(Number(result['data']['pc_id']))
-            $form_cate_select2.val(Number(result['data']['catid'])) 
-            # $form_style_select.text
+            $form_cate_select2.val(Number(result['data']['catid']))
+            $form_cate_select.on 'change', ->
+              id = Number($(this).val())
+              get2ndCate(id) 
+                    # $form_style_select.text
             $form_recommendation.val(result['data']['content'])
             updatePreview(result['data'])
             $popup_loading.hide()
@@ -289,7 +291,7 @@ init_form_publish = ->
           data: obj,
           dataType: 'json',
           success: (result)->
-            if result.status = 1
+            if result.status == 1
               init_dashboard_data()
         })
 
@@ -401,7 +403,6 @@ init_form_publish = ->
 
       
     $form_submit_btn.on 'click', (e)->
-      alert 'yes'
       link = $form_url_input.val()
       str = link.match(/http:\/\/.+/)
       if str == null
@@ -466,7 +467,6 @@ init_form_publish = ->
       }
 
       if $(this).attr('data-target') == 'new'
-        alert 'yes2'
         $blackbox.fadeIn(500)
         $.ajax({
           url :  SITE_URL + 'services/service.php?m=share&a=share_save',
@@ -476,10 +476,9 @@ init_form_publish = ->
           cache: false,
           success: (result)-> 
             if result.status == 1
-              alert('fuck')
+              window.location.href = result.url
         })
       else if $(this).attr('data-target') == 'update'
-        alert 'no'
         obj.share_id = g_shareid
         obj.image_change = g_hasChangedImg
         $blackbox.fadeIn(500)
@@ -493,20 +492,7 @@ init_form_publish = ->
           cache: false,
           success: (result)-> 
             if result.status == 1
-              $('.emoji-hint').show()
-              # $('.empty-message').find('a').attr('href', result.url)
-              $('.separator').show()
-              $('.goods-link').find('label').show()
-              $('.urlwarning').html('')
-              $popup_loading.hide()
-              $popup.show()
-              $popup.fadeIn(500)
-              $form_url_input.val('')
-              $('.urlwarining').html('')
-              init_dashboard_data()
-              refreshForm()
-              g_hasChangedImg = 0
-              toggleGoods(true)
+              window.location.href = result.url
         })
       e.preventDefault()
 
@@ -522,11 +508,12 @@ init_form_publish = ->
     updatePreview(result)
     generateImg SITE_URL + url for url in result['url_arr']
     setImgEditor()
+    $('.url-img').first().find('img').addClass('main-img')
     $form_style_select.append('<option value=0>风格（选填）</option>')
     generateStyle style for style in result['fengge_list']
     $form_cate_select.append('<option value=0>分类</option>')
     generateCategory cate for cate in result['category_list']
-    $form_cate_select.one 'change', ->
+    $form_cate_select.on 'change', ->
       id = Number($(this).val())
       get2ndCate(id)
     getMyTagName tag for tag in result['tags']
@@ -542,18 +529,3 @@ init_form_publish = ->
            init: init,
            clean: clean 
          }
-
-  # $(document).on 'click','.show-new_list', ->
-  #   ajaxEditAndDelete()
-
-  # $(document).on 'click','.show-hot_list', ->
-  #   ajaxEditAndDelete()
-
-  # $(document).on 'click','.show-big_list', ->
-  #   ajaxEditAndDelete()
-
-  # $(document).on 'click','.show-small_list', ->
-  #   ajaxEditAndDelete()
-
-  # $(document).on 'click','#dashboard-show-more', ->
-  #   ajaxEditAndDelete()
