@@ -201,14 +201,10 @@ $(document).on 'click','.btn_like', ->
     do_like(this)
 
 $(document).on 'click','.publish_entrance', ->
-  if _user_mail_vrification
-#    url = ['u/addshare-',myid,'.html'].join('')
-#    location.href = SITE_URL + url
-    $('.popup__blackbox').fadeIn(300)
-    $('.popup').show()
-    $('.popup__loading').hide()
-  else
-    alert('老板,您还未验证E-Mail')
+  $('.popup__blackbox').fadeIn(300)
+  $('.popup').show()
+  $('.popup__loading').hide()
+  askUserToGetValidated()
 
 $(document).on 'click','div.return_home', ->
   location.href = SITE_URL
@@ -611,7 +607,6 @@ gen_dashboard_item = () ->
       if state is 'fav' or state is 'dashboard'
         query_dashboard_recommand_data()
   if _dashboard_show_me
-    alert 'hi!!'
     publish = init_form_publish()
     publish.clean()
     publish.ajaxEditAndDelete()

@@ -7,7 +7,7 @@ init_form_publish = ->
   $popup_close = $('.popup__close')
   $blackbox = $('.popup__blackbox')
   $popup = $('.popup')
-  $popup_btn = $blackbox.find('button')
+  $popup_btn = $blackbox.find('.confirm')
   $popup_url = $blackbox.find('input[name=url]')
   $popup_loading = $blackbox.find('.popup__loading');
   $popup_manually_upload = $blackbox.find('.manually-upload')

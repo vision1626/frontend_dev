@@ -1,3 +1,27 @@
+askUserToGetValidated = ->
+  if user_mobile == ''
+    if +email_status <= 0
+      $('.validator-separator').show()
+      $('.validator-separator').find('span').on 'click', (e)->
+        if user_email
+          $(this).text('验证邮箱后，您分享的商品将会获得优先审核并优先展示哦')
+          $('.email-validator').show()
+          $('i.captcha').css("background-image",'url(' + SITE_URL + "services/service.php?m=index&a=verify&rand=" + Math.random() + ')')
+          $('.email-bind').on 'click', ->
+            self = this
+            captcha = $('.email-input').val()
+            $.ajax({
+              url: SITE_URL + 'services/service.php?m=user&a=sendemail',
+              dataType: 'json',
+              method: 'get',
+              data: {captcha: captcha}
+              success: (result)->
+                $('.user-email').html(result.msg)
+                if +result.status == 1
+                  $(self).text('没有收到邮件？重新发送')
+            })
+        else
+          $('.phone-validator').show()
 refreshForm = ->
     # refresh everything
     $form_publish = $('form.form__body')

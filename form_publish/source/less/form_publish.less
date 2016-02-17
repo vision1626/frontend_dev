@@ -480,26 +480,6 @@
             }
           }
         }
-        .input-row {
-          padding: 5px 0 5px 10px;
-          border-bottom: 2px dotted grey;
-          background-color: white;
-          margin-top: 10px;
-          display: inline-block;
-          width: 78%;
-          .icon {
-            font-size: 20px;
-          }
-          input {
-            border: none;
-            outline: none;
-            width: 90%;
-            font-size: 14px;
-            &:-webkit-autofill {
-              background-color: white !important;
-            }
-          }
-        }
         button {
           margin-left: 13px;
           padding: 9px 20px;
@@ -516,6 +496,79 @@
             border-bottom: 2px solid @grey;
             cursor: pointer;
           }
+        }
+      }
+      .input-row {
+        padding: 5px 0 5px 10px;
+        border-bottom: 2px dotted grey;
+        background-color: white;
+        display: inline-block;
+        width: 78%;
+        .icon {
+          font-size: 20px;
+        }
+        input {
+          border: none;
+          outline: none;
+          width: 90%;
+          font-size: 14px;
+          &:-webkit-autofill {
+            background-color: white !important;
+          }
+        }
+      }
+      .validator-separator {
+        font-size: @font-size-s;
+        border-top: 1px solid @grey;
+        padding-top: 12px;
+        margin: 30px 0 0 0;
+        display: none;
+        span {
+          border-bottom: 1px solid black;
+          cursor: help;
+        }
+        .icon-hand:before {
+          font-size: 20px;
+          color: @orange;
+        }
+      }
+      .validator {
+        display: none;
+        color: @grey;
+        font-size: @font-size-s;
+         a {
+          border-bottom: 2px solid @grey;
+          &:link,
+          &:visited,
+          &:hover,
+          &:active {
+            color: inherit;
+          }
+        }
+        i.captcha {
+          display: inline-block;
+          margin: 0 10px;
+          width: 60px;
+          height: 30px;
+          background-position: center;
+          float: left;
+        }
+        button {
+          display: block;
+          margin-top: 10px;
+          outline: none;
+        }
+      }
+      .email-validator {
+        div:first-child {
+          margin-top: 10px;
+        }
+        .wrapper {
+          overflow: hidden;
+        }
+        .input-row {
+          width: 30%;
+          float: left;
         }
       }
     }
