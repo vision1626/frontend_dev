@@ -52,12 +52,11 @@ afterGetMagCover = (in_data) ->
   $('.global-footer').find('.mag-buy strong').text number
   footer_mag.attr 'data-link', buy_link
 
-$(document).on 'click','.footer_qrcode', (e) ->
-#  e.preventDefault()
+$(document).on 'touchend','.qrcode_wechat', (e) ->
+  e.preventDefault()
+  $('.wechat_qrcode').show()
+
+$(document).on 'touchend','.wechat_qrcode', (e) ->
+  e.preventDefault()
   me = $(this)
-  if !_footer_qrchde_showout
-    me.addClass('show_out')
-    _footer_qrchde_showout = true
-  else
-    me.removeClass('show_out')
-    _footer_qrchde_showout = false
+  me.hide()

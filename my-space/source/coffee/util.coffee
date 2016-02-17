@@ -78,8 +78,14 @@ followItem_Generater = (data,current_index) ->
     fans_count = format_count(data.fans)
     follow_count = format_count(data.follows)
   else
-    fans_count = data.fans
-    follow_count = data.follows
+    if parseInt(data.fans) > 0
+      fans_count = data.fans
+    else
+      fans_count = 0
+    if parseInt(data.follows) > 0
+      follow_count = data.follows
+    else
+      follow_count = 0
   dd = $('<dd class="follow-list_item" i="' + current_index + '" t-uid=' + data.uid + '>'+
     '<div class="fans-container">' +
       '<div class="fans-face">' +
@@ -579,6 +585,9 @@ fixMainnav = ->
     $('.main-nav-container,.main-nav').addClass('fixed')
     if !_is_mobile
       $('.scroll-to-top').addClass('fixed')
+    else
+      if state is 'fans' or state is 'follow'
+        $('.mobile-view-change').hide()
 
   else
     $('.main-nav-container,.main-nav').removeClass('fixed')
@@ -599,7 +608,6 @@ excite_Anim = (obj,animName) ->
   $(obj).addClass(animName + ' animated').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', () ->
     obj.removeClass(animName).removeClass('animated')
   );
-
 
 $(document).on 'blur','.list-search', ->
   set_clean_list_search($(this))
@@ -663,12 +671,15 @@ clean_list_search = () ->
         init_follow_data()
 
 format_count = (count) ->
-  if count >= 10000
-    [Math.round(count/1000),'k'].join ''
-  else if count >= 1000
-    [(count/1000).toFixed(1),'k'].join ''
+  if parseInt(count) > 0
+    if parseInt(count) >= 10000
+      [Math.round(count/1000),'k'].join ''
+    else if parseInt(count) >= 1000
+      [(count/1000).toFixed(1),'k'].join ''
+    else
+      count
   else
-    count
+    0
 
 calculateTimes = (in_time) ->
   ((new Date) - in_time) / (1000 * 60)

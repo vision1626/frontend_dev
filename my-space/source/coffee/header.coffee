@@ -81,13 +81,18 @@ init_u_header = ->
     slideToCurrent.apply($pub)
   else if isInCurrentAction('fans')
     changeState('fans')
-    slideToCurrent.apply($fans,[36])
+    if _is_mobile
+      slideToCurrent.apply($fans_m)
+    else
+      slideToCurrent.apply($fans,[36])
     $fans_m.addClass('current')
   else if isInCurrentAction('follow')
     changeState('follow')
-    slideToCurrent.apply($follow,[36])
+    if _is_mobile
+      slideToCurrent.apply($follow_m)
+    else
+      slideToCurrent.apply($follow,[36])
     $follow_m.addClass('current')
-
   parallax($profile)
 
   #  ----------------------------------------
@@ -96,32 +101,46 @@ init_u_header = ->
     if giveupEditing()
       slideToCurrent.apply(this)
       user_action_async('fav')
+      if _is_mobile
+        $('html, body').animate({scrollTop:0}, 200);
   $db.on 'click', ->
     if giveupEditing()
       slideToCurrent.apply(this)
       user_action_async('dashboard')
+      if _is_mobile
+        $('html, body').animate({scrollTop:0}, 200);
   $pub.on 'click', ->
     if giveupEditing()
       slideToCurrent.apply(this)
       user_action_async('talk')
+      if _is_mobile
+        $('html, body').animate({scrollTop:0}, 200);
   $fans.on 'click', ->
     if giveupEditing()
       slideToCurrent.apply(this,[36])
       user_relation_async('fans')
+      if _is_mobile
+        $('html, body').animate({scrollTop:0}, 200);
   $follow.on 'click', ->
     if giveupEditing()
       slideToCurrent.apply(this,[36])
       user_relation_async('follow')
+      if _is_mobile
+        $('html, body').animate({scrollTop:0}, 200);
   $fans_m.on 'click', ->
     if giveupEditing()
       $(this).addClass('current')
       slideToCurrent.apply(this)
       user_relation_async('fans')
+      if _is_mobile
+        $('html, body').animate({scrollTop:0}, 200);
   $follow_m.on 'click', ->
     if giveupEditing()
       $(this).addClass('current')
       slideToCurrent.apply(this)
       user_relation_async('follow')
+      if _is_mobile
+        $('html, body').animate({scrollTop:0}, 200);
   $fans_m_t.on 'click', ->
     if giveupEditing()
       $fans_m.parent().parent().find('li').removeClass('current')
@@ -145,9 +164,24 @@ init_u_header = ->
       slideToCurrent.apply($pub)
     else if isInCurrentAction('fans')
       changeState('fans')
-      slideToCurrent.apply($fans,[36])
+      if _is_mobile
+        slideToCurrent.apply($fans_m)
+        $fans_m.addClass('current')
+      else
+        slideToCurrent.apply($fans,[36])
     else if isInCurrentAction('follow')
       changeState('follow')
-      slideToCurrent.apply($follow,[36])
+      if _is_mobile
+        slideToCurrent.apply($follow_m)
+        $follow_m.addClass('current')
+      else
+        slideToCurrent.apply($follow,[36])
 
     setTabWidth()
+
+  if $(window).width() <= 680 and myid isnt uid
+    $('.content__actions').find('label').show()
+    $('.content__relationship').find('label').show()
+  else
+    $('.content__actions').find('label').hide()
+    $('.content__relationship').find('label').hide()

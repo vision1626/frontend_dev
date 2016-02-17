@@ -24,7 +24,7 @@ footer.global-footer
       .footer_contact
         img.footer_lookout(src="#{image_path}/text-nav-mobile-popup-white.png", alt="wechat")
         label (点击或扫一扫)
-        .footer_qrcodes
+        .footer_icons
           .qrcode_app
             a(href='http://www.1626.com/downloads/andriod')
               //img.footer_qrcode(src='#{image_path}/qr-app.jpg')
@@ -32,11 +32,11 @@ footer.global-footer
                 i.icon.icon-1626app
               span APP下载
           .qrcode_wechat
-            a(href='http://weixin.qq.com/r/_nXM1GjENjVJrSy39yDo')
-              //img.footer_qrcode(src='#{image_path}/qr-wechat.jpg')
+            a
               .icon_wechat
                 i.icon.icon-wechat
               span 微信公众号
+          img.show_out.wechat_qrcode(src='#{image_path}/qr-wechat.jpg')
           .qrcode_weibo
             a(href='http://weibo.com/city1626?is_all=1')
               //img.footer_qrcode(src='#{image_path}/qr-weibo.jpg')
