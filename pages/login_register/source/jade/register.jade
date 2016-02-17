@@ -1,0 +1,75 @@
+<!--{template page/user/header}-->
+- var site_url = '$_FANWE[site_url]';
+section.login-panel
+
+  include source/jade/includes/side-panel.jade
+
+  article.form-container
+    .hand-logo.below-tablet
+      i.icon.icon-hand
+
+    .switch-header
+      .switch-container
+        .form-header.register
+          label.form-title
+            span 注册
+            img.logo(src="/tpl/hi1626/images/login/logo-1626-black.svg")
+          a.switch.goto-login(href="#{site_url}user/login.html") 登录
+            i.icon.icon-sml.icon-switch
+        .form-header.nickname(style='display:none;')
+          label.form-title
+            span 注册成功
+            img.logo(src="/tpl/hi1626/images/login/logo-1626-black.svg")
+
+    .form-wrap
+      form#form-register(data-action='{u user/ajax_register}', autocomplete='off')
+        ul
+          li.input-row
+            i.icon.icon-sml.icon-phone
+            input.input-phone(type='text', value='', placeholder='请输入登录邮箱 / 手机号', autocomplete='off')
+          li.input-row
+            i.icon.icon-sml.icon-lock
+            input.input-password(type='password', value='', placeholder='请输入密码', maxlength='20', autocomplete='off')
+            a.icon.icon-sml.icon-unseen(title='显示/隐藏密码')
+          li.input-row.captcha
+            i.icon.icon-sml.icon-captcha
+            input#captchaInput(type='text', value='', placeholder='请输入验证码', autocomplete='off', maxlength='5')
+            a.captcha(style='')
+          li#code_input.input-row(style='display:none')
+            i.icon.icon-sml.icon-captcha
+            input#mobCodeInput(type='text', value='', placeholder='短信中的验证码', autocomplete='off', maxlength='5')
+        h5#resend_code(style='display: none')
+        .form-actions
+          .form-options
+            input#agreed.checkbox(type='checkbox', value='1', checked='checked', autocomplete='off')
+            label(for='agreed') 我已阅读并同意遵守
+            a.text.show-terms(data-href='http://www.1626.com/about/privacy.html', style='float:none') 1626服务条款
+          button#submitInfo.button.large.disabled.full-width(type="button") 立即注册
+
+      form#form-nickname(data-action='{u user/update_nickname}',autocomplete='off',style='display:none;')
+        .above-input
+          p
+            | 你现在的用户名是
+            span.text.old-nickname
+            br
+            | 要做个性超人,怎么也得起个酷炫的名号吧!
+        ul
+          li.input-row
+            i.icon.icon-sml.icon-user
+            input.input-nickname(type='text', value='', placeholder='用户名', autocomplete='off', maxlength='15')
+        .form-actions
+          button#submitNickname.button.large.disabled.full-width(type="button") 确    定
+          h5
+            a.text.nickname-skip(data-href='') 跳过
+
+    .form-error
+      i.icon.icon-sml.icon-error
+      label
+
+    include source/jade/includes/social-login.jade
+
+    input(name='rhash', value='{FORM_HASH}', type='hidden')
+
+include source/jade/includes/pick-interest.jade
+include source/jade/includes/hidden-ele.jade
+//{template v2/views/public/global_footer}

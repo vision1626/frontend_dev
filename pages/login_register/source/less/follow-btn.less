@@ -1,0 +1,184 @@
+.follow-btn {
+  top: 0px;
+  left: 42px;
+  display: inline-block;
+  &:hover {
+    color: @blue;
+  }
+  .slider {
+    &.to-unfollow {
+      a {
+        color: white !important;
+      }
+      .icon {
+        color: white !important;
+      }
+    }
+  }
+}
+.follow-btn {
+  //margin: 10px auto 0;
+
+  .slider {
+    &.to-unfollow {
+      a {
+        color: black !important;
+      }
+      .icon {
+        color: black !important;
+      }
+    }
+  }
+}
+.follow-btn{
+  border: 1px solid @grey;
+  //position: relative;
+  //position: absolute;
+  background-color: #fff;
+
+  font-size: 13px;
+  border-radius: 38px;
+  line-height: 1;
+  text-align: left;
+  cursor: pointer;
+  overflow: hidden;
+  width: 88px;
+  height: 29px;
+  transition: background-color .4s linear;
+  &:hover {
+    .icon-follow {
+      transition: all 0.1s linear;
+      color: @blue;
+    }
+  }
+  .status_text {
+    top: 8px;
+    left: 28px;
+    position: absolute;
+    width: 52px;
+    display: inline-block;
+    text-align: center;
+  }
+  .icon {
+    font-size: 20px;
+    margin-right: 3px;
+    position: absolute;
+    top: 4px;
+    left: 6px;
+  }
+  a,
+  a:link,
+  a:visited,
+  a:hover
+  a:active {
+    color: inherit;
+  }
+  .slider {
+    //transition: opacity .2s linear;
+    .icon {
+    }
+    &.to-unfollow {
+      .icon {
+        &:before {
+          content: "\e907" !important;
+        }
+      }
+    }
+
+  }
+  &.slider--on {
+    .icon {
+      left: 63px;
+      &.icon-followed {
+        color: @blue;
+      }
+      &.icon-friends {
+        color: @blue;
+      }
+    }
+    .status_text {
+      left: 7px;
+    }
+    &:hover {
+      .icon-followed {
+        &:before {
+        }
+      }
+    }
+
+  }
+  .slider-btn {
+    position: absolute;
+    ._square(19px);
+    border-radius: 10px;
+    background-color: @blue;
+    //transform: scale(1.1);
+    top: 5px;
+    left: 6px;
+    opacity: 0;
+    display: none;
+    &.slide-to-right {
+      animation: slide-to-right 0.6s forwards ease-out;
+    }
+    &.slide-to-left {
+      animation: slide-to-left 0.6s forwards ease-out;
+    }
+    @keyframes slide-to-right {
+      0% {
+        left: 6px;
+        width: 19px;
+        opacity: 1;
+      }
+      60% {
+        left: 30px;
+        width: 50px;
+        opacity: 1;
+      }
+      99% {
+        left: 63px;
+        width: 19px;
+        opacity: 1;
+      }
+      100% {
+        left: 63px;
+        width: 19px;
+        opacity: 0;
+      }
+    }
+    @keyframes slide-to-left {
+      0% {
+        left: 63px;
+        width: 19px;
+        opacity: 1;
+      }
+      60% {
+        left: 30px;
+        width: 50px;
+        opacity: 1;
+      }
+      99% {
+        left: 6px;
+        width: 19px;
+        opacity: 1;
+      }
+      100% {
+        left: 6px;
+        width: 19px;
+        opacity: 0;
+      }
+    }
+  }
+  .slider.slideright {
+  }
+  .icon-follow.slideright {
+  }
+  .icon-unfollow.slideleft {
+  }
+  .slider.slideleft {
+  }
+
+  .icon-follow {
+  }
+  .icon-follow:before, .icon-unfollow:before {
+  }
+}

@@ -1,0 +1,26 @@
+- var production = true
+//if !production
+//  include source/jade/header.jade
+section.pick-interest(style="display:none")
+  .interest-panel
+    article.pick-category
+      .form-title
+        span 选择兴趣
+        p 选择1-5个，1626会推荐一些不错的潮人达人给你，快试试吧~
+      ul.categories
+
+    article.pick-users
+      .form-title
+        span 推荐关注
+      .tab-control.vertical
+        .tabbar
+          .tab.current(cat-id='0')
+            span 热门
+        .tab__panel
+          section.tab__content
+        .bulk-actions(style='display:none;')
+          a.refresh 换一批
+          a.follow-all 一键关注
+
+  .submit-interest
+    button.button.large.always-blue 进入1626

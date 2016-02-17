@@ -1,0 +1,210 @@
+// Breakpoints --------------------------------------------------
+._1626-breakpoints__pick-interest() {
+  min-width: 900px;
+  @media only screen and (min-width: 1200px) {
+    width: 1190px;
+  }
+  @media only screen and (max-width: 1199px) {
+    width: 900px;
+  }
+}
+.pick-interest {
+  ._1626-breakpoints__pick-interest();
+  margin: 70px auto;
+  .form-title {
+    margin-bottom: 20px;
+  }
+  .interest-panel {
+    ._clearfix;
+  }
+  .pick-category {
+    float: left;
+    width: 900px;
+  }
+  ul.categories {
+    clear: left;
+    ._clearfix;
+    li {
+      box-shadow: 0 0 3px rgba(0,0,0,0.4);
+      float: left;
+      margin: 0 10px 20px 0;
+      cursor: pointer;
+      .thumb {
+        background-color: @gray;
+        ._square(170px);
+        position: relative;
+        //background-image: url("@{img-location}/act/arttitude/act-share-img.jpg");
+        background-size: cover;
+        .tick {
+          ._absolute-center();
+          ._square(50px);
+          display: none;
+          border-radius: 50%;
+          border: 2px solid white;
+          text-align: center;
+          //cursor: pointer;
+          &:hover {
+            .icon {
+              color: @blue;
+            }
+          }
+          .icon {
+            color: white;
+            font-size: 30px;
+            position: relative;
+            top: 10px;
+          }
+        }
+      }
+      .desc {
+        padding: 14px;
+        height: 66px;
+        h3 {
+          font-size: 18px;
+          margin: 0;
+        }
+        p{
+          font-size: 12px;
+          color: @dark-grey;
+          margin: 5px 0;
+        }
+      }
+      &:hover {
+        .thumb .tick {
+          display: block;
+        }
+      }
+      &.selected {
+        .thumb {
+          .tick {
+            display: block;
+            background: white;
+            box-shadow: 0 0 3px rgba(0,0,0,0.7);
+            .icon {
+              color: @blue;
+            }
+          }
+        }
+      }
+      &.disabled {
+        cursor: default;
+        &:hover {
+          .tick {
+            display: none;
+          }
+        }
+      }
+    }
+  }
+  .pick-users {
+    float: left;
+    width: 280px;
+    margin-left: 10px;
+    ul.push-users {
+      position: absolute;
+      li {
+        position: relative;
+        margin-bottom: 16px;
+        .avatar {
+          ._square(32px);
+          border-radius: 50%;
+          overflow: hidden;
+          img {
+            width: 100%;
+          }
+        }
+        .nickname {
+          margin-top: 5px;
+        }
+        .relations {
+          span {
+            font-size: 12px;
+            color: @dark-grey;
+            margin-right: 30px;
+            line-height: 20px;
+            display: inline-block;
+          }
+          b {
+            font-weight: normal;
+          }
+        }
+        .follow-btn {
+          position: absolute;
+        }
+      }
+    }
+    .bulk-actions {
+      position: absolute;
+      left: 20px;
+      bottom: 16px;
+      width: 66%;
+      ._clearfix;
+      a {
+        font-size: 12px;
+        border: 1px solid @dark-grey;
+        display: block;
+        border-radius: 20px;
+        padding: 4px 10px;
+        transition: all 0.1s linear;
+        background: white;
+        cursor: pointer;
+        &:hover {
+          background: @blue;
+          border: 1px solid @blue;
+          color: white;
+        }
+      }
+      .refresh {
+        float: left;
+      }
+      .follow-all {
+        float: right;
+      }
+    }
+    .tab-control {
+      height: 548px;
+      clear: left;
+      margin:20px 0;
+      background: @light-grey;
+      box-shadow: 0 0 3px rgba(0,0,0,0.4);
+      position: relative;
+      ._clearfix;
+    }
+    .tabbar {
+      float: right;
+      width: 22%;
+    }
+    .tab__panel {
+      float: left;
+      height: 100%;
+      background: white;
+      width: 78%;
+    }
+    .tab__content {
+      padding: 16px 20px 0 20px;
+    }
+    .tab {
+      text-align: center;
+      padding: 16px 0;
+      border-right: 2px solid @light-grey;
+      cursor: pointer;
+      span {
+        font-size: 14px;
+      }
+      &.current {
+        background: white;
+        border-right: 2px solid white;
+      }
+      &:hover {
+        border-right: 2px solid @blue;
+      }
+    }
+  }
+  .submit-interest {
+    text-align: center;
+    width: 100%;
+  }
+}
+@media only screen and (max-width: 1199px) {
+
+}

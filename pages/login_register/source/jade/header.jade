@@ -1,0 +1,69 @@
+doctype html
+<html>
+head(lang='en')
+  //META
+  meta(charset='UTF-8')
+  meta(name='viewport', content='width=device-width, initial-scale=1 maximum-scale=1, user-scalable=no')
+  meta(name='apple-mobile-web-app-status-bar-style', content='black')
+  meta(name='apple-mobile-web-app-capable', content='yes')
+  meta(name='description')
+  - title = "{$_FANWE['title']}"
+  title= title
+
+  - var production = true
+  - var image_path
+  if production
+    :php
+      $current_css[]  = './tpl/hi1626/v2/css/vendor/normalize.css';
+      $current_css[]  = './tpl/hi1626/v2/css/global.css';
+      $current_css[]  = './tpl/hi1626/v2/css/global_header.css';
+      $current_css[]  = './tpl/hi1626/v2/css/global_footer.css';
+      $current_css[]  = './tpl/hi1626/v2/css/login/login-register.css';
+      $current_js[]   = './tpl/hi1626/v2/js/vendor/jquery-1.11.3.min.js';
+      $current_js[]   = './tpl/hi1626/v2/js/global_footer.js';
+      $current_js[]   = './tpl/hi1626/v2/js/global_header.js';
+
+      if (ACTION_NAME == 'forgetpassword') {
+        $current_js[] = './public/js/regions.js';
+        $current_js[] = './tpl/hi1626/v2/js/login/forget-password.js';
+
+      } elseif (ACTION_NAME == 'bind') {
+        $current_js[] = './tpl/hi1626/v2/js/login/social-bind.js';
+
+      } elseif (ACTION_NAME == 'resetpassword') {
+        $current_js[] = './tpl/hi1626/v2/js/login/reset-password.js';
+
+      } else {
+        $current_js[] = './tpl/hi1626/v2/js/login/login-register.js';
+        $current_js[] = './public/js/user-terms.js';
+      }
+    link(rel="stylesheet", type="text/css", href="{css $current_css}", media="all")
+    link(rel="icon", href="{$_FANWE['site_root']}favicon.ico", type="image/x-icon")
+    script(type='text/javascript',src="{script $current_js}")
+    script(type='text/javascript').
+      var SITE_PATH = '$_FANWE[site_root]';
+      var SITE_URL = '$_FANWE[site_url]';
+      var TPL_PATH = '{TPL_PATH}';
+      var PUBLIC_PATH = '{PUBLIC_PATH}';
+      var MODULE_NAME = '{MODULE_NAME}';
+      var ACTION_NAME = '{ACTION_NAME}';
+      var COOKIE_PRE = "$_FANWE['config']['cookie']['cookie_pre']";
+      var TPL_NAME = '$_FANWE["setting"]["site_tmpl"]';
+      var IS_POSTING = false;
+
+    <!--[if lt IE 10]>
+    :php
+      $current_js2[] = './tpl/hi1626/v2/js/vendor/html5shiv.min.js';
+      $current_js2[] = './tpl/hi1626/v2/js/vendor/placeholders.jquery.min.js';
+      $current_js2[] = './tpl/hi1626/v2/js/login/login-register-ie.js';
+    script(type='text/javascript',src="{script $current_js2}")
+    <![endif]-->
+    - image_path='./tpl/hi1626/images'
+
+  else
+    link(rel="stylesheet", type="text/css", href="../../css/login/dist/normalize.css", media="all")
+    link(rel="stylesheet", type="text/css", href="../../css/login/dist/login-register.min.css", media="all")
+    script(type='text/javascript',src="../../js/vendor/jquery-1.11.3.min.js")
+    script(type='text/javascript',src="../../js/login/login-register.js")
+    - image_path='../../img'
+<body>

@@ -1,0 +1,49 @@
+- var site_url = '$_FANWE[site_url]';
+//{template page/user/header}
+//{template v2/views/public/global_header}
+
+section.login-panel
+
+  include source/jade/includes/side-panel.jade
+
+  article.form-container
+    .hand-logo.below-tablet
+      i.icon.icon-hand
+
+    .switch-header
+      .switch-container
+        .form-header.login
+          label.form-title
+            span 登录
+            img.logo(src="/tpl/hi1626/images/login/logo-1626-black.svg")
+          a.switch.goto-register(href="#{site_url}user/register.html") 新用户注册
+            i.icon.icon-sml.icon-switch
+
+    .form-wrap
+      form#form-login(data-action='{u user/ajax_login}')
+        ul
+          li.input-row
+            i.icon.icon-sml.icon-user
+            input.input-phone(type='text', value='', placeholder='请输入登录用户名 / 邮箱 / 手机号')
+          li.input-row
+            i.icon.icon-sml.icon-lock
+            input.inpset.input-password(type='password', value='', placeholder='请输入密码')
+            a.icon.icon-sml.icon-unseen(data-id='pass-ind', title='显示/隐藏密码')
+        .form-actions
+          .form-options
+            input#remember.checkbox(type='checkbox', value='1', checked='checked', autocomplete='off')
+            label(for='remember') 10天內免登录
+            a.forget.text(href='{u user/forgetpassword}', title='忘记密码?', rel='nofollow') 忘记密码?
+          button#submitLogin.button.large.disabled.full-width(type="button") 登    录
+
+    .form-error
+      i.icon.icon-sml.icon-error
+      label
+
+    include source/jade/includes/social-login.jade
+
+    input(name='rhash', value='{FORM_HASH}', type='hidden')
+
+include source/jade/includes/pick-interest.jade
+include source/jade/includes/hidden-ele.jade
+//{template v2/views/public/global_footer}

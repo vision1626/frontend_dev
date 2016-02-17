@@ -25,7 +25,7 @@ init_global_footer = (friend_links)->
     if !($.cookie('1626MsgAdv'))
       $.ajax({
         url: '/services/service.php?m=adv&a=get&id=30&limit=1',
-        type: 'post',
+        type: 'GET',
         dataType: 'json',
         data: {},
         success: (result,status,response)->
