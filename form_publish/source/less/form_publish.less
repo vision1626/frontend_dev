@@ -510,6 +510,7 @@
         input {
           border: none;
           outline: none;
+          color: black;
           width: 90%;
           font-size: 14px;
           &:-webkit-autofill {
@@ -521,7 +522,7 @@
         font-size: @font-size-s;
         border-top: 1px solid @grey;
         padding-top: 12px;
-        margin: 30px 0 0 0;
+        margin: 30px 0 8px 0;
         display: none;
         span {
           border-bottom: 1px solid black;
@@ -569,6 +570,24 @@
         .input-row {
           width: 30%;
           float: left;
+        }
+      }
+      .phone-validator {
+        table {
+          border-collapse: collapse;
+          tr.textcode {
+            display: none;
+          }
+          td {
+            padding: 5px 5px 5px 0;
+          }
+          .input-row {
+            width: 100%;
+          }
+        }
+        span.warning {
+          color: @orange;
+          font-size: @font-size-xs;
         }
       }
     }

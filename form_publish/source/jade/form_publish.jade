@@ -62,8 +62,8 @@ else
         h3 单品信息
         input.item-details__title(type="text" placeholder="标题" name="title" value="{$goods_name}")
         input.item-details__price(type="text" placeholder="价格" name="price"
-        value="{$goods_price}")
-        input.item-details__brand(type="text" placeholder="品牌（选填）" name="brand" value="{$goods_brand}")
+        value="{$addition['discount_price']}")
+        input.item-details__brand(type="text" placeholder="品牌（选填）" name="brand" value="{$addution['brand']}")
         ul.cate-and-style
           li
             select.item-details__category(type="text" placeholder="品类" name="category")

@@ -422,8 +422,8 @@ init_form_publish = ->
         $(".form-detailwarning").html('<span style="color:#F00;">请输入价格，填写数字</span>')
         return false
 
-      catid   = $form_cate_select2.val()
-      if catid == 0 || catid == ""
+      catid   = +$form_cate_select2.val()
+      if !catid || catid == 0
         $(".form-detailwarning").html('<span style="color:#F00;">请选择分类</span>');
         return false;
 
@@ -506,6 +506,7 @@ init_form_publish = ->
   init = (result)->
     updateBg(SITE_URL + result['url_arr'][0])
     updatePreview(result)
+    $preview_price.html("¥" +result['addition']['discount_price'])
     generateImg SITE_URL + url for url in result['url_arr']
     setImgEditor()
     $('.url-img').first().find('img').addClass('main-img')
