@@ -1,11 +1,86 @@
+renew_captcha = ->
+  $('i.captcha').css("background-image",'url(' + SITE_URL + "services/service.php?m=index&a=verify&rand=" + Math.random() + ')')
+  $('.input-row.captcha input').val('')
+
+mobileBind = ()->
+  self = this
+  errMsg = ''
+  if ! /^1[35874][0-9]{9}$/.test($('.mobile-input').val())
+    errMsg = '请输入正确的手机号码'
+  captcha = $('.email-input').val()
+  if errMsg
+    $('span.warning').html(errMsg)
+    return false;
+  else
+    $('span.warning').html('')
+    $.ajax({
+      url: SITE_URL + 'services/service.php?m=user&a=get_mobile_verify',
+      dataType:'json',
+      method: 'get',
+      data: {
+        ajax: 1,
+        code: $('.mobile-captcha').val(),
+        mobile: $('.mobile-input').val(),
+        type: 'reg'
+      },
+      success: (result)->
+        renew_captcha()
+        $(self).text('绑定手机')
+        $('span.warning').html(result.msg)
+        if +result.status == 1
+          sec = 60
+          timeId = setInterval ->
+            if sec == 0
+              $('span.warning').text('点击这里重新发送')
+              $('span.warning').on 'click', ->
+                $('tr.textcode').hide()
+                $('tr.captcha').show()
+                $(self).text('重新发送手机验证码')
+                $(self).off()
+                $(self).on 'click', ->
+                  $('span.warning').text('')
+                  $('span.warning').off()
+                  mobileBind.call(this)
+              clearInterval timeId
+            else
+              $('span.warning').text(result.msg + ', 没有收到验证码? ' + sec-- +'秒后重新发送')
+          , 1000 
+          $('tr.textcode').show()
+          $('tr.captcha').hide()
+          $(self).off()
+          $(self).on 'click', ->
+            $.ajax({
+              url: SITE_URL + 'services/service.php?m=user&a=bind_user_mobile',
+              method: 'get',
+              dataType: 'json',
+              data: {
+                ajax: 1,
+                mobile: $('.mobile-input').val(),
+                code: $('.textcode-input').val()
+              },
+              success: (result)->
+                if +result.status == 1
+                  $('.validator').remove()
+                  $('.validator-separator').html('认证成功!')
+                  clearInterval timeId
+                else
+                  $('span.warning').html(result.msg)
+            })
+    })
+
 askUserToGetValidated = ->
   if user_mobile == ''
     if +email_status <= 0
       $('.validator-separator').show()
       $('i.captcha').css("background-image",'url(' + SITE_URL + "services/service.php?m=index&a=verify&rand=" + Math.random() + ')')
+      
       $('.validator-separator').find('span').on 'click', (e)->
+        $(this).text('验证后，您分享的商品将会获得优先审核哦')
+                 .css({
+                    'border-bottom': 'none',
+                    'cursor': 'default'
+                  })
         if user_email
-          $(this).text('验证邮箱后，您分享的商品将会获得优先审核并优先展示哦')
           $('.email-validator').show()
           $('.email-bind').on 'click', ->
             self = this
@@ -16,58 +91,15 @@ askUserToGetValidated = ->
               method: 'get',
               data: {captcha: captcha}
               success: (result)->
+                renew_captcha()
                 $('.user-email').html(result.msg)
                 if +result.status == 1
                   $(self).text('没有收到邮件？重新发送')
             })
         else
-          $(this).text('验证手机后，您分享的商品将会获得优先审核哦')
           $('.phone-validator').show()
           $('.mobile-bind').on 'click', ->
-            self = this
-            errMsg = ''
-            if ! /^1[35874][0-9]{9}$/.test($('.mobile-input').val())
-              errMsg = '请输入正确的手机号码'
-            captcha = $('.email-input').val()
-            if errMsg
-              $('span.warning').html(errMsg)
-              return false;
-            else
-              $('span.warning').html('')
-              $.ajax({
-                url: SITE_URL + 'services/service.php?m=user&a=get_mobile_verify',
-                dataType:'json',
-                method: 'get',
-                data: {
-                  ajax: 1,
-                  code: $('.mobile-captcha').val(),
-                  mobile: $('.mobile-input').val(),
-                  type: 'reg'
-                },
-                success: (result)->
-                  $('span.warning').html(result.msg)
-                  if +result.status == 1 || +result.status == 0
-                    $(self).text('绑定手机号码')
-                    $('tr.textcode').show()
-                    $(self).off()
-                    $(self).on 'click', ->
-                      $.ajax({
-                        url: SITE_URL + 'services/service.php?m=user&a=bind_user_mobile',
-                        method: 'get',
-                        dataType: 'json',
-                        data: {
-                          ajax: 1,
-                          mobile: $('.mobile-input').val(),
-                          code: $('.textcode-input').val()
-                        },
-                        success: (result)->
-                          if +result.status == 1
-                            validator.remove()
-                            $('.validator-separator').html('认证成功')
-                          else
-                            $('span.warning').html(result.msg)
-                      })
-              })
+            mobileBind.call(this)
 refreshForm = ->
     # refresh everything
     $form_publish = $('form.form__body')

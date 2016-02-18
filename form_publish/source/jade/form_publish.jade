@@ -107,7 +107,7 @@ else
         a.pubtutorial(href="/about/help.html" target="_blank") 发布教程
   script.
     if ('{$result}' != 'Array') {
-      var result = JSON.parse('{$result}');
-      init_form_publish().init(result);
+      var form_publish_result = JSON.parse('{$result}');
+      init_form_publish().init(form_publish_result);
     }
   </body>
