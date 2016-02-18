@@ -49,7 +49,7 @@ section.login-panel
           li.input-row
             i.icon.icon-sml.icon-lock
             input.inpset.input-password(type='password', value='', placeholder='请输入密码')
-            a.icon.icon-sml.icon-unseen(data-id='pass-ind', title='显示/隐藏密码')
+            a.icon.icon-sml.icon-unseen.reveal-pw(data-id='pass-ind', title='显示/隐藏密码')
         .form-actions
           .form-options
             input#remember.checkbox(type='checkbox', value='1', checked='checked', autocomplete='off')
@@ -67,7 +67,7 @@ section.login-panel
           li.input-row
             i.icon.icon-sml.icon-lock
             input.input-password(type='password', value='', placeholder='请输入密码', maxlength='20', autocomplete='off')
-            a.icon.icon-sml.icon-unseen(title='显示/隐藏密码')
+            a.icon.icon-sml.icon-unseen.reveal-pw(title='显示/隐藏密码')
           li.input-row.captcha
             i.icon.icon-sml.icon-captcha
             input#captchaInput(type='text', value='', placeholder='请输入验证码', autocomplete='off', maxlength='5')

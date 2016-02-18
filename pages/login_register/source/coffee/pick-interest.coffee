@@ -117,7 +117,7 @@ initPickInterest = (category,is_new_user)->
     $.ajax {
       url: SITE_URL + 'services/service.php?m=u&a=get_approve_user_ajax'
       type: "GET"
-      data: {tag:id,page:page,limit:5,follow:follow} #todo:老马话此处follow要等于0 唔系就搞死台机喔 by Kenny 20160202 ……结果都系死
+      data: {tag:id,page:page,limit:5,follow:follow}
       cache: false
       dataType: "json"
       success: (result)->

@@ -49,7 +49,7 @@ showSmallErrorTip = (text,mood)->
 $('input[type=text],input[type=password]').on 'propertychange input', ->
   $('.form-error').fadeOut(300)
 
-$(document).on 'click','.icon-unseen', ->
+$(document).on 'click','.reveal-pw', ->
   btn_reveal = $(this)
   ipt_pass = btn_reveal.prev();
   if ipt_pass.attr('type') is 'password'

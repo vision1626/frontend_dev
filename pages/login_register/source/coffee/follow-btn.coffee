@@ -81,7 +81,7 @@ initFollowBtn = ()->
       url: '/services/service.php?m=user&a=follow',
       type: 'post',
       dataType: 'json',
-      data: { uid: uid },
+      data: { uid: uid, bulk: 0},
       success: (result)->
         if result.status is 1 or result.status is 2
           sliderToRight($btn, "#{result.status}")
@@ -91,48 +91,41 @@ initFollowBtn = ()->
         alert('fb-errr: ' + result)
     })
 
+  submitFollowAll = (all_uid,$all_btn)->
+    $.ajax({
+      url: '/services/service.php?m=user&a=follow',
+      type: 'post',
+      dataType: 'json',
+      data: { uid: all_uid, bulk: 1},
+      success: (result)->
+        if result.is_error is 0
+          for $btn in $all_btn
+            sliderToRight($btn, '1')
+        else
+          showSmallErrorTip('关注失败',0)
+      error: (result)->
+        showSmallErrorTip('关注失败',0)
+    })
+
   $('.follow-all').click ->
     $current_u_list = $('.push-users.current')
     $current_u_list.find('.slider-btn').show()
+    all_uid = ''
+    $all_btn = $('')
     $current_u_list.find('li').each ->
       $user = $(this)
-      uid = $user.attr 'uid'
-      $btn = $user.find '.follow-btn'
+      $btn = $user.find('.follow-btn')
       follow_status = parseInt($btn.attr('follow-status'))
       if follow_status isnt 1 and follow_status isnt 2
-        submitFollow(uid, $btn)
+        uid = $user.attr 'uid'
+        all_uid = all_uid + uid + ','
+        $all_btn.push($btn)
 
+    submitFollowAll(all_uid, $all_btn, 1)
 
   $(document).on 'click', '.follow-btn', ->
     $button = $(this)
     $button.find('.slider-btn').show()
     uid = $button.parent().attr 'uid'
-    submitFollow(uid,$button)
-
-  changeFollowCount = (change, btn_type, $obj)->
-    $following_count_text = $('')
-    following_count = 0
-
-    changeCount = ->
-      following_count = parseInt($following_count_text.text())
-      if change is 'up'
-        following_count++
-      else
-        following_count--
-      $following_count_text.text following_count
-
-    if btn_type is 'u_header' #点击u_header的关注按钮
-
-      if _follow_show_me #在我自己的关注/粉丝列表,改变「关注」数
-        $following_count_text = $('.content__relationship').find('.relation-follow b')
-      else #在別人的关注/粉丝列表,改变「粉丝」数
-        $following_count_text = $('.content__relationship').find('.relation-fans b')
-      changeCount()
-
-    else if btn_type is 'follow_list'
-      $following_count_text = $obj.parent().find('.fans-concemed_fans b') #改变点击那个人的「粉丝」数
-      changeCount()
-      if _follow_show_me #在我自己的关注/粉丝列表,改变「关注」数
-        $following_count_text = $('.content__relationship').find('.relation-follow b')
-        changeCount()
-
+    $all_follow_users_btn = $('.tab__content').find("li[uid='#{uid}'] .follow-btn")
+    submitFollow(uid,$all_follow_users_btn)

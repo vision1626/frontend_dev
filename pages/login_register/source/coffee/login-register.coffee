@@ -25,32 +25,6 @@ init = ->
   if $form_register.length > 0
     at_page = 1
 
-#  #  Form input error tip 彈出錯誤提示
-#  showFormError = (text, x, y, pass)->
-#    if $(window).width() > 950
-#      $('.form-error').find('label').text(text)
-#      $('.form-error').css {'left': x + 'px', 'top': y + 'px'}
-#      $('.form-error').show()
-#    else
-#      $('.form-error-mob').find('label').text(text)
-#      $('.form-error-mob').fadeIn(200)
-#      setTimeout(->
-#        $(".form-error-mob").fadeOut(100)
-#      , 1000)
-#
-#  #  Form input error tip 彈出錯誤提示
-#  showSmallErrorTip = (text,mood)->
-#    mood = mood or 0 # 1是成功的笑臉，0是失敗的哭臉
-#    $('.form-error-mob').find('label').html(text)
-#    if mood is 1
-#      $('.form-error-mob').find('i.icon').addClass('icon-glad')
-#    $('.form-error-mob').fadeIn(200)
-#    setTimeout(->
-#      $(".form-error-mob").fadeOut(100, ->
-#        $('.form-error-mob').find('i.icon').removeClass('icon-glad')
-#      )
-#    , 1500)
-
   # 適應返回鍵
 #  locationHashChanged = ->
 #    if location.hash is "#register"
