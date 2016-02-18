@@ -159,7 +159,7 @@ init = ->
                 window.location.href = result.success_url
               , 1500)
             else
-              initPickInterest(result.category)
+              initPickInterest(result.category,false)
               showSmallErrorTip('登录成功！<br/>你还没选择兴趣哦',1)
               setTimeout(->
                 $('.login-panel').hide()

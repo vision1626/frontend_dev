@@ -7,10 +7,10 @@ module.exports = function (grunt) {
         cssSrcPath:     'source/less',
         jsSrcPath:      'source/coffee',
         jadeSrcPath:    'source/jade',
-        cssDistPath:    '<%= globalConfig.distPath %>/css/login/dist',
+        cssDistPath:    '<%= globalConfig.distPath %>/css',
         jsDebugPath:    '<%= globalConfig.distPath %>/js/login/debug',
         jsDistPath:     '<%= globalConfig.distPath %>/js/login',
-        htmlDistPath:   '<%= globalConfig.distPath %>/page/login',
+        htmlDistPath:   '<%= globalConfig.distPath %>/pages/login',
         cssName:        'login-register'
     };
 
@@ -53,9 +53,9 @@ module.exports = function (grunt) {
                 },
                 options: {
                     compress: false,
-                    sourceMap: true,
-                    sourceMapFilename: '<%= globalConfig.cssDistPath %>/<%= globalConfig.cssName %>.css.map',
-                    sourceMapURL: '<%= globalConfig.cssName %>.css.map'
+                    sourceMap: false
+                    //sourceMapFilename: '<%= globalConfig.cssDistPath %>/<%= globalConfig.cssName %>.css.map',
+                    //sourceMapURL: '<%= globalConfig.cssName %>.css.map'
                 }
             }
         },

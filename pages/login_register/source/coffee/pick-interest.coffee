@@ -1,11 +1,11 @@
-initPickInterest = (category)->
+initPickInterest = (category,is_new_user)->
   $pick_interest = $('.pick-interest')
   $bulk_action = $pick_interest.find('.bulk-actions')
   $pick_category = $pick_interest.find('.pick-category')
   $pick_users = $('.pick-users')
   $tab_bar = $pick_users.find('.tabbar')
   $tab_panel = $pick_users.find('.tab__panel')
-#  is_new_user = is_new_user or true
+  is_new_user = is_new_user or true
 
   #-------------- 函数: 画兴趣格仔 -----------------
   drawInterest = (item_data)->
@@ -110,14 +110,14 @@ initPickInterest = (category)->
 
   getUserData = (cat_id,page)->
     id = parseInt(cat_id)
-#    if is_new_user
-#      follow = 0
-#    else
-#      follow = 1
+    if is_new_user
+      follow = 0
+    else
+      follow = 1
     $.ajax {
       url: SITE_URL + 'services/service.php?m=u&a=get_approve_user_ajax'
       type: "GET"
-      data: {tag:id,page:page,limit:5,follow:0} #todo:老马话此处follow要等于0 唔系就搞死台机喔 by Kenny 20160202 ……结果都系死
+      data: {tag:id,page:page,limit:5,follow:follow} #todo:老马话此处follow要等于0 唔系就搞死台机喔 by Kenny 20160202 ……结果都系死
       cache: false
       dataType: "json"
       success: (result)->
