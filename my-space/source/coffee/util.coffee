@@ -1,3 +1,73 @@
+askUserToGetValidated = ->
+  if user_mobile == ''
+    if +email_status <= 0
+      $('.validator-separator').show()
+      $('i.captcha').css("background-image",'url(' + SITE_URL + "services/service.php?m=index&a=verify&rand=" + Math.random() + ')')
+      $('.validator-separator').find('span').on 'click', (e)->
+        if user_email
+          $(this).text('验证邮箱后，您分享的商品将会获得优先审核并优先展示哦')
+          $('.email-validator').show()
+          $('.email-bind').on 'click', ->
+            self = this
+            captcha = $('.email-captcha').val()
+            $.ajax({
+              url: SITE_URL + 'services/service.php?m=user&a=sendemail',
+              dataType: 'json',
+              method: 'get',
+              data: {captcha: captcha}
+              success: (result)->
+                $('.user-email').html(result.msg)
+                if +result.status == 1
+                  $(self).text('没有收到邮件？重新发送')
+            })
+        else
+          $(this).text('验证手机后，您分享的商品将会获得优先审核哦')
+          $('.phone-validator').show()
+          $('.mobile-bind').on 'click', ->
+            self = this
+            errMsg = ''
+            if ! /^1[35874][0-9]{9}$/.test($('.mobile-input').val())
+              errMsg = '请输入正确的手机号码'
+            captcha = $('.email-input').val()
+            if errMsg
+              $('span.warning').html(errMsg)
+              return false;
+            else
+              $('span.warning').html('')
+              $.ajax({
+                url: SITE_URL + 'services/service.php?m=user&a=get_mobile_verify',
+                dataType:'json',
+                method: 'get',
+                data: {
+                  ajax: 1,
+                  code: $('.mobile-captcha').val(),
+                  mobile: $('.mobile-input').val(),
+                  type: 'reg'
+                },
+                success: (result)->
+                  $('span.warning').html(result.msg)
+                  if +result.status == 1 || +result.status == 0
+                    $(self).text('绑定手机号码')
+                    $('tr.textcode').show()
+                    $(self).off()
+                    $(self).on 'click', ->
+                      $.ajax({
+                        url: SITE_URL + 'services/service.php?m=user&a=bind_user_mobile',
+                        method: 'get',
+                        dataType: 'json',
+                        data: {
+                          ajax: 1,
+                          mobile: $('.mobile-input').val(),
+                          code: $('.textcode-input').val()
+                        },
+                        success: (result)->
+                          if +result.status == 1
+                            validator.remove()
+                            $('.validator-separator').html('认证成功')
+                          else
+                            $('span.warning').html(result.msg)
+                      })
+              })
 refreshForm = ->
     # refresh everything
     $form_publish = $('form.form__body')
@@ -66,7 +136,7 @@ giveupEditing = ->
   if isEditingGood()
     if confirm('是否放弃编辑单品？')
       refreshForm()
-      toggleGoods(true)
+      # toggleGoods(true)
       return true
     else
       return false

@@ -28,16 +28,50 @@ else
               i.icon.icon-link
               input.input__link(placeholder="请输入商品购买地址（淘宝/天猫）" name="url" autofocus="true")
               input(type='hidden', name='type', value='local')
-            button.button.large.blue 获取信息
+            button.button.large.blue.confirm 获取信息
           .urlwarning
           p 图片已经保存到电脑？点这里
-            a.manually-upload 上传分享
+            a.manually-upload(href="/u/addshare") 上传分享
+        .validator-separator
+          i.icon.icon-hand
+          span 优先审核
+        .email-validator.validator
+          .wrapper
+            div.user-email
+              label 您绑定的邮箱是：
+              span {$_FANWE['user']['email']}        
+            .input-row
+              input.email-captcha(placeholder="请输入右侧验证码")
+            i.captcha
+          button.button.large.blue.email-bind 发送验证邮件
+        .phone-validator.validator
+          table
+            tr
+              td 手机号
+              td 
+                .input-row
+                  input.mobile-input
+            tr
+              td 图片验证码
+              td
+                .input-row
+                  input.mobile-captcha
+              td 
+                i.captcha
+            tr.textcode
+              td 短信验证码
+              td 
+                .input-row
+                  input.textcode-input
+          span.warning
+          button.button.large.blue.mobile-bind 获取手机验证码
       .popup__close
         i.icon.icon-closepop
 
 script(type='text/javascript').
-  $(document).ready(function () {
-    //- init_form_publish();
-  });
+  email_status = "{$_FANWE['user']['email_status']}";
+  user_mobile = "{$_FANWE['user']['mobile']}";
+  user_email = "{$_FANWE['user']['email']}";
+  init_form_publish().popupBinding()
 if !production
   </body>

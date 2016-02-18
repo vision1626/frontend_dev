@@ -99,6 +99,7 @@ init_global_header = ->
     if giveupEditing()
       $('.popup__blackbox').fadeIn(500)
       $('.popup').show()
+      askUserToGetValidated()
       $('.popup__loading').hide()
     else
       return false

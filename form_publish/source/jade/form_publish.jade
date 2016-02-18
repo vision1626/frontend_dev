@@ -14,17 +14,17 @@ else
         .item-b_image.preview
           .dragger
             i.icon.icon-drag
-          //- img(src= image_path + "/pikachu.jpeg")
+              img(src="{$url_arr[0]}")
         .item-b_description
           .item-b_isnew
             span.item_tag new
             span 新发布
           a
             .item-b_title 
-              span {$goods_name}
+              span 商品标题
               
             .item-b_price
-              span {$goods_price}
+              span ¥ 0.00
         .item-b_additional
           a
             img(src="{avatar $_FANWE['uid'] s 1 $_FANWE['user']['img_thumb']}")
@@ -62,8 +62,8 @@ else
         h3 单品信息
         input.item-details__title(type="text" placeholder="标题" name="title" value="{$goods_name}")
         input.item-details__price(type="text" placeholder="价格" name="price"
-        value="{$goods_price}")
-        input.item-details__brand(type="text" placeholder="品牌（选填）" name="brand" value="{$goods_brand}")
+        value="{$addition['discount_price']}")
+        input.item-details__brand(type="text" placeholder="品牌（选填）" name="brand" value="{$addution['brand']}")
         ul.cate-and-style
           li
             select.item-details__category(type="text" placeholder="品类" name="category")
@@ -106,6 +106,8 @@ else
         i.icon.icon-question
         a.pubtutorial(href="/about/help.html" target="_blank") 发布教程
   script.
-    init_form_publish().popupBinding()
-if !production
+    if ('{$result}' != 'Array') {
+      var result = JSON.parse('{$result}');
+      init_form_publish().init(result);
+    }
   </body>
