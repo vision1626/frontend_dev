@@ -397,7 +397,7 @@ big_DashboardItem_Generater = (data,current_index) ->
       ) +
       '<div class="item-b_additional">' +
         '<a href="' + data.user_href + '" title="' + data.user_name + '">' +
-          '<img src="' + data.img_thumb + '"/>' +
+          '<img src="' + data.img_thumb.replace('_small','_middle') + '"/>' +
         '</a>' +
         '<div class="item-value">' +
           '<span class="icon icon-viewed"></span>' +
