@@ -146,6 +146,7 @@ afterMenuOpen = () ->
   setTimeout ->
 #    alert($(".menu-flashbuy-value").contents().find("body").html())
     _menu_showed = true
+    $('.profile-container .content').addClass('absolute')
   , 200
 
 closeMenu = () ->
@@ -156,7 +157,9 @@ closeMenu = () ->
     $(document).off 'touchstart','div.content_container'
     setTimeout ->
       _menu_showed = false
-    , 200
+      $('.profile-container .content').removeClass('absolute')
+      fixMainnav()
+    , 500
 
 $(document).click (e)->
   if !_menu_showed

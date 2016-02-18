@@ -261,7 +261,7 @@ big_DashboardItem_Generater = (data,current_index) ->
       (if data.dynamic_type is 1
         '<div class="item-l_image">' +
           '<a href="' + data.url + '" target="_blank">' +
-            '<img src="' + data.img + '" alt="' + data.title + '"/>' +
+            '<img src="' + data.img + '" alt="' + decodeURIComponent(data.title) + '"/>' +
           '</a>' +
           '<dl class="collocation">' +
           (
@@ -313,7 +313,7 @@ big_DashboardItem_Generater = (data,current_index) ->
       else
         '<div class="item-b_image">' +
           '<a href="' + data.url + '" target="_blank">' +
-            '<img src="' + data.img + '" alt="' + data.title + '"/>' +
+            '<img src="' + data.img + '" alt="' + decodeURIComponent(data.title) + '"/>' +
           '</a>' +
           (
             if state is 'talk' and _dashboard_show_me
@@ -409,7 +409,7 @@ small_DashboardItem_Generater = (data,current_index) ->
   dd = $('<dd class="item ' + sid + '" i="' + current_index + '" dtype="' + dtype + '">' +
       '<div>' +
         '<div class="item-s_image">' +
-        '<img src="' + data.img + '" alt="' + data.title + '"/>' +
+        '<img src="' + data.img + '" alt="' + decodeURIComponent(data.title) + '"/>' +
       '</div>' +
       '<div class="item-s_description">' +
         '<div class="item-s_owner">' +
@@ -653,6 +653,12 @@ fixMainnav = ->
 
   if $('body').scrollTop() >= fixed_point
     $('.main-nav-container,.main-nav').addClass('fixed')
+
+#    $('.profile-container .content').addClass('absolute')
+#    setTimeout ->
+#      $('.profile-container .content').removeClass('absolute')
+#    , 10
+
     if !_is_mobile
       $('.scroll-to-top').addClass('fixed')
     else
