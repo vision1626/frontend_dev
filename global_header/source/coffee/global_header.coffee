@@ -26,10 +26,10 @@ init_global_header = ->
       success: (result)->
         data = result.data
         if result.status == 0
-          $('.fixed-nav__number').html(0)
+          $('.fixed-nav_messages').html(0)
           $('.check-all').find('a').html("没有新消息")
         else 
-          $('.fixed-nav__number').html(result.sum)
+          $('.fixed-nav_messages').html(result.sum)
           for d in data
             if d['type']=="1" && d['ge_sum']!="0"
               $('.get-likes').html("<i class='icon icon-heart'></icon>" + 
@@ -70,7 +70,7 @@ init_global_header = ->
         success: (result)->
           if result.status == 1
             $('.check-all').prevAll().remove()
-            $('.fixed-nav__number.').text('0')
+            $('.fixed-nav_messages.').text('0')
             $('.check-all').find('a').html("没有新消息")
       })
 
