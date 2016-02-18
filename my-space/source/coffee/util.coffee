@@ -654,11 +654,6 @@ fixMainnav = ->
   if $('body').scrollTop() >= fixed_point
     $('.main-nav-container,.main-nav').addClass('fixed')
 
-#    $('.profile-container .content').addClass('absolute')
-#    setTimeout ->
-#      $('.profile-container .content').removeClass('absolute')
-#    , 10
-
     if !_is_mobile
       $('.scroll-to-top').addClass('fixed')
     else
