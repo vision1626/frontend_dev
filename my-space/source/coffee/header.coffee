@@ -25,6 +25,20 @@ init_u_header = ->
   isInCurrentAction = (action) ->
     window.location.pathname.indexOf(action) > 0 or window.state == action
 
+  #部分用户,php端不能正常提供其UID,所以通过页面链接获取,相对应的粉丝或关注数为空时,显示0
+  if window.uid is ''
+    window.uid = location.pathname.substring(location.pathname.indexOf('-')+1,location.pathname.indexOf('.html'))
+  if window.fans_count is ''
+    window.fans_count = '0'
+  if window.follow_count is ''
+    window.follow_count = '0'
+  $fans.find('b').html(window.fans_count)
+  $fans_m.find('b').html(window.fans_count)
+  $fans_m_t.find('span').html(window.fans_count + '粉丝')
+  $follow.find('b').html(window.follow_count)
+  $follow_m.find('b').html(window.follow_count)
+  $follow_m_t.find('span').html(window.follow_count + '关注')
+
 #  if (window.myid != window.uid)
 #    $('.content__actions').find('li').css({'width': '50%'})
 
