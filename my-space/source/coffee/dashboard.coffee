@@ -31,7 +31,7 @@ _fav_p_data = {}
 _fav_c_data = {}
 _publish_p_data = {}
 _publish_c_data = {}
-_seaarch_data = {}
+_search_data = {}
 
 _dashboard_data_count = 0
 _fav_p_data_count = 0
@@ -323,11 +323,11 @@ query_dashboard_data = () ->
         success: (result,status,response)->
           if _dashboard_list_by_search
             _search_data_count = parseInt(result.count)
-            if _seaarch_data and _seaarch_data.length > 0
+            if _search_data and _search_data.length > 0
               for d in result.data
-                _seaarch_data.push(d)
+                _search_data.push(d)
             else
-              _seaarch_data = result.data
+              _search_data = result.data
             if result.more is 1
               _search_data_more = true
             else
@@ -489,7 +489,7 @@ gen_dashboard_item = () ->
   step = 0
   if _dashboard_list_by_search
     list_count = _search_data_count
-    list_data = _seaarch_data
+    list_data = _search_data
 
     if _dashboard_search_keyword isnt ''
       $('.list-search-dashboard').val(_dashboard_search_keyword)
@@ -510,8 +510,7 @@ gen_dashboard_item = () ->
         list_count = _fav_p_data_count
         list_data = _fav_p_data
         list_data_more = _fav_p_data_more
-      nav_c_count.html(_fav_c_data_count)
-      nav_p_count.html(_fav_p_data_count)
+
     else if state is 'talk'
       if _dashboard_show_product_collocation is 2
         list_count = _publish_c_data_count
@@ -521,13 +520,19 @@ gen_dashboard_item = () ->
         list_count = _publish_p_data_count
         list_data = _publish_p_data
         list_data_more = _publish_p_data_more
-      nav_c_count.html(_publish_c_data_count)
-      nav_p_count.html(_publish_p_data_count)
     else
       list_count = _dashboard_data_count
       list_data = _dashboard_data
       list_data_more = _dashboard_data_more
-      nav_d_count.html(_dashboard_data_count)
+
+  if state is 'fav'
+    nav_c_count.html(_fav_c_data_count)
+    nav_p_count.html(_fav_p_data_count)
+  else if state is 'talk'
+    nav_c_count.html(_publish_c_data_count)
+    nav_p_count.html(_publish_p_data_count)
+  else
+    nav_d_count.html(_dashboard_data_count)
 
   if _is_mobile and state is 'talk' and _dashboard_show_me and parseInt($.cookie('publistAlertShow')) is 0
     publish_alert.fadeIn(300)
@@ -662,12 +667,6 @@ init_dashboard_data = (soft) ->
   _dashboard_end_b = 0
   _dashboard_start_s = 0
   _dashboard_end_s = 0
-#  if window.dashboard_list_data
-#    window.dashboard_list_data.length = 0
-#
-#  window.dashboard_count = ''
-#  window.product_count = ''
-#  window.collocation_count = ''
 
   _dashboard_has_publish_btn_b = false
   _dashboard_has_publish_btn_s = false
@@ -689,6 +688,7 @@ init_dashboard_data = (soft) ->
   btn_ShowMore.html('我要看更多').removeClass('loading')
   publish_alert.hide()
   _dashboard_has_more = true
+  _search_data = {}
   if soft
 
   else
@@ -893,7 +893,7 @@ refresh_like = (sid,ed,count) ->
   if _dashboard_list_by_search
     if _search_data_count > 0
       lm = true
-      for ld in _seaarch_data
+      for ld in _search_data
         if parseInt(ld.did) is parseInt(sid)
           ld.is_fav = ed
           ld.like_count += count

@@ -13,34 +13,40 @@ else
       if production
         //{if $_FANWE['uid'] > 0}
         a(href='/settings/psersonal.html')
-          img(src="{avatar $_FANWE['uid'] s 1 $_FANWE['user']['img_thumb']}")
+          img(src="{avatar $_FANWE['uid'] b 1 $_FANWE['user']['img_thumb']}")
         a.nickname(href='/settings/psersonal.html')
           | $_FANWE['user']['user_name']
         a.menu-logout(href="{u user/logout}") 退出
         //{else}
-        i.icon.icon-user
-        a(href="{u user/login}" target="_blank") 登录1626
+        a(href="{u user/login}" target="_blank")
+          i.icon.icon-user
+          |登录1626
         //span |
         //a(href="{u user/register}" target="_blank") 注册
         //{/if}
     //{if $_FANWE['uid'] > 0}
     .menu-myspage
-      i.icon.icon-hand
-      a(href="/u/dashboard.html") 我的潮品
+      a(href="/u/dashboard.html")
+        i.icon.icon-hand
+        |我的潮品
     //{/if}
     .menu-flashbuy
-      i.icon.icon-flashbuy
-      a(href="http://www.1626buy.cn/flow/") 购物车
-      //{if $_FANWE['uid'] > 0}
-      span.fixed-nav__number.fixed-nav__number--blue $_FANWE['cart_number']
-      //{else}
-      iframe.menu-flashbuy-value(src="http://192.168.0.231/api/get_cart.php?token=1626-cart-number&color=222226&size=20px" scrolling="no" name="cartCount")
-      //{/if}
+      a(href="http://www.1626buy.cn/flow/")
+        //{if $_FANWE['uid'] > 0}
+        i.icon.icon-flashbuy
+        |购物车
+        span.fixed-nav__number.fixed-nav__number--blue $_FANWE['cart_number']
+        //{else}
+        i.icon.icon-flashbuy
+        |购物车
+        iframe.menu-flashbuy-value(src="http://192.168.0.231/api/get_cart.php?token=1626-cart-number&color=222226&size=20px" scrolling="no" name="cartCount")
+        //{/if}
     //{if $_FANWE['uid'] > 0}
     .menu-message
-      i.icon.icon-news
-      a(href="/messagetip/") 消息
-      span.fixed-nav__number.fixed-nav__number--blue 0
+      a(href="/messagetip/")
+        i.icon.icon-news
+        |消息
+        span.fixed-nav__number.fixed-nav__number--blue 0
     //{/if}
     .menu-nav
       a(href='http://www.1626.com',target='_blank') 首页
