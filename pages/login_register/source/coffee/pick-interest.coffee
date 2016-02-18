@@ -152,18 +152,6 @@ initPickInterest = (category,is_new_user)->
     getUserData(cat_id,page)
 
   #---------------
-  #  Form input error tip 彈出錯誤提示
-  showSmallErrorTip = (text,mood)->
-    mood = mood or 0 # 1是成功的笑臉，0是失敗的哭臉
-    $('.form-error-mob').find('label').html(text)
-    if mood is 1
-      $('.form-error-mob').find('i.icon').addClass('icon-happy')
-    $('.form-error-mob').fadeIn(200)
-    setTimeout(->
-      $(".form-error-mob").fadeOut(100, ->
-        $('.form-error-mob').find('i.icon').removeClass('icon-happy')
-      )
-    , 1500)
   $('.submit-interest button').click ->
     interests = ''
     $selected = $pick_category.find('li.selected')

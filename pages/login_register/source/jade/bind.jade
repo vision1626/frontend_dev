@@ -1,4 +1,6 @@
-<!--{template page/user/header}-->
+include source/jade/includes/head.jade
+//{template v2/views/public/global_header}
+
 section.login-panel
 
   include source/jade/includes/side-panel.jade
@@ -100,15 +102,10 @@ section.login-panel
             a.text.nickname-skip(data-href='') 跳过
 
     .form-error
-      i.icon.icon-sml.icon-error
+      i.icon.icon-sml.icon-warning
       label
     input(name='rhash', value='{FORM_HASH}', type='hidden')
 
-.popup-wrap.full-screen(style='display: none')
-  .popup-content(style='width: 70%;height:70%;')
-    h3 服务条款
-    article
-    button.close-popup
-      i.icon.icon-sml.icon-close-popup
-
-<!--{template page/user/footer}-->
+include source/jade/includes/pick-interest.jade
+include source/jade/includes/hidden-ele.jade
+//{template v2/views/public/global_footer}

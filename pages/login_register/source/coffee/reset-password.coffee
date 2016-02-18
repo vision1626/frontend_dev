@@ -15,49 +15,6 @@ init = ->
   $(window).resize ->
     resizeEle()
 
-  btn_reveal_pw = $('.icon-unseen')
-  btn_reveal_pw.click ->
-    ipt_pass = $(this).prev();
-    if ipt_pass.attr('type') is 'password'
-      ipt_pass.attr('type', 'text')
-      $(this).addClass 'icon-seen'
-      $(this).removeClass 'icon-unseen'
-    else
-      ipt_pass.attr('type', 'password')
-      $(this).removeClass 'icon-seen'
-      $(this).addClass 'icon-unseen'
-
-  #  Form input error tip 彈出錯誤提示
-  showFormError = (text, x, y, pass)->
-    if $(window).width() > 950
-      $('.form-error').find('label').text(text)
-      $('.form-error').css {'left': x + 'px', 'top': y + 'px'}
-      $('.form-error').show()
-    else
-      $('.form-error-mob').find('label').text(text)
-      $('.form-error-mob').fadeIn(200)
-      setTimeout(->
-        $(".form-error-mob").fadeOut(100)
-      , 1000)
-      
-  #  Form input error tip 彈出錯誤提示
-  showSmallErrorTip = (text,mood)->
-    mood = mood or 0 # 1是成功的笑臉，0是失敗的哭臉
-    $('.form-error-mob').find('label').html(text)
-    if mood is 1
-      $('.form-error-mob').find('i.icon').addClass('icon-happy')
-    $('.form-error-mob').fadeIn(200)
-    setTimeout(->
-      $(".form-error-mob").fadeOut(100, ->
-        $('.form-error-mob').find('i.icon').removeClass('icon-happy')
-      )
-    , 1500)
-
-  # 鍵入，隱藏錯誤提示
-  $('input[type=text],input[type=password]').on 'propertychange input', ->
-    $('.form-error').fadeOut(300)
-
-
   # -------------------------- 重置密码 - START -------------------------
 
   form_reset = $('#form-reset')

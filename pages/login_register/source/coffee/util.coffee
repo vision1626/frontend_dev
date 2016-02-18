@@ -18,6 +18,49 @@ $.fn.windowCenter = ->
   $(this).verticalCenter()
   $(this).horizontalCenter()
 
+
+#  Form input error tip 彈出錯誤提示
+showFormError = (text, x, y, pass)->
+  if $(window).width() > 950
+    $('.form-error').find('label').text(text)
+    $('.form-error').css {'left': x + 'px', 'top': y + 'px'}
+    $('.form-error').show()
+  else
+    $('.form-error-mob').find('label').text(text)
+    $('.form-error-mob').fadeIn(200)
+    setTimeout(->
+      $(".form-error-mob").fadeOut(100)
+    , 1000)
+
+#  Form input error tip 彈出錯誤提示
+showSmallErrorTip = (text,mood)->
+  mood = mood or 0 # 1是成功的笑臉，0是失敗的哭臉
+  $('.form-error-mob').find('label').html(text)
+  if mood is 1
+    $('.form-error-mob').find('i.icon').addClass('icon-glad')
+  $('.form-error-mob').fadeIn(200)
+  setTimeout(->
+    $(".form-error-mob").fadeOut(100, ->
+      $('.form-error-mob').find('i.icon').removeClass('icon-glad')
+    )
+  , 1500)
+
+# 鍵入，隱藏錯誤提示
+$('input[type=text],input[type=password]').on 'propertychange input', ->
+  $('.form-error').fadeOut(300)
+
+$(document).on 'click','.icon-unseen', ->
+  btn_reveal = $(this)
+  ipt_pass = btn_reveal.prev();
+  if ipt_pass.attr('type') is 'password'
+    ipt_pass.attr('type', 'text')
+    btn_reveal.addClass 'icon-seen'
+    btn_reveal.removeClass 'icon-unseen'
+  else
+    ipt_pass.attr('type', 'password')
+    btn_reveal.removeClass 'icon-seen'
+    btn_reveal.addClass 'icon-unseen'
+
 # --------------- Handlers -----------------
 checkCaptcha = (event)-> 
     if isAndroid(window.navigator.userAgent) and isQQBrowser(window.navigator.userAgent)
@@ -119,7 +162,7 @@ checkNickname = (userNickname,callBack) ->
   }
 
 
-imagePath = '/tpl/hi1626/images/login'
+imagePath = '/tpl/hi1626/v2/images'
 
 
 #     浏览器/操作系统嗅探

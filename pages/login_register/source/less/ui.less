@@ -9,7 +9,7 @@ input {
   }
 }
 .button {
-  border: 2px solid @gray;
+  border: 2px solid @grey;
   transition: background-color 0.1s cubic-bezier(.22, .24, .21, 1);
   vertical-align: middle;
   font-size: @font-size-m;
@@ -53,9 +53,9 @@ input {
     }
   }
   &.disabled {
-    background: @gray;
+    background: @grey;
     color: #fff;
-    border: @border-width solid @gray;
+    border: @border-width solid @grey;
   }
   i {
   }
@@ -69,7 +69,7 @@ input {
 }
 
 a.text {
-  border-bottom: 2px solid @gray;
+  border-bottom: 2px solid @grey;
   &:hover {
     cursor: pointer;
     border-bottom: 2px solid @blue;
@@ -79,137 +79,6 @@ a.text {
   }
 }
 
-.icon {
-  ._useIconFont;
-  vertical-align: middle;
-}
-.icon-sml {
-  //margin-right: 3px;
-  &:before {
-    font-size: 20px;
-  }
-}
-.icon-heart {
-  color: @red;
-  &:before {
-    content: "\e800";
-  }
-}
-.icon-mail {
-  &:before {
-    content: "\e804";
-  }
-}
-.icon-phone {
-  &:before {
-    content: "\e805";
-  }
-}
-.icon-lock {
-  &:before {
-    content: "\e803";
-  }
-}
-.icon-captcha {
-  &:before {
-    content: "\e801";
-  }
-}
-.icon-unseen {
-  &:before {
-    content: "\e808";
-  }
-}
-.icon-seen {
-  &:before {
-    content: "\e807";
-  }
-}
-.icon-wechat {
-  &:before {
-    content: "\e810";
-  }
-}
-.icon-weibo {
-  &:before {
-    content: "\e80f";
-  }
-}
-.icon-qq {
-  &:before {
-    content: "\e80e";
-  }
-}
-.icon-taobao {
-  &:before {
-    content: "\e906";
-  }
-}
-.icon-hand {
-  &:before {
-    content: "\e811";
-  }
-}
-.icon-goto-page {
-  &:before {
-    content: "\e812";
-  }
-}
-.icon-bad {
-  &:before {
-    content: "\e814";
-  }
-}
-.icon-happy {
-  &:before {
-    content: "\e901";
-  }
-}
-.icon-close-popup {
-  &:before {
-    content: "\e813";
-  }
-}
-.icon-switch {
-  &:before {
-    content: "\e815";
-  }
-}
-.icon-error {
-  &:before {
-    content: "\e80d";
-  }
-}
-.icon-dropdown {
-  &:before {
-    content: "\e90a";
-  }
-}
-.icon-location {
-  &:before {
-    content: "\e900";
-  }
-}
-.icon-tick {
-  &:before {
-    content: "\e904";
-  }
-}
-.icon-user {
-  &:before {
-    content: "\e902";
-  }
-}
-.icon-follow {
-  &:before {
-    content: "\e905";
-  }
-}
-.icon-followed {
-  &:before {
-    content: "\e903";
-  }
-}
 .full-width {
   width: 100%;
 }
@@ -243,7 +112,7 @@ a.text {
 [type="checkbox"]:not(:checked) + label:after,
 [type="checkbox"]:checked + label:after {
   ._useIconFont;
-  content: '\e904';
+  content: '\e928';
   position: absolute;
   top: 3px; left: 0px;
   font-size: 18px;

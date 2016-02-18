@@ -77,44 +77,10 @@ init = ->
     at_page = 2 #手機號碼更改
     $('.form-wrap').css('overflow','visible') #下拉菜单会因为form-wrap的overflow:hidden而被挡住,在此取消此样式
 
-  btn_reveal_pw = $('.icon-unseen')
-  btn_reveal_pw.click ->
-    $(this).toggleClass 'icon-seen'
-    ipt_pass = $(this).prev();
-    if ipt_pass.attr('type') is 'password'
-      ipt_pass.attr('type', 'text')
-    else
-      ipt_pass.attr('type', 'password')
 
   $('a.captcha').click ->
     $(this).refresh_captcha()
 #    $(this).parent('.captcha').find('input').val('')
-
-  #  Form input error tip 彈出錯誤提示
-  showFormError = (text, x, y)->
-    if $(window).width() > 950
-      $('.form-error').find('label').text(text)
-      $('.form-error').css {'left': x + 'px', 'top': y + 'px'}
-      $('.form-error').show()
-    else
-      $('.form-error-mob').find('label').text(text)
-      $('.form-error-mob').fadeIn(200)
-      setTimeout(->
-        $(".form-error-mob").fadeOut(100)
-      , 1000)
-
-  #  Form input error tip 彈出錯誤提示
-  showSmallErrorTip = (text,mood)->
-    mood = mood or 0 # 1是成功的笑臉，0是失敗的哭臉
-    $('.form-error-mob').find('label').html(text)
-    if mood is 1
-      $('.form-error-mob').find('i.icon').addClass('icon-happy')
-    $('.form-error-mob').fadeIn(200)
-    setTimeout(->
-      $(".form-error-mob").fadeOut(100, ->
-        $('.form-error-mob').find('i.icon').removeClass('icon-happy')
-      )
-    , 1500)
 
   # 適應返回鍵
   locationHashChanged = ->
@@ -129,10 +95,6 @@ init = ->
     locationHashChanged()
 
   locationHashChanged()
-
-  # 侦测键盘输入，隐藏错误提示
-  $('input[type=text],input[type=password]').on 'propertychange input', ->
-    $('.form-error').fadeOut(300)
 
   # IE瀏覽器居中彈窗
 #  $.fn.changePopupPosForIE = ->

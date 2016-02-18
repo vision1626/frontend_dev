@@ -143,6 +143,11 @@ module.exports = function (grunt) {
         'uglify',
         'jade4php'
     ]);
+    grunt.registerTask('css', [
+      'less',
+      'autoprefixer',
+      'cssmin'
+    ]);
     grunt.registerTask('dev', [
         'watch'
     ]);
