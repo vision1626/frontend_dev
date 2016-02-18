@@ -165,7 +165,7 @@ followItem_Generater = (data,current_index) ->
       '</div>' +
       '<div class="fans-content">' +
         '<div class="fans-text">' +
-          '<div class="fans-name">' +
+          '<div class="fans-name" title=' + data.user_name + '>' +
             '<span>' + data.user_name + '</span>' +
           '</div>' +
           '<div class="fans-intro">' +

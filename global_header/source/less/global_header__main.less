@@ -642,6 +642,7 @@ body{
           height: 60px;
           //line-height: 60px;
           border-bottom: solid 1px @xx-dark-grey;
+          position: relative;
         }
         .empty{
           border-bottom: none;
@@ -651,7 +652,12 @@ body{
           font-size: 20px;
           height: 60px;
           line-height: 60px;
-          padding: 10px 0;
+          position: absolute;
+          top: 0;
+          bottom: 0;
+          left: 0;
+          right: 0;
+          padding: 0 10px;
         }
         i {
           color: @grey;
@@ -691,10 +697,8 @@ body{
               padding:0;
             }
             .menu-logout {
-              position: absolute;
+              left:auto;
               right:10px;
-              top:0;
-              bottom:0;
               margin: auto;
               color: @grey;
             }
@@ -705,7 +709,7 @@ body{
           &.menu-flashbuy {
             iframe {
               border: 0;
-              margin: 0 5px;
+              margin: 0 10px;
               background-color: #00d0dc;
               color: #222226;
               /* padding: 0 6px; */
@@ -721,7 +725,7 @@ body{
             }
           }
           span.fixed-nav__number {
-            margin: 0 40px;
+            margin: 0 10px;
             background-color: @blue;
             color: @xx-dark-grey;
             padding: 0 6px;
