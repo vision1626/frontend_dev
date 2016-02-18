@@ -33,14 +33,14 @@ else
           p 图片已经保存到电脑？点这里
             a.manually-upload(href="/u/addshare") 上传分享
         .validator-separator
-          i.icon.icon-hand
+          i.icon.icon-error
           span 优先审核
         .email-validator.validator
           .wrapper
             div.user-email
               label 您绑定的邮箱是：
               span {$_FANWE['user']['email']}        
-            .input-row
+            .input-row.captcha
               input.email-captcha(placeholder="请输入右侧验证码")
             i.captcha
           button.button.large.blue.email-bind 发送验证邮件
@@ -51,10 +51,10 @@ else
               td 
                 .input-row
                   input.mobile-input
-            tr
+            tr.captcha
               td 图片验证码
               td
-                .input-row
+                .input-row.captcha
                   input.mobile-captcha
               td 
                 i.captcha

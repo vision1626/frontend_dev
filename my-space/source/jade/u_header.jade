@@ -39,10 +39,10 @@ else
     .profile__relationship
       .profile__relation-fans
         //i.icon.icon-fans-16
-        span $home_user['fans']粉丝
+        span
       .profile__relation-follow
         //i.icon.icon-fans-16
-        span $home_user['follows']关注
+        span
   .content
     .center-wrap
       .js-slide-bg
@@ -75,26 +75,26 @@ else
         li.relation-fans-m
           i.icon.icon-fans-16
           span
-            b $home_user['fans']
+            b
             label Ta
             | 粉丝
         li.relation-follow-m
           i.icon.icon-following
           span
-            b $home_user['follows']
+            b
             label Ta
             | 关注
       ul.content__relationship
         li.relation-fans
           i.icon.icon-fans-16
           span
-            b $home_user['fans']
+            b
             label Ta
             |粉丝
         li.relation-follow
           i.icon.icon-following
           span
-            b $home_user['follows']
+            b
             label Ta
             |关注
 //- TODO: put script tag below into footer 
@@ -105,5 +105,7 @@ script(type='text/javascript').
     window.isfollow = "{$home_user['is_follow']}";
     window.count = "{$count}";
     window.state = "";
+    window.fans_count = "$home_user['fans']";
+    window.follow_count = "$home_user['follows']";
     init_u_header();
   });

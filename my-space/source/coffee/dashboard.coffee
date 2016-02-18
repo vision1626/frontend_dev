@@ -118,10 +118,18 @@ init_dashboard = ->
   gen_dashboard_item()
   init_dashboard_empty_message()
 
+$('.content_container').bind 'scroll', (e)->
+#  if _menu_showed
+#    alert(1)
+
+
 $(window).bind 'scroll', (e)->
-  parallax($('.profile-container'))
-  fixMainnav()
+  if !_menu_showed
+    parallax($('.profile-container'))
+    fixMainnav()
   e.stopPropagation()
+
+
 
 #  if ($(this).scrollTop() + $(window).height() + 200 >= $(document).height() && $(this).scrollTop() > 200)
 #    gen_dashboard_item()

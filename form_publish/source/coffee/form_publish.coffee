@@ -343,7 +343,11 @@ init_form_publish = ->
     $form_tags_input.on 'keydown', (e)-> 
       if $(this).val() == '' && (e.which == 8 || e.which == 46)
         if $(this).prev().is('span')
-          $(this).prev().remove() 
+          $(this).prev().remove()
+    $form_recommendation.on 'keyup', (e)->
+      if $(this).val().length > 300
+        $(this).val($(this).val().slice(0, 300))
+      $(this).next().text($(this).val().length + '/300')
     $('#file1').on 'change', ->
       imageUpload()
     $preview.find('.icon').on 'click', (e)->
