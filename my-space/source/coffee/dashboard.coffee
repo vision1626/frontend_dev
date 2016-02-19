@@ -222,7 +222,7 @@ $(document).on 'touchend','div.close_alert', (e) ->
   $.cookie('publistAlertShow',1,{expires:7})
   $('.publish_alert').fadeOut(300)
 
-query_dashboard_data = () ->
+query_dashboard_data = (no_cache) ->
   btn_ShowMore = $(document).find('#dashboard-show-more')
   if _dashboard_is_loading
     _dashboard_ajax_process.abort()
@@ -230,6 +230,9 @@ query_dashboard_data = () ->
     _dashboard_recommand_ajax_process.abort()
   if !_dashboard_is_loading and _dashboard_has_more
     refresh_data = false
+
+    if no_cache
+      refresh_data = true
 
     if _dashboard_list_by_search
       refresh_data = true
@@ -656,7 +659,7 @@ gen_dashboard_recommand_item = () ->
   recommandTitle.show()
   recommandList.show()
 
-init_dashboard_data = (soft) ->
+init_dashboard_data = (soft,no_cache) ->
   _dashboard_is_loading = false
   biglist = $('#big_img')
   smalllist = $('#small_img')
@@ -711,7 +714,7 @@ init_dashboard_data = (soft) ->
 
   filter.html(filter_generater())
 
-  query_dashboard_data()
+  query_dashboard_data(no_cache)
   init_dashboard_empty_message()
 
 init_dashboard_empty_message = () ->
