@@ -107,9 +107,10 @@ init_form_publish = ->
   updatePreview = (o)->
     if o['goods_name']
       $preview_title.html(o['goods_name'])
-    if o['goods_price']
-      $preview_price.html("¥" +o['goods_price'])
-
+    if o['addition']['discount_price'] && +o['addition']['discount_price'] > 0
+      $preview_price.html("¥" + o['addition']['discount_price'])
+    else if o['goods_price']
+      $$preview_price.html("¥" + o['goods_price'])
   setImgEditor = ->
     $img_remove = $imgs_proccessor.find('.icon-closepop')
     $img_set_main = $imgs_proccessor.find('span')
@@ -292,7 +293,8 @@ init_form_publish = ->
           dataType: 'json',
           success: (result)->
             if result.status == 1
-              init_dashboard_data()
+              alert 'should init_dashboard_data'
+              init_dashboard_data(false, true)
         })
 
       e.stopPropagation()
@@ -316,6 +318,8 @@ init_form_publish = ->
         $(".urlwarning").html('请输入完整的链接地址')
         e.preventDefault()
         return false
+      $popup.hide()
+      $popup_loading.show()
    
   ### form publish ###
   formEventsBinding = ->
@@ -378,6 +382,7 @@ init_form_publish = ->
             $form_url_input.val(result['url'])
             $form_title_input.val(result['goods_name'])
             $form_price_input.val(result['goods_price'])
+            $form_brand_input.val(result['addition']['brand'])
             g_expire = result['expire_time']
             if result['url_arr'] && result['url_arr'].length > 0
               generateImg(SITE_URL + url) for url in result['url_arr']
@@ -401,12 +406,13 @@ init_form_publish = ->
         refreshForm()
         $popup.show()
         $popup_loading.hide()
-        toggleGoods(true)
+        window.location.href = '/'
       else
         return false
 
       
     $form_submit_btn.on 'click', (e)->
+      self = this
       link = $form_url_input.val()
       str = link.match(/http:\/\/.+/)
       if str == null
@@ -480,6 +486,7 @@ init_form_publish = ->
           cache: false,
           success: (result)-> 
             if result.status == 1
+              $(self).off()
               window.location.href = result.url
         })
       else if $(this).attr('data-target') == 'update'
@@ -496,6 +503,7 @@ init_form_publish = ->
           cache: false,
           success: (result)-> 
             if result.status == 1
+              $(self).off()
               window.location.href = result.url
         })
       e.preventDefault()
@@ -510,8 +518,11 @@ init_form_publish = ->
   init = (result)->
     updateBg(SITE_URL + result['url_arr'][0])
     updatePreview(result)
-    $preview_price.html("¥" +result['addition']['discount_price'])
     generateImg SITE_URL + url for url in result['url_arr']
+    price = if result['addition']['discount_price'] > 0 
+    then result['addition']['discount_price'] 
+    else result['goods_price']
+    $form_price_input.val(price)
     setImgEditor()
     $('.url-img').first().find('img').addClass('main-img')
     $form_style_select.append('<option value=0>风格（选填）</option>')
@@ -522,6 +533,7 @@ init_form_publish = ->
       id = Number($(this).val())
       get2ndCate(id)
     getMyTagName tag for tag in result['tags']
+    makeTag(result['addition']['style']) if result['addition']['style']
     g_addition = result['addition']
     g_expire = result['expire_time']
     formEventsBinding()

@@ -25,9 +25,9 @@ mobileBind = ()->
       },
       success: (result)->
         renew_captcha()
-        $(self).text('绑定手机')
         $('span.warning').html(result.msg)
         if +result.status == 1
+          $(self).text('绑定手机')
           sec = 60
           timeId = setInterval ->
             if sec == 0
@@ -61,7 +61,8 @@ mobileBind = ()->
               success: (result)->
                 if +result.status == 1
                   $('.validator').remove()
-                  $('.validator-separator').html('认证成功!')
+                  $('.validator-separator').html('<i class="icon icon-tick" style="color:green"/> 认证成功!' + 
+                    '赶紧发布商品让别人观摩一下吧')
                   clearInterval timeId
                 else
                   $('span.warning').html(result.msg)
