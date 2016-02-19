@@ -7,6 +7,8 @@ initPickInterest = (category,is_new_user)->
   $tab_panel = $pick_users.find('.tab__panel')
   is_new_user = is_new_user or true
 
+  _is_changing = false
+
   #-------------- 函数: 画兴趣格仔 -----------------
   drawInterest = (item_data)->
     $item =
@@ -109,6 +111,7 @@ initPickInterest = (category,is_new_user)->
     $bulk_action.show()
 
   getUserData = (cat_id,page)->
+    _is_changing = true
     id = parseInt(cat_id)
     if is_new_user
       follow = 0
@@ -125,8 +128,10 @@ initPickInterest = (category,is_new_user)->
         $pick_interest.find('.tab__content').append $user_list
         for user in result.data
           drawPushUser(user,cat_id)
+        _is_changing = false
       error: (xhr,statue,error)->
         alert error
+        _is_changing = false
     }
   getUserData(0,1)
 
@@ -147,11 +152,12 @@ initPickInterest = (category,is_new_user)->
 
   #------------- 换一批 -----------------
   $pick_users.find('.refresh').click ->
-    $current_list = $('.push-users.current')
-    cat_id = parseInt($current_list.attr('cat-id'))
-    page = parseInt($current_list.attr('page')) + 1
-    $current_list.remove()
-    getUserData(cat_id,page)
+    if !_is_changing
+      $current_list = $('.push-users.current')
+      cat_id = parseInt($current_list.attr('cat-id'))
+      page = parseInt($current_list.attr('page')) + 1
+      $current_list.remove()
+      getUserData(cat_id,page)
 
   #---------------
   $('.submit-interest button').click ->
