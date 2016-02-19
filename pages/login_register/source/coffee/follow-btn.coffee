@@ -1,7 +1,7 @@
 # 关注按钮 ---------------------------------------
 
+_is_following = false
 initFollowBtn = ()->
-
 
   # ---------------------------------------------
   # 初始化 u_header 的关注按钮
@@ -77,6 +77,7 @@ initFollowBtn = ()->
     ,500
 
   submitFollow = (uid,$btn)->
+    _is_following = true
     $.ajax({
       url: '/services/service.php?m=user&a=follow',
       type: 'post',
@@ -87,11 +88,14 @@ initFollowBtn = ()->
           sliderToRight($btn, "#{result.status}")
         else
           sliderToLeft($btn)
+        _is_following = false
       error: (result)->
-        alert('fb-errr: ' + result)
+        showSmallErrorTip('关注失败',0)
+        _is_following = false
     })
 
   submitFollowAll = (all_uid,$all_btn)->
+    _is_following = true
     $.ajax({
       url: '/services/service.php?m=user&a=follow',
       type: 'post',
@@ -103,29 +107,43 @@ initFollowBtn = ()->
             sliderToRight($btn, '1')
         else
           showSmallErrorTip('关注失败',0)
+        _is_following = false
       error: (result)->
         showSmallErrorTip('关注失败',0)
+        _is_following = false
     })
 
   $('.follow-all').click ->
-    $current_u_list = $('.push-users.current')
-    $current_u_list.find('.slider-btn').show()
-    all_uid = ''
-    $all_btn = $('')
-    $current_u_list.find('li').each ->
-      $user = $(this)
-      $btn = $user.find('.follow-btn')
-      follow_status = parseInt($btn.attr('follow-status'))
-      if follow_status isnt 1 and follow_status isnt 2
+    if !_is_following
+      $current_u_list = $('.push-users.current')
+#      $current_u_list.find('.slider-btn').show()
+      all_uid = ''
+      $all_btn = $('')
+      t_all_uid = []
+      $current_u_list.find('li').each ->
+        $user = $(this)
+        $btn = $user.find('.follow-btn')
+        follow_status = parseInt($btn.attr('follow-status'))
         uid = $user.attr 'uid'
-        all_uid = all_uid + uid + ','
-        $all_btn.push($btn)
+  #      if follow_status isnt 1 and follow_status isnt 2
+        if follow_status is 0
+          $user.find('.slider-btn').show()
+          t_all_uid.push(uid)
+          $all_btn.push($btn)
+          $all_btn.push($('.tab__content').find("li[uid='#{uid}'] .follow-btn"))
 
-    submitFollowAll(all_uid, $all_btn, 1)
+      if t_all_uid.length >0
+        all_uid = t_all_uid.join(',')
+      else
+        all_uid = ''
+
+      if all_uid isnt ''
+        submitFollowAll(all_uid, $all_btn, 1)
 
   $(document).on 'click', '.follow-btn', ->
-    $button = $(this)
-    $button.find('.slider-btn').show()
-    uid = $button.parent().attr 'uid'
-    $all_follow_users_btn = $('.tab__content').find("li[uid='#{uid}'] .follow-btn")
-    submitFollow(uid,$all_follow_users_btn)
+    if !_is_following
+      $button = $(this)
+      $button.find('.slider-btn').show()
+      uid = $button.parent().attr 'uid'
+      $all_follow_users_btn = $('.tab__content').find("li[uid='#{uid}'] .follow-btn")
+      submitFollow(uid,$all_follow_users_btn)

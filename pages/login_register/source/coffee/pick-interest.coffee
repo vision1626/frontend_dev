@@ -136,7 +136,9 @@ initPickInterest = (category,is_new_user)->
     $tab = $(this)
     cat_id = $tab.attr 'cat-id'
     $tab_panel.find("ul.push-users").hide()
+    $tab_panel.find("ul.push-users").removeClass('current')
     $tab_panel.find("ul.push-users[cat-id='#{cat_id}']").show()
+    $tab_panel.find("ul.push-users[cat-id='#{cat_id}']").addClass('current')
     $tab_bar.find('.tab').removeClass('current')
     $tab.addClass('current')
 

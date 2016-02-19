@@ -1,4 +1,4 @@
-// Breakpoints --------------------------------------------------
+                // Breakpoints --------------------------------------------------
 ._1626-breakpoints__pick-interest() {
   min-width: 900px;
   @media only screen and (min-width: 1200px) {
@@ -173,30 +173,30 @@
     .tabbar {
       float: right;
       width: 22%;
+      .tab {
+        text-align: center;
+        padding: 16px 0;
+        border-right: 2px solid @light-grey;
+        cursor: pointer;
+        span {
+          font-size: 14px;
+        }
+        &.current {
+          background: white;
+          border-right: 2px solid white;
+        }
+        &:hover {
+          border-right: 2px solid @blue;
+        }
+      }
     }
     .tab__panel {
       float: left;
       height: 100%;
       background: white;
       width: 78%;
-    }
-    .tab__content {
-      padding: 16px 20px 0 20px;
-    }
-    .tab {
-      text-align: center;
-      padding: 16px 0;
-      border-right: 2px solid @light-grey;
-      cursor: pointer;
-      span {
-        font-size: 14px;
-      }
-      &.current {
-        background: white;
-        border-right: 2px solid white;
-      }
-      &:hover {
-        border-right: 2px solid @blue;
+      .tab__content {
+        padding: 16px 20px 0 20px;
       }
     }
   }
@@ -206,5 +206,146 @@
   }
 }
 @media only screen and (max-width: 1199px) {
-
+  .pick-interest {
+    .pick-users {
+      clear: both;
+      width: 890px;
+      margin-left: 0;
+      .tab-control {
+        height: 330px;
+      }
+      .tabbar {
+        float: none;
+        width: 100%;
+        column-count: 6;
+        column-gap: 0;
+        height:50px;
+        .tab {
+          text-align: center;
+          padding: 0;
+          border-right: none;
+          cursor: pointer;
+          height:50px;
+          line-height: 50px;
+          transition: all 0.1s;
+          span {
+            font-size: 14px;
+          }
+          &.current {
+            background: white;
+            border-right: none;
+            span{
+              font-weight: bold;
+            }
+          }
+          &:hover {
+            border-right: none;
+            box-shadow: inset 0 4px @blue;
+          }
+        }
+      }
+      .tab__panel {
+        float: left;
+        height: 75%;
+        background: white;
+        width: 100%;
+        .tab__content {
+          padding: 16px 20px 0 20px;
+        }
+      }
+      ul.push-users {
+        position: absolute;
+        li {
+          position: relative;
+          margin-bottom: 16px;
+          float: left;
+          height: 157px;
+          width: 155px;
+          margin-top: 40px;
+          margin-right: 17px;
+          box-shadow: 0 0 3px rgba(0,0,0,.4);
+          .avatar {
+            height: 0;
+            width: 0;
+            display: block;
+            img {
+              position: absolute;
+              left: 0;
+              right: 0;
+              top: -40px;
+              width: 80px;
+              margin: auto;
+              border-radius: 80px;
+            }
+          }
+          .nickname {
+            margin-top: 0;
+            background-color: @light-grey;
+            height: 35px;
+            padding: 45px 10px 0;
+            text-align: center;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            font-size: 20px;
+          }
+          .relations {
+            text-align: center;
+            height: 30px;
+            line-height: 30px;
+            span {
+              color: @dark-grey;
+              line-height: 20px;
+              display: inline-block;
+              font-size: 14px;
+              margin: 0 10px;
+            }
+            b {
+              font-weight: normal;
+            }
+          }
+          .follow-btn {
+            position: absolute;
+            top:auto;
+            left: 0;
+            right: 0;
+            bottom: 10px;
+            margin: auto;
+          }
+        }
+      }
+      .bulk-actions {
+        position: absolute;
+        width: 850px;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        margin: auto;
+        padding: 10px 20px;
+        background-color: @light-grey;
+        ._clearfix;
+        a {
+          font-size: 12px;
+          border: 1px solid @dark-grey;
+          display: block;
+          border-radius: 20px;
+          padding: 4px 10px;
+          transition: all 0.1s linear;
+          background: white;
+          cursor: pointer;
+          &:hover {
+            background: @blue;
+            border: 1px solid @blue;
+            color: white;
+          }
+        }
+        .refresh {
+          float: left;
+        }
+        .follow-all {
+          float: right;
+        }
+      }
+    }
+  }
 }
