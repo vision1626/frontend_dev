@@ -60,7 +60,7 @@ _dashboard_recommand_p_cache_time = null
 _dashboard_recommand_c_cache_time = null
 _dashboard_recommand_u_cache_time = null
 #缓存时间,单位:分钟
-_cache_times = 1
+_cache_times = 2
 _recommand_cache_times = 5
 
 #SITE_URL = 'http://192.168.0.230/'
@@ -110,7 +110,6 @@ init_dashboard = ->
       if _dashboard_data_count > _dashboard_limit then _dashboard_data_more = true
       _dashboard_cache_time = new Date
 
-
   if !parseInt($.cookie('publistAlertShow'))
     $.cookie('publistAlertShow',0,{expires:7})
 
@@ -118,19 +117,11 @@ init_dashboard = ->
   gen_dashboard_item()
   init_dashboard_empty_message()
 
-$('.content_container').bind 'scroll', (e)->
-#  if _menu_showed
-#    alert(1)
-
-
 $(window).bind 'scroll', (e)->
   if !_menu_showed
     parallax($('.profile-container'))
     fixMainnav()
   e.stopPropagation()
-
-
-
 #  if ($(this).scrollTop() + $(window).height() + 200 >= $(document).height() && $(this).scrollTop() > 200)
 #    gen_dashboard_item()
 
@@ -201,7 +192,8 @@ $(document).on 'click','.show-small_list', ->
     $('dl#small_img').show()
 
 $(document).on 'click','#dashboard-show-more', ->
-  query_dashboard_data()
+  if _dashboard_has_more
+    query_dashboard_data()
 
 $(document).on 'click','.btn_like', ->
   if !_dashboard_doing_like
@@ -603,8 +595,10 @@ gen_dashboard_item = () ->
 
       if list_data_more
         btn_ShowMore.html('我要看更多').removeClass('loading')
+        _dashboard_has_more = true
       else
         btn_ShowMore.html('已经全部看完了').removeClass('loading')
+        _dashboard_has_more = false
 
     else
       pagiation.hide()
@@ -747,22 +741,13 @@ init_dashboard_empty_message = () ->
     type = '潮品'
   else
     type = '搭配'
-#    if state is 'fav'
-#      content_text = ''
-#    else if state is 'talk'
-#      content_text = ''
-#    else
-
 
   if _dashboard_list_by_search
-#    txtEmptytitle.html(['没有找到任何',type].join(''))
-#    txtEmptytitle.html(['找到0个 ',_dashboard_search_keyword,' 相关',type].join(''))
     txtEmptytitle.html(['没有找到 ',_dashboard_search_keyword,' 相关',type].join(''))
     txtEmptycontent.html(content_text)
     btnReturnhome.hide()
     btnPublish.hide()
     btnClearsearch.show()
-#找到0个 秋冬 相关单品
   else
     if state is 'fav'
       txtEmptytitle.html([who,'还没有喜欢任何',type].join(''))
@@ -867,45 +852,51 @@ refresh_like = (sid,ed,count) ->
     if _dashboard_show_product_collocation is 2
       if _fav_c_data_count > 0
         lm = true
-        for ld in _fav_c_data
-          if parseInt(ld.did) is parseInt(sid)
-            ld.is_fav = ed
-            ld.like_count += count
     else
       if _fav_p_data_count > 0
         lm = true
-        for ld in _fav_p_data
-          if parseInt(ld.did) is parseInt(sid)
-            ld.is_fav = ed
-            ld.like_count += count
   else if state is 'talk'
     if _dashboard_show_product_collocation is 2
       if _publish_c_data_count > 0
         lm = true
-        for ld in _publish_c_data
-          if parseInt(ld.did) is parseInt(sid)
-            ld.is_fav = ed
-            ld.like_count += count
     else
       if _publish_p_data_count > 0
         lm = true
-        for ld in _publish_p_data
-          if parseInt(ld.did) is parseInt(sid)
-            ld.is_fav = ed
-            ld.like_count += count
   else
     if _dashboard_data_count > 0
       lm = true
-      for ld in _dashboard_data
-        if parseInt(ld.did) is parseInt(sid)
-          ld.is_fav = ed
-          ld.like_count += count
+
+  if _fav_c_data_count > 0
+    for ld in _fav_c_data
+      if parseInt(ld.share_id) is parseInt(sid)
+        ld.is_fav = ed
+        ld.like_count += count
+  if _fav_p_data_count > 0
+    for ld in _fav_p_data
+      if parseInt(ld.share_id) is parseInt(sid)
+        ld.is_fav = ed
+        ld.like_count += count
+  if _publish_c_data_count > 0
+    for ld in _publish_c_data
+      if parseInt(ld.share_id) is parseInt(sid)
+        ld.is_fav = ed
+        ld.like_count += count
+  if _publish_p_data_count > 0
+    for ld in _publish_p_data
+      if parseInt(ld.share_id) is parseInt(sid)
+        ld.is_fav = ed
+        ld.like_count += count
+  if _dashboard_data_count > 0
+    for ld in _dashboard_data
+      if parseInt(ld.share_id) is parseInt(sid)
+        ld.is_fav = ed
+        ld.like_count += count
 
   if _dashboard_list_by_search
     if _search_data_count > 0
       lm = true
       for ld in _search_data
-        if parseInt(ld.did) is parseInt(sid)
+        if parseInt(ld.share_id) is parseInt(sid)
           ld.is_fav = ed
           ld.like_count += count
 
@@ -938,11 +929,6 @@ refresh_like = (sid,ed,count) ->
     big_harting = big_button.find('.harting')
     big_count.html(parseInt(big_count.html()) + count)
     big_button.attr('ed',ed)
-
-    if _dashboard_show_product_collocation is 2
-      _fav_c_data_count += 1
-    else
-      _fav_p_data_count += 1
 
   if _dashboard_show_me
     top_count.html(parseInt(top_count.html()) + count)
