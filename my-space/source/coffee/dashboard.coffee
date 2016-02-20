@@ -867,25 +867,39 @@ refresh_like = (sid,ed,count) ->
       lm = true
 
   if _fav_c_data_count > 0
+    fav_c_foundcount = 0
     for ld in _fav_c_data
       if parseInt(ld.share_id) is parseInt(sid)
         ld.is_fav = ed
         ld.like_count += count
+        fav_c_foundcount += 1
+    if fav_c_foundcount is 0 or _fav_c_data is null then _fav_c_cache_time = null
+  else
+    if count > 0 then _fav_c_cache_time = null
+
   if _fav_p_data_count > 0
+    fav_p_foundcount = 0
     for ld in _fav_p_data
       if parseInt(ld.share_id) is parseInt(sid)
         ld.is_fav = ed
         ld.like_count += count
+        fav_p_foundcount += 1
+    if fav_p_foundcount is 0 or _fav_p_data is null then _fav_p_cache_time = null
+  else
+    if count > 0 then _fav_p_cache_time = null
+
   if _publish_c_data_count > 0
     for ld in _publish_c_data
       if parseInt(ld.share_id) is parseInt(sid)
         ld.is_fav = ed
         ld.like_count += count
+
   if _publish_p_data_count > 0
     for ld in _publish_p_data
       if parseInt(ld.share_id) is parseInt(sid)
         ld.is_fav = ed
         ld.like_count += count
+
   if _dashboard_data_count > 0
     for ld in _dashboard_data
       if parseInt(ld.share_id) is parseInt(sid)
