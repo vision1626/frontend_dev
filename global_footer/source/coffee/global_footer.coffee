@@ -1,5 +1,5 @@
 _footer_qrchde_showout = false
-#缓存时间,单位:分钟
+#缓存时间,单位:日
 _adv_cache_days = 1
 
 init_global_footer = (friend_links)->

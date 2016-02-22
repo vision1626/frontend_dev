@@ -86,7 +86,9 @@ if production
     $(document).ready(function () {
       var friend_links_data = "{$friendlinks_json}";
       init_global_footer(friend_links_data);
+      {if $_FANWE['uid'] > 0}
       initFollowBtn();
+      {/if}
     });
 else
   script.

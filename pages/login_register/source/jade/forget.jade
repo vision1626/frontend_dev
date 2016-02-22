@@ -40,83 +40,83 @@ section.login-panel
             a.user-email(target='_blank') 注册邮箱
             | 中发送了重置密码的邮件，请按邮件中的步骤进行密码重置。
           p 如收不到邮件，可于60秒后重试。
-        form#form-phone-reclaim(autocomplete='off', style='display: none', data-action='services/service.php?m=user&a=resetpwd')
-          ul
-            li.input-row
-              i.icon.icon-sml.icon-phone
-              input.input-phone(type='text', value='', placeholder='请输入登录手机号', autocomplete='off', maxlength='11')
-            li.input-row
-              i.icon.icon-sml.icon-lock
-              input.input-password(type='password', value='', placeholder='请输入新密码', maxlength='20', autocomplete='off')
-              a.icon.icon-sml.icon-unseen.reveal-pw(data-id='pass-ind', title='显示/隐藏密码')
-            li.input-row
-              i.icon.icon-sml.icon-lock
-              input.input-password-again(type='password', value='', placeholder='请确认新密码', maxlength='20', autocomplete='off')
-              a.icon.icon-sml.icon-unseen.reveal-pw(data-id='pass-ind', title='显示/隐藏密码')
-            li.input-row.captcha
-              i.icon.icon-sml.icon-captcha
-              input.captcha-input(type='text', value='', placeholder='请输入验证码', autocomplete='off', maxlength='5')
-              a.captcha(style='')
-            li.input-row.phone-code-input-row(style='display: none')
-              i.icon.icon-sml.icon-phone
-              input.phone-code-input(type='text', value='', placeholder='短信中的验证码', autocomplete='off', maxlength='5')
-          h5.resend-code(style='display: none')
-            span 55秒后
-            a.text 重新发送
-            | 验证码
-          .form-actions(style='top: 150px')
-            .form-options
-              a.forget.text(href='{u user/login}', title='返回登录', rel='nofollow') 返回登录
-            button#submitPhoneReclaim.button.large.disabled.full-width.send-code(type='button') 获取手机验证码
-          h5
-            | 手机号已更换？
-            a.text.goto-phone-changed 点此
-            | 找回密码
-          p.desc(style='display:none')
-            | 我们将在1-2个工作日内审核完毕
-            br
-            | 结果将发送至手机
-        form#form-phone-changed(autocomplete='off', style='display: none')
-          ul
-            li.input-row
-              i.icon.icon-sml.icon-phone
-              input.input-phone(type='text', value='', placeholder='请输入旧手机号', autocomplete='off', maxlength='11')
-            li.input-row
-              i.icon.icon-sml.icon-phone
-              input.input-new-phone(type='text', value='', placeholder='请输入新手机号', autocomplete='off', maxlength='11')
-            li.input-row.dropdown-trigger
-              i.icon.icon-sml.icon-location
-              input.choose-region(type='text', placeholder='请选择上次登录地点', readonly='readonly', autocomplete='off', data-province='0', data-city='0')
-              a.icon.icon-sml.icon-dropdown
-            li.form-dropdown
-              .dd-wrap
-                .dd-result
-                  span 请选择上次登录地点
-                  i.icon.icon-sml.icon-dropdown
-                .dd-container
-                  dl.provinces(style='width: 50%; height: 220px')
-                  dl.cities(style='width: 50%; height: 220px')
-            li.input-row
-              i.icon.icon-sml.icon-lock
-              input.input-password(type='password', value='', placeholder='请输入新密码', maxlength='20', autocomplete='off')
-              a.icon.icon-sml.icon-unseen(title='显示/隐藏密码')
-            li.input-row
-              i.icon.icon-sml.icon-lock
-              input.input-password-again(type='password', value='', placeholder='请确认新密码', maxlength='20', autocomplete='off')
-              a.icon.icon-sml.icon-unseen.reveal-pw(title='显示/隐藏密码')
-            li.input-row.captcha
-              i.icon.icon-sml.icon-captcha
-              input.captcha-input(type='text', value='', placeholder='请输入验证码', autocomplete='off', maxlength='5')
-              a.captcha(style='')
-            li.input-row.phone-code-input-row(style='display: none')
-              i.icon.icon-sml.icon-phone
-              input.phone-code-input(type='text', value='', placeholder='短信中的验证码', autocomplete='off', maxlength='5')
-          h5.redirect(style='display: none')
-          .form-actions(style='top: 250px')
-            .form-options
-              a.forget.text(href='{u user/login}', title='返回登录', rel='nofollow') 返回登录
-            button#submitPhoneChanged.button.large.disabled.full-width.send-code(type='button') 获取手机验证码
-          p.desc(style='display:none') 成功更改登陆密码
+      form#form-phone-reclaim(autocomplete='off', style='display: none', data-action='services/service.php?m=user&a=resetpwd')
+        ul
+          li.input-row
+            i.icon.icon-sml.icon-phone
+            input.input-phone(type='text', value='', placeholder='请输入登录手机号', autocomplete='off', maxlength='11')
+          li.input-row
+            i.icon.icon-sml.icon-lock
+            input.input-password(type='password', value='', placeholder='请输入新密码', maxlength='20', autocomplete='off')
+            a.icon.icon-sml.icon-unseen.reveal-pw(data-id='pass-ind', title='显示/隐藏密码')
+          li.input-row
+            i.icon.icon-sml.icon-lock
+            input.input-password-again(type='password', value='', placeholder='请确认新密码', maxlength='20', autocomplete='off')
+            a.icon.icon-sml.icon-unseen.reveal-pw(data-id='pass-ind', title='显示/隐藏密码')
+          li.input-row.captcha
+            i.icon.icon-sml.icon-captcha
+            input.captcha-input(type='text', value='', placeholder='请输入验证码', autocomplete='off', maxlength='5')
+            a.captcha(style='')
+          li.input-row.phone-code-input-row(style='display: none')
+            i.icon.icon-sml.icon-phone
+            input.phone-code-input(type='text', value='', placeholder='短信中的验证码', autocomplete='off', maxlength='5')
+        h5.resend-code(style='display: none')
+          span 55秒后
+          a.text 重新发送
+          | 验证码
+        .form-actions(style='top: 150px')
+          .form-options
+            a.forget.text(href='{u user/login}', title='返回登录', rel='nofollow') 返回登录
+          button#submitPhoneReclaim.button.large.disabled.full-width.send-code(type='button') 获取手机验证码
+        h5
+          | 手机号已更换？
+          a.text.goto-phone-changed 点此
+          | 找回密码
+        p.desc(style='display:none')
+          | 我们将在1-2个工作日内审核完毕
+          br
+          | 结果将发送至手机
+      form#form-phone-changed(autocomplete='off', style='display: none')
+        ul
+          li.input-row
+            i.icon.icon-sml.icon-phone
+            input.input-phone(type='text', value='', placeholder='请输入旧手机号', autocomplete='off', maxlength='11')
+          li.input-row
+            i.icon.icon-sml.icon-phone
+            input.input-new-phone(type='text', value='', placeholder='请输入新手机号', autocomplete='off', maxlength='11')
+          li.input-row.dropdown-trigger
+            i.icon.icon-sml.icon-location
+            input.choose-region(type='text', placeholder='请选择上次登录地点', readonly='readonly', autocomplete='off', data-province='0', data-city='0')
+            a.icon.icon-sml.icon-dropdown
+          li.form-dropdown
+            .dd-wrap
+              .dd-result
+                span 请选择上次登录地点
+                i.icon.icon-sml.icon-dropdown
+              .dd-container
+                dl.provinces(style='width: 50%; height: 220px')
+                dl.cities(style='width: 50%; height: 220px')
+          li.input-row
+            i.icon.icon-sml.icon-lock
+            input.input-password(type='password', value='', placeholder='请输入新密码', maxlength='20', autocomplete='off')
+            a.icon.icon-sml.icon-unseen(title='显示/隐藏密码')
+          li.input-row
+            i.icon.icon-sml.icon-lock
+            input.input-password-again(type='password', value='', placeholder='请确认新密码', maxlength='20', autocomplete='off')
+            a.icon.icon-sml.icon-unseen.reveal-pw(title='显示/隐藏密码')
+          li.input-row.captcha
+            i.icon.icon-sml.icon-captcha
+            input.captcha-input(type='text', value='', placeholder='请输入验证码', autocomplete='off', maxlength='5')
+            a.captcha(style='')
+          li.input-row.phone-code-input-row(style='display: none')
+            i.icon.icon-sml.icon-phone
+            input.phone-code-input(type='text', value='', placeholder='短信中的验证码', autocomplete='off', maxlength='5')
+        h5.redirect(style='display: none')
+        .form-actions(style='top: 250px')
+          .form-options
+            a.forget.text(href='{u user/login}', title='返回登录', rel='nofollow') 返回登录
+          button#submitPhoneChanged.button.large.disabled.full-width.send-code(type='button') 获取手机验证码
+        p.desc(style='display:none') 成功更改登陆密码
     .form-error
       i.icon.icon-sml.icon-warning
       label
