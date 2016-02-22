@@ -137,7 +137,10 @@ $(document).on 'click','.item-nav', ->
 #      biglist.html('')
 #      smalllist.html('')
 #      query_dashboard_data()
-      init_dashboard_data(true)
+      init_dashboard_data(false)
+    else
+      if _dashboard_list_by_search
+        init_dashboard_data(false)
 
 $(document).on 'click','.show-new_list', ->
   if !$(this).hasClass('current')
@@ -699,7 +702,7 @@ init_dashboard_data = (soft,no_cache) ->
   else
     _dashboard_search_keyword = ''
     _dashboard_list_by_search = false
-    _dashboard_show_product_collocation = 1
+#    _dashboard_show_product_collocation = 1
 
   if myid is uid
     _dashboard_show_me = true

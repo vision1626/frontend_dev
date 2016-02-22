@@ -592,7 +592,7 @@ filter_generater = () ->
       else
         ''
       ) +
-      (if _dashboard_show_me
+      (if _dashboard_show_me and !_dashboard_list_by_search
         if state is 'talk'
           '<div class="item-filter sort">'+
             '<a class="show-new_list' + (if _dashboard_show_new_hot is 'new' then ' current' else '') + '">' +
