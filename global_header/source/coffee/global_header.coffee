@@ -127,10 +127,12 @@ $(document).on 'touchend','.close-mobile-menu', (e) ->
 
 $(document).on 'touchend','.top_hamburger', (e) ->
   e.preventDefault()
-  openMenu()
+  if ACTION_NAME isnt 'login' and ACTION_NAME isnt 'register' and ACTION_NAME isnt 'forgetpassword'
+    openMenu()
 $(document).on 'touchstart','.main-nav__hamburger', (e) ->
   e.preventDefault()
-  openMenu()
+  if ACTION_NAME isnt 'login' and ACTION_NAME isnt 'register' and ACTION_NAME isnt 'forgetpassword'
+    openMenu()
 
 openMenu = () ->
   if !_menu_showed
