@@ -107,10 +107,10 @@ init_form_publish = ->
   updatePreview = (o)->
     if o['goods_name']
       $preview_title.html(o['goods_name'])
-    if o['addition']['discount_price'] && +o['addition']['discount_price'] > 0
+    if o['addition'] && o['addition']['discount_price'] && +o['addition']['discount_price'] > 0
       $preview_price.html("¥" + o['addition']['discount_price'])
     else if o['goods_price']
-      $$preview_price.html("¥" + o['goods_price'])
+      $preview_price.html("¥" + o['goods_price'])
   setImgEditor = ->
     $img_remove = $imgs_proccessor.find('.icon-closepop')
     $img_set_main = $imgs_proccessor.find('span')
@@ -293,7 +293,6 @@ init_form_publish = ->
           dataType: 'json',
           success: (result)->
             if result.status == 1
-              alert 'should init_dashboard_data'
               init_dashboard_data(false, true)
         })
 
@@ -412,7 +411,6 @@ init_form_publish = ->
 
       
     $form_submit_btn.on 'click', (e)->
-      self = this
       link = $form_url_input.val()
       str = link.match(/http:\/\/.+/)
       if str == null
@@ -476,8 +474,15 @@ init_form_publish = ->
           'addition'   :  g_addition  
       }
 
+      $blackbox.fadeIn(500)
+      $popup.hide()
+      $popup_loading.show()
+      
+      $(this).css({
+        'cursor': 'default'
+      }).text('正在提交..').attr('disabled', 'disabled')
+
       if $(this).attr('data-target') == 'new'
-        $blackbox.fadeIn(500)
         $.ajax({
           url :  SITE_URL + 'services/service.php?m=share&a=share_save',
           type: 'post',
@@ -486,7 +491,6 @@ init_form_publish = ->
           cache: false,
           success: (result)-> 
             if result.status == 1
-              $(self).off()
               window.location.href = result.url
         })
       else if $(this).attr('data-target') == 'update'
@@ -503,10 +507,8 @@ init_form_publish = ->
           cache: false,
           success: (result)-> 
             if result.status == 1
-              $(self).off()
               window.location.href = result.url
         })
-      e.preventDefault()
 
   clean = ->
     arr = [$popup_manually_upload, $form_title_input, 
