@@ -43,14 +43,15 @@ init_global_footer = (friend_links)->
   getMagCover()
 
 afterGetMagCover = (in_data) ->
-  mag_data = in_data.data.list[0]
-  footer_mag = $('.global-footer').find('.footer__mag')
-  cover_src = mag_data.code
-  number = mag_data.title
-  buy_link = mag_data.url
-  $('.global-footer').find('.mag-cover img').attr 'src', cover_src
-  $('.global-footer').find('.mag-buy strong').text number
-  footer_mag.attr 'data-link', buy_link
+  if in_data.data.count >0
+    mag_data = in_data.data.list[0]
+    footer_mag = $('.global-footer').find('.footer__mag')
+    cover_src = mag_data.code
+    number = mag_data.title
+    buy_link = mag_data.url
+    $('.global-footer').find('.mag-cover img').attr 'src', cover_src
+    $('.global-footer').find('.mag-buy strong').text number
+    footer_mag.attr 'data-link', buy_link
 
 $(document).on 'touchend','.qrcode_wechat', (e) ->
   e.preventDefault()
