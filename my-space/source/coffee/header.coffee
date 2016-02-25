@@ -14,14 +14,6 @@ init_u_header = ->
   $fans_m_t = $('.profile__relation-fans')
   $slide_tab_bg = $('.js-slide-bg')
 
-  isInActions = ->
-    if (location.pathname.indexOf('dashboard') > 0) or 
-    (location.pathname.indexOf('fav') > 0) or 
-    (location.pathname.indexOf('talk') > 0)
-      return true
-    else
-      return false
-
   isInCurrentAction = (action) ->
     window.location.pathname.indexOf(action) > 0 or window.state == action
 

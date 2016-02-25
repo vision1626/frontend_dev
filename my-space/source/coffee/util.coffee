@@ -27,12 +27,23 @@ mobileBind = ()->
         renew_captcha()
         $('span.warning').html(result.msg)
         if +result.status == 1
+          $('span.textcode-countdown').css({
+                                         'border-bottom': 'none',
+                                         'cursor': 'default'
+                                       }).show()
           $(self).text('绑定手机')
           sec = 60
           timeId = setInterval ->
             if sec == 0
-              $('span.warning').text('点击这里重新发送')
-              $('span.warning').on 'click', ->
+              $('span.textcode-countdown').text('重新发送')
+                                          .css({
+                                            'border-bottom': '2px solid #b4b4b4',
+                                            'cursor': 'pointer'
+                                          })
+              $('span.textcode-countdown').on 'click', ->
+                $(this).hide()
+                $(this).off()
+                $('span.warning').text('')
                 $('tr.textcode').hide()
                 $('tr.captcha').show()
                 $(self).text('重新发送手机验证码')
@@ -43,7 +54,7 @@ mobileBind = ()->
                   mobileBind.call(this)
               clearInterval timeId
             else
-              $('span.warning').text(result.msg + ', 没有收到验证码? ' + sec-- +'秒后重新发送')
+              $('span.textcode-countdown').text(sec-- +'秒后重新发送验证码')
           , 1000 
           $('tr.textcode').show()
           $('tr.captcha').hide()
@@ -74,14 +85,13 @@ askUserToGetValidated = ->
     if +email_status <= 0
       $('.validator-separator').show()
       $('i.captcha').css("background-image",'url(' + SITE_URL + "services/service.php?m=index&a=verify&rand=" + Math.random() + ')')
-      
       $('.validator-separator').find('span').on 'click', (e)->
-        $(this).text('验证后，您分享的商品将会获得优先审核哦')
+        if user_email
+          $(this).text('验证邮箱后，您分享的商品将会获得优先审核哦')
                  .css({
                     'border-bottom': 'none',
                     'cursor': 'default'
                   })
-        if user_email
           $('.email-validator').show()
           $('.email-bind').on 'click', ->
             self = this
@@ -98,6 +108,11 @@ askUserToGetValidated = ->
                   $(self).text('没有收到邮件？重新发送')
             })
         else
+          $(this).text('验证手机后，您分享的商品将会获得优先审核哦')
+                 .css({
+                    'border-bottom': 'none',
+                    'cursor': 'default'
+                  })
           $('.phone-validator').show()
           $('.mobile-bind').on 'click', ->
             mobileBind.call(this)
@@ -162,14 +177,23 @@ toggleGoods = (show)->
     $('.show-more').fadeOut(500)
     $('.form__container').fadeIn(500)
 
+isInActions = ->
+  if (location.pathname.indexOf('dashboard') > 0) or 
+     (location.pathname.indexOf('fav') > 0) or 
+     (location.pathname.indexOf('talk') > 0)
+    return true
+  else
+    return false
+
 isEditingGood = ->
   return $('.form__container').is(':visible')
 
 giveupEditing = ->
   if isEditingGood()
-    if confirm('是否放弃编辑单品？')
+    if confirm('是否放弃编辑单品？') 
       refreshForm()
-      # toggleGoods(true)
+      if isInActions()
+        toggleGoods(true)
       return true
     else
       return false
