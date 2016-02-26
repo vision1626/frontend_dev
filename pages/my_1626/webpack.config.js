@@ -9,7 +9,7 @@ var globalWebpacklConfig = {
 };
 
 var config = {
-  entry: globalWebpacklConfig.viewSrcPath + '/index.jsx',
+  entry: globalWebpacklConfig.viewSrcPath + '/layout.jsx',
   output: {
     path: globalWebpacklConfig.jsDistPath,
     filename: 'bundle.js'
@@ -19,6 +19,10 @@ var config = {
       {
         test : /\.jsx?/,
         loader : 'babel'
+      },
+      {
+        test : /\.less?/,
+        loader : 'style-loader!css-loader!less-loader'
       }
     ]
   }//,
