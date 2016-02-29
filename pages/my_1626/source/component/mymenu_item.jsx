@@ -1,6 +1,6 @@
 import React from 'react';
 class MenuItem extends React.Component {
-  constructor(text,classname,count,iscurrent) {
+  constructor(text = '',classname = '',count = 0,iscurrent = false) {
     super(text,classname,count,iscurrent);
     this.state = {
       text : text || 'MenuItem',
