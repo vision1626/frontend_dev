@@ -1,7 +1,7 @@
 import React from 'react';
-import BaseComponent from '../script/BaseClass.jsx';
+import BaseComponent from '../../../script/BaseClass.jsx';
 import MenuItem from './mymenu_item.jsx';
-class M_Wallet extends BaseComponent {
+class M_Account extends BaseComponent {
   constructor() {
     super();
   }
@@ -11,14 +11,14 @@ class M_Wallet extends BaseComponent {
       <div className="m_component my_wallet">
         <div className="m_title">
           <i className="icon icon-user"/>
-          <span>我的钱包</span>
+          <span>我的账号</span>
         </div>
         <dl className="m_items">
-          <MenuItem text="我的钱包" />
+          <MenuItem text="账号设置" />
         </dl>
       </div>
     );
   }
 }
 
-export default M_Wallet;
+export default M_Account;
