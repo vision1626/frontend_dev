@@ -1,0 +1,57 @@
+.section__header {
+  margin: 12px 0;
+  ._clearfix;
+  .section__title {
+    font-size: @font-size-l;
+    border-left: 4px solid @blue;
+    padding-left: 10px;
+    font-weight: bold;
+    line-height: 1.2;
+    float: left;
+    margin: 0;
+  }
+  .section__nav {
+    float: left;
+    margin-left: 30px;
+    ul {
+      //._clearfix;
+    }
+    li {
+      float: left;
+      border-right: 1px solid @dark-grey;
+      line-height: 1.1;
+      &:nth-last-child(1) {
+        border-right: none;
+      }
+      a {
+        font-size: @font-size-s;
+        position: relative;
+        padding: 0 12px;
+      }
+      &.hot {
+        a {
+          padding-right: 20px;
+          &:after {
+            content: 'H';
+            font-size: 8px;
+            display: block;
+            border-radius: 50%;
+            background: @red;
+            position: absolute;
+            top: -0px;
+            color: white;
+            line-height: 1;
+            padding: 1px 0 0 2px;
+            right: 8px;
+            width: 8px;
+            height: 9px;
+          }
+        }
+      }
+    }
+    &.right {
+      float: right;
+      margin-right: -12px;
+    }
+  }
+}

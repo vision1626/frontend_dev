@@ -1,0 +1,20 @@
+//
+   Created by edlee on 2/25/16.
+section.slideshow
+  .slides__wrap
+    ul.slides
+      li
+        a(href='http://baidu.com',target='_blank')
+          article.slide__content
+            img.bg(src='#{image_path}/slideshow-1.jpg', alt='')
+      li
+        a(href='http://baidu.com',target='_blank')
+          article.slide__content
+            img.bg(src='#{image_path}/slideshow-2.jpg', alt='')
+    ul.slides__bullets
+    a.slides__pager.prev
+      span
+        i.icon.icon-slideleft
+    a.slides__pager.next
+      span
+        i.icon.icon-slideright

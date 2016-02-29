@@ -1,0 +1,142 @@
+.headlines__wrap {
+  ._clearfix;
+}
+._headline_metrics() {
+  @w-b:384px; @h-b:384px;
+  @w-m:412px; @h-m:250px;
+  @w-s:198px; @h-s:116px;
+  @mar:16px;
+}
+.headlines__grid {
+  ._headline_metrics;
+  float: left;
+  width: @w-b + @mar + @w-m;
+  height: @h-b;
+  position: relative;
+  .news-blocks {
+
+    li {
+      position: absolute;
+      h3 {
+      }
+      &.block-0 {
+        ._block(@w-b, @h-b);
+        h3 {
+          font-size: @font-size-xl;
+        }
+        .info {
+          background: linear-gradient(rgba(0,0,0,0) 50%,rgba(0,0,0,0.6) 100%);
+        }
+      }
+      &.block-1 {
+        top: 0;
+        ._block(@w-m,@h-m);
+        left: @w-b + @mar;
+        .info {
+          background: linear-gradient(rgba(0,0,0,0) 50%,rgba(0,0,0,0.6) 100%);
+        }
+      }
+      &.block-2 {
+        ._block(@w-s,@h-s);
+        left: @w-b + @mar;
+        bottom: 0;
+      }
+      &.block-3 {
+        ._block(@w-s,@h-s);
+        bottom: 0;
+        left: @w-b + @mar + @w-s + @mar;
+      }
+    }
+  }
+}
+.headlines__list {
+  ._headline_metrics;
+  @w:364px;
+  @h:@h-b / 10;
+  float: right;
+  width: 364px;
+  .news-blocks {
+    li {
+      height: @h;
+      a {
+        height: auto;
+        ._clearfix;
+      }
+      .image {
+        position: relative;
+        float: left;
+        ._square(@h * 3 - 0px);
+        display: none;
+      }
+      h3 {
+        font-size: @font-size-s;
+        font-weight: normal;
+        height: 22px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        position: relative;
+        left: 6px;
+        color: black;
+        text-shadow: none;
+      }
+      .desc {
+        display: none;
+        font-size: @font-size-s;
+        color: @dark-grey;
+        line-height: 1.2;
+        text-align: justify;
+      }
+      .tag {
+        float: left;
+        margin-top: 5px;
+      }
+      .info {
+        background: none;
+        float: left;
+        position: relative;
+        padding: 0;
+        margin-top: 16px;
+      }
+      .info__content {
+        padding: 0;
+        bottom: auto;
+        top: 0;
+        ._clearfix;
+
+      }
+
+      &.expanded {
+        height: @h * 3;
+        .image {
+          display: block;
+        }
+        .desc {
+          display: block;
+        }
+        .info {
+          @margin:12px;
+          width: @w - (@h * 3) - @margin;
+          margin-top: 0;
+          margin-left: @margin;
+        }
+        .tag {
+          float: none;
+          position: absolute;
+          top: 0px;
+          left: -122px;
+        }
+        h3 {
+          float: none;
+          font-weight: 500;
+          white-space: normal;
+          overflow: visible;
+          height: auto;
+          font-size: @font-size-m;
+          left: 0;
+          margin: 0 0 5px;
+        }
+      }
+    }
+  }
+}
