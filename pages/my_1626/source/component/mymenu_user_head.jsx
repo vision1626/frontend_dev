@@ -1,9 +1,8 @@
 import React from 'react';
-class UserHead extends React.Component {
-  constructor(props) {
-    super(props);
-    this.userInformation = window.user_information;
-    this.userStatistics = window.user_statistics;
+import BaseComponent from '../script/BaseClass.jsx';
+class UserHead extends BaseComponent {
+  constructor() {
+    super();
   }
 
   init(){

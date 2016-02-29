@@ -3,12 +3,13 @@ import {render} from 'react-dom';
 
 import * as util from '../script/util.jsx';
 import UserHead from '../component/mymenu_user_head.jsx';
+import Summary from '../component/mymenu_summary.jsx';
 
 require('../less/layout.less');
 
 class Layout extends React.Component {
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
     this.init();
   }
 
@@ -29,6 +30,7 @@ class Layout extends React.Component {
       <div className="layout">
         <div className="my_menu">
           <UserHead />
+          <Summary />
         </div>
         <div className="my_content_container">
         </div>
