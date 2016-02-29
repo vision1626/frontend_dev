@@ -7,6 +7,7 @@ import Summary from '../component/mymenu_summary.jsx';
 import Flashbuy from '../component/mymenu_my_flashbuy.jsx';
 import Dashboard from '../component/mymenu_my_dashboard.jsx';
 import Message from '../component/mymenu_my_message.jsx';
+import Wallet from '../component/mymenu_my_wallet.jsx';
 
 require('../less/layout.less');
 
@@ -38,6 +39,7 @@ class Layout extends React.Component {
           <Flashbuy />
           <Dashboard />
           <Message />
+          <Wallet />
         </div>
         <div className="my_content_container">
 
