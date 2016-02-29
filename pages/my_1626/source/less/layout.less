@@ -1,0 +1,162 @@
+@import "../../../../public_inc/source/less/imports";
+
+.layout{
+  background-color: @light-grey;
+  .my_menu{
+    width:200px;
+    height:100%;
+    background-color: @x-dark-grey;
+    position: relative;
+
+    .menu_array{
+      position: absolute;
+      right:0;
+      top:248px;
+      width:0;
+      height:0;
+      border-top:7px solid transparent;
+      border-bottom:7px solid transparent;
+      border-right:8px solid @light-grey;
+    }
+
+    .my_base_info{
+      width:200px;
+      height:200px;
+      position: relative;
+      overflow: hidden;
+      .avatar_bg{
+        position: absolute;
+        top:0;
+        bottom:0;
+        left:0;
+        right:0;
+        opacity: 0.6;
+        width:100%;
+        z-index: 1;
+        -webkit-filter: blur(8px);
+        -moz-filter: blur(8px);
+        -ms-filter: blur(8px);
+        filter: blur(8px);
+        filter: progid:DXImageTransform.Microsoft.Blur(PixelRadius=10, MakeShadow=false);
+      }
+      .avatar{
+        position: absolute;
+        left:0;
+        right:0;
+        top:25px;
+        margin: auto;
+        width:90px;
+        height: 90px;
+        border-radius: 50px;
+        z-index: 4;
+      }
+      i.icon-edit{
+        color:@white;
+        font-size: 24px;
+        position: absolute;
+        right: 25px;
+        top: 58px;
+        z-index: 5;
+        transition: all 0.3s;
+        cursor: pointer;
+        &:hover{
+          color:@blue;
+        }
+      }
+      .my_relations{
+        position: absolute;
+        bottom:24px;
+        left:15px;
+        right:15px;
+        margin: auto;
+        -webkit-column-count: 2;
+        -moz-column-count: 2;
+        -ms-column-count: 2;
+        column-count: 2;
+        -webkit-column-gap: 0;
+        -moz-column-gap: 0;
+        -ms-column-gap: 0;
+        column-gap: 0;
+        z-index: 4;
+        .my_relation{
+          text-align: center;
+          cursor: pointer;
+          i{
+            display: block;
+            color: @white;
+            font-size: 24px;
+            transition: all 0.3s;
+            &:hover{
+              color:@blue;
+            }
+          }
+          span{
+            color: @white;
+            font-size: @font-size-s;
+            transition: all 0.3s;
+            &:hover{
+              color:@blue;
+            }
+          }
+        }
+      }
+    }
+
+    .m_component{
+      .m_title{
+        height:35px;
+        background-color: @xx-dark-grey;
+        line-height: 35px;
+        i{
+          margin-left: 15px;
+          font-size: @font-size-s;
+          color:@dark-grey;
+          position: relative;
+          top:-1px;
+        }
+        span{
+          margin-left: 5px;
+          font-size: @font-size-s;
+          color:@dark-grey;
+        }
+      }
+      .m_items{
+        dd{
+          height:40px;
+          position: relative;
+          a{
+            line-height: 40px;
+            position: absolute;
+            left: 15px;
+            right:0;
+            top:0;
+            bottom:0;
+            margin: auto;
+            color: @grey;
+            font-size: @font-size-s;
+            transition: all 0.3s;
+            cursor: pointer;
+            &:hover{
+              color:@light-grey;
+            }
+            span.m_number{
+              margin: 0 10px;
+              background-color: @blue;
+              color: @x-dark-grey;
+              padding: 0 8px;
+              border-radius: 14px;
+              position: relative;
+              top: 0;
+              font-size: @font-size-xs;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .my_content_container{
+    float: left;
+    background-color: @white;
+  }
+}

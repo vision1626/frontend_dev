@@ -109,7 +109,7 @@ query_follow_Data = () ->
 
         if result.count > 0
           if result.data
-            if window.follow_list_data
+            if window.follow_list_data.length > 0
               for d in result.data
                 window.follow_list_data.push(d)
             else

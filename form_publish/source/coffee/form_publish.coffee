@@ -405,7 +405,8 @@ init_form_publish = ->
         refreshForm()
         $popup.show()
         $popup_loading.hide()
-        window.location.href = '/'
+        if ! isInActions()
+          window.location.href = '/'
       else
         return false
 
@@ -509,6 +510,7 @@ init_form_publish = ->
             if result.status == 1
               window.location.href = result.url
         })
+      e.preventDefault()
 
   clean = ->
     arr = [$popup_manually_upload, $form_title_input, 

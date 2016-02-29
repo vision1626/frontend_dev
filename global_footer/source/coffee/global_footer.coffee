@@ -57,6 +57,9 @@ afterGetMagCover = (in_data) ->
     $('.global-footer').find('.mag-cover img').attr 'src', cover_src
     $('.global-footer').find('.mag-buy strong').text number
     footer_mag.attr 'data-link', buy_link
+    $('.mag-buy').show()
+  else
+    $('.mag-buy').hide()
 
 $(document).on 'touchend','.qrcode_wechat', (e) ->
   e.preventDefault()
