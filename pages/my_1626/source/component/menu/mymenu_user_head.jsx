@@ -1,5 +1,5 @@
 import React from 'react';
-import BaseComponent from '../../../script/BaseClass.jsx';
+import BaseComponent from '../../script/BaseClass.jsx';
 class UserHead extends BaseComponent {
   constructor() {
     super();

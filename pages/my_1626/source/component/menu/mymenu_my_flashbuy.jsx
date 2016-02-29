@@ -1,5 +1,5 @@
 import React from 'react';
-import BaseComponent from '../../../script/BaseClass.jsx';
+import BaseComponent from '../../script/BaseClass.jsx';
 import MenuItem from './mymenu_item.jsx';
 class M_FlashBuy extends BaseComponent {
   constructor() {
