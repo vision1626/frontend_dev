@@ -1,5 +1,6 @@
 import React from 'react';
 import BaseComponent from '../script/BaseClass.jsx';
+import MenuItem from 'mymenu_item.jsx';
 class M_Message extends BaseComponent {
   constructor() {
     super();
@@ -19,6 +20,7 @@ class M_Message extends BaseComponent {
               <span className="m_number">{this.userStatistics.msg_like_count}</span>
             </a>
           </dd>
+          <MenuItem text="收到的喜欢收到的喜欢"/>
           <dd className="m_item">
             <a>
               收到的喜欢
