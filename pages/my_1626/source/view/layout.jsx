@@ -29,6 +29,7 @@ class Layout extends React.Component {
     return (
       <div className="layout">
         <div className="my_menu">
+          <div className="menu_array"></div>
           <UserHead />
           <Summary />
         </div>
