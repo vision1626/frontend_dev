@@ -14,8 +14,8 @@ class M_FlashBuy extends BaseComponent {
           <span>我的潮闪购</span>
         </div>
         <dl className="m_items">
-          <MenuItem text="我的订单" count={this.userOrder.unpay_count} />
-          <MenuItem text="退款管理" />
+          <MenuItem text="我的订单" count={this.userOrder.unpay_count} method="util.callMyOrder()"/>
+          <MenuItem text="退款管理" method="" />
           <MenuItem text="优惠券" />
           <MenuItem text="收货地址管理" />
         </dl>

@@ -10,6 +10,8 @@ import Message from '../component/menu/mymenu_my_message.jsx';
 import Wallet from '../component/menu/mymenu_my_wallet.jsx';
 import Account from '../component/menu/mymenu_my_account.jsx';
 
+import My_Order from '../component/order/my_order.jsx';
+
 require('../less/layout.less');
 
 class Layout extends React.Component {
@@ -44,7 +46,7 @@ class Layout extends React.Component {
           <Account />
         </div>
         <div className="my_content_container">
-
+          <My_Order className="component_order" />
         </div>
       </div>
     );

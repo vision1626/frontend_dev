@@ -1,12 +1,21 @@
 import React from 'react';
+import * as util from '../../script/util.jsx';
 class MenuItem extends React.Component {
-  constructor(text,classname,count,iscurrent) {
+  constructor(text,classname,count,iscurrent,method) {
     super();
+    this._handleClick = this._handleClick.bind(this)
     this.props = {
       text : text || 'MenuItem',
       classname : classname || '',
       count : count || 0,
-      iscurrent : iscurrent || 'false'
+      iscurrent : iscurrent || 'false',
+      method : method || ''
+    }
+  }
+
+  _handleClick(e) {
+    if ((this.props.method != '' && typeof(this.props.method) != 'undefined') && this.props.iscurrent != 'true') {
+      util.callMyOrder();
     }
   }
 
@@ -23,7 +32,7 @@ class MenuItem extends React.Component {
     }
 
     return (
-      <dd className={classname}>
+      <dd className={classname} onClick={this._handleClick}>
         <a>
           <span>{this.props.text}</span>
           {numberDom}
