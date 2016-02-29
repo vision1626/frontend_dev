@@ -6,6 +6,7 @@ import UserHead from '../component/mymenu_user_head.jsx';
 import Summary from '../component/mymenu_summary.jsx';
 import Flashbuy from '../component/mymenu_my_flashbuy.jsx';
 import Dashboard from '../component/mymenu_my_dashboard.jsx';
+import Message from '../component/mymenu_my_message.jsx';
 
 require('../less/layout.less');
 
@@ -36,6 +37,7 @@ class Layout extends React.Component {
           <Summary />
           <Flashbuy />
           <Dashboard />
+          <Message />
         </div>
         <div className="my_content_container">
 
