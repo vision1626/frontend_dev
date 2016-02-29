@@ -4,6 +4,8 @@ import {render} from 'react-dom';
 import * as util from '../script/util.jsx';
 import UserHead from '../component/mymenu_user_head.jsx';
 import Summary from '../component/mymenu_summary.jsx';
+import Flashbuy from '../component/mymenu_my_flashbuy.jsx';
+
 
 require('../less/layout.less');
 
@@ -32,6 +34,7 @@ class Layout extends React.Component {
           <div className="menu_array"></div>
           <UserHead />
           <Summary />
+          <Flashbuy />
         </div>
         <div className="my_content_container">
 
