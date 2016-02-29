@@ -124,6 +124,7 @@
         dd{
           height:40px;
           position: relative;
+          cursor: pointer;
           a{
             line-height: 40px;
             position: absolute;
@@ -135,10 +136,6 @@
             color: @grey;
             font-size: @font-size-s;
             transition: all 0.3s;
-            cursor: pointer;
-            &:hover{
-              color:@light-grey;
-            }
             span.m_number{
               margin: 0 10px;
               background-color: @blue;
@@ -149,6 +146,15 @@
               top: 0;
               font-size: @font-size-xs;
             }
+          }
+          &.current{
+            cursor: default;
+            a{
+              color:@light-grey;
+            }
+          }
+          &:hover a{
+            color:@light-grey;
           }
         }
       }
