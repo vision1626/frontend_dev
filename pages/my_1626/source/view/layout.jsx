@@ -33,6 +33,7 @@ class Layout extends React.Component {
           <Summary />
         </div>
         <div className="my_content_container">
+
         </div>
       </div>
     );
