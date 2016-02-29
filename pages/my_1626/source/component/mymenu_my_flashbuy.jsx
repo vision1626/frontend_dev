@@ -14,8 +14,10 @@ class M_FlashBuy extends BaseComponent {
         </div>
         <dl className="m_items">
           <dd className="m_item">
-            <a>我的订单</a>
-            <span className="m_number">{this.userOrder.unpay_count}</span>
+            <a>
+              我的订单
+              <span className="m_number">{this.userOrder.unpay_count}</span>
+            </a>
           </dd>
           <dd className="m_item">
             <a>退款管理</a>

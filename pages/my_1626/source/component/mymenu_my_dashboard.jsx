@@ -14,8 +14,10 @@ class M_Dashboard extends BaseComponent {
         </div>
         <dl className="m_items">
           <dd className="m_item">
-            <a>潮品动态</a>
-            <span className="m_number">{this.userStatistics.dynamic_count}</span>
+            <a>
+              潮品动态
+              <span className="m_number">{this.userStatistics.dynamic_count}</span>
+            </a>
           </dd>
           <dd className="m_item">
             <a>我的喜欢</a>
