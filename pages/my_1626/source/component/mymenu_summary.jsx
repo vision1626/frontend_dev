@@ -1,5 +1,6 @@
 import React from 'react';
 import BaseComponent from '../script/BaseClass.jsx';
+import MenuItem from './mymenu_item.jsx';
 class M_Summary extends BaseComponent {
   constructor() {
     super();
@@ -13,9 +14,7 @@ class M_Summary extends BaseComponent {
           <span>我的1626</span>
         </div>
         <dl className="m_items">
-          <dd className="m_item current">
-            <a>个人中心</a>
-          </dd>
+          <MenuItem text="个人中心" iscurrent="true" />
         </dl>
       </div>
     );

@@ -6,7 +6,7 @@ class MenuItem extends React.Component {
       text : text || 'MenuItem',
       classname : classname || '',
       count : count || 0,
-      currentitem : iscurrent || false
+      iscurrent : iscurrent || 'false'
     }
   }
 
@@ -15,9 +15,15 @@ class MenuItem extends React.Component {
     if (this.props.count > 0){
       numberDom = <span className="m_number">{this.props.count}</span>
     }
+    let classname = '';
+    if (this.props.iscurrent == 'true'){
+      classname = ['m_item',this.props.classname,'current'].join(' ')
+    } else {
+      classname = ['m_item',this.props.classname].join(' ')
+    }
 
     return (
-      <dd className={this.props.currentitem == true ? "m_item current " + this.props.classname : "m_item " + this.props.classname}>
+      <dd className={classname}>
         <a>
           <span>{this.props.text}</span>
           {numberDom}

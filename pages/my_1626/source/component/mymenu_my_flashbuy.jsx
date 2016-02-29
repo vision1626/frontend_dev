@@ -1,5 +1,6 @@
 import React from 'react';
 import BaseComponent from '../script/BaseClass.jsx';
+import MenuItem from './mymenu_item.jsx';
 class M_FlashBuy extends BaseComponent {
   constructor() {
     super();
@@ -13,21 +14,10 @@ class M_FlashBuy extends BaseComponent {
           <span>我的潮闪购</span>
         </div>
         <dl className="m_items">
-          <dd className="m_item">
-            <a>
-              我的订单
-              <span className="m_number">{this.userOrder.unpay_count}</span>
-            </a>
-          </dd>
-          <dd className="m_item">
-            <a>退款管理</a>
-          </dd>
-          <dd className="m_item">
-            <a>优惠券</a>
-          </dd>
-          <dd className="m_item">
-            <a>收货地址管理</a>
-          </dd>
+          <MenuItem text="我的订单" count={this.userOrder.unpay_count} />
+          <MenuItem text="退款管理" />
+          <MenuItem text="优惠券" />
+          <MenuItem text="收货地址管理" />
         </dl>
       </div>
     );
