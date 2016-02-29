@@ -14,31 +14,10 @@ class M_Message extends BaseComponent {
           <span>我的消息</span>
         </div>
         <dl className="m_items">
-          <dd className="m_item">
-            <a>
-              收到的喜欢
-              <span className="m_number">{this.userStatistics.msg_like_count}</span>
-            </a>
-          </dd>
-          <MenuItem />
-          <dd className="m_item">
-            <a>
-              收到的喜欢
-              <span className="m_number">{this.userStatistics.msg_follow_count}</span>
-            </a>
-          </dd>
-          <dd className="m_item">
-            <a>
-              收到的喜欢
-              <span className="m_number">{this.userStatistics.msg_comment_count}</span>
-            </a>
-          </dd>
-          <dd className="m_item">
-            <a>
-              收到的喜欢
-              <span className="m_number">{this.userStatistics.msg_system_count}</span>
-            </a>
-          </dd>
+          <MenuItem text="收到的喜欢" classname="" count={this.userStatistics.msg_like_count} />
+          <MenuItem text="收到的关注" classname="" count={this.userStatistics.msg_follow_count} />
+          <MenuItem text="收到的评论" classname="" count={this.userStatistics.msg_comment_count} />
+          <MenuItem text="官方消息" classname="" count={this.userStatistics.msg_system_count} />
         </dl>
       </div>
     );

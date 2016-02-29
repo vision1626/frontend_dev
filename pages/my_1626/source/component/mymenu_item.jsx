@@ -1,8 +1,8 @@
 import React from 'react';
 class MenuItem extends React.Component {
-  constructor(text = '',classname = '',count = 0,iscurrent = false) {
-    super(text,classname,count,iscurrent);
-    this.state = {
+  constructor(text,classname,count,iscurrent) {
+    super();
+    this.props = {
       text : text || 'MenuItem',
       classname : classname || '',
       count : count || 0,
@@ -12,14 +12,14 @@ class MenuItem extends React.Component {
 
   render() {
     let numberDom = '';
-    if (this.state.count > 0){
-      numberDom = <span className="m_number">this.state.count</span>
+    if (this.props.count > 0){
+      numberDom = <span className="m_number">{this.props.count}</span>
     }
 
     return (
-      <dd className={this.state.currentitem == true ? "m_item current " + this.state.classname : "m_item " + this.state.classname}>
+      <dd className={this.props.currentitem == true ? "m_item current " + this.props.classname : "m_item " + this.props.classname}>
         <a>
-          <span>{this.state.text}</span>
+          <span>{this.props.text}</span>
           {numberDom}
         </a>
       </dd>
