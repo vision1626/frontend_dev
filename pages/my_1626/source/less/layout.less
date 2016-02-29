@@ -1,11 +1,23 @@
 @import "../../../../public_inc/source/less/imports";
 
 .layout{
+  background-color: @light-grey;
   .my_menu{
     width:200px;
     height:100%;
     background-color: @x-dark-grey;
     position: relative;
+
+    .menu_array{
+      position: absolute;
+      right:0;
+      top:248px;
+      width:0;
+      height:0;
+      border-top:7px solid transparent;
+      border-bottom:7px solid transparent;
+      border-right:8px solid @light-grey;
+    }
 
     .my_base_info{
       width:200px;
@@ -84,6 +96,48 @@
             transition: all 0.3s;
             &:hover{
               color:@blue;
+            }
+          }
+        }
+      }
+    }
+
+    .m_component{
+      .m_title{
+        height:35px;
+        background-color: @xx-dark-grey;
+        line-height: 35px;
+        i{
+          margin-left: 15px;
+          font-size: @font-size-s;
+          color:@dark-grey;
+          position: relative;
+          top:-1px;
+        }
+        span{
+          margin-left: 5px;
+          font-size: @font-size-s;
+          color:@dark-grey;
+        }
+      }
+      .m_items{
+        dd{
+          height:40px;
+          position: relative;
+          a{
+            line-height: 40px;
+            position: absolute;
+            left: 15px;
+            right:0;
+            top:0;
+            bottom:0;
+            margin: auto;
+            color: @grey;
+            font-size: @font-size-s;
+            transition: all 0.3s;
+            cursor: pointer;
+            &:hover{
+              color:@light-grey;
             }
           }
         }

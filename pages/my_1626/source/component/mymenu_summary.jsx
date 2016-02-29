@@ -7,7 +7,7 @@ class M_Summary extends BaseComponent {
 
   render() {
     return (
-      <div className="my_summary">
+      <div className="m_component my_summary">
         <div className="m_title">
           <i className="icon icon-hand"/>
           <span>我的1626</span>
