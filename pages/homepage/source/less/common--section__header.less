@@ -18,7 +18,7 @@
     }
     li {
       float: left;
-      border-right: 1px solid @dark-grey;
+      border-right: 1px solid @grey;
       line-height: 1.1;
       &:nth-last-child(1) {
         border-right: none;
@@ -27,6 +27,9 @@
         font-size: @font-size-s;
         position: relative;
         padding: 0 12px;
+        &:hover {
+          font-weight: 600;
+        }
       }
       &.hot {
         a {
@@ -52,6 +55,28 @@
     &.right {
       float: right;
       margin-right: -12px;
+    }
+  }
+  .section__tabs {
+    ul {
+
+    }
+    li {
+      margin: 0 12px;
+      border:none;
+      a {
+        padding: 0 0 2px 0;
+        cursor: pointer;
+      }
+      &.current {
+        a {
+          border-bottom: 2px solid @blue;
+          cursor: default;
+          &:hover {
+            font-weight: normal;
+          }
+        }
+      }
     }
   }
 }

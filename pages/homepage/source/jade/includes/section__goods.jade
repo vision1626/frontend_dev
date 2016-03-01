@@ -4,7 +4,7 @@
 section.goods
   .section__header
     h2.section__title 潮品精选
-    .section__tabs
+    .section__tabs.section__nav.right
       ul
         li.current
           a 编辑精选
@@ -43,3 +43,13 @@ section.goods
   .clear
   .item-pagiation.clear#item-pagiation
     .show-more#dashboard-show-more 我要看更多
+
+  .goods__categories
+    span 你是否要找:
+    ul
+      li
+        a(href='/') 男装
+      li
+        a(href='/') 女装
+      li
+        a(href='/') 男鞋

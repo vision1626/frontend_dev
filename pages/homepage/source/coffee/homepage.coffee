@@ -5,3 +5,4 @@ initHomepage = ->
     placePhantomImg($(this))
 
   initSlideshow()
+  initHeadlineList()
