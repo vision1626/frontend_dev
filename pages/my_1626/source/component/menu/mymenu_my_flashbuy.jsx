@@ -15,9 +15,9 @@ class M_FlashBuy extends BaseComponent {
         </div>
         <dl className="m_items">
           <MenuItem text="我的订单" count={this.userOrder.unpay_count} viewName="order" changeView={this.props.changeView.bind(this)}/>
-          <MenuItem text="退款管理" viewName="refund" changeView={this.props.changeView.bind(this)} />
-          <MenuItem text="优惠券" viewName="coupon" changeView={this.props.changeView.bind(this)}/>
-          <MenuItem text="收货地址管理" viewName="address" changeView={this.props.changeView.bind(this)}/>
+          <MenuItem text="退款管理" link="#"/>
+          <MenuItem text="优惠券" link="#"/>
+          <MenuItem text="收货地址管理" link="#"/>
         </dl>
       </div>
     );

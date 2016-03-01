@@ -4,7 +4,7 @@ import BaseComponent from '../../script/BaseClass.jsx';
 class Entity extends BaseComponent {
   constructor() {
     super();
-    this.state.Name = "order"
+    this.state.Name = "summary"
   }
 
   render() {
@@ -20,10 +20,9 @@ class Entity extends BaseComponent {
     }
 
     return <div style={{display:display}}>
-      <h3>订单</h3>
+      <h3>个人中心</h3>
     </div>
   }
 }
 
 export default Entity;
-

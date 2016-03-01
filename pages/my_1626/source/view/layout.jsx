@@ -11,6 +11,8 @@ import Wallet from '../component/menu/mymenu_my_wallet.jsx';
 import Account from '../component/menu/mymenu_my_account.jsx';
 
 import My_Order from '../component/order/my_order.jsx';
+import My_Summery from '../component/summary/summary.jsx';
+import My_Message from '../component/message/message.jsx';
 
 require('../less/layout.less');
 
@@ -40,10 +42,11 @@ class Layout extends React.Component {
   }
 
   render () {
-    let myOrder = <My_Order testValue="0" />;
-    if (this.state.currentPage == 'order'){
-      myOrder = <My_Order testValue="1" />
-    }
+    let mySummery = <My_Summery currentPage={this.state.currentPage} />;
+    let myOrder = <My_Order currentPage={this.state.currentPage} />;
+
+    let myMssage = <My_Message currentPage={this.state.currentPage} />;
+
     return (
       <div className="layout">
         <div className="my_menu">
@@ -52,12 +55,14 @@ class Layout extends React.Component {
           <Summary changeView={this.changeView.bind(this)} />
           <Flashbuy changeView={this.changeView.bind(this)} />
           <Dashboard />
-          <Message />
+          <Message changeView={this.changeView.bind(this)} />
           <Wallet />
-          <Account />
+          <Account changeView={this.changeView.bind(this)} />
         </div>
         <div className="my_content_container">
+          {mySummery}
           {myOrder}
+          {myMssage}
         </div>
       </div>
     );

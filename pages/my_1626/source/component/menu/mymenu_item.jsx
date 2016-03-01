@@ -1,21 +1,21 @@
 import React from 'react';
 import * as util from '../../script/util.jsx';
 class MenuItem extends React.Component {
-  constructor(text,classname,count,iscurrent,method) {
+  constructor() {
     super();
-    this._handleClick = this._handleClick.bind(this)
-    this.props = {
-      text : text || 'MenuItem',
-      classname : classname || '',
-      count : count || 0,
-      iscurrent : iscurrent || 'false',
-      method : method || ''
-    }
+    this._handleClick = this._handleClick.bind(this);
   }
 
   _handleClick(e) {
-    if ((this.props.viewName != '' && typeof(this.props.viewName) != 'undefined') && this.props.iscurrent != 'true') {
-      this.props.changeView(this.props.viewName);
+    let me = $(e.currentTarget);
+    if (!me.hasClass('current')) {
+      if (this.props.viewName) {
+        this.props.changeView(this.props.viewName);
+        $('.m_item').removeClass('current');
+        me.addClass('current');
+      } else if (this.props.link) {
+        window.open(this.props.link);
+      }
     }
   }
 
@@ -24,8 +24,8 @@ class MenuItem extends React.Component {
     if (this.props.count > 0){
       numberDom = <span className="m_number">{this.props.count}</span>
     }
-    let classname = '';
-    if (this.props.iscurrent == 'true'){
+    let classname = 'm_item empty';
+    if (this.props.iscurrent){
       classname = ['m_item',this.props.classname,'current'].join(' ')
     } else {
       classname = ['m_item',this.props.classname].join(' ')

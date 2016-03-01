@@ -14,10 +14,10 @@ class M_Message extends BaseComponent {
           <span>我的消息</span>
         </div>
         <dl className="m_items">
-          <MenuItem text="收到的喜欢" classname="my_msg_like" count={this.userStatistics.msg_like_count} />
-          <MenuItem text="收到的关注" classname="" count={this.userStatistics.msg_follow_count} />
-          <MenuItem text="收到的评论" classname="" count={this.userStatistics.msg_comment_count} />
-          <MenuItem text="官方消息" classname="" count={this.userStatistics.msg_system_count} />
+          <MenuItem text="收到的喜欢" viewName="message_like" count={this.userStatistics.msg_like_count} changeView={this.props.changeView.bind(this)}/>
+          <MenuItem text="收到的关注" viewName="message_follow" count={this.userStatistics.msg_follow_count} changeView={this.props.changeView.bind(this)}/>
+          <MenuItem text="收到的评论" viewName="message_comment" count={this.userStatistics.msg_comment_count} changeView={this.props.changeView.bind(this)}/>
+          <MenuItem text="官方消息" viewName="message_system" count={this.userStatistics.msg_system_count} changeView={this.props.changeView.bind(this)}/>
         </dl>
       </div>
     );
