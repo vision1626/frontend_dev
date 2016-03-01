@@ -7,12 +7,15 @@ class MenuItem extends React.Component {
   }
 
   _handleClick(e) {
+
     let me = $(e.currentTarget);
     if (!me.hasClass('current')) {
+      //alert('asidhskdhskfhsdkfhs');
       if (this.props.viewName) {
         this.props.changeView(this.props.viewName);
         $('.m_item').removeClass('current');
         me.addClass('current');
+        $('.menu_array').css('top',e.currentTarget.offsetTop+10);
       } else if (this.props.link) {
         window.open(this.props.link);
       }
