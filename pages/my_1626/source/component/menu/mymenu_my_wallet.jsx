@@ -14,7 +14,7 @@ class M_Wallet extends BaseComponent {
           <span>我的钱包</span>
         </div>
         <dl className="m_items">
-          <MenuItem text="我的钱包" />
+          <MenuItem text="我的钱包" link="#" />
         </dl>
       </div>
     );
