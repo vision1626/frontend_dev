@@ -1,13 +1,17 @@
-@import "../../../../public_inc/source/less/imports";
+@import "./common";
+@menu_title_height: 35px;
+@menu_item_height: 35px;
 
 .layout{
   background-color: @light-grey;
+  clear: both;
   .my_menu{
     width:200px;
-    height:100%;
+    //height:100%;
     background-color: @x-dark-grey;
     position: relative;
-
+    float: left;
+    padding-bottom: 50px;
     .menu_array{
       position: absolute;
       right:0;
@@ -17,6 +21,11 @@
       border-top:7px solid transparent;
       border-bottom:7px solid transparent;
       border-right:8px solid @light-grey;
+      -webkit-transition: all 0.2s cubic-bezier(0,0,0.3,1);
+      -moz-transition: all 0.2s cubic-bezier(0,0,0.3,1);
+      -ms-transition: all 0.2s cubic-bezier(0,0,0.3,1);
+      -o-transition: all 0.2s cubic-bezier(0,0,0.3,1);
+      transition: all 0.2s cubic-bezier(0,0,0.3,1);
     }
 
     .my_base_info{
@@ -86,16 +95,15 @@
             color: @white;
             font-size: 24px;
             transition: all 0.3s;
-            &:hover{
-              color:@blue;
-            }
           }
           span{
             color: @white;
             font-size: @font-size-s;
             transition: all 0.3s;
-            &:hover{
-              color:@blue;
+          }
+          &:hover{
+            i,span {
+              color: @blue;
             }
           }
         }
@@ -104,9 +112,9 @@
 
     .m_component{
       .m_title{
-        height:35px;
+        height:@menu_title_height;
         background-color: @xx-dark-grey;
-        line-height: 35px;
+        line-height: @menu_title_height;
         i{
           margin-left: 15px;
           font-size: @font-size-s;
@@ -122,10 +130,11 @@
       }
       .m_items{
         dd{
-          height:40px;
+          height: @menu_item_height;
           position: relative;
+          cursor: pointer;
           a{
-            line-height: 40px;
+            line-height: @menu_item_height;
             position: absolute;
             left: 15px;
             right:0;
@@ -135,10 +144,6 @@
             color: @grey;
             font-size: @font-size-s;
             transition: all 0.3s;
-            cursor: pointer;
-            &:hover{
-              color:@light-grey;
-            }
             span.m_number{
               margin: 0 10px;
               background-color: @blue;
@@ -150,6 +155,15 @@
               font-size: @font-size-xs;
             }
           }
+          &.current{
+            cursor: default;
+            a{
+              color:@light-grey;
+            }
+          }
+          &:hover a{
+            color:@light-grey;
+          }
         }
       }
     }
@@ -157,6 +171,7 @@
 
   .my_content_container{
     float: left;
-    background-color: @white;
+    //background-color: @white;
+    padding: 30px;
   }
 }

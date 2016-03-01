@@ -1,9 +1,5 @@
 
-export function sayHello() {
-  return alert('This is a TTTTTest');
+export function callMyOrder(){
+  //return My_Order.initMyOrder();
+  return alert('nothing');
 }
-
-export function sayHello2() {
-  return alert('This is a TTTTTest2');
-}
-
