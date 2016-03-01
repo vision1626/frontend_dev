@@ -1,3 +1,5 @@
+
 export function callMyOrder(){
-  return alert('call my order');
+  //return My_Order.initMyOrder();
+  return alert('nothing');
 }

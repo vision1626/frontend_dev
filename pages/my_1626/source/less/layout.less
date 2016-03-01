@@ -1,14 +1,17 @@
-@import "../../../../public_inc/source/less/imports";
+@import "./common";
+@menu_title_height: 35px;
+@menu_item_height: 40px;
 
 .layout{
   background-color: @light-grey;
   clear: both;
   .my_menu{
     width:200px;
-    height:100%;
+    //height:100%;
     background-color: @x-dark-grey;
     position: relative;
     float: left;
+    padding-bottom: 50px;
     .menu_array{
       position: absolute;
       right:0;
@@ -87,16 +90,15 @@
             color: @white;
             font-size: 24px;
             transition: all 0.3s;
-            &:hover{
-              color:@blue;
-            }
           }
           span{
             color: @white;
             font-size: @font-size-s;
             transition: all 0.3s;
-            &:hover{
-              color:@blue;
+          }
+          &:hover{
+            i,span {
+              color: @blue;
             }
           }
         }
@@ -105,9 +107,9 @@
 
     .m_component{
       .m_title{
-        height:35px;
+        height:@menu_title_height;
         background-color: @xx-dark-grey;
-        line-height: 35px;
+        line-height: @menu_title_height;
         i{
           margin-left: 15px;
           font-size: @font-size-s;
@@ -123,11 +125,11 @@
       }
       .m_items{
         dd{
-          height:40px;
+          height: @menu_item_height;
           position: relative;
           cursor: pointer;
           a{
-            line-height: 40px;
+            line-height: @menu_item_height;
             position: absolute;
             left: 15px;
             right:0;
@@ -164,6 +166,7 @@
 
   .my_content_container{
     float: left;
-    background-color: @white;
+    //background-color: @white;
+    padding: 30px;
   }
 }

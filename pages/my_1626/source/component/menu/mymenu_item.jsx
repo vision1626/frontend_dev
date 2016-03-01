@@ -14,8 +14,8 @@ class MenuItem extends React.Component {
   }
 
   _handleClick(e) {
-    if ((this.props.method != '' && typeof(this.props.method) != 'undefined') && this.props.iscurrent != 'true') {
-      util.callMyOrder();
+    if ((this.props.viewName != '' && typeof(this.props.viewName) != 'undefined') && this.props.iscurrent != 'true') {
+      this.props.changeView(this.props.viewName);
     }
   }
 

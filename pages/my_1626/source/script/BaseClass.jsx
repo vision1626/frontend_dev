@@ -5,6 +5,10 @@ class BaseComponent extends React.Component {
     this.userInformation = window.user_information;
     this.userStatistics = window.user_statistics;
     this.userOrder = window.user_order;
+    this.state = {
+      Show : false,
+      Build : false
+    }
   }
 }
 

@@ -18,6 +18,9 @@ class Layout extends React.Component {
   constructor() {
     super();
     this.init();
+    this.state = {
+      currentPage : 'summary'
+    }
   }
 
   init() {
@@ -32,21 +35,29 @@ class Layout extends React.Component {
     }
   }
 
+  changeView(view){
+    this.setState({currentPage: view});
+  }
+
   render () {
+    let myOrder = <My_Order testValue="0" />;
+    if (this.state.currentPage == 'order'){
+      myOrder = <My_Order testValue="1" />
+    }
     return (
       <div className="layout">
         <div className="my_menu">
           <div className="menu_array"></div>
           <UserHead />
-          <Summary />
-          <Flashbuy />
+          <Summary changeView={this.changeView.bind(this)} />
+          <Flashbuy changeView={this.changeView.bind(this)} />
           <Dashboard />
           <Message />
           <Wallet />
           <Account />
         </div>
         <div className="my_content_container">
-          <My_Order className="component_order" />
+          {myOrder}
         </div>
       </div>
     );

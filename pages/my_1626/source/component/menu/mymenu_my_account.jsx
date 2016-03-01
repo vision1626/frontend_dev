@@ -6,6 +6,10 @@ class M_Account extends BaseComponent {
     super();
   }
 
+  tick(newState) {
+    alert(newState);
+  }
+
   render() {
     return (
       <div className="m_component my_wallet">
