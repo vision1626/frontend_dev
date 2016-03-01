@@ -14,9 +14,9 @@ class M_Dashboard extends BaseComponent {
           <span>我的潮品</span>
         </div>
         <dl className="m_items">
-          <MenuItem text="潮品动态" count={this.userStatistics.dynamic_count} />
-          <MenuItem text="我的喜欢" />
-          <MenuItem text="我的发布" />
+          <MenuItem text="潮品动态" link="/u/dashboard.html" count={this.userStatistics.dynamic_count} />
+          <MenuItem text="我的喜欢" link="/u/fav.html"/>
+          <MenuItem text="我的发布" link="/u/talk.html"/>
         </dl>
       </div>
     );
