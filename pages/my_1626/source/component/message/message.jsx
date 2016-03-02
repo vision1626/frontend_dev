@@ -1,5 +1,6 @@
 import React from 'react';
 import BaseComponent from '../../script/BaseClass.jsx';
+import Pagination from '../common/pagination.jsx';
 
 class Entity extends BaseComponent {
   constructor() {
@@ -11,12 +12,15 @@ class Entity extends BaseComponent {
   }
 
   build(){
-    alert('building msg');
+    //alert('building msg');
   }
 
   //componentDidMount(){
   //  alert('aaa');
   //}
+  pageTurning(page){
+
+  }
 
   render() {
     let display ;
@@ -45,6 +49,7 @@ class Entity extends BaseComponent {
     return <div style={{display:display}}>
       <h3>我的消息</h3>
       <h5>{subtitle}</h5>
+      <Pagination recordCount="110" pageTurning={this} />
     </div>
   }
 }

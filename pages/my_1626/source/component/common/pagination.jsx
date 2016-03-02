@@ -1,15 +1,24 @@
 import React from 'react';
-import BaseComponent from '../../script/BaseClass.jsx';
 
-class C_Pagination extends BaseComponent {
+class C_Pagination extends React.Component {
   constructor() {
     super();
+    this.state = {
+      current_page : 1
+    }
+  }
+
+  calculatePages(){
+    let total_record = this.props.recordCount;
+    let current_page = this.state.current_page;
+    //Math.ceil(1.1)
   }
 
   render() {
     return (
-      <div>
-        分页控件未得闲做
+      <div clsaaName="pagination">
+        <div>{this.props.recordCount}</div>
+        <div>{this.state.current_page}</div>
       </div>
     );
   }
