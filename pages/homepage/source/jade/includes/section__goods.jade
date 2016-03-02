@@ -1,0 +1,55 @@
+//
+   Created by edlee on 2/25/16.
+
+section.goods
+  .section__header
+    h2.section__title 潮品精选
+    .section__tabs.section__nav.right
+      ul
+        li.current
+          a 编辑精选
+        li
+          a 最热单品
+        li
+          a 最新发布
+
+  .item-list-container
+    dl.big_img#big_img
+    dl.small_img#small_img
+    .list-empty#list-empty
+      .empty-content
+        .empty-icon
+          span.icon.icon-sad
+        .empty-message
+          span.empty-title
+          br
+          label.empty-content
+        .empty-action.return_home
+          a 回首页
+        .empty-action.clear_search#btnInitList
+          a 返回
+        .empty-action.publish_entrance#btnPublish
+          a
+            i.icon.icon-publish_solid
+            | 发布
+    .empty_recommand_title.item-nav-container#recommandTitle
+      .item-nav.first.current
+        a 热门潮人
+    dl.empty_recommand.big_img#recommand
+    .list-loading#list-loading
+      .loading-message
+        i.icon.icon-hand
+        span 正在努力加载中....
+  .clear
+  .item-pagiation.clear#item-pagiation
+    .show-more#dashboard-show-more 我要看更多
+
+  .goods__categories
+    span 你是否要找:
+    ul
+      li
+        a(href='/') 男装
+      li
+        a(href='/') 女装
+      li
+        a(href='/') 男鞋

@@ -4,10 +4,14 @@ _adv_cache_days = 1
 
 init_global_footer = (friend_links)->
   footer_mag = $('.global-footer').find('.footer__mag')
-  footer_mag.click ->
-    mag_buy_link = footer_mag.attr 'data-link'
-    if mag_buy_link isnt ''
-      window.open(mag_buy_link, '_blank');
+  if window.state != 'my1626'
+    footer_mag.click ->
+      mag_buy_link = footer_mag.attr 'data-link'
+      if mag_buy_link isnt ''
+        window.open(mag_buy_link, '_blank');
+  else
+    footer_mag.hide()
+    $('.global-footer').css 'margin-top','0'
 
   if friend_links isnt ''
     friend_links = $.parseJSON(friend_links)
@@ -40,7 +44,8 @@ init_global_footer = (friend_links)->
       mag_data = $.parseJSON(decodeURIComponent($.cookie('1626MsgAdv')))
       afterGetMagCover(mag_data)
 
-  getMagCover()
+  if window.state != 'my1626'
+    getMagCover()
 
 afterGetMagCover = (in_data) ->
   if in_data.data.count >0

@@ -1,0 +1,208 @@
+.headlines__wrap {
+  ._clearfix;
+}
+._headline_metrics() {
+  @w-b:384px; @h-b:384px;
+  @w-m:412px; @h-m:250px;
+  @w-s:198px; @h-s:116px;
+  @mar:16px;
+}
+.headlines__grid {
+  ._headline_metrics;
+  float: left;
+  width: @w-b + @mar + @w-m;
+  height: @h-b;
+  position: relative;
+  .news-blocks {
+
+    li {
+      position: absolute;
+      h3 {
+      }
+      &.block-0 {
+        ._block(@w-b, @h-b);
+        h3 {
+          font-size: @font-size-xl;
+        }
+        .info {
+          background: linear-gradient(rgba(0,0,0,0) 50%,rgba(0,0,0,0.6) 100%);
+        }
+      }
+      &.block-1 {
+        top: 0;
+        ._block(@w-m,@h-m);
+        left: @w-b + @mar;
+        .info {
+          background: linear-gradient(rgba(0,0,0,0) 50%,rgba(0,0,0,0.6) 100%);
+        }
+      }
+      &.block-2 {
+        ._block(@w-s,@h-s);
+        left: @w-b + @mar;
+        bottom: 0;
+      }
+      &.block-3 {
+        ._block(@w-s,@h-s);
+        bottom: 0;
+        left: @w-b + @mar + @w-s + @mar;
+      }
+    }
+  }
+}
+.headlines__list {
+  ._headline_metrics;
+  @w:364px;
+  @h:@h-b / 10;
+  float: right;
+  width: 364px;
+  height: @h-b;
+  overflow: hidden;
+  .news-blocks {
+    margin-top: -11px;
+    li {
+      height: @h;
+      background: none;
+      a {
+        height: auto;
+        ._clearfix;
+      }
+      .image {
+        position: relative;
+        float: left;
+        ._square(0);
+        //._square(@h * 3 - 0px);
+        //display: none;
+        opacity: 0;
+        //transition: opacity 0.1s linear;
+      }
+      h3 {
+        font-size: @font-size-s;
+        font-weight: normal;
+        height: 22px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        position: relative;
+        left: 6px;
+        color: black;
+        text-shadow: none;
+      }
+      .desc {
+        display: none;
+        font-size: @font-size-s;
+        color: @dark-grey;
+        line-height: 1.2;
+        text-align: justify;
+      }
+      .tag {
+        float: left;
+        margin-top: 5px;
+      }
+      .info {
+        background: none;
+        float: left;
+        position: relative;
+        padding: 0;
+        margin-top: 6px;
+      }
+      .info__content {
+        padding: 0;
+        bottom: auto;
+        top: 0;
+        ._clearfix;
+
+      }
+
+      &.expanded {
+        height: @h * 3;
+        margin: 10px 0;
+        .image {
+          //display: block;
+          opacity: 1;
+          ._square(@h * 3 - 0px);
+
+        }
+        .desc {
+          display: block;
+        }
+        .info {
+          @margin:12px;
+          width: @w - (@h * 3) - @margin;
+          margin-top: 0;
+          margin-left: @margin;
+        }
+        .tag {
+          float: none;
+          position: absolute;
+          top: 0px;
+          left: -122px;
+        }
+        h3 {
+          float: none;
+          font-weight: 500;
+          white-space: normal;
+          overflow: visible;
+          height: auto;
+          font-size: @font-size-m;
+          left: 0;
+          margin: 0 0 5px;
+        }
+      }
+    }
+  }
+}
+/** initial setup **/
+.nano {
+  position : relative;
+  width    : 100%;
+  height   : 100%;
+  overflow : hidden;
+}
+.nano > .nano-content {
+  position      : absolute;
+  overflow      : scroll;
+  overflow-x    : hidden;
+  top           : 0;
+  right         : 0;
+  bottom        : 0;
+  left          : 0;
+}
+.nano > .nano-content:focus {
+  outline: thin dotted;
+}
+.nano > .nano-content::-webkit-scrollbar {
+  display: none;
+}
+.has-scrollbar > .nano-content::-webkit-scrollbar {
+  display: block;
+}
+.nano > .nano-pane {
+  background : rgba(0,0,0,.25);
+  position   : absolute;
+  width      : 10px;
+  right      : 0;
+  top        : 0;
+  bottom     : 0;
+  visibility : hidden\9; /* Target only IE7 and IE8 with this hack */
+  opacity    : .01;
+  -webkit-transition    : .2s;
+  -moz-transition       : .2s;
+  -o-transition         : .2s;
+  transition            : .2s;
+  -moz-border-radius    : 5px;
+  -webkit-border-radius : 5px;
+  border-radius         : 5px;
+}
+.nano > .nano-pane > .nano-slider {
+  background: #444;
+  background: rgba(0,0,0,.5);
+  position              : relative;
+  margin                : 0 1px;
+  -moz-border-radius    : 3px;
+  -webkit-border-radius : 3px;
+  border-radius         : 3px;
+}
+.nano:hover > .nano-pane, .nano-pane.active, .nano-pane.flashed {
+  visibility : visible\9; /* Target only IE7 and IE8 with this hack */
+  opacity    : 0.99;
+}

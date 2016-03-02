@@ -1,0 +1,30 @@
+//
+   Created by edlee on 2/26/16.
+
+if production
+  :php
+    $current_js[]   = './tpl/hi1626/v2/js/vendor/jquery-1.11.3.min.js';
+    $current_js[]   = './tpl/hi1626/v2/js/vendor/jquery.cookie.js';
+    $current_js[]   = './tpl/hi1626/v2/js/global_footer.js';
+    $current_js[]   = './tpl/hi1626/v2/js/global_header.js';
+    $current_js[]   = './tpl/hi1626/v2/js/homepage.js';
+  script(type='text/javascript',src="{script $current_js}")
+
+  <!--[if lt IE 10]>
+  :php
+    $current_js2[] = './tpl/hi1626/v2/js/vendor/html5shiv.min.js';
+    $current_js2[] = './tpl/hi1626/v2/js/vendor/placeholders.jquery.min.js';
+  script(type='text/javascript',src="{script $current_js2}")
+  <![endif]-->
+
+else
+  script(type='text/javascript',src="http://apps.bdimg.com/libs/jquery/2.1.1/jquery.min.js")
+  script(type='text/javascript',src="#{asset_path}/js/vendor/jquery.nanoscroller.min.js")
+  script(type='text/javascript',src="#{asset_path}/js/global_footer.js")
+  script(type='text/javascript',src="#{asset_path}/js/global_header.js")
+  script(type='text/javascript',src="#{asset_path}/js/homepage.js")
+
+script(type='text/javascript').
+  $(document).ready(function () {
+    initHomepage();
+  });

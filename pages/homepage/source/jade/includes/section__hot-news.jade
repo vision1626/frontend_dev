@@ -1,0 +1,31 @@
+//
+   Created by edlee on 2/25/16.
+
+- var test_img = 'xxx.jpg'
+section.hot-news
+  .section__header
+    h2.section__title 热门资讯
+    .section__nav.right
+      ul
+        li
+          a 更多资讯
+
+  ul.news-blocks
+    li
+      a(href='http://baidu.com')
+        article.image(style='background-image:url(#{image_path}/#{test_img})')
+          img.phantom(src='#{image_path}/#{test_img}',alt='')
+        article.info
+          span.info__content
+            b.tag 潮鞋
+            h3 打杂的小哥弄了个搞怪的潮牌就连冠希哥
+            p.date 2016年2月22日
+    li
+      a(href='http://baidu.com')
+        article.image(style='background-image:url(#{image_path}/#{test_img})')
+          img.phantom(src='#{image_path}/#{test_img}',alt='')
+        article.info
+          span.info__content
+            b.tag 潮鞋
+            h3 打杂的小哥弄了个搞怪的潮牌就连冠希哥
+            p.date 2016年2月22日

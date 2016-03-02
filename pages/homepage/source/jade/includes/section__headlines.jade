@@ -1,0 +1,73 @@
+section.headlines
+  .section__header
+    h2.section__title 潮流进行时
+    .section__nav
+      ul
+        li.hot
+          a(href='') 潮人
+        li
+          a 潮鞋
+
+  .headlines__wrap
+    .headlines__grid
+      - var test_img = 'xxx.jpg'
+      ul.news-blocks
+        li.block-0
+          a(href='http://baidu.com')
+            article.image(style='background-image:url(#{image_path}/#{test_img})')
+              img.phantom(src='',alt='',data-img='#{image_path}/#{test_img}')
+            article.info
+              span.info__content
+                b.tag.exclusive 独家
+                h3 打杂的小哥弄了个搞怪的潮牌就连冠希哥也忍不住和他合作
+                p.date 2016年2月22日
+        li.block-1
+          a(href='http://baidu.com')
+            article.image(style='background-image:url(#{image_path}/#{test_img})')
+              img.phantom(src='#{image_path}/#{test_img}',alt='')
+            article.info
+              span.info__content
+                b.tag.exclusive 独家
+                h3 打杂的小哥弄了个搞怪的潮牌就连冠希哥也忍不住和他合作
+                p.date 2016年2月22日
+        li.block-2
+          a(href='http://baidu.com')
+            article.image(style='background-image:url(#{image_path}/#{test_img})')
+              img.phantom(src='#{image_path}/#{test_img}',alt='')
+            article.info
+              span.info__content
+                b.tag 潮鞋
+                h3 打杂的小哥弄了个搞怪的潮牌就连冠希哥
+                p.date 2016年2月22日
+        li.block-3
+          a(href='http://baidu.com')
+            article.image(style='background-image:url(#{image_path}/#{test_img})')
+              img.phantom(src='#{image_path}/#{test_img}',alt='')
+            article.info
+              span.info__content
+                b.tag 潮鞋
+                h3 打杂的小哥弄了个搞怪的潮牌就连冠希哥
+                p.date 2016年2月22日
+
+    .headlines__list.nano
+      ul.news-blocks.nano-content
+        li.expanded
+          a(href='http://baidu.com')
+            article.image(style='background-image:url(#{image_path}/#{test_img})')
+              img.phantom(src='#{image_path}/#{test_img}',alt='')
+            article.info
+              span.info__content
+                b.tag.exclusive 独家
+                h3 打杂的小哥弄了个搞怪的潮牌就连冠希哥也忍不住和他合作
+                p.desc 你现在阅读的，并不是真的文案。这些文字，只显示文案将会摆放的位置。我们会称呼这些文案为「假字」。
+
+        include section__headlines__list-news.jade
+        include section__headlines__list-news.jade
+        include section__headlines__list-news.jade
+        include section__headlines__list-news.jade
+        include section__headlines__list-news.jade
+        include section__headlines__list-news.jade
+        include section__headlines__list-news.jade
+        include section__headlines__list-news.jade
+        include section__headlines__list-news.jade
+        include section__headlines__list-news.jade

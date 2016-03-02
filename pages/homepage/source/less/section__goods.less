@@ -1,0 +1,28 @@
+.goods__categories {
+  font-size: @font-size-s;
+  ._clearfix;
+  text-align: center;
+  span {
+    color: @dark-grey;
+    display: inline-block;
+  }
+  ul {
+    display: inline-block;
+    //float: left;
+    ._clearfix;
+  }
+  li {
+    display: inline-block;
+
+    border-right: 1px solid @grey;
+    &:nth-last-child(1){
+      border: none;
+    }
+  }
+  a {
+    padding: 0 10px;
+    &:hover {
+      font-weight: 600;
+    }
+  }
+}
