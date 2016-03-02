@@ -14,6 +14,10 @@ class Entity extends BaseComponent {
     alert('building msg');
   }
 
+  //componentDidMount(){
+  //  alert('aaa');
+  //}
+
   render() {
     let display ;
     let subtitle = '';

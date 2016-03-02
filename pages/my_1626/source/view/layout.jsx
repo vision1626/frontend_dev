@@ -47,6 +47,27 @@ class Layout extends React.Component {
 
     let myMssage = <My_Message currentPage={this.state.currentPage} />;
 
+    let currentView;
+    switch (this.state.currentPage){
+      case 'summary':
+        currentView = mySummery;
+        break;
+      case 'message_like':
+        currentView = myMssage;
+        break;
+      case 'message_follow':
+        currentView = myMssage;
+        break;
+      case 'message_comment':
+        currentView = myMssage;
+        break;
+      case 'message_system':
+        currentView = myMssage;
+        break;
+      default:
+        currentView = mySummery;
+    }
+
     return (
       <div className="layout">
         <div className="my_menu">
@@ -60,9 +81,7 @@ class Layout extends React.Component {
           <Account changeView={this.changeView.bind(this)} />
         </div>
         <div className="my_content_container">
-          {mySummery}
-          {myOrder}
-          {myMssage}
+          {currentView}
         </div>
       </div>
     );
