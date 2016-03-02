@@ -10,6 +10,10 @@ class Entity extends BaseComponent {
     }
   }
 
+  build(){
+    alert('building msg');
+  }
+
   render() {
     let display ;
     let subtitle = '';
@@ -28,10 +32,7 @@ class Entity extends BaseComponent {
           subtitle = '官方消息';
           break;
       }
-      if (!this.state.Build) {
-        //this.setState({Build: true});
-        //alert('build');
-      }
+      this.build();
       display = 'block';
     } else {
       display = 'none';
