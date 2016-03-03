@@ -1,0 +1,55 @@
+@pagination_height : 18px;
+
+.pagination{
+  .pag_numbers {
+    float: left;
+    margin-right: 5px;
+    border: solid 1px @dark-grey;
+    height: @pagination_height;
+    border-radius: @pagination_height;
+    dd {
+      float: left;
+      font-size: @font-size-xs;
+      line-height: @pagination_height;
+      min-width: @pagination_height;
+      text-align: center;
+      color: @black;
+      transition: all 0.3s;
+      position: relative;
+      cursor: pointer;
+      border-left: solid 1px @dark-grey;
+      &:first-child{
+        border-left: none;
+      }
+      &:hover{
+        color: @blue;
+      }
+      &.array{
+        font-size: @font-size-m;
+      }
+      &.current {
+        background-color: @blue;
+        color: @white;
+        cursor: default;
+      }
+      &.invalid{
+        cursor: default;
+        &:hover{
+          color: @black;
+        }
+      }
+      &.disabled{
+        cursor: default;
+        color: @dark-grey;
+      }
+    }
+  }
+  .pag_description{
+    float: left;
+    height: @pagination_height;
+    line-height: @pagination_height;
+    span{
+      font-size: @font-size-s;
+    }
+  }
+}

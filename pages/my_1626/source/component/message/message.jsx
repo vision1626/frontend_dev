@@ -7,19 +7,22 @@ class Entity extends BaseComponent {
     super();
     this.state = {
       Name : "message",
-      Classify : "" //like,follow,comment,system
+      Classify : "", //like,follow,comment,system
+      recordCount : 1,
+      currentPage : 1
     }
   }
 
-  build(){
-    //alert('building msg');
+  pageTurning(page){
+    this.setState({currentPage: page});
   }
 
-  //componentDidMount(){
-  //  alert('aaa');
-  //}
-  pageTurning(page){
+  addCount(){
+    this.setState({recordCount: this.state.recordCount + 5});
+  }
 
+  reduceCount(){
+    this.setState({recordCount: this.state.recordCount - 5});
   }
 
   render() {
@@ -40,7 +43,7 @@ class Entity extends BaseComponent {
           subtitle = '官方消息';
           break;
       }
-      this.build();
+      //this.build();
       display = 'block';
     } else {
       display = 'none';
@@ -49,7 +52,9 @@ class Entity extends BaseComponent {
     return <div style={{display:display}}>
       <h3>我的消息</h3>
       <h5>{subtitle}</h5>
-      <Pagination recordCount="110" pageTurning={this} />
+      <span onClick={this.addCount.bind(this)}>加</span>
+      <span onClick={this.reduceCount.bind(this)}>减</span>
+      <Pagination recordCount={this.state.recordCount} currentPage={this.state.currentPage} pageTurning={this.pageTurning.bind(this)} />
     </div>
   }
 }

@@ -8,7 +8,7 @@ class Entity extends BaseComponent {
   }
 
   build(){
-    alert('building summary');
+    //alert('building summary');
   }
 
   render() {
