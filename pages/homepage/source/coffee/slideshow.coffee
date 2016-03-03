@@ -18,6 +18,10 @@ initSlideshow = ->
   b_margin = parseInt($bullet.css 'margin-left')
   $bullets.width((b_w + (b_margin*2))*slide_count)
 
+#   左右翻页按钮逻辑
+#  $slideshow.mouseenter ->
+
+
   # 函数：构建数据 ----------------------------------------------------------------
   buildSlidesData = ->
     slides_data = []
