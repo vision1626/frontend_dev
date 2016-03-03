@@ -5,4 +5,4 @@ initHeadlineList = ->
     $list_item.removeClass 'expanded'
     $(this).addClass 'expanded'
 
-  $(".nano").nanoScroller()
+  $(".nano").nanoScroller({ preventPageScrolling: true })

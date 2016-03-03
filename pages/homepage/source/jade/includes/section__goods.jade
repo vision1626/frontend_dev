@@ -1,6 +1,3 @@
-//
-   Created by edlee on 2/25/16.
-
 section.goods
   .section__header
     h2.section__title 潮品精选
@@ -14,8 +11,9 @@ section.goods
           a 最新发布
 
   .item-list-container
-    dl.big_img#big_img
-    dl.small_img#small_img
+    dl.big_img#big_img(style='display:block')
+      include section__goods__type-s
+      include section__goods__type-d
     .list-empty#list-empty
       .empty-content
         .empty-icon
@@ -51,5 +49,3 @@ section.goods
         a(href='/') 男装
       li
         a(href='/') 女装
-      li
-        a(href='/') 男鞋
