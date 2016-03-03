@@ -1,5 +1,5 @@
 @import "./common";
-@menu_title_height: 35px;
+@menu_title_height: 30px;
 @menu_item_height: 35px;
 
 .layout{
@@ -15,7 +15,7 @@
     .menu_array{
       position: absolute;
       right:0;
-      top:248px;
+      top:250px;
       width:0;
       height:0;
       border-top:7px solid transparent;
@@ -111,10 +111,12 @@
     }
 
     .m_component{
+      padding-bottom: 10px;
       .m_title{
         height:@menu_title_height;
         background-color: @xx-dark-grey;
         line-height: @menu_title_height;
+        margin-bottom: 10px;
         i{
           margin-left: 15px;
           font-size: @font-size-s;

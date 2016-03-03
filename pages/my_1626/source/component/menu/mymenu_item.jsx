@@ -7,10 +7,8 @@ class MenuItem extends React.Component {
   }
 
   _handleClick(e) {
-
     let me = $(e.currentTarget);
     if (!me.hasClass('current')) {
-      //alert('asidhskdhskfhsdkfhs');
       if (this.props.viewName) {
         this.props.changeView(this.props.viewName);
         $('.m_item').removeClass('current');

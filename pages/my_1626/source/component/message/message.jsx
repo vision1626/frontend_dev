@@ -1,5 +1,6 @@
 import React from 'react';
 import BaseComponent from '../../script/BaseClass.jsx';
+import Pagination from '../common/pagination.jsx';
 
 class Entity extends BaseComponent {
   constructor() {
@@ -8,6 +9,17 @@ class Entity extends BaseComponent {
       Name : "message",
       Classify : "" //like,follow,comment,system
     }
+  }
+
+  build(){
+    //alert('building msg');
+  }
+
+  //componentDidMount(){
+  //  alert('aaa');
+  //}
+  pageTurning(page){
+
   }
 
   render() {
@@ -28,10 +40,7 @@ class Entity extends BaseComponent {
           subtitle = '官方消息';
           break;
       }
-      if (!this.state.Build) {
-        //this.setState({Build: true});
-        //alert('build');
-      }
+      this.build();
       display = 'block';
     } else {
       display = 'none';
@@ -40,6 +49,7 @@ class Entity extends BaseComponent {
     return <div style={{display:display}}>
       <h3>我的消息</h3>
       <h5>{subtitle}</h5>
+      <Pagination recordCount="110" pageTurning={this} />
     </div>
   }
 }

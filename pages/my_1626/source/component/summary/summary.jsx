@@ -4,16 +4,17 @@ import BaseComponent from '../../script/BaseClass.jsx';
 class Entity extends BaseComponent {
   constructor() {
     super();
-    this.state.Name = "summary"
+    this.state.Name = "summary";
+  }
+
+  build(){
+    alert('building summary');
   }
 
   render() {
     let display ;
     if (this.props.currentPage == this.state.Name){
-      if (!this.state.Build) {
-        //this.setState({Build: true});
-        //alert('build');
-      }
+      this.build();
       display = 'block';
     } else {
       display = 'none';

@@ -7,7 +7,7 @@ import Summary from '../component/menu/mymenu_summary.jsx';
 import Flashbuy from '../component/menu/mymenu_my_flashbuy.jsx';
 import Dashboard from '../component/menu/mymenu_my_dashboard.jsx';
 import Message from '../component/menu/mymenu_my_message.jsx';
-import Wallet from '../component/menu/mymenu_my_wallet.jsx';
+//import Wallet from '../component/menu/mymenu_my_wallet.jsx';
 import Account from '../component/menu/mymenu_my_account.jsx';
 
 import My_Order from '../component/order/my_order.jsx';
@@ -47,6 +47,27 @@ class Layout extends React.Component {
 
     let myMssage = <My_Message currentPage={this.state.currentPage} />;
 
+    let currentView;
+    switch (this.state.currentPage){
+      case 'summary':
+        currentView = mySummery;
+        break;
+      case 'message_like':
+        currentView = myMssage;
+        break;
+      case 'message_follow':
+        currentView = myMssage;
+        break;
+      case 'message_comment':
+        currentView = myMssage;
+        break;
+      case 'message_system':
+        currentView = myMssage;
+        break;
+      default:
+        currentView = mySummery;
+    }
+
     return (
       <div className="layout">
         <div className="my_menu">
@@ -56,13 +77,10 @@ class Layout extends React.Component {
           <Flashbuy changeView={this.changeView.bind(this)} />
           <Dashboard />
           <Message changeView={this.changeView.bind(this)} />
-          <Wallet />
           <Account changeView={this.changeView.bind(this)} />
         </div>
         <div className="my_content_container">
-          {mySummery}
-          {myOrder}
-          {myMssage}
+          {currentView}
         </div>
       </div>
     );
