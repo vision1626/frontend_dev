@@ -1,5 +1,6 @@
 @import "./common";
 @import "./summary";
+@menu_width: 200px;
 @menu_title_height: 30px;
 @menu_item_height: 35px;
 
@@ -7,8 +8,9 @@
   background-color: @light-grey;
   overflow: hidden;
   clear: both;
+  position: relative;
   .my_menu{
-    width:200px;
+    width:@menu_width;
     //height:100%;
     background-color: @x-dark-grey;
     position: relative;
@@ -176,6 +178,13 @@
   .my_content_container{
     float: left;
     //background-color: @white;
-    padding: 30px;
+    padding: 40px;
+    position: absolute;
+    left:@menu_width;
+    right:0;
+    top:0;
+    bottom:0;
+    margin: auto;
+    min-width: 600px;
   }
 }
