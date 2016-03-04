@@ -45,7 +45,7 @@ class Layout extends React.Component {
     let mySummery = <My_Summery currentPage={this.state.currentPage} />;
     let myOrder = <My_Order currentPage={this.state.currentPage} />;
 
-    let myMssage = <My_Message currentPage={this.state.currentPage} />;
+    let myMssage = <My_Message currentPage={this.state.currentPage} changeView={this.changeView.bind(this)} />;
 
     let currentView;
     switch (this.state.currentPage){
