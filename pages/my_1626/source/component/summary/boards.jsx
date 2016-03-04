@@ -15,30 +15,30 @@ class Boards extends BaseComponent {
       <div className="boards">
         <div className="board-i">
           <h5>{this.userInformation.user_name}</h5>
-          <div>
+          <div className="profile-progress">
             <span>资料完整度：</span>
-            <span>{this.userStatistics.infomation_degree}</span>
+            <span>{this.userStatistics.infomation_degree + '%'}</span>
           </div>
-          <a>立即完善</a>
+          <a href="/settings">立即完善</a>
         </div>
         
         <div className="board-ii">
           <ul>
             <li>
               <i className="icon icon-news" />
-              <p>{this.userStatistics.dynamic_count}</p>
-              <p>动态</p>
+              <p className="us-count">{this.userStatistics.dynamic_count}</p>
+              <p className="us-name">动态</p>
             </li>
             <li>
               <i className="icon icon-heart" />
-              <p>{this.userStatistics.like_total.share_count +
+              <p className="us-count">{this.userStatistics.like_total.share_count +
                     this.userStatistics.like_total.dapei_count}</p>
-              <p>动态</p>
+              <p className="us-name">喜欢</p>
             </li>
             <li>
               <i className="icon icon-publish" />
-              <p>{this.userStatistics.publish_total}</p>
-              <p>动态</p>
+              <p className="us-count">{this.userStatistics.publish_total}</p>
+              <p className="us-name">发布</p>
             </li>
           </ul>
         </div>
@@ -47,13 +47,13 @@ class Boards extends BaseComponent {
           <ul>
             <li>
               <i className="icon icon-publish" />
-              <p>{this.userOrder.unpay_count}</p>
-              <p>待付款</p>
+              <p className="od-count">{this.userOrder.unpay_count}</p>
+              <p className="od-name">待付款</p>
             </li>
             <li>
               <i className="icon icon-publish" />
-              <p>{this.userOrder.shipped_count}</p>
-              <p>待收货</p>
+              <p className="od-count">{this.userOrder.shipped_count}</p>
+              <p className="od-name">待收货</p>
             </li>
           </ul>
         </div>
