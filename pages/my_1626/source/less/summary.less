@@ -11,20 +11,125 @@
     font-weight: normal;
   }
 
+  .boards {
+    overflow: hidden;
+  }
+
   .board-i {
+    width: 21%;
+    background: white;
+    padding: 34px;
+    float: left;
     h5 {
+      margin: 0;
+      margin-bottom: 17px;
       font-size: 16px;
       font-weight: normal;
+    }
+
+    .profile-progress {
+      margin: 7px 0;
+      span {
+        font-size: 12px;
+      }
+    }
+
+    a {
+      font-size: 14px;
+      border-bottom: 2px solid @grey;
+      &:link,
+      &:visited,
+      &:hover,
+      &:active {
+        color: inherit;
+      }
     }
   }
 
-  .orders, .follows {
+  .board-ii {
+    width: 30%;
+    margin-left: 1.5%;
+    padding: 34px;
+    background: white;
+    float:left;
+    ul {
+      overflow: hidden;
+    }
+    li {
+      width: 33.33333333%;
+      text-align: center;
+      float: left;
+      .icon {
+        font-size: 28px;
+        color: @grey;
+      }
+      .us-count {
+        font-size: 18px;
+        color: @blue;
+        margin-bottom: 0;
+      }
+      .us-name {
+        font-size: 14px;
+        margin: 0;
+      }
+    }
+  }
+
+  .board-iii {
+    width: 19.9999998%;
+    margin-left: 1.5%;
+    background: white;
+    float:left;
+    padding: 34px;
+    ul {
+      overflow: hidden;
+    }
+    li {
+      width: 50%;
+      text-align: center;
+      float: left;
+      .icon {
+        font-size: 28px;
+        color: @grey;
+      }
+      .od-count {
+        font-size: 18px;
+        color: @orange;
+        margin-bottom: 0;
+      }
+      .od-name {
+        font-size: 14px;
+        margin: 0;
+      }
+    }
+  }
+
+  .orders, 
+  .follows {
+    margin-top: 40px;
+    clear: left;
     h5 {
       font-size: 16px;
       font-weight: normal;
+      margin: 0;
     }
-    .icon {
+    .icon:before {
       font-size: 20px;
+      margin-right: 5px;
+    }
+    .icon-news:before {
+      color: @blue;
+    }
+    table {
+      border-collapse: collapse;
+      background: white;
+      width: 100%;
+      tr {
+        border-bottom: 1px solid @light-grey;
+        p {
+          margin: 0;
+        }
+      }
     }
   }
 }

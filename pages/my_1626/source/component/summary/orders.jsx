@@ -52,7 +52,7 @@ class Order extends BaseComponent {
           <img src={this.props.order.thumb_url} />
         </td>
         <td>
-          <p>{this.props.order.order_sn}</p>
+          <p>{'订单号' + this.props.order.order_sn}</p>
           <p>{this.props.order.add_time}</p>
         </td>
         <td>
