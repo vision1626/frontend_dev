@@ -14,7 +14,7 @@ class Boards extends BaseComponent {
     return (
       <div className="boards">
         <div className="board-i">
-          <h4>{this.userInformation.user_name}</h4>
+          <h5>{this.userInformation.user_name}</h5>
           <div>
             <span>资料完整度：</span>
             <span>{this.userStatistics.infomation_degree}</span>

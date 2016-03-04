@@ -24,7 +24,7 @@ class Entity extends BaseComponent {
     }
 
     return (
-      <div style={{display:display}}>
+      <div className='summary' style={{display:display}}>
         <h3>个人中心</h3>
         <Boards />
         <Orders url='/services/service.php?m=home&a=get_order_list&limit=3' />
