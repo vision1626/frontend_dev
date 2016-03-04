@@ -36,7 +36,7 @@ class C_Pagination extends React.Component {
     let dd_current = <DD classname="current" text={current_page} />
 
     let dd_current_right = ((total_page - current_page) >= 1 ) ? <DD classname="r1" pageTurning={this.handlePageTurning.bind(this)} text={current_page + 1} content={current_page + 1} /> : '' ;
-    let dd_current_right2 = (total_page <= 8 && current_page <4) || (total_page <= 8 && current_page >= 5 && current_page < 7) || (total_page > 8 && current_page < 4) || (total_page > 8 && current_page >=7 && ((total_page - current_page) <= 3 && (total_page - current_page) >= 2)) ? <DD classname="r2" pageTurning={this.handlePageTurning.bind(this)} text={current_page + 2} content={current_page + 2} /> : '';
+    let dd_current_right2 = (total_page <= 8 && current_page <4) || (total_page <= 8 && current_page >= 5 && current_page < 7) || (total_page > 8 && current_page < 4) || (total_page == 8 && current_page >=7 && ((total_page - current_page) <= 3 && (total_page - current_page) >= 2)) ||  (total_page > 8 && current_page >=6 && ((total_page - current_page) <= 3 && (total_page - current_page) >= 2)) ? <DD classname="r2" pageTurning={this.handlePageTurning.bind(this)} text={current_page + 2} content={current_page + 2} /> : '';
     let dd_current_right3 = ((current_page == 2) || (current_page == 1)) ? <DD classname="r3" pageTurning={this.handlePageTurning.bind(this)} text={current_page + 3} content={current_page + 3} /> : '' ;
     let dd_current_right4 = (current_page == 1) ? <DD classname="r4" pageTurning={this.handlePageTurning.bind(this)} text={current_page + 4} content={current_page + 4} /> : '' ;
 
