@@ -247,6 +247,7 @@ init_form_publish = ->
             g_shareid = result['data']['share_id']
             # generateImg(result['data']['main_img'])
             if result['data']['gallery'] && result['data']['gallery'].length > 0
+              generateImg(result['data']['main_img'])
               generateImg(url['img']) for url in result['data']['gallery']
             updateBg(result['data']['main_img'])
             $('.url-img').first().find('img').addClass('main-img')
