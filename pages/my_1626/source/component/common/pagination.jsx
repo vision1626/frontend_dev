@@ -74,15 +74,18 @@ class C_Pagination extends React.Component {
     }
 
     let pagination_body = [];
-    pagination_body.push(
-      <div className="pag_numbers">
-        {dl}
-      </div>);
-    pagination_body.push(
-      <div className="pag_description">
-        <span>共{total_page}页</span>
-      </div>);
-
+    if (total_page > 0) {
+      pagination_body.push(
+        <div className="pag_numbers">
+          {dl}
+        </div>);
+      pagination_body.push(
+        <div className="pag_description">
+          <span>共{total_page}页</span>
+        </div>);
+    } else {
+      pagination_body = '';
+    }
     return (
       <div className="pagination">
         {pagination_body}
