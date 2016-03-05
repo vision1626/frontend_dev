@@ -1,31 +1,87 @@
 @import "./common";
+@msg_tab_height:50px;
+@msg_tab_width:120px;
+
 .msg_container{
   width:100%;
   border-radius: 5px 5px 0 0;
   background-color: @white;
+  position: relative;
   .msg_tab{
     background-color: #f9f9f9;
     border-radius: 5px 5px 0 0;
-    height:50px;
+    height:@msg_tab_height;
     position: relative;
-    overflow: hidden;
-    dd{
-      position: relative;
-      float: left;
-      width:100px;
-      height: 50px;
-      line-height: 50px;
-      text-align: center;
-      cursor: pointer;
-      span{
-        color:@grey;
-        font-size: @font-size-m;
+    //overflow: hidden;
+    box-shadow: inset 0 -2px 0.5px rgba(0, 0, 0, 0.1);
+    dl{
+      position: absolute;
+      bottom:0;
+      left:0;
+      z-index: 3;
+      dd{
+        position: relative;
+        float: left;
+        width: @msg_tab_width;
+        height: @msg_tab_height;
+        line-height: @msg_tab_height;
+        text-align: center;
+        cursor: pointer;
+        transition: all 0.3s;
+        span{
+          color:@grey;
+          font-size: @font-size-s;
+          font-weight: bold;
+          transition: all 0.3s;
+        }
+        &.current{
+          //border-radius: 5px 5px 0 0;
+          //background-color: @white;
+          span{
+            color:@black;
+            font-weight: bolder;
+          }
+        }
+        &:hover{
+          span{
+            color:@black;
+          }
+        }
       }
-      &.current{
-        border-radius: 5px 5px 0 0;
-        background-color: @white;
+    }
 
+    .msg_tab_slider{
+      background-color: @white;
+      height: @msg_tab_height;
+      width: @msg_tab_width;
+      border-radius: 5px 5px 0 0;
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      z-index: 2;
+      -webkit-transition: all 0.2s cubic-bezier(0,0,0.3,1);
+      -moz-transition: all 0.2s cubic-bezier(0,0,0.3,1);
+      -ms-transition: all 0.2s cubic-bezier(0,0,0.3,1);
+      -o-transition: all 0.2s cubic-bezier(0,0,0.3,1);
+      transition: all 0.2s cubic-bezier(0,0,0.3,1);
+      box-shadow: 0 -1px 1px rgba(0,0,0,0.3);
+    }
+    .mark_all_read{
+      position: absolute;
+      top:0;
+      bottom:0;
+      right:0;
+      line-height: @msg_tab_height;
+      cursor: pointer;
+      width: 100px;
+      text-align: center;
+      font-size: @font-size-s;
+      color:@grey;
+      transition: all 0.3s;
+      &:hover{
+        color:@red;
       }
+      z-index: 3;
     }
   }
 }

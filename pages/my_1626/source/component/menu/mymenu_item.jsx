@@ -10,10 +10,12 @@ class MenuItem extends React.Component {
     let me = $(e.currentTarget);
     if (!me.hasClass('current')) {
       if (this.props.viewName) {
+
+        //$('.m_item').removeClass('current');
+        //me.addClass('current');
+        //$('.menu_array').css('top',e.currentTarget.offsetTop+10);
+        util.setArrayPosition(this.props.viewName);
         this.props.changeView(this.props.viewName);
-        $('.m_item').removeClass('current');
-        me.addClass('current');
-        $('.menu_array').css('top',e.currentTarget.offsetTop+10);
       } else if (this.props.link) {
         window.open(this.props.link);
       }

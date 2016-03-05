@@ -14,7 +14,7 @@ class M_Summary extends BaseComponent {
           <span>我的1626</span>
         </div>
         <dl className="m_items">
-          <MenuItem text="个人中心" viewName="summary" changeView={this.props.changeView.bind(this)} iscurrent={true} />
+          <MenuItem text="个人中心" classname="mnu_summary" viewName="summary" changeView={this.props.changeView.bind(this)} iscurrent={true} />
         </dl>
       </div>
     );
