@@ -3,6 +3,10 @@ import BaseComponent from '../../script/BaseClass.jsx';
 import Pagination from '../common/pagination.jsx';
 import Loading from './../common/loading.jsx';
 import Tab from './msg_tab.jsx';
+import MLike from './message_like.jsx';
+import MFollow from './message_follow.jsx';
+import MCommeny from './message_comment.jsx';
+import MSystem from './message_system.jsx';
 import * as util from '../../script/util.jsx';
 
 require('../../less/message.less');
@@ -60,7 +64,7 @@ class Entity extends BaseComponent {
   }
 
   markAllRead(currentPage) {
-    alert('未做完錒 咪点人家啦 ');
+    alert('未做完錒 咪点人家啦 ' + currentPage);
   }
 
   queryMessageData(){
@@ -110,37 +114,30 @@ class Entity extends BaseComponent {
     let msg_content;
     let msg_pagination;
     let display ;
-    let subtitle = '';
     if (this.props.currentPage.indexOf(this.state.Name) > -1){
-      switch (this.props.currentPage){
-        case 'message_like':
-          subtitle = '收到的喜欢';
-          break;
-        case 'message_follow':
-          subtitle = '收到的关注';
-          break;
-        case 'message_comment':
-          subtitle = '收到的评论';
-          break;
-        case 'message_system':
-          subtitle = '官方消息';
-          break;
-      }
-      //this.build();
+
       display = 'block';
     } else {
       display = 'none';
     }
 
-    //for (let i =0 ; i < this.state.data.length ; i++ ){
-    //  let d = this.state.data[i];
-    //  substance.push(<span>{i}</span>);
-    //}
     if (this.state.dataLoading){
       msg_content = <Loading />;
       msg_pagination = '';
     } else {
-      msg_content = <span>done</span>;
+      switch (this.props.currentPage){
+        case 'message_like':
+          msg_content = <MLike data={this.state.data} /> ;
+          break;
+        case 'message_follow':
+          msg_content = <MFollow data={this.state.data} /> ;
+          break;
+        case 'message_comment':
+          msg_content = <MCommeny data={this.state.data} /> ;
+          break;
+        default:
+          msg_content = <MSystem data={this.state.data} /> ;
+      }
       msg_pagination = <Pagination recordCount={this.state.recordCount} currentPage={this.state.currentPage} pageTurning={this.pageTurning.bind(this)} />
     }
 
