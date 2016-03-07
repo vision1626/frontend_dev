@@ -1,5 +1,6 @@
 import React from 'react';
 import BaseComponent from '../../script/BaseClass.jsx';
+import {formatDate, getOrderStatus} from '../../script/util.jsx';
 
 class Orders extends BaseComponent {
   constructor() {
@@ -46,20 +47,32 @@ class Orders extends BaseComponent {
 
 class Order extends BaseComponent {
   render() {
+    let orderStatus = getOrderStatus(this.props.order.order_status,
+      this.props.order.pay_status, this.props.order.shipping_status) 
     return (
       <tr>
-        <td>
+        <td className='img-td'>
           <img src={this.props.order.thumb_url} />
         </td>
-        <td>
+        <td className="order-sn-and-date">
           <p>{'订单号' + this.props.order.order_sn}</p>
-          <p>{this.props.order.add_time}</p>
+          <p>{formatDate(+this.props.order.add_time)}</p>
         </td>
-        <td>
+        <td className='order-price-td'>
           <p>{'¥' + this.props.order.total_fee}</p>
         </td>
-        <td>
-          <p>{this.props.order.order_status}</p>
+        <td className='order-status-td'>
+          <p>{orderStatus.text}</p>
+        </td>
+        <td className='order-action-td'>
+          {(() => {
+            if (orderStatus.action) {
+              return <button className={orderStatus.className}>{orderStatus.action}</button>
+            }
+          })()}
+        </td>
+        <td className='check-td'>
+          <a href={this.props.order.detail_url}>查看</a>
         </td>
       </tr>
     )

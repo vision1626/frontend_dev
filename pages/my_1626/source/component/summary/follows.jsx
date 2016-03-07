@@ -53,14 +53,41 @@ class Follows extends BaseComponent {
 
 class Follow extends BaseComponent {
   render() {
+    let div = '';
+    if (this.props.follow.like_user_list && 
+      this.props.follow.like_user_list.length > 0) {
+      div = <div>
+              <a href={this.props.follow.like_user_list[0].user_href}>{this.props.follow.like_user_list[0].user_name}</a>
+              <span>喜欢了</span>
+            </div> 
+    } else {
+        div = <div>
+                <a href={this.props.follow.user_href}>{this.props.follow.user_name}</a>
+                <span>发布了</span>
+              </div>
+    }
     return (
       <tr>
-        <td>
+        <td className="img-td">
           <img src={this.props.follow.img} />
         </td>
-        <td>
-          <p>{this.props.follow.user_name}</p>
+        <td className="news-info-td">
+          {div}
           <p>{decodeURIComponent(this.props.follow.title)}</p>
+        </td>
+        <td className="publisher-td"> 
+          <p>
+            发布者
+            <img src={this.props.follow.img_thumb} />
+          </p>
+        </td>
+        <td className="price-td">
+          <p>{this.props.follow.goods_price ? 
+              '¥' + this.props.follow.goods_price :
+              ''}</p>
+        </td>
+        <td className="check-td">
+          <a href={this.props.follow.url}>查看</a>
         </td>
       </tr>
     )
