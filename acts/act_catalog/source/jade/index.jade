@@ -1,0 +1,56 @@
+include source/jade/includes/texts
+include source/jade/includes/head
+
+<body>
+#catalog
+
+  section.intro
+    article.select-city
+      p #{text_1}
+      .actions
+        a.beijing #{text_2}
+        a.shanghai #{text_3}
+    article.instruction
+      h4 #{text_4}
+      p #{text_5}
+
+  section.draw
+    p.result #{text_7}
+
+
+    img.scratch-result(src='../../../v2/images/homepage-specials.jpg')
+    img.scratch-cover(src='../../../v2/images/xxx.jpg')
+    .scratch
+      .success
+      .fail #{text_8}
+    article
+      h3 #{text_6}
+      h1 1次
+
+  form.user_form
+    .input_container.name_box
+      input.name.empty(value='姓名',ev='姓名',maxlength='15')
+    .input_container.mobile_box
+      input.mobile.empty(value='填写正确电话以便核实获奖',ev='填写正确电话以便核实获奖',maxlength='11')
+    .input_container.mail_box
+      input.name.empty(value='邮箱',ev='邮箱',maxlength='15')
+    .input_container.pid_box
+      input.pid.empty(value='身份证号码',ev='身份证号码',maxlength='16')
+
+    .submit_button#submit_button
+      span 确认提交
+
+  section.after-draw
+    .actions
+      a.share #{text_9}
+      a.replay #{text_10}
+
+  section.popup
+    .wrap
+      .content
+        p #{text_11}
+      button.close
+
+
+
+include source/jade/includes/foot
