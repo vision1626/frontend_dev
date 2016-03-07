@@ -7,6 +7,7 @@ import MLikeItem from './listitem_like.jsx';
 import MFollowItem from './listitem_follow.jsx';
 import MCommenyItem from './listitem_comment.jsx';
 import MSystemItem from './listitem_system.jsx';
+//import UserPopup from './listitem_user_popup.jsx';
 import * as util from '../../script/util.jsx';
 
 require('../../less/message.less');
@@ -138,24 +139,36 @@ class MessageEntity extends BaseComponent {
         if (msg_data.length > 0) {
           switch (this.props.currentPage) {
             case 'message_like':
-              msg_content = msg_data.map(function(md){
-                return <MLikeItem key={md.create_time} data={md}/>
-              });
+              msg_content =
+                <dl className="ml_like">
+                  {msg_data.map(function(md){
+                      return <MLikeItem key={md.create_time} data={md}/>
+                      })}
+                </dl>;
               break;
             case 'message_follow':
-              msg_content = msg_data.map(function(md){
-                return <MFollowItem key={md.create_time} data={md}/>
-              });
+              msg_content =
+                <dl className="ml_follow">
+                  {msg_data.map(function(md){
+                    return <MFollowItem key={md.create_time} data={md}/>
+                    })}
+                </dl>;
               break;
             case 'message_comment':
-              msg_content = msg_data.map(function(md){
-                return <MCommenyItem key={md.create_time} data={md}/>
-              });
+              msg_content =
+                <dl className="ml_comment">
+                  {msg_data.map(function(md){
+                    return <MCommenyItem key={md.create_time} data={md}/>
+                    })}
+                </dl>;
               break;
             default:
-              msg_content = msg_data.map(function(md){
-                return <MSystemItem key={md.create_time} data={md}/>
-              });
+              msg_content =
+                <dl className="ml_system">
+                  {msg_data.map(function(md){
+                    return <MSystemItem key={md.create_time} data={md}/>
+                    })}
+                </dl>;
           }
           msg_pagination = <Pagination recordCount={this.state.recordCount} currentPage={this.state.currentPage}
                                        pageTurning={this.pageTurning.bind(this)}/>
