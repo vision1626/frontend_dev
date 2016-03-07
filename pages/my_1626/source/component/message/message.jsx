@@ -3,10 +3,10 @@ import BaseComponent from '../../script/BaseClass.jsx';
 import Pagination from '../common/pagination.jsx';
 import Loading from './../common/loading.jsx';
 import Tab from './msg_tab.jsx';
-import MLike from './message_like.jsx';
-import MFollow from './message_follow.jsx';
-import MCommeny from './message_comment.jsx';
-import MSystem from './message_system.jsx';
+import MLikeItem from './listitem_like.jsx';
+import MFollowItem from './listitem_follow.jsx';
+import MCommenyItem from './listitem_comment.jsx';
+import MSystemItem from './listitem_system.jsx';
 import * as util from '../../script/util.jsx';
 
 require('../../less/message.less');
@@ -127,16 +127,16 @@ class Entity extends BaseComponent {
     } else {
       switch (this.props.currentPage){
         case 'message_like':
-          msg_content = <MLike data={this.state.data} /> ;
+          msg_content = <MLikeItem data={this.state.data} /> ;
           break;
         case 'message_follow':
-          msg_content = <MFollow data={this.state.data} /> ;
+          msg_content = <MFollowItem data={this.state.data} /> ;
           break;
         case 'message_comment':
-          msg_content = <MCommeny data={this.state.data} /> ;
+          msg_content = <MCommenyItem data={this.state.data} /> ;
           break;
         default:
-          msg_content = <MSystem data={this.state.data} /> ;
+          msg_content = <MSystemItem data={this.state.data} /> ;
       }
       msg_pagination = <Pagination recordCount={this.state.recordCount} currentPage={this.state.currentPage} pageTurning={this.pageTurning.bind(this)} />
     }

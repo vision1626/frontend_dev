@@ -2,7 +2,7 @@ import React from 'react';
 import BaseComponent from '../../script/BaseClass.jsx';
 import * as util from '../../script/util.jsx';
 
-class MessageList extends BaseComponent {
+class MessageListItem extends BaseComponent {
   constructor() {
     super();
   }
@@ -10,9 +10,9 @@ class MessageList extends BaseComponent {
   render() {
     return (
       <div>
-        like
+        comment
       </div>
     );
   }
 }
-export default MessageList;
+export default MessageListItem;
