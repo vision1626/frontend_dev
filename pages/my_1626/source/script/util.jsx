@@ -20,8 +20,8 @@ export function setArrayPosition(currentpage,just_set_tab = false){
 }
 
 export function formatDate(source){
-  let td = new Date(source);
-  return [[td.getFullYear,td.getMonth(),td.getDate].join('-'),[td.getHours(),td.getMinutes(),td.getSeconds()].join(':')].join(' ')
+  let td = new Date(source * 1000);
+  return [[td.getFullYear(),td.getMonth(),td.getDate()].join('-'),[td.getHours(),td.getMinutes(),td.getSeconds()].join(':')].join(' ')
 }
 
 export function showError(title,state,message){
@@ -30,4 +30,35 @@ export function showError(title,state,message){
   } else {
     alert([title,state,message].join(','));
   }
+}
+
+export function getOrderStatus(order_status, pay_status, shipping_status) {
+  let obj = {
+    text: '',
+    action: '',
+    className: ''
+  }
+  if (order_status == 1) {
+    if (pay_status == 0) {
+      obj.text = '待付款'
+      obj.action = '付款'
+      obj.className = 'unpay'
+    } else if (pay_status == 2) {
+      if (shipping_status == 0) {
+        obj.text = '待发货'
+      } else if (shipping_status == 1){
+        obj.text = '待收货,物流跟踪'
+        obj.action = '确认收货'
+        obj.className = 'delivery'
+      } else if (shipping_status == 2) {
+        obj.text = '交易完成,查看物流'
+      }
+    }
+  } else if (order_status == 2) {
+    obj.text = '已取消'
+  } else if (order_status == 0) {
+    obj.text = '未确认'
+  }
+
+  return obj;
 }

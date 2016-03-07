@@ -16,9 +16,9 @@
   }
 
   .board-i {
-    width: 21%;
+    width: 25.8%;
     background: white;
-    padding: 34px;
+    padding: 2%;
     float: left;
     h5 {
       margin: 0;
@@ -47,9 +47,9 @@
   }
 
   .board-ii {
-    width: 30%;
+    width: 37%;
     margin-left: 1.5%;
-    padding: 34px;
+    padding: 2%;
     background: white;
     float:left;
     ul {
@@ -76,11 +76,11 @@
   }
 
   .board-iii {
-    width: 19.9999998%;
+    width: 22.2%;
     margin-left: 1.5%;
     background: white;
     float:left;
-    padding: 34px;
+    padding: 2%;
     ul {
       overflow: hidden;
     }
@@ -112,6 +112,7 @@
       font-size: 16px;
       font-weight: normal;
       margin: 0;
+      margin-bottom: 10px;
     }
     .icon:before {
       font-size: 20px;
@@ -124,10 +125,91 @@
       border-collapse: collapse;
       background: white;
       width: 100%;
+      font-size: 14px;
+
       tr {
         border-bottom: 1px solid @light-grey;
         p {
           margin: 0;
+        }
+        a {
+          color: black;
+          font-size: 14px;
+          border-bottom: 2px solid @grey;
+          &:link,
+          &:visited,
+          &:hover,
+          &:active {
+            color: inherit;
+          }
+        }
+        .order-sn-and-date {
+          width: 54%;
+          p {
+            font-size: 14px;
+            color: @grey;
+            &:first-child {
+              font-weight: bold;
+              color: black;
+            }
+          }
+        }
+        .order-price-td {
+          width: 16%;
+        }
+        .order-status-td {
+          width: 13%;
+        }
+        .order-action-td {
+          width: 7%;
+          button {
+            border: 0;
+            outline: 0;
+            padding: 5px 20px;
+            border-radius: 21px;
+            &.unpay {
+              background-color: @orange;
+              color: white;
+            }
+            &.delivery {
+              background-color: white;
+              color: black;
+              border: 2px solid @orange;
+            }
+          }
+        }
+        .news-info-td {
+          width: 71%;
+          a {
+            margin-right: 5px;
+          }
+          span {
+            color: @grey;
+          }
+        }
+        .img-td {
+          width: 2%;
+          padding: 1.5%;
+        }
+        .publisher-td {
+          width: 10%;
+          p {
+            position: relative;
+            img {
+              width: 30px;
+              height: 30px;
+              border-radius: 30px;
+              position: absolute;
+              left: 52px;
+              top: -6px;
+            }
+          }
+        }
+        .price-td {
+          width: 10%;
+        }
+        .check-td {
+          width: 4%;
         }
       }
     }
