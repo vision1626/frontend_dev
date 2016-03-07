@@ -11,26 +11,26 @@ import * as util from '../../script/util.jsx';
 
 require('../../less/message.less');
 
-class Entity extends BaseComponent {
+class MessageEntity extends BaseComponent {
   constructor() {
     super();
     this.state = {
       Name: "message",
-      Classify: '', //like,follow,comment,system
+      Classify: 'empty', //like,follow,comment,system
       recordCount: 1,
       currentPage: 1,
-      data: [],
       dataLoading : false,
       dataLoaded : false ,
+      dataPrepare : false,
       dataTime: null
-    }
+    };
     this.markAllRead = this.markAllRead.bind(this);
   }
 
   pageTurning(page){
     this.setState({
       currentPage: page,
-      dataLoaded : false 
+      dataLoaded : false
     });
   }
 
@@ -41,6 +41,10 @@ class Entity extends BaseComponent {
 
   componentDidMount(){
     this.setState({Classify : this.getInClassify()});
+  }
+
+  componentWillUpdate(){
+
   }
 
   componentDidUpdate(){
@@ -60,6 +64,11 @@ class Entity extends BaseComponent {
       if (!this.state.dataLoaded) {
         this.queryMessageData();
       }
+      //if (this.state.dataPrepare && this.state.dataLoaded){
+      //  this.setState({
+      //    dataPrepare: false
+      //  });
+      //}
     }
   }
 
@@ -93,9 +102,10 @@ class Entity extends BaseComponent {
       success: function(result) {
         if (result.status == 1) {
           this.setState({
-            orders: result.data,
+            data: result.data,
             dataLoading : false,
             dataLoaded: true,
+            dataPrepare: true,
             recordCount: result.count,
             dataTime: new Date()
           });
@@ -111,35 +121,57 @@ class Entity extends BaseComponent {
 
   render() {
     let whole;
-    let msg_content;
+    let msg_content = [];
     let msg_pagination;
+    let msg_data = this.state.data;
     let display ;
-    if (this.props.currentPage.indexOf(this.state.Name) > -1){
 
+    if (this.props.currentPage.indexOf(this.state.Name) > -1){
       display = 'block';
     } else {
       display = 'none';
     }
 
-    if (this.state.dataLoading){
-      msg_content = <Loading />;
-      msg_pagination = '';
-    } else {
-      switch (this.props.currentPage){
-        case 'message_like':
-          msg_content = <MLikeItem data={this.state.data} /> ;
-          break;
-        case 'message_follow':
-          msg_content = <MFollowItem data={this.state.data} /> ;
-          break;
-        case 'message_comment':
-          msg_content = <MCommenyItem data={this.state.data} /> ;
-          break;
-        default:
-          msg_content = <MSystemItem data={this.state.data} /> ;
+    //if (this.state.dataPrepare) {
+    if (!this.state.dataLoading && this.state.dataLoaded) {
+      if (msg_data) {
+        if (msg_data.length > 0) {
+          switch (this.props.currentPage) {
+            case 'message_like':
+              msg_content = msg_data.map(function(md){
+                return <MLikeItem key={md.create_time} data={md}/>
+              });
+              break;
+            case 'message_follow':
+              msg_content = msg_data.map(function(md){
+                return <MFollowItem key={md.create_time} data={md}/>
+              });
+              break;
+            case 'message_comment':
+              msg_content = msg_data.map(function(md){
+                return <MCommenyItem key={md.create_time} data={md}/>
+              });
+              break;
+            default:
+              msg_content = msg_data.map(function(md){
+                return <MSystemItem key={md.create_time} data={md}/>
+              });
+          }
+          msg_pagination = <Pagination recordCount={this.state.recordCount} currentPage={this.state.currentPage}
+                                       pageTurning={this.pageTurning.bind(this)}/>
+        } else {
+          msg_content = <Loading text="列表为空" />;
+          msg_pagination = '';
+        }
+      } else {
+        msg_content = <Loading text="列表为空" />;
+        msg_pagination = '';
       }
-      msg_pagination = <Pagination recordCount={this.state.recordCount} currentPage={this.state.currentPage} pageTurning={this.pageTurning.bind(this)} />
+    } else {
+      msg_content = <Loading text="正在努力加载中..." />;
+      msg_pagination = '';
     }
+    //}
 
     whole =
     <div style={{display:display}}>
@@ -157,4 +189,4 @@ class Entity extends BaseComponent {
   }
 }
 
-export default Entity;
+export default MessageEntity;

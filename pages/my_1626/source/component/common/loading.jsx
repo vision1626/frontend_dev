@@ -7,7 +7,7 @@ class Loading extends BaseComponent {
     return (
       <div className="loading_message">
         <i className="icon icon-hand" />
-        <span>正在努力加载中...</span>
+        <span>{this.props.text}</span>
       </div>
 
     );

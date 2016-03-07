@@ -25,13 +25,13 @@ var config = {
         loader : 'style-loader!css-loader!less-loader'
       }
     ]
-  }//,
-  //resolve:{
-  //  extensions:['','.js','.json']
-  //},
-  //plugins: [
-  //  new webpack.NoErrorsPlugin()
-  //]
+  },
+  resolve:{
+    extensions:['','.js','.json']
+  },
+  plugins: [
+    new webpack.NoErrorsPlugin()
+  ]
 };
 
 module.exports = config;

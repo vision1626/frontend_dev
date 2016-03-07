@@ -63,7 +63,7 @@ class C_Pagination extends React.Component {
     } else {
       let dd_temp = [] ;
       for (let i = 0 ; i < total_page ; i++){
-        dd_temp.push (<DD classname={current_page == (i+1) ? 'current d' : 'd'} pageTurning={current_page == (i+1) ? null : this.handlePageTurning.bind(this)} text={i+1} content={i+1} />);
+        dd_temp.push (<DD key={['page',i+1].join('_')} classname={current_page == (i+1) ? 'current d' : 'd'} pageTurning={current_page == (i+1) ? null : this.handlePageTurning.bind(this)} text={i+1} content={i+1} />);
       }
       dl =
         <dl>
@@ -76,11 +76,11 @@ class C_Pagination extends React.Component {
     let pagination_body = [];
     if (total_page > 0) {
       pagination_body.push(
-        <div className="pag_numbers">
+        <div key="p_num" className="pag_numbers">
           {dl}
         </div>);
       pagination_body.push(
-        <div className="pag_description">
+        <div key="p_desc" className="pag_description">
           <span>共{total_page}页</span>
         </div>);
     } else {
