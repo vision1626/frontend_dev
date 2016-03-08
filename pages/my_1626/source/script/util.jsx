@@ -62,3 +62,17 @@ export function getOrderStatus(order_status, pay_status, shipping_status) {
 
   return obj;
 }
+
+export function formatCount(count){
+  if (parseInt(count) > 0){
+    if(parseInt(count) >= 10000){
+      return [Math.round(count/1000),'k'].join('');
+    } else if (parseInt(count) >= 1000) {
+      return [(count/1000).toFixed(1),'k'].join('');
+    } else {
+      return count;
+    }
+  } else {
+    return 0;
+  }
+}
