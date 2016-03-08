@@ -8,13 +8,19 @@ class MessageListItem extends BaseComponent {
   constructor() {
     super();
     this.handlerMouseOver = this.handlerMouseOver.bind(this);
+    this.handlerMouseOut = this.handlerMouseOut.bind(this);
   }
 
   handlerMouseOver(e) {
     let popup = $(e.currentTarget).parent().parent().find('.msg_user_popup');
-    popup.show();
-    popup.css('left',e.currentTarget.offsetLeft);
+    popup.fadeIn(100);
+    popup.css('left',e.currentTarget.offsetLeft-5);
     popup.css('top',e.currentTarget.offsetTop);
+  }
+
+  handlerMouseOut(e){
+    //let popup = $(e.currentTarget).parent().parent().find('.msg_user_popup');
+    //popup.fadeOut(100);
   }
 
   render() {
@@ -22,7 +28,7 @@ class MessageListItem extends BaseComponent {
     return (
       <dd className={md.status == 0 ? 'unread' : ''}>
         <div className="mli_username">
-          <a onMouseOver={this.handlerMouseOver}>{md.user_name}</a>
+          <a onMouseOver={this.handlerMouseOver} onMouseOut={this.handlerMouseOut} >{md.user_name}</a>
           <span>喜欢您的潮品</span>
         </div>
         <div className="mli_product_info">
@@ -32,7 +38,7 @@ class MessageListItem extends BaseComponent {
         <div className="mli_datetime">
           <span>{util.formatDate(md.create_time)}</span>
         </div>
-        <UserPopup ref="userPopup" Name={md.user_name}  />
+        <UserPopup ref="userPopup" Name={md.user_name} Img={md.img_thumb} Introduce={md.introduce} Follows={md.follows} Fans={md.fans} FollowState={md.is_follow} UID={md.uid} MyID={window.myid}/>
       </dd>
     );
   }

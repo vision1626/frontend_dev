@@ -77,41 +77,43 @@ initFollowBtn = ()->
     ,500
 
   submitFollow = (uid,$btn)->
-    _is_following = true
-    $.ajax({
-      url: '/services/service.php?m=user&a=follow',
-      type: 'post',
-      dataType: 'json',
-      data: { uid: uid, bulk: 0},
-      success: (result)->
-        if result.status is 1 or result.status is 2
-          sliderToRight($btn, "#{result.status}")
-        else
-          sliderToLeft($btn)
-        _is_following = false
-      error: (result)->
-        showSmallErrorTip('关注失败',0)
-        _is_following = false
-    })
+    if uid
+      _is_following = true
+      $.ajax({
+        url: '/services/service.php?m=user&a=follow',
+        type: 'post',
+        dataType: 'json',
+        data: { uid: uid, bulk: 0},
+        success: (result)->
+          if result.status is 1 or result.status is 2
+            sliderToRight($btn, "#{result.status}")
+          else
+            sliderToLeft($btn)
+          _is_following = false
+        error: (result)->
+          showSmallErrorTip('关注失败',0)
+          _is_following = false
+      })
 
   submitFollowAll = (all_uid,$all_btn)->
-    _is_following = true
-    $.ajax({
-      url: '/services/service.php?m=user&a=follow',
-      type: 'post',
-      dataType: 'json',
-      data: { uid: all_uid, bulk: 1},
-      success: (result)->
-        if result.is_error is 0
-          for $btn in $all_btn
-            sliderToRight($btn, '1')
-        else
+    if all_uid
+      _is_following = true
+      $.ajax({
+        url: '/services/service.php?m=user&a=follow',
+        type: 'post',
+        dataType: 'json',
+        data: { uid: all_uid, bulk: 1},
+        success: (result)->
+          if result.is_error is 0
+            for $btn in $all_btn
+              sliderToRight($btn, '1')
+          else
+            showSmallErrorTip('关注失败',0)
+          _is_following = false
+        error: (result)->
           showSmallErrorTip('关注失败',0)
-        _is_following = false
-      error: (result)->
-        showSmallErrorTip('关注失败',0)
-        _is_following = false
-    })
+          _is_following = false
+      })
 
   $('.follow-all').click ->
     if !_is_following
