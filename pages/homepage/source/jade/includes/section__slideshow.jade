@@ -1,14 +1,12 @@
 section.slideshow
   .slides__wrap
     ul.slides
+      //{loop $banner $k $v}
       li
-        a(href='http://baidu.com',target='_blank')
+        a(href='http://baidu.com',target='_blank',onclick="addclick({$v['id']},{$v['position_id']})")
           article.slide__content
-            img.bg(src='http://www.1626.com/tpl/hi1626/images/temp/slideshow-1.jpg?dfdd', alt='')
-      li
-        a(href='http://baidu.com',target='_blank')
-          article.slide__content
-            img.bg(src='http://www.1626.com/tpl/hi1626/images/temp/slideshow-2.jpg?bbbb', alt='')
+            img.bg(src="{$v['code']}", alt="{$v['name']}")
+      //{/loop}
     ul.slides__bullets
     a.slides__pager.prev
       span

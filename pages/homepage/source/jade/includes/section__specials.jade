@@ -4,13 +4,16 @@ section.specials
     h2.section__title 今日至IN
     .section__nav
       ul
-        li.hot
-          a 男裝
-        li
-          a 女裝
+        //{loop $category $k $v}
+        li(class="{$v['class']}")
+          a(href="{$v['url']}", target="_blank") {$v['name']}
+
+        //{/loop}
 
   .specials__wrap
     ul.specials__blocks
+      //{loop $ad_middle_four $k $v}
       li
-        a
-          img(src='#{image_path}/homepage-specials.jpg',alt='')
+        a(href="{$v['url']}", target="_blank", title="{$v['name']}")
+          img(src="{$v['code']}",alt="{$v['name']}")
+      //{/loop}

@@ -93,8 +93,9 @@
         display: none;
         font-size: @font-size-s;
         color: @dark-grey;
-        line-height: 1.2;
+        line-height: 1.22;
         text-align: justify;
+        position: relative;
       }
       .tag {
         float: left;
@@ -118,6 +119,7 @@
       &.expanded {
         height: @h * 3;
         margin: 10px 0;
+        overflow: hidden;
         .image {
           //display: block;
           opacity: 1;
@@ -148,6 +150,8 @@
           font-size: @font-size-m;
           left: 0;
           margin: 0 0 5px;
+        }
+        .info__content {
         }
       }
     }

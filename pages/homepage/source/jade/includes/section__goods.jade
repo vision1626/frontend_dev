@@ -13,27 +13,6 @@ section.goods
   .item-list-container
     dl.big_img#big_img(style='display:block')
       include section__goods__type-s
-      include section__goods__type-d
-    .list-empty#list-empty
-      .empty-content
-        .empty-icon
-          span.icon.icon-sad
-        .empty-message
-          span.empty-title
-          br
-          label.empty-content
-        .empty-action.return_home
-          a 回首页
-        .empty-action.clear_search#btnInitList
-          a 返回
-        .empty-action.publish_entrance#btnPublish
-          a
-            i.icon.icon-publish_solid
-            | 发布
-    .empty_recommand_title.item-nav-container#recommandTitle
-      .item-nav.first.current
-        a 热门潮人
-    dl.empty_recommand.big_img#recommand
     .list-loading#list-loading
       .loading-message
         i.icon.icon-hand
@@ -45,7 +24,7 @@ section.goods
   .goods__categories
     span 你是否要找:
     ul
+      //{loop $category $k $v}
       li
-        a(href='/') 男装
-      li
-        a(href='/') 女装
+        a(target="_blank", href="{$v['url']}") {$v['name']}
+      //{/loop}

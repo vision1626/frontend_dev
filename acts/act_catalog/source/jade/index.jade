@@ -29,13 +29,13 @@ include source/jade/includes/head
 
   form.user_form
     .input_container.name_box
-      input.name.empty(value='姓名',ev='姓名',maxlength='15')
+      input.name.empty(maxlength='15',type="text",placeholder='请输入姓名')
     .input_container.mobile_box
-      input.mobile.empty(value='填写正确电话以便核实获奖',ev='填写正确电话以便核实获奖',maxlength='11')
+      input.mobile.empty(maxlength='11',type="tel",placeholder='请输入手机号')
     .input_container.mail_box
-      input.name.empty(value='邮箱',ev='邮箱',maxlength='15')
+      input.mail.empty(type="email",placeholder='邮箱')
     .input_container.pid_box
-      input.pid.empty(value='身份证号码',ev='身份证号码',maxlength='16')
+      input.pid.empty(maxlength='18',type="number",placeholder='请输入身份证号')
 
     .submit_button#submit_button
       span 确认提交
