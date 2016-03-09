@@ -1,0 +1,23 @@
+if production
+  :php
+    $current_js[]   = './public/js/jquery-2.2.1.min.js';
+    $current_js[]   = './tpl/hi1626/js/act/catalog/catalog.js';
+  script(type='text/javascript',src="{script $current_js}")
+
+else
+  script(src="../../../v2/js/vendor/jquery-2.2.1.min.js")
+  script(src="../../../js/act/#{act_name}/#{act_name}.js")
+  script(src="../../../js/act/#{act_name}/jquery.eraser.js")
+
+
+<!--{if $is_wx}-->
+<!--{template inc/weixin_share}-->
+<!--{/if}-->
+<!--{template inc/count}-->
+script.
+  $(document).ready(function () {
+    init();
+  });
+
+</body>
+</html>
