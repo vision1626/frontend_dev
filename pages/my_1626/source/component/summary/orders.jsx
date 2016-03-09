@@ -14,7 +14,9 @@ class Orders extends BaseComponent {
       dataType: 'json',
       cache: false,
       success: function(orders) {
-        this.setState({orders: orders.data});
+        if (orders.status == 1) {
+          this.setState({orders: orders.data});
+        }
       }.bind(this),
       error: function(xhr, status, err) {
         console.error(this.props.url, status, err.toString());
