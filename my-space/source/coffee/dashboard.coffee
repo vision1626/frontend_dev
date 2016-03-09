@@ -767,6 +767,10 @@ init_dashboard_empty_message = () ->
           btnPublish.hide()
         else
           btnPublish.show()
+        if type == '搭配'
+          btnPublish.off()
+          btnPublish.on 'click', ->
+            window.location.href = 'http://www.1626.com/dapei/c1.html'
         btnClearsearch.hide()
       else
         btnReturnhome.show()
