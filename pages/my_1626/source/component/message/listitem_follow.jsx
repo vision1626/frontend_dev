@@ -25,7 +25,7 @@ class MessageList extends BaseComponent {
           <span>关注了你</span>
         </div>
         <div className="mli_user_info">
-          <img src={md.img_thumb} alt={decodeURIComponent(this.props.Name)} />
+          <img src={md.img_thumb} alt={decodeURIComponent(md.user_name)} />
         </div>
         <div className="mli_datetime">
           <span>{util.formatDate(md.create_time)}</span>

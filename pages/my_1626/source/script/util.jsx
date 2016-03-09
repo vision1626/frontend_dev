@@ -19,7 +19,7 @@ export function setArrayPosition(currentpage,just_set_tab = false){
   }
 }
 
-export function formatDate(source){
+export function formatDate(source,complete){
   let add_hours = 1000*60*60*8; //加翻8个钟
   let source_date = new Date((source * 1000)+add_hours);
   let source_date_text = [[source_date.getFullYear(),source_date.getMonth(),source_date.getDate()].join('-'),[source_date.getHours(),source_date.getMinutes(),source_date.getSeconds()].join(':')].join(' ');
@@ -30,25 +30,30 @@ export function formatDate(source){
   let gap_hours = (gap / (1000*3600)).toFixed();
   let gap_minute = (gap / (1000*60)).toFixed();
   let result = '';
-  if(gap_minute >= 0 && gap_minute <60){
-    if (gap_minute == 0) {
-      result = '1分钟前';
-    } else {
-      result = gap_minute + '分钟前';
-    }
-  } else if (gap_hours > 0 && gap_hours < 24){
-    result = gap_hours + '小时前';
-  } else if (gap_days > 0 && gap_days <=7){
-    if (gap_days == 1){
-      result = '昨天';
-    } else {
-      result = gap_days + '天前';
-    }
+
+  //判断是否输出完整日期(如不传入参数或者为false,则格式化为"XX分钟/天前"的格式)
+  if (complete) {
+    result = source_date_text;
   } else {
-    result = source_date_text
+    if (gap_minute >= 0 && gap_minute < 60) {
+      if (gap_minute == 0) {
+        result = '1分钟前';
+      } else {
+        result = gap_minute + '分钟前';
+      }
+    } else if (gap_hours > 0 && gap_hours < 24) {
+      result = gap_hours + '小时前';
+    } else if (gap_days > 0 && gap_days <= 7) {
+      if (gap_days == 1) {
+        result = '昨天';
+      } else {
+        result = gap_days + '天前';
+      }
+    } else {
+      result = source_date_text;
+    }
   }
 
-  console.log((source * 1000) + add_hours);
   return result
 }
 

@@ -1,6 +1,7 @@
 @import "./common";
 @msg_tab_height:50px;
 @msg_tab_width:120px;
+@msg_item_height:130px;
 
 .msg_container{
   width:100%;
@@ -178,18 +179,19 @@
     dd{
       position: relative;
       display: block;
-      height: 130px;
+      height: @msg_item_height;
       width:100%;
       border-bottom: solid 1px @light-grey;
       transition: all 0.3s;
       .mli_username{
-        height: 32px;
-        line-height: 32px;
+        height: 37px;
+        line-height: 35px;
         padding: 0 20px;
         a{
           cursor: pointer;
           font-size: @font-size-s;
           font-weight: bold;
+          border-bottom: solid 1px @grey;
         }
         span{
           font-size: @font-size-s;
@@ -265,6 +267,101 @@
             width:80px;
             height:80px;
             border-radius: 40px;
+          }
+        }
+      }
+    }
+
+    .ml_system{
+      dd{
+        .mli_system_content{
+          //margin: 10px;
+          .mli_icon{
+            position: absolute;
+            top: 10px;
+            left: 20px;
+            i{
+              font-size: 20px;
+              font-weight: normal;
+              color: @grey
+            }
+          }
+          .mil_system_text{
+            position: absolute;
+            top: 10px;
+            bottom: 10px;
+            left: 50px;
+            //right: 25px;
+            //max-width: 600px;
+            width: 490px;
+            margin: auto;
+            h3{
+              font-size: @font-size-m;
+              margin: 0 0 10px 0;
+              color: @grey;
+              white-space: nowrap;
+              overflow: hidden;
+              text-overflow: ellipsis;
+            }
+            div.rich_text_box{
+              font-size: @font-size-m;
+              color: @grey;
+              a{
+                color: @blue;
+              }
+            }
+            .summary_text{
+              font-size: @font-size-m;
+              color: @grey;
+              height: 42px;
+              width: 490px;
+              -webkit-word-break: break-all;
+              display: -moz-box;
+              overflow: hidden;
+              text-overflow: ellipsis;
+              word-break: break-all;
+              -webkit-box-orient: vertical;
+              -webkit-line-clamp: 3;
+            }
+            .read_detail{
+              margin: 10px 0 0 0;
+              span {
+                cursor: pointer;
+                font-size: @font-size-s;
+                color: @grey;
+                border-bottom: solid 1px @grey;
+                transition: all 0.3s;
+                &:hover{
+                  color:@blue;
+                }
+              }
+            }
+          }
+        }
+        &.unread{
+          .mli_icon{
+            i{
+              color: @black;
+            }
+          }
+          .mil_system_text{
+            h3{
+              color: @black;
+            }
+          }
+          div.rich_text_box{
+            color: @black;
+            a{
+              color: @blue;
+            }
+          }
+          .summary_text{
+            color: @black;
+          }
+          .mli_datetime{
+            span{
+              color: @dark-grey;
+            }
           }
         }
       }

@@ -14,8 +14,9 @@ class MessageListItem extends BaseComponent {
   handlerMouseOver(e) {
     let popup = $(e.currentTarget).parent().parent().find('.msg_user_popup');
     popup.fadeIn(100);
-    popup.css('left',e.currentTarget.offsetLeft-5);
-    popup.css('top',e.currentTarget.offsetTop);
+    //e.currentTarget.offsetWidth
+    popup.css('left',e.currentTarget.offsetLeft+((e.currentTarget.offsetWidth/2)-18));
+    popup.css('top',e.currentTarget.offsetTop+5);
   }
 
   handlerMouseOut(e){
