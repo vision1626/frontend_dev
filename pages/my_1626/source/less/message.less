@@ -73,7 +73,7 @@
       right:0;
       line-height: @msg_tab_height;
       cursor: pointer;
-      width: 100px;
+      width: 130px;
       text-align: center;
       font-size: @font-size-s;
       color:@grey;
@@ -85,94 +85,96 @@
     }
   }
 
-  .msg_user_popup{
-    display: none;
-    position: absolute;
-    width: 150px;
-    padding-top: 25px;
-    z-index: 2;
-    .popup_content{
-      background-color: @white;
-      box-shadow: 0 0 3px rgba(0, 0, 0, 0.3);
-      width: 150px;
-      height: 235px;
-      .base_info{
-        background-color: #f0f0f0;
-        height: 135px;
-        position: relative;
-        img{
-          width: 80px;
-          height: 80px;
-          border-radius: 40px;
-          margin: auto;
-          position: absolute;
-          left: 0;
-          right: 0;
-          top: 5px;
-        }
-        h3{
-          font-weight: normal;
-          position: absolute;
-          bottom: 24px;
-          left: 5px;
-          right: 5px;
-          margin: 0 auto;
-          text-align: center;
-          font-size: @font-size-l;
-          white-space: nowrap;
-          overflow: hidden;
-          text-overflow: ellipsis;
-        }
-        .ff_count{
-          position: absolute;
-          bottom: 5px;
-          left: 15px;
-          right: 15px;
-          margin: auto;
-          text-align: center;
-          font-size: @font-size-xs;
-          color: @dark-grey;
-          -webkit-column-count:2;
-          -moz-column-count:2;
-          column-count:2;
-          -webkit-column-gap:0;
-          -moz-column-gap:0;
-          column-gap:0;
-
-        }
-      }
-      .introduce{
-        color:@grey;
-        padding: 10px;
-        height:45px;
-        overflow: hidden;
-        span{
-          font-size: @font-size-xs;
-          -ms-text-overflow: ellipsis;
-          text-overflow: ellipsis;
-        }
-      }
-      .follow-btn{
-        position: absolute;
-        bottom:10px;
-        left:0;
-        right:0;
-        margin: auto;
-      }
-    }
-    .popup_array{
+  .msg_content{
+    box-shadow: 0 0 1px rgba(0, 0, 0, 0.3);
+    .msg_user_popup{
+      display: none;
       position: absolute;
-      top: 17px;
-      left: 10px;
-      width: 0;
-      height: 0;
-      border-left: 7px solid transparent;
-      border-right: 7px solid transparent;
-      border-bottom: 8px solid @light-grey;
-    }
-  }
+      width: 150px;
+      padding-top: 25px;
+      z-index: 2;
+      .popup_content{
+        background-color: @white;
+        box-shadow: 0 0 3px rgba(0, 0, 0, 0.3);
+        width: 150px;
+        height: 235px;
+        .base_info{
+          background-color: #f0f0f0;
+          height: 135px;
+          position: relative;
+          img{
+            width: 80px;
+            height: 80px;
+            border-radius: 40px;
+            margin: auto;
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: 5px;
+          }
+          h3{
+            font-weight: normal;
+            position: absolute;
+            bottom: 24px;
+            left: 5px;
+            right: 5px;
+            margin: 0 auto;
+            text-align: center;
+            font-size: @font-size-l;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+          }
+          .ff_count{
+            position: absolute;
+            bottom: 5px;
+            left: 15px;
+            right: 15px;
+            margin: auto;
+            text-align: center;
+            font-size: @font-size-xs;
+            color: @dark-grey;
+            -webkit-column-count:2;
+            -moz-column-count:2;
+            column-count:2;
+            -webkit-column-gap:0;
+            -moz-column-gap:0;
+            column-gap:0;
 
-  .ml_like{
+          }
+        }
+        .introduce{
+          color:@grey;
+          padding: 10px;
+          height:45px;
+          overflow: hidden;
+          span{
+            font-size: @font-size-xs;
+            -ms-text-overflow: ellipsis;
+            text-overflow: ellipsis;
+          }
+        }
+        .follow-btn{
+          position: absolute;
+          bottom:10px;
+          left:0;
+          right:0;
+          margin: auto;
+        }
+      }
+      .popup_array{
+        position: absolute;
+        top: 17px;
+        left: 10px;
+        width: 0;
+        height: 0;
+        border-left: 7px solid transparent;
+        border-right: 7px solid transparent;
+        border-bottom: 8px solid @light-grey;
+      }
+    }
+
+    //公用样式
     dd{
       position: relative;
       display: block;
@@ -195,55 +197,78 @@
           color: @dark-grey;
         }
       }
-
-      .mli_product_info{
-        border: solid 1px @light-grey;
-        margin: 0 20px;
-        max-width: 450px;
-        height: 80px;
-        position: relative;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        img{
-          float: left;
-          width: 60px;
-          height: 60px;
-          position: absolute;
-          top: 0;
-          bottom: 0;
-          left: 10px;
-          margin: auto;
-        }
-        span{
-          position: absolute;
-          top: 10px;
-          bottom: 10px;
-          left: 80px;
-          right: 10px;
-          font-size: @font-size-s;
-          color: @black;
-          overflow: hidden;
-          text-overflow: ellipsis;
-          margin: auto;
-        }
-      }
-
       .mli_datetime{
         position: absolute;
         top: 10px;
         right: 10px;
         span{
           font-size: @font-size-s;
-          color: @dark-grey;
+          color: @grey;
         }
       }
       &.unread{
-        .mli_product_info{
+        .mli_datetime{
           span{
-            font-weight:bold;
+            color: @dark-grey;
+          }
+        }
+      }
+    }
+
+    .ml_like{
+      dd{
+        .mli_product_info{
+          border: solid 1px @light-grey;
+          margin: 0 20px;
+          max-width: 450px;
+          height: 80px;
+          position: relative;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          img{
+            float: left;
+            width: 60px;
+            height: 60px;
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 10px;
+            margin: auto;
+          }
+          span{
+            position: absolute;
+            top: 10px;
+            bottom: 10px;
+            left: 80px;
+            right: 10px;
+            font-size: @font-size-s;
+            color: @black;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            margin: auto;
+          }
+        }
+        &.unread{
+          .mli_product_info{
+            span{
+              font-weight:bold;
+            }
+          }
+        }
+      }
+    }
+    .ml_follow{
+      dd{
+        .mli_user_info{
+          padding: 5px 20px;
+          img{
+            width:80px;
+            height:80px;
+            border-radius: 40px;
           }
         }
       }
     }
   }
+
 }
