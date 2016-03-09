@@ -8,12 +8,14 @@ section.hot-news
           a 更多资讯
 
   ul.news-blocks
+    //{loop $hot_news $k $v}
     li
-      a(href='http://baidu.com')
-        article.image(style='background-image:url(#{image_path}/#{test_img})')
-          img.phantom(src='#{image_path}/#{test_img}',alt='')
+      a(href="{$v['url']}")
+        article.image(style="background-image:url({$v['thumb']})")
+          img.phantom(src="{$v['thumb']}", alt="{$v['title']}" )
         article.info
           span.info__content
-            b.tag 潮鞋
-            h3 打杂的小哥弄了个搞怪的潮牌就连冠希哥
-            p.date 2016年2月22日
+            b.tag {$v['cate_name']}
+            h3 {$v['title']}
+            p.date {$v['output_time']}
+    //{loop}
