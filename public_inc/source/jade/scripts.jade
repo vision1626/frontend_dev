@@ -1,0 +1,19 @@
+script(type='text/javascript').
+  var SITE_PATH = '$_FANWE[site_root]';
+  var SITE_URL = '$_FANWE[site_url]';
+  var TPL_PATH = '{TPL_PATH}';
+  var PUBLIC_PATH = '{PUBLIC_PATH}';
+  var MODULE_NAME = '{MODULE_NAME}';
+  var ACTION_NAME = '{ACTION_NAME}';
+  var COOKIE_PRE = "$_FANWE['config']['cookie']['cookie_pre']";
+  var TPL_NAME = '$_FANWE["setting"]["site_tmpl"]';
+  var IS_POSTING = false;
+
+:php
+  $current_css[]  = './tpl/hi1626/v2/css/vendor/normalize.css';
+  $current_css[]  = './tpl/hi1626/v2/css/global.css';
+  $current_css[]  = './tpl/hi1626/v2/css/global_header.css';
+  $current_css[]  = './tpl/hi1626/v2/css/global_footer.css';
+  $current_js[]   = './tpl/hi1626/v2/js/vendor/jquery-2.2.1.min.js';
+  $current_js[]   = './public/js/base.js';
+  $current_js[]   = './public/js/clickEvent.js';

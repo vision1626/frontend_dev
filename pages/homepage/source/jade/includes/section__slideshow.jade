@@ -3,7 +3,7 @@ section.slideshow
     ul.slides
       //{loop $banner $k $v}
       li
-        a(href='http://baidu.com',target='_blank',onclick="addclick({$v['id']},{$v['position_id']})")
+        a(href="{$v['url']}", target='_blank', onclick="addclick({$v['id']},{$v['position_id']})")
           article.slide__content
             img.bg(src="{$v['code']}", alt="{$v['name']}")
       //{/loop}

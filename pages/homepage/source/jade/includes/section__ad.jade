@@ -1,3 +1,6 @@
+//{if $notice_ad}
 section.ad
   .ad-wrap
-    img(src='#{image_path}/homepage-ad.jpg',alt='')
+    a(onclick="addclick({$notice_ad['id']},{$notice_ad['position_id']})", href="{$notice_ad['url']}")
+    img(src="{$notice_ad['code']}", alt="{$notice_ad['name']}")
+//{/if}

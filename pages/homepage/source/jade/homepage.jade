@@ -1,5 +1,34 @@
 // 首页的<head>
-include source/jade/includes/head.jade
+doctype html
+<html>
+head(lang='en')
+  //META
+  meta(charset='UTF-8')
+  meta(name='viewport', content='width=device-width, initial-scale=1 maximum-scale=1, user-scalable=no')
+  meta(name='apple-mobile-web-app-status-bar-style', content='black')
+  meta(name='apple-mobile-web-app-capable', content='yes')
+  meta(name='description')
+  - title = "{$_FANWE['title']}"
+  title= title
+  - var production = true
+  if production
+    include ../../public_inc/source/jade/scripts.jade
+    :php
+      $current_css[]  = './tpl/hi1626/v2/css/myspace.css';
+      $current_css[]  = './tpl/hi1626/v2/css/homepage.css';
+    link(rel="stylesheet", type="text/css", href="{css $current_css}", media="all")
+    link(rel="icon", href="{$_FANWE['site_root']}favicon.ico", type="image/x-icon")
+    script(src="{script $current_js}")
+  else
+    - var asset_path = '..'
+    link(rel="stylesheet", type="text/css", href="#{asset_path}/css/vendor/normalize.css", media="all")
+    link(rel="stylesheet", type="text/css", href="#{asset_path}/css/global.css", media="all")
+    link(rel="stylesheet", type="text/css", href="#{asset_path}/css/global_header.css", media="all")
+    link(rel="stylesheet", type="text/css", href="#{asset_path}/css/global_footer.css", media="all")
+    link(rel="stylesheet", type="text/css", href="#{asset_path}/css/myspace.css", media="all")
+    link(rel="stylesheet", type="text/css", href="#{asset_path}/css/homepage.css", media="all")
+    - var image_path = '../images'
+<body>
 
 // 全局页头
 //{template v2/views/public/global_header}

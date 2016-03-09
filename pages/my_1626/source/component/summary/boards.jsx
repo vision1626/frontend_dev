@@ -17,6 +17,8 @@ class Boards extends BaseComponent {
           <h5>{this.userInformation.user_name}</h5>
           <div className="profile-progress">
             <span>资料完整度：</span>
+            <span className="progress-bar" style={{backgroundImage: 'linear-gradient(90deg, grey, grey ' + 
+              this.userStatistics.infomation_degree + '%, white 0)'}}></span>
             <span>{this.userStatistics.infomation_degree + '%'}</span>
           </div>
           <a href="/settings">立即完善</a>

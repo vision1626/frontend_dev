@@ -13,7 +13,9 @@ class Follows extends BaseComponent {
       dataType: 'json',
       cache: false,
       success: function(follows) {
-        this.setState({follows: follows.data});
+        if(follows.data) {
+          this.setState({follows: follows.data});
+        }
       }.bind(this),
       error: function(xhr, status, err) {
         console.error(this.props.url, status, err.toString());
