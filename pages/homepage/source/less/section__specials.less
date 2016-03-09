@@ -22,3 +22,15 @@ section.specials {
     }
   }
 }
+@media @mq-col-5 {
+  .specials__blocks {
+    li {
+      @wrap_w: 1520px;
+      @mar: 30px;
+      @w: (@wrap_w - @mar * 3) / 4;
+      @h: @w * 170 / 280;
+      width: @w;
+      height: @h;
+    }
+  }
+}

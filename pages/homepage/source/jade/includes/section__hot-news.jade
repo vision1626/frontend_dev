@@ -1,4 +1,5 @@
 - var test_img = 'xxx.jpg'
+//{if $hot_news}
 section.hot-news
   .section__header
     h2.section__title 热门资讯
@@ -18,4 +19,5 @@ section.hot-news
             b.tag {$v['cate_name']}
             h3 {$v['title']}
             p.date {$v['output_time']}
-    //{loop}
+    //{/loop}
+//{/if}
