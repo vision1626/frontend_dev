@@ -7,7 +7,7 @@ export function callMyOrder(){
 export function setArrayPosition(currentpage,just_set_tab = false){
   let targetMenuItem = $('.mnu_' + currentpage);
   let targetTabItem = $('.tab_' + currentpage);
-  if(just_set_tab) {
+  if(!just_set_tab) {
     $('.m_item').removeClass('current');
     targetMenuItem.addClass('current');
     $('.menu_array').css('top', targetMenuItem.position().top + 10);
