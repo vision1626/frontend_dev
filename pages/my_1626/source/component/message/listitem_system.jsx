@@ -9,7 +9,10 @@ class MessageListItem extends BaseComponent {
     this.handlerReadDetail = this.handlerReadDetail.bind(this);
   }
 
-  handlerReadDetail(e){}
+  handlerReadDetail(e){
+    let md = this.props.data;
+    util.showMessageDetail(this.props.currentPage,decodeURIComponent(md.title),md.message,md.create_time);
+  }
 
   render() {
     let md = this.props.data;

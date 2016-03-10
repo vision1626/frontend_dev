@@ -7,7 +7,7 @@ export function callMyOrder(){
 export function setArrayPosition(currentpage,just_set_tab = false){
   let targetMenuItem = $('.mnu_' + currentpage);
   let targetTabItem = $('.tab_' + currentpage);
-  if(just_set_tab) {
+  if(!just_set_tab) {
     $('.m_item').removeClass('current');
     targetMenuItem.addClass('current');
     $('.menu_array').css('top', targetMenuItem.position().top + 10);
@@ -17,9 +17,10 @@ export function setArrayPosition(currentpage,just_set_tab = false){
     targetTabItem.addClass('current');
     $('.msg_tab_slider').css('left', targetTabItem.position().left);
   }
+  closeMessageDetail();
 }
 
-export function formatDate(source,complete){
+export function formatDate(source,complete = false){
   let add_hours = 1000*60*60*8; //加翻8个钟
   let source_date = new Date((source * 1000)+add_hours);
   let source_date_text = [[source_date.getFullYear(),source_date.getMonth(),source_date.getDate()].join('-'),[source_date.getHours(),source_date.getMinutes(),source_date.getSeconds()].join(':')].join(' ');
@@ -108,4 +109,45 @@ export function formatCount(count){
   } else {
     return 0;
   }
+}
+
+export function showMessageDetail(currentPage,title,content,datetime){
+  let detail_box = $('.message_detail');
+  let read_all_button = $('.mark_all_read');
+  let pagination = $('.pagination');
+  let date_time = formatDate(datetime);
+  let parent_name = '';
+  switch (currentPage) {
+    case 'message_like':
+      parent_name = '收到的喜欢';
+      break;
+    case 'message_follow':
+      parent_name = '收到的关注';
+      break;
+    case 'message_comment':
+      parent_name = '收到的评论';
+      break;
+    default:
+      parent_name = '官方消息';
+  }
+  detail_box.find('.parent_name').html(parent_name);
+  detail_box.find('.message_title').html(title);
+  detail_box.find('.message_content').html(decodeURIComponent(content));
+  detail_box.find('.create_time').html(date_time);
+  detail_box.fadeIn(100);
+  read_all_button.fadeOut(100);
+  pagination.fadeOut(100);
+}
+
+export function closeMessageDetail(){
+  let detail_box = $('.message_detail');
+  let read_all_button = $('.mark_all_read');
+  let pagination = $('.pagination');
+  detail_box.find('.parent_name').html('');
+  detail_box.find('.message_title').html('');
+  detail_box.find('.message_content').html('');
+  detail_box.find('.create_time').html('');
+  detail_box.fadeOut(100);
+  read_all_button.fadeIn(100);
+  pagination.fadeIn(100);
 }

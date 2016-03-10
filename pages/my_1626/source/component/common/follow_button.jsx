@@ -37,7 +37,7 @@ class FollowButton extends BaseComponent {
           data: { uid: uid },
           dataType: 'json',
           success: function(result) {
-            if (result.status == 1 || result == 2) {
+            if (result.status == 1 || result.status == 2) {
               this.sliderToRight($btn,result.status);
             } else {
               this.sliderToLeft($btn);

@@ -19,7 +19,8 @@ class Tab extends BaseComponent {
       //targetMenuItem.addClass('current');
       //$('.menu_array').css('top',targetMenuItem.position().top + 10);
       //$('.msg_tab_slider').css('left',e.currentTarget.offsetLeft);
-      util.setArrayPosition(this.props.currentPage);
+      //console.log('chane:' + this.props.currentPage);
+      //util.setArrayPosition(this.props.currentPage);
       this.props.changeView(me.classList[2]);
     }
   }
@@ -29,7 +30,8 @@ class Tab extends BaseComponent {
   }
 
   render() {
-    util.setArrayPosition(this.props.currentPage,true);
+    //console.log('render:' + this.props.currentPage);
+    util.setArrayPosition(this.props.currentPage);
     return (
       <div className="msg_tab">
         <dl>

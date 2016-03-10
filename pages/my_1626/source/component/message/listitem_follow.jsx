@@ -1,6 +1,6 @@
 import React from 'react';
 import BaseComponent from '../../script/BaseClass.jsx';
-import UserPopup from './listitem_user_popup.jsx';
+import FollowButton from '../common/follow_button.jsx';
 import * as util from '../../script/util.jsx';
 
 class MessageList extends BaseComponent {
@@ -18,19 +18,43 @@ class MessageList extends BaseComponent {
 
   render() {
     let md = this.props.data;
+    let introduce = decodeURIComponent(md.introduce) ;
+    let introduce_class = '';
+    if (introduce == '') {
+      introduce = '这个人太潮了，不屑于填写简介';
+      introduce_class = ' empty';
+    }
     return (
       <dd className={md.status == 0 ? 'unread' : ''}>
-        <div className="mli_username">
-          <a onMouseOver={this.handlerMouseOver} >{md.user_name}</a>
-          <span>关注了你</span>
+        <div className="mli_user_thumb">
+          <a href={['/u/talk-',md.uid,'.html'].join('')} target="_blank" >
+            <img src={md.img_thumb} alt={decodeURIComponent(md.user_name)} />
+          </a>
         </div>
         <div className="mli_user_info">
-          <img src={md.img_thumb} alt={decodeURIComponent(md.user_name)} />
+          <div className="mli_username">
+            <a onMouseOver={this.handlerMouseOver} href={['/u/talk-',md.uid,'.html'].join('')} target="_blank" >{md.user_name}</a>
+            <span>关注了您</span>
+          </div>
+          <div className="ff_count">
+            <div>
+              <label>粉丝</label>
+              <span>{util.formatCount(md.fans)}</span>
+            </div>
+            <div>
+              <label>关注</label>
+              <span>{util.formatCount(md.follows)}</span>
+            </div>
+          </div>
+          <div className={'introduce' + introduce_class}>
+            <label>简介: </label>
+            <span>{introduce}</span>
+          </div>
         </div>
+        <FollowButton classname="fans__follow-btn" FollowState={md.is_follow} UID={md.uid} MyID={window.myid}/>
         <div className="mli_datetime">
           <span>{util.formatDate(md.create_time)}</span>
         </div>
-        <UserPopup ref="userPopup" Name={md.user_name} Img={md.img_thumb} Introduce={md.introduce} Follows={md.follows} Fans={md.fans} FollowState={md.is_follow} UID={md.uid} MyID={window.myid}/>
       </dd>
     );
   }

@@ -8,6 +8,7 @@ import MFollowItem from './listitem_follow.jsx';
 import MCommenyItem from './listitem_comment.jsx';
 import MSystemItem from './listitem_system.jsx';
 //import UserPopup from './listitem_user_popup.jsx';
+import MDetail from './message_detail.jsx';
 import * as util from '../../script/util.jsx';
 
 require('../../less/message.less');
@@ -78,21 +79,25 @@ class MessageEntity extends BaseComponent {
   }
 
   queryMessageData(){
-    let limit = 5;
+    let limit = 0;
     let page = this.state.currentPage;
     let type = 1;
     switch (this.state.Classify){
       case 'like':
         type = 1;
+        limit = 5;
         break;
       case 'follow':
         type = 3;
+        limit = 6;
         break;
       case 'comment':
         type = 2;
+        limit = 4;
         break;
       default: //'sysetm'
         type = 4;
+        limit = 7;
     }
     $.ajax({
       url: '/services/service.php',
@@ -173,11 +178,11 @@ class MessageEntity extends BaseComponent {
           msg_pagination = <Pagination recordCount={this.state.recordCount} currentPage={this.state.currentPage}
                                        pageTurning={this.pageTurning.bind(this)}/>
         } else {
-          msg_content = <Loading text="列表为空" />;
+          msg_content = <Loading text="还没有消息哦" />;
           msg_pagination = '';
         }
       } else {
-        msg_content = <Loading text="列表为空" />;
+        msg_content = <Loading text="还没有消息哦" />;
         msg_pagination = '';
       }
     } else {
@@ -193,6 +198,7 @@ class MessageEntity extends BaseComponent {
         <Tab classify={this.state.Classify} currentPage={this.props.currentPage} changeView={this.props.changeView.bind(this)} markAllRead={this.markAllRead} />
         <div className="msg_content">
           {msg_content}
+          <MDetail />
         </div>
         {msg_pagination}
       </div>
