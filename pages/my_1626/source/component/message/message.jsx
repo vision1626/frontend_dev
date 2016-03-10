@@ -8,6 +8,7 @@ import MFollowItem from './listitem_follow.jsx';
 import MCommenyItem from './listitem_comment.jsx';
 import MSystemItem from './listitem_system.jsx';
 //import UserPopup from './listitem_user_popup.jsx';
+import MDetail from './message_detail.jsx';
 import * as util from '../../script/util.jsx';
 
 require('../../less/message.less');
@@ -193,6 +194,7 @@ class MessageEntity extends BaseComponent {
         <Tab classify={this.state.Classify} currentPage={this.props.currentPage} changeView={this.props.changeView.bind(this)} markAllRead={this.markAllRead} />
         <div className="msg_content">
           {msg_content}
+          <MDetail />
         </div>
         {msg_pagination}
       </div>

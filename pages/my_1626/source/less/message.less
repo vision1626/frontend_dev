@@ -74,7 +74,7 @@
       right:0;
       line-height: @msg_tab_height;
       cursor: pointer;
-      width: 130px;
+      width: 110px;
       text-align: center;
       font-size: @font-size-s;
       color:@grey;
@@ -88,6 +88,7 @@
 
   .msg_content{
     box-shadow: 0 0 1px rgba(0, 0, 0, 0.3);
+    position: relative;
     .msg_user_popup{
       display: none;
       position: absolute;
@@ -271,7 +272,7 @@
         }
       }
     }
-
+    .ml_comment{}
     .ml_system{
       dd{
         .mli_system_content{
@@ -283,7 +284,9 @@
             i{
               font-size: 20px;
               font-weight: normal;
-              color: @grey
+              color: @dark-grey;
+              position: relative;
+              top: -3px;
             }
           }
           .mil_system_text{
@@ -296,23 +299,23 @@
             width: 490px;
             margin: auto;
             h3{
-              font-size: @font-size-m;
+              font-size: @font-size-s;
               margin: 0 0 10px 0;
-              color: @grey;
+              color: @dark-grey;
               white-space: nowrap;
               overflow: hidden;
               text-overflow: ellipsis;
             }
             div.rich_text_box{
-              font-size: @font-size-m;
-              color: @grey;
+              font-size: @font-size-s;
+              color: @dark-grey;
               a{
                 color: @blue;
               }
             }
             .summary_text{
-              font-size: @font-size-m;
-              color: @grey;
+              font-size: @font-size-s;
+              color: @dark-grey;
               height: 42px;
               width: 490px;
               -webkit-word-break: break-all;
@@ -350,7 +353,9 @@
             }
           }
           div.rich_text_box{
-            color: @black;
+            p {
+              color: @black;
+            }
             a{
               color: @blue;
             }
@@ -358,14 +363,67 @@
           .summary_text{
             color: @black;
           }
-          .mli_datetime{
-            span{
-              color: @dark-grey;
-            }
-          }
         }
       }
     }
+
+    .message_detail{
+      position: absolute;
+      top:0;
+      bottom:0;
+      left: 0;
+      right:0;
+      margin:auto;
+      background-color: @white;
+      z-index:3;
+      display: none;
+      max-height:@msg_item_height*5;
+      overflow: scroll;
+      .message_info{
+        height: 30px;
+        padding: 10px;
+        i{
+          position: absolute;
+          top: 10px;
+          right: 10px;
+          transition: all 0.3s;
+          font-size: 24px;
+          color: @grey;
+          cursor: pointer;
+          &:hover{
+            color:@red;
+          }
+        }
+        span{
+          margin-right: 8px;
+          font-size: @font-size-s;
+          &.parent_name{
+            color: @blue;
+            cursor: pointer;
+          }
+        }
+        .message_datetime{
+          position: absolute;
+          top: 30px;
+          left: 10px;
+          span{
+            font-size: @font-size-xs;
+            color: @grey;
+          }
+        }
+      }
+      .message_content{
+        position: absolute;
+        top:60px;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        //max-height: (@msg_item_height*5)-60;
+        overflow: scroll;
+      }
+
+    }
   }
+
 
 }
