@@ -1,7 +1,7 @@
 @import "./common";
 @msg_tab_height:50px;
 @msg_tab_width:120px;
-@msg_item_height:130px;
+@msg_item_height:132px;
 
 .msg_container{
   width:100%;
@@ -89,6 +89,7 @@
   .msg_content{
     box-shadow: 0 0 1px rgba(0, 0, 0, 0.3);
     position: relative;
+    min-height: @msg_item_height*5;
     .msg_user_popup{
       display: none;
       position: absolute;
@@ -180,7 +181,7 @@
     dd{
       position: relative;
       display: block;
-      height: @msg_item_height;
+      height: @msg_item_height - 1;
       width:100%;
       border-bottom: solid 1px @light-grey;
       transition: all 0.3s;
@@ -263,6 +264,7 @@
     }
     .ml_follow{
       dd{
+        height:109px;
         .mli_user_thumb{
           position: absolute;
           top: 0;
@@ -271,8 +273,8 @@
           left: 10px;
           width: 120px;
           img{
-            width:100px;
-            height:100px;
+            width:80px;
+            height:80px;
             border-radius: 50px;
             border: solid 1px @light-grey;
             position: absolute;
@@ -294,7 +296,7 @@
             padding: 0;
           }
           .ff_count{
-            padding-top: 5px;
+            //padding-top: 5px;
             div{
               float: left;
               margin-right:10px;
@@ -310,8 +312,12 @@
             }
           }
           .introduce{
-            padding-top: 10px;
+            padding-top: 5px;
             clear: both;
+            width: 490px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
             span{
               color: @black;
               font-size: @font-size-s;
@@ -319,6 +325,11 @@
             label{
               color: @dark-grey;
               font-size: @font-size-s;
+            }
+            &.empty{
+              span{
+                color: @dark-grey;
+              }
             }
           }
         }
@@ -331,9 +342,14 @@
         }
       }
     }
-    .ml_comment{}
+    .ml_comment{
+      dd{
+        height:164px;
+      }
+    }
     .ml_system{
       dd{
+        height:109px;
         .mli_system_content{
           //margin: 10px;
           .mli_icon{
@@ -359,7 +375,7 @@
             margin: auto;
             h3{
               font-size: @font-size-s;
-              margin: 0 0 10px 0;
+              margin: 0 0 3px 0;
               color: @dark-grey;
               white-space: nowrap;
               overflow: hidden;
@@ -368,7 +384,7 @@
             .rich_text_box,.summary_text{
               font-size: @font-size-s;
               color: @dark-grey;
-              height: 42px;
+              height: 40px;
               width: 490px;
               -webkit-word-break: break-all;
               display: -moz-box;
@@ -398,7 +414,7 @@
             //  -webkit-line-clamp: 3;
             //}
             .read_detail{
-              margin: 10px 0 0 0;
+              margin: 3px 0 0 0;
               span {
                 cursor: pointer;
                 font-size: @font-size-s;

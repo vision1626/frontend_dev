@@ -18,6 +18,12 @@ class MessageList extends BaseComponent {
 
   render() {
     let md = this.props.data;
+    let introduce = decodeURIComponent(md.introduce) ;
+    let introduce_class = '';
+    if (introduce == '') {
+      introduce = '这个人太潮了，不屑于填写简介';
+      introduce_class = ' empty';
+    }
     return (
       <dd className={md.status == 0 ? 'unread' : ''}>
         <div className="mli_user_thumb">
@@ -32,17 +38,17 @@ class MessageList extends BaseComponent {
           </div>
           <div className="ff_count">
             <div>
-              <span>{util.formatCount(md.fans)}</span>
               <label>粉丝</label>
+              <span>{util.formatCount(md.fans)}</span>
             </div>
             <div>
-              <span>{util.formatCount(md.follows)}</span>
               <label>关注</label>
+              <span>{util.formatCount(md.follows)}</span>
             </div>
           </div>
-          <div className="introduce">
-            <label>简介:</label>
-            <span>{decodeURIComponent(md.introduce)}</span>
+          <div className={'introduce' + introduce_class}>
+            <label>简介: </label>
+            <span>{introduce}</span>
           </div>
         </div>
         <FollowButton classname="fans__follow-btn" FollowState={md.is_follow} UID={md.uid} MyID={window.myid}/>

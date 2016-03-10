@@ -79,21 +79,25 @@ class MessageEntity extends BaseComponent {
   }
 
   queryMessageData(){
-    let limit = 5;
+    let limit = 0;
     let page = this.state.currentPage;
     let type = 1;
     switch (this.state.Classify){
       case 'like':
         type = 1;
+        limit = 5;
         break;
       case 'follow':
         type = 3;
+        limit = 6;
         break;
       case 'comment':
         type = 2;
+        limit = 4;
         break;
       default: //'sysetm'
         type = 4;
+        limit = 6;
     }
     $.ajax({
       url: '/services/service.php',
