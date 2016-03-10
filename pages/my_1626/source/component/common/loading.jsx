@@ -6,8 +6,10 @@ class Loading extends BaseComponent {
   render() {
     return (
       <div className="loading_message">
-        <i className="icon icon-hand" />
-        <span>{this.props.text}</span>
+        <div className="message_wapper">
+          <i className="icon icon-hand" />
+          <span>{this.props.text}</span>
+        </div>
       </div>
 
     );

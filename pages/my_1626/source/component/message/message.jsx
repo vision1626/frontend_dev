@@ -174,11 +174,11 @@ class MessageEntity extends BaseComponent {
           msg_pagination = <Pagination recordCount={this.state.recordCount} currentPage={this.state.currentPage}
                                        pageTurning={this.pageTurning.bind(this)}/>
         } else {
-          msg_content = <Loading text="列表为空" />;
+          msg_content = <Loading text="还没有消息哦" />;
           msg_pagination = '';
         }
       } else {
-        msg_content = <Loading text="列表为空" />;
+        msg_content = <Loading text="还没有消息哦" />;
         msg_pagination = '';
       }
     } else {
