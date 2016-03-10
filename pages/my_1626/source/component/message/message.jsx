@@ -97,7 +97,7 @@ class MessageEntity extends BaseComponent {
         break;
       default: //'sysetm'
         type = 4;
-        limit = 6;
+        limit = 7;
     }
     $.ajax({
       url: '/services/service.php',
