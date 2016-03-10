@@ -32,7 +32,9 @@ class MessageUserPopup extends BaseComponent {
       <div className="msg_user_popup" onMouseEnter={this.handlerMouseEnter} onMouseLeave={this.handlerMouseLeave} >
         <div className="popup_content">
           <div className="base_info">
-            <img src={this.props.Img} alt={decodeURIComponent(this.props.Name)} />
+            <a href={['/u/talk-',this.props.UID,'.html'].join('')} target="_blank" >
+              <img src={this.props.Img} alt={decodeURIComponent(this.props.Name)} />
+            </a>
             <h3>{decodeURIComponent(this.props.Name)}</h3>
             <div className="ff_count">
               <div>{[util.formatCount(this.props.Fans),'粉丝'].join('')}</div>

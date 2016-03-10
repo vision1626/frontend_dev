@@ -29,7 +29,7 @@ class MessageListItem extends BaseComponent {
     return (
       <dd className={md.status == 0 ? 'unread' : ''}>
         <div className="mli_username">
-          <a onMouseOver={this.handlerMouseOver} onMouseOut={this.handlerMouseOut} >{md.user_name}</a>
+          <a onMouseOver={this.handlerMouseOver} onMouseOut={this.handlerMouseOut} href={['/u/talk-',md.uid,'.html'].join('')} target="_blank" >{md.user_name}</a>
           <span>喜欢您的潮品</span>
         </div>
         <div className="mli_product_info">

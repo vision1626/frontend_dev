@@ -21,11 +21,13 @@ class MessageList extends BaseComponent {
     return (
       <dd className={md.status == 0 ? 'unread' : ''}>
         <div className="mli_user_thumb">
-          <img src={md.img_thumb} alt={decodeURIComponent(md.user_name)} />
+          <a href={['/u/talk-',md.uid,'.html'].join('')} target="_blank" >
+            <img src={md.img_thumb} alt={decodeURIComponent(md.user_name)} />
+          </a>
         </div>
         <div className="mli_user_info">
           <div className="mli_username">
-            <a onMouseOver={this.handlerMouseOver} >{md.user_name}</a>
+            <a onMouseOver={this.handlerMouseOver} href={['/u/talk-',md.uid,'.html'].join('')} target="_blank" >{md.user_name}</a>
             <span>关注了您</span>
           </div>
           <div className="ff_count">
