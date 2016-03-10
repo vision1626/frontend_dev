@@ -63,25 +63,15 @@
     height: @h-b;
     position: relative;
     .news-blocks {
-
       li {
         position: absolute;
-        h3 {
-        }
         &.block-0 {
           ._block(@w-b, @h-b);
-          h3 {
-            font-size: @font-size-xl;
-          }
-          .info {
-          }
         }
         &.block-1 {
           top: 0;
           ._block(@w-m,@h-m);
           left: @w-b + @mar;
-          .info {
-          }
         }
         &.block-2 {
           ._block(@w-s,@h-s);
@@ -90,6 +80,87 @@
         &.block-3 {
           ._block(@w-s,@h-s);
           left: @w-b + @mar + @w-s + @mar;
+        }
+      }
+    }
+  }
+}
+._headline_metrics_3_col() {
+  @mar:18px;
+  @w-b:360px; @h-b:360px;
+  @w-m:198px; @h-m:(@h-b - @mar * 2)/3;
+  @w-s:@w-m;  @h-s:@h-m;
+}
+@media @mq-col-3 {
+  .headlines__grid {
+    ._headline_metrics_3_col;
+    float: left;
+    width: @w-b + @mar + @w-m;
+    height: @h-b;
+    position: relative;
+    .news-blocks {
+      li {
+        position: absolute;
+        &.block-0 {
+          ._block(@w-b, @h-b);
+        }
+        &.block-1 {
+          top: 0;
+          ._block(@w-m,@h-m);
+          left: @w-b + @mar;
+        }
+        &.block-2 {
+          ._block(@w-s,@h-s);
+          left: @w-b + @mar;
+          top: (@h-m + @mar);
+        }
+        &.block-3 {
+          ._block(@w-s,@h-s);
+          left: @w-b + @mar;
+          top: (@h-m + @mar) * 2;
+        }
+      }
+    }
+  }
+}
+._headline_metrics_2_col() {
+  @mar: 16px;
+  @wrap: 320px;
+  @w-b: @wrap; @h-b: @wrap - 50px;
+  @w-m: @w-b; @h-m: @w-m * 116 / 198 - 30px;
+  @w-s: (@w-b - @mar)/2;  @h-s: @w-s * 116 / 198;
+  @total-h: @h-b + @h-m + @h-s + @mar * 2;
+}
+@media @mq-col-2 {
+  .headlines__grid {
+    ._headline_metrics_2_col;
+    float: left;
+    width: @wrap;
+    height: @total-h;
+    position: relative;
+    .news-blocks {
+      li {
+        position: absolute;
+        h3 {
+          //font-size: @font-size-m !important;
+        }
+        &.block-0 {
+          ._block(@w-b, @h-b);
+        }
+        &.block-1 {
+          ._block(@w-m, @h-m);
+          top: @h-b + @mar;
+          left: 0;
+        }
+        &.block-2 {
+          ._block(@w-s,@h-s);
+          top: (@h-b + @h-m + @mar * 2);
+          left: 0;
+        }
+        &.block-3 {
+          ._block(@w-s,@h-s);
+          top: (@h-b + @h-m + @mar * 2);
+          left: @w-s + @mar;
         }
       }
     }
@@ -214,37 +285,74 @@
     .news-blocks {
       li {
         height: @h;
-        a {
-        }
-        .image {
-        }
-        h3 {
-        }
-        .desc {
-        }
-        .tag {
-        }
-        .info {
-        }
-        .info__content {
-        }
-
         &.expanded {
           height: @h * 3;
           .image {
             ._square(@h * 3 - 0px);
           }
-          .desc {
+          .info {
+            @margin:12px;
+            width: @w - (@h * 3) - @margin;
+          }
+        }
+      }
+    }
+  }
+}
+@media @mq-col-3 {
+  .headlines__list {
+    ._headline_metrics_3_col;
+    @w:300px;
+    @h:@h-b / 9;
+    width: @w;
+    height: @h-b;
+    .news-blocks {
+      li {
+        height: @h;
+        .desc {
+          font-size: @font-size-xs;
+        }
+        &.expanded {
+          height: @h * 3;
+          .image {
+            ._square(@h * 3 - 0px);
           }
           .info {
             @margin:12px;
             width: @w - (@h * 3) - @margin;
           }
-          .tag {
+          h3 {
+            font-size: @font-size-s;
+          }
+        }
+      }
+    }
+  }
+}
+@media @mq-col-2 {
+  .headlines__list {
+    ._headline_metrics_2_col;
+    @w: 590px - @wrap - 30px;
+    @h: @total-h / 14;
+    width: @w;
+    height: @total-h;
+    .news-blocks {
+      li {
+        height: @h;
+        .desc {
+          font-size: @font-size-xs;
+        }
+        &.expanded {
+          height: @h * 2;
+          .image {
+            ._square(@h * 2 - 0px);
+          }
+          .info {
+            @margin:12px;
+            width: @w - (@h * 2) - @margin;
           }
           h3 {
-          }
-          .info__content {
+            font-size: @font-size-s;
           }
         }
       }
