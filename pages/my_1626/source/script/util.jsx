@@ -132,7 +132,7 @@ export function showMessageDetail(currentPage,title,content,datetime){
   }
   detail_box.find('.parent_name').html(parent_name);
   detail_box.find('.message_title').html(title);
-  detail_box.find('.message_content').html(content);
+  detail_box.find('.message_content').html(decodeURIComponent(content));
   detail_box.find('.create_time').html(date_time);
   detail_box.fadeIn(100);
   read_all_button.fadeOut(100);
