@@ -127,6 +127,7 @@ class MessageEntity extends BaseComponent {
 
   render() {
     let whole;
+    let limit = 0;
     let msg_content = [];
     let msg_pagination;
     let msg_data = this.state.data;
@@ -144,6 +145,7 @@ class MessageEntity extends BaseComponent {
         if (msg_data.length > 0) {
           switch (this.props.currentPage) {
             case 'message_like':
+              limit = 5;
               msg_content =
                 <dl className="ml_like">
                   {msg_data.map(function(md){
@@ -152,6 +154,7 @@ class MessageEntity extends BaseComponent {
                 </dl>;
               break;
             case 'message_follow':
+              limit = 6;
               msg_content =
                 <dl className="ml_follow">
                   {msg_data.map(function(md){
@@ -160,6 +163,7 @@ class MessageEntity extends BaseComponent {
                 </dl>;
               break;
             case 'message_comment':
+              limit = 4;
               msg_content =
                 <dl className="ml_comment">
                   {msg_data.map(function(md){
@@ -168,6 +172,7 @@ class MessageEntity extends BaseComponent {
                 </dl>;
               break;
             default:
+              limit = 7;
               msg_content =
                 <dl className="ml_system">
                   {msg_data.map(function(md){
@@ -176,7 +181,7 @@ class MessageEntity extends BaseComponent {
                 </dl>;
           }
           msg_pagination = <Pagination recordCount={this.state.recordCount} currentPage={this.state.currentPage}
-                                       pageTurning={this.pageTurning.bind(this)}/>
+                                       pageTurning={this.pageTurning.bind(this)} pageRecords={limit}/>
         } else {
           msg_content = <Loading text="还没有消息哦" />;
           msg_pagination = '';

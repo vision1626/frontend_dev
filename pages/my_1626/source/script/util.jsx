@@ -151,3 +151,8 @@ export function closeMessageDetail(){
   read_all_button.fadeIn(100);
   pagination.fadeIn(100);
 }
+
+export function validateEventNumeral(e){
+  let code = (e.keyCode ? e.keyCode : e.which);
+  return ((code >= 48 && code<= 57) || code == 8)
+}
