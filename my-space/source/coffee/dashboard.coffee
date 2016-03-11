@@ -204,10 +204,13 @@ $(document).on 'click','.btn_like', ->
     do_like(this)
 
 $(document).on 'click','.publish_entrance', ->
-  $('.popup__blackbox').fadeIn(300)
-  $('.popup').show()
-  $('.popup__loading').hide()
-  askUserToGetValidated()
+  if +$(this).attr('d-type') == 1
+    $('.popup__blackbox').fadeIn(300)
+    $('.popup').show()
+    $('.popup__loading').hide()
+    askUserToGetValidated()
+  else
+    window.location.href = 'http://www.1626.com/dapei/c1.html'
 
 $(document).on 'click','div.return_home', ->
   location.href = SITE_URL
@@ -551,7 +554,7 @@ gen_dashboard_item = () ->
         step = _dashboard_step_b
         if state is 'talk' and _dashboard_show_me and !_is_mobile
           if !_dashboard_has_publish_btn_b
-            biglist.append(publishItem_Generater(myid))
+            biglist.append(publishItem_Generater(_dashboard_show_product_collocation))
             _dashboard_has_publish_btn_b = true
           if _dashboard_publish_first_gen_b
             step -= 1
@@ -570,7 +573,7 @@ gen_dashboard_item = () ->
         step = _dashboard_step_s
         if state is 'talk' and _dashboard_show_me and !_is_mobile
           if !_dashboard_has_publish_btn_s
-            smalllist.append(publishItem_Generater(myid))
+            smalllist.append(publishItem_Generater(_dashboard_show_product_collocation))
             _dashboard_has_publish_btn_s = true
           if _dashboard_publish_first_gen_s
             step -= 1
@@ -768,9 +771,9 @@ init_dashboard_empty_message = () ->
         else
           btnPublish.show()
         if type == '搭配'
-          btnPublish.off()
-          btnPublish.on 'click', ->
-            window.location.href = 'http://www.1626.com/dapei/c1.html'
+          btnPublish.attr('d-type', 2)
+        else
+          btnPublish.attr('d-type', 1)
         btnClearsearch.hide()
       else
         btnReturnhome.show()

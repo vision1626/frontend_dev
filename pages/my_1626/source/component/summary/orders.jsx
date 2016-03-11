@@ -5,7 +5,7 @@ import {formatDate, getOrderStatus} from '../../script/util.jsx';
 class Orders extends BaseComponent {
   constructor() {
     super()
-    this.state = { orders: {} }
+    this.state = { orders: [] }
   }
 
   componentWillMount() {
@@ -26,16 +26,28 @@ class Orders extends BaseComponent {
 
   render() {
     let rows = [];
-    if (this.state.orders != {}) {
+    if (this.state.orders.length > 0) {
       for (var i = 0; i < this.state.orders.length; i++) {
         rows.push(<Order order={this.state.orders[i]} key={i}/>)
       }
+    } else {
+      rows.push(
+        <tr key={Math.random()}>
+          <td className="blank-td">
+            您还没有订单哦
+          </td>
+        </tr>
+      )
     }
     return (
       <div className="orders">
         <h5>
           <i className="icon icon-flashbuy" />
           我的潮闪购订单
+          <a className="check-all" 
+            href="http://www.1626buy.cn/user/act-order_list.html">
+            查看全部订单
+          </a>
         </h5>
         <table>
           <tbody>

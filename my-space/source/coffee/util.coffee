@@ -666,13 +666,18 @@ show_search_result = (keyword,count) ->
 hide_search_result = () ->
   $('.item-search-result').removeClass('show')
 
-publishItem_Generater = () ->
+publishItem_Generater = (type) ->
+  content = ''
+  if type == 1
+    content = '潮品'
+  else
+    content = '搭配'
   dd = $(
-    '<dd class="item publish_entrance">' +
+    '<dd class="item publish_entrance" d-type="' + type + '">' +
       '<div>' +
 #        '<i class="icon icon-publish"></i><br/>' +icon-publish_solid
         '<i class="icon icon-publish_solid"></i><br/>' +
-        '<span class="clear">发布潮品</span>' +
+        '<span class="clear">发布' + content + '</span>' +
       '</div>' +
     '</dd>'
   )
