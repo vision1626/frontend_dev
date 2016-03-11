@@ -40,7 +40,7 @@ init_global_header = ->
               $('.get-comments').html("<i class='icon icon-comment'></icon>" + 
                 "<a href='" + d['url'] + "'>" + "收到" + 
                   "<span class='number'>" + d['ge_sum'] + "</span>" + 
-                    "条留言" + "</a>")
+                    "条评论" + "</a>")
             if d['type']=="3" && d['ge_sum']!="0"
               $('.get-fans').html("<i class='icon icon-fans'></icon>" + 
                 "<a href='" + d['url'] + "'>" + "新增" + 

@@ -365,7 +365,7 @@
             i{
               font-size: 20px;
               font-weight: normal;
-              color: @dark-grey;
+              color: @grey;
               position: relative;
               top: -3px;
             }
@@ -381,16 +381,16 @@
             h3{
               font-size: @font-size-s;
               margin: 0 0 0 0;
-              color: @dark-grey;
+              color: @grey;
               white-space: nowrap;
               overflow: hidden;
               text-overflow: ellipsis;
             }
             .rich_text_box,.summary_text{
               font-size: @font-size-s;
-              color: @dark-grey;
+              color: @grey;
               height: 37px;
-              width: 490px;
+              //width: 490px;
               -webkit-word-break: break-all;
               display: -moz-box;
               overflow: hidden;
@@ -403,11 +403,15 @@
               }
               a{
                 color: @blue;
+                transition: all 0.3s;
+                &:hover{
+                  border-bottom: solid 1px @blue;
+                }
               }
               &.rich_text_box{
                 height: 50px;
                 margin-top: 10px;
-                width: 490px;
+                //width: 490px;
               }
             }
             //.summary_text{

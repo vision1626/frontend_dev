@@ -128,7 +128,7 @@ export function showMessageDetail(currentPage,title,content,datetime){
       parent_name = '收到的评论';
       break;
     default:
-      parent_name = '官方消息';
+      parent_name = '系统消息';
   }
   detail_box.find('.parent_name').html(parent_name);
   detail_box.find('.message_title').html(title);
