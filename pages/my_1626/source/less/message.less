@@ -229,6 +229,7 @@
           position: relative;
           overflow: hidden;
           text-overflow: ellipsis;
+          transition: all 0.3s;
           img{
             float: left;
             width: 60px;
@@ -250,6 +251,11 @@
             overflow: hidden;
             text-overflow: ellipsis;
             margin: auto;
+          }
+          &:hover{
+            -webkit-box-shadow: 0 0 3px rgba(0,0,0,0.3);
+            -moz-box-shadow: 0 0 3px rgba(0,0,0,0.3);
+            box-shadow: 0 0 3px rgba(0,0,0,0.3);
           }
         }
         &.unread{

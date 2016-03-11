@@ -35,8 +35,10 @@ class MessageListItem extends BaseComponent {
           <span>喜欢您的潮品</span>
         </div>
         <div className="mli_product_info">
-          <img src={md.img} alt={decodeURIComponent(md.goods_name)} />
-          <span>{decodeURIComponent(md.goods_name)}</span>
+          <a href={md.url} target="_blank">
+            <img src={md.img} alt={decodeURIComponent(md.goods_name)} />
+            <span>{decodeURIComponent(md.goods_name)}</span>
+          </a>
         </div>
         <div className="mli_datetime">
           <span>{util.formatDate(md.create_time)}</span>

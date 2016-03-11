@@ -42,7 +42,7 @@ class MessageUserPopup extends BaseComponent {
             </div>
           </div>
           <div className="introduce">
-            <span>{decodeURIComponent(this.props.Introduce)}</span>
+            <span>{this.props.Introduce != '' ? decodeURIComponent(this.props.Introduce) : '这个人太潮了，不屑于填写简介' }</span>
           </div>
           <FollowButton classname="fans__follow-btn" FollowState={this.props.FollowState} UID={this.props.UID} MyID={this.props.MyID}/>
         </div>
