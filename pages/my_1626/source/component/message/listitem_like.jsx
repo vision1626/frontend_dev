@@ -12,11 +12,13 @@ class MessageListItem extends BaseComponent {
   }
 
   handlerMouseOver(e) {
-    let popup = $(e.currentTarget).parent().parent().find('.msg_user_popup');
-    popup.fadeIn(100);
-    //e.currentTarget.offsetWidth
-    popup.css('left',e.currentTarget.offsetLeft+((e.currentTarget.offsetWidth/2)-17));
-    popup.css('top',e.currentTarget.offsetTop+5);
+    let all_popup = $('.msg_user_popup');
+    //let my_popup = $(e.currentTarget).parent().parent().find('.msg_user_popup');
+    let my_popup = $(this.refs.userPopup.refs.popup);
+    all_popup.hide();
+    my_popup.fadeIn(100);
+    my_popup.css('left',e.currentTarget.offsetLeft+((e.currentTarget.offsetWidth/2)-17));
+    my_popup.css('top',e.currentTarget.offsetTop+30);
   }
 
   handlerMouseOut(e){

@@ -94,7 +94,7 @@
       display: none;
       position: absolute;
       width: 150px;
-      padding-top: 25px;
+      //padding-top: 5px;
       z-index: 2;
       .popup_content{
         background-color: @white;
@@ -167,7 +167,7 @@
       }
       .popup_array{
         position: absolute;
-        top: 17px;
+        top: -8px;
         left: 10px;
         width: 0;
         height: 0;
@@ -194,7 +194,6 @@
           font-size: @font-size-s;
           font-weight: bold;
           border-bottom: solid 1px @grey;
-          cursor: pointer;
         }
         span{
           font-size: @font-size-s;
@@ -399,6 +398,9 @@
               }
               a{
                 color: @blue;
+              }
+              &.rich_text_box{
+                height: 60px;
               }
             }
             //.summary_text{

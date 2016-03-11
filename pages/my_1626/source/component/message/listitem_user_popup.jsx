@@ -29,7 +29,7 @@ class MessageUserPopup extends BaseComponent {
 
   render() {
     return (
-      <div className="msg_user_popup" onMouseEnter={this.handlerMouseEnter} onMouseLeave={this.handlerMouseLeave} >
+      <div ref="popup" className="msg_user_popup" onMouseEnter={this.handlerMouseEnter} onMouseLeave={this.handlerMouseLeave} >
         <div className="popup_content">
           <div className="base_info">
             <a href={['/u/talk-',this.props.UID,'.html'].join('')} target="_blank" >
