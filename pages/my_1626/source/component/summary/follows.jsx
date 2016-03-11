@@ -51,7 +51,7 @@ class Follows extends BaseComponent {
           <i className="icon icon-news" />
           关注动态
           <a className="check-all" 
-            href="/dashboard">
+            href="/u/dashboard">
             查看全部动态
           </a>
         </h5>
