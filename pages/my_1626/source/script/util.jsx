@@ -17,7 +17,67 @@ export function setArrayPosition(currentpage,just_set_tab = false){
     targetTabItem.addClass('current');
     $('.msg_tab_slider').css('left', targetTabItem.position().left);
   }
+
+  let pathname = exchangePageName(currentpage);
+  if (window.location.pathname.indexOf(pathname) < 0) {
+    changeState(pathname);
+  }
   closeMessageDetail();
+}
+
+export function changeState(currentpage){
+  if (window.history.pushState){
+    history.pushState(null, null, currentpage);
+  }
+  window.state = currentpage;
+}
+
+export function exchangePathName(pathname){
+  let result = 'summary';
+  switch (pathname){
+    case 'msg_like':
+      result = 'message_like';
+      break;
+    case 'msg_follow':
+      result = 'message_follow';
+      break;
+    case 'msg_comment':
+      result = 'message_comment';
+      break;
+    case 'msg_system':
+      result = 'message_system';
+      break;
+    case 'account':
+      result = 'account';
+      break;
+    default:
+      result = 'summary';
+  }
+  return result
+}
+
+export function exchangePageName(pagename){
+  let result = 'index';
+  switch (pagename){
+    case 'message_like':
+      result = 'msg_like';
+      break;
+    case 'message_follow':
+      result = 'msg_follow';
+      break;
+    case 'message_comment':
+      result = 'msg_comment';
+      break;
+    case 'message_system':
+      result = 'msg_system';
+      break;
+    case 'account':
+      result = 'account';
+      break;
+    default:
+      result = 'index';
+  }
+  return result
 }
 
 export function formatDate(source,complete = false){
@@ -155,4 +215,9 @@ export function closeMessageDetail(){
 export function validateEventNumeral(e){
   let code = (e.keyCode ? e.keyCode : e.which);
   return ((code >= 48 && code<= 57) || code == 8)
+}
+
+export function getViewName(pathname){
+  let homeindex = 6;
+  return pathname.substr(homeindex);
 }

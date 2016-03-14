@@ -4,7 +4,7 @@ class BaseComponent extends React.Component {
     super();
     this.userInformation = window.user_information;
     this.userStatistics = window.user_statistics;
-    this.userOrder = window.user_order;
+    //this.userOrder = window.user_order;
     this.state = {
       Build : false
     }

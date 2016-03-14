@@ -49,12 +49,12 @@ class Boards extends BaseComponent {
           <ul>
             <li>
               <a href="http://www.1626buy.cn/user/act-order_list.html"><i className="icon icon-publish" /></a>
-              <p className="od-count">{this.userOrder.unpay_count}</p>
+              <p className="od-count">0</p>
               <p className="od-name">待付款</p>
             </li>
             <li>
               <a href="http://www.1626buy.cn/user/act-order_list-status-3.html"><i className="icon icon-publish" /></a>
-              <p className="od-count">{this.userOrder.shipped_count}</p>
+              <p className="od-count">0</p>
               <p className="od-name">待收货</p>
             </li>
           </ul>

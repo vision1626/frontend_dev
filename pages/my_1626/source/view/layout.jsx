@@ -25,6 +25,14 @@ class Layout extends React.Component {
     }
   }
 
+  componentDidMount(){
+    let pathname = util.getViewName(window.location.pathname);
+    let pagename = util.exchangePathName(pathname);
+    if (this.state.currentPage != pagename){
+      this.setState({currentPage: pagename});
+    }
+  }
+
   init() {
     if (window.user_information_string != ''){
       window.user_information = $.parseJSON(window.user_information_string);
@@ -32,9 +40,9 @@ class Layout extends React.Component {
     if (window.user_statistics_string != ''){
       window.user_statistics = $.parseJSON(window.user_statistics_string);
     }
-    if (window.user_order_string != ''){
-      window.user_order = $.parseJSON(window.user_order_string);
-    }
+    //if (window.user_order_string != ''){
+    //  window.user_order = $.parseJSON(window.user_order_string);
+    //}
   }
 
   changeView(view){
