@@ -3,15 +3,15 @@ section.goods
     h2.section__title 潮品精选
     .section__tabs.section__nav.right
       ul
-        li.current
+        li.current(data-sort='recommend')
           a 编辑精选
-        li
+        li(data-sort='hot')
           a 最热单品
-        li
+        li(data-sort='new')
           a 最新发布
 
   .item-list-container
-    dl.big_img#big_img(style='display:block')
+    dl.big_img#big_img(style='display:block',data-page='1',data-sort='recommend')
       include section__goods__type-s
     .list-loading#list-loading
       .loading-message

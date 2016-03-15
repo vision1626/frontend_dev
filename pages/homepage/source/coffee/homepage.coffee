@@ -1,11 +1,9 @@
 initHomepage = ->
-#  $homepage = $('#homepage-wrap')
-#  $phantoms = $homepage.find('img.phantom')
-#  $phantoms.each ->
-#    placePhantomImg($(this))
 
   initSlideshow()
   initHeadlineList()
+  initHotNews()
+  initGoodsAsync()
 
   removeOverflowCats = ->
     special_cat = $('.specials .section__nav').find('li')
@@ -17,3 +15,4 @@ initHomepage = ->
       special_cat.slice(slice).remove()
 
   removeOverflowCats()
+
