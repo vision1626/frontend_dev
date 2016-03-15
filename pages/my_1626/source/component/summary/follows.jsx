@@ -4,7 +4,7 @@ import BaseComponent from '../../script/BaseClass.jsx';
 class Follows extends BaseComponent {
   constructor() {
     super()
-    this.state = { follows: {} }
+    this.state = { follows: [] }
   }
 
   loadFollowsFromServer() {
@@ -32,16 +32,28 @@ class Follows extends BaseComponent {
 
   render() {
     let rows = [];
-    if (this.state.follows != {}) {
+    if (this.state.follows.length > 0) {
       for (var i = 0; i < this.state.follows.length; i++) {
         rows.push(<Follow follow={this.state.follows[i]} key={i}/>)
       }
+    } else {
+      rows.push(
+        <tr key={Math.random()}>
+          <td className="blank-td" >
+            您还没有新动态
+          </td>
+        </tr>
+      )
     }
     return (
       <div className="follows">
         <h5>
           <i className="icon icon-news" />
           关注动态
+          <a className="check-all" 
+            href="/u/dashboard">
+            查看全部动态
+          </a>
         </h5>
         <table>
           <tbody>

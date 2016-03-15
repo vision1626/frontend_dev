@@ -12,11 +12,13 @@ class MessageListItem extends BaseComponent {
   }
 
   handlerMouseOver(e) {
-    let popup = $(e.currentTarget).parent().parent().find('.msg_user_popup');
-    popup.fadeIn(100);
-    //e.currentTarget.offsetWidth
-    popup.css('left',e.currentTarget.offsetLeft+((e.currentTarget.offsetWidth/2)-17));
-    popup.css('top',e.currentTarget.offsetTop+5);
+    let all_popup = $('.msg_user_popup');
+    //let my_popup = $(e.currentTarget).parent().parent().find('.msg_user_popup');
+    let my_popup = $(this.refs.userPopup.refs.popup);
+    all_popup.hide();
+    my_popup.fadeIn(100);
+    my_popup.css('left',e.currentTarget.offsetLeft+((e.currentTarget.offsetWidth/2)-17));
+    my_popup.css('top',e.currentTarget.offsetTop+30);
   }
 
   handlerMouseOut(e){
@@ -33,8 +35,10 @@ class MessageListItem extends BaseComponent {
           <span>喜欢您的潮品</span>
         </div>
         <div className="mli_product_info">
-          <img src={md.img} alt={decodeURIComponent(md.goods_name)} />
-          <span>{decodeURIComponent(md.goods_name)}</span>
+          <a href={md.url} target="_blank">
+            <img src={md.img} alt={decodeURIComponent(md.goods_name)} />
+            <span>{decodeURIComponent(md.goods_name)}</span>
+          </a>
         </div>
         <div className="mli_datetime">
           <span>{util.formatDate(md.create_time)}</span>

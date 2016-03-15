@@ -21,7 +21,15 @@ class Layout extends React.Component {
     super();
     this.init();
     this.state = {
-      currentPage : 'summary'
+      currentPage : ''
+    }
+  }
+
+  componentDidMount(){
+    let pathname = util.getViewName(window.location.pathname);
+    let pagename = util.exchangePathName(pathname);
+    if (this.state.currentPage != pagename){
+      this.setState({currentPage: pagename});
     }
   }
 
@@ -32,9 +40,9 @@ class Layout extends React.Component {
     if (window.user_statistics_string != ''){
       window.user_statistics = $.parseJSON(window.user_statistics_string);
     }
-    if (window.user_order_string != ''){
-      window.user_order = $.parseJSON(window.user_order_string);
-    }
+    //if (window.user_order_string != ''){
+    //  window.user_order = $.parseJSON(window.user_order_string);
+    //}
   }
 
   changeView(view){
@@ -43,8 +51,6 @@ class Layout extends React.Component {
 
   render () {
     let mySummery = <My_Summery currentPage={this.state.currentPage} />;
-    let myOrder = <My_Order currentPage={this.state.currentPage} />;
-
     let myMssage = <My_Message currentPage={this.state.currentPage} changeView={this.changeView.bind(this)} />;
 
     let currentView;
@@ -67,7 +73,6 @@ class Layout extends React.Component {
       default:
         currentView = mySummery;
     }
-
     return (
       <div className="layout">
         <div className="my_menu">

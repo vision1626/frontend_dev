@@ -49,7 +49,7 @@ else
         {if $_FANWE['uid'] > 0}
 
         span.quit-span
-          a(href='/settings/psersonal.html')
+          a(href='/home/index',target='_blank')
             img(src="{avatar $_FANWE['uid'] s 1 $_FANWE['user']['img_thumb']}")
             |$_FANWE['user']['user_name']
           |&nbsp;|&nbsp;
@@ -67,7 +67,7 @@ else
           |&nbsp;|&nbsp;
           a(href="/") 退出
     li.fixed-nav__msg 
-      a(href="/messagetip/") 消息
+      a(href="/home/msg_like") 消息
       span.fixed-nav_messages.fixed-nav__number.fixed-nav__number--blue 0
       ul.drop-down-list.right
         li.get-likes

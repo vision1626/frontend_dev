@@ -8,15 +8,51 @@ class C_Pagination extends React.Component {
     this.state = {
       current_page : 1
     };
+    this.handleKeyUp = this.handleKeyUp.bind(this);
+    this.handleTextChange = this.handleTextChange.bind(this);
+    this.handleClick = this.handleClick.bind(this);
   }
 
   handlePageTurning(page) {
     this.props.pageTurning(page);
   }
 
+  handleKeyUp(e){
+    if(e.keyCode == 13 || e.which == 13){
+      this.inputPageNum();
+    }
+  }
+
+  handleTextChange(e){
+    let me = $(e.currentTarget);
+    if (me.val().match(/\d/g) == null){
+      me.val('');
+    } else {
+      me.val(me.val().match(/\d/g).join(''));
+    }
+  }
+
+  handleClick(e){
+    this.inputPageNum();
+  }
+
+  inputPageNum(){
+    let txt_num = $(this.refs.txtNum);
+    let num = parseInt(txt_num.val());
+    let total_record = this.props.recordCount;
+    let total_page = Math.ceil(total_record/this.props.pageRecords);
+    if(num < 1){num = 1;}
+    if(num > total_page ){ num = total_page; }
+    if(num != this.props.currentPage) {
+      this.handlePageTurning(num);
+    } else {
+      txt_num.val('');
+    }
+  }
+
   render() {
     let total_record = this.props.recordCount;
-    let total_page = Math.ceil(total_record/5);
+    let total_page = Math.ceil(total_record/this.props.pageRecords);
     let current_page = this.props.currentPage;
 
     let dd_dotdotdot_left =( current_page > 4) ? <DD classname="invalid" text="..." /> : '' ;
@@ -79,10 +115,20 @@ class C_Pagination extends React.Component {
         <div key="p_num" className="pag_numbers">
           {dl}
         </div>);
-      pagination_body.push(
-        <div key="p_desc" className="pag_description">
-          <span>共{total_page}页</span>
-        </div>);
+      if  (total_page > 1) {
+        pagination_body.push(
+          <div key="p_desc" className="pag_description">
+            <span>共{total_page}页到，第</span>
+            <input ref="txtNum" maxLength="4" onKeyUp={this.handleKeyUp} onChange={this.handleTextChange}/>
+            <span>页</span>
+            <a onClick={this.handleClick}>确定</a>
+          </div>);
+      } else {
+        pagination_body.push(
+          <div key="p_desc" className="pag_description">
+            <span>共{total_page}页</span>
+          </div>);
+      }
     } else {
       pagination_body = '';
     }

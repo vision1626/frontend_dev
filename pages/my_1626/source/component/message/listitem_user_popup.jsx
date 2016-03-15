@@ -29,7 +29,7 @@ class MessageUserPopup extends BaseComponent {
 
   render() {
     return (
-      <div className="msg_user_popup" onMouseEnter={this.handlerMouseEnter} onMouseLeave={this.handlerMouseLeave} >
+      <div ref="popup" className="msg_user_popup" onMouseEnter={this.handlerMouseEnter} onMouseLeave={this.handlerMouseLeave} >
         <div className="popup_content">
           <div className="base_info">
             <a href={['/u/talk-',this.props.UID,'.html'].join('')} target="_blank" >
@@ -42,7 +42,7 @@ class MessageUserPopup extends BaseComponent {
             </div>
           </div>
           <div className="introduce">
-            <span>{decodeURIComponent(this.props.Introduce)}</span>
+            <span>{this.props.Introduce != '' ? decodeURIComponent(this.props.Introduce) : '这个人太潮了，不屑于填写简介' }</span>
           </div>
           <FollowButton classname="fans__follow-btn" FollowState={this.props.FollowState} UID={this.props.UID} MyID={this.props.MyID}/>
         </div>

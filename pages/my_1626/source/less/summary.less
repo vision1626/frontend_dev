@@ -121,6 +121,18 @@
       font-weight: normal;
       margin: 0;
       margin-bottom: 10px;
+      .check-all {
+        float: right;
+        font-size: 12px;
+        padding-top: 5px;
+        border-bottom: 2px solid @grey;
+        &:link,
+        &:hover,
+        &:visited,
+        &:active {
+          color: inherit;
+        }
+      }
     }
     .icon:before {
       font-size: 20px;
@@ -218,6 +230,12 @@
         }
         .check-td {
           width: 4%;
+        }
+        .blank-td {
+          height: 90px;
+          padding: 0 1.5%;
+          font-size: 16px;
+          color: grey;
         }
       }
     }

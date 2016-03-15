@@ -94,7 +94,7 @@
       display: none;
       position: absolute;
       width: 150px;
-      padding-top: 25px;
+      //padding-top: 5px;
       z-index: 2;
       .popup_content{
         background-color: @white;
@@ -167,7 +167,7 @@
       }
       .popup_array{
         position: absolute;
-        top: 17px;
+        top: -8px;
         left: 10px;
         width: 0;
         height: 0;
@@ -194,7 +194,6 @@
           font-size: @font-size-s;
           font-weight: bold;
           border-bottom: solid 1px @grey;
-          cursor: pointer;
         }
         span{
           font-size: @font-size-s;
@@ -230,6 +229,7 @@
           position: relative;
           overflow: hidden;
           text-overflow: ellipsis;
+          transition: all 0.3s;
           img{
             float: left;
             width: 60px;
@@ -251,6 +251,11 @@
             overflow: hidden;
             text-overflow: ellipsis;
             margin: auto;
+          }
+          &:hover{
+            -webkit-box-shadow: 0 0 3px rgba(0,0,0,0.3);
+            -moz-box-shadow: 0 0 3px rgba(0,0,0,0.3);
+            box-shadow: 0 0 3px rgba(0,0,0,0.3);
           }
         }
         &.unread{
@@ -360,7 +365,7 @@
             i{
               font-size: 20px;
               font-weight: normal;
-              color: @dark-grey;
+              color: @grey;
               position: relative;
               top: -3px;
             }
@@ -370,23 +375,22 @@
             top: 5px;
             bottom: 10px;
             left: 50px;
-            //right: 25px;
-            //max-width: 600px;
-            width: 490px;
+            width: 90%;
+            min-width: 490px;
             margin: auto;
             h3{
               font-size: @font-size-s;
               margin: 0 0 0 0;
-              color: @dark-grey;
+              color: @grey;
               white-space: nowrap;
               overflow: hidden;
               text-overflow: ellipsis;
             }
             .rich_text_box,.summary_text{
               font-size: @font-size-s;
-              color: @dark-grey;
+              color: @grey;
               height: 37px;
-              width: 490px;
+              //width: 490px;
               -webkit-word-break: break-all;
               display: -moz-box;
               overflow: hidden;
@@ -399,6 +403,15 @@
               }
               a{
                 color: @blue;
+                transition: all 0.3s;
+                &:hover{
+                  border-bottom: solid 1px @blue;
+                }
+              }
+              &.rich_text_box{
+                height: 50px;
+                margin-top: 10px;
+                //width: 490px;
               }
             }
             //.summary_text{

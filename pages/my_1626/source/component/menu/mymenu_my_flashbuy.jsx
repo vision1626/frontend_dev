@@ -14,7 +14,7 @@ class M_FlashBuy extends BaseComponent {
           <span>我的潮闪购</span>
         </div>
         <dl className="m_items">
-          <MenuItem text="我的订单" link={FLASHBUY_URL + '/user/act-order_list.html'} count={this.userOrder.unpay_count} viewName="" changeView={this.props.changeView.bind(this)}/>
+          <MenuItem text="我的订单" link={FLASHBUY_URL + '/user/act-order_list.html'} count="0" viewName="" changeView={this.props.changeView.bind(this)}/>
           <MenuItem text="退款管理" link={FLASHBUY_URL + '/user/act-back_order_list-status-6.html'}/>
           <MenuItem text="优惠券" link={FLASHBUY_URL + '/user/act-bonus.html'}/>
           <MenuItem text="收货地址管理" link={FLASHBUY_URL + '/user/act-address_list.html'}/>

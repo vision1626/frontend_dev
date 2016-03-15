@@ -10,15 +10,14 @@ class Entity extends BaseComponent {
     this.state.Name = "summary";
   }
 
-  build(){
-    // alert('building summary');
-  }
-
   render() {
     let display ;
+    let orders = '';
+    let dashboard = '';
     if (this.props.currentPage == this.state.Name){
-      this.build();
       display = 'block';
+      orders = <Orders url='/services/service.php?m=home&a=get_order_list&limit=3' />;
+      dashboard = <Follows url='/services/service.php?m=u&a=get_dashboard_ajax&ajax=1&limit=2' />;
     } else {
       display = 'none';
     }
@@ -27,8 +26,8 @@ class Entity extends BaseComponent {
       <div className='summary' style={{display:display}}>
         <h3>个人中心</h3>
         <Boards />
-        <Orders url='/services/service.php?m=home&a=get_order_list&limit=3' />
-        <Follows url='/services/service.php?m=u&a=get_dashboard_ajax&ajax=1&limit=2' />
+        {orders}
+        {dashboard}
       </div>
     );
   }

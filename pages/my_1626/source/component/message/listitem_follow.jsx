@@ -38,12 +38,12 @@ class MessageList extends BaseComponent {
           </div>
           <div className="ff_count">
             <div>
-              <label>粉丝</label>
               <span>{util.formatCount(md.fans)}</span>
+              <label>粉丝</label>
             </div>
             <div>
-              <label>关注</label>
               <span>{util.formatCount(md.follows)}</span>
+              <label>关注</label>
             </div>
           </div>
           <div className={'introduce' + introduce_class}>
