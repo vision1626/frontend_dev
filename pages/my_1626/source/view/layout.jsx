@@ -21,7 +21,7 @@ class Layout extends React.Component {
     super();
     this.init();
     this.state = {
-      currentPage : 'summary'
+      currentPage : ''
     }
   }
 
@@ -51,8 +51,6 @@ class Layout extends React.Component {
 
   render () {
     let mySummery = <My_Summery currentPage={this.state.currentPage} />;
-    let myOrder = <My_Order currentPage={this.state.currentPage} />;
-
     let myMssage = <My_Message currentPage={this.state.currentPage} changeView={this.changeView.bind(this)} />;
 
     let currentView;
@@ -75,7 +73,6 @@ class Layout extends React.Component {
       default:
         currentView = mySummery;
     }
-
     return (
       <div className="layout">
         <div className="my_menu">
