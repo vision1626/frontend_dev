@@ -350,6 +350,80 @@
     .ml_comment{
       dd{
         height:164px;
+        .mli_comment_content{
+          margin: 0 20px;
+          height: 30px;
+          overflow: hidden;
+          span{
+            line-height: 30px;
+            font-size: @font-size-s;
+            color: @black;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+          }
+        }
+        .mli_product_info,.mli_comment_info {
+          border: solid 1px @light-grey;
+          margin: 0 20px;
+          max-width: 450px;
+          height: 80px;
+          position: relative;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          transition: all 0.3s;
+          img {
+            float: left;
+            width: 60px;
+            height: 60px;
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 10px;
+            margin: auto;
+          }
+          span {
+            position: absolute;
+            top: 10px;
+            bottom: 10px;
+            left: 80px;
+            right: 10px;
+            font-size: @font-size-s;
+            color: @black;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            margin: auto;
+          }
+          label{
+            position: absolute;
+            top: 10px;
+            bottom: 10px;
+            left: 10px;
+            right: 10px;
+            font-size: @font-size-s;
+            color: @grey;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            margin: auto;
+          }
+          &:hover {
+            -webkit-box-shadow: 0 0 3px rgba(0, 0, 0, 0.3);
+            -moz-box-shadow: 0 0 3px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 0 3px rgba(0, 0, 0, 0.3);
+          }
+        }
+        &.unread{
+          .mli_comment_content{
+            //span{
+            //
+            //}
+          }
+          .mli_product_info{
+            //span{
+            //  font-weight:bold;
+            //}
+          }
+        }
       }
     }
     .ml_system{

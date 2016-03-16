@@ -57,6 +57,7 @@ class MessageEntity extends BaseComponent {
         Classify: in_classify,
         recordCount: 1,
         currentPage: 1,
+        wholeData : [],
         data: [],
         dataLoading : true,
         dataLoaded : false,
@@ -82,7 +83,8 @@ class MessageEntity extends BaseComponent {
     let limit = 0;
     let page = this.state.currentPage;
     let type = 1;
-    switch (this.state.Classify){
+    let classify = this.state.Classify;
+    switch (classify){
       case 'like':
         type = 1;
         limit = 5;
@@ -99,30 +101,63 @@ class MessageEntity extends BaseComponent {
         type = 4;
         limit = 7;
     }
-    $.ajax({
-      url: '/services/service.php',
-      type: 'get',
-      data : {'m':'home', 'a':'get_message_ajax', 'limit':limit , 'p': page ,'type': type},
-      cache: false,
-      dataType: 'json',
-      success: function(result) {
-        if (result.status == 1) {
-          this.setState({
-            data: result.data,
-            dataLoading : false,
-            dataLoaded: true,
-            dataPrepare: true,
-            recordCount: result.count,
-            dataTime: new Date()
-          });
-        } else {
-          util.showError('get_message_ajax',result.status,msg);
-        }
-      }.bind(this),
-      error: function(xhr, status, err) {
-        util.showError('get_message_ajax',status,err);
-      }.bind(this)
-    });
+    //由于后段提供的"收到评论消息"数据无法做到分页(也就是一次畀嗮所有数,所以需要前段自行分页)
+    if(classify != 'comment' || (classify == 'comment' && page == 1)) {
+      $.ajax({
+        url: '/services/service.php',
+        type: 'get',
+        data: {'m': 'home', 'a': 'get_message_ajax', 'limit': limit, 'p': page, 'type': type},
+        cache: false,
+        dataType: 'json',
+        success: function (result) {
+          if (result.status == 1) {
+            let data = [];
+            let page_records = limit;
+            let result_count = result.count;
+            if (classify == 'comment'){
+              if (result_count < page_records) { page_records = result_count; }
+              for (let i = 0 ; i < page_records ; i ++){
+                data.push(result.data[i]);
+              }
+            } else {
+              data = result.data;
+            }
+            this.setState({
+              wholeData: result.data,
+              data: data,
+              dataLoading: false,
+              dataLoaded: true,
+              dataPrepare: true,
+              recordCount: result_count,
+              dataTime: new Date()
+            });
+          } else {
+            util.showError('get_message_ajax', result.status, msg);
+          }
+        }.bind(this),
+        error: function (xhr, status, err) {
+          util.showError('get_message_ajax', status, err);
+        }.bind(this)
+      });
+    } else {
+      let data = [];
+      let whole_data = this.state.wholeData;
+      let total_record = this.state.recordCount;
+      //let total_page =  Math.ceil(total_record/limit);
+      let start_record = (page-1)*limit;
+      let end_record = start_record + limit;
+      if (end_record > total_record) {end_record = total_record;}
+      for (let i = start_record ; i < end_record ; i ++){
+        data.push(whole_data[i]);
+      }
+      this.setState({
+        data: data,
+        dataLoading: false,
+        dataLoaded: true,
+        dataPrepare: true
+      });
+    }
+
   }
 
   render() {
@@ -130,6 +165,7 @@ class MessageEntity extends BaseComponent {
     let limit = 0;
     let msg_content = [];
     let msg_pagination;
+    let msd_data_count = this.state.recordCount;
     let msg_data = this.state.data;
     let display ;
 
@@ -176,7 +212,7 @@ class MessageEntity extends BaseComponent {
               msg_content =
                 <dl className="ml_system">
                   {msg_data.map(function(md){
-                    return <MSystemItem key={md.create_time} data={md}/>
+                    return <MSystemItem key={md.create_time} data={md} recordCount={msd_data_count} pageRecords={4}/>
                     })}
                 </dl>;
           }
