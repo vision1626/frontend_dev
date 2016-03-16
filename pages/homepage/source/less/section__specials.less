@@ -34,3 +34,24 @@ section.specials {
     }
   }
 }
+@media @mq-col-3 {
+  @wrap_w: 900px;
+  @mar: 20px;
+  @w: (@wrap_w - @mar * 3) / 4;
+  @h: @w * 170 / 280;
+  .specials__blocks {
+    margin-right: -@mar;
+    li {
+      width: @w;
+      height: @h;
+      margin-right: @mar;
+    }
+  }
+}
+@media @mq-col-2 {
+  .specials__blocks {
+    li {
+      margin-bottom: 20px;
+    }
+  }
+}
