@@ -7,6 +7,10 @@ class Tab extends BaseComponent {
     super();
     this.handleTabClick = this.handleTabClick.bind(this);
     this.handleMarkAllRead = this.handleMarkAllRead.bind(this);
+    this.state = {
+      marking : false,
+      markDone : false
+    }
   }
 
   handleTabClick(e){
@@ -26,7 +30,24 @@ class Tab extends BaseComponent {
   }
 
   handleMarkAllRead(e){
-    this.props.markAllRead(this.props.currentPage);
+    if(!this.state.marking) {
+      this.setState({marking: true});
+      this.props.markRead(this.props.currentPage);
+    }
+  }
+
+  componentDidUpdate(){
+    if (this.state.markDone){
+      console.log('未曾改状态');
+      let icon = $('.mark_all_read .icon-tick');
+      icon.animate({top:'0',opacity:'1'},100,function(){
+        setTimeout(function(){
+          icon.animate({top:'30px',opacity:'0'},100);
+          icon.animate({top:'-30px'},1);
+          this.setState({markDone: false});
+        },1500);
+      });
+    }
   }
 
   render() {
@@ -40,7 +61,10 @@ class Tab extends BaseComponent {
           <dd onClick={this.handleTabClick} viewName="message_comment" className={this.props.currentPage == 'message_comment' ? 'mt_item tab_message_comment current' : 'mt_item tab_message_comment message_comment'}><span>收到的评论</span></dd>
           <dd onClick={this.handleTabClick} viewName="message_system" className={this.props.currentPage == 'message_system' ? 'mt_item tab_message_system current' : 'mt_item tab_message_system message_system'}><span>系统消息</span></dd>
         </dl>
-        <div onClick={this.handleMarkAllRead} className="mark_all_read">全部标为已读</div>
+        <div onClick={this.handleMarkAllRead} className="mark_all_read">
+          <i className="icon icon-tick"/>
+          <span>全部标为已读</span>
+        </div>
         <div className="msg_tab_slider"></div>
       </div>
     );

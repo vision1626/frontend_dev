@@ -26,7 +26,7 @@ class MessageEntity extends BaseComponent {
       dataPrepare : false,
       dataTime: null
     };
-    this.markAllRead = this.markAllRead.bind(this);
+    this.markRead = this.markRead.bind(this);
   }
 
   pageTurning(page){
@@ -75,8 +75,8 @@ class MessageEntity extends BaseComponent {
     }
   }
 
-  markAllRead(currentPage) {
-    alert('未做完錒 咪点人家啦 ' + currentPage);
+  markRead(currentPage) {
+    this.props.markRead(currentPage)
   }
 
   queryMessageData(){
@@ -236,7 +236,7 @@ class MessageEntity extends BaseComponent {
     <div style={{display:display}}>
       <h3>我的消息</h3>
       <div className="msg_container">
-        <Tab classify={this.state.Classify} currentPage={this.props.currentPage} changeView={this.props.changeView.bind(this)} markAllRead={this.markAllRead} />
+        <Tab ref="Tab" classify={this.state.Classify} currentPage={this.props.currentPage} changeView={this.props.changeView.bind(this)} markRead={this.markRead} />
         <div className="msg_content">
           {msg_content}
           <MDetail />
