@@ -30,21 +30,21 @@ class Tab extends BaseComponent {
   }
 
   handleMarkAllRead(e){
-    if(!this.state.marking) {
+    if(!this.state.marking && !this.state.markDone) {
       this.setState({marking: true});
       this.props.markRead(this.props.currentPage);
     }
   }
 
   componentDidUpdate(){
+    var me = this;
     if (this.state.markDone){
-      console.log('未曾改状态');
       let icon = $('.mark_all_read .icon-tick');
       icon.animate({top:'0',opacity:'1'},100,function(){
         setTimeout(function(){
           icon.animate({top:'30px',opacity:'0'},100);
           icon.animate({top:'-30px'},1);
-          this.setState({markDone: false});
+          me.setState({markDone: false});
         },1500);
       });
     }
