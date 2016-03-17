@@ -10,7 +10,8 @@ class FollowButton extends BaseComponent {
     this.handlerMouseClick = this.handlerMouseClick.bind(this);
     this.setFollowStatus = this.setFollowStatus.bind(this);
     this.state = {
-      FollowState : 0
+      FollowState : 0,
+      following : false
     };
   }
 
@@ -26,11 +27,12 @@ class FollowButton extends BaseComponent {
     //console.log('uid:' + uid );
     //console.log('myid:' + myid );
     let $btn = $(e.currentTarget);
-    if (parseInt(window.myid) > 0){
+    if (parseInt(window.myid) > 0 && !this.state.following){
       if (uid == myid){
         alert('你不能关注自己哦！');
       } else {
         //console.log('uid:' + uid );
+        this.setState({following: true});
         $.ajax({
           url: '/services/service.php?m=user&a=follow',
           type: 'post',
@@ -42,9 +44,14 @@ class FollowButton extends BaseComponent {
             } else {
               this.sliderToLeft($btn);
             }
+            this.setState({following: false});
+            this.setState({following: false});
+            this.setState({following: false});
+            this.setState({following: false});
           }.bind(this),
           error: function(xhr, status, err) {
             util.showError('get_message_ajax',status,err);
+            this.setState({following: false});
           }.bind(this)
         });
       }
