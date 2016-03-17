@@ -4,9 +4,24 @@ include source/jade/includes/head
 <body>
 #catalog
   section.intro
-    h3 #{text_12}
-    .actions
-      a.help-him #{text_13}
-      a.wanna-play #{text_14}
+    article.title
+      img(src='#{image_path}/title-1.png')
+      img.flash(src='#{image_path}/title-2-bg.png')
+      img(src='#{image_path}/title-3.png')
+    article.shoe
+      img(src='#{image_path}/nmd-shoe.png')
+    article.desc
+      |#{text_17}
+      br
+      |#{text_18}
+    article.help-me
+      img(src='#{image_path}/help.png')
+      button.shine.red.give #{text_13}
+      button.shine.blue.play #{text_14}
+    article.instruction
+      a #{text_4}
+  section.logos
+    div
+      img(src='#{image_path}/logos.png')
 
 include source/jade/includes/foot

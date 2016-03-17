@@ -1,0 +1,51 @@
+section.form(style='display:none')
+  article.before-submit
+    p.hint
+      | #{text_20}
+      br
+      | #{text_21}
+    form.user_form
+      .input_container.name_box
+        input.name.empty(maxlength='15',type="text",placeholder='请输入姓名')
+      .input_container.mobile_box
+        input.mobile.empty(maxlength='11',type="tel",placeholder='请输入手机号')
+      .input_container.mail_box
+        input.mail.empty(type="email",placeholder='请输入电子邮箱')
+      .input_container.pid_box
+        input.pid.empty(maxlength='18',type="number",placeholder='请输入身份证号')
+
+      a#submit_button.button.shine.red.touchable
+        span #{text_15}
+
+  article.after-submit
+    h1 #{text_22}
+    .beijing
+      p
+        | #{text_23}
+        br
+        | #{text_32}
+        br
+        b #{text_24}
+        br
+        | #{text_25}
+      h5 #{text_26}
+      p #{text_27}
+      h5 #{text_28}
+      p #{text_29}
+      h5 #{text_30}
+      p #{text_31}
+    .beijing(style='display:none')
+      p
+        | #{text_23}
+        br
+        | #{text_32}
+        br
+        b #{text_33}
+        br
+        | #{text_25}
+      h5 #{text_26}
+      p #{text_34}
+      h5 #{text_28}
+      p #{text_35}
+      h5 #{text_30}
+      p #{text_36}

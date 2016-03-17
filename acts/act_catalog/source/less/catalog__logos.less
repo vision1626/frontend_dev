@@ -1,0 +1,26 @@
+#catalog {
+  .logos {
+    height: auto;
+    bottom: 12px;
+    width: auto;
+    left: 6%;
+    div {
+      position: relative;
+      transition: all 0.8s @curve;
+    }
+    img {
+      width: 170px;
+    }
+    &.center {
+      div {
+        transform:translate3d(48%,0,0);
+        ._animation(center);
+        @keyframes center {
+          0%   {transform: translate3d(0,0%,0);}
+          60%  {transform: translate3d(52%,0%,0);}
+          100% {transform: translate3d(48%,0%,0);}
+        }
+      }
+    }
+  }
+}

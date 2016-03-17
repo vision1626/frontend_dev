@@ -1,7 +1,7 @@
 @import "../../../../public_inc/source/less/imports";
 
-@img-location:'/tpl/hi1626/images/starwars';
-//@img-location:'../../images/starwars';
+//@img-location:'/tpl/hi1626/images/catalog';
+@img-location:'../../../img/act/catalog';
 
 
 img{
@@ -15,15 +15,64 @@ body,html{
 
 }
 
-section.draw {
-  position: relative;
-  .scratch-result,
-  .scratch-cover {
+@gray: #c8c9c9;
+@dark-gray: #1b1f21;
+@red: #af3332;
+@red-t:#d83939;
+@blue: #2b5893;
+@blue-t: #2a70bc;
+@curve: cubic-bezier(0.49, 0.01, 0.45, 0.99);
+._animation(@name: name) {
+  animation: @name @curve 0.8s;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+}
+
+#catalog {
+  background-color: #2d2d2d;
+  background-image: url("@{img-location}/nmd-bg.jpg");
+  background-size: cover;
+  background-position: center;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  color: @gray;
+  text-align: center;
+  a.button {
+    background-color: black;
+    border: none;
+    color: white;
+    &.shine {
+      font-weight: bold;
+      background-color: rgba(0,0,0,0);
+      padding: 8px;
+      &.red {
+        border: 1px solid @red;
+        box-shadow: inset 0 0 40px @red;
+        &.touched {
+          box-shadow: inset 0 0 60px @red;
+        }
+      }
+      &.blue {
+        border: 1px solid @blue;
+        box-shadow: inset 0 0 40px @blue;
+        &.touched {
+          box-shadow: inset 0 0 60px @blue;
+        }
+      }
+    }
+  }
+  section {
+    max-width: 100%;
+    ._square(100%);
     position: absolute;
-    width: 250px;
-    height: 100px;
-    top: 0;
-    left: 0;
-    z-index: 1;
   }
 }
+
+@import "catalog__intro.less";
+@import "catalog__draw.less";
+@import "catalog__actions.less";
+@import "catalog__logos.less";
+@import "catalog__form.less";
+@import "catalog__popup.less";

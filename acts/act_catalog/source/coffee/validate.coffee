@@ -19,7 +19,7 @@ isEmail = (mail)->
   pattern.test mail
 
 # 验证函数
-formValidate = ($name,$mobile,$mail,$pid)->
+formValidate = ($name,$mobile,$mail,$pid, callback)->
   str = ''
   # 判断名称
   name = $.trim($name.val())
@@ -58,5 +58,5 @@ formValidate = ($name,$mobile,$mail,$pid)->
     alert str
     return false
   else
-    alert '成功啦！'
+    callback
   return

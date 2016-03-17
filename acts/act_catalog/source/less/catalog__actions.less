@@ -1,0 +1,75 @@
+#catalog {
+  .actions {
+    top: 800px;
+    opacity: 0;
+    margin-top: 60%;
+    height: auto;
+    .remain {
+      position: absolute;
+      width: 100%;
+      bottom: -130px;
+      transform: translate(0%, 0);
+      transition: all 0.8s @curve;
+      h3 {
+        border-bottom: 2px solid gray;
+        display: inline;
+      }
+      h1 {
+        margin: 0 0 0;
+        font-style: italic;
+        font-size: 40px;
+        span {
+          font-size: 50px;
+          position: relative;
+          top: 4px;
+          line-height: 1;
+          opacity: 1;
+          transition: opacity 0.3s @curve;
+          &.fade-out {
+            opacity: 0;
+          }
+        }
+      }
+      &.hide {
+        transform: translate(-120%, 0);
+      }
+    }
+    article.again {
+      transform: translate(120%,0);
+      width: 80%;
+      position: absolute;
+      bottom: -250px;
+      margin: auto;
+      left: 0;
+      right: 0;
+      a.button {
+        display: block;
+        margin: 10px 0;
+      }
+      &.show {
+        ._animation(slide_left);
+        @keyframes slide_left {
+          0% {transform: translate(120%, 0);}
+          60% {transform: translate(-10%, 0);}
+          100% {transform: translate(0%, 0);}
+        }
+      }
+      &.slide-out {
+        ._animation(action-slide-out);
+        @keyframes action-slide-out {
+          0% {transform: translate(0%, 0);}
+          100% {transform: translate(-120%, 0);}
+        }
+      }
+    }
+    &.show {
+      opacity: 1;
+      ._animation(raise);
+      @keyframes raise {
+        0%   {top:800px;}
+        60%  {top:-20px;}
+        100% {top:0px;}
+      }
+    }
+  }
+}

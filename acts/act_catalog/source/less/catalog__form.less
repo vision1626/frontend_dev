@@ -1,0 +1,86 @@
+#catalog {
+  .form {
+    margin-top: 60%;
+    height: auto;
+    .before-submit {
+      transform: translate(120%,0);
+      &.show {
+        ._animation(form_slide_left);
+        @keyframes form_slide_left {
+          0%   {transform: translate(120%,0);}
+          60%  {transform: translate(-10%,0);}
+          100% {transform: translate(0%,0);}
+        }
+      }
+      &.leave {
+        ._animation(form_go_away);
+        @keyframes form_go_away {
+          0%   {transform: translate(0%,0);}
+          40%  {transform: translate(-100%,0);}
+          100% {transform: translate(-120%,0);}
+        }
+      }
+    }
+    p.hint {
+      font-size: 12px;
+    }
+    .user_form {
+      width: 80%;
+      margin: auto;
+      .input_container {
+        background: white;
+        margin: 10px 0;
+        width: 100%;
+        text-align: left;
+        input {
+          margin-left: 10px;
+          font-size: 13px;
+          padding: 9px 0;
+          border: none;
+          display: block;
+          color: black;
+          width: 90%;
+        }
+      }
+    }
+    #submit_button {
+      width: 50%;
+      margin-top: 10px;
+      display: inline-block;
+    }
+    .after-submit {
+      //transform: translate(120%,0);
+      left: 120%;
+      width: 90%;
+      margin: auto;
+      position: absolute;
+      //left: 0;
+      right: 0;
+      top: 8px;
+      h1 {
+        margin: 0 0 10px;
+        color: white;
+      }
+      p {
+        margin: 0 0 12px 0;
+        font-size: 14px;
+        b {
+          color: white;
+        }
+      }
+      h5 {
+        font-size: 14px;
+        margin: 0;
+        color: white;
+      }
+      &.show {
+        ._animation(show_address);
+        @keyframes show_address {
+          0%   {left:120%}
+          60%  {left:-10%}
+          100% {left:0}
+        }
+      }
+    }
+  }
+}
