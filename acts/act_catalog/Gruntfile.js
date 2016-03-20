@@ -10,7 +10,7 @@ module.exports = function (grunt) {
     jadeSrcPath:    'source/jade',
     cssDistPath:    '<%= globalConfig.distPath %>/css/act/<%= globalConfig.moduleName %>',
     jsDistPath:     '<%= globalConfig.distPath %>/js/act/<%= globalConfig.moduleName %>',
-    htmlDistPath:   '<%= globalConfig.distPath %>/page/act/<%= globalConfig.moduleName %>'
+    htmlDistPath:   '<%= globalConfig.distPath %>/page/<%= globalConfig.moduleName %>'
   };
 
   grunt.initConfig({

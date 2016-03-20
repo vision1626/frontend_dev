@@ -44,6 +44,8 @@
       color: @gray;
       position: absolute;
       right: 0;
+      display: none;
+      z-index: 100;
       &.leave {
         ._animation(slideup);
       }
@@ -153,8 +155,8 @@
         width: 84%;
         top: -16px;
       }
-      button {
-        width: 49%;
+      a.button {
+        width: 42%;
         &.give {
           float: left;
         }

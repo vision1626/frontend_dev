@@ -27,7 +27,7 @@ formValidate = ($name,$mobile,$mail,$pid, callback)->
     str += '请输入姓名'
   else
     if !isChineseName(name)
-      str += '请输入正确姓名'
+      str += '请输入正确的姓名'
 
   # 判断手机号码
   mobile = $.trim($mobile.val())
@@ -59,4 +59,3 @@ formValidate = ($name,$mobile,$mail,$pid, callback)->
     return false
   else
     callback
-  return

@@ -1,0 +1,80 @@
+#catalog {
+  section.instruction {
+    overflow: scroll;
+    //display: none;
+    top: 100%;
+    background: rgba(27,31,33,0.95);
+    padding: 6%;
+    transition: all 0.4s @curve;
+    text-align: left;
+    a.close {
+      display: none;
+    }
+    h4 {
+      font-size: 18px;
+      color: white;
+      width: 88%;
+      font-style: italic;
+    }
+    ul {
+      margin-bottom: 60px;
+    }
+    li {
+      >img {
+        width: 88%;
+        margin-top: 20px;
+      }
+    }
+    p {
+      font-size: 14px;
+      width: 88%;
+      text-align: justify;
+    }
+    .qr {
+      ._clearfix;
+      >img {
+        float: left;
+        width: 41%;
+        margin-right: 6%;
+      }
+    }
+    span {
+      text-align: center;
+      font-size: 12px;
+      display: block;
+      width: 88%;
+      margin: 6px 0;
+    }
+    a.close {
+      position: fixed;
+      padding: 15px;
+      background: #000;
+      top: 0;
+      right: 0;
+      border-radius: 100px;
+      margin: 10px;
+      .icon {
+        background-image: url("@{img-location}/close-inst.png");
+        background-size: contain;
+        width: 22px;
+        height: 22px;
+        display: block;
+        background-repeat: no-repeat;
+      }
+    }
+    &.show {
+      //display: block;
+      top: 0%;
+      a.close {
+        display: block;
+        ._animation(show-slowly);
+        @keyframes show-slowly {
+          0% {opacity:0}
+          50% {opacity: 0}
+          51% {opacity: 1}
+          100% {opacity: 1}
+        }
+      }
+    }
+  }
+}

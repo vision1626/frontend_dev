@@ -16,8 +16,8 @@ include source/jade/includes/head
       |#{text_18}
     article.help-me
       img(src='#{image_path}/help.png')
-      button.shine.red.give #{text_13}
-      button.shine.blue.play #{text_14}
+      a.button.shine.red.give #{text_13}
+      a.button.shine.blue.play(href="{$_FANWE[site_url]}/catalog/") #{text_14}
     article.instruction
       a #{text_4}
   section.logos

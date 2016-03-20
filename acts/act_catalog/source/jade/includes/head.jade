@@ -1,4 +1,4 @@
-- var production = false
+- var production = true
 - var act_name = 'catalog'
 if production
   - var image_path  = './tpl/hi1626/images/act/catalog/'
@@ -19,10 +19,13 @@ head(lang="en")
     :php
       $current_css[]  = './tpl/hi1626/v2/css/vendor/normalize.css';
       $current_css[]  = './tpl/hi1626/v2/css/global.css';
-      $current_css[]  = './tpl/hi1626/css/catalog/catalog.css';
+      $current_css[]  = './tpl/hi1626/css/act/catalog/catalog.css';
     link(rel="stylesheet", href="{css $current_css}" media="all")
     script(type='text/javascript').
       var SITE_URL = '$_FANWE[site_url]';
+      var AWARD_STATUS = '{$data_json[status]}';
+      var AWARD_LOCAL = '{$data_json[location]}';
+      var AWARD_CODE = '{$data_json[code]}';
   else
     //本地调试用
     link(rel="stylesheet", href="../../../v2/css/vendor/normalize.css", media="all")

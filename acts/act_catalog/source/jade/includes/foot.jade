@@ -1,6 +1,8 @@
 if production
   :php
     $current_js[]   = './public/js/jquery-2.2.1.min.js';
+    $current_js[]   = './public/js/fastclick.js';
+    $current_js[]   = './public/js/jquery.eraser.js';
     $current_js[]   = './tpl/hi1626/js/act/catalog/catalog.js';
   script(type='text/javascript',src="{script $current_js}")
 
