@@ -2,8 +2,8 @@ section.form(style='display:none')
   article.before-submit
     p.hint
       | #{text_20}
-      br
-      | #{text_21}
+      //br
+      //| #{text_21}
     form.user_form
       .input_container.name_box
         input.name.empty(maxlength='15',type="text",placeholder='请输入姓名')
@@ -17,8 +17,16 @@ section.form(style='display:none')
       a#submit_button.button.shine.red.touchable
         span #{text_15}
 
+  article.before-announce
+    h1 #{text_43}
+    p
+      | #{text_44}
+      br
+      | #{text_45}
+    a.button.shine.blue #{text_46}
+
   article.after-submit
-    h1 #{text_22}
+    //h1 #{text_22}
     .beijing(style='display:none')
       p
         | #{text_23}

@@ -1,22 +1,26 @@
 section.intro
-  a.button.my-code #{text_16}
+  //a.button.my-code #{text_16}
   article.title
-    img(src='#{image_path}/title-1.png')
-    img.flash(src='#{image_path}/title-2-bg.png')
     img(src='#{image_path}/title-3.png')
+    img.flash(src='#{image_path}/title-2-bg.png')
   article.shoe
     img(src='#{image_path}/nmd-shoe.png')
   article.desc
     |#{text_17}
     br
     |#{text_18}
-  article.select-city
+  article.select-city(style='display:none')
     p #{text_1}
     .cities
       a.beijing.touchable
         img(src='#{image_path}/city-bj.png')
       a.shanghai.touchable
         img(src='#{image_path}/city-sh.png')
+  article.after-acts(style='display:none')
+    .acts
+      //a.view-code.touchable 我的邀请码
+      a.view-winners.touchable 查看中奖名单
+
   article.instruction
     a #{text_4}
     //p #{text_5}
