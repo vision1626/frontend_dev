@@ -1,9 +1,3 @@
-
-export function callMyOrder(){
-  //return My_Order.initMyOrder();
-  return alert('nothing');
-}
-
 export function setArrayPosition(currentpage,just_set_tab = false){
   let targetMenuItem = $('.mnu_' + currentpage);
   let targetTabItem = $('.tab_' + currentpage);
@@ -15,7 +9,7 @@ export function setArrayPosition(currentpage,just_set_tab = false){
   if (targetTabItem.length > 0) {
     $('.mt_item').removeClass('current');
     targetTabItem.addClass('current');
-    $('.msg_tab_slider').css('left', targetTabItem.position().left);
+    $('.tab_slider').css('left', targetTabItem.position().left);
   }
 
   let pathname = exchangePageName(currentpage);
@@ -50,6 +44,15 @@ export function exchangePathName(pathname){
     case 'account':
       result = 'account';
       break;
+    case 'acc_face':
+      result = 'account_face';
+      break;
+    case 'acc_password':
+      result = 'account_password';
+      break;
+    case 'acc_bind':
+      result = 'account_bind';
+      break;
     default:
       result = 'summary';
   }
@@ -73,6 +76,15 @@ export function exchangePageName(pagename){
       break;
     case 'account':
       result = 'account';
+      break;
+    case 'account_face':
+      result = 'acc_face';
+      break;
+    case 'account_password':
+      result = 'acc_password';
+      break;
+    case 'account_bind':
+      result = 'acc_bind';
       break;
     default:
       result = 'index';
@@ -210,11 +222,6 @@ export function closeMessageDetail(){
   detail_box.fadeOut(100);
   read_all_button.fadeIn(100);
   pagination.fadeIn(100);
-}
-
-export function validateEventNumeral(e){
-  let code = (e.keyCode ? e.keyCode : e.which);
-  return ((code >= 48 && code<= 57) || code == 8)
 }
 
 export function getViewName(pathname){

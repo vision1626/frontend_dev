@@ -65,7 +65,7 @@ class Tab extends BaseComponent {
           <i className="icon icon-tick"/>
           <span>全部标为已读</span>
         </div>
-        <div className="msg_tab_slider"></div>
+        <div className="tab_slider"></div>
       </div>
     );
   }
