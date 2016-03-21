@@ -23,7 +23,6 @@ class Entity extends BaseComponent {
   }
 
   componentDidUpdate(){
-    console.log(this.props.currentPage);
     let my_classify = this.state.Classify;
     let in_classify = this.getInClassify();
     if (my_classify != in_classify){
@@ -58,17 +57,17 @@ class Entity extends BaseComponent {
     }
 
     switch (this.props.currentPage) {
-      case 'acc_face':
-        acc_content = <Acc_Face />;
+      case 'account_face':
+        acc_content = <Acc_Face currentPage={this.props.currentPage}  />;
         break;
-      case 'acc_password':
-        acc_content = <Acc_Password />;
+      case 'account_password':
+        acc_content = <Acc_Password currentPage={this.props.currentPage}  />;
         break;
-      case 'acc_bind':
-        acc_content = <Acc_Bind />;
+      case 'account_bind':
+        acc_content = <Acc_Bind currentPage={this.props.currentPage}  />;
         break;
       default:
-        acc_content = <Acc_Info />;
+        acc_content = <Acc_Info currentPage={this.props.currentPage}  />;
     }
 
     whole =

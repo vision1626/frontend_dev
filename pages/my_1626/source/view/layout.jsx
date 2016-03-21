@@ -48,7 +48,6 @@ class Layout extends React.Component {
   }
 
   changeView(view){
-    console.log(view);
     this.setState({currentPage: view});
   }
 
@@ -121,7 +120,6 @@ class Layout extends React.Component {
   render () {
     //let mySummery = <My_Summery currentPage={this.state.currentPage} />;
     //let myMssage = <My_Message ref="myMssage" currentPage={this.state.currentPage} changeView={this.changeView.bind(this)} markRead={this.markRead} />;
-
     let currentView;
     switch (this.state.currentPage){
       case 'summary':
