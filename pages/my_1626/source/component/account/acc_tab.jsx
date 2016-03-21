@@ -20,7 +20,7 @@ class Tab extends BaseComponent {
   }
 
   render() {
-    util.setArrayPosition(this.props.currentPage);
+    util.setArrayPosition(this.props.currentPage,true);
     return (
       <div className="acc_tab">
         <dl>
@@ -29,7 +29,7 @@ class Tab extends BaseComponent {
           <dd onClick={this.handleTabClick} viewName="account_password" className={this.props.currentPage == 'account_password' ? 'mt_item tab_account_password current' : 'mt_item tab_account_password account_password'}><span>密码修改</span></dd>
           <dd onClick={this.handleTabClick} viewName="account_bind" className={this.props.currentPage == 'account_bind' ? 'mt_item tab_account_bind current' : 'mt_item tab_account_bind account_bind'}><span>绑定账号</span></dd>
         </dl>
-        <div className="acc_tab_slider"></div>
+        <div className="tab_slider"></div>
       </div>
     );
   }

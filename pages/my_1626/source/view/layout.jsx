@@ -48,6 +48,7 @@ class Layout extends React.Component {
   }
 
   changeView(view){
+    console.log(view);
     this.setState({currentPage: view});
   }
 
@@ -139,6 +140,15 @@ class Layout extends React.Component {
         currentView = <My_Message ref="myMssage" currentPage={this.state.currentPage} changeView={this.changeView.bind(this)} markRead={this.markRead} />;
         break;
       case 'account':
+        currentView = <My_Account ref="myAccount" currentPage={this.state.currentPage} changeView={this.changeView.bind(this)} />;
+        break;
+      case 'account_face':
+        currentView = <My_Account ref="myAccount" currentPage={this.state.currentPage} changeView={this.changeView.bind(this)} />;
+        break;
+      case 'account_password':
+        currentView = <My_Account ref="myAccount" currentPage={this.state.currentPage} changeView={this.changeView.bind(this)} />;
+        break;
+      case 'account_bind':
         currentView = <My_Account ref="myAccount" currentPage={this.state.currentPage} changeView={this.changeView.bind(this)} />;
         break;
       default:

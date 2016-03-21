@@ -15,7 +15,7 @@ export function setArrayPosition(currentpage,just_set_tab = false){
   if (targetTabItem.length > 0) {
     $('.mt_item').removeClass('current');
     targetTabItem.addClass('current');
-    $('.msg_tab_slider').css('left', targetTabItem.position().left);
+    $('.tab_slider').css('left', targetTabItem.position().left);
   }
 
   let pathname = exchangePageName(currentpage);
