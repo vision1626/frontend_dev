@@ -10,9 +10,10 @@ import MnuMessage from '../component/menu/mymenu_my_message.jsx';
 //import Wallet from '../component/menu/mymenu_my_wallet.jsx';
 import MnuAccount from '../component/menu/mymenu_my_account.jsx';
 
-import My_Order from '../component/order/my_order.jsx';
+//import My_Order from '../component/order/my_order.jsx';
 import My_Summery from '../component/summary/summary.jsx';
 import My_Message from '../component/message/message.jsx';
+import My_Account from '../component/account/account.jsx';
 
 require('../less/layout.less');
 
@@ -117,28 +118,31 @@ class Layout extends React.Component {
   }
 
   render () {
-    let mySummery = <My_Summery currentPage={this.state.currentPage} />;
-    let myMssage = <My_Message ref="myMssage" currentPage={this.state.currentPage} changeView={this.changeView.bind(this)} markRead={this.markRead} />;
+    //let mySummery = <My_Summery currentPage={this.state.currentPage} />;
+    //let myMssage = <My_Message ref="myMssage" currentPage={this.state.currentPage} changeView={this.changeView.bind(this)} markRead={this.markRead} />;
 
     let currentView;
     switch (this.state.currentPage){
       case 'summary':
-        currentView = mySummery;
+        currentView = <My_Summery currentPage={this.state.currentPage} />;
         break;
       case 'message_like':
-        currentView = myMssage;
+        currentView = <My_Message ref="myMssage" currentPage={this.state.currentPage} changeView={this.changeView.bind(this)} markRead={this.markRead} />;
         break;
       case 'message_follow':
-        currentView = myMssage;
+        currentView = <My_Message ref="myMssage" currentPage={this.state.currentPage} changeView={this.changeView.bind(this)} markRead={this.markRead} />;
         break;
       case 'message_comment':
-        currentView = myMssage;
+        currentView = <My_Message ref="myMssage" currentPage={this.state.currentPage} changeView={this.changeView.bind(this)} markRead={this.markRead} />;
         break;
       case 'message_system':
-        currentView = myMssage;
+        currentView = <My_Message ref="myMssage" currentPage={this.state.currentPage} changeView={this.changeView.bind(this)} markRead={this.markRead} />;
+        break;
+      case 'account':
+        currentView = <My_Account ref="myAccount" currentPage={this.state.currentPage} changeView={this.changeView.bind(this)} />;
         break;
       default:
-        currentView = mySummery;
+        currentView = <My_Summery currentPage={this.state.currentPage} />;
     }
     return (
       <div className="layout">

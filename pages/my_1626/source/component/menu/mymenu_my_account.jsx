@@ -14,7 +14,7 @@ class M_Account extends BaseComponent {
           <span>我的账号</span>
         </div>
         <dl className="m_items">
-          <MenuItem classname="mnu_account" text="账号设置" changeView={this.props.changeView.bind(this)} />
+          <MenuItem classname="mnu_account" viewName="account" text="账号设置" changeView={this.props.changeView.bind(this)} />
         </dl>
       </div>
     );
