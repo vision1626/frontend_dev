@@ -43,7 +43,7 @@ class C_Pagination extends React.Component {
     let total_page = Math.ceil(total_record/this.props.pageRecords);
     if(num < 1){num = 1;}
     if(num > total_page ){ num = total_page; }
-    if(num != this.props.currentPage) {
+    if(num != this.props.currentPageing) {
       this.handlePageTurning(num);
     } else {
       txt_num.val('');
@@ -53,7 +53,7 @@ class C_Pagination extends React.Component {
   render() {
     let total_record = this.props.recordCount;
     let total_page = Math.ceil(total_record/this.props.pageRecords);
-    let current_page = this.props.currentPage;
+    let current_page = this.props.currentPageing;
 
     let dd_dotdotdot_left =( current_page > 4) ? <DD classname="invalid" text="..." /> : '' ;
     let dd_dotdotdot_right =(total_page == 8 && (total_page - current_page) > 3) || (total_page == 9 && current_page == 5) || (total_page > 8 && (total_page - current_page) > 3) ? <DD classname="invalid" text="..." /> : '' ;

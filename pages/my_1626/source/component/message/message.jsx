@@ -1,6 +1,7 @@
 import React from 'react';
 import BaseComponent from '../../script/BaseClass.jsx';
 import Pagination from '../common/pagination.jsx';
+import Pagination2 from '../common/pagination2.jsx';
 import Loading from './../common/loading.jsx';
 import Tab from './msg_tab.jsx';
 import MLikeItem from './listitem_like.jsx';
@@ -17,10 +18,11 @@ class MessageEntity extends BaseComponent {
   constructor() {
     super();
     this.state = {
-      Name: "message",
-      Classify: 'empty', //like,follow,comment,system
-      recordCount: 1,
-      currentPage: 1,
+      Name : "message",
+      Classify : 'empty', //like,follow,comment,system
+      recordCount : 1,
+      currentPageing : 1,
+      pageRecords : 1,
       dataLoading : false,
       dataLoaded : false ,
       dataPrepare : false,
@@ -31,9 +33,12 @@ class MessageEntity extends BaseComponent {
 
   pageTurning(page){
     this.setState({
-      currentPage: page,
+      currentPageing: page,
       dataLoaded : false
     });
+    //this.refs.p2.setState({
+    //  currentPageing : page
+    //});
   }
 
   getInClassify(){
@@ -45,10 +50,6 @@ class MessageEntity extends BaseComponent {
     this.setState({Classify : this.getInClassify()});
   }
 
-  componentWillUpdate(){
-
-  }
-
   componentDidUpdate(){
     let my_classify = this.state.Classify;
     let in_classify = this.getInClassify();
@@ -56,7 +57,8 @@ class MessageEntity extends BaseComponent {
       this.setState({
         Classify: in_classify,
         recordCount: 1,
-        currentPage: 1,
+        currentPageing: 1,
+        pageRecords : 1,
         wholeData : [],
         data: [],
         dataLoading : true,
@@ -66,12 +68,14 @@ class MessageEntity extends BaseComponent {
     } else {
       if (!this.state.dataLoaded) {
         this.queryMessageData();
+      } else {
+        //所有数据update之后,设置pagination参数
+        this.refs.Pagination2.setState({
+          recordCount : this.state.recordCount,
+          currentPageing : this.state.currentPageing,
+          pageRecords : this.state.pageRecords
+        });
       }
-      //if (this.state.dataPrepare && this.state.dataLoaded){
-      //  this.setState({
-      //    dataPrepare: false
-      //  });
-      //}
     }
   }
 
@@ -81,7 +85,7 @@ class MessageEntity extends BaseComponent {
 
   queryMessageData(){
     let limit = 0;
-    let page = this.state.currentPage;
+    let page = this.state.currentPageing;
     let type = 1;
     let classify = this.state.Classify;
     switch (classify){
@@ -123,12 +127,13 @@ class MessageEntity extends BaseComponent {
               data = result.data;
             }
             this.setState({
-              wholeData: result.data,
-              data: data,
-              dataLoading: false,
-              dataLoaded: true,
-              dataPrepare: true,
-              recordCount: result_count,
+              wholeData : result.data,
+              data : data,
+              dataLoading : false,
+              dataLoaded : true,
+              dataPrepare : true,
+              recordCount : result_count,
+              pageRecords : limit,
               dataTime: new Date()
             });
           } else {
@@ -161,7 +166,6 @@ class MessageEntity extends BaseComponent {
   }
 
   render() {
-    let whole;
     let limit = 0;
     let msg_content = [];
     let msg_pagination;
@@ -216,24 +220,23 @@ class MessageEntity extends BaseComponent {
                     })}
                 </dl>;
           }
-          msg_pagination = <Pagination recordCount={this.state.recordCount} currentPage={this.state.currentPage}
-                                       pageTurning={this.pageTurning.bind(this)} pageRecords={limit}/>
+          //msg_pagination = <Pagination recordCount={this.state.recordCount} currentPageing={this.state.currentPageing}
+          //                             pageTurning={this.pageTurning.bind(this)} pageRecords={this.state.pageRecords}/>;
         } else {
           msg_content = <Loading text="还没有消息哦" />;
-          msg_pagination = '';
+          //msg_pagination = '';
         }
       } else {
         msg_content = <Loading text="还没有消息哦" />;
-        msg_pagination = '';
+        //msg_pagination = '';
       }
     } else {
       msg_content = <Loading text="正在努力加载中..." />;
-      msg_pagination = '';
+      //msg_pagination = '';
     }
     //}
 
-    whole =
-    <div style={{display:display}}>
+    return <div style={{display:display}}>
       <h3>我的消息</h3>
       <div className="msg_container">
         <Tab ref="Tab" classify={this.state.Classify} currentPage={this.props.currentPage} changeView={this.props.changeView.bind(this)} markRead={this.markRead} />
@@ -241,11 +244,10 @@ class MessageEntity extends BaseComponent {
           {msg_content}
           <MDetail />
         </div>
-        {msg_pagination}
+        <Pagination2 ref="Pagination2" key="Pagination2" pageTurning={this.pageTurning.bind(this)} />
       </div>
-    </div>;
 
-    return whole
+    </div>
   }
 }
 

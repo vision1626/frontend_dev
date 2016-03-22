@@ -26,7 +26,6 @@ class Layout extends React.Component {
     };
     this.markRead = this.markRead.bind(this);
   }
-
   componentDidMount(){
     let pathname = util.getViewName(window.location.pathname);
     let pagename = util.exchangePathName(pathname);
