@@ -14,7 +14,7 @@ head(lang="en")
   meta(name="description", content="{$seo_description")
   meta(name='apple-mobile-web-app-status-bar-style', content='black')
   meta(name='apple-mobile-web-app-capable', content='yes')
-  title 1626 x Catalog
+  title adidas NMD RUNNER PK 购买登记
   if production
     :php
       $current_css[]  = './tpl/hi1626/v2/css/vendor/normalize.css';
@@ -22,10 +22,14 @@ head(lang="en")
       $current_css[]  = './tpl/hi1626/css/act/catalog/catalog.css';
     link(rel="stylesheet", href="{css $current_css}" media="all")
     script(type='text/javascript').
-      var SITE_URL = '$_FANWE[site_url]';
-      var AWARD_STATUS = '{$data_json[status]}';
-      var AWARD_LOCAL = '{$data_json[location]}';
-      var AWARD_CODE = '{$data_json[code]}';
+      var SITE_URL        = '$_FANWE[site_url]';
+      var AWARD_STATUS    = '{$data_json[status]}';
+      var AWARD_LOCAL     = '{$data_json[location]}';
+      var AWARD_CODE      = '{$data_json[code]}';
+      var IS_SUBMITTED    = '{$is_submitted}';
+      var IS_OFF          = '{$is_off}';
+      var WINNERS         = '{$list}';
+
   else
     //本地调试用
     link(rel="stylesheet", href="../../../v2/css/vendor/normalize.css", media="all")

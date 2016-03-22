@@ -1,0 +1,70 @@
+#catalog {
+  .winners {
+    width: 88%;
+    margin: auto;
+    left: 0;
+    right: 0;
+    transform: translate(120%,0);
+    &.show {
+      ._animation(winner_slide_left);
+      @keyframes winner_slide_left {
+        0%   {transform: translate(120%,0);}
+        60%  {transform: translate(-10%,0);}
+        100% {transform: translate(0%,0);}
+      }
+    }
+    h3 {
+      color: white;
+    }
+    .tabs {
+      ._clearfix;
+      .tab {
+        color: @gray;
+        float: left;
+        display: block;
+        width: 50%;
+        font-size: 14px;
+        padding: 10px 0;
+        background: rgba(0,0,0,0.4);
+        &.current {
+          background: @blue;
+          color: white;
+        }
+      }
+    }
+    .header {
+      background: @dark-gray;
+      ._clearfix;
+      span {
+        display: block;
+        float: left;
+        width: 50%;
+        font-size: 12px;
+        padding: 8px 0;
+      }
+    }
+    .list {
+      height: 67%;
+      overflow: scroll;
+      padding: 4px 0;
+      background: rgba(0,0,0,0.5);
+      @media screen and (max-width: 320px){
+        height: 60%;
+      }
+      @media screen and (max-width: 420px) and (min-width: 401px) {
+        height: 70%;
+      }
+        .item {
+
+      }
+      span {
+        display: inline-block;
+        font-size: 14px;
+        color: white;
+        //text-align: left;
+        padding: 5px 0;
+        width: 49%;
+      }
+    }
+  }
+}

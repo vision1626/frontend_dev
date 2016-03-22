@@ -58,7 +58,7 @@
       img {
         width: 100%;
         &.flash {
-          background: url("@{img-location}/title-2-bg.png");
+          //background: url("@{img-location}/title-2-bg.png");
           width: 105%;
           margin-left: -2.5%;
           background-size: contain;
@@ -71,6 +71,7 @@
       }
     }
     .shoe {
+      margin-top: 10px;
       img {
         width: 75%;
       }
@@ -83,11 +84,16 @@
       font-size: 13px;
       margin-top: 2%;
       &.leave {
-        ._animation(slidedown);
-        ._keyframe_slidedown(800%);
+        ._animation(desc_slidedown);
+        @keyframes desc_slidedown{
+          0%   {transform: translate3d(0,0%,0);}
+          14%  {transform: translate3d(0,-10%,0);}
+          40%  {transform: translate3d(0,1000%,0);}
+          100% {transform: translate3d(0,1000%,0);}
+        }
       }
     }
-    .select-city {
+    .select-city,.after-acts {
       width: 88%;
       p {
         font-size: 13px;
@@ -97,19 +103,19 @@
         font-style: italic;
         margin-bottom: 5px;
       }
-      .cities {
+      .cities,.acts {
         ._clearfix;
         a {
           width: 49%;
           padding: 14px 0 11px;
-          &.beijing {
+          &.beijing, &.view-code {
             float: left;
             background: @red;
             &.touched {
               background: @red-t;
             }
           }
-          &.shanghai {
+          &.shanghai, &.view-winners {
             float: right;
             background: @blue;
             &.touched {
@@ -123,8 +129,18 @@
       }
       &.leave {
         ._animation(slidedown);
-        ._keyframe_slidedown(800%);
+        ._keyframe_slidedown(900%);
       }
+      .acts {
+        margin-top: 30px;
+        a {
+          color: white;
+          font-weight: bold;
+          padding: 24px 0;
+          width: 100%;
+        }
+      }
+
     }
     .instruction {
       width: 88%;
