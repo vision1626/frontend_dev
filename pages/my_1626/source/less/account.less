@@ -1,6 +1,7 @@
 @import "./common";
 @acc_tab_height:50px;
 @acc_tab_width:120px;
+@from_row_height: 40px;
 
 .acc_container {
   width: 100%;
@@ -65,6 +66,133 @@
       -o-transition: all 0.2s cubic-bezier(0,0,0.3,1);
       transition: all 0.2s cubic-bezier(0,0,0.3,1);
       box-shadow: 0 -1px 1px rgba(0,0,0,0.3);
+    }
+
+    .user_information_form{
+      dl{
+        dt{
+          width:85px;
+          float: left;
+        }
+        dd{
+          float: left;
+        }
+      }
+    }
+  }
+  .user_information_form{
+    box-shadow: 0 0 1px rgba(0, 0, 0, 0.3);
+    position: relative;
+    min-height: 660px;
+    overflow: hidden;
+    padding-top: 20px;
+    dl{
+      dt{
+        float: left;
+        width:120px;
+        height: @from_row_height;
+        line-height: @from_row_height;
+        position: relative;
+        span{
+          position: absolute;
+          top:0;
+          bottom:0;
+          left: 15px;
+          right:5px;
+          margin: auto;
+          line-height: @from_row_height;
+          font-size: @font-size-s;
+          color: @grey;
+        }
+      }
+      dd{
+        float: left;
+        width: 80%;
+        height: @from_row_height;
+        line-height: @from_row_height;
+        position: relative;
+        input{
+          border: 0;
+          transition: all 0.3s;
+          font-size: @font-size-s;
+          border-bottom: 2px dotted @grey;
+          position: relative;
+          top: -2px;
+          &:hover{
+            border-bottom: 2px dotted @blue;
+          }
+          &:focus {
+            border-bottom: 2px solid @blue;
+            outline: none !important;
+          }
+        }
+        textarea{
+          border: 2px dotted @grey;
+          width: 300px;
+          height: 80px;
+          font-size: @font-size-s;
+          padding: 4px;
+          line-height: 1;
+          border-radius: 8px;
+          position: relative;
+          top: 5px;
+          &:hover{
+            border: 2px dotted @blue;
+          }
+          &:focus {
+            border: 2px solid @blue;
+            outline: none !important;
+          }
+        }
+        .dropbox{
+          float: left;
+          margin-right: 10px;
+          position: relative;
+          top: -2px;
+        }
+        &.row_sex{
+          input{
+            margin-right: 3px;
+          }
+          label{
+            cursor: pointer;
+            margin-right: 15px;
+          }
+        }
+        &.row_introduce{
+          height: auto;
+        }
+        &.row_submit{
+          width:100%;
+          div{
+            margin-left: 15px;
+            width:120px;
+            height:40px;
+            border-radius: 40px;
+            //background-color: @grey;
+            //border:solid 1px @grey;
+            background-color: @blue;
+            border:solid 1px @blue;
+            transition: all 0.3s;
+            position: relative;
+            cursor: pointer;
+            &:hover{
+              background-color: rgba(0,233,233,1);
+            }
+            span{
+              position: absolute;
+              top:0;
+              bottom:0;
+              left:0;
+              right:0;
+              line-height: 40px;
+              text-align: center;
+              color: @white;
+              font-size: @font-size-m;
+            }
+          }
+        }
+      }
     }
   }
 }

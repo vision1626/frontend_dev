@@ -228,3 +228,23 @@ export function getViewName(pathname){
   let homeindex = 6;
   return pathname.substr(homeindex);
 }
+
+export function getProvince(pid = 0) {
+  let count = CITYS.province.length;
+  let provinceID,cityID,selected;
+  let provinces = [];
+  for (let i = 0; i < count ; i++){
+    let isselected = false;
+    provinceID = parseInt(CITYS.province[i]);
+    if(pid == 0) { pid = provinceID;}
+    if(pid == provinceID) {isselected = true;}
+
+    provinces.push({
+      value : provinceID,
+      text : CITYS.all[provinceID].name,
+      isselected : isselected
+    })
+
+  }
+  return provinces
+}

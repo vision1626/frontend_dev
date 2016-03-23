@@ -1,0 +1,71 @@
+.dropbox{
+  width: 120px;
+  //border-bottom: 2px dotted @grey;
+  margin: 12px 0;
+  position: relative;
+  input{
+    display: block;
+    width: 100%;
+    border: 0;
+    outline: 0;
+    background: none;
+    cursor: pointer;
+    &:focus {
+      outline: none !important;
+    }
+    &.unselected{
+      color:@grey;
+    }
+  }
+  ul{
+    height: 200px;
+    overflow: scroll;
+    position: absolute;
+    z-index: 100;
+    background-color: #fff;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    box-shadow: 0 0 3px rgba(0,0,0,0.3);
+    transition: all 0.3s;
+    &:hover{
+      box-shadow: 0 0 5px rgba(0,0,0,0.5);
+    }
+    li{
+      height:24px;
+      line-height: 24px;
+      cursor: pointer;
+      float: none;
+      width:100%;
+      span{
+        font-size: @font-size-s;
+        color: @grey;
+      }
+      &:hover{
+        span{
+          color:@black;
+        }
+      }
+      &.selected{
+        background-color:@light-grey;
+      }
+    }
+  }
+  i{
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    font-size: @font-size-xxs;
+    margin: auto;
+    right: 5px;
+    line-height: 2;
+    color: @grey;
+    transition: all 0.3s;
+  }
+  &:hover{
+    i{
+      color: @black;
+    }
+  }
+}
