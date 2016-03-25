@@ -125,7 +125,7 @@ class Entity extends BaseComponent {
                 if (parseInt(result.status) == 1) {
                   this.saveUserInformation()
                 } else if (parseInt(result.status) == 3) {
-                  vm_mobile.setState({
+                  vm_nickname.setState({
                     show: true,
                     type: 2,
                     message: '昵称已存在。'
@@ -280,7 +280,7 @@ class Entity extends BaseComponent {
       <div className="user_information_form">
         <dl>
           <dt><span>昵  称</span></dt>
-          <dd><input ref="txt_nickname" onChange={this.handlerUserNameChange} value={ui.user_name} maxLength="16"/></dd>
+          <dd><input ref="txt_nickname" placeholder="昵称" onChange={this.handlerUserNameChange} value={ui.user_name} maxLength="16"/></dd>
 
           <dt><span>性  别</span></dt>
           <dd className="row_sex">
@@ -292,10 +292,10 @@ class Entity extends BaseComponent {
           <dd><input className="sang_Calender" onChange={this.handlerBirthDayChange} value={[ui.birth_year,ui.birth_month,ui.birth_day].join('-')} maxLength="10"/></dd>
 
           <dt><span>邮  箱</span></dt>
-          <dd><input ref="txt_email" value={ui.email} onChange={this.handlerEmailChange} maxLength="50" /></dd>
+          <dd><input ref="txt_email" placeholder="E-Mail" value={ui.email} onChange={this.handlerEmailChange} maxLength="50" /></dd>
 
           <dt><span>手  机</span></dt>
-          <dd><input ref="txt_mobile" value={ui.mobile} onChange={this.handlerMobileChange} maxLength="11" /></dd>
+          <dd><input ref="txt_mobile" placeholder="手机号码" value={ui.mobile} onChange={this.handlerMobileChange} maxLength="11" /></dd>
 
           <dt><span>所在地</span></dt>
           <dd>
@@ -305,7 +305,7 @@ class Entity extends BaseComponent {
 
           <dt><span>个人介绍</span></dt>
           <dd className="row_introduce">
-            <textarea ref="txt_introduce" value={ui.introduce} onChange={this.handlerIntroduceChange} maxLength="120" />
+            <textarea ref="txt_introduce" placeholder="填写个人介绍" value={ui.introduce} onChange={this.handlerIntroduceChange} maxLength="120" />
           </dd>
 
           <dd className="row_validate_message">
