@@ -248,3 +248,34 @@ export function getProvince(pid = 0) {
   }
   return provinces
 }
+
+export function validateEmail(inputvalue){
+  let pattern = /^([a-zA-Z0-9_.-])+@([a-zA-Z0-9_.-])+\.([a-zA-Z])+([a-zA-Z])+/;
+  return pattern.test(inputvalue)
+}
+
+export function validateMobile(inputvalue){
+  let pattern =  /^1[35874][0-9][0-9]{8}$/;
+  return pattern.test(inputvalue)
+}
+
+export function validateCaptcha(inputvalue){
+  let pattern =  /\d/;
+  return pattern.test(inputvalue)
+}
+
+export function validateCharacter(inputvalue){
+  let pattern =  /^1[35874][0-9][0-9]{8}$|^[\u4E00-\u9FA5A-Za-z0-9_.-]+$|^([a-zA-Z0-9_.-])+@([a-zA-Z0-9_.-])+\.([a-zA-Z])+([a-zA-Z])+/;
+  return pattern.test(inputvalue)
+}
+
+export function validateNickname(inputvalue,checkfirstchar){
+  let pattern;
+  if(checkfirstchar){
+    pattern = /^[\u4E00-\u9FA5A-Za-z][\u4E00-\u9FA5A-Za-z0-9]+$/;
+  } else {
+    pattern = /^[\u4E00-\u9FA5A-Za-z0-9]+$/;
+  }
+
+  return pattern.test(inputvalue)
+}
