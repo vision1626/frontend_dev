@@ -58,7 +58,7 @@ class Entity extends BaseComponent {
           type: 2,
           message: '请输入原密码'
         });
-      } else if (txt_oldpassword.value != '' && !util.validateCharacter(txt_oldpassword.value)) {
+      } else if (txt_oldpassword.value != '' && !util.validateCharacter(txt_oldpassword.value) || !(txt_oldpassword.value.length >= 6  && txt_oldpassword.value.length <= 12)) {
         verified = false;
         vm_oldpassword.setState({
           show: true,
@@ -78,7 +78,7 @@ class Entity extends BaseComponent {
           type: 2,
           message: '请输入新密码'
         });
-      } else if (txt_newpassword1.value != '' && !util.validateCharacter(txt_newpassword1.value)) {
+      } else if (txt_newpassword1.value != '' && !util.validateCharacter(txt_newpassword1.value) || !(txt_oldpassword.value.length >= 6  && txt_oldpassword.value.length <= 12)) {
         verified = false;
         vm_newpassword1.setState({
           show: true,
@@ -161,11 +161,11 @@ class Entity extends BaseComponent {
       <div className="user_information_form">
         <dl>
           <dt><span>原密码</span></dt>
-          <dd><input ref="txt_oldpassword" type="password" placeholder="登录密码" onChange={this.handlerOldPasswordChange}/></dd>
+          <dd><input ref="txt_oldpassword" type="password" placeholder="登录密码" maxlength="12" onChange={this.handlerOldPasswordChange}/></dd>
           <dt><span>新密码</span></dt>
-          <dd><input ref="txt_newpassword1" type="password" placeholder="6-12位密码" onChange={this.handlerOldPasswordChange}/></dd>
+          <dd><input ref="txt_newpassword1" type="password" placeholder="6-12位密码" maxlength="12" onChange={this.handlerOldPasswordChange}/></dd>
           <dt><span>确认密码</span></dt>
-          <dd><input ref="txt_newpassword2" type="password" placeholder="确认新密码" onChange={this.handlerOldPasswordChange}/></dd>
+          <dd><input ref="txt_newpassword2" type="password" placeholder="确认新密码" maxlength="12" onChange={this.handlerOldPasswordChange}/></dd>
           <dd className="row_validate_message">
             <ValidateMessage ref="vm_oldpassword" key="vm_oldpassword" />
             <ValidateMessage ref="vm_newpassword1" key="vm_newpassword1" />
