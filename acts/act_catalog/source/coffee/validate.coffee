@@ -19,7 +19,8 @@ isEmail = (mail)->
   pattern.test mail
 
 # 验证函数
-formValidate = ($name,$mobile,$mail,$pid)->
+#formValidate = ($name,$mobile,$mail,$pid)->
+formValidate = ($name,$mobile,$mail)->
   str = ''
   # 判断名称
   name = $.trim($name.val())
@@ -45,12 +46,9 @@ formValidate = ($name,$mobile,$mail,$pid)->
     if !isEmail(mail)
       str += '请输入正确的邮箱\n'
 
-  # 验证身份证
-  pid = $.trim($pid.val())
-  if pid.length == 0
-    str += '请输入身份证号码\n'
-  else
-    if !isCardNo(pid)
-      str += '请输入正确的身份证号码\n'
+#  # 验证身份证
+#  pid = $.trim($pid.val())
+#  if !isCardNo(pid)
+#    str += '请输入正确的身份证号码\n'
 
   str
