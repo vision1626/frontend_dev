@@ -67,10 +67,15 @@ init = ->
   if WINNERS isnt 'null' and WINNERS isnt '' and IS_OFF is '1'
     initWinners(WINNERS)
 
+#  initWinners(WINNERS)
+
   if IS_OFF is '0'
     $intro_city.show()
+    $intro_title.find('img.flash').attr 'src',"#{SITE_URL}/tpl/hi1626/images/act/catalog/title-2-bg.png"
   else if IS_OFF is '1'
     $intro_acts.show()
+    $intro_title.find('img.flash').attr 'src',"#{SITE_URL}/tpl/hi1626/images/act/catalog/title-end.png"
+    $intro_desc.hide()
 
   $btn_city.click ->
     if IS_SUBMITTED is '0'
@@ -242,24 +247,26 @@ init = ->
   $submit_btn.click ->
 #    submitSuccess()
     if !_form_is_submitting
-      str = formValidate($input_name,$input_mobile,$input_mail,$input_pid)
+      str = formValidate($input_name,$input_mobile,$input_mail)
       if str is ''
         submitForm()
       else
         alert str
+
+#  alert SITE_URL + 'catalog/submit.html'
+#  false
 
   submitForm = ->
     _form_is_submitting = true
     $user_form.css 'opacity', .3
     name = $.trim($input_name.val())
     mobile = $.trim($input_mobile.val())
-    email = $.trim($input_mail.val())
-    pid = $.trim($input_pid.val())
+    email = $input_mail.val()
+#    pid = $.trim($input_pid.val())
     $.ajax {
       url: SITE_URL + 'catalog/submit.html'
-      type: "POST"
-      data: {'name':name, 'mobile':mobile, 'email':email, 'id':pid, 'location':_selected_city}
-      cache: true
+      type: "GET"
+      data: {'name':name, 'mobile':mobile, 'email':email, 'location':parseInt(_selected_city)}
       dataType: "json"
       success: (result)->
         _form_is_submitting = false
@@ -269,6 +276,9 @@ init = ->
           $user_form.css 'opacity', 1
           alert result.msg
       error: (xhr, status, error)->
+        _form_is_submitting = false
+        $user_form.css 'opacity', 1
+        alert '服务器君跑到外太空去了,刷新试试看!'
         if status is 502
           alert('服务器君跑到外太空去了,刷新试试看!')
     }

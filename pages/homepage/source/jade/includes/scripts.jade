@@ -21,6 +21,8 @@ else
   script(type='text/javascript',src="#{asset_path}/js/global_header.js")
   script(type='text/javascript',src="#{asset_path}/js/homepage.js")
 
+div(style='display:none')
+  script(type='text/javascript',src="{$_FANWE['site_root']}stat.php")
 script(type='text/javascript').
   $(document).ready(function () {
     initHomepage();

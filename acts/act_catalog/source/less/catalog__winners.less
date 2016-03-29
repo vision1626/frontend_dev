@@ -38,32 +38,71 @@
       span {
         display: block;
         float: left;
-        width: 50%;
         font-size: 12px;
         padding: 8px 0;
+        &:nth-child(1){
+          width: 23%;
+        }
+        &:nth-child(2){
+          width: 32%;
+        }
+        &:nth-child(3){
+          width: 45%;
+        }
       }
     }
-    .list {
-      height: 67%;
+    .tab-panels {
+      height: 74%;
       overflow: scroll;
-      padding: 4px 0;
-      background: rgba(0,0,0,0.5);
       @media screen and (max-width: 320px){
-        height: 60%;
+        height: 68%;
       }
       @media screen and (max-width: 420px) and (min-width: 401px) {
         height: 70%;
       }
+    }
+    .panel {
+      .address {
+        padding: 14px 0 0;
+        p {
+          margin: 0 0 12px 0;
+          font-size: 14px;
+          b {
+            color: white;
+          }
+        }
+        h5 {
+          font-size: 14px;
+          margin: 0;
+          color: white;
+        }
+      }
+    }
+    .list {
+      padding: 4px 0;
+      background: rgba(0,0,0,0.5);
         .item {
 
       }
       span {
         display: inline-block;
-        font-size: 14px;
+        font-size: 11px;
         color: white;
-        //text-align: left;
+        text-align: left;
         padding: 5px 0;
-        width: 49%;
+        //width: 49%;
+        &.email {
+        }
+        &:nth-child(1){
+          width: 22%;
+          font-size: 13px;
+        }
+        &:nth-child(2){
+          width: 31%;
+        }
+        &:nth-child(3){
+          width: 44%;
+        }
       }
     }
   }

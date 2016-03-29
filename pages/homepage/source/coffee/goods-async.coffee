@@ -116,7 +116,7 @@ initGoodsAsync = ->
             "</div>"+
             "<div l='b' sid='#{item.share_id}' dtype='s' ed='0' class='item-b_add_like btn_like'>"+
               "<img src='' alt='' class='harting'>"+
-              "<i class='icon icon-heart'></i>"+
+              "<i class='icon #{isfav}'></i>"+
               "<span class='like_count'>#{item.collect_count}</span>"+
             "</div>"+
           "</div>"+
@@ -125,3 +125,82 @@ initGoodsAsync = ->
 
       $list.append dd
       is_loading_more = false
+
+
+  _doing_like = false
+
+  $(document).on 'click','.btn_like', ->
+    do_like($(this))
+
+  do_like = (obj) ->
+    _doing_like = true
+    me = $(obj)
+    sid = me.attr('sid')
+#    dtype = me.attr('dtype')
+    ed = me.attr('ed')
+    method = "GET"
+
+    job = 0
+
+    if ed is '0'
+      url = 'services/service.php?m=share&a=fav'
+      job = 1
+    else
+      url = 'services/service.php?m=share&a=removefav'
+      job = 2
+
+    $.ajax {
+      url: SITE_URL + url
+      type: method
+      data: {ajax: 1, 'id': sid}
+      cache: false
+      dataType: "json"
+      success: (result)->
+        after_like(me,result,job)
+      error: (xhr,status,error)->
+        if status isnt 0
+          alert('服务器君跑到外太空去了,刷新试试看!')
+        else
+          alert(error)
+    }
+
+  after_like = (me,result,job) ->
+    if result.status isnt 3
+      if job is 1
+        if result.status is 1 or result.status is 2
+          ed = 1
+          count = 1
+      else if job is 2
+        if result.status is 1
+          ed = 0
+          count = -1
+      refresh_like(me.attr('sid'),ed,count)
+    else
+      alert('不可以喜欢自己发布的单品哦!')
+
+  refresh_like = (sid,ed,count) ->
+    $btn = $('.item-list-container').find(".btn_like[sid=#{sid}]")
+    $like_count = $btn.find('.like_count')
+    $big_harting = $btn.find('img.harting')
+    $big_icon = $btn.find('i')
+    harting_img_url = SITE_URL + '/tpl/hi1626/v2/images/icon-heart-ing.gif'
+
+    like_count = parseInt($like_count.text()) + count
+    $like_count.text(like_count)
+    $btn.attr 'ed', ed
+
+    if ed is 1
+      $big_harting.attr('src',harting_img_url)
+      $big_harting.show()
+      $big_icon.css 'color','#ff006b'
+      setTimeout ->
+        $big_icon.removeClass('icon-heart').addClass('icon-hearted')
+        $big_harting.attr('src','')
+        $big_harting.hide()
+        _doing_like = false
+      , 1300
+    else
+      $big_icon.css 'color','grey'
+      $big_harting.attr('src','')
+      $big_icon.removeClass('icon-hearted').addClass('icon-heart')
+

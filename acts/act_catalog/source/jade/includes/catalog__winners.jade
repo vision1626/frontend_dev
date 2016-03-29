@@ -1,11 +1,43 @@
 section.winners(style='display:none')
-  h3 中奖名单
+  h3 名单公布
   .tabs
     a.tab.current.bj 北京店铺
     a.tab.sh 上海店铺
-  .header
-    span 登记姓名
-    span 登记电话
-  .list.bj
+  .tab-panels
+    .panel.bj
+      .address
+        p
+          | #{text_23}
+          br
+          b #{text_24}
+          | #{text_25}
 
-  .list.sh(style='display:none')
+        h5 #{text_28}
+        p #{text_29}
+        h5 #{text_30}
+        p #{text_31}
+      .header
+        span 登记姓名
+        span 登记电话
+        span 登记电邮
+      .list.bj
+        //<div class='item'><span>我是姓名</span><span>sdkjf***@fdkf.com</span></div>
+
+    .panel.sh(style='display:none')
+      .address
+        p
+          | #{text_47}
+          br
+          b #{text_33}
+          | #{text_25}
+
+        h5 #{text_28}
+        p #{text_35}
+        h5 #{text_30}
+        p #{text_36}
+      .header
+        span 登记姓名
+        span 登记电话
+        span 登记电邮
+      .list.sh
+        //<div class='item'><span>我是姓名</span><span>13800******</span></div>
