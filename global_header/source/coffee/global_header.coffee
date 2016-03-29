@@ -105,6 +105,17 @@ init_global_header = ->
     else
       return false
 
+  switch MODULE_NAME
+    when 'Index'
+      $nav_left.find('.main-nav__home a').addClass('current-page')
+    when 'Zixun'
+      $nav_left.find('.main-nav__zixun a').addClass('current-page')
+    when 'Dapei'
+      $nav_left.find('.main-nav__c1 a').addClass('current-page')
+    when 'Master'
+      $nav_left.find('.main-nav__master a').addClass('current-page')
+
+
 $(document).on 'mouseover','li.fixed-nav__flash-buy', ->
   $(this).find('.cart-link').addClass('cart-link_show')
   $(this).find('.order-link').addClass('order-link_show')

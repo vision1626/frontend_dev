@@ -19,6 +19,14 @@ head(lang='en')
     link(rel="stylesheet", type="text/css", href="{css $current_css}", media="all")
     link(rel="icon", href="{$_FANWE['site_root']}favicon.ico", type="image/x-icon")
     script(src="{script $current_js}")
+    script(type='text/javascript').
+      var SITE_PATH = '$_FANWE[site_root]';
+      var SITE_URL = '$_FANWE[site_url]';
+      var MODULE_NAME = '{MODULE_NAME}';
+      var ACTION_NAME = '{ACTION_NAME}';
+      var COOKIE_PRE = "$_FANWE['config']['cookie']['cookie_pre']";
+      var TPL_NAME = '$_FANWE["setting"]["site_tmpl"]';
+      var IS_POSTING = false;
   else
     - var asset_path = '..'
     link(rel="stylesheet", type="text/css", href="#{asset_path}/css/vendor/normalize.css", media="all")

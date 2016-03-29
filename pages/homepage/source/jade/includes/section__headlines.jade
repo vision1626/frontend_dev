@@ -3,10 +3,10 @@ section.headlines
     h2.section__title 潮流进行时
     .section__nav
       ul
-        li.hot
-          a(href='') 潮人
-        li
-          a 潮鞋
+        //{loop $document_category $k $v}
+        li(class="{$v['class']}")
+          a(href="{$v['url']}") {$v['name']}
+        //{/loop}
 
   .headlines__wrap
     .headlines__grid
@@ -19,7 +19,7 @@ section.headlines
               img.phantom(src='#{b0_img}',alt="{$ad_popup_left['name']}",data-img='#{b0_img}')
             article.info
               span.info__content
-                b.tag.exclusive 独家
+                b(class="{$ad_popup_left['class']}") {$ad_popup_left['cate_name']}
                 h3 {$ad_popup_left['name']}
                 //p.date 2016年2月22日
 
@@ -32,7 +32,7 @@ section.headlines
               img.phantom(src='#{b_img}',alt="{$v['name']}",data-img='#{b_img}')
             article.info
               span.info__content
-                b.tag.exclusive 独家
+                b(class="{$v['class']}") {$v['cate_name']}
                 h3 {$v['name']}
         //{/loop}
 
@@ -47,7 +47,7 @@ section.headlines
                 img.phantom(src='#{thumb}',alt="{$v['title']}")
               article.info
                 span.info__content
-                  b.tag {$v['cate_name']}
+                  b(class="{$v['class']}") {$v['cate_name']}
                   h3 {$v['title']}
                   p.desc {$v['description']}
           //{/loop}

@@ -7,7 +7,3 @@ initHeadlineList = ->
     $(this).addClass 'expanded'
 
   $(".nano").nanoScroller({ preventPageScrolling: true })
-
-  $item_tag = $list_item.find 'b.tag'
-  if $item_tag.text is '1626独家'
-    $item_tag.addClass 'exclusive'

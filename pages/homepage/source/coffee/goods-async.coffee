@@ -43,7 +43,8 @@ initGoodsAsync = ->
       $('.item-list-container').prepend($goods_list)
       loadMoreGoods(page, sort)
     if $('.item-list-container').find('dl.big_img.current').data('page') isnt 3
-      $load_more.parent().show().html('我要看更多')
+      $load_more.parent().show()
+      $load_more.html('我要看更多')
 
   # 函数：Ajax加载数据
   loadMoreGoods = (page, sort)->

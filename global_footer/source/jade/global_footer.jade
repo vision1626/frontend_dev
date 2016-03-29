@@ -6,7 +6,7 @@ else
   - var image_path  = local_file_path+'/images/'
 footer.global-footer
   .footer__mag
-    .center-wrap.clear
+    .center-wrap.clearfix
       .mag-display
         .mag-cover
           img
@@ -18,7 +18,7 @@ footer.global-footer
           |期现已上市
         a.button.orange.large 立即购买
   .footer__main
-    .center-wrap.clear
+    .center-wrap.clearfix
       a.footer__logo(href='http://www.1626.com',target='_blank')
         img(src='#{image_path}/logo-1626-white.svg')
       .footer_contact
@@ -71,7 +71,7 @@ footer.global-footer
         p.footer__sml-text.friend-links
         if production
           //{/if}
-        p.footer__sml-text.clear
+        p.footer__sml-text.clearfix
           span
             |备案号：
             a(target="_blank" href="http://www.miibeian.gov.cn/") 粤ICP备11022094号-1
@@ -84,11 +84,11 @@ div(style='display:none')
 if production
   script.
     $(document).ready(function () {
-      var friend_links_data = "{$friendlinks_json}";
+      var friend_links_data = '{$friendlinks_json}';
       init_global_footer(friend_links_data);
-      {if $_FANWE['uid'] > 0}
-      initFollowBtn();
-      {/if}
+      if(parseInt("$_FANWE['uid']") > 0) {
+        initFollowBtn();
+      }
     });
 else
   script.

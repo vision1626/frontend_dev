@@ -46,7 +46,7 @@ else
           a(href="/about/help.html", target="_blank") 发布指引
     li.fixed-nav__avatar
       if production
-        {if $_FANWE['uid'] > 0}
+        //{if $_FANWE['uid'] > 0}
 
         span.quit-span
           a(href='/home/index',target='_blank')
@@ -54,11 +54,11 @@ else
             |$_FANWE['user']['user_name']
           |&nbsp;|&nbsp;
           a(href="{u user/logout}") 退出
-        {else}
+        //{else}
         a(href="{u user/login}" target="_blank") 登录
         span |
         a(href="{u user/register}" target="_blank") 注册
-        {/if}
+        //{/if}
       else
         span.quit-span
           a(href='/')
@@ -66,7 +66,7 @@ else
             |jonexiu
           |&nbsp;|&nbsp;
           a(href="/") 退出
-    li.fixed-nav__msg 
+    li.fixed-nav__msg
       a(href="/home/msg_like") 消息
       span.fixed-nav_messages.fixed-nav__number.fixed-nav__number--blue 0
       ul.drop-down-list.right
@@ -87,23 +87,23 @@ else
           .order-link__wrap
             span &nbsp;|&nbsp;
             a(href="http://www.1626buy.cn/user/act-order_list.html",target='_blank') 我的订单
-.main-nav-container.clear
-  ul.main-nav.clear
+.main-nav-container
+  ul.main-nav
     li.main-nav__logo
-      a(href='http://www.1626.com',target='_blank')
+      a(href='{$_FANWE[site_url]}',target='_blank')
         img(src='#{image_path}/logo-1626-black.svg')
     li.main-nav__hamburger
       i.icon.icon-hamburger.mobile_top_icon
     li.main-nav__home
-      a(href='http://www.1626.com',target='') 首页
+      a(href='{$_FANWE[site_url]}',target='') 首页
     li.main-nav__zixun
-      a(href='http://www.1626.com/zixun/',target='') 资讯
+      a(href='{$_FANWE[site_url]}zixun/',target='') 资讯
     li.main-nav__flashbuy
       a(href='http://www.1626buy.cn/flashbuy/',target='') 潮闪购
     li.main-nav__c1
-      a(href='http://www.1626.com/dapei/c1.html',target='') 搭配
+      a(href='{$_FANWE[site_url]}dapei/c1.html',target='') 搭配
     li.main-nav__master
-      a(href='http://www.1626.com/master',target='') 达人
+      a(href='{$_FANWE[site_url]}master',target='') 达人
     li.main-nav__action
       i.icon.icon-list_view.mobile-view-change
       //i.icon.icon-search
@@ -128,15 +128,15 @@ else
         | 发布
     li.main-nav__msg
       if production
-        {if $_FANWE['uid'] > 0}
+        //{if $_FANWE['uid'] > 0}
         span.quit-span
           a(href='/settings/psersonal.html')
             img(src="{avatar $_FANWE['uid'] s 1 $_FANWE['user']['img_thumb']}")
-        {else}
+        //{else}
         //- a(href="{u user/login}") 登录
         //- span |
         //- a(href="{u user/register}") 注册
-        {/if}
+        //{/if}
       span.fixed-nav_messages.fixed-nav__number.fixed-nav__number--blue 0
       ul.drop-down-list
         li.get-likes
