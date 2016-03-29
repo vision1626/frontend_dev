@@ -18,15 +18,15 @@
     }
   }
   ul{
-    height: 200px;
+    height: 185px;
     overflow: scroll;
     position: absolute;
     z-index: 100;
     background-color: #fff;
-    top: 0;
+    top: 22px;
     bottom: 0;
     left: 0;
-    right: 0;
+    right: -2px;
     box-shadow: 0 0 3px rgba(0,0,0,0.3);
     transition: all 0.3s;
     &:hover{
@@ -41,6 +41,8 @@
       span{
         font-size: @font-size-s;
         color: @grey;
+        padding: 0 5px;
+        transition: all 0.3s;
       }
       &:hover{
         span{

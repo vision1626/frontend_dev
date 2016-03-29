@@ -15,12 +15,15 @@ class Tab extends BaseComponent {
     }
   }
 
-  componentDidUpdate(){
+  componentDidMount(){
+    util.setArrayPosition(this.props.currentPage);
+  }
 
+  componentDidUpdate(){
+    util.setArrayPosition(this.props.currentPage,true);
   }
 
   render() {
-    util.setArrayPosition(this.props.currentPage,true);
     return (
       <div className="acc_tab">
         <dl>

@@ -1,4 +1,5 @@
 export function setArrayPosition(currentpage,just_set_tab = false){
+  console.log(currentpage);
   let targetMenuItem = $('.mnu_' + currentpage);
   let targetTabItem = $('.tab_' + currentpage);
   if(!just_set_tab) {
@@ -231,7 +232,7 @@ export function getViewName(pathname){
 
 export function getProvince(pid = 0) {
   let count = CITYS.province.length;
-  let provinceID,cityID,selected;
+  let provinceID;
   let provinces = [];
   for (let i = 0; i < count ; i++){
     let isselected = false;
@@ -247,6 +248,27 @@ export function getProvince(pid = 0) {
 
   }
   return provinces
+}
+
+export function getCity(pid = 0, cid = 0) {
+  let cities = [];
+  if (pid > 0) {
+    let count = CITYS.city[pid].length;
+    let cityID;
+    for (let i = 0; i < count; i++) {
+      let isselected = false;
+      cityID = parseInt(CITYS.city[pid][i]);
+      if(cid == 0) {cid = cityID;}
+      if(cid == cityID) {isselected = true;}
+
+      cities.push({
+        value : cityID,
+        text : CITYS.all[cityID].name,
+        isselected : isselected
+      });
+    }
+  }
+  return cities
 }
 
 export function validateEmail(inputvalue){

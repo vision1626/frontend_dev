@@ -137,7 +137,7 @@ class MessageEntity extends BaseComponent {
               dataTime: new Date()
             });
           } else {
-            util.showError('get_message_ajax', result.status, msg);
+            util.showError('get_message_ajax', result.status, result.msg);
           }
         }.bind(this),
         error: function (xhr, status, err) {
