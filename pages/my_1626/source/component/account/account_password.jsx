@@ -48,7 +48,6 @@ class Entity extends BaseComponent {
     let vm_oldpassword = this.refs.vm_oldpassword;
     let vm_newpassword1 = this.refs.vm_newpassword1;
     let vm_newpassword2 = this.refs.vm_newpassword2;
-    let original_information = $.parseJSON(window.user_information_string);
 
     if (!this.state.saving) {
       if (txt_oldpassword.value == '') {
@@ -119,21 +118,26 @@ class Entity extends BaseComponent {
         $.ajax ({
           url: SITE_URL + "services/service.php",
           type: "GET",
-          data: {m: 'user', a: 'save_password', ajax: 1, oldpassword: txt_oldpassword.value, newpassword: txt_newpassword1.value, newpasswordagain: txt_newpassword2.value},
+          data: {m: 'home', a: 'save_password', ajax: 1, oldpassword: txt_oldpassword.value, newpassword: txt_newpassword1.value, newpasswordagain: txt_newpassword2.value},
           cache: false,
           async: false,
           dataType: "json",
           success: function (result) {
             if (parseInt(result.status) == 1) {
               alert('修改成功');
-            } else if (parseInt(result.status) == 2) {
-              vm_oldpassword.setState({
+              vm_oldpassword.setState({show: false});
+              vm_newpassword1.setState({show: false});
+              vm_newpassword2.setState({show: false});
+              txt_oldpassword.value = '';
+              txt_newpassword1.value = '';
+              txt_newpassword2.value = '';
+            } else {
+              //util.showError('save_password', status, err);
+              vm_newpassword2.setState({
                 show: true,
                 type: 2,
-                message: '原密码不正确。'
+                message: result.msg
               });
-            } else {
-              util.showError('save_password', status, err);
             }
             this.setState({
               saving: false
@@ -161,11 +165,11 @@ class Entity extends BaseComponent {
       <div className="user_information_form">
         <dl>
           <dt><span>原密码</span></dt>
-          <dd><input ref="txt_oldpassword" type="password" placeholder="登录密码" maxlength="12" onChange={this.handlerOldPasswordChange}/></dd>
+          <dd><input ref="txt_oldpassword" type="password" placeholder="登录密码" maxLength="12" onChange={this.handlerOldPasswordChange}/></dd>
           <dt><span>新密码</span></dt>
-          <dd><input ref="txt_newpassword1" type="password" placeholder="6-12位密码" maxlength="12" onChange={this.handlerOldPasswordChange}/></dd>
+          <dd><input ref="txt_newpassword1" type="password" placeholder="6-12位密码" maxLength="12" onChange={this.handlerOldPasswordChange}/></dd>
           <dt><span>确认密码</span></dt>
-          <dd><input ref="txt_newpassword2" type="password" placeholder="确认新密码" maxlength="12" onChange={this.handlerOldPasswordChange}/></dd>
+          <dd><input ref="txt_newpassword2" type="password" placeholder="确认新密码" maxLength="12" onChange={this.handlerOldPasswordChange}/></dd>
           <dd className="row_validate_message">
             <ValidateMessage ref="vm_oldpassword" key="vm_oldpassword" />
             <ValidateMessage ref="vm_newpassword1" key="vm_newpassword1" />

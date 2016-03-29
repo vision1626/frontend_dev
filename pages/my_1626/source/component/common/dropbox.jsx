@@ -6,47 +6,56 @@ class DropBox extends React.Component {
     super();
     this.state = {
       data : [],
-      selectedValue : 0,
-      showingOptions : false
+      selectedValue : -1,
+      showingOptions : false,
+      optionsMouseOver : false
     };
-    this.handlerMouseEnter = this.handlerMouseEnter.bind(this);
-    this.handlerMouseLeave = this.handlerMouseLeave.bind(this);
     this.handlerLostFocus = this.handlerLostFocus.bind(this);
-    this.handlerOnFocus = this.handlerOnFocus.bind(this);
     this.handlerDropBoxClick = this.handlerDropBoxClick.bind(this);
     this.handlerOptionClick = this.handlerOptionClick.bind(this);
+    this.handlerOptionMouseEnter = this.handlerOptionMouseEnter.bind(this);
+    this.handlerOptionMouseLeave = this.handlerOptionMouseLeave.bind(this);
   }
 
   handlerDropBoxClick(e){
-    let options =$(this.refs.Options);
-    //options.show();
+    //let options =$(this.refs.Options);
     this.setState({
       showingOptions:true
-    })
-  }
-
-  handlerOnFocus(e){
-    console.log('of');
+    });
   }
 
   handlerOptionClick(e){
-
-  }
-
-  handlerMouseEnter(e){
-
+    let selected_value = e.currentTarget.value;
+    this.setState({
+      selectedValue : selected_value,
+      showingOptions : false
+    });
+    if (this.props.onSelected) {
+      this.props.onSelected(selected_value);
+    }
   }
 
   handlerLostFocus(e){
-    console.log('lf');
+    if(!this.state.optionsMouseOver) {
+      this.setState({
+        showingOptions: false
+      })
+    }
   }
 
-  handlerMouseLeave(e){
-    //let options = $(e.currentTarget);
-    //options.hide();
+  handlerOptionMouseEnter(e){
     this.setState({
-      showingOptions:false
-    })
+      optionsMouseOver:true
+    });
+  }
+
+  handlerOptionMouseLeave(e){
+    this.setState({
+      optionsMouseOver:false
+    });
+  }
+
+  componentDidUpdate(){
   }
 
   render() {
@@ -70,26 +79,26 @@ class DropBox extends React.Component {
 
     if (data.length > 0){
       for(let i = 0 ; i < data.length ;i++){
-        if (data[i].isselected){
+        if (data[i].value == this.state.selectedValue) {
           selected_text = data[i].text;
           selected_id = data[i].value;
           selected_class = '';
         }
 
         options.push(
-          <li key={data[i].value} className={ data[i].isselected ? [data[i].value,'selected'].join(' ') : data[i].value }>
+          <li key={data[i].value} className={ data[i].value == this.state.selectedValue ? 'selected' : '' } value={data[i].value} onClick={this.handlerOptionClick} >
             <span>{data[i].text}</span>
           </li>
         );
         ul =
-          <ul ref="Options" onMouseEnter={this.handlerMouseEnter} onMouseLeave={this.handlerMouseLeave} onblur={this.handlerLostFocus} style={this.state.showingOptions ? {display:'block'} : {display:'none'}}>
+          <ul ref="Options" onMouseEnter={this.handlerOptionMouseEnter} onMouseLeave={this.handlerOptionMouseLeave} style={this.state.showingOptions ? {display:'block'} : {display:'none'}}>
             {options}
           </ul>;
       }
     }
 
-    return <div className={['dropbox',show_state,disable_state,class_name].join(' ')} onClick={this.handlerDropBoxClick}>
-      <input type="text" readOnly="readonly" value={selected_text} className={[selected_id,selected_class].join(' ')} />
+    return <div className={['dropbox',show_state,disable_state,class_name].join(' ')}>
+      <input type="text" readOnly="readonly" value={selected_text} className={[selected_id,selected_class].join(' ')} onBlur={this.handlerLostFocus} onClick={this.handlerDropBoxClick} />
       {ul}
       <i className="icon icon-dropdown"></i>
     </div>
