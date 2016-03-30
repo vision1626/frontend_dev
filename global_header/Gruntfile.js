@@ -49,7 +49,8 @@ module.exports = function (grunt) {
         less: {
             target: {
                 files: {
-                    '<%= globalConfig.cssDistPath %>/<%= globalConfig.viewName %>.css': '<%= globalConfig.cssSrcPath %>/**/*.less'
+                  '<%= globalConfig.cssDistPath %>/<%= globalConfig.viewName %>.css': '<%= globalConfig.cssSrcPath %>/*.less',
+                  '<%= globalConfig.cssDistPath %>/<%= globalConfig.viewName %>--zixun.css': '<%= globalConfig.cssSrcPath %>/dedicated/global_header--zixun.less'
                 }
             }
             //src: {
@@ -102,13 +103,18 @@ module.exports = function (grunt) {
                     drop_console: true
                 }
             },
-            dist: {
-                files: [{
-                    expand: true,
-                    cwd: '<%= globalConfig.jsDebugPath %>',
-                    src: '**/*.js',
-                    dest: '<%= globalConfig.jsDistPath %>'
-                }]
+            //dist: {
+                //files: [{
+                //    expand: true,
+                //    cwd: '<%= globalConfig.jsDebugPath %>',
+                //    src: '**/*.js',
+                //    dest: '<%= globalConfig.jsDistPath %>'
+                //}]
+            //}
+            files: {
+              '<%= globalConfig.jsDistPath %>/<%= globalConfig.viewName %>.js':[
+                '<%= globalConfig.jsDebugPath %>/<%= globalConfig.viewName %>.js'
+              ]
             }
         },
 

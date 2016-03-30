@@ -47,6 +47,9 @@ init_global_footer = (friend_links)->
   if window.state != 'my1626'
     getMagCover()
 
+  if MODULE_NAME is 'Index'
+    $('.global-footer').css 'margin-top','120px'
+
 afterGetMagCover = (in_data) ->
   if in_data.data.count >0
     mag_data = in_data.data.list[0]
