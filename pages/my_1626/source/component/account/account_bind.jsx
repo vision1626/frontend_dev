@@ -6,18 +6,10 @@ import * as util from '../../script/util.jsx';
 class Entity extends BaseComponent {
   constructor() {
     super();
-    //this.state = {
-    //  init: true
-    //};
-    //this.handlerOldPasswordChange = this.handlerOldPasswordChange.bind(this);
-    //this.handlerNewPassword1Change = this.handlerNewPassword1Change.bind(this);
-    //this.handlerNewPassword2Change = this.handlerNewPassword2Change.bind(this);
-    //this.handlerSubmitClick = this.handlerSubmitClick.bind(this);
   }
 
   render() {
     let bind_data = [];
-    let bind_list;
 
     for(let index in window.user_information.login_modules){
       let name,short_name,icon_name,isbinded = false;
