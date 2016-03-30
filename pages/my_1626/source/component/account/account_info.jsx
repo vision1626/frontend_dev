@@ -2,6 +2,8 @@ import React from 'react';
 import BaseComponent from '../../script/BaseClass.jsx';
 import DropBox from '../common/dropbox.jsx';
 import ValidateMessage from '../common/from_validate_message.jsx';
+import SettingEMail from './account_email_verification.jsx';
+import SettingMobile from './account_mobile_verification.jsx';
 import * as util from '../../script/util.jsx';
 
 class Entity extends BaseComponent {
@@ -356,7 +358,6 @@ class Entity extends BaseComponent {
     if (ui.email == ''){
       content_email = <dd>
         <span ref="lbl_email" className="content_text">未设置E-Mail</span>
-        <a href="" className="content_link">设置</a>
       </dd>
     } else {
       if (parseInt(ui.email_status) == 1) {
@@ -367,15 +368,15 @@ class Entity extends BaseComponent {
       } else {
         content_email = <dd>
           <span ref="lbl_email" className="content_text">{ui.email}</span>
-          <a href="" className="content_link">验证</a>
+          <label htmlFor="lbl_email" className="content_desc">未验证</label>
+
         </dd>
       }
     }
-
+    //<a href="" className="content_link">验证</a>
     if (ui.mobile == ''){
       content_mobile = <dd>
         <span ref="lbl_email" className="content_text">未设置手机</span>
-        <a href="" className="content_link">设置</a>
       </dd>
     } else {
       content_mobile = <dd>
@@ -398,8 +399,8 @@ class Entity extends BaseComponent {
             <input type="radio" name="rdoSex" id="rdoFemale" value={2} checked={parseInt(ui.gender) == 2 ? 'checked' : ''} onChange={this.handlerSexChange}/><label htmlFor="rdoFemale">女</label>
             <input type="radio" name="rdoSex" id="rdoUnknow" value={0} checked={parseInt(ui.gender) == 0 ? 'checked' : ''} onChange={this.handlerSexChange}/><label htmlFor="rdoUnknow">中性</label>
           </dd>
-          <dt><span>生  日</span></dt>
-          <dd><input className="sang_Calender" onChange={this.handlerBirthDayChange} value={[ui.birth_year,ui.birth_month,ui.birth_day].join('-')} maxLength="10"/></dd>
+          <dt style={{display:'none'}}><span>生  日</span></dt>
+          <dd style={{display:'none'}}><input className="sang_Calender" onChange={this.handlerBirthDayChange} value={[ui.birth_year,ui.birth_month,ui.birth_day].join('-')} maxLength="10"/></dd>
 
           <dt><span>邮  箱</span></dt>
           {content_email}

@@ -1,6 +1,10 @@
 export function setArrayPosition(currentpage,just_set_tab = false){
-  console.log(currentpage);
-  let targetMenuItem = $('.mnu_' + currentpage);
+  let targetMenuItem;
+  if (currentpage.indexOf('account') > -1) {
+    targetMenuItem = $('.mnu_account');
+  } else {
+    targetMenuItem = $('.mnu_' + currentpage);
+  }
   let targetTabItem = $('.tab_' + currentpage);
   if(!just_set_tab) {
     $('.m_item').removeClass('current');
@@ -187,7 +191,7 @@ export function formatCount(count){
 export function showMessageDetail(currentPage,title,content,datetime){
   let detail_box = $('.message_detail');
   let read_all_button = $('.mark_all_read');
-  let pagination = $('.pagination');
+  let pagination = $('.pagination2');
   let date_time = formatDate(datetime);
   let parent_name = '';
   switch (currentPage) {
@@ -213,6 +217,19 @@ export function showMessageDetail(currentPage,title,content,datetime){
 }
 
 export function closeMessageDetail(){
+  let detail_box = $('.message_detail');
+  let read_all_button = $('.mark_all_read');
+  let pagination = $('.pagination');
+  detail_box.find('.parent_name').html('');
+  detail_box.find('.message_title').html('');
+  detail_box.find('.message_content').html('');
+  detail_box.find('.create_time').html('');
+  detail_box.fadeOut(100);
+  read_all_button.fadeIn(100);
+  pagination.fadeIn(100);
+}
+
+export function closeAccountVerificationForm(){
   let detail_box = $('.message_detail');
   let read_all_button = $('.mark_all_read');
   let pagination = $('.pagination');

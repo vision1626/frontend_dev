@@ -224,5 +224,133 @@
         }
       }
     }
+
+    .account_verification_form{
+      position: absolute;
+      top:0;
+      bottom:0;
+      left: 0;
+      right:0;
+      margin:auto;
+      background-color: @white;
+      z-index:3;
+      display: none;
+      max-height: 660px;
+      overflow: scroll;
+      .verification_title{
+        height: 30px;
+        padding: 10px;
+        i{
+          position: absolute;
+          top: 10px;
+          right: 10px;
+          transition: all 0.3s;
+          font-size: 24px;
+          color: @grey;
+          cursor: pointer;
+          &:hover{
+            color:@red;
+          }
+        }
+        span{
+          margin-right: 8px;
+          font-size: @font-size-s;
+          &.parent_name{
+            color: @blue;
+            cursor: pointer;
+          }
+        }
+      }
+      .verification_content{
+        position: absolute;
+        top:60px;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        //max-height: (@msg_item_height*5)-60;
+        overflow: scroll;
+      }
+
+    }
+  }
+
+  .user_bind_form{
+    box-shadow: 0 0 1px rgba(0, 0, 0, 0.3);
+    position: relative;
+    min-height: 660px;
+    overflow: hidden;
+    padding: 20px;
+
+    span.bind_desc{
+      font-size: @font-size-s;
+      color:@grey;
+    }
+    dl{
+      margin-top: 30px;
+      dd{
+        float: left;
+        width:120px;
+        text-align: center;
+        i{
+          font-size: 40px;
+          display: block;
+          margin-bottom: 10px;
+          &.icon-weibo{ color: rgba(198,28,48,1);}
+          &.icon-qq{ color: rgba(101,168,224,1);}
+          &.icon-wechat{ color: rgba(198,28,48,1);}
+          &.icon-taobao{ color: rgba(222,70,10,1);}
+        }
+        img{
+          width:40px;
+          height:40px;
+          display: block;
+          margin: 0 auto 10px;
+        }
+        span{
+          font-size: @font-size-xs;
+          color:@grey;
+          display: block;
+          margin-bottom: 5px;
+          &.binded{
+            color: @black;
+          }
+        }
+        a.unbind{
+          height: 30px;
+          border-radius: 30px;
+          cursor: pointer;
+          display: block;
+          width: 80px;
+          margin: auto;
+          background-color: @blue;
+          border:solid 1px @blue;
+          line-height: 30px;
+          font-size: @font-size-xs;
+          color: @white;
+          transition: all 0.3s;
+          &:hover{
+            background-color: rgba(0,233,233,1);
+          }
+        }
+        a.binded{
+          //height: 30px;
+          width: 50px;
+          white-space: nowrap;
+          cursor: pointer;
+          display: block;
+          margin: auto;
+          //line-height: 30px;
+          font-size: @font-size-xs;
+          color: @dark-grey;
+          border-bottom: solid 2px @white;
+          position: relative;
+          top: 7px;
+          transition: all 0.3s;
+          &:hover{
+            border-bottom: solid 2px @red;
+          }
+        }
+      }
+    }
   }
 }
