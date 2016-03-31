@@ -152,7 +152,7 @@ class Layout extends React.Component {
         currentView = <My_Summery currentPage={this.state.currentPage} />;
     }
     return (
-      <div className="layout">
+      <div className="layout" ref="layout">
         <div className="my_menu">
           <div className="menu_array"></div>
           <MnuUserHead />
@@ -164,6 +164,12 @@ class Layout extends React.Component {
         </div>
         <div className="my_content_container">
           {currentView}
+        </div>
+        <div className="msg_box_container" style={{display:'none'}} >
+          <div className="msg_box">
+            <i className="icon "/>
+            <span className="msg_box_content"></span>
+          </div>
         </div>
       </div>
     );
