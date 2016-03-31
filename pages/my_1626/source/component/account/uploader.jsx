@@ -48,7 +48,6 @@ class Uploader extends BaseComponent {
             //  setSelect: [result.mark.x,result.mark.y,result.mark.w,result.mark.h]
             //});
             uploaded_url = [SITE_PATH,result.src].join('');
-            alert(uploaded_url);
           }
           else
           {
@@ -56,10 +55,9 @@ class Uploader extends BaseComponent {
             //$("#avatarmsg").html("上传头像失败");
           }
         }else if(result.status ==2){
-          //alert("请上传正确的图片格式！");
           util.msgBox('请上传正确的图片格式','icon-sad');
         }else if(result.status ==3){
-          alert("请上传大小在1M以内的图片！");
+          util.msgBox('请上传大小在1M以内的图片！','icon-sad');
         }
         this.setState({
           uploading : false,
