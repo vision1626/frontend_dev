@@ -318,3 +318,21 @@ export function validateNickname(inputvalue,checkfirstchar){
 
   return pattern.test(inputvalue)
 }
+
+export function msgBox(message ='',icon_name = 'icon-hand'){
+  let msg_box_container = $('.msg_box_container');
+  let msg_box = $('.msg_box_container .msg_box');
+
+  msg_box.find('i').addClass(icon_name);
+  msg_box.find('span').html(message);
+  msg_box_container.show();
+  msg_box.addClass('show');
+  setTimeout(function() {
+    msg_box.removeClass('show');
+  }, 3000);
+  setTimeout(function() {
+    msg_box.find('i').removeClass(icon_name);
+    msg_box.find('span').html('');
+    msg_box_container.hide();
+  }, 3300);
+}

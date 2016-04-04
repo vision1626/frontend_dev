@@ -85,7 +85,7 @@
     position: relative;
     min-height: 660px;
     overflow: hidden;
-    padding-top: 20px;
+    padding: 20px;
     dl{
       dt{
         float: left;
@@ -348,6 +348,116 @@
           transition: all 0.3s;
           &:hover{
             border-bottom: solid 2px @red;
+          }
+        }
+      }
+    }
+  }
+
+
+  .user_face_form{
+    @o_face_width: 80px;
+    box-shadow: 0 0 1px rgba(0, 0, 0, 0.3);
+    position: relative;
+    min-height: 660px;
+    overflow: hidden;
+    padding: 20px;
+    dl {
+      dt {
+        float: left;
+        width: 120px;
+        height: @from_row_height;
+        line-height: @from_row_height;
+        position: relative;
+        span {
+          position: absolute;
+          top: 0;
+          bottom: 0;
+          left: 15px;
+          right: 5px;
+          margin: auto;
+          line-height: @from_row_height;
+          font-size: @font-size-s;
+          color: @grey;
+        }
+        &.row_o_face{
+          height: @o_face_width;
+          line-height: @o_face_width;
+          span{
+            line-height: @o_face_width;
+          }
+        }
+      }
+      dd {
+        float: left;
+        width: 80%;
+        height: @from_row_height;
+        line-height: @from_row_height;
+        position: relative;
+        &.row_o_face{
+          height: @o_face_width;
+          line-height: @o_face_width;
+          img{
+            width:@o_face_width;
+            height: @o_face_width;
+            border-radius: @o_face_width;
+            float: left;
+          }
+          .uploader {
+            float: left;
+            margin-left: 20px;
+            a {
+              width: 50px;
+              white-space: nowrap;
+              cursor: pointer;
+              margin: auto;
+              font-size: @font-size-s;
+              color: @black;
+              border-bottom: solid 2px @white;
+              transition: all 0.3s;
+            }
+            input{
+            }
+            &:hover{
+              a{
+                border-bottom: solid 2px @blue;
+              }
+            }
+          }
+          span{
+            font-size: @font-size-s;
+            color: @grey;
+            margin-left: 20px;
+          }
+        }
+        &.row_submit{
+          width:100%;
+          div{
+            margin-left: 15px;
+            width:120px;
+            height:40px;
+            border-radius: 40px;
+            //background-color: @grey;
+            //border:solid 1px @grey;
+            background-color: @blue;
+            border:solid 1px @blue;
+            transition: all 0.3s;
+            position: relative;
+            cursor: pointer;
+            &:hover{
+              background-color: rgba(0,233,233,1);
+            }
+            span{
+              position: absolute;
+              top:0;
+              bottom:0;
+              left:0;
+              right:0;
+              line-height: 40px;
+              text-align: center;
+              color: @white;
+              font-size: @font-size-m;
+            }
           }
         }
       }

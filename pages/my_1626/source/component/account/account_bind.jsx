@@ -62,7 +62,7 @@ class Entity extends BaseComponent {
 
     return (
       <div className="user_bind_form">
-        <span className="bind_desc">绑定微博、QQ、微信或淘宝,可以方便地把您在1626上的内容分享給您的好友们。</span>
+        <span className="bind_desc">绑定微博、QQ、微信或淘宝，可以方便地把您在1626上的内容分享給您的好友们。</span>
         <dl>
           {bind_data.map(function(bd){
             return <BindItem key={bd.index} data={bd} />

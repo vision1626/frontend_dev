@@ -171,9 +171,9 @@ class Entity extends BaseComponent {
           //}
         }
       } else if (this.state.saved) {
-        alert('已经保存成功,请勿重复保存!')
+        util.msgBox('已经保存成功,请勿重复保存!','icon-sad');
       } else {
-        alert('正在保存中,请勿重复点击!')
+        util.msgBox('正在保存中,请勿重复点击!','icon-sad');
       }
     }
   }
@@ -203,7 +203,7 @@ class Entity extends BaseComponent {
       dataType: "json",
       success: function (result) {
         if (parseInt(result.status) == 1) {
-          alert('保存成功!');
+          util.msgBox('保存成功!','icon-glad');
           vm_nickname.setState({show: false});
           //vm_email.setState({show: false});
           //vm_mobile.setState({show: false});

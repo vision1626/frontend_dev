@@ -124,7 +124,7 @@ class Entity extends BaseComponent {
           dataType: "json",
           success: function (result) {
             if (parseInt(result.status) == 1) {
-              alert('修改成功');
+              util.msgBox('修改成功','icon-glad');
               vm_oldpassword.setState({show: false});
               vm_newpassword1.setState({show: false});
               vm_newpassword2.setState({show: false});
@@ -153,9 +153,9 @@ class Entity extends BaseComponent {
       }
 
     } else if (this.state.saved) {
-      alert('已经保存成功,请勿重复保存!')
+      util.msgBox('已经保存成功,请勿重复保存!','icon-sad');
     } else {
-      alert('正在保存中,请勿重复点击!')
+      util.msgBox('正在保存中,请勿重复点击!','icon-sad');
     }
   }
 
