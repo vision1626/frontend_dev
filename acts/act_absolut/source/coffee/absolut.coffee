@@ -240,10 +240,10 @@ init = ->
       g = printDataValue(screenAdjustedEvent.gamma)
       # spec.find('p').eq(1).find('span').html(b)
       # spec.find('p').eq(2).find('span').html(g)
-      if g > 60 and app.hasClass('picked')
+      if g > 60 and app.hasClass('picked') and !app.hasClass('rotated')
         rotateScreen()
-        if b < -15 and app.hasClass('rotated')
-          pourDrink()
-          orientationData.stop()
+      if g > 60 and b < -15 and app.hasClass('rotated')
+        pourDrink()
+        orientationData.stop()
     
 
