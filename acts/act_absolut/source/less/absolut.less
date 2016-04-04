@@ -1,0 +1,69 @@
+@import "../../../../public_inc/source/less/imports";
+
+// @img-location:'/tpl/hi1626/images/act/absolut';
+@img-location:'../../../img/act/absolut';
+
+.use2xImage(@width:0, @height:0, @img: "") {
+  width: @width * 0.5;
+  height: @height * 0.5;
+  background-image: url(@img);
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+img{
+  border: 0;
+}
+
+a{
+}
+
+body,html{
+
+}
+
+@curve: cubic-bezier(0.49, 0.01, 0.45, 0.99);
+
+._animation(@name: name) {
+  animation: @name @curve 0.8s;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+}
+
+#absolut {
+  section {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+  }
+  img {
+    width: 100%;
+  }
+  * {
+    color: white;
+    -webkit-font-smoothing: antialiased;
+  }
+  h3 {
+    font-size: 20px;
+    text-shadow: 0px 0px 6px rgba(255,0,0,1);
+  }
+  h4 {
+    font-size: 14px;
+  }
+  .gyro-spec {
+    position: fixed;
+    z-index: 9999;
+    p {
+      margin: 0;
+    }
+  }
+}
+
+@import "absolut__intro.less";
+@import "absolut__bg.less";
+@import "absolut__final.less";
+@import "absolut__glasses.less";
+@import "absolut__panda.less";
+@import "absolut__pick-drink.less";
+@import "absolut__result.less";

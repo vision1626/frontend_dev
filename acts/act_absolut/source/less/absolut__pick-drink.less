@@ -1,0 +1,279 @@
+#absolut {
+  section.pick-drink {
+    .drinks {
+      position: absolute;
+      top: 10%;
+      width: 70%;
+      height: 48%;
+      margin: auto;
+      left: 0;
+      right: 0;
+      ul {
+
+      }
+      li {
+        @ratio: .5;
+        width: 119px * @ratio;
+        height: 415px * @ratio;
+        position: absolute;
+        transform: rotate(23deg) scale(0.8) translate(900%,0);
+        .drink {
+          ._square(100%);
+          position: absolute;
+        }
+        .liquid {
+          position: absolute;
+          ._square(100%);
+        }
+        .mask {
+
+        }
+        .color {
+          width: 100px;
+          height: 100px;
+          position: absolute;
+          clip-path: url(#clipping);
+          width: 115px;
+          height: 403px;
+          transform: scale(0.5);
+          transform-origin: top left;
+          left: 1px;
+          top: 4px;
+          .filling {
+            position: absolute;
+            top: 60px;
+            width: 800px;
+            height: 350px;
+            background: orange;
+            left: -400px;
+            right: -400px;
+            margin: auto;
+            transform: rotate(-23deg);
+            transform-origin: top center;
+          }
+        }
+        .glass-bottle {
+          ._square(100%);
+          background: url("@{img-location}/bottle.png");
+          background-size: contain;
+          position: absolute;
+          top: 0;
+          left: 0;
+        }
+        label {
+          position: absolute;
+          width: 60px;
+          font-size: 20px;
+          text-shadow: 0px 1px 2px rgba(0,0,0,0.50);
+          font-weight: bold;
+          top: 40%;
+          text-align: center;
+          transform: rotate(-23deg) scale(1.25);
+        }
+        @bottle-dis: 36%;
+        @bottle-left-start: 0%;
+        @bottle-row-diff: 9%;
+        &.passionfruit {
+          left: @bottle-left-start;
+          .color .filling {
+            background-image: linear-gradient(#FFBF2B 0%, #FFA00A 80%);
+          }
+        }
+        &.ice-tea {
+          left: @bottle-left-start + @bottle-dis;
+          .color .filling {
+            background-image: linear-gradient(-180deg, #D28122 0%, #E23C0C 80%);
+          }
+        }
+        &.lemon {
+          left: @bottle-left-start + @bottle-dis * 2;
+          .color .filling {
+            background-image: linear-gradient(-180deg, #FFFD93 0%, #FEFE3F 80%);
+          }
+        }
+        &.coke {
+          top: 30%;
+          left: @bottle-left-start + @bottle-dis * 0 + @bottle-row-diff;
+          .color .filling {
+            background-image: linear-gradient(-180deg, #60271D 0%, #1E0000 80%);
+          }
+        }
+        &.cranberry {
+          top: 30%;
+          left: @bottle-left-start + @bottle-dis * 1 + @bottle-row-diff;
+          .color .filling {
+            background-image: linear-gradient(-180deg, #E378A8 0%, #BA1123 80%);
+          }
+        }
+        &.hawthorn {
+          top: 30%;
+          left: @bottle-left-start + @bottle-dis * 2 + @bottle-row-diff;
+          .color .filling {
+            background-image: linear-gradient(-180deg, #D76C3E 0%, #A30F06 80%);
+          }
+        }
+        &.touched {
+          .drink {
+            transform: rotate(-5deg) scale(1.2);
+            .filling {
+              transform: rotate(-18deg);
+            }
+          }
+        }
+      }
+      &.shown {
+        li {
+          animation: drinks-slide-in @curve 0.8s;
+          animation-iteration-count: 1;
+          animation-fill-mode: forwards;
+          @keyframes drinks-slide-in {
+            0% { transform:rotate(45deg) translate(800%,-100%) scale(0.8); }
+            100% {transform:rotate(23deg) translate(0%,0%) scale(0.8);}
+          }
+          &.passionfruit {
+            animation-delay: 0;
+          }
+          &.ice-tea {
+            animation-delay: 0.2s;
+          }
+          &.lemon {
+            animation-delay: 0.4s;
+          }
+          &.coke {
+            animation-delay: 0.5s;
+          }
+          &.cranberry {
+            animation-delay: 0.7s;
+          }
+          &.hawthorn {
+            animation-delay: 0.9s;
+          }
+          &.selected {
+            animation: drink-selected @curve 0.8s;
+            @keyframes drink-selected {
+              0% { transform:rotate(23deg) translate(0%,0%) scale(0.8); }
+              20% { transform:rotate(23deg) translate(20%,0%) scale(0.8); }
+              100% {transform:rotate(-23deg) translate(-1000%,0%) scale(0.8);}
+            }
+          }
+          &.leave {
+            animation: drinks-leave @curve 0.8s;
+            @keyframes drinks-leave {
+              0% { transform:rotate(23deg) translate(0%,0%) scale(0.8); }
+              100% { transform:rotate(45deg) translate(900%,-100%) scale(0.8); }
+            }
+          }
+        }
+        
+      }
+    }
+    h3 {
+      text-align: center;
+      margin: 0;
+      opacity: 0;
+      transition: all 0.5s @curve;
+      &.pls {
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 60%;
+        &.shown {
+          opacity: 1;
+        }
+      }
+    }
+    .panda-hands {
+      position: absolute;
+      bottom: 0;
+      // z-index: 100;
+      width: 100%;
+      height: 170px;
+      .hand {
+        position: absolute;
+        animation-iteration-count: 1;
+        transition: all 0.2s @curve;
+        animation-fill-mode: forwards;
+      }
+      .left {
+        transform: translate3d(0%,100%,0);
+        .use2xImage(164px, 313px, "@{img-location}/panda-one.png");
+        bottom: 0;
+        &.shown {
+          transform: translate3d(0%,0%,0);
+        }
+        &.leave {
+          transform: translate3d(-100%,0%,0);
+        }
+      }
+      .right {
+        transform: translate3d(0%,100%,0);
+        .use2xImage(207px, 355px, "@{img-location}/panda-five.png");
+        right: 0;
+        &.shown {
+          transform: translate3d(0%,0%,0);
+        }
+        &.leave {
+          transform: translate3d(100%,0%,0);
+        }
+      }
+    }
+    .rotate-hint {
+      width: 100%;
+      margin: auto;
+      height: 25%;
+      position: absolute;
+      top: -60px;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      opacity: 0;
+      transition: all 0.6s @curve;
+      h3 {
+        opacity: 1;
+      }
+      h4 {
+        margin: 0;
+        text-align: center;
+      }
+      .phone-icon {
+        margin: auto;
+        width: 22%;
+        opacity: 0.8;
+      }
+      img {
+
+      }
+      &.shown {
+        opacity: 1;
+      }
+    }
+  }
+  .pick-triggers {
+    position: absolute;
+    top: 15%;
+    width: 70%;
+    height: 48%;
+    margin: auto;
+    left: 0;
+    right: 0;
+    ul {
+
+    }
+    li {
+      position: absolute;
+      @ratio: .4;
+      width: 119px * @ratio;
+      height: 415px * @ratio;
+      // background: red;
+      transform: rotate(23deg);
+      
+      &:nth-child(1){left: 2%;           top: 5%;}
+      &:nth-child(2){left: 2% + 36%;     top: 5%;}
+      &:nth-child(3){left: 2% + 36% * 2; top: 5%;}
+      &:nth-child(4){left: 12%;           top: 25%;}
+      &:nth-child(5){left: 12% + 36%;     top: 25%;}
+      &:nth-child(6){left: 12% + 36% * 2; top: 25%;}
+
+    }
+  }
+}

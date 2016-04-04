@@ -1,0 +1,206 @@
+#absolut {
+  section.panda {
+    .bar-tender {
+    }
+    .panda-body {
+      .use2xImage(936px, 1119px, "@{img-location}/panda3-body.png");
+      position: absolute;
+      margin: auto;
+      right: -100%;
+      left: -100%;
+      top: -100%;
+      bottom: -100%;
+      transition: all 0.6s @curve;
+      transform: translate(-6.5%,120%) scale(.9) rotate(-5deg);
+      &.shown {
+        transform: translate(-6.5%,63%) scale(.9) rotate(-5deg);
+      }
+      &.picked {
+        transform: translate(10%,63%) scale(.9) rotate(5deg);
+      }
+      &.rotated {
+        transform: translate(-10%,20%) scale(1) rotate(-90deg);
+      }
+      &.pouring-3 {
+        transform: translate(-10%,2%) scale(1) rotate(-90deg);
+      }
+      &.pouring-2 {
+        transform: translate(-10%,-18%) scale(1) rotate(-90deg);
+      }
+      &.pouring-1 {
+        transform: translate(-10%,-36%) scale(1) rotate(-90deg);
+      }
+      &.pouring-0 {
+        transform: translate(-10%,-54%) scale(1) rotate(-90deg);
+      }
+      &.leave {
+        transform: translate(-10%,200%) scale(1) rotate(-90deg);
+      }
+      @media screen and (max-width: 320px){
+        transform: translate(-300px,370px) rotate(0);
+        &.picked {transform: translate(5%,55%) scale(.9) rotate(5deg);}
+        &.rotated {transform: translate(-10%,20%) scale(1) rotate(-90deg);}
+        &.pouring-3 {transform: translate(-10%,2%) scale(1) rotate(-90deg);}
+        &.pouring-2 {transform: translate(-10%,-18%) scale(1) rotate(-90deg);}
+        &.pouring-1 {transform: translate(-10%,-36%) scale(1) rotate(-90deg);}
+        &.pouring-0 {transform: translate(-10%,-54%) scale(1) rotate(-90deg);}
+        &.leave {transform: translate(-10%,200%) scale(1) rotate(-90deg);}
+      }
+    }
+    .holding-drink {
+      position: absolute;
+      transform: translate(-300px,460px) rotate(0deg);
+      transition: all 0.6s @curve;
+      z-index: 998;
+      &.picked {
+        transform: translate(70px,460px) rotate(0deg);
+      }
+      &.ready-to-pour {
+        transform: translate(50px,540px) rotate(-30deg);
+        .color .filling {
+          transform:rotate(-60deg);
+        }
+      }
+      &.pouring {
+        transform: translate(50px,540px) rotate(-20deg);
+      }
+      @mar:104px;
+      @tran_y:540px;
+      &.pouring-4to3 {transform: translate(50px, @tran_y - @mar) rotate(-30deg);}
+      &.pouring-3 {transform: translate(50px, @tran_y - @mar) rotate(-20deg);}
+      &.pouring-3to2 {transform: translate(50px, @tran_y - @mar * 2) rotate(-30deg);}
+      &.pouring-2 {transform: translate(50px, @tran_y - @mar * 2) rotate(-20deg);}
+      &.pouring-2to1 {transform: translate(50px, @tran_y - @mar * 3) rotate(-30deg);}
+      &.pouring-1 {transform: translate(50px, @tran_y - @mar * 3) rotate(-20deg);}
+      &.pouring-1to0 {transform: translate(50px, @tran_y - @mar * 4) rotate(-30deg);}
+      &.pouring-0 {transform: translate(50px, @tran_y - @mar * 4) rotate(-20deg);}
+      &.pouring-end {transform: translate(50px, @tran_y - @mar * 4) rotate(-30deg);}
+      &.leave {transform: translate(50px, 1000px) rotate(-30deg);}
+      
+      @media screen and (max-width: 320px){
+        transform: translate(-300px,370px) rotate(0);
+        &.picked {
+          transform: translate(50px,370px) rotate(0);
+        }
+        &.ready-to-pour {
+          transform: translate(50px,470px) rotate(-30deg) scale(0.8);
+          .color .filling {
+            transform:rotate(-60deg);
+          }
+        }
+        &.pouring {
+          transform: translate(50px,470px) rotate(-20deg) scale(0.8);
+        }
+        @mar:90px;
+        @tran_y:470px;
+        &.pouring-4to3 {transform: translate(50px, @tran_y - @mar) rotate(-30deg) scale(0.8);}
+        &.pouring-3 {transform: translate(50px, @tran_y - @mar) rotate(-20deg) scale(0.8);}
+        &.pouring-3to2 {transform: translate(50px, @tran_y - @mar * 2) rotate(-30deg) scale(0.8);}
+        &.pouring-2 {transform: translate(50px, @tran_y - @mar * 2) rotate(-20deg) scale(0.8);}
+        &.pouring-2to1 {transform: translate(50px, @tran_y - @mar * 3) rotate(-30deg) scale(0.8);}
+        &.pouring-1 {transform: translate(50px, @tran_y - @mar * 3) rotate(-20deg) scale(0.8);}
+        &.pouring-1to0 {transform: translate(50px, @tran_y - @mar * 4) rotate(-30deg) scale(0.8);}
+        &.pouring-0 {transform: translate(50px, @tran_y - @mar * 4) rotate(-20deg) scale(0.8);}
+        &.pouring-end {transform: translate(50px, @tran_y - @mar * 4) rotate(-30deg) scale(0.8);}
+        &.leave {transform: translate(50px, 1000px) rotate(-30deg) scale(0.8);}
+      }
+      @media screen and (max-width: 420px) and (min-width: 401px) {
+        transform: translate(-300px,520px) rotate(0);
+        &.picked {
+          transform: translate(50px,520px) rotate(0);
+        }
+        @tran_y:570px;
+        &.ready-to-pour {
+          transform: translate(50px,@tran_y) rotate(-30deg);
+          .color .filling {
+            transform:rotate(-60deg);
+          }
+        }
+        &.pouring {
+          transform: translate(50px,@tran_y) rotate(-20deg);
+        }
+        @mar:104px;
+        
+        &.pouring-4to3 {transform: translate(50px, @tran_y - @mar) rotate(-30deg);}
+        &.pouring-3 {transform: translate(50px, @tran_y - @mar) rotate(-20deg);}
+        &.pouring-3to2 {transform: translate(50px, @tran_y - @mar * 2) rotate(-30deg);}
+        &.pouring-2 {transform: translate(50px, @tran_y - @mar * 2) rotate(-20deg);}
+        &.pouring-2to1 {transform: translate(50px, @tran_y - @mar * 3) rotate(-30deg);}
+        &.pouring-1 {transform: translate(50px, @tran_y - @mar * 3) rotate(-20deg);}
+        &.pouring-1to0 {transform: translate(50px, @tran_y - @mar * 4) rotate(-30deg);}
+        &.pouring-0 {transform: translate(50px, @tran_y - @mar * 4) rotate(-20deg);}
+        &.pouring-end {transform: translate(50px, @tran_y - @mar * 4) rotate(-30deg);}
+        &.leave {transform: translate(50px, 1000px) rotate(-30deg);}
+      }
+      .fingers {
+        .use2xImage(230px, 232px, "@{img-location}/panda3-hand.png");
+        position: absolute;
+        background-repeat: no-repeat;
+        position: absolute;
+        transform: rotate(-20deg);
+        top: 40px;
+        left: -40px;
+      }
+      .drink {
+        ._square(100%);
+        position: absolute;
+        transform: scale(0.5);
+      }
+      .liquid {
+        position: absolute;
+        ._square(100%);
+      }
+      .color {
+        width: 100px;
+        height: 100px;
+        position: absolute;
+        clip-path: url(#clipping);
+        width: 115px;
+        height: 403px;
+        transform-origin: top left;
+
+        .filling {
+          // transition: all 0.6s @curve;
+          position: absolute;
+          top: 60px;
+          width: 800px;
+          height: 350px;
+          // background: orange;
+          left: -410px;
+          right: -400px;
+          margin: auto;
+          transform-origin: top center;
+          &.passionfruit {
+            background-image: linear-gradient(#FFBF2B 0%, #FFA00A 80%);
+          }
+          &.ice-tea {
+            background-image: linear-gradient(-180deg, #D28122 0%, #E23C0C 80%);
+          }
+          &.lemon {
+            background-image: linear-gradient(-180deg, #FFFD93 0%, #FEFE3F 80%);
+          }
+          &.coke {
+            background-image: linear-gradient(-180deg, #60271D 0%, #1E0000 80%);
+          }
+          &.cranberry {
+            background-image: linear-gradient(-180deg, #E378A8 0%, #BA1123 80%);
+          }
+          &.hawthorn {
+            background-image: linear-gradient(-180deg, #D76C3E 0%, #A30F06 80%);
+          }
+        }
+      }
+      .glass-bottle {
+        ._square(100%);
+        background: url("@{img-location}/bottle.png");
+        background-repeat: no-repeat;
+        background-size: contain;
+        position: absolute;
+        top: -8px;
+        left: -2px;
+        width: 120px;
+        height: 418px;
+      }
+    }
+  }
+}

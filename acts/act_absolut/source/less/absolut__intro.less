@@ -1,0 +1,42 @@
+#absolut {
+  .intro {
+    .kv-vodka {
+      width: 55%;
+      margin: auto;
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      height: 40%;
+      transition: all 0.8s @curve;
+      opacity: 1;
+      -webkit-filter: blur(0px);
+      &.hidden {
+        opacity: 0;
+        -webkit-filter: blur(20px);
+      }
+    }
+  }
+  a.start, a.next {
+    background-image: linear-gradient(233deg, rgba(255,0,119,0.25) 0%, rgba(40,98,255,0.35) 100%);
+    border: 2px solid #FF7E2A;
+    box-shadow: 0px 2px 7px 0px rgba(198,9,76,0.92);
+    border-radius: 12px;
+    display: block;
+    padding: 10px 40px;
+    margin: auto;
+    width: 30%;
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 30px;
+    transition: all 0.8s @curve;
+    &.touched {
+      background-image: linear-gradient(233deg, rgba(255,0,119,0.60) 0%, rgba(40,98,255,0.35) 100%);
+    }
+  }
+  a.start.hidden {
+    transform: translate(0,500%);
+  }
+}

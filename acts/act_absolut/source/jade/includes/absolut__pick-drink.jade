@@ -1,0 +1,73 @@
+section.pick-drink(style='display:none;')
+  article.drinks
+    <svg width="0" height="0">
+    <defs>
+    <clipPath id="clipping">
+    <path fill-rule="evenodd" clip-rule="evenodd" d="M75,0.101c-17.881-0.227-36.777,0-39,0s-5.492,3.476-4,8s-1.922,14.329-3,21 s-2.518,14.478-6,27s-5.752,32.112-8,46s-14.709,73.334-15,99s1.556,74.452,3,82s5.524,27.644,1,50c-4.524,22.356-3.111,39.164-1,48 s1.443,16.215,31,20s60.43-0.444,69-5c8.57-4.556,11.157-16.228,11-39c-0.157-22.772-7.534-38.766-3-67 c4.534-28.234,4.823-93.296-2-137c-6.823-43.704-17.634-91.338-22-114c-1.619-8.405-4.078-16.872-4-23 C83.132,5.705,85.515,0.234,75,0.101z"/>
+    </clipPath>
+    </defs>
+    </svg>
+    ul
+      li.passionfruit.touchable
+        .drink
+          .liquid
+            .color
+              .filling
+          .glass-bottle
+        label 百香果
+      li.ice-tea.touchable
+        .drink
+          .liquid
+            .color
+              .filling
+          .glass-bottle
+        label 冰红茶
+      li.lemon.touchable
+        .drink
+          .liquid
+            .color
+              .filling
+          .glass-bottle
+        label 柠檬
+      li.coke.touchable
+        .drink
+          .liquid
+            .color
+              .filling
+          .glass-bottle
+        label 可乐
+      li.cranberry.touchable
+        .drink
+          .liquid
+            .color
+              .filling
+          .glass-bottle
+        label 蔓越莓
+      li.hawthorn.touchable
+        .drink
+          .liquid
+            .color
+              .filling
+          .glass-bottle
+        label 山楂
+  
+  article.pick-triggers
+    ul
+      li
+      li
+      li
+      li
+      li
+      li
+
+  h3.pls 请选择一款软饮
+
+  article.panda-hands
+    .hand.left
+    .hand.right
+
+  article.rotate-hint(style='display:none;')
+    .phone-icon
+      img(src='#{image_path}/rotate-hint.png')
+    h3 旋转手机
+    h4 请先关闭屏幕自动旋转功能

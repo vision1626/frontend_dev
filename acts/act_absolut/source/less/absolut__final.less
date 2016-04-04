@@ -1,0 +1,139 @@
+#absolut {
+  section.final {
+    .prizes {
+      width: 84%;
+      padding: 5% 8% 0;
+      ._clearfix;
+      img {
+        float: left;
+        width: 30%;
+      }
+      .prize-list {
+        background: url("@{img-location}/prize.png");
+        background-size: contain;
+        background-repeat: no-repeat;
+        float: right;
+        @r: 196/135; @w: 64%;
+        @pd-v: 58px; @pd-h: 33px;
+        padding: @pd-v @pd-h 0 @pd-h;
+        width: 196px - @pd-h * 2;
+        height:135px - @pd-v;
+        ul {
+
+        }
+        li {
+          font-size: 13px;
+          ._clearfix;
+          label {
+            font-weight: bold;
+            display: block;
+            text-align: center;
+          }
+          span {
+            float: right;
+          }
+        }
+      }
+      transform: translate(0,-200%);
+      transition: all 0.6s @curve;
+      &.shown {
+        transform: translate(0,0%);
+      }
+    }
+    .form {
+      p {
+        font-size: 14px;
+        text-align: center;
+        margin-top:0;
+      }
+      form {
+        input {
+          border: 1px solid #FFFFFF;
+          box-shadow: 0px 1px 4px 0px #000000;
+          display: block;
+          width: 64%;
+          margin: 10px auto;
+          font-size: 16px;
+          background: rgba(0, 0, 0, 0.3);
+          border-radius: 10px;
+          padding: 10px;
+        }
+        a.submit {
+          background-image: linear-gradient(233deg, rgba(255,0,119,0.25) 0%, rgba(40,98,255,0.35) 100%);
+          border: 2px solid #FFFFFF;
+          box-shadow: 0px 1px 3px 0px #071592;
+          border-radius: 12px;
+          padding: 10px 0px;
+          margin: 20px auto 0;
+          display: block;
+          text-align: center;
+          font-size: 18px;
+          font-weight: bold;
+          width: 33%;
+          &.touched {
+            background-image: linear-gradient(233deg, rgba(255,0,119,0.60) 0%, rgba(40,98,255,0.35) 100%);
+          }
+        }
+      }
+      transition: all 0.6s @curve;
+      opacity: 0;
+      &.shown {
+        opacity: 1;
+      }
+    }
+    .brand {
+      width: 74%;
+      padding: 0 13%;
+      position: absolute;
+      bottom: 20px;
+      ._clearfix;
+      .logo, .qr {
+        float: left;
+        width: 44%;
+        margin: 0 3%;
+      }
+      .qr {
+        float: left;
+      }
+      transform: translate(0,200%);
+      transition: all 0.6s @curve;
+      &.shown {
+        transform: translate(0,0%);
+      }
+    }
+    @media screen and (max-width: 320px){
+      .prizes {
+        .prize-list {
+          padding: 47px 24px 0;
+          width: 124px;
+          height: 72px;
+        }
+      }
+      .form {
+        p {
+          font-size: 14px;
+          text-align: center;
+          margin-top:0;
+        }
+        form {
+          a.submit {
+            margin: 10px auto 0;
+          }
+        }
+      }
+    }
+    @media screen and (max-width: 420px) and (min-width: 401px) {
+      .prizes {
+        img {
+          width: 36%;
+        }
+        .prize-list {
+          padding: 61px 33px 0;
+          width: 137px;
+          height: 81px;
+          margin-top: 20px;
+        }
+      }
+    }
+  }
+}

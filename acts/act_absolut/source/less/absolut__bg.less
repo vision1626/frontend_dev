@@ -1,0 +1,45 @@
+#absolut {
+  section.logo-background {
+    .bg {
+      position: absolute;
+      background: url("@{img-location}/bg.jpg");
+      background-size:cover;
+      background-position: center;
+      top: 0; left: 0; right: 0; bottom: 0;
+      transform-origin: center;
+      transition: all 0.8s @curve;
+      transform: rotate(0deg);
+      width: 100%;
+      .cover {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background-image: linear-gradient(-132deg, rgba(220,13,94,0.61) 0%, rgba(34,52,176,0.27) 34%, rgba(39,56,186,0.32) 73%, rgba(11,33,134,0.07) 79%, rgba(205,19,113,0.71) 100%);
+      }
+      &.rotated {
+        left: -180px;
+        transform: rotate(-90deg);
+        width: 200%;
+      }
+    }
+    .logo {
+      width: 30%;
+      margin: auto;
+      position: absolute;
+      top: 30px;
+      left: 0;
+      right: 0;
+      transition: all 0.8s @curve;
+      img {
+
+      }
+      &.shrink {
+        width: 18%;
+        top: 20px;
+      }
+      &.rotated {
+        transform:rotate(-90deg);
+      }
+    }
+  }
+}

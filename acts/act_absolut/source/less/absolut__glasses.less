@@ -1,0 +1,166 @@
+#absolut {
+  section.glasses {
+    .glass-row {
+      z-index: 999;
+      position: absolute;
+      right: 112px;
+      top: 9%;
+      transition: all 0.6s @curve;
+      @media screen and (max-width: 320px){
+        right: 92px;
+        top:10%;
+        transform: scale(0.8);
+        transform-origin: top right;
+      }
+      @media screen and (max-width: 420px) and (min-width: 401px) {
+        top: 12%;
+      }
+      li.glass {
+        width: 113px;
+        height: 91.5px;
+        position: absolute;
+        // transition: all 0.6s @curve;
+
+        .color {
+          position: absolute;
+          clip-path: url(#cupClip);
+          transform:scale(0.5);
+        }
+        .filling {
+          left: 192px;
+          width: 0px;
+          height: 171px;
+          position: absolute;
+          // background: orange;
+          transition: all 1s linear;
+          &.full {
+            left: 0;
+            width: 192px;
+          }
+          &.passionfruit {
+            background-image: linear-gradient(#FFBF2B 0%, #FFA00A 80%);
+          }
+          &.ice-tea {
+            background-image: linear-gradient(-180deg, #D28122 0%, #E23C0C 80%);
+          }
+          &.lemon {
+            background-image: linear-gradient(-180deg, #FFFD93 0%, #FEFE3F 80%);
+          }
+          &.coke {
+            background-image: linear-gradient(-180deg, #60271D 0%, #1E0000 80%);
+          }
+          &.cranberry {
+            background-image: linear-gradient(-180deg, #E378A8 0%, #BA1123 80%);
+          }
+          &.hawthorn {
+            background-image: linear-gradient(-180deg, #D76C3E 0%, #A30F06 80%);
+          }
+        }
+        .glass-and-ice {
+          position: absolute;
+          .use2xImage(226px, 183px, "@{img-location}/cup-ice-90.png");
+          top: -4px;
+          left: -3px;
+        }
+        @mar: 104px;
+        &:nth-child(1){top: 0;       transform:translate(0,1200px)}
+        &:nth-child(2){top: @mar * 1;transform:translate(0,1200px)}
+        &:nth-child(3){top: @mar * 2;transform:translate(0,1200px)}
+        &:nth-child(4){top: @mar * 3;transform:translate(0,1200px)}
+        &:nth-child(5){top: @mar * 4;transform:translate(0,1200px)}
+
+        
+      }
+
+      &.shown {
+        li.glass {
+          @keyframes glass-in {
+            0% {transform:translate(0,1200px)}
+            100% {transform:translate(0,0px)}
+          }
+          animation: glass-in @curve 0.6s;
+          animation-iteration-count: 1;
+          animation-fill-mode: forwards;
+          &:nth-child(1){animation-delay:0.0s;}
+          &:nth-child(2){animation-delay:0.2s;}
+          &:nth-child(3){animation-delay:0.4s;}
+          &:nth-child(4){animation-delay:0.6s;}
+          &:nth-child(5){animation-delay:0.8s;}
+        }
+      }
+      &.leave {
+        top: -200%;
+      }
+    }
+    
+    h3 {
+      transform:rotate(-90deg);
+      top: 16px;
+      left: -130px;
+      position: absolute;
+      transform-origin: top right;
+    }
+  }
+  .fluid {
+    display: none;
+    .use2xImage(266px, 685px, "");
+        position: absolute;
+    transform: rotate(-90deg) scale(0.7);
+    @top: 350px;
+    @mar: 104px;
+    top: @top;
+    left: 118px;
+    &.passionfruit {
+      background-image: url("@{img-location}/fluid--passionfruit.gif");
+    }
+    &.ice-tea {
+      background-image: url("@{img-location}/fluid--ice-tea.gif");
+    }
+    &.lemon {
+      background-image: url("@{img-location}/fluid--lemon.gif");
+    }
+    &.coke {
+      background-image: url("@{img-location}/fluid--coke.gif");
+    }
+    &.cranberry {
+      background-image: url("@{img-location}/fluid--cranberry.gif");
+    }
+    &.hawthorn {
+      background-image: url("@{img-location}/fluid--hawthorn.gif");
+    }
+    &.pouring-3 {
+      top: @top - @mar;
+    }
+    &.pouring-2 {
+      top: @top - @mar * 2;
+    }
+    &.pouring-1 {
+      top: @top - @mar * 3;
+    }
+    &.pouring-0 {
+      top: @top - @mar * 4;
+    }
+    @media screen and (max-width: 320px){
+      @top: 280px;
+      @mar: 90px;
+      top: @top;
+      left: 110px;
+      &.pouring-3 {top: @top - @mar;}
+      &.pouring-2 {top: @top - @mar * 2;}
+      &.pouring-1 {top: @top - @mar * 3;}
+      &.pouring-0 {top: @top - @mar * 4;}
+    }
+    @media screen and (max-width: 420px) and (min-width: 401px) {
+      transform: rotate(-90deg) scale(0.8);
+      @top: 380px;
+      @mar: 104px;
+      top: @top;
+      left: 130px;
+      &.pouring-3 {top: @top - @mar;}
+      &.pouring-2 {top: @top - @mar * 2;}
+      &.pouring-1 {top: @top - @mar * 3;}
+      &.pouring-0 {top: @top - @mar * 4;}
+    }
+
+  }
+}

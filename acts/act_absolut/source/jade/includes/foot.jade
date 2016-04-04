@@ -1,0 +1,25 @@
+if production
+  :php
+    $current_js[]   = './public/js/jquery-2.2.1.min.js';
+    $current_js[]   = './public/js/fastclick.js';
+    $current_js[]   = './tpl/hi1626/js/act/absolut/absolut.js';
+  script(type='text/javascript',src="{script $current_js}")
+
+else
+  script(src="#{local_file_path}/v2/js/vendor/jquery-2.2.1.min.js")
+  script(src="#{local_file_path}/v2/js/vendor/fastclick.js")
+  script(src="#{local_file_path}/v2/js/vendor/fulltilt.min.js")
+  script(src="#{local_file_path}/js/act/#{act_name}/#{act_name}.js")
+
+
+<!--{if $is_wx}-->
+<!--{template inc/weixin_share}-->
+<!--{/if}-->
+<!--{template inc/count}-->
+script.
+  $(document).ready(function () {
+    init();
+  });
+
+</body>
+</html>
