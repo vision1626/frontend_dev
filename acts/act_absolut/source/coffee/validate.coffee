@@ -20,7 +20,8 @@ isEmail = (mail)->
 
 # 验证函数
 #formValidate = ($name,$mobile,$mail,$pid)->
-formValidate = ($name,$mobile,$mail)->
+#formValidate = ($name,$mobile,$mail)->
+formValidate = ($name,$mobile)->
   str = ''
   # 判断名称
   name = $.trim($name.val())
@@ -38,17 +39,19 @@ formValidate = ($name,$mobile,$mail)->
     if !isMobile(mobile)
       str += '请输入正确的手机号码\n'
 
-  # 验证邮箱
-  mail = $.trim($mail.val())
-  if mail.length == 0
-    str += '请输入邮箱\n'
-  else
-    if !isEmail(mail)
-      str += '请输入正确的邮箱\n'
+#  # 验证邮箱
+#  mail = $.trim($mail.val())
+#  if mail.length == 0
+#    str += '请输入邮箱\n'
+#  else
+#    if !isEmail(mail)
+#      str += '请输入正确的邮箱\n'
+
+
 
 #  # 验证身份证
 #  pid = $.trim($pid.val())
 #  if !isCardNo(pid)
 #    str += '请输入正确的身份证号码\n'
 
-  str
+#  str

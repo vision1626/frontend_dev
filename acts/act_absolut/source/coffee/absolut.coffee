@@ -1,3 +1,5 @@
+_beta = false
+_gamma = false
 init = ->
   initTouch()
 
@@ -101,17 +103,35 @@ init = ->
   pickedAndShowPanda = (selected)->
     selected.siblings().addClass 'leave'
     pls.removeClass 'shown'
-    setTimeout ->
-      selected.addClass 'selected'
-      left_hand.addClass 'leave'
-      right_hand.addClass 'leave'
-      panda_body.addClass 'picked'
-      hint.show().addClass('shown')
-    , 400
-    setTimeout ->
-      holding.addClass 'picked'
-      app.addClass 'picked'
-    , 600
+    if !_beta and !_gamma
+      setTimeout ->
+        selected.addClass 'selected'
+        left_hand.addClass 'leave'
+        right_hand.addClass 'leave'
+        panda_body.addClass 'picked'
+        hint.show().addClass('shown')
+        rotateScreen()
+      , 400
+      setTimeout ->
+        holding.addClass 'picked'
+        app.addClass 'picked'
+      , 600
+      setTimeout ->
+        pourDrink()
+      , 2000
+
+    else
+      setTimeout ->
+        selected.addClass 'selected'
+        left_hand.addClass 'leave'
+        right_hand.addClass 'leave'
+        panda_body.addClass 'picked'
+        hint.show().addClass('shown')
+      , 400
+      setTimeout ->
+        holding.addClass 'picked'
+        app.addClass 'picked'
+      , 600
 
   # hint.click ->
   #   rotateScreen()
@@ -234,16 +254,27 @@ init = ->
   deviceOrientation = FULLTILT.getDeviceOrientation({'type': 'world'})
   deviceOrientation.then (orientationData)->
     orientationData.listen ()->
-      screenAdjustedEvent = orientationData.getFixedFrameEuler()
-      spec = app.find '.gyro-spec'
-      b = printDataValue(screenAdjustedEvent.beta)
-      g = printDataValue(screenAdjustedEvent.gamma)
-      # spec.find('p').eq(1).find('span').html(b)
-      # spec.find('p').eq(2).find('span').html(g)
-      if g > 60 and app.hasClass('picked') and !app.hasClass('rotated')
-        rotateScreen()
-      if g > 60 and b < -15 and app.hasClass('rotated')
-        pourDrink()
-        orientationData.stop()
-    
+      if $(window).width() < $(window).height()
+        screenAdjustedEvent = orientationData.getFixedFrameEuler()
+        spec = app.find '.gyro-spec'
+        b = printDataValue(screenAdjustedEvent.beta)
+        g = printDataValue(screenAdjustedEvent.gamma)
+        spec.find('p').eq(1).find('span').html(b)
+        spec.find('p').eq(2).find('span').html(g)
+        _gamma = g
+        if g > 60 and app.hasClass('picked') and !app.hasClass('rotated')
+          rotateScreen()
+        if g > 60 and b < -15 and app.hasClass('rotated')
+          pourDrink()
+          orientationData.stop()
 
+
+  $(window).on 'resize', ->
+    hor = $('.horizontal-screen')
+    hint = hor.find '.rotate-hint'
+    if $(window).width() > $(window).height()
+      hor.show()
+      hint.addClass 'shown'
+    else
+      hint.removeClass 'shown'
+      hor.hide()

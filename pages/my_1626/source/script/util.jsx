@@ -334,5 +334,5 @@ export function msgBox(message ='',icon_name = 'icon-hand'){
     msg_box.find('i').removeClass(icon_name);
     msg_box.find('span').html('');
     msg_box_container.hide();
-  }, 3300);
+  }, 3200);
 }

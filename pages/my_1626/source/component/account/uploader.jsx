@@ -48,11 +48,12 @@ class Uploader extends BaseComponent {
             //  setSelect: [result.mark.x,result.mark.y,result.mark.w,result.mark.h]
             //});
             uploaded_url = [SITE_PATH,result.src].join('');
+            //console.log(uploaded_url);
+            this.props.callBack(result);
           }
           else
           {
-            //$(".preview").hide();
-            //$("#avatarmsg").html("上传头像失败");
+            util.msgBox('上传头像失败','icon-sad');
           }
         }else if(result.status ==2){
           util.msgBox('请上传正确的图片格式','icon-sad');
@@ -67,6 +68,7 @@ class Uploader extends BaseComponent {
       }.bind(this),
       error: function (xhr, status, err) {
         util.showError('avatar', status, err);
+        if (xhr.responseText.indexOf('413') > -1){util.msgBox('请上传大小在1M以内的图片！','icon-sad'); }
         this.setState({
           uploading: false
         });
@@ -74,12 +76,10 @@ class Uploader extends BaseComponent {
     });
   }
 
-
-
   render() {
     return <div className="uploader" style={{position:'relative'}}>
       <a ref="upload_fake" href="" className="upload_button" >{this.state.uploading ? '正在上传...' : this.props.showText}</a>
-      <input ref="upload_entity" id="upload_entity" type="file" className="upload_entity" onChange={this.handlerFileSelected} style={{position:'absolute',opacity:'0',cursor:'pointer'}} />
+      <input ref="upload_entity" id="upload_entity" name="avatar" type="file" className="upload_entity" onChange={this.handlerFileSelected} style={{position:'absolute',opacity:'0',cursor:'pointer'}} />
     </div>
   }
 }

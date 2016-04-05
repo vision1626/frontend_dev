@@ -58,7 +58,7 @@
           border-radius: 10px;
           padding: 10px;
         }
-        a.submit {
+        a.submit,a.again {
           background-image: linear-gradient(233deg, rgba(255,0,119,0.25) 0%, rgba(40,98,255,0.35) 100%);
           border: 2px solid #FFFFFF;
           box-shadow: 0px 1px 3px 0px #071592;
@@ -69,7 +69,16 @@
           text-align: center;
           font-size: 18px;
           font-weight: bold;
-          width: 33%;
+
+          &.submit{
+            width: 33%;
+          }
+          &.again{
+            width: 38%;
+            display: none;
+            position: relative;
+            top: -30px;
+          }
           &.touched {
             background-image: linear-gradient(233deg, rgba(255,0,119,0.60) 0%, rgba(40,98,255,0.35) 100%);
           }
