@@ -1,5 +1,8 @@
 _beta = false
 _gamma = false
+_is_iphone = navigator.userAgent.indexOf('iPhone') > 0
+_image_path = '../tpl/hi1626/images/act/absolut/'
+
 init = ->
   initTouch()
 
@@ -29,6 +32,8 @@ init = ->
   panda_body = panda.find '.panda-body'
   holding = panda.find '.holding-drink'
   holding_fill = holding.find '.filling'
+  holding_color = holding.find '.color'
+  holding_img = holding.find 'img.type'
   # glasses doms
   glass_row = glasses.find '.glass-row'
   glass_filling = glass_row.find('li.glass').find('.filling')
@@ -55,37 +60,60 @@ init = ->
     pickedAndShowPanda(drinks.find('li').eq(i))
     explain_item.eq(i).show()
     cocktail.find('img').eq(i).show()
+
+    if _is_iphone
+      holding_color.show()
+      holding_img.hide()
+    else
+      holding_color.hide()
+      holding_img.show()
     switch i
       when 0
+        holding_img.attr 'src',_image_path + 'passionfruit_dump.png'
         holding_fill.addClass 'passionfruit'
         glass_filling.addClass 'passionfruit'
         fluid.addClass 'passionfruit'
       when 1
+        holding_img.attr 'src',_image_path + 'ice-tea_dump.png'
         holding_fill.addClass 'ice-tea'
         glass_filling.addClass 'ice-tea'
         fluid.addClass 'ice-tea'
       when 2
+        holding_img.attr 'src',_image_path + 'lemon_dump.png'
         holding_fill.addClass 'lemon'
         glass_filling.addClass 'lemon'
         fluid.addClass 'lemon'
       when 3
+        holding_img.attr 'src',_image_path + 'coke_dump.png'
         holding_fill.addClass 'coke'
         glass_filling.addClass 'coke'
         fluid.addClass 'coke'
       when 4
+        holding_img.attr 'src',_image_path + 'cranberry_dump.png'
         holding_fill.addClass 'cranberry'
         glass_filling.addClass 'cranberry'
         fluid.addClass 'cranberry'
       when 5
+        holding_img.attr 'src',_image_path + 'hawthorn_dump.png'
         holding_fill.addClass 'hawthorn'
         glass_filling.addClass 'hawthorn'
         fluid.addClass 'hawthorn'
 
   introToPick = ->
+
+
     vodka = intro.find '.kv-vodka'
     vodka.addClass 'hidden'
     btn_start.addClass 'hidden'
     top_logo.addClass 'shrink'
+
+    if _is_iphone
+      drinks.find('img').hide()
+      drinks.find('.color').show()
+    else
+      drinks.find('img').show()
+      drinks.find('.color').hide()
+
     setTimeout ->
       pick.show()
       drinks.addClass 'shown'
@@ -119,7 +147,6 @@ init = ->
       setTimeout ->
         pourDrink()
       , 2000
-
     else
       setTimeout ->
         selected.addClass 'selected'
