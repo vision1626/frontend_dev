@@ -16,7 +16,7 @@ initTouch = ->
         _submiting = true
         submit_info = $.ajax {
           url: SITE_URL + 'absolut/submit.html'
-          type: "POST"
+          type: 'POST'
           data: {name:$('.username').val(),mobile:$('.mobile').val()}
           cache: true
           dataType: "json"
