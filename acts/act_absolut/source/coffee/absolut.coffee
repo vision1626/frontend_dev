@@ -62,39 +62,40 @@ init = ->
     cocktail.find('img').eq(i).show()
 
     if _is_iphone
-      holding_color.show()
-      holding_img.hide()
+#      holding_color.show()
+#      holding_img.hide()
     else
       holding_color.hide()
-      holding_img.show()
+#      holding_img.show()
+
     switch i
       when 0
-        holding_img.attr 'src',_image_path + 'passionfruit_dump.png'
+        holding_img.attr('src',_image_path + 'passionfruit_dump.png')
         holding_fill.addClass 'passionfruit'
         glass_filling.addClass 'passionfruit'
         fluid.addClass 'passionfruit'
       when 1
-        holding_img.attr 'src',_image_path + 'ice-tea_dump.png'
+        holding_img.attr('src',_image_path + 'ice-tea_dump.png')
         holding_fill.addClass 'ice-tea'
         glass_filling.addClass 'ice-tea'
         fluid.addClass 'ice-tea'
       when 2
-        holding_img.attr 'src',_image_path + 'lemon_dump.png'
+        holding_img.attr('src',_image_path + 'lemon_dump.png')
         holding_fill.addClass 'lemon'
         glass_filling.addClass 'lemon'
         fluid.addClass 'lemon'
       when 3
-        holding_img.attr 'src',_image_path + 'coke_dump.png'
+        holding_img.attr('src',_image_path + 'coke_dump.png')
         holding_fill.addClass 'coke'
         glass_filling.addClass 'coke'
         fluid.addClass 'coke'
       when 4
-        holding_img.attr 'src',_image_path + 'cranberry_dump.png'
+        holding_img.attr('src',_image_path + 'cranberry_dump.png')
         holding_fill.addClass 'cranberry'
         glass_filling.addClass 'cranberry'
         fluid.addClass 'cranberry'
       when 5
-        holding_img.attr 'src',_image_path + 'hawthorn_dump.png'
+        holding_img.attr('src',_image_path + 'hawthorn_dump.png')
         holding_fill.addClass 'hawthorn'
         glass_filling.addClass 'hawthorn'
         fluid.addClass 'hawthorn'
