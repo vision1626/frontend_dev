@@ -27,6 +27,8 @@ init = ->
   right_hand = hands.find '.right'
   pls = pick.find 'h3.pls'
   hint = pick.find '.rotate-hint'
+  panda-say = pick.find '.panda-say'
+  panda-say_content = pick.find 'h2'
   trigger = pick.find '.pick-triggers li'
   # panda doms
   panda_body = panda.find '.panda-body'
@@ -41,6 +43,8 @@ init = ->
   # result doms
   explain_block = result.find '.explanations'
   explain_item = result.find('.explanations li')
+  say_result = result.find('.say_result')
+  panda_left = result.find('.panda_left')
   cocktail = result.find '.cocktail'
   next_btn = result.find 'a.next'
   # final doms
@@ -68,37 +72,50 @@ init = ->
       holding_color.hide()
 #      holding_img.show()
 
+    say_content_base = '1份伏特加+5份'
     switch i
       when 0
         holding_img.attr('src',_image_path + 'passionfruit_dump.png')
         holding_fill.addClass 'passionfruit'
         glass_filling.addClass 'passionfruit'
         fluid.addClass 'passionfruit'
+        say_result.addClass 'passionfruit'
+        panda-say_content.html(say_content_base + '百香果')
       when 1
         holding_img.attr('src',_image_path + 'ice-tea_dump.png')
         holding_fill.addClass 'ice-tea'
         glass_filling.addClass 'ice-tea'
         fluid.addClass 'ice-tea'
+        say_result.addClass 'ice-tea'
+        panda-say_content.html(say_content_base + '冰红茶')
       when 2
         holding_img.attr('src',_image_path + 'lemon_dump.png')
         holding_fill.addClass 'lemon'
         glass_filling.addClass 'lemon'
         fluid.addClass 'lemon'
+        say_result.addClass 'lemon'
+        panda-say_content.html(say_content_base + '柠檬')
       when 3
         holding_img.attr('src',_image_path + 'coke_dump.png')
         holding_fill.addClass 'coke'
         glass_filling.addClass 'coke'
         fluid.addClass 'coke'
+        say_result.addClass 'coke'
+        panda-say_content.html(say_content_base + '可乐')
       when 4
         holding_img.attr('src',_image_path + 'cranberry_dump.png')
         holding_fill.addClass 'cranberry'
         glass_filling.addClass 'cranberry'
         fluid.addClass 'cranberry'
+        say_result.addClass 'cranberry'
+        panda-say_content.html(say_content_base + '蔓越莓')
       when 5
         holding_img.attr('src',_image_path + 'hawthorn_dump.png')
         holding_fill.addClass 'hawthorn'
         glass_filling.addClass 'hawthorn'
         fluid.addClass 'hawthorn'
+        say_result.addClass 'hawthorn'
+        panda-say_content.html(say_content_base + '山楂')
 
   introToPick = ->
 
@@ -135,37 +152,46 @@ init = ->
     if !_beta and !_gamma
       setTimeout ->
         selected.addClass 'selected'
-        left_hand.addClass 'leave'
         right_hand.addClass 'leave'
         panda_body.addClass 'picked'
+        panda-say.addClass 'shown'
+      , 400
+      setTimeout ->
+        left_hand.addClass 'leave'
+        panda-say.removeClass 'shown'
         hint.show().addClass('shown')
         rotateScreen()
-      , 400
+      , 3400
       setTimeout ->
         holding.addClass 'picked'
         app.addClass 'picked'
-      , 600
+      , 3600
       setTimeout ->
         pourDrink()
-      , 2000
+      , 5000
     else
       setTimeout ->
         selected.addClass 'selected'
-        left_hand.addClass 'leave'
         right_hand.addClass 'leave'
         panda_body.addClass 'picked'
-        hint.show().addClass('shown')
+        panda-say.addClass 'shown'
       , 400
+      setTimeout ->
+        left_hand.addClass 'leave'
+        panda-say.removeClass 'shown'
+        hint.show().addClass('shown')
+      , 3400
       setTimeout ->
         holding.addClass 'picked'
         app.addClass 'picked'
-      , 600
+      , 3600
 
   # hint.click ->
   #   rotateScreen()
   rotateScreen = ->
     backdrop.addClass 'rotated'
     hint.removeClass 'shown'
+#    panda-say.removeClass 'shown'
     top_logo.addClass 'rotated'
     panda_body.addClass 'rotated'
     glasses.show()
@@ -240,12 +266,17 @@ init = ->
       next_btn.addClass 'shown'
       explain_block.addClass 'shown'
       cocktail.addClass 'shown'
+      panda_left.addClass 'shown'
+      say_result.addClass 'shown'
+
     , 9300
 
   gotoFinal = ->
     next_btn.removeClass 'shown'
     explain_block.removeClass 'shown'
     cocktail.removeClass 'shown'
+    panda_left.removeClass 'shown'
+    say_result.removeClass 'shown'
     setTimeout ->
       final.show()
       prizes.addClass 'shown'

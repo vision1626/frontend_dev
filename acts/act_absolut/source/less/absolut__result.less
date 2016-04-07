@@ -1,9 +1,48 @@
 #absolut {
   section.result {
+    img.panda_left{
+      position: absolute;
+      left:0;
+      bottom:50px;
+      width:34%;
+      z-index: 5000;
+      transform: translate(-200%,0);
+      transition: all 0.6s @curve;
+      &.shown {
+        transform: translate(0%,0);
+      }
+    }
+    img.say_result{
+      position: absolute;
+      top:10px;
+      transform: translate(0,-200%);
+      transition: all 0.6s @curve;
+      &.passionfruit{}
+      &.ice-tea{
+        top: 15px;
+        height: 265px;
+      }
+      &.lemon{}
+      &.coke{
+        top: 15px;
+        height: 265px;
+      }
+      &.cranberry{
+        height: 220px;
+      }
+      &.hawthorn{
+        top: 15px;
+        height: 245px;
+      }
+
+      &.shown {
+        transform: translate(0,0%);
+      }
+    }
     .explanations {
-      border: 2px solid #FFAF66;
-      box-shadow: 0px 1px 2px 0px rgba(236,8,8,0.7), 3px 3px 4px 0px #FF0A08;
-      border-radius: 8px;
+      //border: 2px solid #FFAF66;
+      //box-shadow: 0px 1px 2px 0px rgba(236,8,8,0.7), 3px 3px 4px 0px #FF0A08;
+      //border-radius: 8px;
       padding: 14px;
       width: 60%;
       margin: auto;
@@ -17,23 +56,39 @@
 
       }
       li {
+
         h3 {
           margin: 0 0 10px;
           text-align: center;
+          color: #000;
         }
         p {
+          margin-top: 5px;
           margin-bottom: 0;
           font-size: 14px;
           letter-spacing: 1.2px;
           line-height: 19px;
           text-align: justify;
           font-weight: bold;
+          color: #000;
+        }
+        h4{
+          text-align: center;
+          margin: 8px 0 0 0;
+          font-size: 16px;
+          text-shadow: 0 0 6px red;
+          color: black;
         }
       }
     }
     .cocktail {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 24%;
+      margin: auto;
       width: 35%;
-      margin: 40px auto;
+      //margin: 40px auto;
       opacity: 0;
       transition: all 1s @curve;
       -webkit-filter: blur(20px);
