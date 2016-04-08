@@ -58,6 +58,18 @@ body,html{
       margin: 0;
     }
   }
+
+  .bgm_control{
+    position: absolute;
+    z-index: 9000;
+    top:10px;
+    right:10px;
+    width: 40px;
+    height: 40px;
+    &.play{
+      animation: rotaterotate 2s infinite linear;
+    }
+  }
 }
 
 @import "absolut__intro.less";
@@ -68,3 +80,12 @@ body,html{
 @import "absolut__pick-drink.less";
 @import "absolut__result.less";
 @import "absolut__horizontal.less";
+
+@keyframes rotaterotate{
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

@@ -2,6 +2,7 @@ _beta = false
 _gamma = false
 _is_iphone = navigator.userAgent.indexOf('iPhone') > 0
 _image_path = '../tpl/hi1626/images/act/absolut/'
+_playing_music = false
 
 init = ->
   initTouch()
@@ -119,6 +120,10 @@ init = ->
 
   introToPick = ->
 
+    $('#bgm')[0].play()
+    $('.bgm_control').attr('src',_image_path + 'bgm_stop.png')
+    $('.bgm_control').removeClass 'play'
+    _playing_music = true
 
     vodka = intro.find '.kv-vodka'
     vodka.addClass 'hidden'
@@ -323,7 +328,8 @@ init = ->
         _gamma = g
         if g > 60 and app.hasClass('picked') and !app.hasClass('rotated')
           rotateScreen()
-        if g > 60 and b < -15 and app.hasClass('rotated')
+#        if g > 60 and b < -15 and app.hasClass('rotated')
+        if g > 60 and b < 0 and app.hasClass('rotated')
           pourDrink()
           orientationData.stop()
 
@@ -337,3 +343,13 @@ init = ->
     else
       hint.removeClass 'shown'
       hor.hide()
+
+  gbmControl = ->
+    if _playing_music
+      $('#bgm')[0].pause()
+      $('.bgm_control').attr('src',_image_path + 'bgm_play.png')
+      _playing_music = false
+    else
+      $('#bgm')[0].play()
+      $('.bgm_control').attr('src',_image_path + 'bgm_stop.png')
+      _playing_music = true

@@ -22,4 +22,7 @@ include source/jade/includes/head
       |gamma:
       span
 
+  audio.bgm(id='bgm',src='#{image_path}/bomb.mp3',controls='controls',loop='true',hidden='true',autoplay="autoplay",preload="auto")
+  img.bgm_control.play(src='#{image_path}/bgm_play.png')
+
 include source/jade/includes/foot

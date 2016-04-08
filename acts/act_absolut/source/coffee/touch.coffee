@@ -38,3 +38,15 @@ initTouch = ->
 
   $(document).on 'touchend', '.again', ->
     location.reload()
+
+  $(document).on 'touchend', '.bgm_control', ->
+    if _playing_music
+      $('#bgm')[0].pause()
+      $('.bgm_control').attr('src',_image_path + 'bgm_play.png')
+      $('.bgm_control').addClass 'play'
+      _playing_music = false
+    else
+      $('#bgm')[0].play()
+      $('.bgm_control').attr('src',_image_path + 'bgm_stop.png')
+      $('.bgm_control').removeClass 'play'
+      _playing_music = true
