@@ -87,7 +87,9 @@ if production
       var friend_links_data = '{$friendlinks_json}';
       init_global_footer(friend_links_data);
       if(parseInt("$_FANWE['uid']") > 0) {
-        initFollowBtn();
+        if (typeof(initFollowBtn) != 'undefined') {
+          initFollowBtn();
+        }
       }
     });
 else
@@ -95,6 +97,8 @@ else
     $(document).ready(function () {
       var friend_links_data = '[{"id":"5","name":"\u6d77\u62a5\u65f6\u5c1a\u7f51","url":"http:\/\/www.haibao.com\/","sort":"1"},{"id":"6","name":"o2o\u540d\u54c1\u5bfc\u8d2d\u5708","url":"http:\/\/q.chinasspp.com\/","sort":"2"},{"id":"8","name":"\u7f51\u6613\u5973\u4eba","url":"http:\/\/lady.163.com\/","sort":"3"},{"id":"9","name":"\u65b0\u6d6a\u5973\u6027","url":"http:\/\/eladies.sina.com.cn\/","sort":"4"},{"id":"10","name":"\u7231\u7f8e\u7f51","url":"http:\/\/www.lady8844.com\/","sort":"5"},{"id":"11","name":"\u5217\u8868\u7f51","url":"http:\/\/www.liebiao.com\/","sort":"6"},{"id":"12","name":"\u9b45\u7f51\u5973\u6027","url":"http:\/\/www.meyol.com\/ ","sort":"7"}]';
       init_global_footer(friend_links_data);
-      initFollowBtn();
+      if (typeof(initFollowBtn) != 'undefined') {
+        initFollowBtn();
+      }
     });
   </body>
