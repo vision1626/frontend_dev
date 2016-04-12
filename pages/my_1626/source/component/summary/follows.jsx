@@ -3,38 +3,39 @@ import BaseComponent from '../../script/BaseClass.jsx';
 
 class Follows extends BaseComponent {
   constructor() {
-    super()
-    this.state = { follows: [] }
+    super();
   }
 
   loadFollowsFromServer() {
-    $.ajax({
-      url: this.props.url,
-      dataType: 'json',
-      cache: false,
-      success: function(follows) {
-        if(follows.data) {
-          this.setState({follows: follows.data});
-        }
-      }.bind(this),
-      error: function(xhr, status, err) {
-        console.error(this.props.url, status, err.toString());
-      }.bind(this)
-    });
+    //$.ajax({
+    //  url: this.props.url,
+    //  dataType: 'json',
+    //  cache: false,
+    //  success: function(follows) {
+    //    if(follows.data) {
+    //      this.setState({follows: follows.data});
+    //    }
+    //  }.bind(this),
+    //  error: function(xhr, status, err) {
+    //    console.error(this.props.url, status, err.toString());
+    //  }.bind(this)
+    //});
   }
 
   componentWillMount() {
-    let self = this
-    setTimeout(function() {
-      self.loadFollowsFromServer()
-    }, 1000)
+    //let self = this
+    //setTimeout(function() {
+    //  self.loadFollowsFromServer()
+    //}, 1000)
   }
 
   render() {
+    let dt = this.props.data;
+
     let rows = [];
-    if (this.state.follows.length > 0) {
-      for (var i = 0; i < this.state.follows.length; i++) {
-        rows.push(<Follow follow={this.state.follows[i]} key={i}/>)
+    if (dt.length > 0) {
+      for (var i = 0; i < dt.length; i++) {
+        rows.push(<Follow follow={dt[i]} key={i}/>)
       }
     } else {
       rows.push(

@@ -4,13 +4,15 @@ import BaseComponent from '../../script/BaseClass.jsx';
 class Boards extends BaseComponent {
   constructor() {
     super()
-    this.userStatistics.like_total.share_count = this.userStatistics.like_total.share_count ? 
+    this.userStatistics.like_total.share_count = this.userStatistics.like_total.share_count ?
       this.userStatistics.like_total.share_count : 0;
-    this.userStatistics.like_total.dapei_count = this.userStatistics.like_total.dapei_count ? 
+    this.userStatistics.like_total.dapei_count = this.userStatistics.like_total.dapei_count ?
       this.userStatistics.like_total.dapei_count : 0;
   };
 
   render() {
+    let dt = this.props.data;
+
     return (
       <div className="boards">
         <div className="board-i">
@@ -49,12 +51,12 @@ class Boards extends BaseComponent {
           <ul>
             <li>
               <a href="http://www.1626buy.cn/user/act-order_list.html"><i className="icon icon-publish" /></a>
-              <p className="od-count">0</p>
+              <p className="od-count">{dt.unpay_count}</p>
               <p className="od-name">待付款</p>
             </li>
             <li>
               <a href="http://www.1626buy.cn/user/act-order_list-status-3.html"><i className="icon icon-publish" /></a>
-              <p className="od-count">0</p>
+              <p className="od-count">{dt.shipped_count}</p>
               <p className="od-name">待收货</p>
             </li>
           </ul>

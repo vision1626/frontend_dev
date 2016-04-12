@@ -4,31 +4,32 @@ import {formatDate, getOrderStatus} from '../../script/util.jsx';
 
 class Orders extends BaseComponent {
   constructor() {
-    super()
-    this.state = { orders: [] }
+    super();
   }
 
   componentWillMount() {
-    $.ajax({
-      url: this.props.url,
-      dataType: 'json',
-      cache: false,
-      success: function(orders) {
-        if (orders.status == 1) {
-          this.setState({orders: orders.data});
-        }
-      }.bind(this),
-      error: function(xhr, status, err) {
-        console.error(this.props.url, status, err.toString());
-      }.bind(this)
-    });
+    //$.ajax({
+    //  url: this.props.url,
+    //  dataType: 'json',
+    //  cache: false,
+    //  success: function(orders) {
+    //    if (orders.status == 1) {
+    //      this.setState({orders: orders.data});
+    //    }
+    //  }.bind(this),
+    //  error: function(xhr, status, err) {
+    //    console.error(this.props.url, status, err.toString());
+    //  }.bind(this)
+    //});
   }
 
   render() {
+    let dt = this.props.data;
+
     let rows = [];
-    if (this.state.orders.length > 0) {
-      for (var i = 0; i < this.state.orders.length; i++) {
-        rows.push(<Order order={this.state.orders[i]} key={i}/>)
+    if (dt.length > 0) {
+      for (var i = 0; i < dt.length; i++) {
+        rows.push(<Order order={dt[i]} key={i}/>)
       }
     } else {
       rows.push(
