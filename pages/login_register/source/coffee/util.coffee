@@ -37,11 +37,11 @@ showSmallErrorTip = (text,mood)->
   mood = mood or 0 # 1是成功的笑臉，0是失敗的哭臉
   $('.form-error-mob').find('label').html(text)
   if mood is 1
-    $('.form-error-mob').find('i.icon').addClass('icon-glad')
+    $('.form-error-mob').find('i.icon').removeClass('icon-sad').addClass('icon-glad')
   $('.form-error-mob').fadeIn(200)
   setTimeout(->
     $(".form-error-mob").fadeOut(100, ->
-      $('.form-error-mob').find('i.icon').removeClass('icon-glad')
+      $('.form-error-mob').find('i.icon').removeClass('icon-glad').addClass('icon-sad')
     )
   , 1500)
 
