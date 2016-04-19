@@ -23,7 +23,7 @@ class Boards extends BaseComponent {
               this.userStatistics.infomation_degree + '%, white 0)'}}></span>
             <span>{this.userStatistics.infomation_degree + '%'}</span>
           </div>
-          <a href="/settings">立即完善</a>
+          <a href="/home/account">立即完善</a>
         </div>
         
         <div className="board-ii">
