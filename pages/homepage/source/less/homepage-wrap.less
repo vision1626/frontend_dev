@@ -1,4 +1,8 @@
 #homepage-wrap {
+  @media @mobile {
+    width: 100%;
+    overflow: hidden;
+  }
 }
 
 img.phantom {
@@ -10,6 +14,9 @@ img.phantom {
 #homepage-wrap {
   section {
     margin: 0 auto 46px;
+    @media @mobile {
+      margin: 0 auto 40px;
+    }
   }
   section.goods {
     .item-pagiation {

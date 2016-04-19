@@ -1,5 +1,8 @@
 .section__header {
   margin: 12px 0;
+  @media @mobile {
+    margin: 20px 0;
+  }
   ._clearfix;
   .section__title {
     font-size: @font-size-l;
@@ -9,6 +12,9 @@
     line-height: 1.2;
     float: left;
     margin: 0;
+    @media @mobile {
+      font-size: 20px;
+    }
   }
   .section__nav {
     float: left;
@@ -82,6 +88,11 @@
           }
         }
       }
+    }
+  }
+  @media @mobile {
+    .section__nav {
+      display: none;
     }
   }
 }
