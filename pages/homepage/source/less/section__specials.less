@@ -52,6 +52,22 @@ section.specials {
   .specials__blocks {
     li {
       margin-bottom: 20px;
+      &:nth-child(even) {
+        margin-right: 0;
+      }
+    }
+  }
+}
+@media @mobile {
+  .specials__blocks {
+    margin-right: 0;
+    li {
+      margin-right: 4%;
+      margin-bottom: 4%;
+      width: 48%;
+      &:nth-child(even) {
+        margin-right: 0;
+      }
     }
   }
 }
