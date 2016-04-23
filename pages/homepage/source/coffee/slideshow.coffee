@@ -112,3 +112,27 @@ initSlideshow = ->
     slideWithInterval(true)
 
 
+initSlideshowMobile = ->
+  $mobileSlideshow = $('<div class="slides--mobile__wrap"></div>')
+  $slideshow = $('.slideshow .slides__wrap')
+  winW = $(window).width()
+  $slideshow.find('li a').each ->
+    s = $(this)
+    link = s.attr 'href'
+    o_c = s.attr 'onclick'
+    img_url = s.find('img.bg').attr('src')
+    img_alt = s.find('img.bg').attr('alt')
+    $new_slide = $("<div class='new_slide' style='width:#{winW}'><a href='#{link}' onclick='#{o_c}' style='background-image:url(#{img_url})'></a></div>")
+    $mobileSlideshow.append $new_slide
+  $slideshow.remove()
+  $('section.slideshow').append $mobileSlideshow
+  $mobileSlideshow.slick(
+    arrows: false,
+    dots: true,
+    autoplay: true,
+    autoplaySpeed: 3000,
+    cssEase: 'ease-out',
+    speed: '200'
+  )
+
+

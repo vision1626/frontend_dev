@@ -73,3 +73,45 @@ section.hot-news {
     }
   }
 }
+@media @mobile {
+  section.hot-news {
+    .news-blocks {
+      li {
+        width: 100%;
+        margin-right: 0;
+        float: none;
+        background: none;
+        a {
+          ._clearfix;
+          .image {
+            position: relative;
+            top: auto;
+            right: auto;
+            width: 50%;
+            float: left;
+          }
+          .info {
+            float: left;
+            background: none;
+            width: 50%;
+            .info__content {
+              bottom: auto;
+              padding: 0 6%;
+              width: 78%;
+            }
+            h3 {
+              text-shadow:none;
+              color: black;
+              font-weight: normal;
+            }
+            .tag {
+              font-size: 14px;
+              padding: 2px 6px;
+              display: inline-block;
+            }
+          }
+        }
+      }
+    }
+  }
+}

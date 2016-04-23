@@ -36,6 +36,30 @@
     }
   }
 }
+@media @mobile {
+  .goods__categories {
+    width: 92%;
+    margin: auto;
+    ul {
+      margin-top: 10px;
+    }
+    li {
+      width: 19%;
+      border: none;
+      a {
+        width: 100%;
+        box-sizing: border-box;
+        border: 1px solid @grey;
+        padding: 10px 0;
+        display: block;
+        margin: 5px 0 0;
+      }
+      &:nth-last-child(1){
+        display: none;
+      }
+    }
+  }
+}
 section.goods {
   .item-list-container {
     padding: 0;

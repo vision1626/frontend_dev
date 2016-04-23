@@ -13,10 +13,11 @@ initHomepage = ->
   if winW > 680
     initHeadlineList()
     removeOverflowCats()
+    initSlideshow()
   else
     initSpecials()
+    initSlideshowMobile()
 
-  initSlideshow()
   initHotNews()
   initGoodsAsync()
 

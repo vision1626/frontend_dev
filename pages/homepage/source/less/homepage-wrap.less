@@ -15,12 +15,21 @@ img.phantom {
   section {
     margin: 0 auto 46px;
     @media @mobile {
-      margin: 0 auto 40px;
+      margin: 0 auto 30px;
     }
   }
   section.goods {
     .item-pagiation {
       display: block;
+    }
+    @media @mobile {
+      .item-pagiation {
+        margin: -20px auto 0;
+        .show-more {
+          height: 60px;
+          line-height: 60px;
+        }
+      }
     }
   }
 }
