@@ -18,10 +18,14 @@ head(lang='en')
       $current_css[]  = './tpl/hi1626/v2/css/vendor/normalize.css';
       $current_css[]  = './tpl/hi1626/v2/css/global.css';
       $current_css[]  = './tpl/hi1626/v2/css/global_header.css';
-      $current_js[]   = './tpl/hi1626/v2/js/vendor/jquery-1.11.3.min.js';
+      $current_js_good_ie[]   = './tpl/hi1626/v2/js/vendor/jquery-2.2.1.min.js';
+      $current_js_bad_ie[]    = './tpl/hi1626/v2/js/vendor/jquery-1.12.3.min.js';
     link(rel="stylesheet", type="text/css", href="{css $current_css}", media="all")
     link(rel="icon", href="{$_FANWE['site_root']}favicon.ico", type="image/x-icon")
-    script(src="{script $current_js}")
+    script(src="{script $current_js_good_ie}")
+    <!--[if lte IE 8]>
+    script(src="{script $current_js_bad_ie}")
+    <!--<![endif]-->
 
     script(type='text/javascript').
       var SITE_PATH = '{$_FANWE[site_root]}';
